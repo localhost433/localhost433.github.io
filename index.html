@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Robin's Site</title>
+    <link rel="stylesheet" href="./css/home-style.css" />
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        script-src 'self' https://cdn.jsdelivr.net;
+        connect-src 'self' https://cdn.jsdelivr.net;
+        style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
+        font-src 'self' https://cdn.jsdelivr.net;
+        img-src data:;"
+        charset="UTF-8">
+<body>
+    <header>
+        <div class="header-title">~</div>
+        <div class="header-row">
+            <p>Welcome! This is where I share random ideas and stuff I created about school, life, etc.</p>
+            <button id="theme-toggle">Dark Mode</button>
+        </div>
+    </header>
+    <main>
+        <section id="posts-list">
+            <!-- List -->
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/theme.js"></script>
+</body>
+
+</html>

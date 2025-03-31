@@ -1,0 +1,134 @@
+/* Shared Typography and Layout */
+body {
+  font-family: Georgia, 'Noto Serif', 'Noto Sans SC', 'Microsoft YaHei', 'Hiragino Sans GB', serif;
+  background-color: #fff;
+  color: #111;
+  padding: 2.1rem;
+  max-width: 800px;
+  margin: auto;
+  line-height: 1.8;
+}
+
+a {
+  color: #0044cc;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Header */
+header h1, .header-title {
+  font-size: 2.1rem;
+  color: #000;
+  margin-bottom: 0.3rem;
+}
+
+header p, .header-row p {
+  font-size: 1.3rem;
+  color: #444;
+  margin: 0;
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Post Listing */
+#posts-list {
+  margin-top: 2.1rem;
+}
+
+.post-entry {
+  margin-bottom: 2.1rem;
+}
+
+.post-entry a {
+  font-size: 1.3rem;
+}
+
+.post-meta, .post-date {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.post-date::after {
+  content: " •";
+  padding: 0 0.4rem;
+}
+
+.post-author {
+  color: #444;
+}
+
+/* Individual Post */
+article {
+  margin-top: 3.4rem;
+}
+
+article h1, article h2 {
+  color: #000;
+  margin: 1.3rem 0;
+}
+
+article p {
+  margin-bottom: 1.3rem;
+}
+
+/* Back Link */
+.back-link {
+  display: block;
+  margin-top: 2.1rem;
+  color: #555;
+}
+
+/* Dark Mode */
+.dark-mode body {
+  background-color: #0e0e0e;
+  color: #f1f1f1;
+}
+
+.dark-mode a {
+  color: #88aaff;
+}
+
+.dark-mode header h1, 
+.dark-mode article h1, 
+.dark-mode article h2, 
+.dark-mode .header-title {
+  color: #fff;
+}
+
+.dark-mode header p, 
+.dark-mode .header-row p, 
+.dark-mode .post-meta, 
+.dark-mode .post-date, 
+.dark-mode .back-link {
+  color: #ccc;
+}
+
+/* Theme Toggle */
+#theme-toggle {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  color: inherit;
+  white-space: nowrap;
+}
+
+#theme-toggle:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.dark-mode #theme-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
