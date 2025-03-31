@@ -1,2 +1,2 @@
-# Personal
-Robin's personal site
+# Blog
+Repository for blog.
