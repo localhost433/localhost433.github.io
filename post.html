@@ -1,61 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blog - Robin's Site</title>
-    <link rel="stylesheet" href="css/post.css" />
-    <meta http-equiv="Content-Security-Policy" content="
-        default-src 'self';
-        script-src 'self' https://cdn.jsdelivr.net;
-        connect-src 'self' https://cdn.jsdelivr.net;
-        style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
-        font-src 'self' https://cdn.jsdelivr.net;
-        img-src 'self' data;">
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Post – Robin's Site</title>
+
+  <link rel="stylesheet" href="css/shared.css"/>
+  <link rel="stylesheet" href="css/post.css"/>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self';
+                 script-src 'self' https://cdn.jsdelivr.net;
+                 connect-src 'self';
+                 style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
+                 font-src 'self' https://cdn.jsdelivr.net;
+                 img-src 'self' data:;">
 </head>
 
 <body>
-    <header id="header-placeholder"></header>
-    <main>
-        <article id="post-content">
-            <!-- Post content dynamically loaded here -->
-        </article>
+  <header id="header-placeholder"></header>
 
-        <section id="tag-filter">
-            <strong>Filter by Tag:</strong>
-            <div id="tag-buttons"></div>
-        </section>
-        <section id="posts-list">
-            <h1>Blog</h1>
-            <p>Collection of posts I've written about various topics.</p>
-            <!-- Blog posts dynamically loaded here -->
-        </section>
-        <section id="comments-section">
-            <h2>Comments</h2>
-            <div id="comments-list">
-                <!-- Comments will load here -->
-            </div>
+  <article id="post-content"><!-- JS injects post here --></article>
 
-            <h3>Add a Comment</h3>
-            <form id="comment-form">
-                <input type="text" id="comment-author" placeholder="Your name (default: Anonymous)" />
-                <textarea id="comment-text" placeholder="Write your comment..." required></textarea><br>
-                <button type="submit">Post Comment</button>
-            </form>
-        </section>
-        <a href="index.html" class="back-link">Back to Home</a>
-    </main>
+  <section id="comments-section">
+    <h2>Comments</h2>
+    <div id="comments-list"></div>
 
-    <footer id="footer-placeholder"></footer>
+    <h3>Add a Comment</h3>
+    <form id="comment-form">
+      <input type="text" id="comment-author"
+             placeholder="Your name (default: Anonymous)"/>
+      <textarea id="comment-text" required
+                placeholder="Write your comment..."></textarea>
+      <button type="submit">Post Comment</button>
+    </form>
+  </section>
 
-    <script src="js/mathjax.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
-    <script src="js/posts.js"></script>
-    <script src="js/theme.js"></script>
-    <script src="js/header-footer.js"></script>
+  <a href="blog.html" class="back-link">← Back to Blog</a>
 
+  <footer id="footer-placeholder"></footer>
+
+  <script src="js/mathjax.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+          async></script>
+
+  <script src="js/theme.js"></script>
+  <script src="js/header-footer.js"></script>
+  <script src="js/post.js"></script>
 </body>
-
 </html>
