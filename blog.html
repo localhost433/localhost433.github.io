@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Robin's Site</title>
+    <title>Blog - Robin's Site</title>
     <link rel="stylesheet" href="css/home.css" />
     <meta http-equiv="Content-Security-Policy" content="
         default-src 'self';
@@ -13,17 +13,22 @@
         style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
         font-src 'self' https://cdn.jsdelivr.net;
         img-src data:;" charset="UTF-8">
+</head>
 
 <body>
     <header id="header-placeholder"></header>
-    <div class="header-title">~</div>
-    <div class="header-row">
-        <p>Welcome! This is where I share random ideas and stuff I created about school, life, etc. (Not any type of
-            category that I want to fall into, journal, diary, because it would feel kind of restrictive on 'how'/'what'
-            should I write about anything.)</p>
-        <button id="theme-toggle">Dark Mode</button>
-    </div>
-    </header>
+    <main>
+        <article>
+            <h1>Blog</h1>
+            <p>Collection of posts I've written about various topics.</p>
+
+            <section id="posts-list">
+                <!-- Blog posts dynamically loaded here -->
+            </section>
+
+            <a href="index.html" class="back-link">Back to Home</a>
+        </article>
+    </main>
 
     <footer id="footer-placeholder"></footer>
 

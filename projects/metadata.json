@@ -1,0 +1,17 @@
+[
+    {
+        "title": "Personal Blog Site",
+        "link": "https://github.com/localhost433/localhost433.github.io",
+        "tech": "HTML, CSS, JavaScript"
+    },
+    {
+        "title": "Semantic Search Engine",
+        "link": "https://github.com/localhost433/FAISS",
+        "tech": "Python, FAISS, Sentence Transformers"
+    },
+    {
+        "title": "Prime Factorization Game",
+        "link": "https://github.com/localhost433/prime-factorization-game",
+        "tech": "HTML, CSS, JavaScript"
+    }
+]
