@@ -1,37 +1,99 @@
 /* --- Base site-wide styles ------------------------------------------- */
-html { box-sizing:border-box; font-size:16px; }
-*,*::before,*::after { box-sizing:inherit; }
-
-body{
-  font-family:Georgia,'Noto Serif','Noto Sans SC','Microsoft YaHei',
-               'Hiragino Sans GB',serif;
-  max-width:800px; margin:auto; padding:2rem;
-  background:#f9f9f9; color:#333; line-height:1.8;
+html {
+    box-sizing: border-box;
+    font-size: 16px;
 }
 
-a       { color:#0055aa; text-decoration:none; font-weight:600; }
-a:hover { text-decoration:underline; }
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
 
-.header-title{font-size:2rem; margin-bottom:.5rem;}
-.header-row p{font-size:1.2rem; color:#555}
+input,
+textarea,
+button {
+    font-family: inherit;
+}
+
+body {
+    font-family: Georgia, 'Noto Serif', 'Noto Sans SC', 'Microsoft YaHei',
+        'Hiragino Sans GB', serif;
+    max-width: 800px;
+    margin: auto;
+    padding: 2rem;
+    background: #f9f9f9;
+    color: #333;
+    line-height: 1.8;
+}
+
+a {
+    color: #0055aa;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.header-title {
+    font-size: 2rem;
+    margin-bottom: .5rem;
+}
+
+.header-row p {
+    font-size: 1.2rem;
+    color: #555
+}
 
 /* --- Tag chips ------------------------------------------------------- */
-.post-tag{
-  display:inline-block; background:#eef; color:#336;
-  font-size:.8rem; padding:.2rem .55rem; border-radius:.6rem;
-  margin:.3rem .4rem .3rem 0;
+.post-tag {
+    display: inline-block;
+    background: #eef;
+    color: #336;
+    font-size: .8rem;
+    padding: .2rem .55rem;
+    border-radius: .6rem;
+    margin: .3rem .4rem .3rem 0;
 }
 
 /* --- Filter buttons (blog list) -------------------------------------- */
-.tag-button{
-  background:#ddeeff; border:none; border-radius:.5rem;
-  padding:.4rem .8rem; font-size:.85rem; cursor:pointer; margin:.25rem;
+.tag-button {
+    background: #ddeeff;
+    border: none;
+    border-radius: .5rem;
+    padding: .4rem .8rem;
+    font-size: .85rem;
+    cursor: pointer;
+    margin: .25rem;
 }
-.tag-button:hover{background:#ccddee;}
+
+.tag-button:hover {
+    background: #ccddee;
+}
 
 /* --- Dark-mode toggleable rules -------------------------------------- */
-.dark-mode, .dark-mode body{background:#0e0e0e; color:#f1f1f1;}
-.dark-mode a{color:#88aaff;}
-.dark-mode .post-tag{background:#223;color:#ccf;}
-.dark-mode .tag-button{background:#334455;color:#ddeeff;}
-.dark-mode .tag-button:hover{background:#445566;}
+.dark-mode,
+.dark-mode body {
+    background: #0e0e0e;
+    color: #f1f1f1;
+}
+
+.dark-mode a {
+    color: #88aaff;
+}
+
+.dark-mode .post-tag {
+    background: #223;
+    color: #ccf;
+}
+
+.dark-mode .tag-button {
+    background: #334455;
+    color: #ddeeff;
+}
+
+.dark-mode .tag-button:hover {
+    background: #445566;
+}
