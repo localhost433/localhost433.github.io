@@ -36,15 +36,15 @@
     <script src="js/theme.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            fetch("components/header.html")
+            fetch("/components/header.html")
                 .then(response => response.text())
                 .then(data => document.getElementById("header-placeholder").innerHTML = data);
-            fetch("components/footer.html")
+            fetch("/components/footer.html")
                 .then(response => response.text())
                 .then(data => document.getElementById("footer-placeholder").innerHTML = data);
 
             // Load projects dynamically
-            fetch("projects/metadata.json")
+            fetch("/projects/metadata.json")
                 .then(res => res.json())
                 .then(projects => {
                     const container = document.getElementById("projects-list");
