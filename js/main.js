@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("posts-list");
 
-  fetch("metadata/posts.json")
+  fetch("metadata/entries.json")
     .then((res) => res.json())
     .then((posts) => {
       posts.forEach((post) => {

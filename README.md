@@ -1,2 +1,2 @@
-# Blog
-Repository for blog.
+# ~
+Repository for a personal site.
