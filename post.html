@@ -23,10 +23,26 @@
             <!-- Post content dynamically loaded here -->
         </article>
 
+        <section id="tag-filter">
+            <strong>Filter by Tag:</strong>
+            <div id="tag-buttons"></div>
+        </section>
         <section id="posts-list">
             <h1>Blog</h1>
             <p>Collection of posts I've written about various topics.</p>
             <!-- Blog posts dynamically loaded here -->
+        </section>
+        <section id="comments-section">
+            <h2>Comments</h2>
+            <div id="comments-list">
+                <!-- Comments will load here -->
+            </div>
+
+            <h3>Add a Comment</h3>
+            <form id="comment-form">
+                <textarea id="comment-text" placeholder="Write your comment..." required></textarea><br>
+                <button type="submit">Post Comment</button>
+            </form>
         </section>
         <a href="index.html" class="back-link">Back to Home</a>
     </main>
@@ -38,7 +54,7 @@
     <script src="js/posts.js"></script>
     <script src="js/theme.js"></script>
     <script src="js/header-footer.js"></script>
-        
+
 </body>
 
 </html>
