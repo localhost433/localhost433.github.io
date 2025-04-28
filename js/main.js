@@ -1,8 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("posts-list");
 
-  fetch("metadata/entries.json")
-    .then((res) => res.json())
+  fetch("/posts/metadata/entries.json")
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error(`HTTP error ${res.status}`);
+      }
+      return res.json();
+    })
     .then((posts) => {
       posts.forEach((post) => {
         const entry = document.createElement("div");
@@ -22,5 +27,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         container.appendChild(entry);
       });
+    })
+    .catch((err) => {
+      console.error("Failed to load blog entries:", err);
+      container.innerHTML = "<p>Unable to load posts at this time.</p>";
     });
 });
