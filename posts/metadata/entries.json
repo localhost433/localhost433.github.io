@@ -3,6 +3,15 @@
         "title": "First Post",
         "date": "2025-03-30",
         "author": "R",
+        "tags": ["cs", "life"],
         "slug": "first"
+    }
+    ,
+    {
+        "title": "Random stuff in linear algebra",
+        "date": "2025-04-02",
+        "author": "R",
+        "tags": ["math"],
+        "slug": "random"
     }
 ]
