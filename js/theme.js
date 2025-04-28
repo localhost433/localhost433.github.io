@@ -1,9 +1,10 @@
-function initializeThemeToggle() {
-  const toggleBtn = document.getElementById("theme-toggle");
-  if (!toggleBtn) {
-      console.warn("Theme toggle button not found.");
-      return;
-  }
+document.addEventListener("DOMContentLoaded", () => {
+  function initializeThemeToggle() {
+      const toggleBtn = document.getElementById("theme-toggle");
+      if (!toggleBtn) {
+          console.warn("Theme toggle button not found.");
+          return;
+      }
   const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const storedTheme = localStorage.getItem("theme");
 

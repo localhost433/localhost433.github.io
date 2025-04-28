@@ -12,7 +12,7 @@
         connect-src 'self' https://cdn.jsdelivr.net;
         style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
         font-src 'self' https://cdn.jsdelivr.net;
-        img-src data:;" charset="UTF-8">
+        img-src 'self' data;">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 
@@ -40,6 +40,7 @@
 
             <h3>Add a Comment</h3>
             <form id="comment-form">
+                <input type="text" id="comment-author" placeholder="Your name (default: Anonymous)" />
                 <textarea id="comment-text" placeholder="Write your comment..." required></textarea><br>
                 <button type="submit">Post Comment</button>
             </form>
