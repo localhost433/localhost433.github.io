@@ -15,10 +15,13 @@ just like doing an orthogonal decomposition on $x$, that
 
 $$x - \proj_{\ran A^*}x \in (\ran A^*)^\perp = \ker A$$
 
-so that
-$A(x - \proj_{\ran A^*}x) = 0$, thus it restricts the vectors in the transformation by removing the ones in $\ker A$, and changing $A$ to $\tilde{A}$ just further restricts the domain because now there's only input from $\ran A^*$. 
+so that 
 
-The dual space $A'$ ($\Li (V, F)$ space of all the linear functionals) sometimes have the notation $A^*$ which coincides with the adjoint operator, this is what makes me think about the relation between the two. Specifically, the Riesz representation theorem states that for all linear functionals $\phi$ on $V$, there exists a unique $v \in V$ such that:
+$$A(x - \proj_{\ran A^*}x) = 0$$
+
+thus it restricts the vectors in the transformation by removing the ones in $\ker A$, and changing $A$ to $\tilde{A}$ just further restricts the domain because now there's only input from $\ran A^*$.
+
+The dual space $A'$ (denoted as $\Li (V, F)$, space of all the linear functionals) sometimes have the notation $A^*$ which coincides with the adjoint operator, this is what makes me think about the relation between the two. Specifically, the Riesz representation theorem states that for all linear functionals $\phi$ on $V$, there exists a unique $v \in V$ such that:
 
 $$\phi(u) = \inr{u}{v}$$
 
