@@ -1,0 +1,12 @@
+/* imports shared.css automatically through <link> order */
+#posts-list{ margin-top:2rem; }
+
+.post-entry{
+  display:flex; justify-content:space-between; flex-wrap:wrap;
+  margin-bottom:1.6rem;
+}
+
+.post-title{font-size:1.25rem; color:#0055aa;}
+.post-meta-inline{font-size:.85rem; color:#777;}
+
+#tag-filter{margin-top:3rem;}

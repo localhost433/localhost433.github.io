@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog – Robin's Site</title>
+
+  <link rel="stylesheet" href="css/shared.css"/>
+  <link rel="stylesheet" href="css/blog.css"/>
+
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self';
+                 script-src 'self' https://cdn.jsdelivr.net;
+                 connect-src 'self';
+                 style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
+                 font-src 'self' https://cdn.jsdelivr.net;
+                 img-src 'self' data:;">
+</head>
+
+<body>
+  <header id="header-placeholder"></header>
+
+  <!-- Tag filter shown ABOVE post list -->
+  <section id="tag-filter">
+    <strong>Filter by Tag:</strong>
+    <div id="tag-buttons"></div>
+  </section>
+
+  <section id="posts-list">
+    <!-- Posts load here -->
+  </section>
+
+  <footer id="footer-placeholder"></footer>
+
+  <script src="js/theme.js"></script>
+  <script src="js/header-footer.js"></script>
+  <script src="js/blog.js"></script>
+</body>
+</html>

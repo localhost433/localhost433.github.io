@@ -1,37 +1,28 @@
-document.addEventListener("DOMContentLoaded", () => {
-    function initializeThemeToggle() {
-        const toggleBtn = document.getElementById("theme-toggle");
-        if (!toggleBtn) {
-            console.warn("Theme toggle button not found.");
-            return;
-        }
-        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-        const storedTheme = localStorage.getItem("theme");
-
-        const enableDark = () => {
-            document.documentElement.classList.add("dark-mode");
-            localStorage.setItem("theme", "dark");
-            toggleBtn.textContent = "Light Mode";
-        };
-
-        const disableDark = () => {
-            document.documentElement.classList.remove("dark-mode");
-            localStorage.setItem("theme", "light");
-            toggleBtn.textContent = "Dark Mode";
-        };
-
-        if (storedTheme === "dark" || (!storedTheme && prefersDark)) {
-            enableDark();
-        } else {
-            disableDark();
-        }
-
-        toggleBtn.addEventListener("click", () => {
-            if (document.documentElement.classList.contains("dark-mode")) {
-                disableDark();
-            } else {
-                enableDark();
-            }
-        });
-    }
-});
+/* Dark-mode toggle */
+function initializeThemeToggle(){
+    const btn = document.getElementById("theme-toggle");
+    if(!btn){ console.warn("theme-toggle not found"); return; }
+  
+    const enable = ()=>{
+      document.documentElement.classList.add("dark-mode");
+      localStorage.setItem("theme","dark");
+      btn.textContent="Light Mode";
+    };
+    const disable = ()=>{
+      document.documentElement.classList.remove("dark-mode");
+      localStorage.setItem("theme","light");
+      btn.textContent="Dark Mode";
+    };
+  
+    const stored = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme:dark)").matches;
+    (stored==="dark" || (!stored && prefersDark)) ? enable() : disable();
+  
+    btn.addEventListener("click", ()=>{
+      document.documentElement.classList.contains("dark-mode") ? disable() : enable();
+    });
+  }
+  
+  /* Wait for header/footer to be injected */
+  document.addEventListener("DOMContentLoaded", initializeThemeToggle);
+  
