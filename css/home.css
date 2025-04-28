@@ -10,28 +10,29 @@ body {
 }
 
 a {
-  color: #0044cc;
+  color: #0055aa;
   text-decoration: none;
   font-weight: 600;
 }
 
-a:hover {
+a:hover,
+a:focus {
   text-decoration: underline;
 }
 
 /* Header */
 header h1,
 .header-title {
-  font-size: 2.1rem;
+  font-size: 2rem;
   color: #000;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.5rem;
 }
 
 header p,
 .header-row p {
-  font-size: 1.3rem;
-  color: #444;
-  margin-bottom: 1.1rem;
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 1rem;
 }
 
 .header-row {
@@ -43,20 +44,24 @@ header p,
 
 /* Post Listing */
 #posts-list {
-  margin-top: 2.1rem;
+  margin-top: 2rem;
 }
 
 .post-entry {
-  margin-bottom: 2.1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
 }
 
 .post-entry a {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
 }
 
 .post-date,
 .post-meta {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   color: #777;
 }
 
@@ -66,28 +71,45 @@ header p,
 }
 
 .post-author {
-  color: #444;
+  color: #555;
+}
+
+.post-title {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #0055aa;
+  text-decoration: none;
+}
+
+.post-title:hover {
+  text-decoration: underline;
+}
+
+.post-meta-inline {
+  font-size: 0.85rem;
+  color: #777;
+  margin-left: 1rem;
 }
 
 /* Individual Post */
 article {
-  margin-top: 3.4rem;
+  margin-top: 3rem;
 }
 
 article h1,
 article h2 {
   color: #000;
-  margin: 1.3rem 0;
+  margin: 1.5rem 0;
 }
 
 article p {
-  margin-bottom: 1.3rem;
+  margin-bottom: 1.2rem;
 }
 
 /* Back Link */
 .back-link {
   display: block;
-  margin-top: 2.1rem;
+  margin-top: 2rem;
   color: #555;
 }
 
@@ -140,32 +162,6 @@ article p {
   color: #bbbbbb;
 }
 
-.post-entry {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.3rem;
-  flex-wrap: wrap;
-  /* Allow wrapping on smaller screens */
-}
-
-.post-title {
-  font-weight: bold;
-  font-size: 1.3rem;
-  color: #0055aa;
-  text-decoration: none;
-}
-
-.post-title:hover {
-  text-decoration: underline;
-}
-
-.post-meta-inline {
-  font-size: 0.85rem;
-  color: #888;
-  margin-left: 1rem;
-}
-
 .dark-mode .post-meta-inline {
-  color: #bbb;
+  color: #bbbbbb;
 }

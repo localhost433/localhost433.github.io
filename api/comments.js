@@ -2,6 +2,11 @@
 export default async function handler(req, res) {
     const fs = require('fs');
     const path = require('path');
+
+    // Ensure the request body is parsed
+    if (req.method === 'POST' && !req.body) {
+        return res.status(400).json({ error: "Invalid or missing request body" });
+    }
     
     const filePath = path.join(process.cwd(), 'comments.json');
 
@@ -28,13 +33,14 @@ export default async function handler(req, res) {
         if (!data[slug]) {
             data[slug] = [];
         }
+        const timestamp = Date.now();
         data[slug].push({
             text,
-            timestamp: Date.now(),
+            timestamp,
         });
 
         fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
-        return res.status(201).json({ text, timestamp: Date.now() });
+        return res.status(201).json({ text, timestamp });
     }
 
     res.setHeader('Allow', ['GET', 'POST']);

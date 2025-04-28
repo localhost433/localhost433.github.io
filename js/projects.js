@@ -1,7 +1,16 @@
 fetch("projects/metadata.json")
-    .then(res => res.json())
+    .then(res => {
+        if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+    })
     .then(projects => {
         const container = document.getElementById("projects-list");
+        if (!container) {
+            console.error("Error: 'projects-list' element not found in the DOM.");
+            return;
+        }
         projects.forEach(project => {
             const entry = document.createElement("div");
             entry.className = "post-entry";

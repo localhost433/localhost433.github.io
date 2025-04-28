@@ -22,21 +22,35 @@ function parseFrontMatter(markdown) {
 
 // Tag Management
 const tagsSet = new Set();
-posts.forEach(post => {
-  if (post.tags) {
-    post.tags.forEach(tag => tagsSet.add(tag));
-  }
-});
+let posts = []; // Initialize posts as an empty array
 
-// Create tag buttons
-const tagButtonsContainer = document.getElementById('tag-buttons');
-tagsSet.forEach(tag => {
-  const button = document.createElement('button');
-  button.className = 'tag-button';
-  button.textContent = tag;
-  button.addEventListener('click', () => filterPosts(tag));
-  tagButtonsContainer.appendChild(button);
-});
+fetch('/posts/metadata/entries.json')
+  .then(response => response.json())
+  .then(data => {
+    posts = data; // Assign fetched posts to the variable
+    posts.forEach(post => {
+      if (post.tags) {
+        post.tags.forEach(tag => tagsSet.add(tag));
+      }
+    });
+
+    // Create tag buttons
+    const tagButtonsContainer = document.getElementById('tag-buttons');
+    if (tagButtonsContainer) {
+      tagsSet.forEach(tag => {
+        const button = document.createElement('button');
+        button.className = 'tag-button';
+        button.textContent = tag;
+        button.addEventListener('click', () => filterPosts(tag));
+        tagButtonsContainer.appendChild(button);
+      });
+    } else {
+      console.warn('Tag buttons container not found.');
+    }
+  })
+  .catch(error => {
+    console.error('Failed to load posts:', error);
+  });
 
 function filterPosts(tag) {
   const entries = document.querySelectorAll('.post-entry');
@@ -48,19 +62,83 @@ function filterPosts(tag) {
 
 // DOMContentLoaded Event Handler
 document.addEventListener("DOMContentLoaded", () => {
-  const slug = getSlugFromURL();
-  const contentDiv = document.getElementById("post-content");
   const postsList = document.getElementById("posts-list");
+  const tagButtonsContainer = document.getElementById("tag-buttons");
 
-  if (!contentDiv || !postsList) {
-    console.error("Required DOM elements are missing.");
-    return;
+  if (!postsList) return; // Only run on post.html where postsList exists
+
+  fetch('/posts/metadata/entries.json')
+    .then(response => response.json())
+    .then(posts => {
+      renderPosts(posts);
+      createTagFilter(posts);
+    })
+    .catch(error => {
+      console.error('Failed to load posts:', error);
+    });
+
+  function renderPosts(posts, filterTag = null) {
+    postsList.innerHTML = ''; // Clear old posts first
+
+    posts.forEach(post => {
+      if (filterTag && (!post.tags || !post.tags.includes(filterTag))) {
+        return; // Skip posts that don't match the filter
+      }
+
+      const entry = document.createElement("div");
+      entry.className = "post-entry";
+
+      const title = document.createElement("a");
+      title.href = `post.html?id=${post.slug}`;
+      title.textContent = post.title;
+      title.className = "post-title";
+
+      const meta = document.createElement("div");
+      meta.className = "post-meta-inline";
+      meta.textContent = `${post.date}${post.author ? " • by " + post.author : ""}`;
+
+      const tagsContainer = document.createElement("div");
+      tagsContainer.className = "tags-container";
+      if (post.tags && post.tags.length > 0) {
+        post.tags.forEach(tag => {
+          const tagEl = document.createElement("span");
+          tagEl.className = "post-tag";
+          tagEl.textContent = tag;
+          tagsContainer.appendChild(tagEl);
+        });
+      }
+
+      entry.appendChild(title);
+      entry.appendChild(meta);
+      entry.appendChild(tagsContainer);
+
+      postsList.appendChild(entry);
+    });
   }
 
-  if (!slug) {
-    loadPostList(postsList);
-  } else {
-    loadSpecificPost(slug, contentDiv, postsList);
+  function createTagFilter(posts) {
+    const allTags = new Set();
+    posts.forEach(post => {
+      if (post.tags) {
+        post.tags.forEach(tag => allTags.add(tag));
+      }
+    });
+
+    // Add "All" button
+    const allButton = document.createElement('button');
+    allButton.className = "tag-button";
+    allButton.textContent = "All";
+    allButton.addEventListener('click', () => renderPosts(posts, null));
+    tagButtonsContainer.appendChild(allButton);
+
+    // Add buttons for each unique tag
+    allTags.forEach(tag => {
+      const button = document.createElement('button');
+      button.className = "tag-button";
+      button.textContent = tag;
+      button.addEventListener('click', () => renderPosts(posts, tag));
+      tagButtonsContainer.appendChild(button);
+    });
   }
 });
 
@@ -146,11 +224,17 @@ function loadSpecificPost(slug, contentDiv, postsList) {
       bodyContainer.innerHTML = html;
 
       contentDiv.appendChild(titleEl);
-      contentDiv.appendChild(metaWrapper);
+      if (postsList) {
+        postsList.style.display = "none";
+      } else {
+        console.warn('Posts list not found.');
+      }
       contentDiv.appendChild(bodyContainer);
 
       // Hide the posts list
-      postsList.style.display = "none";
+      if (postsList) {
+        postsList.style.display = "none";
+      }
 
       // Render MathJax if available
       if (window.MathJax) {
