@@ -1,12 +1,41 @@
-/* imports shared.css automatically through <link> order */
-#posts-list{ margin-top:2rem; }
-
-.post-entry{
-  display:flex; justify-content:space-between; flex-wrap:wrap;
-  margin-bottom:1.6rem;
+#posts-list {
+    margin-top: 2rem;
 }
 
-.post-title{font-size:1.25rem; color:#0055aa;}
-.post-meta-inline{font-size:.85rem; color:#777;}
+/* stack things vertically */
+.post-entry {
+    margin-bottom: 1.6rem;
+}
 
-#tag-filter{margin-top:3rem;}
+.post-title {
+    display: block;
+    font-size: 1.25rem;
+    color: #0055aa;
+    margin-bottom: 0.25rem;
+}
+
+.post-meta-inline {
+    display: block;
+    font-size: 0.85rem;
+    color: #777;
+    margin-bottom: 0.5rem;
+}
+
+/* if you still render tags on the list page */
+.tags-container {
+    margin-top: 0.3rem;
+}
+
+#tag-filter {
+    margin-top: 3rem;
+}
+
+.dark-mode,
+.dark-mode body {
+    background-color: #0e0e0e;
+    color: #f1f1f1;
+}
+
+.dark-mode a {
+    color: #88aaff;
+}
