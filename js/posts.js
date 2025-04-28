@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-    fetch(`./posts/${slug}.md`)
+    fetch(`./posts/entries/${slug}.md`)
         .then((res) => res.text())
         .then((markdown) => {
             const { metadata, body: markdownBody } = parseFrontMatter(markdown);
