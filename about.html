@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About - Robin's Site</title>
+    <link rel="stylesheet" href="css/home.css" />
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        script-src 'self' https://cdn.jsdelivr.net;
+        connect-src 'self' https://cdn.jsdelivr.net;
+        style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
+        font-src 'self' https://cdn.jsdelivr.net;
+        img-src data:;" charset="UTF-8">
+</head>
+
+<body>
+    <header id="header-placeholder"></header>
+    <main>
+        <article>
+            <h1>Hello, I'm Robin.</h1>
+            <p>
+                This website is a place where I share ideas, projects, thoughts on school, life, and other things that
+                catch my interest.
+                I don't like confining my writing to traditional labels like "blog," "journal," or "portfolio," since
+                that feels restrictive to how and what I want to write.
+            </p>
+
+            <h2>What You Might Find Here</h2>
+            <p>
+                - Posts about random topics I find interesting.<br>
+                - Small projects, experiments, and creations.<br>
+                - Thoughts on academic topics, especially from school work.<br>
+                - Personal reflections or ideas that I simply want to document.
+            </p>
+
+            <h2>Connect with Me</h2>
+            <p>
+                You can find me here:
+            <ul>
+                <li><a href="https://github.com/localhost433" target="_blank">GitHub</a></li>
+                <li><a href="https://www.linkedin.com/in/robin-chen-a494542b7/" target="_blank">LinkedIn</a></li>
+            </ul>
+            </p>
+
+            <h2>Tech Stack</h2>
+            <p>
+                This site is built with vanilla HTML, CSS, and JavaScript.
+                It uses minimal libraries to stay lightweight, with <code>marked.js</code> for Markdown parsing and
+                <code>MathJax</code> for rendering math.
+            </p>
+
+            <a href="index.html" class="back-link">Back to Home</a>
+        </article>
+    </main>
+
+    <footer id="footer-placeholder"></footer>
+
+    <script src="js/theme.js"></script>
+    <script>
+        // Load header and footer dynamically
+        document.addEventListener("DOMContentLoaded", () => {
+            fetch("components/header.html")
+                .then(response => response.text())
+                .then(data => document.getElementById("header-placeholder").innerHTML = data);
+            fetch("components/footer.html")
+                .then(response => response.text())
+                .then(data => document.getElementById("footer-placeholder").innerHTML = data);
+        });
+    </script>
+</body>
+
+</html>
