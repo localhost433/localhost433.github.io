@@ -1,4 +1,13 @@
 /* Shared Typography and Layout */
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
 body {
   font-family: Georgia, 'Noto Serif', 'Noto Sans SC', 'Microsoft YaHei', 'Hiragino Sans GB', serif;
   background-color: #fff;
@@ -20,13 +29,15 @@ a:hover {
 }
 
 /* Header */
-header h1, .header-title {
+header h1,
+.header-title {
   font-size: 2.1rem;
   color: #000;
   margin-bottom: 0.3rem;
 }
 
-header p, .header-row p {
+header p,
+.header-row p {
   font-size: 1.3rem;
   color: #444;
   margin: 0;
@@ -52,7 +63,8 @@ header p, .header-row p {
   font-size: 1.3rem;
 }
 
-.post-meta, .post-date {
+.post-meta,
+.post-date {
   font-size: 0.9rem;
   color: #777;
 }
@@ -71,7 +83,8 @@ article {
   margin-top: 3.4rem;
 }
 
-article h1, article h2 {
+article h1,
+article h2 {
   color: #000;
   margin: 1.3rem 0;
 }
@@ -97,20 +110,73 @@ article p {
   color: #88aaff;
 }
 
-.dark-mode header h1, 
-.dark-mode article h1, 
-.dark-mode article h2, 
+.dark-mode header h1,
+.dark-mode article h1,
+.dark-mode article h2,
 .dark-mode .header-title {
   color: #fff;
 }
 
-.dark-mode header p, 
-.dark-mode .header-row p, 
-.dark-mode .post-meta, 
-.dark-mode .post-date, 
+.dark-mode header p,
+.dark-mode .header-row p,
+.dark-mode .post-meta,
+.dark-mode .post-date,
 .dark-mode .back-link {
   color: #ccc;
 }
+
+/*Tags*/
+.tags-container {
+  margin-top: 0.5rem;
+}
+
+.post-tag {
+  display: inline-block;
+  background-color: #eef;
+  color: #336;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.5rem;
+  margin-right: 0.4rem;
+  margin-top: 0.4rem;
+}
+
+.dark-mode .post-tag {
+  background-color: #223;
+  color: #ccf;
+}
+
+#tag-filter {
+  margin-bottom: 2rem;
+}
+
+#tag-buttons {
+  margin-top: 0.5rem;
+}
+
+.tag-button {
+  background-color: #ddeeff;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  margin: 0.2rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.tag-button:hover {
+  background-color: #ccddee;
+}
+
+.dark-mode .tag-button {
+  background-color: #334455;
+  color: #ddeeff;
+}
+
+.dark-mode .tag-button:hover {
+  background-color: #445566;
+}
+
 
 /* Theme Toggle */
 #theme-toggle {

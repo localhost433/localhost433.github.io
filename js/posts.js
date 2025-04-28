@@ -1,3 +1,4 @@
+// Utility Functions
 function getSlugFromURL() {
   const params = new URLSearchParams(window.location.search);
   return params.get('id');
@@ -19,48 +20,99 @@ function parseFrontMatter(markdown) {
   return { metadata, body };
 }
 
+// Tag Management
+const tagsSet = new Set();
+posts.forEach(post => {
+  if (post.tags) {
+    post.tags.forEach(tag => tagsSet.add(tag));
+  }
+});
+
+// Create tag buttons
+const tagButtonsContainer = document.getElementById('tag-buttons');
+tagsSet.forEach(tag => {
+  const button = document.createElement('button');
+  button.className = 'tag-button';
+  button.textContent = tag;
+  button.addEventListener('click', () => filterPosts(tag));
+  tagButtonsContainer.appendChild(button);
+});
+
+function filterPosts(tag) {
+  const entries = document.querySelectorAll('.post-entry');
+  entries.forEach(entry => {
+    const tags = Array.from(entry.querySelectorAll('.post-tag')).map(e => e.textContent);
+    entry.style.display = tags.includes(tag) ? 'flex' : 'none';
+  });
+}
+
+// DOMContentLoaded Event Handler
 document.addEventListener("DOMContentLoaded", () => {
   const slug = getSlugFromURL();
   const contentDiv = document.getElementById("post-content");
   const postsList = document.getElementById("posts-list");
 
-  if (!slug) {
-    // No specific post requested: show list of posts
-    fetch("/posts/metadata/entries.json")
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(`HTTP error ${res.status}`);
-        }
-        return res.json();
-      })
-      .then((posts) => {
-        posts.forEach((post) => {
-          const entry = document.createElement("div");
-          entry.className = "post-entry";
-
-          const title = document.createElement("a");
-          title.href = `post.html?id=${post.slug}`;
-          title.textContent = post.title;
-          title.className = "post-title";
-
-          const meta = document.createElement("div");
-          meta.className = "post-meta-inline";
-          meta.textContent = `${post.date}${post.author ? " • by " + post.author : ""}`;
-
-          entry.appendChild(title);
-          entry.appendChild(meta);
-
-          postsList.appendChild(entry);
-        });
-      })
-      .catch((err) => {
-        console.error("Failed to load blog entries:", err);
-        postsList.innerHTML = "<p>Unable to load posts at this time.</p>";
-      });
+  if (!contentDiv || !postsList) {
+    console.error("Required DOM elements are missing.");
     return;
   }
 
-  // Otherwise, load specific post
+  if (!slug) {
+    loadPostList(postsList);
+  } else {
+    loadSpecificPost(slug, contentDiv, postsList);
+  }
+});
+
+// Load List of Posts
+function loadPostList(postsList) {
+  fetch("/posts/metadata/entries.json")
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error(`HTTP error ${res.status}`);
+      }
+      return res.json();
+    })
+    .then((posts) => {
+      posts.forEach((post) => {
+        const entry = document.createElement("div");
+        entry.className = "post-entry";
+
+        const title = document.createElement("a");
+        title.href = `post.html?id=${post.slug}`;
+        title.textContent = post.title;
+        title.className = "post-title";
+
+        const meta = document.createElement("div");
+        meta.className = "post-meta-inline";
+        meta.textContent = `${post.date}${post.author ? " • by " + post.author : ""}`;
+
+        const tagsContainer = document.createElement("div");
+        tagsContainer.className = "tags-container";
+        if (post.tags && post.tags.length > 0) {
+          post.tags.forEach(tag => {
+            const tagEl = document.createElement("span");
+            tagEl.className = "post-tag";
+            tagEl.textContent = tag;
+            tagsContainer.appendChild(tagEl);
+          });
+        }
+
+        entry.appendChild(title);
+        entry.appendChild(meta);
+        entry.appendChild(tagsContainer);
+
+        postsList.appendChild(entry);
+      });
+    })
+    .catch((err) => {
+      console.error("Failed to load blog entries:", err);
+      postsList.innerHTML = "<p>Unable to load posts at this time.</p>";
+    });
+}
+
+// Load Specific Post
+function loadSpecificPost(slug, contentDiv, postsList) {
   fetch(`/posts/entries/${slug}.md`)
     .then((res) => res.text())
     .then((markdown) => {
@@ -100,6 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Hide the posts list
       postsList.style.display = "none";
 
+      // Render MathJax if available
       if (window.MathJax) {
         requestAnimationFrame(() => {
           try {
@@ -121,7 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .catch((err) => {
       console.error("Failed to load post:", err);
       contentDiv.innerHTML = `
-              <h2>Post Not Found</h2>
-              <a href="index.html" class="back-link">Back to Home</a>`;
+        <h2>Post Not Found</h2>
+        <a href="index.html" class="back-link">Back to Home</a>`;
     });
-});
+}
