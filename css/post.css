@@ -6,10 +6,12 @@
 article#post-content {
   margin-top: 2rem;
 }
+
 article#post-content h1 {
   font-size: 2rem;
   margin-bottom: 0.5rem;
 }
+
 article#post-content .post-meta {
   font-size: 0.9rem;
   color: #777;
@@ -25,20 +27,48 @@ article#post-content .post-meta {
 #comments-section {
   margin-top: 3rem;
   padding: 1.5rem;
-  background-color: #666666;
-  border-radius: 1rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  background-color: #bbb;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
+
 #comments-list p {
-  background-color: #eef;
+  background-color: #eee;
   padding: 0.8rem 1.2rem;
   border-radius: 1rem;
   margin-bottom: 1rem;
   border-left: 4px solid #3366ff;
 }
+
 #comment-form {
   margin-top: 1.5rem;
 }
+
 #comment-form button {
   align-self: flex-start;
+}
+
+/* ==========================================================================
+   DARK MODE (POST-SPECIFIC)
+   ========================================================================== */
+.dark-mode #comments-section {
+  background-color: #444;
+}
+
+.dark-mode #comments-list p {
+  background-color: #555;
+  border-left: 4px solid #88aaff;
+}
+
+.dark-mode #comment-form button {
+  background-color: #555;
+  color: #def;
+}
+
+.dark-mode #comment-form button:hover {
+  background-color: #666;
+}
+
+.dark-mode #comment-form textarea {
+  background-color: #555;
+  color: #eee;
 }
