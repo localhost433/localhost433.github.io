@@ -1,5 +1,5 @@
 /* Dark-mode toggle */
-export function initializeThemeToggle() {
+function initializeThemeToggle() {
   const btn = document.getElementById("theme-toggle");
   if (!btn) {
     console.warn("theme-toggle not found.");
@@ -24,6 +24,8 @@ export function initializeThemeToggle() {
     document.documentElement.classList.contains("dark-mode") ? disable() : enable();
   });
 }
+
+export { initializeThemeToggle };
 
 
 /* Wait for header/footer to be injected */
