@@ -3,7 +3,11 @@
    ========================================================================== */
 
 /* — Reset & Box-Sizing — */
-html, body, *, *::before, *::after {
+html,
+body,
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -21,12 +25,18 @@ body {
 }
 
 /* — Headings & Paragraphs — */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: #000;
   margin-top: 1.5rem;
   margin-bottom: 0.75rem;
   font-weight: normal;
 }
+
 p {
   margin-bottom: 1rem;
 }
@@ -36,7 +46,9 @@ a {
   color: #0055aa;
   text-decoration: none;
 }
-a:hover, a:focus {
+
+a:hover,
+a:focus {
   text-decoration: underline;
 }
 
@@ -46,9 +58,11 @@ a:hover, a:focus {
   font-weight: bold;
   margin-bottom: 0.5rem;
 }
+
 nav {
   margin-bottom: 1.5rem;
 }
+
 nav a {
   font-size: 1.1rem;
   margin-right: 0.5rem;
@@ -61,13 +75,16 @@ nav a {
   align-items: center;
   margin-bottom: 2rem;
 }
+
 .header-row p {
   font-size: 1.2rem;
   color: #555;
 }
 
 /* — Buttons & Toggles — */
-button, #theme-toggle, .tag-button {
+button,
+#theme-toggle,
+.tag-button {
   font-family: inherit;
   font-size: 1rem;
   padding: 0.5rem 1rem;
@@ -78,7 +95,10 @@ button, #theme-toggle, .tag-button {
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
-button:hover, #theme-toggle:hover, .tag-button:hover {
+
+button:hover,
+#theme-toggle:hover,
+.tag-button:hover {
   background-color: #ccddee;
 }
 
@@ -98,6 +118,7 @@ button:hover, #theme-toggle:hover, .tag-button:hover {
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
+
 #tag-buttons {
   margin-top: 0.5rem;
 }
@@ -109,47 +130,68 @@ button:hover, #theme-toggle:hover, .tag-button:hover {
   font-size: 0.9rem;
   color: #555;
 }
+
 .back-link:hover {
   text-decoration: underline;
 }
 
 /* — Form Controls — */
-input[type="text"], textarea {
+input[type="text"],
+textarea {
   width: 100%;
   font-family: inherit;
   font-size: 1rem;
-  padding: 0.7rem;
+  padding: 0.8rem;
   margin-bottom: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 0.5rem;
+  border: 0px;
+  border-radius: 0rem;
 }
+
 textarea {
   resize: vertical;
 }
 
 /* — Dark Mode — */
-.dark-mode, 
+.dark-mode,
 .dark-mode body {
   background-color: #0e0e0e;
   color: #f1f1f1;
 }
+
 .dark-mode a {
   color: #88aaff;
 }
+
 .dark-mode button,
 .dark-mode #theme-toggle,
 .dark-mode .tag-button {
-  background-color: #334455;
+  background-color: transparent;
   color: #ddeeff;
+  border: none;
 }
+
 .dark-mode button:hover,
 .dark-mode #theme-toggle:hover,
 .dark-mode .tag-button:hover {
   background-color: #445566;
 }
+
 .dark-mode input[type="text"],
 .dark-mode textarea {
   background-color: #222;
   color: #eee;
   border: 1px solid #555;
+}
+
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3,
+.dark-mode h4,
+.dark-mode h5,
+.dark-mode h6 {
+  color: #ffffff;
+}
+
+.dark-mode .header-title {
+  color: #cccccc;
 }
