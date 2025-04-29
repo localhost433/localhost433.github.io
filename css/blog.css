@@ -1,41 +1,33 @@
+/* ==========================================================================
+   BLOG LISTING PAGE
+   ========================================================================== */
+
+/* Remove default list spacing */
 #posts-list {
-    margin-top: 2rem;
-}
-
-/* stack things vertically */
-.post-entry {
-    margin-bottom: 1.6rem;
-}
-
-.post-title {
+    margin-top: 0;
+  }
+  
+  /* Stack each entry vertically */
+  .post-entry {
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Title & Meta */
+  .post-title {
     display: block;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     color: #0055aa;
     margin-bottom: 0.25rem;
-}
-
-.post-meta-inline {
+  }
+  .post-meta-inline {
     display: block;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     color: #777;
     margin-bottom: 0.5rem;
-}
-
-/* if you still render tags on the list page */
-.tags-container {
-    margin-top: 0.3rem;
-}
-
-#tag-filter {
-    margin-top: 3rem;
-}
-
-.dark-mode,
-.dark-mode body {
-    background-color: #0e0e0e;
-    color: #f1f1f1;
-}
-
-.dark-mode a {
-    color: #88aaff;
-}
+  }
+  
+  /* Tag row under each entry */
+  .tags-container {
+    margin-top: 0.5rem;
+  }
+  

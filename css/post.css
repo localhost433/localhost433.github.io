@@ -1,37 +1,44 @@
-/* relies on shared.css first */
-article{margin-top:3rem;}
-article h1{margin:1.5rem 0; font-size:1.9rem;}
-.post-meta{font-size:.9rem; color:#777; margin-bottom:1.5rem;}
+/* ==========================================================================
+   INDIVIDUAL POST PAGE
+   ========================================================================== */
 
-/* --- comment section ------------------------------------------------- */
-#comments-section{
-  margin-top:3rem; padding:1.6rem;
-  background:#f9f9f9; border-radius:1rem;
-  box-shadow:0 2px 6px rgba(0,0,0,.08);
+/* Article content */
+article#post-content {
+  margin-top: 2rem;
 }
-#comments-list p{
-  background:#eef; padding:.9rem 1.2rem; border-radius:1rem;
-  margin-bottom:1.2rem; border-left:4px solid #3366ff;
+article#post-content h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
 }
-#comment-form{margin-top:1.5rem; display:flex; flex-direction:column;}
-#comment-form textarea,
-#comment-form input[type=text]{
-  font-size:1rem; padding:.8rem; margin-bottom:1rem;
-  border-radius:.6rem; border:1px solid #ccc;
+article#post-content .post-meta {
+  font-size: 0.9rem;
+  color: #777;
+  margin-bottom: 1.5rem;
 }
-#comment-form button{
-  align-self:flex-start; padding:.75rem 1.6rem;
-  background:#3366ff; color:#fff; border:none; border-radius:.5rem;
-  cursor:pointer; font-size:1rem;
-}
-#comment-form button:hover{background:#254eda;}
 
-/* dark-mode */
-.dark-mode #comments-section{background:#1f1f1f;}
-.dark-mode #comments-list p{
-  background:#334; color:#ddeeff; border-left:4px solid #88aaff;
+/* Tags under the post title */
+.tags-container {
+  margin-top: 1rem;
 }
-.dark-mode #comment-form textarea,
-.dark-mode #comment-form input[type=text]{
-  background:#222; color:#eee; border:1px solid #555;
+
+/* Comments section */
+#comments-section {
+  margin-top: 3rem;
+  padding: 1.5rem;
+  background-color: #f9f9f9;
+  border-radius: 1rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+#comments-list p {
+  background-color: #eef;
+  padding: 0.8rem 1.2rem;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+  border-left: 4px solid #3366ff;
+}
+#comment-form {
+  margin-top: 1.5rem;
+}
+#comment-form button {
+  align-self: flex-start;
 }
