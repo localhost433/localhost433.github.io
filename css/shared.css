@@ -1,99 +1,155 @@
-/* --- Base site-wide styles ------------------------------------------- */
-html {
-    box-sizing: border-box;
-    font-size: 16px;
+/* ==========================================================================
+   SHARED / GLOBAL STYLES
+   ========================================================================== */
+
+/* — Reset & Box-Sizing — */
+html, body, *, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-*,
-*::before,
-*::after {
-    box-sizing: inherit;
-}
-
-input,
-textarea,
-button {
-    font-family: inherit;
-}
-
+/* — Base Typography & Layout — */
 body {
-    font-family: Georgia, 'Noto Serif', 'Noto Sans SC', 'Microsoft YaHei',
-        'Hiragino Sans GB', serif;
-    max-width: 800px;
-    margin: auto;
-    padding: 2rem;
-    background: #f9f9f9;
-    color: #333;
-    line-height: 1.8;
+  font-family: Georgia, 'Noto Serif', serif;
+  max-width: 800px;
+  margin: auto;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  color: #333;
+  line-height: 1.8;
 }
 
+/* — Headings & Paragraphs — */
+h1, h2, h3, h4, h5, h6 {
+  color: #000;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  font-weight: normal;
+}
+p {
+  margin-bottom: 1rem;
+}
+
+/* — Links — */
 a {
-    color: #0055aa;
-    text-decoration: none;
-    font-weight: 600;
+  color: #0055aa;
+  text-decoration: none;
+}
+a:hover, a:focus {
+  text-decoration: underline;
 }
 
-a:hover {
-    text-decoration: underline;
-}
-
+/* — Header & Nav — */
 .header-title {
-    font-size: 2rem;
-    margin-bottom: .5rem;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+nav {
+  margin-bottom: 1.5rem;
+}
+nav a {
+  font-size: 1.1rem;
+  margin-right: 0.5rem;
 }
 
+/* — Header Row (sub-heading + toggle) — */
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
 .header-row p {
-    font-size: 1.2rem;
-    color: #555
+  font-size: 1.2rem;
+  color: #555;
 }
 
-/* --- Tag chips ------------------------------------------------------- */
+/* — Buttons & Toggles — */
+button, #theme-toggle, .tag-button {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: #ddeeff;
+  color: #0055aa;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+button:hover, #theme-toggle:hover, .tag-button:hover {
+  background-color: #ccddee;
+}
+
+/* — Tag “Chips” — */
 .post-tag {
-    display: inline-block;
-    background: #eef;
-    color: #336;
-    font-size: .8rem;
-    padding: .2rem .55rem;
-    border-radius: .6rem;
-    margin: .3rem .4rem .3rem 0;
+  display: inline-block;
+  background-color: #eef;
+  color: #336;
+  font-size: 0.85rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 0.6rem;
+  margin: 0.2rem 0.3rem 0.2rem 0;
 }
 
-/* --- Filter buttons (blog list) -------------------------------------- */
-.tag-button {
-    background: #ddeeff;
-    border: none;
-    border-radius: .5rem;
-    padding: .4rem .8rem;
-    font-size: .85rem;
-    cursor: pointer;
-    margin: .25rem;
+/* — Filter Button Container — */
+#tag-filter {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+#tag-buttons {
+  margin-top: 0.5rem;
 }
 
-.tag-button:hover {
-    background: #ccddee;
+/* — Back Link — */
+.back-link {
+  display: inline-block;
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+.back-link:hover {
+  text-decoration: underline;
 }
 
-/* --- Dark-mode toggleable rules -------------------------------------- */
-.dark-mode,
+/* — Form Controls — */
+input[type="text"], textarea {
+  width: 100%;
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.7rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+}
+textarea {
+  resize: vertical;
+}
+
+/* — Dark Mode — */
+.dark-mode, 
 .dark-mode body {
-    background: #0e0e0e;
-    color: #f1f1f1;
+  background-color: #0e0e0e;
+  color: #f1f1f1;
 }
-
 .dark-mode a {
-    color: #88aaff;
+  color: #88aaff;
 }
-
-.dark-mode .post-tag {
-    background: #223;
-    color: #ccf;
-}
-
+.dark-mode button,
+.dark-mode #theme-toggle,
 .dark-mode .tag-button {
-    background: #334455;
-    color: #ddeeff;
+  background-color: #334455;
+  color: #ddeeff;
 }
-
+.dark-mode button:hover,
+.dark-mode #theme-toggle:hover,
 .dark-mode .tag-button:hover {
-    background: #445566;
+  background-color: #445566;
+}
+.dark-mode input[type="text"],
+.dark-mode textarea {
+  background-color: #222;
+  color: #eee;
+  border: 1px solid #555;
 }
