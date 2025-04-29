@@ -1,17 +1,22 @@
+// header-footer.js
+
+import { initializeThemeToggle } from './theme.js'; 
+// or if not using modules, just ensure initializeThemeToggle is global
+
 function loadHeaderFooter() {
-    return Promise.all([
-        fetch("/components/header.html")
-            .then(response => response.text())
-            .then(data => document.getElementById("header-placeholder").innerHTML = data),
-        fetch("/components/footer.html")
-            .then(response => response.text())
-            .then(data => document.getElementById("footer-placeholder").innerHTML = data)
-    ]);
+  return Promise.all([
+    fetch("/components/header.html")
+      .then(r => r.text())
+      .then(html => document.getElementById("header-placeholder").innerHTML = html),
+    fetch("/components/footer.html")
+      .then(r => r.text())
+      .then(html => document.getElementById("footer-placeholder").innerHTML = html)
+  ]);
 }
 
-// After header and footer are loaded, then init dark mode
 document.addEventListener("DOMContentLoaded", () => {
-    loadHeaderFooter().then(() => {
-        initializeThemeToggle(); // <-- call dark mode setup AFTER loading header/footer
-    });
+  loadHeaderFooter().then(() => {
+    // now that <button id="theme-toggle"> is in the DOM:
+    initializeThemeToggle();
+  });
 });
