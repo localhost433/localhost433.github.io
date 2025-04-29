@@ -94,7 +94,7 @@ button,
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 0.5rem;
-  background-color: #ddeeff;
+  background-color: #def;
   color: #0055aa;
   cursor: pointer;
   transition: background-color 0.2s ease;
@@ -154,6 +154,8 @@ textarea {
   margin-bottom: 1rem;
   border: 0px;
   border-radius: 0rem;
+  background-color: #eef;
+  color: #bbb;
 }
 
 textarea {
@@ -174,7 +176,7 @@ textarea {
 }
 
 .dark-mode button {
-  background-color: transparent;
+  background-color: #345;
   color: #def;
   border: none;
 }
@@ -205,9 +207,9 @@ textarea {
 
 .dark-mode input[type="text"],
 .dark-mode textarea {
-  background-color: #222;
+  background-color: #345;
   color: #eee;
-  border: 1px solid #555;
+  border: 1px solid #456;
 }
 
 .dark-mode h1,
