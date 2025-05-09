@@ -23,19 +23,17 @@ article#post-content .post-meta {
   margin-top: 1rem;
 }
 
-/* Comments section */
+/* Comment's section */
 #comments-section {
   margin-top: 3rem;
   padding: 1.5rem;
   background-color: #bbb;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 1rem;
 }
 
 #comments-list p {
   background-color: #bbb;
   padding: 0.8rem 1.2rem;
-  border-radius: 1rem;
   margin-bottom: 1rem;
 }
 
@@ -81,5 +79,5 @@ article#post-content .post-meta {
 
 .dark-mode #comment-form textarea::placeholder,
 .dark-mode #comment-form input::placeholder {
-  color: #aaa;
+  color: #bbb;
 }
