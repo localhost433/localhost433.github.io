@@ -1,38 +1,3 @@
-// Vercel serverless function
-import { kv } from '@vercel/kv';
-
-export default async function handler(req, res) {
-  const { method } = req;
-
-  if (method === 'GET') {
-    const slug = req.query.slug;
-    if (!slug) {
-      return res.status(400).json({ error: "Missing slug" });
-    }
-    const comments = (await kv.get(`comments:${slug}`)) || [];
-    return res.status(200).json(comments);
-  }
-
-  if (method === 'POST') {
-    const { slug, text, author } = req.body;
-    if (!slug || !text) {
-      return res.status(400).json({ error: "Missing slug or text" });
-    }
-    const newComment = {
-      text,
-      author: author || "Anonymous",
-      timestamp: Date.now()
-    };
-    const existingComments = (await kv.get(`comments:${slug}`)) || [];
-    existingComments.push(newComment);
-    await kv.set(`comments:${slug}`, existingComments);
-    return res.status(201).json(newComment);
-  }
-
-  res.setHeader('Allow', ['GET', 'POST']);
-  res.status(405).end(`Method ${method} Not Allowed`);
-}
-
 document.addEventListener("DOMContentLoaded", () => {
   const slug = new URLSearchParams(window.location.search).get('id');
   if (!slug) return;

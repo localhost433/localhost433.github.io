@@ -14,7 +14,7 @@ article#post-content h1 {
 
 article#post-content .post-meta {
   font-size: 0.9rem;
-  color: #777;
+  color: #555;
   margin-bottom: 1.5rem;
 }
 
@@ -27,14 +27,19 @@ article#post-content .post-meta {
 #comments-section {
   margin-top: 3rem;
   padding: 1.5rem;
-  background-color: #bbb;
+  background-color: #def;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 #comments-list p {
-  background-color: #bbb;
+  background-color: #fff;
   padding: 0.8rem 1.2rem;
   margin-bottom: 1rem;
+}
+
+.comment-author {
+  font-weight: 600;
+  color: #0055aa;
 }
 
 #comment-form {
@@ -43,37 +48,60 @@ article#post-content .post-meta {
 
 #comment-form button {
   align-self: flex-start;
-  background-color: #bbb;
-  color: #000;
+  background-color: #99ccff;
+  color: #0055aa;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+#comment-form button:hover {
+  background-color: #88bbff;
 }
 
 #comment-form textarea {
-  background-color: #bbb;
+  background-color: #fff;
   color: #000;
+  padding: 0.8rem;
+}
+
+.post-location {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 1.5rem 0 0;
+  text-align: right;
 }
 
 /* ==========================================================================
   DARK MODE (POST-SPECIFIC)
   ========================================================================== */
 .dark-mode #comments-section {
-  background-color: #444;
+  background-color: #0055aa;
+  color: #fff;
 }
 
 .dark-mode #comments-list p {
-  background-color: #444;
+  background-color: #0055aa;
+}
+
+.dark-mode .comment-author {
+  color: #def;
 }
 
 .dark-mode #comment-form button {
-  background-color: #444;
+  background-color: #0055aa;
   color: #def;
 }
 
 .dark-mode #comment-form button:hover {
-  background-color: #555;
+  background-color: #0055aa;
+  /* Updated hover color */
 }
 
 .dark-mode #comment-form textarea {
-  background-color: #444;
+  background-color: #0055aa;
+  /* Updated to match dark mode styles */
   color: #eee;
 }
 

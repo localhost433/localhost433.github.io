@@ -18,7 +18,8 @@ Three things that couldn't make the speaker go to sleep at night (in opensource,
    Espeacially with internal/public, upstream/downstream branches in terms of workforce. Internal forks diverge too much from the public version.
 
 ## Opensource in Public Service
-Governments and organizations are adopting open source mainly for cost-effectiveness. Also there's a **UN Open Source Week**, which takes place in June and includes a hackathon, I might look into that later but it sounds fun.
+
+Governments and organizations are adopting open source mainly for cost-effectiveness. Also there's a UN Open Source Week(???), which takes place in June and includes a hackathon, I might look into that later but it sounds fun.
 
 ## How Projects Evolve
 
@@ -29,8 +30,6 @@ How projects start with a specific purpose but evolves into something much large
   Companies utilize open source for practical reasons, such as reducing development costs, accelerating innovation, and avoiding vendor lock-in.
 - **Balancing Purpose and Practicality**
   A balance between serving the public good and addressing practical needs.
-
----
 
 ## The Purpose of Opensource
 
