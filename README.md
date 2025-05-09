@@ -10,14 +10,19 @@ This repository contains the source code for my personal website. The site serve
 - **Dark Mode**: Toggle between light and dark themes.
 - **Math Support**: Render mathematical expressions using MathJax.
 - **Markdown Parsing**: Blog posts are written in Markdown and rendered dynamically.
+- **Pagination & Filtering**: Browse posts by tag or search with pagination.
 
 ## Tech Stack
 
-- **Frontend**: HTML, CSS, JavaScript
+- **Frontend**: HTML, CSS, JavaScript (Vanilla)
 - **Libraries**:
-  - [Marked.js](https://github.com/markedjs/marked) for Markdown parsing
-  - [MathJax](https://www.mathjax.org/) for rendering math
-- **Backend**: Node.js API (serverless) to handle posting and fetching comments
+  - [Marked.js](https://github.com/markedjs/marked) — Markdown parsing
+  - [MathJax](https://www.mathjax.org/) — Math rendering in posts
+  - [DOMPurify](https://github.com/cure53/DOMPurify) — HTML sanitization for user-generated content
+- **Backend**: Node.js (serverless functions via Vercel)
+  - Dynamic comment storage using either:
+    - JSON file (local/dev)
+    - [Vercel KV](https://vercel.com/docs/storage/vercel-kv) (prod)
 
 ## Contact
 

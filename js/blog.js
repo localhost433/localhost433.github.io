@@ -45,7 +45,7 @@ function renderPosts(posts, filterTag = null) {
 
     const meta = document.createElement("div");
     meta.className = "post-meta-inline";
-    meta.textContent = `${post.date}${post.author ? ` • by ${post.author}` : ""}`;
+    meta.textContent = `${post.date}${post.author ? ` - by ${post.author}` : ""}`;
 
     const tagsDiv = document.createElement("div");
     (post.tags || []).forEach(tag => {

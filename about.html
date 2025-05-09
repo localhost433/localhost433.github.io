@@ -49,9 +49,18 @@
 
             <h2>Tech Stack</h2>
             <p>
-                This site is built with vanilla HTML, CSS, and JavaScript.
-                It uses minimal libraries to stay lightweight, with <code>marked.js</code> for Markdown parsing and
-                <code>MathJax</code> for rendering math.
+                This site is built with vanilla HTML, CSS, and JavaScript. It uses minimal dependencies to stay
+                lightweight, including:
+            </p>
+            <ul>
+                <li><code>marked.js</code> – for client-side Markdown rendering</li>
+                <li><code>MathJax</code> – for TeX/LaTeX rendering in posts</li>
+                <li><code>DOMPurify</code> – for safe rendering of user-submitted content</li>
+                <li><code>Vercel KV</code> (optional) – for serverless comment storage</li>
+            </ul>
+            <p>
+                The comment system gracefully falls back to local JSON storage in development mode. Blog entries now use
+                a JSON-based front-matter metadata system.
             </p>
 
             <a href="index.html" class="back-link">Back to Home</a>
