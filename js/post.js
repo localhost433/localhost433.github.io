@@ -13,6 +13,10 @@ const slug = new URLSearchParams(location.search).get("id");
 if (!slug) { location.href = "blog.html"; }
 
 const content = document.getElementById("post-content");
+if (!content) {
+  console.error("Element with id 'post-content' not found.");
+  throw new Error("Required DOM element not found.");
+}
 
 /* ---------- fetch markdown ---------- */
 fetch(`/posts/entries/${slug}.md`)
@@ -24,17 +28,18 @@ fetch(`/posts/entries/${slug}.md`)
     const html = DOMPurify.sanitize(dirty);
 
     const h1 = document.createElement("h1"); h1.textContent = meta.title || "Untitled";
-    const footerDiv = document.createElement("div");
+    content.append(h1);
 
     const bodyDiv = document.createElement("div"); bodyDiv.innerHTML = html;
     content.appendChild(bodyDiv);
 
+    const footerDiv = document.createElement("div");
     footerDiv.className = "post-location";
     const author = meta.author || "Anonymous";
     const date = meta.date || "In a fragment of time";
     const loc = meta.location ? ` in ${meta.location}` : "Somewhere on Earth";
     footerDiv.textContent = `${author}, ${date}${loc}`;
-    content.append(h1, footerDiv);
+    content.appendChild(footerDiv);
 
     /* MathJax render if present */
     if (window.MathJax) { window.MathJax.typesetPromise?.([content]); }
@@ -42,8 +47,17 @@ fetch(`/posts/entries/${slug}.md`)
   .catch(e => {
     console.error(e);
     content.innerHTML = "<h2>Post not found</h2>";
+  })
+  .catch(e => {
+    console.error(e);
+    content.innerHTML = "<h2>Post not found</h2>";
   });
+const form = document.getElementById("comment-form");
 
+if (!list || !form) {
+  console.error("Required elements for comments not found.");
+  return;
+}
 /* ---------- comments ---------- */
 document.addEventListener("DOMContentLoaded", () => {
   const list = document.getElementById("comments-list");
