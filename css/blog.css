@@ -1,124 +1,145 @@
 /* ==========================================================================
    BLOG LISTING PAGE
-   ========================================================================== */
+   Shared-compatible version
+========================================================================== */
 
 /* Remove default list spacing */
 #posts-list {
   margin-top: 0;
+  padding: 0;
+  list-style: none;
 }
 
-/* Stack each entry vertically */
-.post-entry {
-  margin-bottom: 1.5rem;
+/* Individual blog post entries */
+.post-item {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.dark-mode .post-item {
+  border-color: #444;
 }
 
 /* Title & Meta */
-.post-title {
-  display: block;
+.post-item h2 {
+  margin: 0 0 0.25rem;
   font-size: 1.5rem;
-  color: #0055aa;
-  margin-bottom: 0.25rem;
 }
 
-.post-meta-inline {
-  display: block;
+.post-item a {
+  color: var(--link-color, #0055aa);
+  text-decoration: none;
+}
+
+.post-item a:hover {
+  text-decoration: underline;
+}
+
+.post-meta {
   font-size: 0.9rem;
   color: #555;
-  margin-bottom: 0.5rem;
 }
 
-/* Tag row under each entry */
-.tags-container {
-  margin-top: 0.5rem;
+.dark-mode .post-meta {
+  color: #aaa;
 }
 
-.tag-button {
-  position: relative;
-  z-index: 0;
-  height: 3rem;
-  background-color: #88bbff;
-  padding: 0 1.5rem;
-  color: #000;
-  text-align: center;
-  line-height: 3rem;
-  overflow: hidden;
-  transition: transform 0.2s, background-color 0.2s ease;
+/* Tags */
+.post-tag {
+  display: inline-block;
+  background-color: #eee;
+  color: #555;
+  font-size: 0.85rem;
+  border: none;
+  padding: 0.5rem 1rem;
+  /* Updated padding */
+  margin: 0.2rem 0.3rem 0.2rem 0;
+  border-radius: 0.5rem;
+  /* Optional: Add rounded corners for better aesthetics */
 }
 
-.tag-button::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: -10;
-  height: 100%;
+.post-tag:hover {
+  background-color: #ddd;
+}
+
+.dark-mode .post-tag {
+  background-color: #555;
+  color: #eee;
+}
+
+.dark-mode .post-tag:hover {
+  background-color: #666;
+}
+
+/* Search bar */
+#search-box {
   width: 100%;
-  background-color: #88bbff;
-  transform: scale(1);
-  opacity: 1;
-  transition: transform 0.5s, opacity 0.5s;
+  max-width: 400px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-family: inherit;
+  background: #ffffff;
+  color: #222;
+  border-radius: 15px;
+  transition: border 0.3s, box-shadow 0.3s;
 }
 
-.tag-button:active {
-  transform: scale(0.95);
+#search-box:focus {
+  outline: none;
 }
 
-.tag-button:active::after {
-  transform: scale(1.25, 1.5);
-  opacity: 0;
+.dark-mode #search-box {
+  background: #222;
+  color: #f0f0f0;
 }
 
-.tag-button.selected {
-  background-color: #3399ff;
-}
-
-.dark-mode .tag-button.selected {
-  background-color: #0055aa;
-  color: #fff;
-}
-
-/* Prev/Next buttons */
-#posts-navigation {
+/* Pagination buttons */
+#pagination-controls {
   display: flex;
   justify-content: space-between;
   margin-top: 2rem;
 }
 
-#prev-button,
-#next-button {
-  padding: 0.75rem 1.5rem;
-  background-color: #88bbff;
-  color: #000;
+/* Match the theme-toggle style for pagination buttons */
+#prev-page,
+#next-page {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
   border: none;
-  text-decoration: none;
-  text-align: center;
-  transition: background-color 0.3s;
+  border-radius: 15px;
+  background-color: #ccddee;
+  color: #0055aa;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
-#prev-button:hover,
-#next-button:hover {
-  background-color: #3399ff;
+#prev-page:hover,
+#next-page:hover {
+  background-color: #88bbff;
 }
 
-#prev-button:disabled,
-#next-button:disabled {
+#prev-page:disabled,
+#next-page:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
 
-.dark-mode #prev-button,
-.dark-mode #next-button {
-  background-color: #0055aa;
-  color: #fff;
+/* Dark mode: match theme-toggle hover */
+.dark-mode #prev-page,
+.dark-mode #next-page {
+  background-color: #333;
+  color: #eee;
 }
 
-.dark-mode #prev-button:hover,
-.dark-mode #next-button:hover {
-  background-color: #003377;
+.dark-mode #prev-page:hover,
+.dark-mode #next-page:hover {
+  background-color: #666;
 }
 
-.dark-mode #prev-button:disabled,
-.dark-mode #next-button:disabled {
+.dark-mode #prev-page:disabled,
+.dark-mode #next-page:disabled {
   background-color: #555;
   cursor: not-allowed;
 }
