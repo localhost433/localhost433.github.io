@@ -20,7 +20,7 @@ body {
   margin: auto;
   padding: 2rem;
   background-color: #f9f9f9;
-  color: #333;
+  color: #333333;
   line-height: 1.8;
 }
 
@@ -30,7 +30,7 @@ h3,
 h4,
 h5,
 h6 {
-  color: #000;
+  color: #000000;
   margin-top: 1.5rem;
   margin-bottom: 0.75rem;
   font-weight: normal;
@@ -60,6 +60,7 @@ a:focus {
   font-size: 2.5rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
+  color: #000000;
 }
 
 nav {
@@ -80,7 +81,7 @@ nav a {
 
 .header-row p {
   font-size: 1.2rem;
-  color: #555;
+  color: #555555;
 }
 
 /* ==========================================================================
@@ -97,7 +98,6 @@ button,
   background-color: #ccddee;
   color: #0055aa;
   cursor: pointer;
-  transition: background-color 0.2s ease;
 }
 
 button:hover,
@@ -111,8 +111,8 @@ button:hover,
 ========================================================================== */
 .post-tag {
   display: inline-block;
-  background-color: #eee;
-  color: #555;
+  background-color: #eeeeee;
+  color: #555555;
   font-size: 0.85rem;
   border: none;
   padding: 0.3rem 0.7rem;
@@ -135,7 +135,7 @@ button:hover,
   display: inline-block;
   margin-top: 2rem;
   font-size: 0.9rem;
-  color: #666;
+  color: #666666;
 }
 
 .back-link:hover {
@@ -153,8 +153,8 @@ textarea {
   padding: 0.8rem;
   border: none;
   margin-bottom: 1rem;
-  background-color: #eee;
-  color: #bbb;
+  background-color: #eeeeee;
+  color: #bbbbbb;
 }
 
 textarea {
@@ -167,7 +167,7 @@ textarea {
 .dark-mode,
 .dark-mode body {
   background-color: #0e0e0e;
-  color: #f1f1f1;
+  color: #cccccc;
 }
 
 .dark-mode a {
@@ -175,39 +175,39 @@ textarea {
 }
 
 .dark-mode button {
-  background-color: #333;
-  color: #eee;
+  background-color: #333333;
+  color: #eeeeee;
   border: none;
 }
 
 .dark-mode button:hover {
-  background-color: #666;
+  background-color: #666666;
 }
 
 .dark-mode #theme-toggle {
-  background-color: #333;
-  color: #eee;
+  background-color: #333333;
+  color: #eeeeee;
   border: none;
 }
 
 .dark-mode #theme-toggle:hover {
-  background-color: #555;
+  background-color: #555555;
 }
 
 .dark-mode .tag-button {
-  background-color: #555;
-  color: #eee;
+  background-color: #555555;
+  color: #eeeeee;
   border: none;
 }
 
 .dark-mode .tag-button:hover {
-  background-color: #555;
+  background-color: #555555;
 }
 
 .dark-mode input[type="text"],
 .dark-mode textarea {
-  background-color: #555;
-  color: #eee;
+  background-color: #555555;
+  color: #eeeeee;
 }
 
 .dark-mode h1,
@@ -216,29 +216,29 @@ textarea {
 .dark-mode h4,
 .dark-mode h5,
 .dark-mode h6 {
-  color: #ffffff;
+  color: #eeeeee;
 }
 
 .dark-mode .header-title {
-  color: #cccccc;
+  color: #ffffff;
 }
 
 .dark-mode .header-row p {
   font-size: 1.2rem;
-  color: #bbb;
+  color: #bbbbbb;
 }
 
 .dark-mode .post-tag {
-  background-color: #555;
-  color: #eee;
+  background-color: #555555;
+  color: #eeeeee;
 }
 
 .dark-mode .post-tag:hover {
-  background-color: #555;
+  background-color: #555555;
 }
 
 .dark-mode .back-link {
-  color: #bbb;
+  color: #bbbbbb;
 }
 
 .dark-mode .back-link:hover {

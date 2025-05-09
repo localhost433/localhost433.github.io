@@ -83,12 +83,12 @@ article#post-content .post-meta {
 
 /* Dark Mode (Post-specific) */
 .dark-mode #comments-section {
-  background-color: #001133;
+  background-color: #222222;
   color: #fff;
 }
 
 .dark-mode #comments-list p {
-  background-color: #001133;
+  background-color: #222222;
 }
 
 .dark-mode .comment-author {
@@ -106,7 +106,7 @@ article#post-content .post-meta {
 
 .dark-mode #comment-form textarea,
 .dark-mode #comment-form input[type="text"] {
-  background-color: #555;
+  background-color: #333;
   color: #eee;
 }
 
