@@ -25,8 +25,6 @@ function initializeThemeToggle() {
   });
 }
 
-export { initializeThemeToggle };
-
 
 /* Wait for header/footer to be injected */
 document.addEventListener("DOMContentLoaded", initializeThemeToggle);
