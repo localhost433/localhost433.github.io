@@ -3,6 +3,7 @@
         "title": "First Post",
         "date": "2025-03-30",
         "author": "R",
+        "location": "New York",
         "tags": ["cs", "life"],
         "slug": "first"
     }
@@ -11,6 +12,7 @@
         "title": "Random stuff in linear algebra",
         "date": "2025-04-02",
         "author": "R",
+        "location": "New York",
         "tags": ["math"],
         "slug": "random"
     }
@@ -19,6 +21,7 @@
         "title": "Seminar - Opensource",
         "date": "2025-04-04",
         "author": "R",
+        "location": "New York",
         "tags": ["notes", "cs"],
         "slug": "seminar-opensource"
     }
@@ -27,6 +30,7 @@
         "title": "Seminar - Insights from the Financial Industry",
         "date": "2025-04-30",
         "author": "R",
+        "location": "New York",
         "tags": ["notes", "finance"],
         "slug": "seminar-finance"
     }

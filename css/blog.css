@@ -23,7 +23,7 @@
 .post-meta-inline {
   display: block;
   font-size: 0.9rem;
-  color: #777;
+  color: #555;
   margin-bottom: 0.5rem;
 }
 
@@ -32,12 +32,93 @@
   margin-top: 0.5rem;
 }
 
+.tag-button {
+  position: relative;
+  z-index: 0;
+  height: 3rem;
+  background-color: #88bbff;
+  padding: 0 1.5rem;
+  color: #000;
+  text-align: center;
+  line-height: 3rem;
+  overflow: hidden;
+  transition: transform 0.2s, background-color 0.2s ease;
+}
+
+.tag-button::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -10;
+  height: 100%;
+  width: 100%;
+  background-color: #88bbff;
+  transform: scale(1);
+  opacity: 1;
+  transition: transform 0.5s, opacity 0.5s;
+}
+
+.tag-button:active {
+  transform: scale(0.95);
+}
+
+.tag-button:active::after {
+  transform: scale(1.25, 1.5);
+  opacity: 0;
+}
+
 .tag-button.selected {
-  background-color: #99ccff;
-  color: #fff;
+  background-color: #3399ff;
 }
 
 .dark-mode .tag-button.selected {
   background-color: #0055aa;
   color: #fff;
+}
+
+/* Prev/Next buttons */
+#posts-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+#prev-button,
+#next-button {
+  padding: 0.75rem 1.5rem;
+  background-color: #88bbff;
+  color: #000;
+  border: none;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.3s;
+}
+
+#prev-button:hover,
+#next-button:hover {
+  background-color: #3399ff;
+}
+
+#prev-button:disabled,
+#next-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.dark-mode #prev-button,
+.dark-mode #next-button {
+  background-color: #0055aa;
+  color: #fff;
+}
+
+.dark-mode #prev-button:hover,
+.dark-mode #next-button:hover {
+  background-color: #003377;
+}
+
+.dark-mode #prev-button:disabled,
+.dark-mode #next-button:disabled {
+  background-color: #555;
+  cursor: not-allowed;
 }

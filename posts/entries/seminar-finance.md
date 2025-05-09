@@ -55,9 +55,9 @@ They also emphasized the value of empathy and understanding in leadership, as we
 
 ##### Differentiation and Career Growth
 
-The speaker reflected on their career journey, (as a tip they would give to their younger self) sharing lessons learned along the way:
+The speaker reflected on their career, (as a tip they would give to younger self):
 
-- Take risks and embrace mistakes as opportunities for growth.
+- Take risks as opportunities for growth.
 - Prioritize self-improvement to become a better version of yourself.
 - Focus on building skills and experiences that set you apart.
 
