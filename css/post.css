@@ -42,16 +42,24 @@ article#post-content .post-meta {
   color: #0055aa;
 }
 
+/* Comment Form – Updated to match style from shared.css / blog.css */
 #comment-form {
   margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  /* Spacing between input, textarea, and button */
 }
 
 #comment-form button {
-  align-self: flex-start;
-  background-color: #99ccff;
-  color: #0055aa;
-  border: none;
+  font-family: inherit;
+  font-size: 1rem;
   padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 15px;
+  background-color: #ccddee;
+  /* Matches .tag-button & theme-toggle */
+  color: #0055aa;
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
@@ -60,22 +68,20 @@ article#post-content .post-meta {
   background-color: #88bbff;
 }
 
-#comment-form textarea {
+/* Match the rest of the pages’ input/textarea styles */
+#comment-form textarea,
+#comment-form input[type="text"] {
   background-color: #fff;
   color: #000;
+  font-family: inherit;
+  font-size: 1rem;
   padding: 0.8rem;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
 }
 
-.post-location {
-  font-size: 0.9rem;
-  color: #555;
-  margin: 1.5rem 0 0;
-  text-align: right;
-}
-
-/* ==========================================================================
-  DARK MODE (POST-SPECIFIC)
-  ========================================================================== */
+/* Dark Mode (Post-specific) */
 .dark-mode #comments-section {
   background-color: #0055aa;
   color: #fff;
@@ -90,21 +96,23 @@ article#post-content .post-meta {
 }
 
 .dark-mode #comment-form button {
-  background-color: #0055aa;
-  color: #def;
-}
-
-.dark-mode #comment-form button:hover {
-  background-color: #0055aa;
-  /* Updated hover color */
-}
-
-.dark-mode #comment-form textarea {
-  background-color: #0055aa;
-  /* Updated to match dark mode styles */
+  background-color: #333;
+  /* Matches dark-mode theme-toggle */
   color: #eee;
 }
 
+.dark-mode #comment-form button:hover {
+  background-color: #666;
+}
+
+.dark-mode #comment-form textarea,
+.dark-mode #comment-form input[type="text"] {
+  background-color: #555;
+  /* Matches dark-mode input in shared.css */
+  color: #eee;
+}
+
+/* Placeholder in dark mode */
 .dark-mode #comment-form textarea::placeholder,
 .dark-mode #comment-form input::placeholder {
   color: #bbb;
