@@ -25,15 +25,16 @@ fetch(`/posts/entries/${slug}.md`)
 
     const h1 = document.createElement("h1"); h1.textContent = meta.title || "Untitled";
     const footerDiv = document.createElement("div");
+
+    const bodyDiv = document.createElement("div"); bodyDiv.innerHTML = html;
+    content.appendChild(bodyDiv);
+
     footerDiv.className = "post-location";
     const author = meta.author || "Anonymous";
     const date = meta.date || "In a fragment of time";
     const loc = meta.location ? ` in ${meta.location}` : "Somewhere on Earth";
     footerDiv.textContent = `${author}, ${date}${loc}`;
-
     content.append(h1, footerDiv);
-    const bodyDiv = document.createElement("div"); bodyDiv.innerHTML = html;
-    content.appendChild(bodyDiv);
 
     /* MathJax render if present */
     if (window.MathJax) { window.MathJax.typesetPromise?.([content]); }
