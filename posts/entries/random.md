@@ -11,19 +11,19 @@ While reading the Wikipedia article about metric spaces just now, it was talking
 These are not really on the topic, what I want to say today is about the essential part of a linear transformation, and I figured out the proof and purpose just after looking over it in terms of domains and codomains. What I understand here is that
 
 $$
-A x = A(\proj{\ran A^{*}}x + ( x - \proj{\ran A^{*}}x ) ) = A \proj{\ran A^{*}} x
+A x = A(\proj{\ran A^*}x + ( x - \proj{\ran A^*}x ) ) = A \proj{\ran A^*} x
 $$
 
 just like doing an orthogonal decomposition on $x$, that 
 
 $$
-x - \proj{\ran A^{*}}x \in (\ran A^{*})^{\perp} = \ker A
+x - \proj{\ran A^*}x \in (\ran A^*)^{\perp} = \ker A
 $$
 
 so that 
 
 $$
-A(x - \proj{\ran A^{*}}x) = 0
+A(x - \proj{\ran A^*}x) = 0
 $$
 
 thus it restricts the vectors in the transformation by removing the ones in $\ker A$, and changing $A$ to $\tilde{A}$ just further restricts the domain because now there's only input from $\ran A^*$.

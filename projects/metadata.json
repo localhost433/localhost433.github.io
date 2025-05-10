@@ -1,17 +1,20 @@
 [
     {
-        "title": "Personal Blog Site",
+        "title": "Robin's Site",
         "link": "https://github.com/localhost433/localhost433.github.io",
-        "tech": "HTML, CSS, JavaScript"
+        "tech": "HTML, CSS, JavaScript",
+        "description": "This site!"
     },
     {
         "title": "Semantic Search Engine",
         "link": "https://github.com/localhost433/FAISS",
-        "tech": "Python, FAISS, Sentence Transformers"
+        "tech": "Python, FAISS, Sentence Transformers",
+        "description": "A semantic search engine (with interface) that uses FAISS and Sentence Transformers to index and search through trained indices."
     },
     {
         "title": "Prime Factorization Game",
-        "link": "https://github.com/localhost433/prime-factorization-game",
-        "tech": "HTML, CSS, JavaScript"
+        "link": "https://localhost433.github.io/Prime-Factorization-Game/",
+        "tech": "HTML, CSS, JavaScript",
+        "description": "A simple web game about prime factorization."
     }
 ]
