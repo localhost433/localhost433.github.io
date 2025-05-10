@@ -10,15 +10,15 @@ While reading the Wikipedia article about metric spaces just now, it was talking
 
 These are not really on the topic, what I want to say today is about the essential part of a linear transformation, and I figured out the proof and purpose just after looking over it in terms of domains and codomains. What I understand here is that
 
-$$
-A x = A(\proj{\ran A^*}x + ( x - \proj{\ran A^*}x ) ) = A \proj{\ran A^*} x
-$$
+\[
+Ax = A\left(\proj{\ran A^* } x + \left(x - \proj{\ran A^* } x \right)\right) = A\left(\proj{\ran A^* } x\right)
+\]
 
-just like doing an orthogonal decomposition on $x$, that 
+This uses orthogonal decomposition of $x$, where:
 
-$$
-x - \proj{\ran A^*}x \in (\ran A^*)^{\perp} = \ker A
-$$
+\[
+x - \proj{\ran A^* } x \in \left(\ran A^* \right)^\perp = \ker A
+\]
 
 so that 
 
