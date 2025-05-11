@@ -37,7 +37,9 @@ function createLanguageBar(languages) {
 async function fetchLanguages(repo) {
   if (langCache.has(repo)) return langCache.get(repo);
 
-  const resp = await fetch(`/api/github-languages?repo=${repo}`);
+  const url = `https://api.github.com/repos/${repo}/languages`;
+  const resp = await fetch(url);
+  
   if (!resp.ok) {
     console.warn(`Could not load languages for ${repo}: ${resp.status}`);
     langCache.set(repo, {});
