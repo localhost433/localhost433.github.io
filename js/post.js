@@ -1,5 +1,3 @@
-import jsYaml from 'js-yaml';
-
 function parseFrontMatter(md) {
   const re = /^---\r?\n([\s\S]+?)\r?\n---(?:\r?\n|$)/;
   const m = re.exec(md);
@@ -29,7 +27,7 @@ if (!content) {
   throw new Error("Required DOM element not found.");
 }
 
-fetch(`/posts/entries/${slug}.md`)
+fetch(`./posts/entries/${slug}.md`)
   .then(r => r.text())
   .then(md => {
     const { meta, body } = parseFrontMatter(md);

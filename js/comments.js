@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // load existing
   fetch(`/api/comments?slug=${slug}`)
-    .then(r => r.json())
+    .then(r => r.ok ? r.json() : [])
     .then(arr => {
       if (!arr.length) {
         commentsList.innerHTML = 

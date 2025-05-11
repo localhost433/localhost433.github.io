@@ -118,7 +118,7 @@ window.addEventListener("popstate", e => {
 /* -------------------- Initialization -------------------- */
 
 // Fetch posts and initialize the page
-fetch("/posts/metadata/entries.json")
+fetch("./posts/metadata/entries.json")
   .then(response => response.json())
   .then(data => {
     posts = data;
