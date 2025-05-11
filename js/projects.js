@@ -5,6 +5,7 @@ const LINGUIST_COLORS = {
   TypeScript: "#2b7489",
   HTML: "#e34c26",
   CSS: "#563d7c",
+  Shell: "#89e051",
   // Add other languages and their colors as needed
 };
 const langCache = new Map();
@@ -80,13 +81,23 @@ fetch("projects/metadata.json")
       entry.appendChild(title);
       entry.appendChild(meta);
 
+      const wrapper = document.createElement("div");
+      wrapper.className = "linguist-wrapper";
+
+      const langList = document.createElement("div");
+      langList.className = "linguist-langs";
+      langList.textContent = meta.textContent;
+      wrapper.appendChild(langList);
+
+      entry.appendChild(wrapper);
+
       container.appendChild(entry);
 
       if (project.repo) {
         try {
           const languages = await fetchLanguages(project.repo);
           const languageBar = createLanguageBar(languages);
-          entry.appendChild(languageBar);
+          wrapper.appendChild(languageBar);
         } catch (error) {
           console.error(`Error loading languages for ${project.repo}:`, error);
         }
