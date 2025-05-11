@@ -53,15 +53,28 @@ fetch(`./posts/entries/${slug}.md`)
     bodyDiv.innerHTML = html;
     content.appendChild(bodyDiv);
 
-    const footerDiv = document.createElement("div");
-    footerDiv.id         = "post-meta";
-    footerDiv.className  = "post-location";
-    const author = meta.author || "Anonymous";
-    const date = meta.date || "In a fragment of time";
-    footerDiv.textContent = `${author}, ${date}${meta.location ? ' in ' + meta.location : " Somewhere on Earth"}`;
-    footerDiv.style.textAlign = "right";
-    content.appendChild(footerDiv);
+    let rawDate = meta.date ? new Date(meta.date) : null;
 
+    let dateDisplay;
+    if (rawDate instanceof Date && !isNaN(rawDate)) {
+      const Y = rawDate.getFullYear();
+      const M = String(rawDate.getMonth() + 1).padStart(2, "0");
+      const D = String(rawDate.getDate()).padStart(2, "0");
+      dateDisplay = `${Y}-${M}-${D}`;
+    } else {
+      dateDisplay = "In a fragment of time";
+    }
+
+    const footerDiv = document.createElement("div");
+    footerDiv.id        = "post-meta";
+    footerDiv.className = "post-location";
+    footerDiv.style.textAlign = "right";
+    const author = meta.author || "Anonymous";
+    const locationPart = meta.location
+      ? ` in ${meta.location}`
+      : " Somewhere on Earth";
+    footerDiv.textContent = `${author}, ${dateDisplay}${locationPart}`;
+    content.appendChild(footerDiv);
 
     // If MathJax is present, render any math
     if (window.MathJax) {
