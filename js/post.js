@@ -1,5 +1,5 @@
 function parseFrontMatter(text) {
-  const re = /^[\uFEFF]?---\r?\n([\s\S]*?)\r?\n---\r?\n?/;
+  const re = /^---\r?\n([\s\S]+?)\r?\n---(?:\r?\n|$)/;
   const m  = text.match(re);
   let meta = {};
   let body = text;
@@ -14,10 +14,9 @@ function parseFrontMatter(text) {
   return { meta, body };
 }
 
-const slug = new URLSearchParams(location.search).get("slug");
-if (!slug) {
-  location.href = "blog.html";
-}
+const params = new URLSearchParams(location.search);
+const slug = params.get("slug") || params.get("id");
+if (!slug) location.href = "blog.html";
 
 const content = document.getElementById("post-content");
 if (!content) {
