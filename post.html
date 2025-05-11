@@ -2,6 +2,15 @@
 <html lang="en">
 
 <head>
+  <script>
+    (function () {
+      var stored = localStorage.getItem('theme');
+      var prefers = window.matchMedia('(prefers-color-scheme:dark)').matches;
+      if (stored === 'dark' || (!stored && prefers)) {
+        document.documentElement.classList.add('dark-mode');
+      }
+    })();
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Post – Robin's Site</title>
@@ -11,11 +20,11 @@
 
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <meta http-equiv="Content-Security-Policy" content="default-src 'self';
-                 script-src 'self' https://cdn.jsdelivr.net;
-                 connect-src 'self';
-                 style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
-                 font-src 'self' https://cdn.jsdelivr.net;
-                 img-src 'self' data:;">
+         script-src 'self' https://cdn.jsdelivr.net;
+         connect-src 'self';
+         style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
+         font-src 'self' https://cdn.jsdelivr.net;
+         img-src 'self' data:;">
 </head>
 
 <body>
@@ -29,8 +38,12 @@
 
     <h3>Add a Comment</h3>
     <form id="comment-form">
+      <label for="comment-author">Your Name</label>
       <input type="text" id="comment-author" placeholder="Your name (default: Anonymous)" />
+
+      <label for="comment-text">Your Comment</label>
       <textarea id="comment-text" required placeholder="Write your comment..."></textarea>
+
       <button type="submit">Post Comment</button>
     </form>
   </section>
@@ -42,7 +55,8 @@
   <script src="js/mathjax.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
   <script type="module" src="js/header-footer.js"></script>
-  <script src="js/post.js"></script>
+  <script type="module" src="js/post.js"></script>
+  <script src="js/comments.js"></script>
 </body>
 
 </html>

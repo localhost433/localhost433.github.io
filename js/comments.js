@@ -1,55 +1,64 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const slug = new URLSearchParams(window.location.search).get('id');
+  const slug = new URLSearchParams(window.location.search).get("id");
   if (!slug) return;
 
   const commentsList = document.getElementById("comments-list");
-  const form = document.getElementById("comment-form");
-
+  const form         = document.getElementById("comment-form");
   if (!commentsList || !form) {
     console.error("Required DOM elements are missing");
     return;
   }
 
-  // Load existing comments
+  // sanitize helper
+  const sanitize = window.DOMPurify?.sanitize || (s => s);
+
+  // render one comment
+  function add(comment) {
+    const p = document.createElement("p");
+    const author = sanitize(comment.author || "Anonymous");
+    const text   = sanitize(comment.text);
+    p.innerHTML = `<strong>${author}:</strong> ${text}`;
+    commentsList.appendChild(p);
+  }
+
+  // load existing
   fetch(`/api/comments?slug=${slug}`)
-    .then(res => res.json())
-    .then(comments => {
-      comments.forEach(comment => {
-        const p = document.createElement("p");
-        p.innerHTML = `<strong>${comment.author || "Anonymous"}:</strong> ${comment.text}`;
-        commentsList.appendChild(p);
-      });
+    .then(r => r.json())
+    .then(arr => {
+      if (!arr.length) {
+        commentsList.innerHTML = 
+          "<p class='no-comments'>No comments yet. Be the first!</p>";
+      } else {
+        arr.forEach(add);
+      }
     })
-    .catch(err => {
-      console.error("Failed to load comments", err);
-    });
+    .catch(e => console.error("Failed to load comments", e));
 
-  // Submit new comment
-  form.addEventListener("submit", (e) => {
+  // new comment
+  form.addEventListener("submit", e => {
     e.preventDefault();
-    const text = document.getElementById("comment-text").value.trim();
-    const authorInput = document.getElementById("comment-author").value.trim();
-    const author = authorInput.length > 0 ? authorInput : "Anonymous";
+    const textEl   = document.getElementById("comment-text");
+    const authEl   = document.getElementById("comment-author");
+    const text     = textEl.value.trim();
+    const author   = authEl.value.trim() || "Anonymous";
+    if (!text) return;
 
-    if (text.length === 0) return;
-
-    fetch('/api/comments', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+    fetch("/api/comments", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ slug, text, author })
     })
-      .then(res => res.json())
-      .then(newComment => {
-        const p = document.createElement("p");
-        p.innerHTML = `<strong>${newComment.author || "Anonymous"}:</strong> ${newComment.text}`;
-        commentsList.appendChild(p);
-        document.getElementById("comment-text").value = "";
-        document.getElementById("comment-author").value = "";
+      .then(r => {
+        if (!r.ok) throw new Error(r.statusText);
+        return r.json();
+      })
+      .then(comment => {
+        add(comment);
+        requestAnimationFrame(() => form.reset());
       })
       .catch(err => {
         console.error("Failed to post comment", err);
+        alert("Could not submit comment—please try again.");
       });
   });
 });

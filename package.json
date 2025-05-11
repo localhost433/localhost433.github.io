@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@vercel/kv": "^1.0.0",
+    "js-yaml": "^4.1.0",
+    "node-fetch": "^3.3.2",
+    "sanitize-html": "^2.8.0"
+  }
+}

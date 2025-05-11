@@ -1,7 +1,6 @@
 // header-footer.js
 
 import { initializeThemeToggle } from './theme.js'; 
-// or if not using modules, just ensure initializeThemeToggle is global
 
 function loadHeaderFooter() {
   return Promise.all([
@@ -16,7 +15,10 @@ function loadHeaderFooter() {
 
 document.addEventListener("DOMContentLoaded", () => {
   loadHeaderFooter().then(() => {
-    // now that <button id="theme-toggle"> is in the DOM:
     initializeThemeToggle();
+    const yearEl = document.getElementById("current-year");
+    if (yearEl) {
+      yearEl.textContent = new Date().getFullYear();
+    }
   });
 });

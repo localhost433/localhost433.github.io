@@ -12,17 +12,17 @@ This is a problem really gets me wonder 'What is Googology?' during the summer, 
 
 ### Stirling's Approximation
 
-According to Stirling's Approximation[^1]:
+According to [Stirling's Approximation](https://en.wikipedia.org/wiki/Stirling%27s_approximation):
 
 $$
 n! \sim \sqrt{2\pi n} \left(\frac{n}{e}\right)^n
 $$
 
-[^1]: "\(\sim\)" here means that the two quantities are asymptotic, i.e., the ratio between these two terms tends to 1 as \(n \to \infty\).
+"$\sim$" here means that the two quantities are asymptotic, i.e., the ratio between these two terms tends to 1 as $n \to \infty$.
 
 So:
 
-### For \(2^{100!}\)
+### For $2^{100!}$
 
 $$
 100! \sim \sqrt{2\pi \cdot 100} \left(\frac{100}{e}\right)^{100}
@@ -33,7 +33,7 @@ $$
 2^{100!} \approx 2^{9.3 \times 10^{57}}
 $$
 
-### For \(\left(2^{100}\right)!\)
+### For $\left(2^{100}\right)!$
 
 $$
 2^{100}! \sim \sqrt{\pi \cdot 2^{101}} \left(\frac{2^{100}}{e}\right)^{2^{100}} \approx 2.82 \times 10^{15} \cdot \left(4.66 \times 10^{29}\right)^{1.26 \times 10^{30}}
@@ -43,7 +43,7 @@ Both numbers are in the form of tetration (operation based on iterated exponenti
 
 ## Logarithm Approach
 
-### \(\log_2(2^{100!})\)
+### $\log_2(2^{100!})$
 $$
 \log_2(2^{100!}) = 100!
 $$
@@ -56,9 +56,9 @@ $$
 
 Which approximates to:
 
-\[ > 9.3 \times 10^{57} \]
+$$ > 9.3 \times 10^{57} $$
 
-### \(\log_2((2^{100})!)\) (code attached in [Appendix](#appendix))
+### $\log_2((2^{100})!)$ (code attached in [Appendix](#appendix))
 Using Stirling again:
 
 $$
@@ -96,16 +96,16 @@ $$
 
 Ngl, I think Michael make the best argument out of us all...
 
-For \(a \in \mathbb{Z}^+\), \(a > 6\), we know:
+For $a \in \mathbb{Z}^+$, $a > 6$, we know:
 
-\[
+$$
 \begin{align*}
-    a! &> a \cdot 2^a, \\
-    2^{a!} &> 2^{a \cdot 2^a}, \\
-           &> (2^a)^{2^a}, \\
+        a! &> a \cdot 2^a\\
+    2^{a!} &> 2^{a \cdot 2^a}\\
+           &> (2^a)^{2^a}\\
            &= \underbrace{2^a \cdot 2^a \cdot \dots \cdot 2^a}_{2^a \text{ terms}}.
 \end{align*}
-\]
+$$
 
 Then there is:
 

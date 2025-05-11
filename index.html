@@ -2,6 +2,15 @@
 <html lang="en">
 
 <head>
+    <script>
+        (function () {
+            var stored = localStorage.getItem('theme');
+            var prefers = window.matchMedia('(prefers-color-scheme:dark)').matches;
+            if (stored === 'dark' || (!stored && prefers)) {
+                document.documentElement.classList.add('dark-mode');
+            }
+        })();
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Robin's Site</title>
@@ -14,10 +23,10 @@
         style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
         font-src 'self' https://cdn.jsdelivr.net;
         img-src data:;" charset="UTF-8">
+</head>
 
 <body>
     <header id="header-placeholder"></header>
-    <div class="header-title">~</div>
     <div class="header-row">
         <p>This is where I share random ideas and stuff I created about school, life, etc. (Not any type of
             category that I want to fall into, journal, diary, because it would feel kind of restrictive on 'how'/'what'
