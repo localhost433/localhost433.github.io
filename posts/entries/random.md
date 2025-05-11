@@ -10,15 +10,15 @@ While reading the Wikipedia article about metric spaces just now, it was talking
 
 These are not really on the topic, what I want to say today is about the essential part of a linear transformation, and I figured out the proof and purpose just after looking over it in terms of domains and codomains. What I understand here is that
 
-\[
-Ax = A\left(\proj{\ran A^* } x + \left(x - \proj{\ran A^* } x \right)\right) = A\left(\proj{\ran A^* } x\right)
-\]
+$$
+Ax = A\left( \proj{ \ran A^* } x + \left( x - \proj{\ran A^* } x \right) \right) = A\left( \proj{\ran A^* } x \right)
+$$
 
 This uses orthogonal decomposition of $x$, where:
 
-\[
-x - \proj{\ran A^* } x \in \left(\ran A^* \right)^\perp = \ker A
-\]
+$$
+x - \proj{\ran A^* } x \in \left( \ran A^* \right)^\perp = \ker A
+$$
 
 so that 
 
@@ -28,7 +28,7 @@ $$
 
 thus it restricts the vectors in the transformation by removing the ones in $\ker A$, and changing $A$ to $\tilde{A}$ just further restricts the domain because now there's only input from $\ran A^*$.
 
-The dual space $A'$  sometimes have the notation $A^*$ which coincides with the adjoint operator, this is what makes me think about the relation between the two. Specifically, the Riesz representation theorem states that for all linear functionals $\phi$ on $V$, there exists a unique $v \in V$ such that:
+The dual space $A'$ sometimes have the notation $A^*$ which coincides with the adjoint operator, this is what makes me think about the relation between the two. Specifically, the Riesz representation theorem states that for all linear functionals $\phi$ on $V$, there exists a unique $v \in V$ such that:
 
 $$
 \phi(u) = \inr{u}{v}

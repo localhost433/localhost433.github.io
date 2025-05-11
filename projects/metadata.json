@@ -2,19 +2,29 @@
     {
         "title": "Robin's Site",
         "link": "https://github.com/localhost433/localhost433.github.io",
+        "repo": "localhost433/localhost433.github.io",
         "tech": "HTML, CSS, JavaScript",
         "description": "This site!"
     },
     {
         "title": "Semantic Search Engine",
         "link": "https://github.com/localhost433/FAISS",
+        "repo": "localhost433/FAISS",
         "tech": "Python, FAISS, Sentence Transformers",
         "description": "A semantic search engine (with interface) that uses FAISS and Sentence Transformers to index and search through trained indices."
     },
     {
         "title": "Prime Factorization Game",
         "link": "https://localhost433.github.io/Prime-Factorization-Game/",
+        "repo": "localhost433/Prime-Factorization-Game",
         "tech": "HTML, CSS, JavaScript",
         "description": "A simple web game about prime factorization."
+    },
+    {
+        "title": "Study Readiness Survey",
+        "link": "https://github.com/localhost433/Study-Readiness",
+        "repo": "localhost433/Study-Readiness",
+        "tech": "Python",
+        "description": "A survey aimed at quantifying mental readiness for study, based on more objective tests instead of self-evaluation."
     }
 ]

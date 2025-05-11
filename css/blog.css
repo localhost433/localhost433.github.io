@@ -11,28 +11,28 @@
 }
 
 /* Individual blog post entries */
-.post-item {
+.post-entry {
   margin-bottom: 2rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid #ddd;
 }
 
-.dark-mode .post-item {
+.dark-mode .post-entry {
   border-color: #444;
 }
 
 /* Title & Meta */
-.post-item h2 {
+.post-entry h2 {
   margin: 0 0 0.25rem;
   font-size: 1.5rem;
 }
 
-.post-item a {
+.post-entry a {
   color: var(--link-color, #0055aa);
   text-decoration: none;
 }
 
-.post-item a:hover {
+.post-entry a:hover {
   text-decoration: underline;
 }
 
@@ -161,7 +161,7 @@
 }
 
 /* Pagination buttons */
-#pagination-controls {
+#pagination {
   display: flex;
   justify-content: flex-end;
   gap: 1rem;
@@ -169,8 +169,8 @@
 }
 
 /* Match the theme-toggle style for pagination buttons */
-#prev-page,
-#next-page {
+#prev-button,
+#next-button {
   font-family: inherit;
   font-size: 1rem;
   padding: 0.5rem 1rem;
@@ -181,31 +181,31 @@
   cursor: pointer;
 }
 
-#prev-page:hover,
-#next-page:hover {
+#prev-button:hover,
+#next-button:hover {
   background-color: #88bbff;
 }
 
-#prev-page:disabled,
-#next-page:disabled {
+#prev-button:disabled,
+#next-button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
 
 /* Dark mode: match theme-toggle hover */
-.dark-mode #prev-page,
-.dark-mode #next-page {
+.dark-mode #prev-button,
+.dark-mode #next-button {
   background-color: #333;
   color: #eee;
 }
 
-.dark-mode #prev-page:hover,
-.dark-mode #next-page:hover {
+.dark-mode #prev-button:hover,
+.dark-mode #next-button:hover {
   background-color: #666;
 }
 
-.dark-mode #prev-page:disabled,
-.dark-mode #next-page:disabled {
+.dark-mode #prev-button:disabled,
+.dark-mode #next-button:disabled {
   background-color: #555;
   cursor: not-allowed;
 }
