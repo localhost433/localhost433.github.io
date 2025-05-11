@@ -1,26 +1,24 @@
-function parseFrontMatter(md) {
-  const re = /^---\r?\n([\s\S]+?)\r?\n---(?:\r?\n|$)/;
-  const m = re.exec(md);
-  if (!m) return { meta: {}, body: md };
-
-  // parse with js-yaml
+function parseFrontMatter(text) {
+  const re = /^[\uFEFF]?---\r?\n([\s\S]*?)\r?\n---\r?\n?/;
+  const m  = text.match(re);
   let meta = {};
-  try {
-    meta = jsYaml.load(m[1]) || {};
-  } catch (err) {
-    console.warn('YAML parse error:', err);
+  let body = text;
+  if (m) {
+    if (window.jsyaml) {
+      meta = window.jsyaml.load(m[1]);
+    } else {
+      console.error("jsyaml library is not available.");
+    }
+    body = text.slice(m[0].length);
   }
-
-  const body = md.slice(m[0].length);
   return { meta, body };
 }
 
-const slug = new URLSearchParams(location.search).get("id");
+const slug = new URLSearchParams(location.search).get("slug");
 if (!slug) {
   location.href = "blog.html";
 }
 
-// Check that post-content exists
 const content = document.getElementById("post-content");
 if (!content) {
   console.error("Element with id 'post-content' not found.");
@@ -33,12 +31,13 @@ fetch(`./posts/entries/${slug}.md`)
     const { meta, body } = parseFrontMatter(md);
 
     // Provide DOMPurify fallback if not available
-    const sanitize = window.DOMPurify?.sanitize || (str => str);
+    const sanitize = window.DOMPurify?.sanitize || (str => str.replace(/<[^>]+>/g, ""));
 
     const cleanTitle = sanitize(meta.title || "Untitled");
     document.title = `${cleanTitle} – Robin's Blog`;
 
     const h1 = document.createElement("h1");
+    h1.id          = "post-title";
     h1.textContent = cleanTitle;
     content.append(h1);
 
@@ -56,10 +55,11 @@ fetch(`./posts/entries/${slug}.md`)
     content.appendChild(bodyDiv);
 
     const footerDiv = document.createElement("div");
-    footerDiv.className = "post-location";
+    footerDiv.id         = "post-meta";
+    footerDiv.className  = "post-location";
     const author = meta.author || "Anonymous";
     const date = meta.date || "In a fragment of time";
-    footerDiv.textContent = `${author}, ${date}${meta.location ? ' in ' + meta.location : "Somewhere on Earth"}`;
+    footerDiv.textContent = `${author}, ${date}${meta.location ? ' in ' + meta.location : " Somewhere on Earth"}`;
     footerDiv.style.textAlign = "right";
     content.appendChild(footerDiv);
 
