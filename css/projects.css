@@ -1,6 +1,6 @@
 /* ==========================================================================
-   PROJECTS PAGE
-   ========================================================================== */
+  PROJECTS PAGE
+  ========================================================================== */
 
 /* Grid container */
 .projects-container {
@@ -59,10 +59,12 @@
   text-decoration: underline;
 }
 
-/* projects.css */
+/* Projects List */
 #projects-list .post-entry {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 #projects-list .post-meta-inline {
@@ -72,17 +74,34 @@
   margin-bottom: 0.3rem;
 }
 
-.linguist-bar {
-  display: flex;
-  width: 100%;
-  height: 8px;
-  margin: 0.3rem 0 0.5rem 0;
-  overflow: hidden;
-  border-radius: 4px;
-  background-color: #ddd;
+/* Project Info */
+.project-info {
+  max-width: 200px;
 }
 
-/* new wrapper on the right */
+.project-description {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 0.25rem 0;
+}
+
+/* Tech Stack Column */
+.languages {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.languages-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #333;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+
+/* Linguist Wrapper */
 .linguist-wrapper {
   margin-left: auto;
   width: 200px;
@@ -92,16 +111,30 @@
   text-align: right;
 }
 
-/* shrink the bar to fill that wrapper */
-.linguist-wrapper .linguist-bar {
+/* Linguist Bar */
+.linguist-bar {
   width: 100%;
   height: 8px;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.5rem;
+  border-radius: 4px;
+  background-color: #ddd;
+  overflow: hidden;
 }
 
-/* style the names under the bar */
+.linguist-bar .linguist-bar-segment {
+  height: 100%;
+  display: inline-block;
+}
+
+/* Linguist Languages */
 .linguist-langs {
-  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.linguist-langs div {
+  font-size: 0.85rem;
   color: #555;
-  line-height: 1.4;
+  margin-bottom: 0.2rem;
 }
