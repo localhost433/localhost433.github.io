@@ -1,7 +1,7 @@
 /* blog.js – list of posts with tag filter, pagination, and search */
 
 // Constants
-const PER_PAGE = 8;
+const PER_PAGE = 10;
 
 // DOM Elements
 const list = document.getElementById("posts-list");
