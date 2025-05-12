@@ -74,9 +74,12 @@ fetch("projects/metadata.json")
       title.textContent = project.title || "Untitled Project";
       title.className = "post-title";
 
-      // title + description
+      // div for the title and description
       const info = document.createElement("div");
       info.className = "project-info";
+
+      // title
+      info.appendChild(title);
 
       // short description under the title
       if (project.description) {
