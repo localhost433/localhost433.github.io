@@ -69,37 +69,65 @@ fetch("projects/metadata.json")
       entry.className = "post-entry";
 
       const title = document.createElement("a");
-      title.href = project.link;
+      title.href = project.link || "#";
       title.target = "_blank";
-      title.textContent = project.title;
+      title.textContent = project.title || "Untitled Project";
       title.className = "post-title";
 
-      const meta = document.createElement("div");
-      meta.className = "post-meta-inline";
-      meta.textContent = project.tech || "";
+      // title + description
+      const info = document.createElement("div");
+      info.className = "project-info";
 
-      entry.appendChild(title);
-      entry.appendChild(meta);
+      // short description under the title
+      if (project.description) {
+        const desc = document.createElement("p");
+        desc.className   = "project-description";
+        desc.textContent = project.description;
+        info.appendChild(desc);
+      }
+      entry.appendChild(info);
 
+      // languages
+      const techContainer = document.createElement("div");
+      techContainer.className = "languages";
+
+      //header
+      const techLabel = document.createElement("div");
+      techLabel.className   = "languages-label";
+      techLabel.textContent = "languages";
+      techContainer.appendChild(techLabel);
+
+      // wrapper for bar + per‑lang list
       const wrapper = document.createElement("div");
       wrapper.className = "linguist-wrapper";
+      techContainer.appendChild(wrapper);
 
-      const langList = document.createElement("div");
-      langList.className = "linguist-langs";
-      langList.textContent = meta.textContent;
-      wrapper.appendChild(langList);
-
-      entry.appendChild(wrapper);
+      entry.appendChild(techContainer);
 
       container.appendChild(entry);
 
       if (project.repo) {
         try {
           const languages = await fetchLanguages(project.repo);
+          const total     = Object.values(languages).reduce((a,b)=>a+b, 0);
+
           const languageBar = createLanguageBar(languages);
           wrapper.appendChild(languageBar);
-        } catch (error) {
-          console.error(`Error loading languages for ${project.repo}:`, error);
+
+          const langList = document.createElement("div");
+          langList.className = "linguist-langs";
+          Object.entries(languages).forEach(([lang, bytes]) => {
+            const pct  = total
+              ? ((bytes/total*100).toFixed(1) + "%")
+              : "0%";
+            const line = document.createElement("div");
+            line.textContent = `${lang} – ${pct}`;
+            langList.appendChild(line);
+          });
+          wrapper.appendChild(langList);
+
+        } catch(err) {
+          console.error(`Could not load languages for ${project.repo}`, err);
         }
       }
     }
