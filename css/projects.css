@@ -44,7 +44,7 @@
 
 .project-card-description {
   font-size: 1rem;
-  color: #666;
+  color: #666666;
   line-height: 1.5;
 }
 
@@ -76,13 +76,17 @@
 
 /* Project Info */
 .project-info {
-  max-width: 200px;
+  max-width: 500px;
 }
 
 .project-description {
   font-size: 0.9rem;
-  color: #555;
+  color: #555555;
   margin: 0.25rem 0;
+}
+
+.dark-mode .project-description {
+  color: #dddddd;
 }
 
 /* Tech Stack Column */
@@ -101,6 +105,10 @@
   margin-bottom: 0.3rem;
 }
 
+.dark-mode .languages-label {
+  color: #eeeeee;
+}
+
 /* Linguist Wrapper */
 .linguist-wrapper {
   margin-left: auto;
@@ -117,7 +125,13 @@
   height: 8px;
   margin-bottom: 0.5rem;
   border-radius: 4px;
-  background-color: #ddd;
+  background-color: #f9f9f9;
+  overflow: hidden;
+  font-size: 0;
+}
+
+.dark-mode .linguist-bar {
+  background-color: #0e0e0e;
   overflow: hidden;
   font-size: 0;
 }
@@ -140,4 +154,8 @@
   font-size: 0.85rem;
   color: #555;
   margin-bottom: 0.2rem;
+}
+
+.dark-mode .linguist-langs div {
+  color: #dddddd;
 }

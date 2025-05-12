@@ -97,6 +97,10 @@
   text-decoration: none;
 }
 
+.dark-mode .post-title {
+  color: #88bbff
+}
+
 .post-title:hover {
   text-decoration: underline;
 }
