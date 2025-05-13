@@ -18,24 +18,6 @@
     }
     ,
     {
-        "title": "Seminar - Opensource",
-        "date": "2025-04-04",
-        "author": "R",
-        "location": "New York, NY",
-        "tags": ["notes", "cs"],
-        "slug": "seminar-opensource"
-    }
-    ,
-    {
-        "title": "Seminar - Insights from the Financial Industry",
-        "date": "2025-04-30",
-        "author": "R",
-        "location": "New York, NY",
-        "tags": ["notes", "finance"],
-        "slug": "seminar-finance"
-    }
-    ,
-    {
         "title": "A Glimpse into Googology",
         "date": "2024-02-14",
         "author": "R",
