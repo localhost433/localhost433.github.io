@@ -6,9 +6,7 @@ author: R
 location: New York
 ---
 
-While reading the Wikipedia article about metric spaces just now, it was talking about the motivation like "We can measure the distance between two such points by the length of the shortest path along the surface, "as the COW flies". Then I was like there's something wrong about this, and its 'As the crow flies'. This was kind of random but yeah, I want to learn what is a measure space suddenly because I encountered this thing called a bilinear form.
-
-These are not really on the topic, what I want to say today is about the essential part of a linear transformation, and I figured out the proof and purpose just after looking over it in terms of domains and codomains. What I understand here is that
+What I want to say today is about the essential part of a linear transformation, and I figured out the proof and purpose just after looking over it in terms of domains and codomains. What I understand here is that
 
 $$
 Ax = A\left( \proj{ \ran A^* } x + \left( x - \proj{\ran A^* } x \right) \right) = A\left( \proj{\ran A^* } x \right)
