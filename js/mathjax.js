@@ -1,7 +1,5 @@
 window.MathJax = {
-    loader: {
-        load: ['input/tex', 'output/chtml']
-    },
+    loader: { load: ['[tex]/textmacros'] },
     tex: {
         packages: { '[+]': ['noerrors', 'ams', 'textmacros'] },
         macros: {
@@ -26,14 +24,14 @@ window.MathJax = {
             sig: ["\\left( #1, #2, #3 \\right)", 3],
             inr: ["\\left( #1, #2 \\right)", 2],
             proj: ["\\text{proj}_{#1}", 1],
+            textipa: ['\\class{ipa}{#1}', 1]
         },
         inlineMath: [['$', '$'], ['\\(', '\\)']],
         displayMath: [['$$', '$$'], ['\\[', '\\]']],
-        textipa: ['{\\fontfamily{tipa}\\selectfont #1}', 1]
     },
     svg: {
         fontCache: 'global'
     },
-    cthml: {
+    chtml: {
     },
 };
