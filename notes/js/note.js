@@ -24,8 +24,10 @@ marked.setOptions({
 });
 
 const headingData = [];
+const slugger = new marked.Slugger();
 const renderer = new marked.Renderer();
-renderer.heading = (text, level, raw, slugger) => {
+
+renderer.heading = (text, level, raw) => {
     const slug = slugger.slug(raw);
     headingData.push({ text: raw, level, slug });
     return `<h${level} id="${slug}">${text}</h${level}>`;
@@ -41,7 +43,6 @@ fetch(`/notes/courses/${course}/${noteSlug}.md`)
     })
     .then(md => {
         const { meta, body } = parseFrontMatter(md);
-
         document.title = meta.title || noteSlug;
 
         const h1 = document.createElement("h1");
