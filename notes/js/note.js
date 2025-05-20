@@ -83,13 +83,16 @@ fetch(`/notes/courses/${course}/${noteSlug}.md`)
                 const a = document.createElement("a");
                 a.href = `#${slug}`;
                 a.textContent = text;
+                const tgt = () => document.getElementById(slug);
+                if (tgt()) {
+                    a.addEventListener('click', e => {
+                        const t = document.getElementById(slug);
+                        if (!t) return;
+                        e.preventDefault();
+                        t.scrollIntoView({ behavior: 'smooth' });
+                    });
+                }
                 li.append(a);
-
-                li.addEventListener("click", e => {
-                    e.preventDefault();
-                    document.getElementById(slug)
-                        .scrollIntoView({ behavior: "smooth" });
-                });
                 ul.append(li);
             });
 

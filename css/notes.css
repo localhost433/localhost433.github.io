@@ -112,3 +112,7 @@ h1 {
     }
   }
 }
+
+.mjx-chtml .ipa {
+  font-family: "Charis SIL", "Doulos SIL", "Noto Sans IPA", sans-serif;
+}
