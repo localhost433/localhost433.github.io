@@ -2,19 +2,22 @@
    NOTES PAGES
    ========================================================================== */
 
-.course-entry, .note-entry {
+.course-entry,
+.note-entry {
   border-bottom: 1px solid #ddd;
   padding: 0.7rem 0;
   display: flex;
   justify-content: space-between;
 }
 
-.course-title, .note-title {
+.course-title,
+.note-title {
   font-weight: bold;
   color: var(--link-color, #0055aa);
 }
 
-.course-meta, .note-date {
+.course-meta,
+.note-date {
   font-size: 0.9rem;
   color: #555;
 }
@@ -38,6 +41,26 @@
   margin-left: 3rem;
 }
 
-#note-content li + li {
+#note-content li+li {
   margin-top: 0.25rem;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+h4 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
 }

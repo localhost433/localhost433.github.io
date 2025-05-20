@@ -1,4 +1,11 @@
-# What is Language?
+---
+title: 01 – What is Language
+date: 2025-05-19
+---
+
+An overview of contents.
+
+## What is Language?
 - Cultural artifact
 - Articulation of thoughts
 - Code for communication
@@ -13,6 +20,7 @@
 - what exactly do we know when we say we 'know' a language?
 
 ## What does it mean to 'know' a language
+
 ### Linguistic competence
 Sounds, words, linguistic structures, meanings, etc.
 Mostly unconscious
