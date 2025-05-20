@@ -40,8 +40,9 @@ const headingData = [];
 const renderer = new marked.Renderer();
 
 renderer.heading = (text, level, raw) => {
-  const slug = slugify(raw);
-  headingData.push({ text: raw, level, slug });
+  const source = typeof raw === "string" ? raw : text;
+  const slug = slugify(source);
+  headingData.push({ text: source, level, slug });
   return `<h${level} id="${slug}">${text}</h${level}>`;
 };
 
@@ -63,7 +64,7 @@ fetch(`/notes/courses/${course}/${noteSlug}.md`)
 
         headingData.length = 0;
         for (let k in slugCounts) delete slugCounts[k];
-        
+
         const dirty = marked.parse(body);
         const sanitize = window.DOMPurify?.sanitize || (s => s);
         const contentDiv = document.createElement("div");
