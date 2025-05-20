@@ -31,6 +31,7 @@ fetch(`/notes/courses/${course}/${noteSlug}.md`)
         const { meta, body } = parseFrontMatter(md);
 
         document.title = meta.title || noteSlug;
+        
         const h1 = document.createElement("h1");
         h1.textContent = meta.title || noteSlug;
         container.append(h1);
