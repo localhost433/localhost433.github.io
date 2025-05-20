@@ -14,7 +14,7 @@ fetch(`/notes/metadata/courses.json`)
     heading.textContent = course ? course.title : slug;
   });
 
-fetch(`/notes/entries/${slug}/index.json`)
+fetch(`/notes/courses/${slug}/index.json`)
   .then(r => r.json())
   .then(notes => {
     if (!notes.length) {

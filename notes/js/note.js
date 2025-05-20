@@ -14,7 +14,7 @@ if (!course || !noteSlug) location.href = "notes.html";
 
 const article = document.getElementById("note-content");
 
-fetch(`/notes/entries/${course}/${noteSlug}.md`)
+fetch(`/notes/courses/${course}/${noteSlug}.md`)
     .then(r => r.text())
     .then(raw => {
         const { meta, body } = parseFrontMatter(raw);

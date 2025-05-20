@@ -15,7 +15,7 @@ fetch("/notes/metadata/courses.json")
       div.className = "course-entry";
 
       const link = document.createElement("a");
-      link.href = `course.html?id=${c.slug}`;
+      link.href = `course.html?id=${encodeURIComponent(c.slug)}`;
       link.textContent = c.title;
       link.className = "course-title";
 
