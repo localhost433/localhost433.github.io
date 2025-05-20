@@ -4,10 +4,12 @@
 <head>
     <script>
         (function () {
-            var stored = localStorage.getItem('theme');
-            var prefers = window.matchMedia('(prefers-color-scheme:dark)').matches;
+            const stored = localStorage.getItem('theme');
+            const prefers = window.matchMedia('(prefers-color-scheme:dark)').matches;
             if (stored === 'dark' || (!stored && prefers)) {
                 document.documentElement.classList.add('dark-mode');
+            } else {
+                document.documentElement.classList.remove('dark-mode');
             }
         })();
     </script>
@@ -16,7 +18,6 @@
     <title>Note – Robin’s Site</title>
     <link rel="stylesheet" href="css/shared.css" />
     <link rel="stylesheet" href="css/notes.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@5/github-markdown.min.css" />
     <meta http-equiv="Content-Security-Policy" content="default-src 'self';
          script-src 'self' https://cdn.jsdelivr.net;
          connect-src 'self';
