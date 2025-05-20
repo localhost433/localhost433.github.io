@@ -2,15 +2,16 @@
 
 const slugCounts = Object.create(null);
 function slugify(raw) {
-  let base = raw
-    .toLowerCase()
-    .trim()
-    .replace(/[\s]+/g, '-')
-    .replace(/[^\w\-]/g, '');
+    const str = String(raw || "");
+    let base = str
+        .toLowerCase()
+        .trim()
+        .replace(/[\s]+/g, '-')
+        .replace(/[^\w\-]/g, '');
 
-  const count = slugCounts[base] || 0;
-  slugCounts[base] = count + 1;
-  return count ? `${base}-${count}` : base;
+    const count = slugCounts[base] || 0;
+    slugCounts[base] = count + 1;
+    return count ? `${base}-${count}` : base;
 }
 
 function parseFrontMatter(md) {
@@ -39,11 +40,11 @@ marked.setOptions({
 const headingData = [];
 const renderer = new marked.Renderer();
 
-renderer.heading = (text, level, raw) => {
-  const source = typeof raw === "string" ? raw : text;
-  const slug = slugify(source);
-  headingData.push({ text: source, level, slug });
-  return `<h${level} id="${slug}">${text}</h${level}>`;
+renderer.heading = (text, level) => {
+    const source = text;
+    const slug = slugify(source);
+    headingData.push({ text: source, level, slug });
+    return `<h${level} id="${slug}">${text}</h${level}>`;
 };
 
 marked.use({ renderer });
