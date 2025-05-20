@@ -16,6 +16,7 @@
     <title>Note – Robin’s Site</title>
     <link rel="stylesheet" href="css/shared.css" />
     <link rel="stylesheet" href="css/notes.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@5/github-markdown.min.css" />
     <meta http-equiv="Content-Security-Policy" content="default-src 'self';
          script-src 'self' https://cdn.jsdelivr.net;
          connect-src 'self';
@@ -28,12 +29,13 @@
     <header id="header-placeholder"></header>
 
     <main>
-        <article id="note-content"></article>
+        <article id="note-content" class="markdown-body"></article>
     </main>
 
     <a id="back-to-course" class="back-link">Back to Course</a>
     <footer id="footer-placeholder"></footer>
 
+    <script src="js/mathjax.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
     <script type="module" src="js/header-footer.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
