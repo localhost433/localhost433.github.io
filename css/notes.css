@@ -50,17 +50,65 @@ h1 {
   margin-bottom: 0.5rem;
 }
 
-h2 {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
+.table-of-contents {
+  border-left: 3px solid #eee;
+  padding-left: 1em;
+  margin: 1em 0;
+  font-size: 0.95em;
 }
 
-h3 {
-  font-size: 1.25rem;
-  margin-bottom: 0.5rem;
+.table-of-contents ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-h4 {
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
+.table-of-contents li+li {
+  margin-top: 0.3em;
+}
+
+.table-of-contents a {
+  text-decoration: none;
+  border-left: 1px solid var(--border-color, #ddd);
+  padding-left: 1rem;
+  margin: 1rem 0;
+
+  ts a:hover {
+    font-size: 0.95rem;
+    text-decoration: underline;
+  }
+
+  .table-of-contents ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .table-of-contents li+li {
+    margin-top: 0.25rem;
+  }
+
+  .table-of-contents a {
+    text-decoration: none;
+    color: var(--link-color, #0055aa);
+
+    .table-of-contents a:hover {
+      text-decoration: underline;
+    }
+
+    .dark-mode .table-of-contents {
+      border-color: #444;
+      border-left-color: var(--border-color);
+    }
+
+    .dark-mode .table-of-contents a {
+      color: var(--link-color);
+      border-left-color: var(--border-color);
+    }
+
+    .dark-mode .table-of-contents a:hover {
+      text-decoration: underline;
+      color: var(--link-hover-color);
+    }
+  }
 }
