@@ -40,10 +40,10 @@ marked.setOptions({
 const headingData = [];
 const renderer = new marked.Renderer();
 
-renderer.heading = (text, level) => {
-    const source = text;
+renderer.heading = (text, level, raw) => {
+    const source = typeof raw === 'string' ? raw : text;
     const slug = slugify(source);
-    headingData.push({ text: source, level, slug });
+    headingData.push({ text, level, slug });
     return `<h${level} id="${slug}">${text}</h${level}>`;
 };
 
@@ -79,11 +79,19 @@ fetch(`/notes/courses/${course}/${noteSlug}.md`)
             headingData.forEach(({ text, level, slug }) => {
                 const li = document.createElement("li");
                 li.style.marginLeft = `${(level - 1) * 16}px`;
-                li.innerHTML = `<a href="#${slug}">${text}</a>`;
+
+                const a = document.createElement("a");
+                a.href = `#${slug}`;
+                a.textContent = text;
+                li.append(a);
+                li.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    document.getElementById(slug).scrollIntoView({ behavior: "smooth" });
+                });
                 ul.append(li);
             });
 
-            tocNav.append(ul);
+            tocNav.appendChild(ul);
             container.prepend(tocNav);
         }
 
