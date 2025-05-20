@@ -1,6 +1,6 @@
 window.MathJax = {
     tex: {
-        packages: { '[+]': ['noerrors', 'ams'] },
+        packages: { '[+]': ['noerrors', 'ams', 'tipa'] },
         macros: {
             qed: "\\square",
             ran: "\\text{ran}",
