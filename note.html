@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        (function () {
+            var stored = localStorage.getItem('theme');
+            var prefers = window.matchMedia('(prefers-color-scheme:dark)').matches;
+            if (stored === 'dark' || (!stored && prefers)) {
+                document.documentElement.classList.add('dark-mode');
+            }
+        })();
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Note – Robin’s Site</title>
+    <link rel="stylesheet" href="css/shared.css" />
+    <link rel="stylesheet" href="css/notes.css" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self';
+         script-src 'self' https://cdn.jsdelivr.net;
+         connect-src 'self';
+         style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
+         font-src 'self' https://cdn.jsdelivr.net;
+         img-src 'self' data:;">
+</head>
+
+<body>
+    <header id="header-placeholder"></header>
+
+    <main>
+        <article id="note-content"></article>
+    </main>
+
+    <a id="back-to-course" class="back-link">Back to Course</a>
+    <footer id="footer-placeholder"></footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+    <script type="module" src="js/header-footer.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4/dist/js-yaml.min.js"></script>
+    <script src="notes/js/note.js"></script>
+</body>
+
+</html>
