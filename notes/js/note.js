@@ -71,12 +71,22 @@ fetch(`/notes/courses/${course}/${noteSlug}.md`)
         const contentDiv = document.createElement("div");
         contentDiv.innerHTML = sanitize(dirty);
 
-        if (headingData.length) {
+        const tocEntries = [];
+
+        contentDiv.querySelectorAll("h1, h2, h3, h4, h5, h6").forEach(h => {
+            tocEntries.push({
+                text: h.textContent,
+                level: parseInt(h.tagName.charAt(1), 10),
+                slug: h.id
+            });
+        });
+
+        if (tocEntries.length) {
             const tocNav = document.createElement("nav");
             tocNav.className = "table-of-contents";
             const ul = document.createElement("ul");
 
-            headingData.forEach(({ text, level, slug }) => {
+            tocEntries.forEach(({ text, level, slug }) => {
                 const li = document.createElement("li");
                 li.style.marginLeft = `${(level - 1) * 16}px`;
 
@@ -84,19 +94,26 @@ fetch(`/notes/courses/${course}/${noteSlug}.md`)
                 a.href = `#${slug}`;
                 a.textContent = text;
                 li.append(a);
-                li.addEventListener("click", (e) => {
+
+                li.addEventListener("click", e => {
                     e.preventDefault();
-                    document.getElementById(slug).scrollIntoView({ behavior: "smooth" });
+                    document.getElementById(slug)
+                        .scrollIntoView({ behavior: "smooth" });
                 });
                 ul.append(li);
             });
 
-            tocNav.appendChild(ul);
+            tocNav.append(ul);
             container.prepend(tocNav);
         }
 
         container.append(contentDiv);
 
+        if (window.MathJax && MathJax.typesetPromise) {
+            MathJax.typesetPromise([container])
+                .catch(err => console.error('MathJax typeset failed:', err));
+        }
+        
         const back = document.getElementById("back-to-course");
         back.href = `course.html?id=${encodeURIComponent(course)}`;
     })
