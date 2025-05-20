@@ -1,5 +1,18 @@
 /* note.js – render note */
 
+const slugCounts = Object.create(null);
+function slugify(raw) {
+  let base = raw
+    .toLowerCase()
+    .trim()
+    .replace(/[\s]+/g, '-')
+    .replace(/[^\w\-]/g, '');
+
+  const count = slugCounts[base] || 0;
+  slugCounts[base] = count + 1;
+  return count ? `${base}-${count}` : base;
+}
+
 function parseFrontMatter(md) {
     const re = /^---\r?\n([\s\S]+?)\r?\n---(?:\r?\n|$)/;
     const m = re.exec(md);
@@ -24,13 +37,12 @@ marked.setOptions({
 });
 
 const headingData = [];
-const slugger = new marked.Slugger();
 const renderer = new marked.Renderer();
 
 renderer.heading = (text, level, raw) => {
-    const slug = slugger.slug(raw);
-    headingData.push({ text: raw, level, slug });
-    return `<h${level} id="${slug}">${text}</h${level}>`;
+  const slug = slugify(raw);
+  headingData.push({ text: raw, level, slug });
+  return `<h${level} id="${slug}">${text}</h${level}>`;
 };
 
 marked.use({ renderer });
@@ -50,6 +62,8 @@ fetch(`/notes/courses/${course}/${noteSlug}.md`)
         container.append(h1);
 
         headingData.length = 0;
+        for (let k in slugCounts) delete slugCounts[k];
+        
         const dirty = marked.parse(body);
         const sanitize = window.DOMPurify?.sanitize || (s => s);
         const contentDiv = document.createElement("div");
