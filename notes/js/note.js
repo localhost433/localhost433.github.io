@@ -34,20 +34,10 @@ marked.setOptions({
     smartLists: true,
     smartypants: false,
     headerIds: true,
-    headerPrefix: ""
+    headerPrefix: ''
 });
 
 const headingData = [];
-const renderer = new marked.Renderer();
-
-renderer.heading = (text, level, raw) => {
-    const source = typeof raw === 'string' ? raw : text;
-    const slug = slugify(source);
-    headingData.push({ text, level, slug });
-    return `<h${level} id="${slug}">${text}</h${level}>`;
-};
-
-marked.use({ renderer });
 
 const container = document.getElementById("note-content");
 fetch(`/notes/courses/${course}/${noteSlug}.md`)
@@ -113,7 +103,7 @@ fetch(`/notes/courses/${course}/${noteSlug}.md`)
             MathJax.typesetPromise([container])
                 .catch(err => console.error('MathJax typeset failed:', err));
         }
-        
+
         const back = document.getElementById("back-to-course");
         back.href = `course.html?id=${encodeURIComponent(course)}`;
     })
