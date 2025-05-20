@@ -1,10 +1,8 @@
 /* Dark-mode toggle */
 export function initializeThemeToggle() {
   const btn = document.getElementById("theme-toggle");
-  if (!btn) {
-    console.warn("theme-toggle not found.");
-    return;
-  }
+  if (!btn) return;
+
   const enable = () => {
     document.documentElement.classList.add("dark-mode");
     localStorage.setItem("theme", "dark");
@@ -16,11 +14,15 @@ export function initializeThemeToggle() {
     btn.textContent = "Dark Mode";
   };
 
-  const stored = localStorage.getItem("theme");
-  const prefersDark = window.matchMedia("(prefers-color-scheme:dark)").matches;
-  (stored === "dark" || (!stored && prefersDark)) ? enable() : disable();
-
   btn.addEventListener("click", () => {
     document.documentElement.classList.contains("dark-mode") ? disable() : enable();
   });
+
+  const stored = localStorage.getItem("theme");
+  const prefersDark = window.matchMedia("(prefers-color-scheme:dark)").matches;
+  if (stored === "dark" || (!stored && prefersDark)) {
+    enable();
+  } else {
+    disable();
+  }
 }
