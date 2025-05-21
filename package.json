@@ -1,8 +1,21 @@
 {
+  "name": "localhost433.github.io",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "vercel build",
+    "start": "vercel start"
+  },
   "dependencies": {
-    "@vercel/kv": "^1.0.0",
+    "@upstash/redis": "^1.25.1",
+    "pg": "^8.11.0",
     "js-yaml": "^4.1.0",
     "node-fetch": "^3.3.2",
     "sanitize-html": "^2.8.0"
+  },
+  "overrides": {
+    "path-to-regexp": ">=6.2.3",
+    "tar-fs": ">=1.16.4"
   }
 }

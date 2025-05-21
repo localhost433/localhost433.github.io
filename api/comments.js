@@ -1,70 +1,83 @@
-import { kv } from "@vercel/kv";
+import { Redis } from "@upstash/redis";
+import { Pool } from "pg";
 import sanitizeHtml from "sanitize-html";
-import fs from "fs/promises";
-import path from "path";
 
-const USE_KV = process.env.VERCEL_ENV === "production";
-const COMMENTS_DIR = path.join(process.cwd(), "comments");
+const kv = new Redis({
+  url: process.env.UPSTASH_KV_REST_URL,
+  token: process.env.UPSTASH_KV_REST_TOKEN,
+});
 
-// Always use KV—remove file‐based fallback to avoid race conditions
-async function readComments(slug) {
-  if (USE_KV) {
-    return (await kv.get(`comments:${slug}`)) || [];
-  }
-  try {
-    const file = path.join(COMMENTS_DIR, `${slug}.json`);
-    const raw = await fs.readFile(file, "utf8");
-    return JSON.parse(raw);
-  } catch {
-    return [];
-  }
+let pg;
+if (!global._pgPool) {
+  global._pgPool = new Pool({
+    connectionString: process.env.VERCEL_POSTGRES_URL
+  });
 }
-
-async function writeComments(slug, arr) {
-  if (USE_KV) {
-    await kv.set(`comments:${slug}`, arr);
-    return;
-  }
-  await fs.mkdir(COMMENTS_DIR, { recursive: true });
-  const file = path.join(COMMENTS_DIR, `${slug}.json`);
-  await fs.writeFile(file, JSON.stringify(arr, null, 2), "utf8");
-}
+pg = global._pgPool;
 
 export default async function handler(req, res) {
-  if (req.method === 'POST' && !req.body) {
-    return res.status(400).json({ error: "Invalid or missing request body" });
-  }
+  try {
+    const { method } = req;
 
-  if (req.method === 'GET') {
-    const { slug } = req.query;
-    if (!slug) return res.status(400).json({ error: "Missing slug" });
-    const comments = await readComments(slug);
-    return res.status(200).json(comments);
-  }
+    if (method === "GET") {
+      const { slug } = req.query;
+      if (!slug) return res.status(400).json({ error: "Missing slug" });
 
-  if (req.method === 'POST') {
-    const { slug, text, author } = req.body;
-    if (!slug || !text) {
-      return res.status(400).json({ error: "Missing slug or text" });
+      const cacheKey = `comments:${slug}`;
+      let comments = await kv.get(cacheKey);
+      if (comments) {
+        return res.status(200).json(comments);
+      }
+
+      const { rows } = await pg.query(
+        "SELECT id, slug, author, text, created_at FROM comments WHERE slug = $1 ORDER BY created_at",
+        [slug]
+      );
+      comments = rows.map(r => ({
+        id: r.id,
+        slug: r.slug,
+        author: r.author,
+        text: r.text,
+        timestamp: r.created_at,
+      }));
+
+      await kv.set(cacheKey, comments, { ex: 60 * 5 });
+      return res.status(200).json(comments);
     }
 
-    const sanitizedText = sanitizeHtml(text, {
-      allowedTags: [],
-      allowedAttributes: {},
-    });
-    const sanitizedAuthor = sanitizeHtml(author || "Anonymous", {
-      allowedTags: [],
-      allowedAttributes: {},
-    });
-    const timestamp = new Date();
+    if (method === "POST") {
+      const { slug, text, author = "Anonymous" } = req.body;
+      if (!slug || !text) {
+        return res.status(400).json({ error: "Missing slug or text" });
+      }
 
-    const comments = await readComments(slug);
-    comments.push({ author: sanitizedAuthor, text: sanitizedText, timestamp });
-    await writeComments(slug, comments);
+      const cleanText = sanitizeHtml(text, { allowedTags: [], allowedAttributes: {} });
+      const cleanAuthor = sanitizeHtml(author, { allowedTags: [], allowedAttributes: {} });
 
-    return res.status(201).json({ author: sanitizedAuthor, text: sanitizedText, timestamp });
+      const insert = await pg.query(
+        "INSERT INTO comments (slug, author, text) VALUES ($1, $2, $3) RETURNING id, created_at",
+        [slug, cleanAuthor, cleanText]
+      );
+      const entry = {
+        id: insert.rows[0].id,
+        slug,
+        author: cleanAuthor,
+        text: cleanText,
+        timestamp: insert.rows[0].created_at,
+      };
+
+      const cacheKey = `comments:${slug}`;
+      let cached = (await kv.get(cacheKey)) || [];
+      cached.push(entry);
+      await kv.set(cacheKey, cached, { ex: 60 * 5 });
+
+      return res.status(201).json(entry);
+    }
+
+    res.setHeader("Allow", ["GET", "POST"]);
+    return res.status(405).end(`Method ${method} Not Allowed`);
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: "Internal Server Error" });
   }
-
-  res.setHeader('Allow', ['GET', 'POST']);
-  res.status(405).end(`Method ${req.method} Not Allowed`);
 }
