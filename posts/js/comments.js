@@ -19,8 +19,11 @@ document.addEventListener("DOMContentLoaded", () => {
     commentsList.appendChild(p);
   }
 
-  // load existing
-  fetch(`/api/comments?slug=${slug}`)
+  const base = window.location.origin.includes('localhost')
+    ? window.location.origin
+    : 'https://robinc.vercel.app';
+
+  fetch(`${base}/api/comments?slug=${slug}`)
     .then(r => r.ok ? r.json() : [])
     .then(arr => {
       if (!arr.length) {
@@ -41,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const author = authEl.value.trim() || "Anonymous";
     if (!text) return;
 
-    fetch("/api/comments", {
+    fetch(`${base}/api/comments`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ slug, text, author })
