@@ -100,18 +100,17 @@ nav.table-of-contents a:hover,
 /* Dark mode variants */
 .dark-mode nav.table-of-contents,
 .dark-mode .table-of-contents {
-  border-left-color: var(--border-color, #444);
+  border-left: 1px solid var(--border-color, #ccc);
 }
 
 .dark-mode nav.table-of-contents a,
 .dark-mode .table-of-contents a {
-  color: var(--link-color);
-  border-left-color: var(--border-color);
+  color: var(--link-color, #88aaff);
+  border-left: 1px solid var(--border-color, #ccc);
 }
 
 .dark-mode nav.table-of-contents a:hover,
 .dark-mode .table-of-contents a:hover {
-  color: var(--link-hover-color);
   text-decoration: underline;
 }
 
@@ -161,4 +160,9 @@ nav.table-of-contents a:hover,
 .table-wrapper td {
   border: 1px solid #ccc;
   padding: 0.5em 1em;
+}
+
+.dark-mode .table-wrapper th,
+.dark-mode .table-wrapper td {
+  background: #0e0e0e
 }
