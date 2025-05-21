@@ -61,6 +61,13 @@ fetch(`/notes/courses/${course}/${noteSlug}.md`)
         const contentDiv = document.createElement("div");
         contentDiv.innerHTML = sanitize(dirty);
 
+        contentDiv.querySelectorAll('img').forEach(img => {
+            img.style.display = 'block';
+            img.style.maxWidth = '100%';
+            img.style.height = 'auto';
+            img.style.margin = '0 auto';
+        });
+
         const tocEntries = [];
 
         contentDiv.querySelectorAll("h1, h2, h3, h4, h5, h6").forEach(h => {
