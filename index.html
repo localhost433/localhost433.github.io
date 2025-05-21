@@ -33,9 +33,10 @@
             <p>
                 This site serves as a platform for me to document my thoughts, projects, and anything else I find worth
                 sharing. I share random ideas and stuff I created about school, life, etc. (Not any type of
-                category that I want to fall into, journal, diary, because it would feel kind of restrictive on 'how'/'what'
-                should I write about anything.) Just a little bit of self intro, I'm a freshman at the NYU studying Computer
-                Science and Mathematics.
+                category that I want to fall into, journal, diary, because it would feel kind of restrictive on
+                'how'/'what' should I write about anything.) Just a little bit of self intro, I'm a freshman at the NYU
+                studying
+                Computer Science and Mathematics.
             </p>
 
             <h2>What You Might Find Here</h2>
@@ -45,6 +46,19 @@
                 - Thoughts on academic topics, especially from school work.<br>
                 - Personal reflections or ideas that I simply want to document.
             </p>
+
+            <h2>Features</h2>
+            <ul>
+                <li>Blog: Posts about various topics, including school, life, and random ideas.</li>
+                <li>Projects: A showcase of personal projects and experiments.</li>
+                <li>Comments: Visitors can leave comments on posts, with support for author names and timestamps.</li>
+                <li>Dark Mode: Toggle between light and dark themes.</li>
+                <li>Math Support: Render mathematical expressions using MathJax.</li>
+                <li>Markdown Parsing: Blog posts are written in Markdown and rendered dynamically.</li>
+                <li>Notes: Course notes rendered from Markdown (with front-matter), featuring MathJax support and an
+                    auto-generated table of contents.</li>
+                <li>Pagination & Filtering: Browse blog posts by tag or search with pagination.</li>
+            </ul>
 
             <h2>Connect with Me</h2>
             <p>
@@ -60,16 +74,21 @@
 
             <h2>Tech Stack</h2>
             <p>
-                This site is built with vanilla HTML, CSS, and JavaScript. It uses minimal dependencies to stay
-                lightweight, including:
+                This site is built with vanilla HTML, CSS, and JavaScript. I'm trying to use minimal dependencies to
+                stay
+                lightweight, the ones being used including:
             </p>
             <ul>
-                <li><code>marked.js</code> – for client-side Markdown rendering</li>
-                <li><code>MathJax</code> – for TeX/LaTeX rendering in posts</li>
-                <li><code>DOMPurify</code> – for safe rendering of user-submitted content</li>
-                <li><code>Neon</code> – for serverless PostgreSQL</li>
-                <li><code>Upstash</code> – for serverless Redis</li>
+                <li><code>js-yaml</code> – parse front-matter in notes</li>
+                <li><code>DOMPurify</code> – sanitize rendered HTML</li>
+                <li><code>MathJax</code> – render LaTeX/math expressions</li>
+                <li><code>marked.js</code> – Markdown -> HTML parsing</li>
+                <li><code>node-fetch</code> – HTTP client for serverless functions</li>
+                <li><code>sanitize-html</code> – clean user input in comments</li>
+                <li><code>@upstash/redis</code> – serverless KV caching</li>
+                <li><code>pg</code> – Neon serverless PostgreSQL driver</li>
             </ul>
+
             <h2>Future Plans</h2>
             <p>
                 I plan to add more features and improve the design over time. Some ideas include:
