@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "vercel dev",
-    "build": "vercel build",
-    "start": "vercel start"
+    "build": "echo \"No build step required for a static site\""
   },
   "dependencies": {
     "@upstash/redis": "^1.25.1",
