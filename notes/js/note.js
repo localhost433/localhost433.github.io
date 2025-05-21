@@ -72,7 +72,6 @@ fetch(`/notes/courses/${course}/${noteSlug}.md`)
         });
 
         const tocEntries = [];
-
         contentDiv.querySelectorAll("h1, h2, h3, h4, h5, h6").forEach(h => {
             tocEntries.push({
                 text: h.textContent,
@@ -83,19 +82,18 @@ fetch(`/notes/courses/${course}/${noteSlug}.md`)
 
         container.append(contentDiv);
 
-        if (headingData.length) {
+        if (tocEntries.length) {
             const tocNav = document.createElement("nav");
             tocNav.className = "table-of-contents";
             const ul = document.createElement("ul");
 
-            headingData.forEach(({ text, level, slug }) => {
+            tocEntries.forEach(({ text, level, slug }) => {
                 const li = document.createElement("li");
                 li.style.marginLeft = `${(level - 1) * 16}px`;
 
                 const a = document.createElement("a");
                 a.href = `#${slug}`;
                 a.textContent = text;
-
                 a.addEventListener("click", e => {
                     e.preventDefault();
                     const target = document.getElementById(slug);
