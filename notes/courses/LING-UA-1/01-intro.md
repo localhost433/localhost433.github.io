@@ -5,8 +5,7 @@ date: 2025-05-19
 
 Overview of what will be covered in the course.
 
-## What is Language?
-
+# What is Language?
 - Cultural artifact
 - Articulation of thoughts
 - Code for communication

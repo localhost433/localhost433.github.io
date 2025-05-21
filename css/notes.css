@@ -27,6 +27,12 @@
   color: #aaa;
 }
 
+.top-back-link {
+  display: inline-block;
+  font-size: 0.9rem;
+  color: #666666;
+}
+
 /* ==========================================================================
   NOTE CONTENT
   ========================================================================== */
@@ -44,11 +50,11 @@
 #note-content ul ol,
 #note-content ol ul,
 #note-content ol ol {
-  margin-left: 3rem;
+  margin-left: 0.25rem;
 }
 
 #note-content li + li {
-  margin-top: 0.25rem;
+  margin-top: 0.1rem;
 }
 
 #note-content h1 {
@@ -87,7 +93,6 @@ nav.table-of-contents a,
   color: var(--link-color, #0055aa);
   border-left: 1px solid var(--border-color, #ddd);
   padding-left: 1rem;
-  margin: 0.5em 0;
 }
 
 nav.table-of-contents a:hover,
