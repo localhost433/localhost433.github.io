@@ -21,7 +21,7 @@ Write IPA in [square brackets] for phonetic transcription.
 
 Bold ones are in English. There are different levels of specificity of transcription.
 
-#### what is phonetics?
+#### What is phonetics?
 branch of linguistics that focuses on the inventory and structure of speech sounds
 
 #### What do phoneticians study?
@@ -30,7 +30,7 @@ Articulatory Phonetics: How speech sounds are produces
 #### Speech production system
 Move different part of mouth for different sounds.
 
-![](notes/courses/LING-UA-1/images/02-1.png) Image of human vocal tract, from [ link](https://www.researchgate.net/figure/PA-articulation-points-left-Human-vocal-tract-right-IPA-vowels-consonants_fig2_357296500).
+![](notes/courses/LING-UA-1/images/02-1.png) Image of human vocal tract, from [ here](https://www.researchgate.net/figure/PA-articulation-points-left-Human-vocal-tract-right-IPA-vowels-consonants_fig2_357296500).
 
 ## Consonants
 Three key features:
