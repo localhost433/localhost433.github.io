@@ -49,6 +49,9 @@ fetch(`/notes/courses/${course}/${noteSlug}.md`)
         const { meta, body } = parseFrontMatter(md);
         document.title = meta.title || noteSlug;
 
+        const back = document.getElementById("back-to-course");
+        back.href = `course.html?id=${encodeURIComponent(course)}`;
+
         const h1 = document.createElement("h1");
         h1.textContent = meta.title || noteSlug;
         container.append(h1);
@@ -78,36 +81,34 @@ fetch(`/notes/courses/${course}/${noteSlug}.md`)
             });
         });
 
-        if (tocEntries.length) {
+        container.append(contentDiv);
+
+        if (headingData.length) {
             const tocNav = document.createElement("nav");
             tocNav.className = "table-of-contents";
             const ul = document.createElement("ul");
 
-            tocEntries.forEach(({ text, level, slug }) => {
+            headingData.forEach(({ text, level, slug }) => {
                 const li = document.createElement("li");
                 li.style.marginLeft = `${(level - 1) * 16}px`;
 
                 const a = document.createElement("a");
                 a.href = `#${slug}`;
                 a.textContent = text;
-                const tgt = () => document.getElementById(slug);
-                if (tgt()) {
-                    a.addEventListener('click', e => {
-                        const t = document.getElementById(slug);
-                        if (!t) return;
-                        e.preventDefault();
-                        t.scrollIntoView({ behavior: 'smooth' });
-                    });
-                }
+
+                a.addEventListener("click", e => {
+                    e.preventDefault();
+                    const target = document.getElementById(slug);
+                    if (target) target.scrollIntoView({ behavior: "smooth" });
+                });
+
                 li.append(a);
                 ul.append(li);
             });
 
             tocNav.append(ul);
-            container.prepend(tocNav);
+            container.insertBefore(tocNav, contentDiv);
         }
-
-        container.append(contentDiv);
 
         contentDiv.querySelectorAll('table').forEach(table => {
             const wrapper = document.createElement('div');
@@ -120,8 +121,6 @@ fetch(`/notes/courses/${course}/${noteSlug}.md`)
             MathJax.typesetPromise([container])
                 .catch(err => console.error('MathJax typeset failed:', err));
         }
-
-        const back = document.getElementById("back-to-course");
         back.href = `course.html?id=${encodeURIComponent(course)}`;
     })
     .catch(err => {
