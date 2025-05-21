@@ -102,6 +102,13 @@ fetch(`/notes/courses/${course}/${noteSlug}.md`)
 
         container.append(contentDiv);
 
+        contentDiv.querySelectorAll('table').forEach(table => {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'table-wrapper';
+            table.parentNode.insertBefore(wrapper, table);
+            wrapper.appendChild(table);
+        });
+
         if (window.MathJax && MathJax.typesetPromise) {
             MathJax.typesetPromise([container])
                 .catch(err => console.error('MathJax typeset failed:', err));

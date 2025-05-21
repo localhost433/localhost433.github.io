@@ -1,13 +1,13 @@
 /* ==========================================================================
-   NOTES PAGES
-   ========================================================================== */
+  NOTES PAGES
+  ========================================================================== */
 
 .course-entry,
 .note-entry {
-  border-bottom: 1px solid #ddd;
-  padding: 0.7rem 0;
   display: flex;
   justify-content: space-between;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid #ddd;
 }
 
 .course-title,
@@ -27,6 +27,14 @@
   color: #aaa;
 }
 
+/* ==========================================================================
+  NOTE CONTENT
+  ========================================================================== */
+
+#note-content {
+  overflow-x: auto;
+}
+
 #note-content ul,
 #note-content ol {
   margin: 0 0 0 1.5rem;
@@ -35,21 +43,26 @@
 }
 
 #note-content ul ul,
-#note-content ol ul,
 #note-content ul ol,
+#note-content ol ul,
 #note-content ol ol {
   margin-left: 3rem;
 }
 
-#note-content li+li {
+#note-content li + li {
   margin-top: 0.25rem;
 }
 
-h1 {
+#note-content h1 {
   font-size: 2rem;
   margin-bottom: 0.5rem;
 }
 
+/* ==========================================================================
+  TABLE OF CONTENTS
+  ========================================================================== */
+
+nav.table-of-contents,
 .table-of-contents {
   border-left: 3px solid #eee;
   padding-left: 1em;
@@ -57,62 +70,95 @@ h1 {
   font-size: 0.95em;
 }
 
+nav.table-of-contents ul,
 .table-of-contents ul {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.table-of-contents li+li {
+nav.table-of-contents li + li,
+.table-of-contents li + li {
   margin-top: 0.3em;
 }
 
+nav.table-of-contents a,
 .table-of-contents a {
+  display: block;
   text-decoration: none;
+  color: var(--link-color, #0055aa);
   border-left: 1px solid var(--border-color, #ddd);
   padding-left: 1rem;
-  margin: 1rem 0;
-
-  ts a:hover {
-    font-size: 0.95rem;
-    text-decoration: underline;
-  }
-
-  .table-of-contents ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .table-of-contents li+li {
-    margin-top: 0.25rem;
-  }
-
-  .table-of-contents a {
-    text-decoration: none;
-    color: var(--link-color, #0055aa);
-
-    .table-of-contents a:hover {
-      text-decoration: underline;
-    }
-
-    .dark-mode .table-of-contents {
-      border-color: #444;
-      border-left-color: var(--border-color);
-    }
-
-    .dark-mode .table-of-contents a {
-      color: var(--link-color);
-      border-left-color: var(--border-color);
-    }
-
-    .dark-mode .table-of-contents a:hover {
-      text-decoration: underline;
-      color: var(--link-hover-color);
-    }
-  }
+  margin: 0.5em 0;
 }
+
+nav.table-of-contents a:hover,
+.table-of-contents a:hover {
+  text-decoration: underline;
+}
+
+/* Dark mode variants */
+.dark-mode nav.table-of-contents,
+.dark-mode .table-of-contents {
+  border-left-color: var(--border-color, #444);
+}
+
+.dark-mode nav.table-of-contents a,
+.dark-mode .table-of-contents a {
+  color: var(--link-color);
+  border-left-color: var(--border-color);
+}
+
+.dark-mode nav.table-of-contents a:hover,
+.dark-mode .table-of-contents a:hover {
+  color: var(--link-hover-color);
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+  MATH JAX IPA
+  ========================================================================== */
 
 .mjx-chtml .ipa {
   font-family: "Charis SIL", "Doulos SIL", "Noto Sans IPA", sans-serif;
+}
+
+/* ==========================================================================
+  TABLE STYLING IN NOTES
+  ========================================================================== */
+
+#note-content table {
+  border-collapse: collapse;
+  white-space: nowrap;
+  min-width: max-content;
+}
+
+#note-content th,
+#note-content td {
+  border: 1px solid #ccc;
+  padding: 0.5em 1em;
+}
+
+#note-content tr:nth-child(even) {
+  background: #fafafa;
+}
+
+/* ==========================================================================
+  TABLE WRAPPER
+  ========================================================================== */
+
+.table-wrapper {
+  overflow-x: auto;
+  margin: 1em 0;
+}
+
+.table-wrapper table {
+  border-collapse: collapse;
+  white-space: nowrap;
+}
+
+.table-wrapper th,
+.table-wrapper td {
+  border: 1px solid #ccc;
+  padding: 0.5em 1em;
 }

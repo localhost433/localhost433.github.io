@@ -30,7 +30,7 @@ Articulatory Phonetics: How speech sounds are produces
 #### Speech production system
 Move different part of mouth for different sounds.
 
-![](images/02-1.png) Image of human vocal tract, from [ link](https://www.researchgate.net/figure/PA-articulation-points-left-Human-vocal-tract-right-IPA-vowels-consonants_fig2_357296500).
+![](notes/courses/LING-UA-1/images/02-1.png) Image of human vocal tract, from [ link](https://www.researchgate.net/figure/PA-articulation-points-left-Human-vocal-tract-right-IPA-vowels-consonants_fig2_357296500).
 
 ## Consonants
 Three key features:
