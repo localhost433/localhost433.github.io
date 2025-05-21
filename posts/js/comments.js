@@ -3,20 +3,18 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!slug) return;
 
   const commentsList = document.getElementById("comments-list");
-  const form         = document.getElementById("comment-form");
+  const form = document.getElementById("comment-form");
   if (!commentsList || !form) {
     console.error("Required DOM elements are missing");
     return;
   }
 
-  // sanitize helper
   const sanitize = window.DOMPurify?.sanitize || (s => s);
 
-  // render one comment
   function add(comment) {
     const p = document.createElement("p");
     const author = sanitize(comment.author || "Anonymous");
-    const text   = sanitize(comment.text);
+    const text = sanitize(comment.text);
     p.innerHTML = `<strong>${author}:</strong> ${text}`;
     commentsList.appendChild(p);
   }
@@ -26,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(r => r.ok ? r.json() : [])
     .then(arr => {
       if (!arr.length) {
-        commentsList.innerHTML = 
+        commentsList.innerHTML =
           "<p class='no-comments'>No comments yet. Be the first!</p>";
       } else {
         arr.forEach(add);
@@ -37,10 +35,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // new comment
   form.addEventListener("submit", e => {
     e.preventDefault();
-    const textEl   = document.getElementById("comment-text");
-    const authEl   = document.getElementById("comment-author");
-    const text     = textEl.value.trim();
-    const author   = authEl.value.trim() || "Anonymous";
+    const textEl = document.getElementById("comment-text");
+    const authEl = document.getElementById("comment-author");
+    const text = textEl.value.trim();
+    const author = authEl.value.trim() || "Anonymous";
     if (!text) return;
 
     fetch("/api/comments", {
