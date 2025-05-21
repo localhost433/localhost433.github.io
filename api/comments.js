@@ -41,7 +41,7 @@ export default async function handler(req, res) {
         timestamp: r.created_at,
       }));
 
-      await kv.set(cacheKey, comments, { ex: 60 * 5 });
+      await kv.set(cacheKey, comments, { ex: 60 * 15 });
       return res.status(200).json(comments);
     }
 
@@ -69,7 +69,7 @@ export default async function handler(req, res) {
       const cacheKey = `comments:${slug}`;
       let cached = (await kv.get(cacheKey)) || [];
       cached.push(entry);
-      await kv.set(cacheKey, cached, { ex: 60 * 5 });
+      await kv.set(cacheKey, cached, { ex: 60 * 15 });
 
       return res.status(201).json(entry);
     }
