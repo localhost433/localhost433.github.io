@@ -119,7 +119,6 @@ article#post-content .post-meta {
   color: #eee;
 }
 
-/* Placeholder in dark mode */
 .dark-mode #comment-form textarea::placeholder,
 .dark-mode #comment-form input::placeholder {
   color: #bbb;
