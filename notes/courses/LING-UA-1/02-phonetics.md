@@ -5,10 +5,21 @@ date: 2025-05-20
 
 ## Phonetics
 
-Ineternation Phonetic Alphabet (IPA): Different sounds for same alphabets.
+### Ineternation Phonetic Alphabet (IPA)
 Write IPA in [square brackets] for phonetic transcription.
 
-Different levels of specificity of transcription.
+| Manner \ Place      | Bilabial    | Labiodental | Dental      | Alveolar     | Postalveolar | Retroflex | Palatal | Velar       | Uvular | Pharyngeal | Glottal |
+| ------------------- | ----------- | ----------- | ----------- | ------------ | ------------ | --------- | ------- | ----------- | ------ | ---------- | ------- |
+| Plosive             | **p** **b** |             |             | **t** **d**  |              | ʈ ɖ       | c ɟ     | **k** **g** | q ɢ    |            | **ʔ**   |
+| Nasal               | **m**       | ɱ           |             | **n**        |              | ɳ         | ɲ       | **ŋ**       | ɴ      |            |         |
+| Trill               | ʙ           |             |             | r            |              |           |         |             | ʀ      |            |         |
+| Tap / Flap          |             |             |             | **ɾ**        |              | ɽ         |         |             |        |            |         |
+| Fricative           | ɸ β         | **f** **v** | **θ** **ð** | **s** **z**  | **ʃ** **ʒ**  | ʂ ʐ       | ç ʝ     | x ɣ         | χ ʁ    | ħ ʕ        | **h** ɦ |
+| Lateral fricative   | —           | —           | —           | ɬ ɮ          | —            | —         |         |             |        |            |         |
+| Approximant         |             | ʋ           |             | **ɹ**        |              | ɻ         | **j**   | ɰ           |        |            |         |
+| Lateral approximant |             |             |             | **l**        |              | ɭ         | ʎ       | ʟ           |        |            |         |
+
+Bold ones are in English. There are different levels of specificity of transcription.
 
 #### what is phonetics?
 branch of linguistics that focuses on the inventory and structure of speech sounds
@@ -16,40 +27,36 @@ branch of linguistics that focuses on the inventory and structure of speech soun
 #### What do phoneticians study?
 Articulatory Phonetics: How speech sounds are produces
 
-### Speech production system
+#### Speech production system
 Move different part of mouth for different sounds.
 
-#### How do we peoduce speech?
-- The Vocal Tract
+![](images/02-1.png) Image of human vocal tract, from [ link](https://www.researchgate.net/figure/PA-articulation-points-left-Human-vocal-tract-right-IPA-vowels-consonants_fig2_357296500).
 
-#### Consonants
+## Consonants
 Three key features:
 - Voicing
   - Voiced: Vibrating (Vowels in English are voiced)
   - Voiceless: Held apart not vibrating
 - Place of articulation
   - Bilabial
-    - Oral: [$\textipa{p}$], [$\textipa{b}$], [$\textipa{w}$]
-    - Nasal: [$\textipa{m}$]
-      - m
+    - Oral: [p] [b] [w]
+    - Nasal: [m]
   - Labiodental
-    - [$\textipa{f}$], [$\textipa{v}$]
+    - [f] [v]
   - Interdental
-    - [$\textipa{\theta}$], [$\textipa{\eth}$]
+    - [θ] [ð]
   - Alveolar
-    - Oral: [$\textipa{t}$], [$\textipa{d}$], [$\textipa{s}$], [$\textipa{z}$], [$\textipa{l}$], [$\textipa{\*r}$]
-    - Nasal: [$\textipa{n}$]
-  - Post-Alveolar
-    - [$\textipa{S}$], [$\textipa{tS}$], [$\textipa{N}$], [$\textipa{dN}$]
+    - Oral: [t] [d] [s] [z] [l] [ɹ]
+    - Nasal: [n]
+  - Postalveolar
+    - [ʃ] [ʒ] [t͡ʃ] [d͡ʒ]
   - Palatal
-    - [$\textipa{j}$]
+    - [j]
   - Velar
-    - Oral: [$\textipa{k}$], [$\textipa{g}$]
-    - Nasal: [$\textipa{\engma}$]
-  - Uvular
+    - Oral: [k] [g]
+    - Nasal: [ŋ]
   - Glottal
-    - h
-    - 
+      - [h] [ʔ]
 - Manner of articulation
   - Airflow at the place of articulation
     - Completely obstructed (**consonants**)
@@ -68,28 +75,11 @@ Three key features:
 
 **Describe: Voicing, place, manner**
 
-Natural Classes:
-Obstruents:
-- Stops
-- Affricates
-- Fricatives
-
-Sonorants:
-Rest.
-
-Noncontinuants:
-Obstruents + Nasal
-Approximants:
-rest.
-
-Siblents.
-
-
-Simone
-$\textipa{sim\~oun}$
-
-Alden
-eldEn
-
-Linguistics
-[liNgwistiks]
+#### Natural Classes:
+|              | **Obstruent** | **Sonorant** | **Noncontinuant** | **Approximant** | **Sibilant** |
+| :----------: | :-----------: | :----------: | :---------------: | :-------------: | :----------: |
+|     Stop     |       x       |              |         x         |                 |              |
+|   Affricate  |       x       |              |         x         |                 |       x      |
+|   Fricative  |       x       |              |                   |                 |       x      |
+|     Nasal    |               |       x      |         x         |                 |              |
+|  Approximant |               |       x      |                   |        x        |              |
