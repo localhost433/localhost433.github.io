@@ -27,8 +27,14 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(r => r.ok ? r.json() : [])
     .then(arr => {
       if (!arr.length) {
-        commentsList.innerHTML =
-          "<p class='no-comments'>No comments yet. Be the first!</p>";
+        const prodUrl = `https://robinc.vercel.app${window.location.pathname}${window.location.search}`;
+        commentsList.innerHTML = `
+          <p class="no-comments">
+            No comments yet. Be the first!
+            Or <a href="${prodUrl}" target="_blank" rel="noopener">
+              view this post on robinc.vercel.app
+            </a> if there are any comments there.
+          </p>`;
       } else {
         arr.forEach(add);
       }
