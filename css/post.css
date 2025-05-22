@@ -51,6 +51,12 @@ article#post-content .post-meta {
   color: #0055aa;
 }
 
+.comment-time {
+  font-size: 0.8rem;
+  color: #888;
+  float: right；
+}
+
 /* Comment Form – Updated to match style from shared.css / blog.css */
 #comment-form {
   margin-top: 1.5rem;
@@ -102,6 +108,10 @@ article#post-content .post-meta {
 
 .dark-mode .comment-author {
   color: #def;
+}
+
+.dark-mode .comment-time {
+  color: #bbb;
 }
 
 .dark-mode #comment-form button {
