@@ -15,7 +15,33 @@ document.addEventListener("DOMContentLoaded", () => {
     const p = document.createElement("p");
     const author = sanitize(comment.author || "Anonymous");
     const text = sanitize(comment.text);
-    p.innerHTML = `<strong>${author}:</strong> ${text}`;
+
+    let timeText = "";
+    if (comment.timestamp) {
+      const date = new Date(comment.timestamp);
+      const now = new Date();
+      const diff = Math.floor((now - date) / 1000);
+      if (diff < 60) {
+        timeText = "just now";
+      } else if (diff < 3600) {
+        timeText = `${Math.floor(diff / 60)} minutes ago`;
+      } else if (diff < 86400) {
+        timeText = `${Math.floor(diff / 3600)} hours ago`;
+      } else {
+        timeText = `${Math.floor(diff / 86400)} days ago`;
+      }
+    }
+    if (timeText) {
+      const timeEl = document.createElement("span");
+      timeEl.className = "comment-time";
+      timeEl.textContent = ` (${timeText})`;
+      p.appendChild(timeEl);
+    }
+
+    p.innerHTML = `
+      <strong>${author}:</strong> ${text}
+      <span class="comment-time">${timeText}</span>
+    `;
     commentsList.appendChild(p);
   }
 
