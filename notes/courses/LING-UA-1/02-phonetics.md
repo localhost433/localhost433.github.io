@@ -76,10 +76,10 @@ Three key features:
 **Describe: Voicing, place, manner**
 
 ## Natural Classes
-|              | **Obstruent** | **Sonorant** | **Noncontinuant** | **Approximant** | **Sibilant** |
-| :----------: | :-----------: | :----------: | :---------------: | :-------------: | :----------: |
-|     Stop     |       x       |              |         x         |                 |              |
-|   Affricate  |       x       |              |         x         |                 |       x      |
-|   Fricative  |       x       |              |                   |                 |       x      |
-|     Nasal    |               |       x      |         x         |                 |              |
-|  Approximant |               |       x      |                   |        x        |              |
+|              | **Obstruent** | **Sonorant** | **Noncontinuant** | **Continuant** | **Sibilant** |
+| :----------: | :-----------: | :----------: | :---------------: | :------------: | :----------: |
+|     Stop     |       x       |              |         x         |                |              |
+|   Affricate  |       x       |              |         x         |                |       x      |
+|   Fricative  |       x       |              |                   |       x        |       x      |
+|     Nasal    |               |       x      |         x         |                |              |
+|  Approximant |               |       x      |                   |       x        |              |

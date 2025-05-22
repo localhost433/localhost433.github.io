@@ -54,7 +54,8 @@ article#post-content .post-meta {
 .comment-time {
   font-size: 0.8rem;
   color: #888;
-  float: right；
+  display: flex;
+  float: right;
 }
 
 /* Comment Form – Updated to match style from shared.css / blog.css */
