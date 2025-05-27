@@ -9,11 +9,11 @@ date: 2025-05-21
 
 **Bold** = tense, *italic* = lax
 
-| Height | Front        | Central | Back        |
-|:------:|:------------:|:-------:|:-----------:|
+|  Height  |    Front    | Central |    Back     |
+| :------: | :---------: | :-----: | :---------: |
 | **High** | **i** / *ɪ* |         | *ʊ* / **u** |
-| **Mid**  | **e** / *ɛ* | *ə*     | *ɔ* / **o** |
-| **Low**  | *æ*         | *ʌ*     | **a**       |
+| **Mid**  | **e** / *ɛ* |   *ə*   | *ɔ* / **o** |
+| **Low**  |     *æ*     |   *ʌ*   |    **a**    |
 
 ### What are vowels?
 
@@ -26,8 +26,8 @@ date: 2025-05-21
 - Roundedness (Are lips are being rounded or not?)
 
 #### Monophthongs vs. Diphthongs
-- Monophthongs (mono-) for one
-- Diphthongs (di-) for two put together
+- Monophthongs [^1] for one syllable.
+- Diphthongs [^2] for two put together
 
 ## Acoustics and perception
 - Periodic sounds: Vowels
@@ -37,3 +37,5 @@ date: 2025-05-21
 - Amplitude - Loudness
 - Formants
 
+[^1]: Mono-
+[^2]: Di-

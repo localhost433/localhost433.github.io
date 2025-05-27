@@ -74,12 +74,3 @@ Three key features:
     - Semi-vowels, very vowel-like.
 
 **Describe: Voicing, place, manner**
-
-## Natural Classes
-|              | **Obstruent** | **Sonorant** | **Noncontinuant** | **Continuant** | **Sibilant** |
-| :----------: | :-----------: | :----------: | :---------------: | :------------: | :----------: |
-|     Stop     |       x       |              |         x         |                |              |
-|   Affricate  |       x       |              |         x         |                |       x      |
-|   Fricative  |       x       |              |                   |       x        |       x      |
-|     Nasal    |               |       x      |         x         |                |              |
-|  Approximant |               |       x      |                   |       x        |              |
