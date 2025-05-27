@@ -4,34 +4,36 @@ date: 2025-05-22
 ---
 
 # Phonology
+
+The study of the structures and patterns of speech sounds, at a more abstract level than phonetics.
+
 ## Phones, Phonemes, Allophones
 
-Phones: basic unit of speech sound, concrete, what we hear.
+### Phones
 
-Two languages may use the same tone, but used differently.
-- Difference between the **underlying sound** and how it is **phonetically realized**.
+Basic unit of speech sound, concrete, what we hear. (Correspond to individual IPA symbols)
 
-Checking for minimal pairs
-- determining whether two phones are different.
+- IPA is a list of universal phones, but no language would use every phone.
+- Two languages may use the same tone, but used differently.
+  - Difference between the **underlying sound** and how it is **phonetically realized**.
+
+### Checking for minimal pairs
+- A minimal pair is word tuple where everything is identical except for a single sound.
 
 Word pair where everything is identical except for a sound is called a minimal pair.
 
-### Type of distribution
+##### Contrastive distribution
+There is a minimal pair, that two phones can occur in the same phonological context.
 
-#### Contrastive distribution
-There is a minimal pair
+##### Complementary distribution
+If there are no minimal pairs, it is *not* contrastive. That they are is a complementary distribution, meaning these to are used in different phonological contexts.
 
-#### Complementary distribution
-If there are no minimal pairs, it is not contrastive. That they are is a complementary distribution, meaning:
-- they are used in different phonological contexts
+##### Free Variation
+Can occur in the same context, but do *not* result in a contrast in meaning.
 
-#### Free Variation
-can occur in the same context, but do not result in a contrast in meaning.
+### Phoneme
 
-### Introducing the phoneme
-
-Two sounds are in complementary distribution
-They represent the same underlying sounds
+Two sounds are in complementary distribution that represent the same underlying sounds.
 
 i.e. smallest contrastive unit
 
@@ -89,8 +91,15 @@ Sounds are ranked based on how 'loud' phones are.
 `/p/`, `/t/`, `/d/` follows this pattern with aspiration in English.
 
 ### Natural classes
-Referring back to [the chart in 02](https://robinc.vercel.app).
 Groupd of phones that can be defined by some phonetic similarity.
+
+|              | **Obstruent** | **Sonorant** | **Noncontinuant** | **Continuant** | **Sibilant** |
+| :----------: | :-----------: | :----------: | :---------------: | :------------: | :----------: |
+|     Stop     |       x       |              |         x         |                |              |
+|   Affricate  |       x       |              |         x         |                |       x      |
+|   Fricative  |       x       |              |                   |       x        |       x      |
+|     Nasal    |               |       x      |         x         |                |              |
+|  Approximant |               |       x      |                   |       x        |              |
 
 #### Feature specifications (based on the manner of articulation)
 To determine the minimal distinguishing feature between two sounds.
