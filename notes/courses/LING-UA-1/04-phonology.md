@@ -32,10 +32,9 @@ If there are no minimal pairs, it is *not* contrastive. That they are is a compl
 Can occur in the same context, but do *not* result in a contrast in meaning.
 
 ### Phoneme
+Phoneme is the smallest contrastive unit.
 
 Two sounds are in complementary distribution that represent the same underlying sounds.
-
-i.e. smallest contrastive unit
 
 #### Phonemes are not universal
 Different ways to pronounce the phonemes are called allophones.
