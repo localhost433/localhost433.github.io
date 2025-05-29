@@ -1,9 +1,22 @@
 ---
-title: 06 - Morphology
-date: 2025-05-28
+title: Morphology
+date: 2025-05-28/29
 ---
 
 # Morphology
+
+## Different types of words
+Content words (open class words):
+- Nouns
+- Verbs
+- Adjectives
+- Adverbs
+
+Function words (close class words):
+- Conjunctions
+- Prepositions
+- Articles
+- Pronoun
 
 ## What is morphology?
 Study of morphemes, smallest meaningful units in language.
@@ -53,15 +66,34 @@ In English, most bound morphemes are affixes. Affixes are classified by where th
 Perform morphological analysis to identify morphemes.
 Identify **recurring forms** with **recurring meanings**.
 
-## Different types of words
-Content words (open class words):
-- Nouns
-- Verbs
-- Adjectives
-- Adverbs
 
-Function words (close class words):
-- Conjunctions
-- Prepositions
-- Articles
-- Pronoun
+## Word Building
+
+### How languages build words
+- **Non-concatenative** morphology build words by modifying a root. (Semitic languages)
+- **Concatenative** morphology build words by attaching affixes to a root
+  - **Agglutination** is when each affix attaches to a root seemingly one-by-one. (undrinkable)
+  - **Fusion** is when affixes seem to fuse together before attaching to a root. (The man walks)
+
+### Inflectional vs. Derivational morphemes
+- **Derivational** morphemes create new words with a different meaning and may change the grammatical category.
+  - A word may contain multiple derivational affixes.
+  - *Class-changing*
+  - *Class-maintaining*
+
+- **Inflectional** morphemes convey grammatical information (e.g., tense, number, person) and never change the grammatical category of the stem. The number of inflectional morphemes in English is limited.
+  - Inflectional morphemes can apply to almost all words of the appropriate category (they are *productive*). They are always applied *after* any derivational morphemes.
+  - All inflectional morphemes are class maintaining.
+
+### Multiple affix problem
+- In English, affixes have rules about what word class they attach to and what word class they create.
+- Sometimes affixes can be attached to more than one word class.
+  - In these cases the meaning of the affixes are related
+- When more than one affix is involved, there is a order of derivation.
+
+### Building morphology trees
+- Represent word internal structures as hierarchical trees
+- Features:    
+  - Binary-branching
+  - Labelling each node with the grammatical category
+  - **Each level must be a well-formed word**.

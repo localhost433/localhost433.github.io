@@ -1,32 +1,22 @@
 [
     {
         "slug": "01-intro",
-        "title": "01 - What is Language",
+        "title": "What is Language",
         "date": "2025-05-19"
     },
     {
-        "slug": "02-phonetics",
-        "title": "02 - Phonetics",
-        "date": "2025-05-20"
+        "slug": "02-03-phonetics",
+        "title": "Phonetics",
+        "date": "2025-05-20/21"
     },
     {
-        "slug": "03-phonetics",
-        "title": "03 - Phonetics",
-        "date": "2025-05-21"
+        "slug": "04-05-phonology",
+        "title": "Phonology",
+        "date": "2025-05-22/27"
     },
     {
-        "slug": "04-phonology",
-        "title": "04 - Phonology",
-        "date": "2025-05-22"
-    },
-    {
-        "slug": "05-phonology",
-        "title": "05 - Phonology",
-        "date": "2025-05-27"
-    },
-    {
-        "slug": "06-morphology",
-        "title": "06 - Morphology",
-        "date": "2025-05-28"
+        "slug": "06-07-morphology",
+        "title": "Morphology",
+        "date": "2025-05-28/29"
     }
 ]
