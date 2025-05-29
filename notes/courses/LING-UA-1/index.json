@@ -1,22 +1,22 @@
 [
     {
         "slug": "01-intro",
-        "title": "What is Language",
+        "title": "01    - What is Language",
         "date": "2025-05-19"
     },
     {
         "slug": "02-03-phonetics",
-        "title": "Phonetics",
+        "title": "02/03 - Phonetics",
         "date": "2025-05-20/21"
     },
     {
         "slug": "04-05-phonology",
-        "title": "Phonology",
+        "title": "04/05 - Phonology",
         "date": "2025-05-22/27"
     },
     {
         "slug": "06-07-morphology",
-        "title": "Morphology",
+        "title": "06/07 - Morphology",
         "date": "2025-05-28/29"
     }
 ]
