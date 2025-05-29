@@ -1,6 +1,6 @@
 ---
-title: 02 – Phonetics
-date: 2025-05-20
+title: Phonetics
+date: 2025-05-20/21
 ---
 
 # Phonetics
@@ -74,3 +74,38 @@ Three key features:
     - Semi-vowels, very vowel-like.
 
 **Describe: Voicing, place, manner**
+
+## Vowels
+
+**Bold** = tense, *italic* = lax
+
+|  Height  |    Front    | Central |    Back     |
+| :------: | :---------: | :-----: | :---------: |
+| **High** | **i** / *ɪ* |         | *ʊ* / **u** |
+| **Mid**  | **e** / *ɛ* |   *ə*   | *ɔ* / **o** |
+| **Low**  |     *æ*     |   *ʌ*   |    **a**    |
+
+### What are vowels?
+
+- Relative to consonants.
+
+### Three features to describe vowels
+
+- Tongue height
+- Tongue backness/frontness
+- Roundedness (Are lips are being rounded or not?)
+
+#### Monophthongs vs. Diphthongs
+- Monophthongs [^1] for one syllable.
+- Diphthongs [^2] for two put together
+
+## Acoustics and perception
+- Periodic sounds: Vowels
+- Non-periodic sounds: Fricatives
+
+- Frequency - Pitch
+- Amplitude - Loudness
+- Formants
+
+[^1]: Mono-
+[^2]: Di-

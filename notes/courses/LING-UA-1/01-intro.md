@@ -1,5 +1,5 @@
 ---
-title: 01 – What is Language
+title: What is Language
 date: 2025-05-19
 ---
 
