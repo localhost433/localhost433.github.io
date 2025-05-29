@@ -16,6 +16,7 @@
     { "src": "notes/courses/**/*",       "use": "@vercel/static"  },
 
     { "src": "projects/metadata.json",   "use": "@vercel/static"  },
+    { "src": "projects/languages/*.json", "use": "@vercel/static" },
     { "src": "posts/metadata/**/*.json", "use": "@vercel/static"  },
     { "src": "notes/metadata/**/*.json", "use": "@vercel/static"  },
     

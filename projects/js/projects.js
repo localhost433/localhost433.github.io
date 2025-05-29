@@ -38,16 +38,31 @@ function createLanguageBar(languages) {
 async function fetchLanguages(repo) {
   if (langCache.has(repo)) return langCache.get(repo);
 
-  const url = `https://api.github.com/repos/${repo}/languages`;
-  const resp = await fetch(url);
-  
-  if (!resp.ok) {
-    console.warn(`Could not load languages for ${repo}: ${resp.status}`);
-    langCache.set(repo, {});
-    return {};
+  const ghurl = `https://api.github.com/repos/${repo}/languages`;
+  let data = {};
+
+  try {
+    const resp = await fetch(ghurl);
+    if (!resp.ok) throw new Error(`GitHub API error: ${resp.status}`);
+    data = await resp.json();
+  } catch (err) {
+    console.warn(`Could not load languages for ${repo} from GitHub (Private repo), trying local fallback`, err);
+    const repoName = repo.includes('/') ? repo.split('/')[1] : repo;
+    const fallbackFile = `/projects/languages/${repoName}.json`;
+    try {
+      const r2 = await fetch(fallbackFile);
+      if (r2.ok) {
+        data = await r2.json();
+      } else {
+        console.warn(`Local fallback file not found: ${fallbackFile}`);
+        return {};
+      }
+    } catch (e2) {
+      console.error(`Error loading local fallback for ${repo}:`, e2);
+      data = {};
+    }
   }
 
-  const data = await resp.json();
   langCache.set(repo, data);
   return data;
 }
@@ -84,7 +99,7 @@ fetch("projects/metadata.json")
       // short description under the title
       if (project.description) {
         const desc = document.createElement("p");
-        desc.className   = "project-description";
+        desc.className = "project-description";
         desc.textContent = project.description;
         info.appendChild(desc);
       }
@@ -96,7 +111,7 @@ fetch("projects/metadata.json")
 
       //header
       const techLabel = document.createElement("div");
-      techLabel.className   = "languages-label";
+      techLabel.className = "languages-label";
       techLabel.textContent = "languages";
       techContainer.appendChild(techLabel);
 
@@ -112,7 +127,7 @@ fetch("projects/metadata.json")
       if (project.repo) {
         try {
           const languages = await fetchLanguages(project.repo);
-          const total     = Object.values(languages).reduce((a,b)=>a+b, 0);
+          const total = Object.values(languages).reduce((a, b) => a + b, 0);
 
           const languageBar = createLanguageBar(languages);
           wrapper.appendChild(languageBar);
@@ -120,8 +135,8 @@ fetch("projects/metadata.json")
           const langList = document.createElement("div");
           langList.className = "linguist-langs";
           Object.entries(languages).forEach(([lang, bytes]) => {
-            const pct  = total
-              ? ((bytes/total*100).toFixed(1) + "%")
+            const pct = total
+              ? ((bytes / total * 100).toFixed(1) + "%")
               : "0%";
             const line = document.createElement("div");
             line.textContent = `${lang} – ${pct}`;
@@ -129,7 +144,7 @@ fetch("projects/metadata.json")
           });
           wrapper.appendChild(langList);
 
-        } catch(err) {
+        } catch (err) {
           console.error(`Could not load languages for ${project.repo}`, err);
         }
       }
