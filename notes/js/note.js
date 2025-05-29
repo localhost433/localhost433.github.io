@@ -49,6 +49,21 @@ fetch(`/notes/courses/${course}/${noteSlug}.md`)
         const { meta, body } = parseFrontMatter(md);
         document.title = meta.title || noteSlug;
 
+        const footnotes = [];
+
+        const bodyWithoutDefs = body.replace(
+            /^\s*\[([^\]]+)\]:\s*(.+)$/gm,
+            (_, num, text) => {
+                footnotes.push({ num, text: text.trim() });
+                return '';
+            }
+        )
+
+        const bodyWithRefs = bodyWithoutDefs.replace(
+            /\[\^(d+)\]/g,
+            (_, num) => `<sup id="fnref${num}"><a href="#fn${num}">${num}</a></sup>`
+        );
+
         const back = document.getElementById("back-to-course");
         back.href = `course.html?id=${encodeURIComponent(course)}`;
 
@@ -59,7 +74,7 @@ fetch(`/notes/courses/${course}/${noteSlug}.md`)
         headingData.length = 0;
         for (let k in slugCounts) delete slugCounts[k];
 
-        const dirty = marked.parse(body);
+        const dirty = marked.parse(bodyWithRefs);
         const sanitize = window.DOMPurify?.sanitize || (s => s);
         const contentDiv = document.createElement("div");
         contentDiv.innerHTML = sanitize(dirty);
@@ -106,6 +121,24 @@ fetch(`/notes/courses/${course}/${noteSlug}.md`)
 
             tocNav.append(ul);
             container.insertBefore(tocNav, contentDiv);
+        }
+
+        if (footnotes.length) {
+            const fnSec = document.createElement("section");
+            fnSec.className = "footnotes";
+            const hr = document.createElement("hr");
+            fnSec.appendChild(hr);
+
+            const ol = document.createElement("ol");
+            footnotes.forEach(({ num, text }) => {
+                const li = document.createElement("li");
+                li.id = `fn${num}`;
+                const fnHtml = sanitize(marked.parseInline(text));
+                li.innerHTML = fnHtml;
+                ol.appendChild(li);
+            });
+            fnSec.appendChild(ol);
+            container.appendChild(fnSec);
         }
 
         contentDiv.querySelectorAll('table').forEach(table => {
