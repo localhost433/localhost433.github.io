@@ -11,7 +11,7 @@
         "link": "https://github.com/localhost433/FAISS",
         "repo": "localhost433/FAISS",
         "tech": "Python, FAISS, Sentence Transformers",
-        "description": "A semantic search engine (with interface) that uses FAISS and Sentence Transformers to index and search through trained indices."
+        "description": "Winner of 2025 Corner-DSC-BAC Datathon, collaborated with Tomas Gutierrez & Yarden Morad. A semantic search engine (with interface) that uses FAISS and Sentence Transformers to index and search through trained indices."
     },
     {
         "title": "Prime Factorization Game",
