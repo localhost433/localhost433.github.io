@@ -3,7 +3,7 @@ title: Seminar - Opensource
 date: 2025-04-04
 tags: [notes, cs]
 author: R
-location: New York
+location: New York, NY
 ---
 
 I went to a seminar where the speaker was discussing about the purpose/development, and many stuff about opensource that I didn't know before.

@@ -3,7 +3,7 @@ title: A Glimpse into Googology
 date: 2024-02-14
 tags: [math]
 author: R
-location: St. Catharines, ON, Canada
+location: St. Catharines, ON
 ---
 
 This is a problem really gets me wonder 'What is Googology?' during the summer, and I ended up reading about it. When I wrote this I was in my last days of high school, coming across a instagram reel gives the question of comparing $2^{100!}$ and $(2^{100})!$ (the reel was just making fun about math), we ended up arguing about this and come up with different methods to proof our ideas. 
