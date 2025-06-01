@@ -3,7 +3,7 @@
         "title": "First Post",
         "date": "2025-03-30",
         "author": "R",
-        "location": "New York, NY",
+        "location": "Brittany Hall, New York, NY",
         "tags": ["cs", "life"],
         "slug": "first"
     }
@@ -12,7 +12,7 @@
         "title": "Random stuff in linear algebra",
         "date": "2025-04-02",
         "author": "R",
-        "location": "New York, NY",
+        "location": "Bobst 6F, New York, NY",
         "tags": ["math"],
         "slug": "random"
     }
@@ -33,5 +33,14 @@
         "location": "St. Catharines, ON",
         "tags": ["math"],
         "slug": "googology"
+    }
+    ,
+    {
+        "title": "News in life + dealing with Render deployment",
+        "date": "2025-06-01",
+        "author": "R",
+        "location": "Alumni Hall, New York, NY",
+        "tags": ["cs", "life"],
+        "slug": "news-render-deployment"
     }
 ]

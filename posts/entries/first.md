@@ -3,7 +3,7 @@ title: First Post
 date: 2025-03-30
 tags: [cs, life]
 author: R
-location: New York
+location: Brittany Hall, New York, NY
 ---
 
 This is (going to be) the first post, the first thing I'm writing in Markdown. I thought about doing the whole thing in $\LaTeX$, but it would be weird, so yeah... I came to this idea of a blog website only after going down a rabbit hole on reddit, and I start wondering "it would actually be cool if I have some type of project that I work on", so here I am. I felt like I'm only going to learn the practical stuff that I'm actually going to use while doing "side quests" like this that I'm interested in.

@@ -3,7 +3,7 @@ title: Random stuff in linear algebra
 date: 2025-04-02
 tags: [math]
 author: R
-location: New York
+location: Bobst 6F, New York, NY
 ---
 
 What I want to say today is about the essential part of a linear transformation, and I figured out the proof and purpose just after looking over it in terms of domains and codomains. What I understand here is that

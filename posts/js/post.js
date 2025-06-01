@@ -16,13 +16,35 @@ function parseFrontMatter(text) {
 
 const params = new URLSearchParams(location.search);
 const slug = params.get("slug") || params.get("id");
-if (!slug) location.href = "blog.html";
+if (!slug) {
+  location.href = "blog.html";
+  throw new Error("Slug not provided, redirecting to blog list.");
+}
 
 const content = document.getElementById("post-content");
 if (!content) {
   console.error("Element with id 'post-content' not found.");
   throw new Error("Required DOM element not found.");
 }
+
+const renderer = new marked.Renderer();
+
+renderer.code = function(code, infostring, escaped) {
+  const lang = (infostring || "").trim().toLowerCase();
+
+  if (lang === "mermaid") {
+    return `<div class="mermaid">\n${code}\n</div>`;
+  }
+  return marked.Renderer.prototype.code.call(this, code, infostring, escaped);
+};
+
+marked.setOptions({
+  gfm: true,
+  breaks: false,
+  smartLists: true,
+  smartypants: false,
+  renderer: renderer
+});
 
 fetch(`./posts/entries/${slug}.md`)
   .then(r => r.text())
@@ -78,7 +100,27 @@ fetch(`./posts/entries/${slug}.md`)
 
     // If MathJax is present, render any math
     if (window.MathJax) {
-      window.MathJax.typesetPromise?.([content]);
+      window.MathJax.typesetPromise?.([content]).then(() => {
+        if (window.mermaid) {
+          try {
+            mermaid.initialize({ startOnLoad: false });
+            mermaid.init(undefined, bodyDiv);
+          } catch (e) {
+            console.warn("Mermaid failed to render:", e);
+          }
+        }
+      }).catch((e) => {
+        console.warn("MathJax vs Mermaid timing issue:", e);
+        if (window.mermaid) {
+          mermaid.initialize({ startOnLoad: false });
+          mermaid.init(undefined, bodyDiv);
+        }
+      });
+    } else {
+      if (window.mermaid) {
+        mermaid.initialize({ startOnLoad: false });
+        mermaid.init(undefined, bodyDiv);
+      }
     }
   })
   .catch(e => {

@@ -6,7 +6,7 @@ const LINGUIST_COLORS = {
   HTML: "#e34c26",
   CSS: "#563d7c",
   Shell: "#89e051",
-  // Add other languages and their colors as needed
+  // Add other languages as needed
 };
 const langCache = new Map();
 
@@ -46,7 +46,7 @@ async function fetchLanguages(repo) {
     if (!resp.ok) throw new Error(`GitHub API error: ${resp.status}`);
     data = await resp.json();
   } catch (err) {
-    console.warn(`Could not load languages for ${repo} from GitHub (Private repo), trying local fallback`, err);
+    console.warn(`Could not load languages for ${repo} from GitHub (Private repo), trying local fallback.`, err);
     const repoName = repo.includes('/') ? repo.split('/')[1] : repo;
     const fallbackFile = `/projects/languages/${repoName}.json`;
     try {
