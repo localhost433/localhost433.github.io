@@ -97,3 +97,17 @@ Identify **recurring forms** with **recurring meanings**.
   - Binary-branching
   - Labelling each node with the grammatical category
   - **Each level must be a well-formed word**.
+
+### Compounding
+**Compounding** is the process of combining two already existing words into one.
+
+### Zero Derivation
+**Zero-Derivation** when a word changes word class, with no new morphemes added.
+
+### Acronyms and initialisms
+**Acronym**: Initials pronounced as a regular word.
+**Initialism**: Initials pronounced as letters.
+
+### Clipping and blending
+**Clipping** refers to cutting off part of a word
+**Blends** (portmanteaux) are created by putting clippings together.
