@@ -104,22 +104,31 @@ fetch(`./posts/entries/${slug}.md`)
         if (window.mermaid) {
           try {
             mermaid.initialize({ startOnLoad: false });
-            mermaid.init(undefined, bodyDiv);
+            const mermaidBlocks = bodyDiv.querySelectorAll('.mermaid');
+            if (mermaidBlocks.length > 0) {
+              mermaid.init(undefined, mermaidBlocks);
+            }
           } catch (e) {
             console.warn("Mermaid failed to render:", e);
           }
         }
       }).catch((e) => {
-        console.warn("MathJax vs Mermaid timing issue:", e);
+        console.warn("MathJax error, attempting Mermaid anyway:", e);
         if (window.mermaid) {
           mermaid.initialize({ startOnLoad: false });
-          mermaid.init(undefined, bodyDiv);
+          const mermaidBlocks = bodyDiv.querySelectorAll('.mermaid');
+          if (mermaidBlocks.length > 0) {
+            mermaid.init(undefined, mermaidBlocks);
+          }
         }
       });
     } else {
       if (window.mermaid) {
         mermaid.initialize({ startOnLoad: false });
-        mermaid.init(undefined, bodyDiv);
+        const mermaidBlocks = bodyDiv.querySelectorAll('.mermaid');
+        if (mermaidBlocks.length > 0) {
+          mermaid.init(undefined, mermaidBlocks);
+        }
       }
     }
   })
