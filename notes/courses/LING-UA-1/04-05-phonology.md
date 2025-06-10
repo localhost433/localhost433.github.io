@@ -49,7 +49,7 @@ one phone can be an allophone of more than one phoneme (Sounds like some type of
 How phonemes can be sequenced.
 
 ### Syllables
-- Prosodic unit in most languages.
+- Smallest prosodic unit in most languages.
 
 ```
 syllable
