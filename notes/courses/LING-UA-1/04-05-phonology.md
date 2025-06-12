@@ -26,7 +26,7 @@ Word pair where everything is identical except for a sound is called a minimal p
 There is a minimal pair, that two phones can occur in the same phonological context.
 
 ##### Complementary distribution
-If there are no minimal pairs, it is *not* contrastive. That they are is a complementary distribution, meaning these to are used in different phonological contexts.
+If there are no minimal pairs, it is *not* contrastive. That is a complementary distribution, meaning these two are used in different phonological contexts.
 
 ##### Free Variation
 Can occur in the same context, but do *not* result in a contrast in meaning.
@@ -90,7 +90,7 @@ Sounds are ranked based on how 'loud' phones are.
 `/p/`, `/t/`, `/d/` follows this pattern with aspiration in English.
 
 ### Natural classes
-Groupd of phones that can be defined by some phonetic similarity.
+Groups of phones that can be defined by some phonetic similarity.
 
 |              | **Obstruent** | **Sonorant** | **Noncontinuant** | **Continuant** | **Sibilant** |
 | :----------: | :-----------: | :----------: | :---------------: | :------------: | :----------: |
@@ -109,7 +109,7 @@ To determine the minimal distinguishing feature between two sounds.
 
 ## Phonological Rules
 
-Human have the tendency to increase the place of articulation.
+Humans have the tendency to increase the place of articulation.
 
 Some common phonological processes:
 - **Assimilation**: two nearby sounds become more similar.
