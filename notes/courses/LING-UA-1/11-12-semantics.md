@@ -5,8 +5,6 @@ date: 2025-06-10/11
 
 # Semantics
 
-## Semantics vs. Pragmatics
-
 ## Defining semantics
 Hypothesis 1: meanings are paraphrases (circular)  
 Hypothesis 2: Meanings are concepts and ideas (Different ideas in different people's mind, hard to represent some words.)  
@@ -64,3 +62,72 @@ To relate predicates to other predicates, examples:
   - a formal definition of being **contradictions**
 
 Relation of entailment is given just by the meaning of a sentence, independent of context. However, in actual conversation speakers often rely on context when communicating. More related to pragmatics.
+
+## Presuppositions
+Logically, presupposing some information.
+
+### Triggers
+1. Factive verbs
+2. Definite determiners
+3. Possessive case 's and possessive pronouns
+4. Cleft sentences
+5. Iterative (additive particles) such as *again* and *too*
+6. Contrasts
+7. Comparatives
+8. Temporal (time word) classes
+9. Change of state words
+10. Counterfactual conditionals introduces by *if*
+
+## Implicatures
+What the listener can infer by reason based on what the speaker says in a given context.
+
+Language as a **cooperative endeavor**.
+
+### Grice's Maxims
+What does the hearer assume the speaker is doing:
+1. Maxim of Quality
+   - **True**
+   - Do not say what you believe is false. (lying)
+   - Do not say that for which you lack adequate evidence.
+2. Maxim of Quantity
+   - **Informative**
+   - Informative as is required (for the current purpose of exchange).
+   - Do not make it more informative than is required.
+3. Maxim of Relevance
+   - **Relevance**
+4. Maxim of Manner
+   - **Perspicuous/ Specific**
+   - Avoid ambiguity
+   - Avoid obscurity
+   - Be brief
+   - Be orderly
+
+### Chatacteristic of implicatures
+1. Implicatures are implied, not said.
+2. Meaning is the result of the context.
+3. Implicatures are **cancellable** or defeasible.
+
+### Implicature vs. Entailment vs. Presupposition
+- Implicature is possible to cancel, not the other two. 
+
+```java
+Does B have to be true regardless of the condition of A?
+True: Presupposition
+Does B have to be true if A is true?
+True: Entailment
+False: Implicature.
+```
+
+Entailment: B necessarily follows from A
+Presupposition: Assumed background information
+Implicature: Information you infer that is not necessarily explicit 
+
+Understand:
+- Meanings are out in the world
+- Meaning of a sentence is its truth condition.
+- Principle of compositionality
+- Three different semantic relations
+
+Do:
+- Venn Diagrams
+- Distinguish semantic relations
