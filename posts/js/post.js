@@ -98,38 +98,32 @@ fetch(`./posts/entries/${slug}.md`)
     footerDiv.textContent = `${author}, ${dateDisplay}${locationPart}`;
     content.appendChild(footerDiv);
 
-    // If MathJax is present, render any math
-    if (window.MathJax) {
-      window.MathJax.typesetPromise?.([content]).then(() => {
-        if (window.mermaid) {
-          try {
-            mermaid.initialize({ startOnLoad: false });
-            const mermaidBlocks = bodyDiv.querySelectorAll('.mermaid');
-            if (mermaidBlocks.length > 0) {
-              mermaid.init(undefined, mermaidBlocks);
-            }
-          } catch (e) {
-            console.warn("Mermaid failed to render:", e);
-          }
-        }
-      }).catch((e) => {
-        console.warn("MathJax error, attempting Mermaid anyway:", e);
-        if (window.mermaid) {
-          mermaid.initialize({ startOnLoad: false });
-          const mermaidBlocks = bodyDiv.querySelectorAll('.mermaid');
-          if (mermaidBlocks.length > 0) {
-            mermaid.init(undefined, mermaidBlocks);
-          }
-        }
-      });
-    } else {
-      if (window.mermaid) {
+    function renderMermaid() {
+      if (!window.mermaid) return;
+      try {
         mermaid.initialize({ startOnLoad: false });
         const mermaidBlocks = bodyDiv.querySelectorAll('.mermaid');
         if (mermaidBlocks.length > 0) {
-          mermaid.init(undefined, mermaidBlocks);
+          if (typeof mermaid.run === 'function') {
+            mermaid.run({ nodes: mermaidBlocks });
+          } else if (typeof mermaid.init === 'function') {
+            mermaid.init(undefined, mermaidBlocks);
+          }
         }
+      } catch (e) {
+        console.warn('Mermaid failed to render:', e);
       }
+    }
+
+    if (window.MathJax) {
+      window.MathJax.typesetPromise?.([content])
+        .then(renderMermaid)
+        .catch(e => {
+          console.warn('MathJax error, attempting Mermaid anyway:', e);
+          renderMermaid();
+        });
+    } else {
+      renderMermaid();
     }
   })
   .catch(e => {
