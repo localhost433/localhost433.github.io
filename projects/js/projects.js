@@ -28,7 +28,7 @@ function createLanguageBar(languages) {
     portion.className = "linguist-bar-segment";
     portion.style.backgroundColor = LINGUIST_COLORS[lang] || "#ccc";
     portion.style.width = `${(bytes / total) * 100}%`;
-    portion.title = `${lang} – ${(bytes / total * 100).toFixed(1)}%`;
+    portion.title = `${lang} - ${(bytes / total * 100).toFixed(1)}%`;
     barContainer.appendChild(portion);
   });
 
@@ -139,7 +139,7 @@ fetch("projects/metadata.json")
               ? ((bytes / total * 100).toFixed(1) + "%")
               : "0%";
             const line = document.createElement("div");
-            line.textContent = `${lang} – ${pct}`;
+            line.textContent = `${lang} - ${pct}`;
             langList.appendChild(line);
           });
           wrapper.appendChild(langList);

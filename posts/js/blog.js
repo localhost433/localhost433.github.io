@@ -1,4 +1,4 @@
-/* blog.js – list of posts with tag filter, pagination, and search */
+/* blog.js - list of posts with tag filter, pagination, and search */
 
 // Constants
 const PER_PAGE = 10;
