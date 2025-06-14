@@ -1,4 +1,4 @@
-/* notes.js – courses list */
+/* notes.js - courses list */
 
 const listEl = document.getElementById("courses-list");
 
@@ -21,7 +21,7 @@ fetch("/notes/metadata/courses.json")
 
       const meta = document.createElement("div");
       meta.className = "course-meta";
-      meta.textContent = `${c.semester || ""}${c.instructor ? " – " + c.instructor : ""}`;
+      meta.textContent = `${c.semester || ""}${c.instructor ? " - " + c.instructor : ""}`;
 
       div.append(link, meta);
       listEl.appendChild(div);

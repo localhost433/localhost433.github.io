@@ -30,7 +30,8 @@ if (!content) {
 const renderer = new marked.Renderer();
 
 renderer.code = function(code, infostring, escaped) {
-  const lang = (infostring || "").trim().toLowerCase();
+  const raw = (infostring || "").trim().toLowerCase();
+  const lang = raw.replace(/^language-/, "");
 
   if (lang === "mermaid") {
     return `<div class="mermaid">\n${code}\n</div>`;
@@ -55,7 +56,7 @@ fetch(`./posts/entries/${slug}.md`)
     const sanitize = window.DOMPurify?.sanitize || (str => str.replace(/<[^>]+>/g, ""));
 
     const cleanTitle = sanitize(meta.title || "Untitled");
-    document.title = `${cleanTitle} – Robin's Blog`;
+    document.title = `${cleanTitle} - Robin's Blog`;
 
     const h1 = document.createElement("h1");
     h1.id          = "post-title";
