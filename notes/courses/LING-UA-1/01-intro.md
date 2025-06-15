@@ -81,6 +81,6 @@ Association of meaning with the words
 
 ### Descriptivism vs. Prescriptivism
 - Descriptive grammar: description or model of the mental grammar, what speaker know about their language.
-- Prescriptive Grammar: attempts to prescribe what rules of language people should use to speak “properly”.
+- Prescriptive Grammar: attempts to prescribe what rules of language people should use to speak "properly”.
 
 **Linguists don’t tell people how to speak. They observe how people actually speak and try to understand why.**

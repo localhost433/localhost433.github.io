@@ -1,12 +1,23 @@
 ---
-title: Language Acquisition
+title: Acquisition
 date: 2025-06-12
 ---
 
-# Language acquisition
+# Acquisition
+
+## Big questions in language acquisition
+- How do children acquire language?
+  - How much of language is learned?
+  - How much of language is innate?
+  - What is the role of the environment?
 
 ## Stages in Language acquisition
-Children always understand more than what they produce.
+
+### An ordered enterprise
+- Some aspects of language develop early while others are acquired much later:
+  - Surprisingly, the order of how things are acquired is constant across individuals and between languages, even across modalities.
+  - Although a child’s grammar develops over time, it is always rule-governed; any "errors" reflect a systematic grammar that simply is not yet adult-like.
+  - Children always understand more than what they produce.
 
 ### How to study language acquisition
 - Corpus studies (child)
@@ -23,11 +34,11 @@ Children always understand more than what they produce.
 
 #### Infant learning
 Before the age of 6 months, babies are able to discriminate between any two sounds, regardless of whether it's used in their target language or not.
-- Example: Infant before 6 month in a Japanese speaking environment are able to differentiate 'la' and 'ra'.
+- Example: Infant before 6 month in a Japanese speaking environment are able to differentiate 'la' and 'ra'. (using this as example because /l/ and /r/ are allophones of /r/ in Japanese)
 - Because the infant doesn't know what language they are going to speak.
 Around the age of 6 months, they begin to lose the ability to discriminate between sounds that are not phonemic in their own language.
 
-Babies are statistical trakers, be able to attune to statistical properties of the language in a few minutes
+Babies are statistical trakers, be able to attune to statistical properties of the language in a few minutes  
 Using such information, infants begin to segment speech.
 
 #### Language production
@@ -62,7 +73,7 @@ Children **overextend** and **underextend** the meaning of words (how to form ca
 ### Stage 3
 
 #### Two word stage
-About 1.5 years, children start putting together two words.
+About 1.5 years, children start putting together two words.  
 Around 2 years old, children start producing two word sentences.
 - Pitch is used to indicate that words group together
 - No pauses
@@ -73,7 +84,7 @@ Around 2 years old, children start producing two word sentences.
 The telegraphic stage, named after the short messages alluding to telegraph.
 
 #### Morphology
-Acquire different function words and inflectional morphemes.
+Acquire different function words and inflectional morphemes.  
 Combination of semantic complexity and formal complexity. So different languages have different orders for the acquisition of such grammatical words.
 
 Acquisition of morphological rules is rule governed, described as a U-shaped development.
@@ -87,7 +98,7 @@ Acquisition of morphological rules is rule governed, described as a U-shaped dev
 - Unpack relative clauses into the two component clauses around 4.
 
 ### Acquisition of signed languages
-In the same way the hearing babies acquire language.
+- In the same way the hearing babies acquire language.
 - When deaf babies are not exposed to sign language, they will sometimes create their own signs, called **home sign**, complete with systematic rules.
 - Nicaraguan Sign Language is an example of a recent language created by home signers coming together. (Demonstrated the human drive for communication.)
 
@@ -98,7 +109,7 @@ In the same way the hearing babies acquire language.
 #### Nature
 The **innateness hypothesis**, also known as **nativism**, claims that nature deives language acquisition. (**Universal Grammar**)
 - Structure-sensitivity: Children never make some mistakes.
-- Over-generalization: Make generalization about the rule system
+- Over-generalization: Make generalization about the rule system  
 Universal Grammar: certain things are given (**principles**) while other things (**parameters**) vary in a systematic way.
 
 #### Nurture

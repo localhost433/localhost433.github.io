@@ -9,7 +9,7 @@ The study of the structures and patterns of speech sounds, at a more abstract le
 
 ## Phones, Phonemes, Allophones
 
-### Phones
+### Phone
 
 Basic unit of speech sound, concrete, what we hear. (Correspond to individual IPA symbols)
 
@@ -17,7 +17,10 @@ Basic unit of speech sound, concrete, what we hear. (Correspond to individual IP
 - Two languages may use the same tone, but used differently.
   - Difference between the **underlying sound** and how it is **phonetically realized**.
 
-### Checking for minimal pairs
+### Phoneme
+Phoneme is the smallest contrastive unit.
+
+#### Checking for minimal pairs
 - A minimal pair is word tuple where everything is identical except for a single sound.
 
 Word pair where everything is identical except for a sound is called a minimal pair.
@@ -31,8 +34,7 @@ If there are no minimal pairs, it is *not* contrastive. That is a complementary 
 ##### Free Variation
 Can occur in the same context, but do *not* result in a contrast in meaning.
 
-### Phoneme
-Phoneme is the smallest contrastive unit.
+### Allophones
 
 Two sounds are in complementary distribution that represent the same underlying sounds.
 
@@ -70,6 +72,59 @@ Sounds are ranked based on how 'loud' phones are.
   - N: Allophones for the same phoneme
 - Environments the words occur
   - In complementary or not
+
+```java
+/*********************************************************************
+ * ASSUMPTIONS
+ * ----------
+ * Types Word, Sound, Environment, Lexicon, Meaning already exist.
+ * Helper functions already exist (shown below).
+ *     List<Pair<Word,Word>>   findMinimalPairs(Sound a, Sound b, Lexicon L)
+ *     Set<Environment>        environmentsOf(Sound x, Lexicon L)
+ *     boolean                 overlap(Set<Environment> A, Set<Environment> B)
+ *********************************************************************/
+
+enum DistributionType { CONTRASTIVE, COMPLEMENTARY, FREE_VARIATION }
+
+class PhonologicalAnalyzer {
+
+    /**
+     * @param s1
+     * @param s2
+     * @param lexicon  corpus
+     * @return         CONTRASTIVE → distinct phonemes
+     *                 COMPLEMENTARY → allophones of one phoneme
+     *                 FREE_VARIATION → context-overlap without meaning contrast
+     */
+    public static DistributionType classifyPair(Sound s1,
+                                                Sound s2,
+                                                Lexicon lexicon) {
+
+        /* ---------- Search for minimal pairs ---------- */
+        List<Pair<Word,Word>> minimalPairs = findMinimalPairs(s1, s2, lexicon);
+
+        if (!minimalPairs.isEmpty()) {
+            return DistributionType.CONTRASTIVE;
+        }
+
+        /* ---------- Compare environments ---------- */
+        Set<Environment> env1 = environmentsOf(s1, lexicon);
+        Set<Environment> env2 = environmentsOf(s2, lexicon);
+
+        boolean shareContext = overlap(env1, env2);
+
+        if (!shareContext) {
+            // Never co-occur in the same environment -> complementary
+            return DistributionType.COMPLEMENTARY;
+        }
+
+        /* ---------- Same environments, no meaning-contrast ---------- */
+        // Since no minimal pairs -> free variation
+        return DistributionType.FREE_VARIATION;
+    }
+}
+```
+A java style psuedocode for the process (this is added at Jun 14, after I felt this piece of note was not too good and I didn't do this process well on the exam).
 
 ## Phonological Rules
 
