@@ -27,25 +27,24 @@ if (!content) {
   throw new Error("Required DOM element not found.");
 }
 
-const renderer = new marked.Renderer();
-
-renderer.code = function(code, infostring, escaped) {
-  const raw = (infostring || "").trim().toLowerCase();
-  const lang = raw.replace(/^language-/, "");
-
-  if (lang === "mermaid") {
-    return `<div class="mermaid">\n${code}\n</div>`;
+const renderer = {
+  code(code, infostring, escaped) {
+    const raw = (infostring || "").trim().toLowerCase();
+    const lang = raw.replace(/^language-/, "");
+    if (lang === "mermaid") {
+      return `<div class="mermaid">\n${code}\n</div>`;
+    }
+    return false;
   }
-  return marked.Renderer.prototype.code.call(this, code, infostring, escaped);
 };
 
 marked.setOptions({
   gfm: true,
   breaks: false,
   smartLists: true,
-  smartypants: false,
-  renderer: renderer
+  smartypants: false
 });
+marked.use({ renderer });
 
 fetch(`./posts/entries/${slug}.md`)
   .then(r => r.text())
