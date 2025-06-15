@@ -1,37 +1,57 @@
 /* ==========================================================================
   NOTES PAGES
   ========================================================================== */
+  .course-entry,
+  .note-entry {
+    padding: 0.7rem 0;
+    border-bottom: 1px solid #dddddd;
+  }
 
-.course-entry,
-.note-entry {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.7rem 0;
-  border-bottom: 1px solid #ddd;
-}
+  .course-entry {
+    display: flex;
+    justify-content: space-between;
+  }
 
-.course-title,
-.note-title {
-  font-weight: bold;
-  color: var(--link-color, #0055aa);
-}
+  .note-entry {
+    display: grid;
+    grid-template-columns: 1fr 13.5ch;
+    column-gap: 1rem;
+  }
 
-.course-meta,
-.note-date {
-  font-size: 0.9rem;
-  color: #555;
-}
+  .course-title,
+  .note-title {
+    font-weight: bold;
+    color: var(--link-color, #0055aa);
+  }
 
-.dark-mode .course-meta,
-.dark-mode .note-date {
-  color: #aaa;
-}
+  .course-meta,
+  .note-date {
+    font-size: 0.9rem;
+    color: #555555;
+  }
 
-.top-back-link {
-  display: inline-block;
-  font-size: 0.9rem;
-  color: #666666;
-}
+  .note-date {
+    width: 16ch;
+    text-align: left;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .top-back-link {
+    display: inline-block;
+    font-size: 0.9rem;
+    color: #666666;
+  }
+
+  .dark-mode .course-entry,
+  .dark-mode .note-entry {
+    border-bottom: 1px solid #777777;
+  }
+
+  .dark-mode .course-meta,
+  .dark-mode .note-date {
+    color: #aaaaaa;
+  }
 
 /* ==========================================================================
   NOTE CONTENT
@@ -68,7 +88,7 @@
 
 nav.table-of-contents,
 .table-of-contents {
-  border-left: 3px solid #eee;
+  border-left: 3px solid #eeeeee;
   padding-left: 1em;
   margin: 1em 0;
   font-size: 0.95em;
@@ -91,7 +111,7 @@ nav.table-of-contents a,
   display: block;
   text-decoration: none;
   color: var(--link-color, #0055aa);
-  border-left: 1px solid var(--border-color, #ddd);
+  border-left: 1px solid var(--border-color, #dddddd);
   padding-left: 1rem;
 }
 
@@ -103,13 +123,13 @@ nav.table-of-contents a:hover,
 /* Dark mode variants */
 .dark-mode nav.table-of-contents,
 .dark-mode .table-of-contents {
-  border-left: 1px solid var(--border-color, #ccc);
+  border-left: 1px solid var(--border-color, #cccccc);
 }
 
 .dark-mode nav.table-of-contents a,
 .dark-mode .table-of-contents a {
   color: var(--link-color, #88aaff);
-  border-left: 1px solid var(--border-color, #ccc);
+  border-left: 1px solid var(--border-color, #cccccc);
 }
 
 .dark-mode nav.table-of-contents a:hover,
@@ -137,7 +157,7 @@ nav.table-of-contents a:hover,
 
 #note-content th,
 #note-content td {
-  border: 1px solid #ccc;
+  border: 1px solid #cccccc;
   padding: 0.5em 1em;
 }
 
@@ -161,7 +181,7 @@ nav.table-of-contents a:hover,
 
 .table-wrapper th,
 .table-wrapper td {
-  border: 1px solid #ccc;
+  border: 1px solid #cccccc;
   padding: 0.5em 1em;
 }
 
