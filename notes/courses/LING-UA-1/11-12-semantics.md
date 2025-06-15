@@ -5,6 +5,21 @@ date: 2025-06-10/11
 
 # Semantics
 
+## Goal
+### Understand:
+- Meanings are out in the world
+- Meaning of a sentence is its truth condition.
+- Principle of compositionality
+- Three different semantic relations
+
+### Do:
+- Venn Diagrams
+- Distinguish semantic relations
+
+## Semantics vs. Pragmatics
+- Semantics is the study of linguistic meaning independent of the context.  
+- Pragmatics is the study of linguistic meaning dependent on context  
+
 ## Defining semantics
 Hypothesis 1: meanings are paraphrases (circular)  
 Hypothesis 2: Meanings are concepts and ideas (Different ideas in different people's mind, hard to represent some words.)  
@@ -27,6 +42,7 @@ Ex. $2 + 2 \neq 5$ (I was thinking this maybe could be true in a quaternary syst
 - logical connectives *or* require one of the two conjuncts to be true.
 
 ## Composing meanings
+
 ### Establishing truth conditions
 Meaning of a sentence is its truth conditions.
 - Determining the meaning of a sentence by the meanings of the words it contains and the way they are combined. This is called the **principle of compositionality**.
@@ -55,33 +71,35 @@ To relate predicates to other predicates, examples:
 - numerals (exact quantity of the shared elements)
 
 ## Entailment
-- When one sentence follows from another. 
-  - (Implication that are one/two directional)
-  - A formal definition of being **synonymous** (iff).
-- When sentences are contradictory.
-  - a formal definition of being **contradictions**
+- When one sentence follows from another.  
+  - (Implication that are one/two directional)  
+  - A formal definition of **entailment**: $S_1$ entails $S_2$ iff ($S_1$ is true $\implies$ $S_2$ is true).  
+  - A formal definition of being **synonymous** (iff): $S_1$ is equivalent to $S_2$ iff they entail each other.  
+- When sentences are contradictory.  
+  - a formal definition of being **contradictions**: $S_1$ contradicts $S_2$ iff no possible world in which ($S_1$ and $S_2$ are true).  
 
-Relation of entailment is given just by the meaning of a sentence, independent of context. However, in actual conversation speakers often rely on context when communicating. More related to pragmatics.
+Relation of entailment is given just by the meaning of a sentence, independent of context. However, in actual conversation speakers often rely on context when communicating.  
 
 ## Presuppositions
-Logically, presupposing some information.
+Speakers often consider certain background assumptions to be **shared** between the conversation participants (or at least they will talk as if they are).  
+- These background assumptions are **presuppositions**.  
+- Presuppositions rely on context, thus have to do with pragmatics.  
 
 ### Triggers
-1. Factive verbs
-2. Definite determiners
-3. Possessive case 's and possessive pronouns
-4. Cleft sentences
-5. Iterative (additive particles) such as *again* and *too*
-6. Contrasts
-7. Comparatives
-8. Temporal (time word) classes
-9. Change of state words
-10. Counterfactual conditionals introduces by *if*
+1. Factive verbs (realize, regret, etc.)  
+2. Definite determiners (the)  
+3. Possessive case 's and possessive pronouns  
+4. Cleft sentences (It was... that...)  
+5. Iterative (additive particles) (again, too)  
+6. Contrasts  
+7. Comparatives (-er)  
+8. Temporal (time word) classes ($\pm$ Past, before, etc.)  
+9. Change of state words (stop, begin, etc.)  
+10. Counterfactual conditionals introduces by *if*  
 
 ## Implicatures
-What the listener can infer by reason based on what the speaker says in a given context.
-
-Language as a **cooperative endeavor**.
+What the listener can infer by reason based on what the speaker says in a given context.  
+Language as a **cooperative endeavor**.  
 
 ### Grice's Maxims
 What does the hearer assume the speaker is doing:
@@ -110,24 +128,57 @@ What does the hearer assume the speaker is doing:
 ### Implicature vs. Entailment vs. Presupposition
 - Implicature is possible to cancel, not the other two. 
 
-```java
 Does B have to be true regardless of the condition of A?
 True: Presupposition
 Does B have to be true if A is true?
 True: Entailment
 False: Implicature.
+
+A java style psuedocode of this process:
+```java
+/*********************************************************************
+ * ASSUMPTIONS
+ * ----------
+ * Types Sentence, Context already exist.
+ * Helper functions already exist:
+ *     boolean isTrueRegardless(Sentence B, Sentence A, Context C)
+ *     boolean isTrueIf(Sentence A, Sentence B, Context C)
+ *********************************************************************/
+
+enum SemanticRelation { PRESUPPOSITION, ENTAILMENT, IMPLICATURE }
+
+class SemanticAnalyzer {
+
+   /**
+    * @param A       first sentence
+    * @param B       second sentence
+    * @param C       context
+    * @return        PRESUPPOSITION -> B must be true regardless of A
+    *                ENTAILMENT     -> B must be true if A is true
+    *                IMPLICATURE    -> B is inferred but not guaranteed
+    */
+   public static SemanticRelation classifyRelation(Sentence A,
+                                                   Sentence B,
+                                                   Context C) {
+      // if B true regardless, Presupposition
+      if (TruthEvaluator.isTrueRegardless(B, A, C)) {
+         return SemanticRelation.PRESUPPOSITION;
+      }
+
+      // Now the truth value of B is dependent on A;
+      // if (A true -> B true), Entailment
+      if (TruthEvaluator.isTrueIf(A, B, C)) {
+         return SemanticRelation.ENTAILMENT;
+      }
+
+      // otherwise, Implicature
+      return SemanticRelation.IMPLICATURE;
+   }
+}
 ```
+(Now I feel like psuedocode is a good way to understand sth, however sometimes it's really hard to implement, for example, I wanted to writeout the helper isTrueRegardless as isTrue, but on second thought the meaning become fuzzy, and I need to define the params precisely.)
 
-Entailment: B necessarily follows from A
-Presupposition: Assumed background information
-Implicature: Information you infer that is not necessarily explicit 
-
-Understand:
-- Meanings are out in the world
-- Meaning of a sentence is its truth condition.
-- Principle of compositionality
-- Three different semantic relations
-
-Do:
-- Venn Diagrams
-- Distinguish semantic relations
+Or a summary:
+- Entailment: B necessarily follows from A
+- Presupposition: Assumed background information
+- Implicature: Information you infer that is not necessarily explicit.
