@@ -7,11 +7,17 @@ export function initializeThemeToggle() {
     document.documentElement.classList.add("dark-mode");
     localStorage.setItem("theme", "dark");
     btn.textContent = "Light Mode";
+    if (typeof window.onThemeChange === "function") {
+      window.onThemeChange("dark");
+    }
   };
   const disable = () => {
     document.documentElement.classList.remove("dark-mode");
     localStorage.setItem("theme", "light");
     btn.textContent = "Dark Mode";
+    if (typeof window.onThemeChange === "function") {
+      window.onThemeChange("light");
+    }
   };
 
   btn.addEventListener("click", () => {
