@@ -241,3 +241,36 @@ textarea {
 .dark-mode .back-link:hover {
   text-decoration: underline;
 }
+
+/* ==========================================================================
+   CODE BLOCKS
+========================================================================== */
+pre {
+  background-color: #f5f5f5;
+  padding: 1rem;
+  overflow-x: auto;
+  border-radius: 4px;
+}
+
+pre code {
+  font-family: Consolas, "Courier New", monospace;
+  display: block;
+  line-height: 1.4;
+  color: #2d2d2d;
+}
+
+pre code.language-java {
+  color: #b07219; /* typical Java keyword color */
+}
+
+.dark-mode pre {
+  background-color: #1e1e1e;
+}
+
+.dark-mode pre code {
+  color: #dddddd;
+}
+
+.dark-mode pre code.language-java {
+  color: #ffcc66;
+}

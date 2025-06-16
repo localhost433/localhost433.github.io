@@ -115,15 +115,23 @@ fetch(`./posts/entries/${slug}.md`)
       }
     }
 
+    function applyHighlight() {
+      if (window.hljs) {
+        document.querySelectorAll('pre code').forEach(b => hljs.highlightElement(b));
+      }
+    }
+
     if (window.MathJax) {
       window.MathJax.typesetPromise?.([content])
-        .then(renderMermaid)
+        .then(() => { renderMermaid(); applyHighlight(); })
         .catch(e => {
           console.warn('MathJax error, attempting Mermaid anyway:', e);
           renderMermaid();
+          applyHighlight();
         });
     } else {
       renderMermaid();
+      applyHighlight();
     }
   })
   .catch(e => {
