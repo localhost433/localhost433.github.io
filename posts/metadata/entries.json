@@ -43,4 +43,22 @@
         "tags": ["cs", "life"],
         "slug": "news-render-deployment"
     }
+    ,
+    {
+        "title": "Thoughts about language acquisition",
+        "date": "2025-06-14",
+        "author": "R",
+        "location": "New York, NY",
+        "tags": ["linguistics"],
+        "slug": "language-acquisition"
+    }
+    ,
+    {
+        "title": "Comparing Chinese to programming languages",
+        "date": "2025-06-16",
+        "author": "R",
+        "location": "Bobst 10F, New York, NY",
+        "tags": ["cs", "linguistics"],
+        "slug": "chinese-program-lang"
+    }
 ]
