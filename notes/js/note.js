@@ -148,9 +148,21 @@ fetch(`/notes/courses/${course}/${noteSlug}.md`)
             wrapper.appendChild(table);
         });
 
+        function applyHighlight() {
+            if (window.hljs) {
+                container.querySelectorAll('pre code').forEach(b => hljs.highlightElement(b));
+            }
+        }
+
         if (window.MathJax && MathJax.typesetPromise) {
             MathJax.typesetPromise([container])
-                .catch(err => console.error('MathJax typeset failed:', err));
+                .then(applyHighlight)
+                .catch(err => {
+                    console.error('MathJax typeset failed:', err);
+                    applyHighlight();
+                });
+        } else {
+            applyHighlight();
         }
         back.href = `course.html?id=${encodeURIComponent(course)}`;
     })
