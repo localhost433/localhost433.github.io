@@ -1,4 +1,4 @@
-/* note.js - render note */
+/* note.js - render individual note */
 
 const slugCounts = Object.create(null);
 function slugify(raw) {

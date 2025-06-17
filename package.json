@@ -6,12 +6,13 @@
     "build": "echo \"No build step required for a static site\""
   },
   "dependencies": {
+    "20": "^1.0.0",
     "@upstash/redis": "^1.25.1",
     "js-yaml": "^4.1.0",
+    "latest": "^0.2.0",
     "node-fetch": "^3.3.2",
     "pg": "^8.11.0",
-    "sanitize-html": "^2.8.0",
-    "vercel": "^42.2.0"
+    "sanitize-html": "^2.8.0"
   },
   "overrides": {
     "path-to-regexp": ">=6.2.3",
