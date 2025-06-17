@@ -1,4 +1,4 @@
-/* course.js - list all notes in a course */
+/* course.js - course page*/
 
 const params = new URLSearchParams(location.search);
 const slug = params.get("id");

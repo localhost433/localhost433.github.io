@@ -1,4 +1,4 @@
-/* notes.js - courses list */
+/* notes.js - list of notes */
 
 const listEl = document.getElementById("courses-list");
 
