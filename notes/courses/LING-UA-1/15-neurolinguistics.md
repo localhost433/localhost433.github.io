@@ -5,7 +5,11 @@ date: 2025-06-17
 
 # Neurolinguistics
 
+---
+
 ## What is Newrolinguistics?
+
+---
 
 ### Intro
 Uncovering the **neural bases of language**. Specifically, what parts of the brain are responsible for performing specific **linguistic computations** on **mental representations**?
@@ -14,6 +18,8 @@ Uncovering the **neural bases of language**. Specifically, what parts of the bra
 - When it does it?
 
 To identify a brain region that supports(correspond) to a type of linguistic process.
+
+---
 
 ### Human brain - crash course
 Parts:
@@ -37,7 +43,11 @@ Parts:
     - Role of lobes may be similar across hemispheres, also hemispheric differences called **lateralization**.
       - **Split-brain patients** provide some evidence for this.
 
+---
+
 ## Aphasia and the origin of neurolinguistics
+
+---
 
 ### How to study language before neuroimaging?
 Study impaired language, as different types of **apahsias**. Aphasia arises from brain damage of some sort, common causes include:
@@ -53,6 +63,8 @@ Rationale is known as the **deficit-lesion method**.
   - Conclusion might not be correlated
   - Moral questions (Consent?)
 
+---
+
 ### Broca's aphasia
 Paul Broca and the patient "Tan" (1861)
 - His conclusion: **Broca's area** responsible for language production.
@@ -62,6 +74,8 @@ Characteristics of Broca's aphasia:
 - Slow, laborious, non-fluent speech with few if any grammatical morphemes.
 - Comprehension relatively intact, but writing is limited.
 [Example of person with Broca’s aphasia](https://www.youtube.com/watch?v=JWC-cVQmEmY)
+
+---
 
 ### Fluent (Wernicke's) aphasia
 Carl Wernicke's subsequent discovery (1874)
@@ -74,13 +88,19 @@ Characteristics of Fluent (Wernicke's) aphasia:
 - impaired understanding of speech and writing.
 [Example of person with Wernicke’s aphasia](https://www.youtube.com/watch?v=3oef68YabD0)
 
+---
+
 ### How much can we learn from aphasias?
 Get an idea of *where* and *how* language is organized in the brain by comparing behavior and lesion sites. Many disadvantages of relying on apasia studies:
 - Inter-individual variability, no patients are identical, and very difficult to replicate.
 - Lot of reorganization can happen during recovery.
 - Moral concerns.
 
+---
+
 ## Modern neuroimaging techniques
+
+---
 
 ### Overview of modern neuroimaging techniques
 To investigate *what* the brain does, *where* it does it, and *when* it does it.
@@ -88,6 +108,8 @@ To investigate *what* the brain does, *where* it does it, and *when* it does it.
 - **Functional imagining** (measuring an aspect of brain function)
   - **Non-invasive techniques** (**PET** (to some extent), **fMRI**, **EEG**, **MEG** etc.)
   - **Invasive techniques** (electrocorticography, single cell recordings)
+
+---
 
 ### Hemodynamic techniques (PET & fMRI)
 Measure *blood*, a dependent measure of neural activity
@@ -100,6 +122,8 @@ Increase in neuronal activity -> Increase in metabolic demand for glucose and ox
 *Measures the work of the brain after it has happened.*
 Hemodynamic techniques have *excellent spatial resolution* but *bad temporal resolution*.
 
+---
+
 ### Electrophysiological techniques (EEG & MEG)
 Measure actual electrical activity of neurons
 - EEG: Electroencephalography
@@ -110,7 +134,11 @@ Neurons use electricity to communicate with each other -> Neuronal networks fire
 *Measures the work of the brain as it is happening.*
 Electrophysiology techniques have *~bad spatial resolution* but *excellent temporal resolution*.
 
+---
+
 ## Some classic and modern findings (Case Studies)
+
+---
 
 ### Phonemes in the brain
 Phillips et al. (2000)
@@ -126,6 +154,8 @@ Examine the **Auditory Mismatch Field** elicited in auditory cortex at ~180ms po
 Conclusion:
 The brain (auditory cortex) has access to phonemes, not just acoustic features, and they are recognized quickly.
 
+---
+
 ### Semantics and syntax in the brain
 Finding evidence for high-level processes? (higher than phonemes)
 
@@ -138,6 +168,8 @@ Progression from smaller unit to larger unit in terms of time.
 
 Conclusion:
 The brain gets surprised by semantically and syntactically anomalous stimuli.
+
+---
 
 ### Putting two words together
 Combining two lexical items involves at least three processes

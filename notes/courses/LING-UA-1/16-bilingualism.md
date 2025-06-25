@@ -5,6 +5,8 @@ date: 2025-06-18
 
 # Bilingualism
 
+---
+
 ## Terminology
 - Bilinguilism & Multilingualism often used interchangeably.
 - Native language vs. L1 (language learned from birth)
@@ -13,6 +15,8 @@ date: 2025-06-18
 - Second Language Acquisition (SLA) vs. Bilingual Language Acquisition (BLA)
 - Target Language vs. Source language -> (language a learner is learning vs. the already known language)
 - 'Mistakes/Errors' (Not really prescriptive in that terms)
+
+---
 
 ## Defining Bilingualism
 “We’ll say that bilingualism is **the ability to use two or more languages sufficiently to carry on a limited casual conversation**.”
@@ -26,21 +30,33 @@ But more complicated than that, criterias include:
 
 Maybe think "bilingual" as a broad category with bmany sub-categories.
 
+---
+
 ## Typology of Bilingualism
+
+---
 
 ### Proficiency level
 - Balanced vs. Dominant bilinguals
 - Additive vs. Subtractive bilinguals (how the process of acquiring the second language affect the acquisition of the first language)
 - Receptive (passive) vs. Productive (active) bilinguals
 
+---
+
 ### Age of acquisition
 - Early vs. Late bilinguals
 - Simultaneous vs. Successive (sequential) bilinguals
 
+---
+
 ### Context of acquisition
 - Compound vs. Coordinate bilinguals
 
+---
+
 ## L2 Acquisition
+
+---
 
 ### Perceiving and Discriminating sounds
 Finding the word boundaries in a language you aren't familiar with is diffcult
@@ -53,6 +69,8 @@ Different Phonotactics
 - Allophones are also language specific
 
 Different Syllable Structures
+
+---
 
 ### Speaking like a 'Native'?
 Many L2 learners will experience:
@@ -71,6 +89,8 @@ Positive factors as well:
 - motivation and attitude
 - individual language attitude
 
+---
+
 ## Language Transfer (interference)
 L1 & L2 affecting each other.
 
@@ -81,9 +101,13 @@ L1 & L2 affecting each other.
   - Some form involve ways that an L1 helps a learner with an L2 in cases where the languages share some property
   - But some negative errors, in the forms of quantitative interference.
 
+---
+
 ### Examples of Transfers
 - Syntactic transfer
 - Phonetic/ Phonemic Transfer
+
+---
 
 ### Clues use to identify transfer errors
 - Parallelism
@@ -93,8 +117,12 @@ L1 & L2 affecting each other.
 - Heterogeneity
   - Learners with different source languages make different errors in the target language.
 
+---
+
 ## A Bilingual (Dis)advantage?
 **Normative Monolingual Ideology**
+
+---
 
 ### Why has monolingualism enjoyed a privileged status?
 - Research on language acquisition has traditionally focused on monolingual children
@@ -105,6 +133,8 @@ L1 & L2 affecting each other.
   - Language spokenar home
 
 
+---
+
 ### Is growing up bilingual harmful for children?
 Both quantity of input and quality of input matter for acquisition
 Monolingual children will have enough input to construct a mental grammar sonner than bilingual children will
@@ -112,10 +142,14 @@ Monolingual children will have enough input to construct a mental grammar sonner
 Any delays even out relatively early
 - Bilinguals equal or exceed monolinguals in terms of terminologies
 
+---
+
 ### Advantages?
 - Executive function: the set of mental processes that govern our attention and control our behavior.
 - Correlated with higher cognitive flexibility?
 - Contribute to cognitive reserve?
+
+---
 
 ### Policies around Bilingualism
 **Policy and science don't always align**
@@ -123,6 +157,8 @@ Any delays even out relatively early
 Proponents for English-only policy in the US.
 Educational Language Policies around the world: Haiti
 Singaporean 
+
+---
 
 ## Societal Bilingualism
 Typical factors:
@@ -133,8 +169,12 @@ Typical factors:
   - Instrumental motivation
   - Identity-based motivation
 
+---
+
 ### Diglossia
 A situation in which two languages are used in a community, often by the same speakers, but are generally confined to different domains of use.
+
+---
 
 ### Languages in Context
 **Pidgins & Creoles**
