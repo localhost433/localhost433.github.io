@@ -190,9 +190,22 @@ nav.table-of-contents a:hover,
   background: #0e0e0e
 }
 
+/* ==========================================================================
+  CUSTOM
+  ========================================================================== */
+
 hr {
   border: none;
   height: 1px;
   background-color: #888888;
   margin: 1em 0;
 }
+
+red {color: #a03040;}
+cyan {color: #00a0a0;}
+orange {color: #ff8a2a;}
+purple {color: #7044aa;}
+green {color: #338000;}
+blue {color: #0088dd;}
+pink {color: #dd6388;}
+scarlet{color: #790032;}
