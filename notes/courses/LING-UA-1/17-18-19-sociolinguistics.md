@@ -297,3 +297,141 @@ Children who speak a dialect of English other than SAE, may be at a disadvantage
 - Another approach is to encourage **bidialectalism**
   - Encourages children to take pride in their non-SAE dialect, while also promoting their proficiency in SAE
   - Recognizes potential cognitive advantages, metalinguistic strategies, etc.
+
+---
+
+## Language and Style
+
+---
+
+### Foundational notions
+Two dimensions of variation in langugage:
+1. <cyan>**Inter-speaker**</cyan> = variation that patterns by user  
+2. <red>**Intra-speaker**</red> = variation that patterns by use  
+   - <orange>**Style**</orange>  
+     - <purple>**Register**</purple>: language associated with a particular occupational or social group; may contain <green>**jargon**</green>
+       - <blue>**genre**</blue>: register with a conventional structure
+
+---
+
+### Register
+e.g., legalese
+e.g., sports announcer play-by-play commentar
+    <cyan>Bases loaded</cyan>, <purple>swing and a miss</purple>. <red>One and one</red>. 
+e.g., meeting royalty
+    Address Queen as <purple>Your Majesty</purple>, other royals as <red>Your Royal Highness</red>
+
+---
+
+### Foundational Notions
+There are no single style speakers:
+everyone engages in **style-shifting**
+
+---
+
+### Style as Attention Paid to Speech
+
+---
+
+#### Style-shifting by task & context of speech
+
+Some Methodologies:
+- Sociolinguistic Interview
+  - Guided conversation
+  - Reading passage
+  - Word list
+  - Minimal pairs
+- Rapid and Anonymous Survey
+
+---
+
+##### Labov’s NYC Department Store Study
+William Labov - University of Pennsylvania
+
+Some Key Results:
+- Higher rates of ‘r’ word-finally than pre-consonantally
+- Rhoticity shows class stratification (higher SES, more ‘r’)
+- Higher rates of ‘r’ in emphatic vs. casual speech
+
+---
+
+#### Findings
+
+The <red>more closely</red> speakers monitor their speech, the more they shift into <cyan>formal styles</cyan>, characterized as speech that resembles that of <purple>high-prestige social groups</purple>.
+
+Variants' usage can shift over time:
+- Change from above
+- Change from below
+  - <pink>Indicator</pink>
+    - No style-shifting
+    - No conscious awareness
+  - <red>Marker</red>
+    - Style-shifting appears
+    - Some awareness
+  - <scarlet>Stereotype</scarlet>
+    - Style-shifting
+    - Conscious awareness
+
+---
+
+#### Limitations of the Attention-Paid-to-Speech Model
+- "Attention" is difficult to define & quantify
+- Speecific to sociolinguistic interview tasks
+  - How do we think about reframing this model when dealing with more naturalistic speech contexts?
+
+---
+
+### Style as Audience Design
+Speakers design their speech <red>toward their audience</red>.
+
+---
+
+#### Accommodation
+- Convergence
+- Divergence
+
+Task effects -> Audience effects
+
+---
+
+#### Bell's Style Axiom
+Allan Bell - Auckland University of Technology
+
+“Variation on the style dimension within the speech of a single speaker derives from and echoes the variation which exists between speakers on the ‘social’ dimension." (Bell 1984)
+
+---
+
+#### Hypercorrection
+
+---
+
+### Style as Speaker Design
+Speakers adjust their speech <red>agentively</red>, selecting variants depending on their <cyan>social associations</cyan>, to express different <purple>attitudes</purple>, different aspects of their <orange>identities</orange>, etc.
+
+---
+
+#### Jocks & Burnouts
+Penny Eckert - Stanford University
+
+Eckert’s research site:
+“Belten” High School, suburban Detroit, MI
+
+Data collection via <cyan>participant observation</cyan> and <red>ethnography</red>.
+
+What affects students’ language at Belten High?
+- Parents’ social class?
+- Sex/Gender?
+- Social group affiliation?
+
+---
+
+#### Pop Music
+Identities are not *stable*
+
+---
+
+#### Lifespan Change
+
+---
+
+#### Anwar
