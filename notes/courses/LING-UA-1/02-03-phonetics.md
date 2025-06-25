@@ -5,6 +5,8 @@ date: 2025-05-20/21
 
 # Phonetics
 
+---
+
 ## Ineternation Phonetic Alphabet (IPA)
 Write IPA in [square brackets] for phonetic transcription.
 
@@ -21,16 +23,24 @@ Write IPA in [square brackets] for phonetic transcription.
 
 Bold ones are in English. There are different levels of specificity of transcription.
 
+---
+
 ### What is phonetics?
 branch of linguistics that focuses on the inventory and structure of speech sounds
 
+---
+
 ### What do phoneticians study?
 Articulatory Phonetics: How speech sounds are produces
+
+---
 
 ### Speech production system
 Move different part of mouth for different sounds.
 
 ![](notes/courses/LING-UA-1/images/02-1.png) Image of human vocal tract, from [ here](https://www.researchgate.net/figure/PA-articulation-points-left-Human-vocal-tract-right-IPA-vowels-consonants_fig2_357296500).
+
+---
 
 ## Consonants
 Three key features:
@@ -75,6 +85,8 @@ Three key features:
 
 **Describe: Voicing, place, manner**
 
+---
+
 ## Vowels
 
 **Bold** = tense, *italic* = lax
@@ -85,9 +97,13 @@ Three key features:
 | **Mid**  | **e** / *ɛ* |   *ə*   | *ɔ* / **o** |
 | **Low**  |     *æ*     |   *ʌ*   |    **a**    |
 
+---
+
 ### What are vowels?
 
 - Relative to consonants.
+
+---
 
 ### Three features to describe vowels
 
@@ -95,9 +111,13 @@ Three key features:
 - Tongue backness/frontness
 - Roundedness (Are lips are being rounded or not?)
 
+---
+
 #### Monophthongs vs. Diphthongs
 - Monophthongs [^1] for one syllable.
 - Diphthongs [^2] for two put together
+
+---
 
 ## Acoustics and perception
 - Periodic sounds: Vowels

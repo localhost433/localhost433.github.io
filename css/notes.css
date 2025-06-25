@@ -189,3 +189,10 @@ nav.table-of-contents a:hover,
 .dark-mode .table-wrapper td {
   background: #0e0e0e
 }
+
+hr {
+  border: none;
+  height: 1px;
+  background-color: #888888;
+  margin: 1em 0;
+}

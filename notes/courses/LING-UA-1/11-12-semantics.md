@@ -5,43 +5,66 @@ date: 2025-06-10/11
 
 # Semantics
 
+---
+
 ## Goal
+
+---
+
 ### Understand:
 - Meanings are out in the world
 - Meaning of a sentence is its truth condition.
 - Principle of compositionality
 - Three different semantic relations
 
+---
+
 ### Do:
 - Venn Diagrams
 - Distinguish semantic relations
 
+---
+
 ## Semantics vs. Pragmatics
 - Semantics is the study of linguistic meaning independent of the context.  
 - Pragmatics is the study of linguistic meaning dependent on context  
+
+---
 
 ## Defining semantics
 Hypothesis 1: meanings are paraphrases (circular)  
 Hypothesis 2: Meanings are concepts and ideas (Different ideas in different people's mind, hard to represent some words.)  
 Hypothesis 3: Meanings are out in the world.
 
+---
+
 ## Sentence meanings and truth conditions
+
+---
 
 ### Truth is relative
 Given a certain condition, we can judge the truth value of a sentence.  
 We only need to know *what the world should be like* for a sentence to actually be true or false.
+
+---
 
 ### Possible worlds
 For each way the world *could have been*, there is a distinct possible world.  
 Only talk about *logically* possible ways that would have turned out.  
 Ex. $2 + 2 \neq 5$ (I was thinking this maybe could be true in a quaternary system, but then I realized 5 isn't even a defined digit under that. There is only $2_4 + 2_4 = 10_4$)
 
+---
+
 ### Connectives
 - negation *not* reverses the truth.
 - logical connectives *and* require both conjuncts to be true.
 - logical connectives *or* require one of the two conjuncts to be true.
 
+---
+
 ## Composing meanings
+
+---
 
 ### Establishing truth conditions
 Meaning of a sentence is its truth conditions.
@@ -49,6 +72,8 @@ Meaning of a sentence is its truth conditions.
 - There is an order of operations establishing the conditions.
 
 (The reason I think that there's the logical aspect, because the word in languages doesn't have a connection to it's meaning. So there is the need of building the logic constructively from ground up, not using established languages)
+
+---
 
 ### Common semantic building blocks
 - Names (proper nouns) refer to specific individuals in the world (**referent**)
@@ -58,10 +83,14 @@ Meaning of a sentence is its truth conditions.
     - What the world must be like for it to apply to any given individual.
     - In what kinds of logically possible situations it would be possible.
 
+---
+
 ### Set theory
 Venn diagrams to model the set of individuals.  
 **Inclusive** and **Exclusive or**.  
 but is logically equivalent to and, but it conveys an extra meaning of unexpectedness or contrast.
+
+---
 
 ### Quantifiers
 To relate predicates to other predicates, examples:
@@ -69,6 +98,8 @@ To relate predicates to other predicates, examples:
 - some (non-empty intersection)
 - no (no intersection)
 - numerals (exact quantity of the shared elements)
+
+---
 
 ## Entailment
 - When one sentence follows from another.  
@@ -80,10 +111,14 @@ To relate predicates to other predicates, examples:
 
 Relation of entailment is given just by the meaning of a sentence, independent of context. However, in actual conversation speakers often rely on context when communicating.  
 
+---
+
 ## Presuppositions
 Speakers often consider certain background assumptions to be **shared** between the conversation participants (or at least they will talk as if they are).  
 - These background assumptions are **presuppositions**.  
 - Presuppositions rely on context, thus have to do with pragmatics.  
+
+---
 
 ### Triggers
 1. Factive verbs (realize, regret, etc.)  
@@ -97,9 +132,13 @@ Speakers often consider certain background assumptions to be **shared** between 
 9. Change of state words (stop, begin, etc.)  
 10. Counterfactual conditionals introduces by *if*  
 
+---
+
 ## Implicatures
 What the listener can infer by reason based on what the speaker says in a given context.  
 Language as a **cooperative endeavor**.  
+
+---
 
 ### Grice's Maxims
 What does the hearer assume the speaker is doing:
@@ -120,10 +159,14 @@ What does the hearer assume the speaker is doing:
    - Be brief
    - Be orderly
 
+---
+
 ### Chatacteristic of implicatures
 1. Implicatures are implied, not said.
 2. Meaning is the result of the context.
 3. Implicatures are **cancellable** or defeasible.
+
+---
 
 ### Implicature vs. Entailment vs. Presupposition
 - Implicature is possible to cancel, not the other two. 

@@ -5,11 +5,15 @@ date: 2025-05-19
 
 Overview of what will be covered in the course.
 
+---
+
 # What is Language?
 - Cultural artifact
 - Articulation of thoughts
 - Code for communication
 - Human biological trait
+
+---
 
 ## How does language work?
 - Language as a mapping
@@ -19,15 +23,23 @@ Overview of what will be covered in the course.
     ```
 - What exactly do we know when we say we 'know' a language?
 
+---
+
 ## What does it mean to 'know' a language
+
+---
 
 ### Linguistic competence
 - Our knowledge of sounds, words, linguistic structures, linguistic
 meanings, etc.
 - Mostly unconscious
 
+---
+
 #### vs... Linguistic performance
 - The way people use languages, including errors.
+
+---
 
 #### Knowledge of sound patterns: Phonetics
 - Inventory of sounds
@@ -37,6 +49,8 @@ meanings, etc.
   - Where in a word/syllable?
   - In sequence with which other sounds?
 
+---
+
 #### Knowledge of Word patterns: Morphology
 [Morpheme:= smallest meaningful unit.](https://en.wikipedia.org/wiki/Morpheme)
 
@@ -45,13 +59,19 @@ meanings, etc.
 #### Knowledge of meaning patterns: Semantics
 Logical implication for the sentence.
 
+---
+
 ### Communicative competence
 - Our knowledge of how and when to use those linguistic structures.
 - Our evaluations ((un)/conscious) of others’ linguistic (in)competence
 and linguistic performance.
 
+---
+
 #### Knowledge of usage patterns: Sociolinguistics
 Association of meaning with the words
+
+---
 
 ## Key features of language
 1. Arbitrariness
@@ -71,6 +91,8 @@ Association of meaning with the words
 
 **There are no distinction between dialect and language in linguistics.**
 
+---
+
 ## What exactly is Linguistics?
 - Scientific study of language
   - Unconscious knowledge we have
@@ -78,6 +100,8 @@ Association of meaning with the words
   - structure of language and of particular languages
   - how languages vary
   - how language is used in society
+
+---
 
 ### Descriptivism vs. Prescriptivism
 - Descriptive grammar: description or model of the mental grammar, what speaker know about their language.
