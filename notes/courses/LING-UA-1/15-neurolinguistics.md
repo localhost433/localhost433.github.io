@@ -117,6 +117,7 @@ Measure *blood*, a dependent measure of neural activity
 - fMRI: Functional Magnetic Resonance Imagining
 
 Premise:
+
 Increase in neuronal activity -> Increase in metabolic demand for glucose and oxygen -> Increase in cerebral blood flow to the activated region
 
 *Measures the work of the brain after it has happened.*
@@ -146,13 +147,13 @@ Phillips et al. (2000)
 *Does auditory cortex have access to phonemic categories? And when is phonemic category information accessed?*
 
 Obstacle:
-Prove that any results are due to crossing a *phoneme* boundary rather than just differeces in the *acoustics* properties.
+- Prove that any results are due to crossing a *phoneme* boundary rather than just differeces in the *acoustics* properties.
 
 Approach:
-Examine the **Auditory Mismatch Field** elicited in auditory cortex at ~180ms post stimulus onset by deviant stimuli in an **oddball paradigm**.
+- Examine the **Auditory Mismatch Field** elicited in auditory cortex at ~180ms post stimulus onset by deviant stimuli in an **oddball paradigm**.
 
 Conclusion:
-The brain (auditory cortex) has access to phonemes, not just acoustic features, and they are recognized quickly.
+- The brain (auditory cortex) has access to phonemes, not just acoustic features, and they are recognized quickly.
 
 ---
 
@@ -161,8 +162,8 @@ Finding evidence for high-level processes? (higher than phonemes)
 
 So called **violation studies** use EEG has investigated brain responses to when languages goes awry.
 
-N400: Semantic anomalies. (negativity 400 ms after the stimulus onset)
-P600: Syntactic anomalies. (positivity 600 ms after the stimulus onset)
+- N400: Semantic anomalies. (negativity 400 ms after the stimulus onset)
+- P600: Syntactic anomalies. (positivity 600 ms after the stimulus onset)
 
 Progression from smaller unit to larger unit in terms of time.
 
@@ -179,7 +180,7 @@ Combining two lexical items involves at least three processes
 
 What aspects of composition is the brain sentitive to?
 
-Bemis & Pylkkänen(2011)
+Bemis & Pylkkänen (2011)
 
 Approach:
 - 2 words vs. 1 word
@@ -190,8 +191,8 @@ Approach:
   - Task varied for composition and list stimuli to avoid composition in list stimuli
 
 Results: 
-difference from two-word composition and one-word composition.
+- difference from two-word composition and one-word composition.
 
 Conclusion:
-The combination of minimal stimuli reflects **conceptual combination**-not syntactic nor semantic.
+- The combination of minimal stimuli reflects **conceptual combination**-not syntactic nor semantic.
 

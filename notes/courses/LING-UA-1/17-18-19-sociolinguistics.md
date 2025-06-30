@@ -67,7 +67,7 @@ A "non-standard" variety:
 
 ---
 
-##### "Covert" vs. "Overt" Prestige
+#### "Covert" vs. "Overt" Prestige
 Covert Prestige
 - Hidden or community-based recognition
 - Linked to non-standard varieties and local identities
@@ -80,7 +80,7 @@ Overt prestige
 
 ---
 
-##### How is the "Standard" Established
+#### How is the "Standard" Established
 - A standard variety is determined by social, economic, historical etc. factors, not because any linguistic features
 - A given linguistic feature is never inherently “standard” / “non-standard
 - Social context dynamically assigns perceptions of “standardness” or “non-standardness” to certain features
@@ -88,7 +88,7 @@ Overt prestige
 
 ---
 
-##### Standard is arbitrary
+#### Standard is arbitrary
 - Standard British English, SBE (aka. Received pronounciation, RP) omits /ɹ/ when not followed by a vowel, and RP is considered "standard".
 - But in US, dialects that does this is considered "non-standard" (e.g., Boston English)
 - What considered a "standard" dialect has a social basis, not a linguistic one.
@@ -286,6 +286,18 @@ Dialect spoken by many Mexican Americans in California and the Southwestern regi
 
 ---
 
+### Languages in Context
+**Pidgins & Creoles**
+
+Rule-governed with simplified grammatical system and lexicons
+Superstrate language, infra
+
+Pidgins has no native speakers, stabilized, Becomes creole.
+
+Pidginization and Creolization
+
+---
+
 ### Linguistic Discrimination in Education
 
 ---
@@ -435,3 +447,29 @@ Identities are not *stable*
 ---
 
 #### Anwar
+
+---
+
+## Language, Power, 
+
+---
+
+### Language and (Generative) AI
+
+---
+
+#### Implicit vs. Explicit Bias
+
+Bias against different languages
+
+### Language and Government
+
+1. Language in the Courtroom
+Language equity
+Language in
+
+2. Language and Immigration
+shibboleth, 'archaic' but here, the word used that align with certain groups
+
+Discursive Frames, Narrative Expectations
+
