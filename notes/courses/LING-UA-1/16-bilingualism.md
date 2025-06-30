@@ -173,19 +173,3 @@ Typical factors:
 
 ### Diglossia
 A situation in which two languages are used in a community, often by the same speakers, but are generally confined to different domains of use.
-
----
-
-### Languages in Context
-**Pidgins & Creoles**
-
-
-Rule-governed with simplified grammatical system and lexicons
-Superstrate language, infra
-
-Pidgins has no native speakers, stabilized, Becomes creole.
-
-Pidginization and Creolization
-
-
-
