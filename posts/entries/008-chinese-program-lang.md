@@ -7,7 +7,7 @@ location: Bobst 10F, New York, NY
 ---
 
 ## The rationale
-It's such a wierd idea to compare a natural language to programming langueges, since I have put some thought into this, I'd better write it out.
+It's such a weird idea to compare a natural language to programming langueges, since I have put some thought into this, I'd better write it out.
 
 ## Learning
 The Chinese language is known for it's difficulty to learn; personally, I don't think this is true, every language have the same difficulty to learn, as they are created equally complex with the equal intellectuals of the human mind. However, a number of factors may influence one's perception on that. To English speakers, Chinese might be the most distinct language to encounter compared to English.
