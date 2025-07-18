@@ -5,7 +5,7 @@
         "author": "R",
         "location": "Brittany Hall, New York, NY",
         "tags": ["cs", "life"],
-        "slug": "first"
+        "slug": "001-first"
     }
     ,
     {
@@ -14,7 +14,7 @@
         "author": "R",
         "location": "Bobst 6F, New York, NY",
         "tags": ["math"],
-        "slug": "random"
+        "slug": "002-random"
     }
     ,
     {
@@ -23,7 +23,7 @@
         "author": "R",
         "location": "New York, NY",
         "tags": ["notes", "cs"],
-        "slug": "seminar-opensource"
+        "slug": "003-seminar-opensource"
     }
     ,
     {
@@ -32,7 +32,7 @@
         "author": "R",
         "location": "St. Catharines, ON",
         "tags": ["math"],
-        "slug": "googology"
+        "slug": "005-googology"
     }
     ,
     {
@@ -41,7 +41,7 @@
         "author": "R",
         "location": "Alumni Hall, New York, NY",
         "tags": ["cs", "life"],
-        "slug": "datathon-render-deploy"
+        "slug": "006-datathon-render-deploy"
     }
     ,
     {
@@ -50,7 +50,7 @@
         "author": "R",
         "location": "New York, NY",
         "tags": ["linguistics"],
-        "slug": "language-acquisition"
+        "slug": "007-language-acquisition"
     }
     ,
     {
@@ -59,6 +59,6 @@
         "author": "R",
         "location": "Bobst 10F, New York, NY",
         "tags": ["cs", "linguistics"],
-        "slug": "chinese-program-lang"
+        "slug": "008-chinese-program-lang"
     }
 ]
