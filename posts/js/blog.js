@@ -97,8 +97,14 @@ searchBox.addEventListener("input", e => {
 // Handle tag button clicks
 function handleTagClick(tag) {
   const params = new URLSearchParams(location.search);
-  params.set("tag", tag);
-  history.pushState({ tag }, "", `?${params.toString()}`);
+  if (tag) {
+    params.set("tag", tag);
+  } else {
+    params.delete("tag");
+  }
+  const newUrl = window.location.pathname +
+    (params.toString() ? `?${params.toString()}` : "");
+  history.pushState({ tag }, "", newUrl);
   applyTagFilter(tag);
 }
 
