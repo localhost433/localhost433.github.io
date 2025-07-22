@@ -1,29 +1,29 @@
 {
   "version": 2,
   "builds": [
-    { "src": "api/**/*.js",              "use": "@vercel/node"    },
+    { "src": "api/**/*.js",               "use": "@vercel/node"    },
 
-    { "src": "components/**/*.html",     "use": "@vercel/static"  },
-    { "src": "css/**/*.css",             "use": "@vercel/static"  },
+    { "src": "components/**/*.html",      "use": "@vercel/static"  },
+    { "src": "css/**/*.css",              "use": "@vercel/static"  },
     
-    { "src": "js/**/*.js",               "use": "@vercel/static"  },
-    { "src": "notes/js/**/*.js",         "use": "@vercel/static"  },
-    { "src": "posts/js/**/*.js",         "use": "@vercel/static"  },
-    { "src": "projects/js/**/*.js",      "use": "@vercel/static"  },
+    { "src": "js/**/*.js",                "use": "@vercel/static"  },
+    { "src": "notes/js/**/*.js",          "use": "@vercel/static"  },
+    { "src": "posts/js/**/*.js",          "use": "@vercel/static"  },
+    { "src": "projects/js/**/*.js",       "use": "@vercel/static"  },
     
-    { "src": "assets/images/**/*",       "use": "@vercel/static"  },
-    { "src": "posts/entries/**/*.md",    "use": "@vercel/static"  },
-    { "src": "notes/courses/**/*",       "use": "@vercel/static"  },
+    { "src": "assets/images/**/*",        "use": "@vercel/static"  },
+    { "src": "posts/entries/**/*.md",     "use": "@vercel/static"  },
+    { "src": "notes/courses/**/*",        "use": "@vercel/static"  },
 
-    { "src": "projects/metadata.json",   "use": "@vercel/static"  },
+    { "src": "projects/metadata.json",    "use": "@vercel/static"  },
     { "src": "projects/languages/*.json", "use": "@vercel/static" },
-    { "src": "posts/metadata/**/*.json", "use": "@vercel/static"  },
-    { "src": "notes/metadata/**/*.json", "use": "@vercel/static"  },
+    { "src": "posts/metadata/**/*.json",  "use": "@vercel/static"  },
+    { "src": "notes/metadata/**/*.json",  "use": "@vercel/static"  },
     
-    { "src": "*.html",                   "use": "@vercel/static"  }
+    { "src": "*.html",                    "use": "@vercel/static"  }
   ],
   "routes": [
-    { "src": "^/api/(.*)$",              "dest": "/api/$1.js"     },
+    { "src": "^/api/(.*)$",               "dest": "/api/$1.js"     },
 
     { "handle": "filesystem" }
   ]
