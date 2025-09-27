@@ -61,4 +61,22 @@
         "tags": ["cs", "linguistics"],
         "slug": "008-chinese-program-lang"
     }
+    ,
+    {
+        "title": "Server Dev",
+        "date": "2025-07-15",
+        "author": "R",
+        "location": "Futian district, Shenzhen, Guangdong, China",
+        "tags": ["cs"],
+        "slug": "014-server-dev"
+    }
+    ,
+    {
+        "title": "Anubis, Containers, & Kubernetes",
+        "date": "2025-09-19",
+        "author": "R",
+        "location": "Warren Weaver Hall, NYU, New York, NY",
+        "tags": ["notes", "cs"],
+        "slug": "015-seminar-anubis"
+    }
 ]

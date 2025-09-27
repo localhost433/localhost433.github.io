@@ -10,7 +10,7 @@ window.MathJax = {
             Q: "\\mathbb{Q}",
             R: "\\mathbb{R}",
             C: "\\mathbb{C}",
-            Li: "\\mathcal{L}",
+            X: "\\mathbb{X}",
             M: "\\mathcal{M}",
             im: "\\text{im}",
             rank: "\\text{rank}",
@@ -23,6 +23,7 @@ window.MathJax = {
             bi: ["\\left( #1, #2 \\right)", 2],
             sig: ["\\left( #1, #2, #3 \\right)", 3],
             inr: ["\\left( #1, #2 \\right)", 2],
+            norm: ["\\left|\\left| #1 \\right|\\right|", 1],
             proj: ["\\text{proj}_{#1}", 1],
             textipa: ['\\class{ipa}{#1}', 1]
         },
