@@ -6,7 +6,7 @@ author: R
 location: St. Catharines, ON
 ---
 
-This is a problem really gets me wonder 'What is Googology?' during the summer, and I ended up reading about it. When I wrote this I was in my last days of high school, coming across a instagram reel gives the question of comparing $2^{100!}$ and $(2^{100})!$ (the reel was just a joke btw), we ended up arguing about this and come up with different methods to proof our ideas. 
+This is a problem that really got me wondering "What is Googology?" during the summer, and I ended up reading about it. When I wrote this I was in my last days of high school, I came across an Instagram reel posing the question of comparing $2^{100!}$ and $(2^{100})!$ (the reel was just a joke, btw). We ended up arguing about this and came up with different methods to prove our ideas. 
 
 ## Numerical Method
 
@@ -39,7 +39,7 @@ $$
 2^{100}! \sim \sqrt{\pi \cdot 2^{101}} \left(\frac{2^{100}}{e}\right)^{2^{100}} \approx 2.82 \times 10^{15} \cdot \left(4.66 \times 10^{29}\right)^{1.26 \times 10^{30}}
 $$
 
-Both numbers are in the form of tetration (operation based on iterated exponentiation), so it's difficult to compare them directly by hand.
+Both numbers involve iterated exponentiation, so it's difficult to compare them directly by hand.
 
 ## Logarithm Approach
 
@@ -58,7 +58,7 @@ Which approximates to:
 
 $$ > 9.3 \times 10^{57} $$
 
-### $\log_2((2^{100})!)$ (code attached in [Appendix](#appendix))
+### $\log_2((2^{100})!)$ (code attached in the [Appendix](#appendix))
 Using Stirling again:
 
 $$
@@ -94,7 +94,7 @@ $$
 
 ## Michael’s Method (Xiao 2024)
 
-Ngl, I think Michael make the best argument out of us all...
+Not gonna lie, I think Michael made the best argument out of us all...
 
 For $a \in \mathbb{Z}^+$, $a > 6$, we know:
 
