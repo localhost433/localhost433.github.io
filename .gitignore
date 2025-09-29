@@ -27,7 +27,7 @@ build/
 .git/
 .vercel
 
-# Forbidden 
+# Forbidden post entries
 /posts/entries/004-*.md
 /posts/entries/010-*.md
 /posts/entries/011-*.md
@@ -39,14 +39,20 @@ build/
 /posts/entries/018-*.md
 /posts/entries/019-*.md
 
+# Media files
 *.mov
 *.mp3
 
-/notes/courses/*/HW
-/notes/courses/*/Books
-/notes/courses/*/Exam
-/notes/courses/*/syllabus*
+# Forbidden course materials
+/notes/courses/*/*HW*
+/notes/courses/*/*Book*
+/notes/courses/*/*Exam*
+/notes/courses/*/*code*
+/notes/courses/*/*lecture*
+/notes/courses/*/*reading*
+/notes/courses/*/*exercise*
+/notes/courses/*/*syllabus*
 
-# Course
+# Hidden courses
 /notes/courses/FYSEM*
 /notes/courses/EXPOS*
