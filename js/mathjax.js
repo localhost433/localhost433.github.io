@@ -12,6 +12,7 @@ window.MathJax = {
             C: "\\mathbb{C}",
             X: "\\mathbb{X}",
             M: "\\mathcal{M}",
+            E: "\\mathbb{E}",
             im: "\\text{im}",
             rank: "\\text{rank}",
             Span: "\\text{span}",
