@@ -41,5 +41,5 @@ fetch(`/notes/courses/${slug}/index.json`)
   })
   .catch(e => {
     console.error(e);
-    listEl.innerHTML = "<p>Failed to load notes.</p>";
+    listEl.innerHTML = "<p>Notes are unavailable at the moment, they might not be uploaded yet.</p>";
   });
