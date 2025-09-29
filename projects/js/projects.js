@@ -6,7 +6,11 @@ const LINGUIST_COLORS = {
   HTML: "#e34c26",
   CSS: "#563d7c",
   Shell: "#89e051",
-  // Add other languages as needed
+  Dockerfile: "#384d54",
+  JSON: "#292929",
+  Markdown: "#083fa1",
+  // Add more colors as needed
+  // Source: https://github.com/github/linguist/blob/master/lib/linguist/languages.yml
 };
 const langCache = new Map();
 
