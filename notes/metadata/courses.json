@@ -7,10 +7,10 @@
   }
   ,
   {
-    "slug": "J-N5",
-    "title": "Japanese N5 Level",
-    "semester": "Nan",
-    "instructor": "Mr. Yano"
+    "slug": "MATH-UA-333",
+    "title": "Theory of Probability (MATH-UA 333)",
+    "semester": "Fall 2025",
+    "instructor": "Prof. Yu"
   }
   ,
   {
@@ -18,12 +18,5 @@
     "title": "Honors Analysis (MATH-UA 328)",
     "semester": "Fall 2025",
     "instructor": "Prof. Shatah"
-  }
-  ,
-  {
-    "slug": "Convex",
-    "title": "Convex Optimization",
-    "semester": "NAN",
-    "instructor": "Self-study"
   }
 ]

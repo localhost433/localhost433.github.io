@@ -1,0 +1,25 @@
+[
+    {
+        "slug": "01-intro",
+        "title": "1 - Basic combinatorics",
+        "date": "2025-09-04"
+    }
+    ,
+    {
+        "slug": "02-axioms",
+        "title": "2 - Axioms of probability",
+        "date": "2025-09-06"
+    }
+    ,
+    {
+        "slug": "03-conditional-independence",
+        "title": "3 - Conditional Probability and Independence",
+        "date": "2025-09-11"
+    }
+    ,
+    {
+        "slug": "04-05-drv",
+        "title": "4/5 - Discrete random variables",
+        "date": "2025-09-16/18/23/25"
+    }
+]
