@@ -68,7 +68,7 @@
         "author": "R",
         "location": "Futian district, Shenzhen, Guangdong, China",
         "tags": ["cs"],
-        "slug": "014-server-dev"
+        "slug": "014-server"
     }
     ,
     {
@@ -77,6 +77,6 @@
         "author": "R",
         "location": "Warren Weaver Hall, NYU, New York, NY",
         "tags": ["notes", "cs"],
-        "slug": "015-seminar-anubis"
+        "slug": "020-seminar-anubis"
     }
 ]
