@@ -5,4 +5,25 @@
     "semester": "Summer 2025",
     "instructor": "Prof. Møller Krogh, Prof. McCollum"
   }
+  ,
+  {
+    "slug": "J-N5",
+    "title": "Japanese N5 Level",
+    "semester": "Nan",
+    "instructor": "Mr. Yano"
+  }
+  ,
+  {
+    "slug": "MATH-UA-328",
+    "title": "Honors Analysis (MATH-UA 328)",
+    "semester": "Fall 2025",
+    "instructor": "Prof. Shatah"
+  }
+  ,
+  {
+    "slug": "Convex",
+    "title": "Convex Optimization",
+    "semester": "NAN",
+    "instructor": "Self-study"
+  }
 ]

@@ -35,3 +35,18 @@ build/
 /posts/entries/013-*.md
 /posts/entries/015-*.md
 /posts/entries/016-*.md
+/posts/entries/017-*.md
+/posts/entries/018-*.md
+/posts/entries/019-*.md
+
+*.mov
+*.mp3
+
+/notes/courses/*/HW
+/notes/courses/*/Books
+/notes/courses/*/Exam
+/notes/courses/*/syllabus*
+
+# Course
+/notes/courses/FYSEM*
+/notes/courses/EXPOS*
