@@ -63,6 +63,24 @@
     }
     ,
     {
+        "title": "Auxiliary-loss Load Balancing in MoEs (1)",
+        "date": "2025-07-06",
+        "author": "R",
+        "location": "Above Illulissat, Greenland while on a plane from New York to Hong Kong",
+        "tags": ["cs", "ai", "notes"],
+        "slug": "011-MoE1"
+    }
+    ,
+    {
+        "title": "Loss-free Balancing in MoEs (2)",
+        "date": "2025-07-06",
+        "author": "R",
+        "location": "Above around Ust-Ilimsk, Russia while on a plane from New York to Hong Kong",
+        "tags": ["cs", "finance", "ai", "notes"],
+        "slug": "012-MoE2"
+    }
+    ,
+    {
         "title": "Server Dev",
         "date": "2025-07-15",
         "author": "R",
@@ -72,11 +90,29 @@
     }
     ,
     {
+        "title": "RNNs as IIR Filters",
+        "date": "2025-07-23",
+        "author": "R",
+        "location": "Shenzhen, Guangdong, China",
+        "tags": ["ai"],
+        "slug": "017-RNN-IIR"
+    }
+    ,
+    {
         "title": "Anubis, Containers, & Kubernetes",
         "date": "2025-09-19",
         "author": "R",
         "location": "Warren Weaver Hall, NYU, New York, NY",
         "tags": ["notes", "cs"],
         "slug": "020-seminar-anubis"
+    }
+    ,
+    {
+        "title": "Smalls Jazz Club",
+        "date": "2025-09-28",
+        "author": "R",
+        "location": "West Village, NYC",
+        "tags": ["life", "jazz"],
+        "slug": "021-smalls"
     }
 ]
