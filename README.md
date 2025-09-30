@@ -34,6 +34,10 @@ This repository contains the source code for my personal website. The site serve
 
 This site is deployed on [Vercel](https://vercel.com/) with automatic GitHub-triggered builds.  
 
+## Terms / AI Usage
+
+Use of this content for training machine learning or AI models is expressly prohibited without prior written consent. See `TERMS.md` for full details.
+
 ## Contact
 
 Feel free to reach out via:

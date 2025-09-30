@@ -22,9 +22,13 @@
     
     { "src": "*.html",                    "use": "@vercel/static"  }
   ],
-  "routes": [
-    { "src": "^/api/(.*)$",               "dest": "/api/$1.js"     },
-
-    { "handle": "filesystem" }
+  
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noai,noimageai" }
+      ]
+    }
   ]
 }

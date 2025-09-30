@@ -1,8 +1,8 @@
 [
     {
         "title": "Semantic Search Engine",
-        "link": "https://github.com/localhost433/FAISS",
-        "repo": "localhost433/FAISS",
+        "link": "https://github.com/localhost433/Vibe-Search-Engine",
+        "repo": "localhost433/Vibe-Search-Engine",
         "tech": "Python, FAISS, Sentence Transformers",
         "description": "Winner of 2025 Corner-DSC-BAC Datathon, collaborated with Tomas Gutierrez & Yarden Morad. A semantic search engine (with interface) that uses FAISS and Sentence Transformers to index and search through trained indices."
     },
