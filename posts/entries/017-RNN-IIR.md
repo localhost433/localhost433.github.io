@@ -1,7 +1,7 @@
 ---
 title: RNNs as IIR Filters
 date: 2025-07-23
-tags: [ai]
+tags: [ai, linguistics]
 author: R
 location: Shenzhen, Guangdong, China
 ---
