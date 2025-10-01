@@ -9,6 +9,7 @@ const btnBox = document.getElementById("tag-buttons");
 const prevBtn = document.getElementById("prev-button");
 const nextBtn = document.getElementById("next-button");
 const searchBox = document.getElementById("search-box");
+const searchButton = document.getElementById("search-button");
 
 // State
 let posts = [];
