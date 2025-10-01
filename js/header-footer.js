@@ -14,6 +14,32 @@ function loadHeaderFooter() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  // Inject centralized meta tags if template present
+  const metaTpl = document.getElementById('meta-include');
+  if (metaTpl && metaTpl.dataset.src) {
+    fetch(metaTpl.dataset.src)
+      .then(r => r.text())
+      .then(fragment => {
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = fragment;
+        // Avoid duplicate robots/meta by removing any existing with same name/http-equiv
+        const incoming = Array.from(tempDiv.children);
+        incoming.forEach(el => {
+          if (el.tagName === 'META') {
+            const name = el.getAttribute('name');
+            const equiv = el.getAttribute('http-equiv');
+            if (name) {
+              document.head.querySelectorAll(`meta[name="${name}"]`).forEach(e => e.remove());
+            }
+            if (equiv) {
+              document.head.querySelectorAll(`meta[http-equiv="${equiv}"]`).forEach(e => e.remove());
+            }
+            document.head.appendChild(el);
+          }
+        });
+      })
+      .catch(() => { /* silent fail */ });
+  }
   loadHeaderFooter().then(() => {
     initializeThemeToggle();
     const yearEl = document.getElementById("current-year");
