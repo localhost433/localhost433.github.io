@@ -13,6 +13,8 @@ const searchBox = document.getElementById("search-box");
 // State
 let posts = [];
 let filtered = [];
+let postBodies = {}; // slug -> raw searchable text content (lowercase)
+let invertedIndex = {}; // token -> Set(slug)
 let currentPage = 1;
 
 /* -------------------- Utility Functions -------------------- */
@@ -86,26 +88,64 @@ nextBtn.addEventListener("click", () => {
   }
 });
 
-// Handle search input
-searchBox.addEventListener("input", e => {
-  const query = e.target.value.toLowerCase();
-  filtered = posts.filter(post => post.title.toLowerCase().includes(query));
+// Execute a search over titles + loaded body excerpts
+function executeSearch() {
+  const query = searchBox.value.trim().toLowerCase();
+  if (!query) {
+    resetSearchAndFilter();
+    return;
+  }
+
+  // Tokenize query for index lookup
+  const tokens = Array.from(new Set(query.split(/\W+/).filter(t => t.length > 0)));
+  let candidateSlugs = null;
+  tokens.forEach(t => {
+    const bucket = invertedIndex[t];
+    if (!bucket) {
+      candidateSlugs = new Set();
+      return;
+    }
+    if (candidateSlugs === null) {
+      candidateSlugs = new Set(bucket);
+    } else {
+      // intersect
+      candidateSlugs = new Set([...candidateSlugs].filter(s => bucket.has(s)));
+    }
+  });
+
+  let candidatesArray;
+  if (!candidateSlugs || candidateSlugs.size === 0) {
+    candidatesArray = posts;
+  } else {
+    candidatesArray = posts.filter(p => candidateSlugs.has(p.slug));
+  }
+
+  filtered = candidatesArray.filter(post => {
+    const body = postBodies[post.slug] || "";
+    return post.title.toLowerCase().includes(query) || body.includes(query);
+  });
+
   currentPage = 1;
   renderPage();
+}
+
+// Trigger search only on button click or Enter key
+searchButton.addEventListener("click", executeSearch);
+searchBox.addEventListener("keydown", e => {
+  if (e.key === "Enter") {
+    executeSearch();
+  }
 });
 
 // Handle tag button clicks
 function handleTagClick(tag) {
-  const params = new URLSearchParams(location.search);
-  if (tag) {
-    params.set("tag", tag);
-  } else {
-    params.delete("tag");
-  }
-  const newUrl = window.location.pathname +
-    (params.toString() ? `?${params.toString()}` : "");
-  history.pushState({ tag }, "", newUrl);
+  searchBox.value = "";
   applyTagFilter(tag);
+  if (tag) {
+    history.replaceState({ tag }, "", window.location.pathname);
+  } else {
+    history.replaceState({}, "", window.location.pathname);
+  }
 }
 
 // Apply tag filter
@@ -115,10 +155,16 @@ function applyTagFilter(tag) {
   renderPage();
 }
 
+function resetSearchAndFilter() {
+  searchBox.value = "";
+  filtered = posts;
+  currentPage = 1;
+  renderPage();
+}
+
 // React to popstate (back/forward navigation)
-window.addEventListener("popstate", e => {
-  const tag = e.state?.tag || null;
-  applyTagFilter(tag);
+window.addEventListener("popstate", () => {
+  resetSearchAndFilter();
 });
 
 /* -------------------- Initialization -------------------- */
@@ -128,18 +174,43 @@ fetch("./posts/metadata/entries.json")
   .then(response => response.json())
   .then(data => {
     posts = data;
-    const params = new URLSearchParams(location.search);
-    const initialTag = params.get("tag");
-    filtered = posts;
-
-    // Render initial posts
-    applyTagFilter(initialTag);
+  filtered = posts;
+  // Reset search and filter
+  resetSearchAndFilter();
 
     // Build tag buttons
     const tags = [...new Set(posts.flatMap(post => post.tags || []))];
     btnBox.appendChild(createButton("All", () => handleTagClick(null)));
     tags.forEach(tag => {
       btnBox.appendChild(createButton(tag, () => handleTagClick(tag)));
+    });
+
+    // Preload post bodies (best-effort). Assumes markdown at ./posts/entries/<slug>.md
+    const slugSafe = /^[\w-]+$/;
+    posts.forEach(p => {
+      if (!slugSafe.test(p.slug)) return; // skip unsafe slug
+      const mdPath = `./posts/entries/${p.slug}.md`;
+      fetch(mdPath)
+        .then(r => (r.ok ? r.text() : ""))
+        .then(text => {
+          const lowered = text
+            .replace(/`[^`]*`/g, " ")
+            .replace(/\*|_|#/g, " ")
+            .replace(/\[(.*?)\]\((.*?)\)/g, "$1")
+            .toLowerCase();
+          postBodies[p.slug] = lowered;
+          // Build inverted index tokens
+            lowered.split(/\W+/).forEach(tok => {
+              if (tok.length < 2) return; // skip very short tokens
+              let set = invertedIndex[tok];
+              if (!set) {
+                set = new Set();
+                invertedIndex[tok] = set;
+              }
+              set.add(p.slug);
+            });
+        })
+        .catch(() => { /* ignore failures */ });
     });
   })
   .catch(err => {
