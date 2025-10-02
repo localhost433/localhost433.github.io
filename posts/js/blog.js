@@ -1,13 +1,16 @@
 /* blog.js - list of posts with tag filter, pagination, and search */
 
-// Constants
-const PER_PAGE = 10;
+// Pagination size (mutable via dropdown)
+let perPage = 10;
 
 // DOM Elements
 const list = document.getElementById("posts-list");
 const btnBox = document.getElementById("tag-buttons");
 const prevBtn = document.getElementById("prev-button");
 const nextBtn = document.getElementById("next-button");
+const perPageSelect = document.getElementById("per-page-select");
+const pageInput = document.getElementById("page-input");
+const totalPagesSpan = document.getElementById("total-pages");
 const searchBox = document.getElementById("search-box");
 const searchButton = document.getElementById("search-button");
 
@@ -64,11 +67,24 @@ function renderPosts(posts, filterTag = null) {
 }
 
 // Render the current page of posts
+function totalPages() {
+  return Math.max(1, Math.ceil(filtered.length / perPage));
+}
+
+function clampPage() {
+  const tp = totalPages();
+  if (currentPage > tp) currentPage = tp;
+  if (currentPage < 1) currentPage = 1;
+}
+
 function renderPage() {
-  const start = (currentPage - 1) * PER_PAGE;
-  renderPosts(filtered.slice(start, start + PER_PAGE));
+  clampPage();
+  const start = (currentPage - 1) * perPage;
+  renderPosts(filtered.slice(start, start + perPage));
   prevBtn.disabled = currentPage === 1;
-  nextBtn.disabled = start + PER_PAGE >= filtered.length;
+  nextBtn.disabled = currentPage >= totalPages();
+  if (pageInput) pageInput.value = currentPage;
+  if (totalPagesSpan) totalPagesSpan.textContent = ` / ${totalPages()}`;
 }
 
 /* -------------------- Event Handlers -------------------- */
@@ -83,11 +99,42 @@ prevBtn.addEventListener("click", () => {
 
 // Handle pagination (next button)
 nextBtn.addEventListener("click", () => {
-  if (currentPage * PER_PAGE < filtered.length) {
+  if (currentPage < totalPages()) {
     currentPage++;
     renderPage();
   }
 });
+
+// Change per-page size
+if (perPageSelect) {
+  perPageSelect.addEventListener("change", () => {
+    const val = parseInt(perPageSelect.value, 10);
+    if ([10, 20, 50].includes(val)) {
+      perPage = val;
+      currentPage = 1;
+      renderPage();
+    }
+  });
+}
+
+// Page jump input
+if (pageInput) {
+  pageInput.addEventListener("change", () => {
+    let val = parseInt(pageInput.value, 10);
+    if (Number.isNaN(val)) val = 1;
+    currentPage = val;
+    renderPage();
+  });
+  pageInput.addEventListener("keydown", e => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      let val = parseInt(pageInput.value, 10);
+      if (Number.isNaN(val)) val = currentPage;
+      currentPage = val;
+      renderPage();
+    }
+  });
+}
 
 // Execute a search over titles + loaded body excerpts
 function executeSearch() {
@@ -176,7 +223,7 @@ fetch("./posts/metadata/entries.json")
   .then(data => {
     posts = data;
   filtered = posts;
-  // Reset search and filter
+  // Reset search and filter (also updates pagination UI)
   resetSearchAndFilter();
 
     // Build tag buttons
