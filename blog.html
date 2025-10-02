@@ -42,8 +42,19 @@
 
     <section id="posts-list"></section>
     <div id="pagination">
-        <button id="prev-button">Previous</button>
-        <button id="next-button">Next</button>
+        <label for="per-page-select" class="pagination-label">Per page:</label>
+        <select id="per-page-select" aria-label="Posts per page">
+            <option value="10" selected>10</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+        </select>
+        <button id="prev-button" aria-label="Previous page">Previous</button>
+        <div id="page-jump">
+            <label for="page-input" class="pagination-label">Page</label>
+            <input id="page-input" type="number" min="1" value="1" aria-label="Current page" />
+            <span id="total-pages" aria-live="polite"></span>
+        </div>
+        <button id="next-button" aria-label="Next page">Next</button>
     </div>
 
     <a href="index.html" class="back-link">Back to Home</a>
