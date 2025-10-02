@@ -115,4 +115,13 @@
         "tags": ["life", "jazz"],
         "slug": "021-smalls"
     }
+    ,
+    {
+        "title": "Surányi-Hickerson conjecture",
+        "date": "2025-10-01",
+        "author": "R",
+        "location": "Bobst 8F, New York, NY",
+        "tags": ["math", "life", "notes"],
+        "slug": "022-suranyi"
+    }
 ]
