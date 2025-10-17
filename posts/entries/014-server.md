@@ -21,7 +21,7 @@ Shoutout to my CSCI-UA 101 prof who taught us some of that and using VIM!
 
 > I realize how similar this is to cybersecurity/computer network stuff after doing all this; under the surface, they are trying to design or exploit systems that operate on the same level.
 
-Just on how dumb I was: I was prompted to change the default login password by the admin after my first successful login to the server; however, I couldn't do it. Why? Because it was asking for `Current password:` right after I logged in, and without even a tiny bit of effort trying to comprehend it, I entered the new password. I got stuck for 30 minutes just on this. The last time I felt like this was putting a Chinese apostrophe (full width, taking two bytes) while writing a homework—the autograder just wouldn't let it pass without any useful output.
+I still laugh at this: after my first successful login, the system prompted me to change the default password. When it asked for `Current password:`, I confidently typed the new one instead—and spent 30 minutes wondering why it kept failing. It reminded me of the time I submitted homework with a full‑width Chinese apostrophe (two bytes): the autograder kept rejecting it with no helpful feedback.
 
 > Indeed one of the reasons why I hate full-width characters (or Unicode) appearing where I don't expect them.
 

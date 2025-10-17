@@ -1,0 +1,37 @@
+[
+    {
+        "slug": "00-intro",
+        "title": "Intro",
+        "date": "2025-09-02"
+    }
+    ,
+    {
+        "slug": "01-sounds",
+        "title": "Sounds (Consonants, Vowels, Syllables & Stress)",
+        "date": "2025-09-04/09/11"
+    }
+    ,
+    {
+        "slug": "02-change",
+        "title": "Naming Change & Blends",
+        "date": "2025-09-16/18/23"
+    }
+    ,
+    {
+        "slug": "03-gender",
+        "title": "Naming & Gender",
+        "date": "2025-09-25/30"
+    }
+    ,
+    {
+        "slug": "04-symbolism",
+        "title": "Naming & Sound Symbolism",
+        "date": "2025-10-02"
+    }
+    ,
+    {
+        "slug": "05-nickname",
+        "title": "Nickname Formation (Truncation, Affixation & Reduplication)",
+        "date": "2025-10-07/09"
+    }
+]
