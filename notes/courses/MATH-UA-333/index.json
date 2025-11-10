@@ -22,4 +22,34 @@
         "title": "4/5 - Discrete random variables",
         "date": "2025-09-16/18/23/25"
     }
+    ,
+    {
+        "slug": "06-07-crv",
+        "title": "6/7 - Continuous random variables",
+        "date": "2025-09-29|10-07/09/14"
+    }
+    ,
+    {
+        "slug": "08-joint-distributions",
+        "title": "8 - Joint distributions and independence",
+        "date": "2025-10-16/21"
+    }
+    ,
+    {
+        "slug": "09-sum-independent-rv",
+        "title": "9 - Sum of Independent Random Variables",
+        "date": "2025-10-23"
+    }
+    ,
+    {
+        "slug": "10-conditional-distribution-and-conditional-expectation",
+        "title": "10 - Conditional Distribution and Conditional Expectation",
+        "date": "2025-10-28/30"
+    }
+    ,
+    {
+        "slug": "11-covariance-correlation",
+        "title": "11 - Covariance and Correlation",
+        "date": "2025-11-04"
+    }
 ]
