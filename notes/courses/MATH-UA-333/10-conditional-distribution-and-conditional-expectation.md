@@ -103,13 +103,17 @@ So given $Y=b$, $X$ is uniform on the horizontal chord.
 ### Example 2: structured joint density
 
 If
+
 $$
-f(x,y)=c\,\mathbf{1}_{\{x>0\}}e^{-y^2-4xy^4-\cos y},
+f(x,y)=c\mathbf{1}_{\{x>0\}}e^{-y^2-4xy^4-\cos y},
 $$
+
 we can rewrite $f(x,y)=c_1(y)\mathbf{1}_{\{x>0\}}e^{-4xy^4}$, so for fixed $b$,
+
 $$
 f_{X\mid Y}(x\mid b)\propto \mathbf{1}_{\{x>0\}}e^{-4xb^4},
 $$
+
 i.e. conditional on $Y=b$, $X$ has an exponential-type density on $(0,\infty)$ (normalize to integrate to $1$).
 
 ### Example 3: hierarchical normal

@@ -26,7 +26,9 @@ window.MathJax = {
             inr: ["\\left( #1, #2 \\right)", 2],
             norm: ["\\left|\\left| #1 \\right|\\right|", 1],
             proj: ["\\text{proj}_{#1}", 1],
-            textipa: ['\\class{ipa}{#1}', 1]
+            textipa: ['\\class{ipa}{#1}', 1],
+            Var: ["\\text{Var}(#1)", 1],
+            Cov: ["\\text{Cov}(#1, #2)", 2]
         },
         inlineMath: [['$', '$'], ['\\(', '\\)']],
         displayMath: [['$$', '$$'], ['\\[', '\\]']],
