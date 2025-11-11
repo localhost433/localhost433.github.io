@@ -60,12 +60,12 @@ $$
 Then
 $$
 F_Z(t)=P(Z\le t)
-= \iint_{x+y\le t} f_X(x)f_Y(y)\,dx\,dy.
+= \iint_{x+y\le t} f_X(x)f_Y(y) dx dy.
 $$
 By changing order/variables and differentiating,
 $$
 f_Z(t)
-= \int_{-\infty}^{\infty} f_X(x)f_Y(t-x)\,dx
+= \int_{-\infty}^{\infty} f_X(x)f_Y(t-x) dx
 = (f_X * f_Y)(t),
 $$
 the **convolution** of $f_X$ and $f_Y$.
@@ -77,19 +77,19 @@ the **convolution** of $f_X$ and $f_Y$.
 Let $X,Y$ be independent $\mathrm{Unif}(0,1)$, $Z=X+Y$.
 
 Then
+
 $$
-f_Z(t)
-= \int_{-\infty}^{\infty} \mathbf{1}_{[0,1]}(x)\mathbf{1}_{[0,1]}(t-x)\,dx.
+f_Z(t) = \int_{-\infty}^{\infty} \mathbf{1}_{[0,1]}(x)\mathbf{1}_{[0,1]}(t-x) dx.
 $$
 
-The integrand is $1$ exactly when $0\le x\le1$ and $0\le t-x\le1$.
+The integrand is $1$ exactly when $0 \le x\le1$ and $0 \le t-x\le1$.
 
-This implies $0\le t\le2$ and
+This implies $0 \le t\le2$ and
 $$
 \max\{0,t-1\}\le x\le \min\{1,t\}.
 $$
 
-Hence, for $0\le t\le2$,
+Hence, for $0 \le t\le2$,
 $$
 f_Z(t) = \min\{1,t\}-\max\{0,t-1\},
 $$
@@ -97,7 +97,7 @@ and $f_Z(t)=0$ otherwise. Explicitly,
 $$
 f_Z(t)=
 \begin{cases}
-t, & 0\le t\le 1,\\
+t, & 0 \le t\le 1,\\
 2-t, & 1< t\le 2,\\
 0, & \text{otherwise}.
 \end{cases}
@@ -115,8 +115,8 @@ with densities $f_X(x)=\lambda_1 e^{-\lambda_1 x}\mathbf{1}_{\{x>0\}}$ and simil
 
 For $Z=X+Y$ and $t>0$,
 $$
-f_Z(t) = \int_0^t \lambda_1 e^{-\lambda_1 x}\,\lambda_2 e^{-\lambda_2 (t-x)}\,dx
-= \lambda_1\lambda_2 e^{-\lambda_2 t} \int_0^t e^{-(\lambda_1-\lambda_2)x}\,dx.
+f_Z(t) = \int_0^t \lambda_1 e^{-\lambda_1 x} \lambda_2 e^{-\lambda_2 (t-x)} dx
+= \lambda_1\lambda_2 e^{-\lambda_2 t} \int_0^t e^{-(\lambda_1-\lambda_2)x} dx.
 $$
 
 If $\lambda_1\neq\lambda_2$,
@@ -141,7 +141,7 @@ f_X(x)
 $$
 where
 $$
-\Gamma(s) = \int_0^\infty u^{s-1}e^{-u}\,du.
+\Gamma(s) = \int_0^\infty u^{s-1}e^{-u} du.
 $$
 
 For $s=1$, this is $\mathrm{Exp}(\lambda)$.

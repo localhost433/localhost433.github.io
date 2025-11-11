@@ -33,19 +33,19 @@ Let $X,Y$ be random variables with finite second moments.
 
 The **covariance** of $X$ and $Y$ is
 $$
-\mathrm{Cov}(X,Y)
+\Cov{X}{Y}
 := \E\big[(X-\E[X])(Y-\E[Y])\big].
 $$
 
 Expanding:
 $$
-\mathrm{Cov}(X,Y)
+\Cov{X}{Y}
 = \E[XY] - \E[X]\E[Y].
 $$
 
 In particular,
 $$
-\mathrm{Cov}(X,X)=\mathrm{Var}(X).
+\Cov{X}{X}=\Var{X}.
 $$
 
 ---
@@ -56,33 +56,33 @@ For random variables $X,Y,Z$ and constants $a,b$:
 
 - Symmetry:
   $$
-  \mathrm{Cov}(X,Y)=\mathrm{Cov}(Y,X).
+  \Cov{X}{Y}=\Cov{Y}{X}.
   $$
 - Variance:
   $$
-  \mathrm{Cov}(X,X)=\mathrm{Var}(X).
+  \Cov{X}{X}=\Var{X}.
   $$
 - Shift invariance:
   $$
-  \mathrm{Cov}(X+b,Y)=\mathrm{Cov}(X,Y).
+  \Cov{X+b}{Y}=\Cov{X}{Y}.
   $$
 - Scaling:
   $$
-  \mathrm{Cov}(aX,Y)=a\,\mathrm{Cov}(X,Y).
+  \Cov{aX}{Y}=a\,\Cov{X}{Y}.
   $$
 - Bilinearity:
   $$
-  \mathrm{Cov}(X+Z,Y)=\mathrm{Cov}(X,Y)+\mathrm{Cov}(Z,Y).
+  \Cov{X+Z}{Y}=\Cov{X}{Y}+\Cov{Z}{Y}.
   $$
 - Sums:
   $$
-  \mathrm{Cov}\Big(\sum_{i=1}^n X_i,\ \sum_{j=1}^m Y_j\Big)
-  = \sum_{i=1}^n\sum_{j=1}^m \mathrm{Cov}(X_i,Y_j).
+  \Cov{\sum_{i=1}^n X_i}{\sum_{j=1}^m Y_j}
+  = \sum_{i=1}^n\sum_{j=1}^m \Cov{X_i}{Y_j}.
   $$
 
 If $X$ and $Y$ are independent, then
 $$
-\mathrm{Cov}(X,Y)=0,
+\Cov{X}{Y}=0,
 $$
 but the converse is not always true (uncorrelated $\not\Rightarrow$ independent).
 
@@ -93,19 +93,19 @@ but the converse is not always true (uncorrelated $\not\Rightarrow$ independent)
 From bilinearity,
 $$
 \mathrm{Var}\Big(\sum_{i=1}^n X_i\Big)
-= \sum_{i=1}^n\sum_{j=1}^n \mathrm{Cov}(X_i,X_j).
+= \sum_{i=1}^n\sum_{j=1}^n \Cov{X_i}{X_j}.
 $$
 
 If $X_1,\dots,X_n$ are pairwise independent (or at least uncorrelated), this simplifies to
 $$
 \mathrm{Var}\Big(\sum_{i=1}^n X_i\Big)
-= \sum_{i=1}^n \mathrm{Var}(X_i).
+= \sum_{i=1}^n \Var{X_i}.
 $$
 
 Example: If $X\sim\mathrm{Bin}(n,p)$, write $X=\sum_{i=1}^n X_i$ with $X_i\sim\mathrm{Ber}(p)$ independent. Then
 $$
-\mathrm{Var}(X)
-= \sum_{i=1}^n \mathrm{Var}(X_i)
+\Var{X}
+= \sum_{i=1}^n \Var{X_i}
 = np(1-p).
 $$
 
@@ -113,20 +113,20 @@ $$
 
 ## Correlation
 
-Assume $\mathrm{Var}(X)>0$ and $\mathrm{Var}(Y)>0$.
+Assume $\Var{X}>0$ and $\Var{Y}>0$.
 
 The **correlation coefficient** of $X$ and $Y$ is
 $$
 \rho(X,Y)
-:= \frac{\mathrm{Cov}(X,Y)}{\sqrt{\mathrm{Var}(X)\,\mathrm{Var}(Y)}}.
+:= \frac{\Cov{X}{Y}}{\sqrt{\Var{X}\,\Var{Y}}}.
 $$
 
 Equivalently,
 $$
-\rho(X,Y) = \mathrm{Cov}\!\left(
-\frac{X}{\sqrt{\mathrm{Var}(X)}},
-\frac{Y}{\sqrt{\mathrm{Var}(Y)}}
-\right).
+\rho(X,Y) = \Cov{
+\frac{X}{\sqrt{\Var{X}}}}
+{\frac{Y}{\sqrt{\Var{Y}}}
+}
 $$
 
 Properties:
@@ -156,10 +156,10 @@ U=X-\E[X],\quad V=Y-\E[Y],
 $$
 to get
 $$
-\mathrm{Cov}(X,Y)^2
+\Cov{X}{Y}^2
 = \big(\E[UV]\big)^2
 \le \E[U^2]\E[V^2]
-= \mathrm{Var}(X)\mathrm{Var}(Y).
+= \Var{X}\Var{Y}.
 $$
 
 Therefore
