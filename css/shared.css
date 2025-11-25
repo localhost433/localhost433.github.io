@@ -20,6 +20,7 @@ body {
   background-color: #f9f9f9;
   color: #333333;
   line-height: 1.8;
+  scroll-behavior: smooth;
 }
 
 h1,
@@ -273,4 +274,41 @@ pre code.language-java {
 
 .dark-mode pre code.language-java {
   color: #ffcc66;
+}
+
+/* ==========================================================================
+   BLOCKQUOTES
+   Styled to stand out with same background color as the theme toggle button
+========================================================================== */
+blockquote {
+  background-color: #ccddee; /* light-mode uses theme toggle background */
+  padding: 0.75rem 1rem;
+  margin: 1.25rem 0;
+  border-left: 4px solid #88bbff; /* subtle accent matches hover tone */
+  border-radius: 8px;
+}
+
+/* Remove excessive spacing inside blockquote */
+blockquote p {
+  margin: 0.5rem 0 0.5rem;
+}
+blockquote p:first-child { margin-top: 0; }
+blockquote p:last-child { margin-bottom: 0; }
+
+/* Dark mode adaptation */
+.dark-mode blockquote {
+  background-color: #333333; /* dark-mode theme toggle background */
+  border-left: 4px solid #555555; /* hover shade as accent */
+  color: #dddddd;
+}
+
+/* Temporary highlight class when navigating via TOC */
+.toc-highlight {
+  animation: tocPulse 1s ease-in-out;
+}
+
+@keyframes tocPulse {
+  0% { background-color: #bbddff; }
+  60% { background-color: #88bbff; }
+  100% { background-color: transparent; }
 }

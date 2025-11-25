@@ -67,9 +67,10 @@ fetch(`/notes/courses/${course}/${noteSlug}.md`)
         const back = document.getElementById("back-to-course");
         back.href = `course.html?id=${encodeURIComponent(course)}`;
 
-        const h1 = document.createElement("h1");
-        h1.textContent = meta.title || noteSlug;
-        container.append(h1);
+    const h1 = document.createElement("h1");
+    h1.textContent = meta.title || noteSlug;
+    h1.id = slugify(h1.textContent);
+    container.append(h1);
 
         headingData.length = 0;
         for (let k in slugCounts) delete slugCounts[k];
@@ -79,6 +80,19 @@ fetch(`/notes/courses/${course}/${noteSlug}.md`)
         const contentDiv = document.createElement("div");
         contentDiv.innerHTML = sanitize(dirty);
 
+        const used = new Set();
+        contentDiv.querySelectorAll('h1,h2,h3,h4,h5,h6').forEach(h => {
+            if (!h.id) {
+                h.id = slugify(h.textContent);
+            }
+            let base = h.id;
+            let i = 1;
+            while (used.has(h.id)) {
+                h.id = `${base}-${i++}`;
+            }
+            used.add(h.id);
+        });
+
         contentDiv.querySelectorAll('img').forEach(img => {
             img.style.display = 'block';
             img.style.maxWidth = '100%';
@@ -87,6 +101,7 @@ fetch(`/notes/courses/${course}/${noteSlug}.md`)
         });
 
         const tocEntries = [];
+        tocEntries.push({ text: h1.textContent, level: 1, slug: h1.id });
         contentDiv.querySelectorAll("h1, h2, h3, h4, h5, h6").forEach(h => {
             tocEntries.push({
                 text: h.textContent,
@@ -112,7 +127,12 @@ fetch(`/notes/courses/${course}/${noteSlug}.md`)
                 a.addEventListener("click", e => {
                     e.preventDefault();
                     const target = document.getElementById(slug);
-                    if (target) target.scrollIntoView({ behavior: "smooth" });
+                    if (target) {
+                        history.replaceState(null, '', `#${slug}`);
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        target.classList.add('toc-highlight');
+                        setTimeout(() => target.classList.remove('toc-highlight'), 1200);
+                    }
                 });
 
                 li.append(a);
