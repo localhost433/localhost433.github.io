@@ -1,6 +1,6 @@
 ---
 title: Covariance and Correlation
-date: 2025-11-04
+date: 2025-11-04/06/11
 ---
 
 ## Motivation

@@ -12,7 +12,7 @@
     }
     ,
     {
-        "slug": "03-conditional-independence",
+        "slug": "03-cond-indep",
         "title": "3 - Conditional Probability and Independence",
         "date": "2025-09-11"
     }
@@ -30,26 +30,51 @@
     }
     ,
     {
-        "slug": "08-joint-distributions",
+        "slug": "08-joint-dist",
         "title": "8 - Joint distributions and independence",
         "date": "2025-10-16/21"
     }
     ,
     {
-        "slug": "09-sum-independent-rv",
+        "slug": "09-sum-indep-rv",
         "title": "9 - Sum of Independent Random Variables",
         "date": "2025-10-23"
     }
     ,
     {
-        "slug": "10-conditional-distribution-and-conditional-expectation",
+        "slug": "10-cond-dist-exp",
         "title": "10 - Conditional Distribution and Conditional Expectation",
         "date": "2025-10-28/30"
     }
     ,
     {
-        "slug": "11-covariance-correlation",
+        "slug": "11-cov-corr",
         "title": "11 - Covariance and Correlation",
         "date": "2025-11-04/06/11"
+    },
+    {
+        "slug": "12-mgf",
+        "title": "12 - Moment Generating Functions",
+        "date": "2025-11-11/13"
+    },
+    {
+        "slug": "13-inequalities-exp",
+        "title": "13 - Inequalities about Expectation",
+        "date": "2025-11-17"
+    },
+    {
+        "slug": "14-lln",
+        "title": "14 - Laws of Large Numbers",
+        "date": "2025-11-19"
+    },
+    {
+        "slug": "15-central-lim-thm",
+        "title": "15 - Central Limit Theorem",
+        "date": "2025-11-19/25"
+    },
+    {
+        "slug": "16-markov-chains",
+        "title": "16 - Introduction to Markov Chains",
+        "date": "2025-11-25"
     }
 ]
