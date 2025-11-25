@@ -302,6 +302,17 @@ blockquote p:last-child { margin-bottom: 0; }
   color: #dddddd;
 }
 
+/* Nested blockquotes */
+blockquote blockquote {
+  background-color: #bbccdd;
+  border-left-color: #669fdc;
+}
+
+.dark-mode blockquote blockquote {
+  background-color: #444444;
+  border-left-color: #dedede;
+}
+
 /* Temporary highlight class when navigating via TOC */
 .toc-highlight {
   animation: tocPulse 1s ease-in-out;
