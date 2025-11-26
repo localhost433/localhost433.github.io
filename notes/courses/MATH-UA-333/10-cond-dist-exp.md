@@ -63,7 +63,7 @@ $$
 
 Then for any Borel set $A$,
 $$
-P(X\in A\mid Y=b) = \int_A f_{X\mid Y}(x\mid b)\,dx.
+P(X\in A\mid Y=b) = \int_A f_{X\mid Y}(x\mid b) dx.
 $$
 
 Also
@@ -84,7 +84,7 @@ $$
 
 For $|b|<1$,
 $$
-f_Y(b)=\int_{-\sqrt{1-b^2}}^{\sqrt{1-b^2}}\frac1\pi\,dx
+f_Y(b)=\int_{-\sqrt{1-b^2}}^{\sqrt{1-b^2}}\frac1\pi dx
 = \frac{2\sqrt{1-b^2}}{\pi}.
 $$
 
@@ -145,11 +145,11 @@ Given $Y=y$:
 
 - Discrete:
   $$
-  \E[X\mid Y=y] = \sum_x x\,p_{X\mid Y}(x\mid y).
+  \E[X\mid Y=y] = \sum_x x p_{X\mid Y}(x\mid y).
   $$
 - Continuous:
   $$
-  \E[X\mid Y=y] = \int_{-\infty}^\infty x\,f_{X\mid Y}(x\mid y)\,dx.
+  \E[X\mid Y=y] = \int_{-\infty}^\infty x f_{X\mid Y}(x\mid y) dx.
   $$
 
 ---
@@ -175,15 +175,15 @@ $$
 - Discrete:
   $$
   \E[X]
-  = \sum_y p_Y(y)\,\E[X\mid Y=y].
+  = \sum_y p_Y(y) \E[X\mid Y=y].
   $$
 - Continuous:
   $$
   \E[X]
-  = \int_{-\infty}^\infty f_Y(y)\,\E[X\mid Y=y]\,dy.
+  = \int_{-\infty}^\infty f_Y(y) \E[X\mid Y=y] dy.
   $$
 
 Proof in both cases is by expanding the right-hand side and using the joint distribution; it collapses to $\E[X]$.
 
-(Conditional variance is defined similarly:
-$\mathrm{Var}(X\mid Y=y)$, and $\mathrm{Var}(X\mid Y)$.)
+> Conditional variance is defined similarly:  
+> $\mathrm{Var}(X\mid Y=y)$, and $\mathrm{Var}(X\mid Y)$.

@@ -221,8 +221,27 @@ window.addEventListener("popstate", () => {
 fetch("./posts/metadata/entries.json")
   .then(response => response.json())
   .then(data => {
-    posts = data;
-  filtered = posts;
+    // Sort posts so newest appear first. We try date (desc) then fallback to slug id.
+    posts = data.slice().sort((a, b) => {
+      const da = a.date ? new Date(a.date) : null;
+      const db = b.date ? new Date(b.date) : null;
+      const va = da instanceof Date && !isNaN(da) ? da.getTime() : null;
+      const vb = db instanceof Date && !isNaN(db) ? db.getTime() : null;
+
+      if (va !== null && vb !== null && va !== vb) {
+        // Newest first
+        return vb - va;
+      }
+
+      // Fallback: sort by slug/id descending so higher numbered posts come first
+      if (a.slug && b.slug) {
+        return b.slug.localeCompare(a.slug, undefined, { numeric: true, sensitivity: "base" });
+      }
+
+      return 0;
+    });
+
+    filtered = posts;
   // Reset search and filter (also updates pagination UI)
   resetSearchAndFilter();
 
