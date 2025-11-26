@@ -8,7 +8,7 @@ date: 2025-11-04/06/11
 Independence implies strong factorization:
 for all reasonable $g,h$,
 $$
-\E[g(X)h(Y)] = \E[g(X)]\,\E[h(Y)].
+\E[g(X)h(Y)] = \E[g(X)] \E[h(Y)].
 $$
 In particular, if $X,Y$ are independent,
 $$
@@ -68,7 +68,7 @@ For random variables $X,Y,Z$ and constants $a,b$:
   $$
 - Scaling:
   $$
-  \Cov{aX}{Y}=a\,\Cov{X}{Y}.
+  \Cov{aX}{Y}=a \Cov{X}{Y}.
   $$
 - Bilinearity:
   $$
@@ -118,7 +118,7 @@ Assume $\Var{X}>0$ and $\Var{Y}>0$.
 The **correlation coefficient** of $X$ and $Y$ is
 $$
 \rho(X,Y)
-:= \frac{\Cov{X}{Y}}{\sqrt{\Var{X}\,\Var{Y}}}.
+:= \frac{\Cov{X}{Y}}{\sqrt{\Var{X} \Var{Y}}}.
 $$
 
 Equivalently,

@@ -7,12 +7,20 @@ location: New York, NY
 ---
 
 ## What's the idea?
-Predict the NYC mayoral election outcome.
 
-## Where did I get the idea from
-In April, I read a news article discussing [this paper](https://arxiv.org/pdf/2505.01553). The method of trying to predict the papal election was interesting. After getting bombarded with advertisements about the NYC mayoral elections, I was instantly reminded of this, and here I am with this idea.
+Build a quick model to forecast the NYC mayoral primary using polls, signals, and some reasonable priors. The goal isn't to beat FiveThirtyEight-just to see if the curve lines up with reality and learn what breaks first.
 
-The good point about this idea is that, unlike the papal election, there's plenty of polls and data out there online. And all the candidates (fewer than 20) are known. However, there's a primary coming in a few weeks, and another election in November.
+## Where did the idea come from?
+
+In the recent two weeks I've been bombarded with ads on social media about the Democratic primary, a noisy dataset, and curiosity about whether a small model can recover the election's direction of travel. The "why" is half technical: elections are messy, and it's addictive to coax structure out of the mess.
 
 ## What we did
-It's really a lot of work to do in ~2 weeks with classes, but we finished the main functions of the model. Although the predictions aren't very promising at the moment, they're reasonable to some point. The model predicted that Cuomo to win this primary at first, but I saw the polls around the day and thought Mandani is winning, not a bad thing, but it make me keep revising the model. However, indeed he did win—aligning with the output of what I expected.
+
+We built something that produces sensible predictions most of the time. Early on, it leaned toward Cuomo; later, the polling and model revisions pulled toward Mandani, which turned out to match the outcome. Not perfect, but not random either.
+
+The interesting parts:
+
+- Feature choice matters more than fancy architecture when time is short.
+- Revising while watching new polls is a mind game...
+
+It didn't predict the race with elegance (neighborhood by neighborhood, well it probably can). It did teach me how quickly "plausible" becomes "useful" with careful constraints and a bit of humility.
