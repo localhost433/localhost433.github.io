@@ -123,5 +123,13 @@
         "location": "Bobst 8F, New York, NY",
         "tags": ["math", "life", "notes"],
         "slug": "022-Suranyi"
+    },
+    {
+        "title": "Scheduling a WeChat message (Or, why I ended up hitting send)",
+        "date": "2025-11-25",
+        "author": "R",
+        "location": "Manhattan, NYC",
+        "tags": ["life", "cs"],
+        "slug": "023-wechat-bot"
     }
 ]
