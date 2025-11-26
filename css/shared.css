@@ -323,3 +323,28 @@ blockquote blockquote {
   60% { background-color: #88bbff; }
   100% { background-color: transparent; }
 }
+
+/* ==========================================================================
+   TEXT SELECTION HIGHLIGHT
+========================================================================== */
+
+/* Light mode selection */
+::selection {
+  background-color: #bbddff;
+  color: #000000;
+}
+
+::-moz-selection {
+  background-color: #bbddff;
+  color: #000000;
+}
+
+.dark-mode ::selection {
+  background-color: #555555;
+  color: #ffffff;
+}
+
+.dark-mode ::-moz-selection {
+  background-color: #555555;
+  color: #ffffff;
+}
