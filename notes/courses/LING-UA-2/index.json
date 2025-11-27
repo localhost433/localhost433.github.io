@@ -1,37 +1,85 @@
 [
     {
         "slug": "00-intro",
-        "title": "Intro",
+        "title": "0 - Intro",
         "date": "2025-09-02"
     }
     ,
     {
         "slug": "01-sounds",
-        "title": "Sounds (Consonants, Vowels, Syllables & Stress)",
+        "title": "1 - Sounds (Consonants, Vowels, Syllables & Stress)",
         "date": "2025-09-04/09/11"
     }
     ,
     {
         "slug": "02-change",
-        "title": "Naming Change & Blends",
+        "title": "2 - Naming Change & Blends",
         "date": "2025-09-16/18/23"
     }
     ,
     {
         "slug": "03-gender",
-        "title": "Naming & Gender",
+        "title": "3 - Naming & Gender",
         "date": "2025-09-25/30"
     }
     ,
     {
         "slug": "04-symbolism",
-        "title": "Naming & Sound Symbolism",
+        "title": "4 - Naming & Sound Symbolism",
         "date": "2025-10-02"
     }
     ,
     {
         "slug": "05-nickname",
-        "title": "Nickname Formation (Truncation, Affixation & Reduplication)",
+        "title": "5 - Nickname Formation (Truncation, Affixation & Reduplication)",
         "date": "2025-10-07/09"
+    }
+    ,
+    {
+        "slug": "06-history",
+        "title": "6 - History of Names & Renaming",
+        "date": "2025-10-21"
+    }
+    ,
+    {
+        "slug": "07-world",
+        "title": "7 - Personal Names around the World",
+        "date": "2025-10-23"
+    }
+    ,
+    {
+        "slug": "08-immigrant",
+        "title": "8 - Immigrant Naming",
+        "date": "2025-10-30"
+    }
+    ,
+    {
+        "slug": "09-foreign",
+        "title": "9 - Foreign Names & Titles",
+        "date": "2025-11-04"
+    }
+    ,
+    {
+        "slug": "10-bias",
+        "title": "10 - Names, Bias & Discrimination",
+        "date": "2025-11-06/11"
+    }
+    ,
+    {
+        "slug": "11-brands",
+        "title": "11 - Brand Names",
+        "date": "2025-11-13/18"
+    }
+    ,
+    {
+        "slug": "12-psycholinguistics",
+        "title": "12 - Psycholinguistics of Names",
+        "date": "2025-11-20"
+    }
+    ,
+    {
+        "slug": "avian",
+        "title": "AvianAtlas Database - Guest Lecture",
+        "date": "2025-11-25"
     }
 ]

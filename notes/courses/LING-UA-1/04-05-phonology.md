@@ -75,7 +75,7 @@ How phonemes can be sequenced.
 ### Syllables
 - Smallest prosodic unit in most languages.
 
-```
+```text
 syllable
 |--rime
 |  |--coda
@@ -163,7 +163,7 @@ A java style psuedocode for the process (this is added at Jun 14, after I felt t
 ---
 
 #### Flapping rule
-```
+```text
 /t/ -> [r] | 'V_V
 /t/ -> [t] | *elsewhere
 ```
@@ -171,7 +171,7 @@ A java style psuedocode for the process (this is added at Jun 14, after I felt t
 ---
 
 #### Aspiration
-```
+```text
 /t/ -> [t^h] | _.'
 /t/ -> [t] | elsewhere*
 ```
