@@ -17,7 +17,7 @@ Overview of what will be covered in the course.
 
 ## How does language work?
 - Language as a mapping
-    ```
+    ```text
     form                 <->               function
     sound/sign <-> words <-> sentences <-> meaning
     ```
