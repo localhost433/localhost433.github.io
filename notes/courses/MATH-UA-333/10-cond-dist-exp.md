@@ -91,11 +91,7 @@ $$
 Thus
 $$
 f_{X\mid Y}(x\mid b)=
-\begin{cases}
-\displaystyle
-\frac{1}{2\sqrt{1-b^2}}, & -\sqrt{1-b^2}\le x\le\sqrt{1-b^2},\\[6pt]
-0, & \text{otherwise.}
-\end{cases}
+\frac{1}{2\sqrt{1-b^2}}, \quad \text{for }-\sqrt{1-b^2}\le x\le\sqrt{1-b^2} \quad \text{0 otherwise}
 $$
 
 So given $Y=b$, $X$ is uniform on the horizontal chord.

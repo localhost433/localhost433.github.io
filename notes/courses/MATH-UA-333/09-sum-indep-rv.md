@@ -79,7 +79,7 @@ Let $X,Y$ be independent $\mathrm{Unif}(0,1)$, $Z=X+Y$.
 Then
 
 $$
-f_Z(t) = \int_{-\infty}^{\infty} \mathbf{1}_{[0,1]}(x)\mathbf{1}_{[0,1]}(t-x) dx.
+f\_Z(t) = \int\_{-\infty}^{\infty} \mathbf{1}\_{[0,1]}(x)\mathbf{1}\_{[0,1]}(t-x) dx.
 $$
 
 The integrand is $1$ exactly when $0 \le x\le1$ and $0 \le t-x\le1$.

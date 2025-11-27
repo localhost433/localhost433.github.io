@@ -32,20 +32,21 @@ These monotonicity properties are the starting point for Markov’s inequality.
 Let $X$ be a random variable with $X \ge 0$ almost surely and let $a>0$.
 
 We have
+
 $$
-X \ge X \mathbf{1}_{\{X\ge a\}} \ge a \mathbf{1}_{\{X\ge a\}}.
+X \ge X \mathbf{1}\_{\{X \ge a\}} \ge a \mathbf{1}\_{\{X \ge a\}}.
 $$
 
 Taking expectations,
+
 $$
-\mathbb{E}X \;\ge\; \mathbb{E}\big(X \mathbf{1}_{\{X\ge a\}}\big)
-\;\ge\; a\,\mathbb{E}\big(\mathbf{1}_{\{X\ge a\}}\big)
-= a\,\mathbb{P}(X\ge a).
+\mathbb{E}X \ge \mathbb{E} \big(X \mathbf{1}\_{\{X\ge a\}} \big) \ge a \mathbb{E}\big(\mathbf{1}\_{\{X \ge a\}} \big)
+= a \mathbb{P}(X \ge a)
 $$
 
 Therefore
 $$
-\mathbb{P}(X\ge a) \le \frac{\mathbb{E}X}{a}.
+\mathbb{P}(X \ge a) \le \frac{\mathbb{E}X}{a}.
 $$
 
 If $X$ is not necessarily nonnegative, we can apply Markov to $|X|$:

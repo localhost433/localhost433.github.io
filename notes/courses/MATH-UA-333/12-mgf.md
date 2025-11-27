@@ -10,11 +10,14 @@ $$
 \mathbb{E}(X^n).
 $$
 
-For a (deterministic) sequence $\{a_n\}_{n\ge 0}$, the **(ordinary) generating function** is
+For a (deterministic) sequence $(a_n)_{n\ge 0}$, the **(ordinary) generating function** is
+
 $$
 F(z) = \sum_{n=0}^{\infty} a_n z^n.
 $$
+
 Within the radius of convergence,
+
 $$
 a_n = \frac{1}{n!} \frac{d^n}{dz^n} F(z)\bigg|_{z=0}.
 $$
@@ -100,7 +103,7 @@ $$
 > $$
 > M_X(t) =
 > \begin{cases}
-> \dfrac{\lambda}{\lambda - t}, & t < \lambda,\\[4pt]
+> \dfrac{\lambda}{\lambda - t}, & t < \lambda,\\
 > \infty, & t \ge \lambda.
 > \end{cases}
 > $$
@@ -117,25 +120,29 @@ $$
 > M_X(t) = \sum_{k=0}^{n} \binom{n}{k} (p e^t)^k (1-p)^{n-k}
 > = (1 - p + p e^t)^n.
 > $$
+>
 > Differentiate:
 > $$
 > M_X'(t) = n(1 - p + p e^t)^{n-1} \cdot p e^t,
 > $$
+>
 > $$
 > M_X''(t)
-> = n(n-1)(1 - p + p e^t)^{n-2} (p e^t)^2
-> + n(1 - p + p e^t)^{n-1} p e^t.
+> = n(n-1)(1 - p + p e^t)^{n-2} (p e^t)^2 + n(1 - p + p e^t)^{n-1} p e^t.
 > $$
+>
 > At $t=0$,
 > $$
 > \mathbb{E}(X) = M_X'(0)
 > = n(1 - p + p)^{n-1} p
 > = np,
 > $$
+>
 > $$
 > \mathbb{E}(X^2) = M_X''(0)
 > = n(n-1)p^2 + np.
 > $$
+>
 > Hence
 > $$
 > \operatorname{Var}(X)
