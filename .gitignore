@@ -44,6 +44,7 @@ build/
 /notes/courses/*/*HW*
 /notes/courses/*/*Book*
 /notes/courses/*/*Exam*
+/notes/courses/*/*Note*
 /notes/courses/*/*code*
 /notes/courses/*/*lecture*
 /notes/courses/*/*reading*
@@ -53,3 +54,15 @@ build/
 # Hidden courses
 /notes/courses/FYSEM*
 /notes/courses/EXPOS*
+/notes/courses/J*
+
+# Insufficient content
+/notes/courses/CSCI-UA-101
+/notes/courses/CSCI-UA-102
+/notes/courses/MATH-UA-32*
+
+# Haven't taken yet
+/notes/courses/CSCI-UA-310
+/notes/courses/CSCI-UA-473
+/notes/courses/CSCI-UA-474
+/notes/courses/CSCI-UA-469
