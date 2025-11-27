@@ -33,5 +33,26 @@
         "repo": "localhost433/Study-Readiness",
         "tech": "Python",
         "description": "A survey aimed at quantifying mental readiness for study, based on more objective tests instead of self-evaluation."
+    },
+    {
+        "title": "NYC Mayor Prediction",
+        "link": "https://github.com/localhost433/nyc-mayor-prediction",
+        "repo": "localhost433/nyc-mayor-prediction",
+        "tech": "Python, PyMC, JAX, RAG, embeddings",
+        "description": "Bayesian precinct-level model and ranked-choice voting simulation to forecast the 2025 NYC mayoral primary, combining polls, endorsements, ACS covariates, and issue-salience embeddings."
+    },
+    {
+        "title": "Authorship Attribution (Stylometry)",
+        "link": "https://github.com/localhost433/authorship_project",
+        "repo": "localhost433/authorship_project",
+        "tech": "Python, scikit-learn, NLP",
+        "description": "Stylometric pipeline over 19th-century English novels with shared utilities for authorship attribution and author-gender prediction using character n-grams, function words, and linear models."
+    },
+    {
+        "title": "Test Me Please",
+        "link": "https://github.com/marcussleongg/test-me-please",
+        "repo": "marcussleongg/test-me-please",
+        "tech": "Python, FastAPI, Streamlit, Weaviate, ONNX, RAG",
+        "description": "HackNYU Fall 2025 practice-exam generation and grading platform using RAG, local embeddings, and a Streamlit UI for course-grounded adaptive assessments and feedback."
     }
 ]
