@@ -92,19 +92,22 @@ $$
 First compute the mean and variance of $\overline{X}_n$:
 
 - Linearity of expectation:
-  $$
-  \mathbb{E}\overline{X}_n
-  = \mathbb{E}\left(\frac{1}{n}\sum_{k=1}^n X_k\right)
-  = \frac{1}{n}\sum_{k=1}^n \mathbb{E}X_k
-  = \mu.
-  $$
+
+$$
+\mathbb{E}\overline{X}\_n
+= \mathbb{E} \left(\frac{1}{n}\sum\_{k=1}^n X\_k\right)
+= \frac{1}{n}\sum\_{k=1}^n \mathbb{E}X\_k
+= \mu
+$$
+
 - Independence and identical distribution give
-  $$
-  \operatorname{Var}(\overline{X}_n)
-  = \operatorname{Var}\left(\frac{1}{n}\sum_{k=1}^n X_k\right)
-  = \frac{1}{n^2} \sum_{k=1}^n \operatorname{Var}(X_k)
-  = \frac{\sigma^2}{n}.
-  $$
+
+$$
+\operatorname{Var}(\overline{X}_n)
+= \operatorname{Var}\left(\frac{1}{n}\sum\_{k=1}^n X\_k\right)
+= \frac{1}{n^2} \sum\_{k=1}^n \operatorname{Var}(X\_k)
+= \frac{\sigma^2}{n}.
+$$
 
 Now for any $\varepsilon>0$, Chebyshev’s inequality gives
 $$

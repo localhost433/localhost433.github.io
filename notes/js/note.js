@@ -190,3 +190,30 @@ fetch(`/notes/courses/${course}/${noteSlug}.md`)
         console.error(err);
         container.innerHTML = "<p>Could not load note.</p>";
     });
+
+const tokenizer = {
+  em(src) {
+    // Only treat *...* as emphasis, ignore underscores
+    const match = /^\*([^*]+)\*/.exec(src);
+    if (!match) return;
+    return {
+      type: 'em',
+      raw: match[0],
+      text: match[1],
+      tokens: this.lexer.inlineTokens(match[1])
+    };
+  },
+  strong(src) {
+    // Only treat **...** as strong emphasis, ignore __
+    const match = /^\*\*([^*]+)\*\*/.exec(src);
+    if (!match) return;
+    return {
+      type: 'strong',
+      raw: match[0],
+      text: match[1],
+      tokens: this.lexer.inlineTokens(match[1])
+    };
+  }
+};
+
+marked.use({ tokenizer });
