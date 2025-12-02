@@ -1,7 +1,7 @@
 window.MathJax = {
     loader: { load: ['[tex]/textmacros'] },
     tex: {
-        packages: { '[+]': ['noerrors', 'ams', 'textmacros'] },
+        packages: { '[+]': ['noerrors', 'ams', 'textmacros', 'amssymb'] },
         macros: {
             qed: "\\square",
             ran: "\\text{ran}",
