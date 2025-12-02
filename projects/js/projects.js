@@ -5,6 +5,7 @@ const LINGUIST_COLORS = {
   TypeScript: "#2b7489",
   HTML: "#e34c26",
   CSS: "#563d7c",
+  PowerShell: "#012456",
   Shell: "#89e051",
   Dockerfile: "#384d54",
   JSON: "#292929",

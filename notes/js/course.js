@@ -33,7 +33,7 @@ fetch(`/notes/courses/${slug}/index.json`)
 
       const date = document.createElement("div");
       date.className = "note-date";
-      date.textContent = n.date;
+      date.textContent = n.date || "";
 
       div.append(link, date);
       listEl.appendChild(div);

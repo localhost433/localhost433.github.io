@@ -1,0 +1,62 @@
+[
+    {
+        "slug": "01-num-mem",
+        "title": "01 - Number Systems & Memory Organization",
+        "date": ""
+    },
+    {
+        "slug": "02-data-repr",
+        "title": "02 - Data Representation",
+        "date": ""
+    },
+    {
+        "slug": "03-c-fund",
+        "title": "03 - C Programming Fundamentals",
+        "date": ""
+    },
+    {
+        "slug": "04-arrays-ptr",
+        "title": "04 - Arrays, Pointers, and Dynamic Memory",
+        "date": ""
+    },
+    {
+        "slug": "05-ll-bit",
+        "title": "05 - Linked Lists and Bitwise Operators",
+        "date": ""
+    },
+    {
+        "slug": "06-cli-io",
+        "title": "06 - Command-Line Arguments and File I/O",
+        "date": ""
+    },
+    {
+        "slug": "07-asm-intro",
+        "title": "07 - Introduction to Assembly Language",
+        "date": ""
+    },
+    {
+        "slug": "08-mov-addr",
+        "title": "08 - Move Instructions, Addressing, and Calling Conventions",
+        "date": ""
+    },
+    {
+        "slug": "09-func-cache",
+        "title": "09 - Function Conventions and Cache Basics",
+        "date": ""
+    },
+    {
+        "slug": "10-cache-perf",
+        "title": "10 - Cache Organization and Performance",
+        "date": ""
+    },
+    {
+        "slug": "11-logic-circuits",
+        "title": "11 - Digital Logic Transistors to Arithmetic Circuits",
+        "date": ""
+    },
+    {
+        "slug": "12-logic-compos",
+        "title": "12 - Digital Logic Components and ALU Design",
+        "date": ""
+    }
+]
