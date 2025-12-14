@@ -117,7 +117,7 @@ $$
 >   \le \frac{\operatorname{Var}(X)}{k^2}
 >   = \frac{np(1-p)}{k^2}.
 >   $$
-> 
+>
 > Chebyshev typically gives a better bound than Markov here, but neither is exponential in $n$.
 
 ---
@@ -207,12 +207,12 @@ We can then choose $t$ to minimize the upper bound $e^{-tk} M(t)^n$.
 > For $a>1$, we have $a - 1 - a \ln a < 0$, hence the tail probability decays exponentially in $n$.
 >
 > For comparison:
-> 
+>
 > - Markov: $\mathbb{P}(X \ge a n p) \le 1/a$.
 > - Chebyshev:
 >   $$
 >   \mathbb{P}(X \ge a n p)
 >   \le \frac{1-p}{n (a-1)^2 p}.
 >   $$
-> 
+>
 > Chernoff gives an exponentially small bound, which is much sharper.

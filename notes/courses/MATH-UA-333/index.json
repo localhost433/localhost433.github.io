@@ -76,5 +76,15 @@
         "slug": "16-markov-chains",
         "title": "16 - Introduction to Markov Chains",
         "date": "2025-11-25"
+    },
+    {
+        "slug": "17-pois-processes",
+        "title": "17 - Poisson Processes",
+        "date": "2025-12-04"
+    },
+    {
+        "slug": "18-entropy-info-thry",
+        "title": "18 - Intro to Information Theory, Entropy, and Coding",
+        "date": "2025-12-09"
     }
 ]
