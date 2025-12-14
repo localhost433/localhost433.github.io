@@ -163,7 +163,6 @@ $$
 > $$
 > \mathbb{E}X = \lambda, \qquad \operatorname{Var}(X) = \lambda.
 > $$
-
 > **Example (Uniform distribution on $[a,b]$).**  
 > Let $X \sim \mathrm{Unif}([a,b])$. Then
 > $$
@@ -177,7 +176,6 @@ $$
 > \mathbb{E}X = \frac{a+b}{2}, \qquad
 > \operatorname{Var}(X) = \frac{(b-a)^2}{12}.
 > $$
-
 > **Example (Normal distribution).**  
 > Let $X \sim N(\mu,\sigma^2)$. Then
 > $$
