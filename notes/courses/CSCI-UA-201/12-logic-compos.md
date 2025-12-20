@@ -1,6 +1,6 @@
 ---
 title: Digital Logic Components and ALU Design
-date:
+date: 2025-12-04/09
 ---
 
 ## Overview
@@ -33,8 +33,8 @@ So we can reuse an adder for subtraction by:
 
 Each bit slice has:
 
-- Inputs: $A$, $B$, $	ext{Cin}$, mode $M$.
-- Outputs: result bit and $	ext{Cout}$.
+- Inputs: $A$, $B$, $\text{Cin}$, mode $M$.
+- Outputs: result bit and $\text{Cout}$.
 
 Mode behavior:
 
@@ -49,16 +49,16 @@ Typical wiring:
 
 - Each $B$ bit goes through an XOR with $M$:
   - $B' = B \oplus M$.
-- Least significant $	ext{Cin}$ is $M$.
+- Least significant $\text{Cin}$ is $M$.
 
 ### N-bit implementation
 
 For an N-bit adder/subtractor:
 
 1. Chain N single-bit add/sub units.
-2. Connect $	ext{Cout}$ of bit $i$ to $	ext{Cin}$ of bit $i+1$.
+2. Connect $\text{Cout}$ of bit $i$ to $\text{Cin}$ of bit $i+1$.
 3. Share the mode bit $M$ across all slices.
-4. Use $M$ as the initial $	ext{Cin}$.
+4. Use $M$ as the initial $\text{Cin}$.
 
 **Overflow vs carry:**
 
@@ -76,7 +76,7 @@ Binary multiplication is similar to decimal:
 - Each bit of the multiplier selects either 0 or the multiplicand.
 - Partial products are shifted and added.
 
-Example: $5 	imes 3$:
+Example: $5 times 3$:
 
 - $5 = 101_2$, $3 = 011_2$.
 - Generate partial products based on bits of the multiplier and add them.
@@ -166,7 +166,7 @@ Inputs: data $I_0, I_1, I_2, I_3$, selects $S_1, S_0$.
 Output function:
 
 $$
-	ext{Out} =
+\text{Out} =
 \lnot S_1 \land \lnot S_0 \land I_0
 \;\lor\;
 \lnot S_1 \land S_0 \land I_1
@@ -204,13 +204,13 @@ Total 2-to-1 muxes required: 7.
 Inputs:
 
 - Operand bits $A$ and $B$.
-- Carry in $	ext{Cin}$ (for arithmetic).
+- Carry in $\text{Cin}$ (for arithmetic).
 - Operation select signals (for example 2 bits).
 
 Outputs:
 
-- Result bit $	ext{Out}$.
-- Carry out $	ext{Cout}$ (for arithmetic).
+- Result bit $\text{Out}$.
+- Carry out $\text{Cout}$ (for arithmetic).
 - Possibly flags such as zero or negative for the bit or for the whole word.
 
 Supported operations (depending on select encoding):
@@ -233,7 +233,7 @@ To build an N-bit ALU:
 
 1. Use N copies of the 1-bit ALU slice.
 2. Connect corresponding bits of $A$ and $B$ into each slice.
-3. Chain carries: $	ext{Cout}$ of bit $i$ -> $	ext{Cin}$ of bit $i+1$.
+3. Chain carries: $\text{Cout}$ of bit $i$ -> $\text{Cin}$ of bit $i+1$.
 4. Broadcast the same operation select signals to all slices.
 
 The ALU also typically outputs **status flags**:

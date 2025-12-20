@@ -2,61 +2,71 @@
     {
         "slug": "01-num-mem",
         "title": "01 - Number Systems & Memory Organization",
-        "date": ""
+        "date": "2025-09-02/09"
     },
     {
         "slug": "02-data-repr",
         "title": "02 - Data Representation",
-        "date": ""
+        "date": "2025-09-04"
     },
     {
         "slug": "03-c-fund",
         "title": "03 - C Programming Fundamentals",
-        "date": ""
+        "date": "2025-09-11"
     },
     {
         "slug": "04-arrays-ptr",
         "title": "04 - Arrays, Pointers, and Dynamic Memory",
-        "date": ""
+        "date": "2025-09-16/18/23"
     },
     {
         "slug": "05-ll-bit",
         "title": "05 - Linked Lists and Bitwise Operators",
-        "date": ""
+        "date": "2025-09-25/30"
     },
     {
         "slug": "06-cli-io",
         "title": "06 - Command-Line Arguments and File I/O",
-        "date": ""
+        "date": "2025-10-02/07"
     },
     {
         "slug": "07-asm-intro",
         "title": "07 - Introduction to Assembly Language",
-        "date": ""
+        "date": "2025-10-23"
     },
     {
         "slug": "08-mov-addr",
-        "title": "08 - Move Instructions, Addressing, and Calling Conventions",
-        "date": ""
+        "title": "08 - Move Instructions and Addressing Modes",
+        "date": "2025-10-28/30"
     },
     {
         "slug": "09-func-cache",
-        "title": "09 - Function Conventions and Cache Basics",
-        "date": ""
+        "title": "09 - Function Conventions and Cache Primer",
+        "date": "2025-10-30/11-06"
     },
     {
         "slug": "10-cache-perf",
         "title": "10 - Cache Organization and Performance",
-        "date": ""
+        "date": "2025-11-11/18"
     },
     {
         "slug": "11-logic-circuits",
         "title": "11 - Digital Logic Transistors to Arithmetic Circuits",
-        "date": ""
+        "date": "2025-11-20"
     },
     {
         "slug": "12-logic-compos",
         "title": "12 - Digital Logic Components and ALU Design",
-        "date": ""
+        "date": "2025-12-04/09"
+    },
+    {
+        "slug": "13-mem-cpu",
+        "title": "13 - Memory Circuits and CPU Datapath",
+        "date": "2025-11-25/12-02"
+    },
+    {
+        "slug": "14-mem-arch",
+        "title": "14 - Memory Hierarchy and CPU Architecture",
+        "date": "2025-10-21/11-04"
     }
 ]

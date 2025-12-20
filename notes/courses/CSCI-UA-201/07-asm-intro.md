@@ -1,6 +1,6 @@
 ---
 title: Introduction to Assembly Language
-date:
+date: 2025-10-23
 ---
 
 ## CPU registers
@@ -50,28 +50,23 @@ Read `mov S, D` as "move S into D".
 
 ## Core instructions
 
-### MOV (copy data)
+### MOV (copy data, brief)
 
 ```asm
 mov SOURCE, DEST
 ```
 
-- Copies data from `SOURCE` into `DEST`.
-- The source is not changed.
+- Copies data from `SOURCE` into `DEST` (the source is not changed).
+- Operand order is `source, destination` in AT&T syntax.
 
-Example:
-
-```asm
-mov $25, %rax
-mov %rax, %rbx
-```
-
-Common mistake: leaving out `$` for immediates:
+Common pitfall (immediate vs address):
 
 ```asm
 mov 25, %rax    # WRONG: uses address 25
 mov $25, %rax   # RIGHT: literal 25
 ```
+
+For the full set of `mov` forms (memory dereference, offsets, base/index/scale) and array/struct addressing, see **08**.
 
 ### ADD and SUB
 

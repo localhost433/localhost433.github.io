@@ -1,6 +1,6 @@
 ---
 title: Command-Line Arguments and File I/O
-date:
+date: 2025-10-30/11-06
 ---
 
 ## Command-line arguments
