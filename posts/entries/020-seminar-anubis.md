@@ -27,7 +27,7 @@ location: Warren Weaver Hall, NYU, New York, NY
 - Orchestrated by **Kubernetes (k8s)**; extends networking (CNI) and storage (CSI) across many nodes.
 - Deployed via **Helm** (install on any k8s cluster like a package).
 - **Pod** = unit of work: containers + volumes + config maps + secrets.
-- Runtime pathway highlighted in slides: kube → containerd (CRI) → containers.
+- Runtime pathway highlighted in slides: kube -> containerd (CRI) -> containers.
 
 ## Cloud IDE design (per student)
 - Each student gets an **IDE Pod** with an isolated filesystem (e.g., NFS-backed home volume mounted into the pod).
@@ -36,7 +36,7 @@ location: Warren Weaver Hall, NYU, New York, NY
   - **Init container**: clone repo, fix permissions.
   - **Theia IDE server**: web IDE + shell.
   - **Autosave sidecar**: background sync/saves.
-  - **(New)** rootless **dockerd** sidecar → “Docker inside IDEs.”
+  - **(New)** rootless **dockerd** sidecar -> “Docker inside IDEs.”
 - Containers in a pod share `localhost`; home mounted at `/home/anubis`.
 
 ## “The Cloud” (framing from the talk)

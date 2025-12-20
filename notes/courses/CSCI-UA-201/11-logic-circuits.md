@@ -1,6 +1,6 @@
 ---
 title: Digital Logic Transistors to Arithmetic Circuits
-date:
+date: 2025-11-20
 ---
 
 ## Overview
@@ -154,7 +154,7 @@ Example pattern for three inputs $A$, $B$, $C$:
 If we ignore carry, adding two bits $A$ and $B$ is simply:
 
 $$
-	ext{Sum} = A \oplus B
+\text{Sum} = A \oplus B
 $$
 
 But this is not enough for binary addition because $1 + 1 = 10_2$ requires both a sum bit and a carry bit.
@@ -178,33 +178,33 @@ Truth table:
 Boolean functions:
 
 $$
-	ext{Sum} = A \oplus B
+\text{Sum} = A \oplus B
 $$
 
 $$
-	ext{Carry} = A \land B
+\text{Carry} = A \land B
 $$
 
 ### Full adder
 
 A **full adder** adds three bits:
 
-- Inputs: $A$, $B$, and $	ext{Cin}$ (carry in).
-- Outputs: $	ext{Sum}$ and $	ext{Cout}$ (carry out).
+- Inputs: $A$, $B$, and $\text{C}_\text{in}$ (carry in).
+- Outputs: $\text{Sum}$ and $\text{Cout}$ (carry out).
 
 Truth table (sketched):
 
-- When an odd number of inputs are 1, $	ext{Sum} = 1$.
-- When at least two inputs are 1, $	ext{Cout} = 1$.
+- When an odd number of inputs are 1, $\text{Sum} = 1$.
+- When at least two inputs are 1, $\text{Cout} = 1$.
 
 Simplified expressions:
 
 $$
-	ext{Sum} = A \oplus B \oplus 	ext{Cin}
+\text{Sum} = A \oplus B \oplus \text{Cin}
 $$
 
 $$
-	ext{Cout} = (A \land B) \lor (	ext{Cin} \land (A \oplus B))
+\text{Cout} = (A \land B) \lor (\text{Cin} \land (A \oplus B))
 $$
 
 ### N-bit ripple-carry adder
@@ -212,8 +212,8 @@ $$
 To add two N-bit numbers:
 
 - Chain $N$ full adders.
-- Connect $	ext{Cout}$ of bit $i$ to $	ext{Cin}$ of bit $i+1$.
-- The least significant adder gets $	ext{Cin}$ (usually 0).
+- Connect $\text{Cout}$ of bit $i$ to $\text{Cin}$ of bit $i+1$.
+- The least significant adder gets $\text{Cin}$ (usually 0).
 
 This is called a **ripple-carry** adder since carries ripple from least significant bit to most significant bit, limiting speed for large $N$.
 
@@ -230,7 +230,7 @@ Design trick:
 - Insert an XOR gate on each bit of $B$, controlled by a mode signal $M$:
   - $M = 0$ -> $B$ passes through (addition).
   - $M = 1$ -> $\lnot B$ (subtraction).
-- Feed $M$ as the initial $	ext{Cin}$ into the least significant full adder.
+- Feed $M$ as the initial $\text{Cin}$ into the least significant full adder.
 
 Then the same N-bit adder can perform:
 
@@ -243,6 +243,6 @@ This forms the arithmetic part of an ALU.
 
 - NAND and NOR are functionally complete.
 - Half adder: sum $A \oplus B$, carry $A \land B$.
-- Full adder: sum $A \oplus B \oplus 	ext{Cin}$, carry $(A \land B) \lor (	ext{Cin} \land (A \oplus B))$.
+- Full adder: sum $A \oplus B \oplus \text{Cin}$, carry $(A \land B) \lor (\text{Cin} \land (A \oplus B))$.
 - N-bit ripple-carry adder chains full adders using carry.
 - Two's complement subtraction: invert $B$, add 1, and add to $A$.

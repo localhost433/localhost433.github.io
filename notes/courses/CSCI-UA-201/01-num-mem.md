@@ -1,6 +1,6 @@
 ---
 title: Number Systems & Memory Organization
-date: 
+date: 2025-09-02/09
 ---
 
 ## Number system fundamentals
@@ -83,15 +83,12 @@ An $n$-bit quantity can represent $2^n$ distinct values:
 - $1$ bit -> $2$ values.
 - $8$ bits ($1$ byte) -> $2^8 = 256$ values.
 
-### Text encoding
+### Where text and numeric formats live
 
-- **ASCII:** uses $1$ byte ($8$ bits) per character; can encode up to $256$ characters (e.g., `'A' = 65_{10}$).
-- **Unicode:** uses $16$ bits or more; supports many languages and symbols ($2^{16}$ or more code points).
+This note focuses on bases, units, and memory sizing. For how bits represent:
 
-### Numbers
-
-- **Integers:** stored as binary whole numbers (with specific schemes for signed vs unsigned).
-- **Floating-point:** used for real numbers; stored using standardized formats (e.g., IEEE-754) with finite precision, so not all real values can be represented exactly.
+- **Text (ASCII, Unicode, UTF-8)**, see **[02 - Data Representation](https://robinc.vercel.app/note.html?course=CSCI-UA-201&note=02-data-repr)**.
+- **Signed integers (two's complement)** and **floating point (IEEE 754)**, see **[02 - Data Representation](https://robinc.vercel.app/note.html?course=CSCI-UA-201&note=02-data-repr)**.
 
 ## Memory organization
 

@@ -1,6 +1,6 @@
 ---
 title: C Programming Fundamentals
-date:
+date: 2025-09-11
 ---
 
 ## From source code to execution

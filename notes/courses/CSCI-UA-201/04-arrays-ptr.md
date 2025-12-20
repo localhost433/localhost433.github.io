@@ -1,6 +1,6 @@
 ---
 title: Arrays, Pointers, and Dynamic Memory
-date:
+date: 2025-09-16/18/23
 ---
 
 ## Stack vs heap memory

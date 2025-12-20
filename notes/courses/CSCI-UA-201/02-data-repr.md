@@ -1,6 +1,6 @@
 ---
 title: Data Representation
-date:
+date: 2025-09-04
 ---
 
 ## Text and character encoding

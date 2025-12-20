@@ -1,7 +1,81 @@
 ---
 title: Linked Lists and Bitwise Operators
-date:
+date: 2025-09-25/30
 ---
+
+## Bitwise operators in C
+
+Integer values are stored as bits. Bitwise operators operate on each bit position.
+
+Assume 8-bit examples for clarity.
+
+### AND `&`
+
+- Result bit is 1 only if both input bits are 1.
+
+Example:
+
+- $00000111_2 \quad \\& \quad 00000100_2 = 00000100_2$
+
+Truth table:
+
+- $0 \\& 0 = 0$
+- $0 \\& 1 = 0$
+- $1 \\& 0 = 0$
+- $1 \\& 1 = 1$
+
+Typical uses:
+
+- Masking to zero out some bits.
+- Testing whether specific bits are set.
+
+### OR `|`
+
+- Result bit is 1 if at least one input bit is 1.
+
+Example:
+
+- $00000111_2 \mid 00000100_2 = 00000111_2$
+
+### XOR `^`
+
+- Result bit is 1 if the input bits are different.
+
+Truth table:
+
+- $0 \oplus 0 = 0$
+- $0 \oplus 1 = 1$
+- $1 \oplus 0 = 1$
+- $1 \oplus 1 = 0$
+
+> Using $\oplus$ here means XOR.
+
+Typical uses:
+
+- Flipping bits under a mask.
+- Simple parity or checksum calculations.
+- Toy "encryption" where the same key applied twice recovers the original.
+
+### NOT `~`
+
+- Flips every bit (0 becomes 1 and 1 becomes 0).
+
+If we consider 8 bits, then
+
+- $\sim 00000101_2 = 11111010_2.$
+
+In two's complement, this is closely related to negation: $-x = \sim x + 1$.
+
+### Shift operators `<<` and `>>`
+
+- `x << k` shifts bits of `x` left by $k$ positions (fills with zeros on the right).
+- `x >> k` shifts bits right. For unsigned values this fills with zeros on the left; for signed values it may copy the sign bit.
+
+Shifting left by $k$ is equivalent to multiplying by $2^k$ when there is no overflow.
+
+Example:
+
+- $00000101_2 << 1 = 00001010_2$ which is $5$ shifted to $10$.
 
 ## Linked lists in C
 
@@ -98,77 +172,3 @@ void print_list(CELL *head) {
 - Overwriting `head` while traversing, then losing access to the list.
 - Forgetting to initialize `next` for new nodes.
 - Failing to `free` nodes eventually, causing memory leaks.
-
-## Bitwise operators in C
-
-Integer values are stored as bits. Bitwise operators operate on each bit position.
-
-Assume 8-bit examples for clarity.
-
-### AND `&`
-
-- Result bit is 1 only if both input bits are 1.
-
-Example:
-
-- $00000111_2 \quad \\& \quad 00000100_2 = 00000100_2$
-
-Truth table:
-
-- $0 \\& 0 = 0$
-- $0 \\& 1 = 0$
-- $1 \\& 0 = 0$
-- $1 \\& 1 = 1$
-
-Typical uses:
-
-- Masking to zero out some bits.
-- Testing whether specific bits are set.
-
-### OR `|`
-
-- Result bit is 1 if at least one input bit is 1.
-
-Example:
-
-- $00000111_2 \mid 00000100_2 = 00000111_2$
-
-### XOR `^`
-
-- Result bit is 1 if the input bits are different.
-
-Truth table:
-
-- $0 \oplus 0 = 0$
-- $0 \oplus 1 = 1$
-- $1 \oplus 0 = 1$
-- $1 \oplus 1 = 0$
-
-> Using $\oplus$ here means XOR.
-
-Typical uses:
-
-- Flipping bits under a mask.
-- Simple parity or checksum calculations.
-- Toy "encryption" where the same key applied twice recovers the original.
-
-### NOT `~`
-
-- Flips every bit (0 becomes 1 and 1 becomes 0).
-
-If we consider 8 bits, then
-
-- $\sim 00000101_2 = 11111010_2.$
-
-In two's complement, this is closely related to negation: $-x = \sim x + 1$.
-
-### Shift operators `<<` and `>>`
-
-- `x << k` shifts bits of `x` left by $k$ positions (fills with zeros on the right).
-- `x >> k` shifts bits right. For unsigned values this fills with zeros on the left; for signed values it may copy the sign bit.
-
-Shifting left by $k$ is equivalent to multiplying by $2^k$ when there is no overflow.
-
-Example:
-
-- $00000101_2 << 1 = 00001010_2$ which is $5$ shifted to $10$.
