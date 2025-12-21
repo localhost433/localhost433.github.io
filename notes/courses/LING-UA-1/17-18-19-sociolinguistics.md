@@ -158,7 +158,7 @@ Overt prestige
     - Envelope of variation: Anywhere you can use a modal.
   - Double Objects
     - Variable: Object Constructions
-    - Variants: *‘a fish*’ vs. ‘*me a fish*’ etc. → ‘OBJ’ vs. ‘OBJ + OBJ'
+    - Variants: *‘a fish*’ vs. ‘*me a fish*’ etc. -> ‘OBJ’ vs. ‘OBJ + OBJ'
     - Envelope of variation: After transitive verbs
 
 ---

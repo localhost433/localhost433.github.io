@@ -25,8 +25,8 @@ The main idea: brand naming is not random. Sound patterns, word structure, and m
 
 - **Sound symbolism**: when a sound or sound pattern is perceived as directly linked to some meaning (e.g. size, sharpness, speed), rather than being completely arbitrary.
 - Earlier work on **sound symbolism in names** (for people, animals, etc.) suggested patterns like:
-  - High/front vowels (e.g. [i]) → “small, light, sharp”.
-  - Low/back vowels (e.g. [ɑ]) → “big, heavy, round”.
+  - High/front vowels (e.g. [i]) -> “small, light, sharp”.
+  - Low/back vowels (e.g. [ɑ]) -> “big, heavy, round”.
   - Certain consonants also pattern with “round vs. sharp” impressions.
 - Question: Do these patterns carry over to **brand names**, especially nonsense ones?
 
@@ -105,8 +105,8 @@ Yorkston & Menon studied one product and one vowel pair. Lowrey & Shrum tested:
 
 **Patterns**
 
-- Front vowels → preferred for **smaller/faster/lighter/sharper** products.
-- Back vowels → preferred for **larger/slower/heavier/richer** products.
+- Front vowels -> preferred for **smaller/faster/lighter/sharper** products.
+- Back vowels -> preferred for **larger/slower/heavier/richer** products.
 - “Positive” vowels (like [ɑ]) were consistently preferred over [ju]-words, across product types.
 
 #### Experiment 2: beers
@@ -182,8 +182,8 @@ Yorkston & Menon studied one product and one vowel pair. Lowrey & Shrum tested:
 #### Study 2: amusement park rides
 
 - Participants rated ride names along:
-  1. **Safety** (very safe → very risky).
-  2. **Excitement** (very dull → very adventurous).
+  1. **Safety** (very safe -> very risky).
+  2. **Excitement** (very dull -> very adventurous).
 
 - Easy vs. hard ride names:
   - Easy: *Chunta, Ohanzee, Tihkoosue*.
@@ -343,7 +343,7 @@ Connotations help position brands in terms of **price, quality, lifestyle, and v
   - *Nike* (Greek goddess of victory).
   - *Gap* (identity/generational gap, youth culture).
 - Automobiles:
-  - *Jaguar, Dodge Ram, Mustang* → speed, strength, agility.
+  - *Jaguar, Dodge Ram, Mustang* -> speed, strength, agility.
   - VW *Passat* (“trade wind”).
   - Subaru (Japanese name for the Pleiades star cluster).
   - Hyundai (“modernity” in Korean).
@@ -358,7 +358,7 @@ Metaphor lets brands **borrow cultural imagery** without directly describing the
 
 - **Metonymy**: using a related concept to stand for something else (e.g. “The White House” for the US presidency).
 
-**Brand → generic product**
+**Brand -> generic product**
 
 - Certain brand names become generic terms for the whole product category:
   - *Kleenex* (tissue).
@@ -407,9 +407,9 @@ These cases show how **politics, activism, and public opinion** directly affect 
 
 Several well-known US food brands rebranded in the early 2020s:
 
-- **Aunt Jemima** → **Pearl Milling Company** (pancake syrup).
-- **Uncle Ben’s** → **Ben’s Original** (rice).
-- **Eskimo Pie** → **Edy’s Pie** (ice cream).
+- **Aunt Jemima** -> **Pearl Milling Company** (pancake syrup).
+- **Uncle Ben’s** -> **Ben’s Original** (rice).
+- **Eskimo Pie** -> **Edy’s Pie** (ice cream).
 
 In each case:
 
@@ -491,9 +491,9 @@ Drug brand names must satisfy several conditions:
   - Letters like **S, M, L** appear frequently in birth-control brands:
     - *Lutera, Lessina, Yasmin, Lybrel, Levora, Jolessa, Alesse*, etc.
 - Drug names often hint at desired emotional states or outcomes:
-  - **Lunesta** (sleep aid) → evokes “luna” (moon, night).
-  - **Ambien** (sleep aid) → often interpreted as suggesting waking up feeling good in the morning.
-  - **Allegra** (allergy medication) → echoes “cheerful, lively, joyful”.
+  - **Lunesta** (sleep aid) -> evokes “luna” (moon, night).
+  - **Ambien** (sleep aid) -> often interpreted as suggesting waking up feeling good in the morning.
+  - **Allegra** (allergy medication) -> echoes “cheerful, lively, joyful”.
 
 These associations are subtle but help make scientific names feel **approachable** and **positive**.
 

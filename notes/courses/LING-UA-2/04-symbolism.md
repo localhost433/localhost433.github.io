@@ -55,14 +55,6 @@ Correlations between name phonology and character **size/power**:
 - Fewer sonorants / different place features track with evolutionary stage.  
 - In Japanese data, more **labial** consonants associate with *smaller/cuter* items (mirrors broader Japanese branding tendencies).
 
-**“Round” vs. “sharp” names and gendered perception**  
-Experimental tasks with novel names:  
-- “Round-sounding” names (e.g., /b, l, m, n, u, o, ɑ/) are more often judged as fitting round/soft characters and are perceived as more feminine.  
-- “Sharp-sounding” names (e.g., /k, p, t, i, e, ɛ, ʌ/) map to angular characters and are perceived as more masculine.  
-Hypothesis: cultural associations (e.g., size dimorphism) + articulatory/acoustic cues -> implicit gendered expectations.
-
----
-
 ## In-class activities
 
 1. **Bouba/Kiki on Names**  

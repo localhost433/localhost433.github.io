@@ -67,7 +67,7 @@ In England, toponyms preserve **multiple settlement layers**:
 - When certain generics cluster in one area, they point to the **prior inhabitants’ language**.
 
 **Inference**
-- Spatial clustering of one language’s generics → region was once dominated by that language group.
+- Spatial clustering of one language’s generics -> region was once dominated by that language group.
 - Sudden changes/boundaries in place-name language can match **historical political or settlement boundaries**.
 
 ---
@@ -87,20 +87,10 @@ In England, toponyms preserve **multiple settlement layers**:
   - County names, townships, and landmarks commemorating heroes, battles, presidents, etc.
 - Named maps can show **paths of settlement**, ethnic enclaves, and changing political priorities.
 
----
+ 
+# Surnames as Parallel Evidence (pointer)
 
-# Surnames as Parallel Evidence
-
-**Last names and history**
-- The most common **surnames** in a region also encode:
-  - Migration patterns (e.g. high concentration of a particular ethnic surname).
-  - Past colonization or slavery.
-  - Religious and linguistic history.
-
-**Combined evidence**
-- **Toponyms + surnames** together provide a richer picture:
-  - Toponyms = long-term geographic memory.
-  - Surnames = more recent demographic patterns.
+If you want a general framing of how surnames can function as historical evidence (and how they complement toponyms), see [Names Around the World](https://robinc.vercel.app/note.html?course=LING-UA-2&note=07-world).
 
 ---
 

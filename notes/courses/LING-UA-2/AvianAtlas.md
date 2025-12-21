@@ -122,8 +122,8 @@ This shows that seemingly simple labels like “color term for both sexes” vs 
 ## 5. Phylogenetic clustering of name categories
 
 - Using Fritz & Purvis’s **D statistic**, the team tested whether name categories are **clumped** across the bird family tree.  
-  - D = 0 → clumped as expected under Brownian motion,  
-  - D = 1 → random.  
+  - D = 0 -> clumped as expected under Brownian motion,  
+  - D = 1 -> random.  
 - Results:
   - **Physical trait** names: D ≈ 0.729  
   - **Natural history**: D ≈ 0.745  

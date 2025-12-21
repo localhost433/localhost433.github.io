@@ -118,9 +118,9 @@ class PhonologicalAnalyzer {
      * @param s1
      * @param s2
      * @param lexicon  corpus
-     * @return         CONTRASTIVE → distinct phonemes
-     *                 COMPLEMENTARY → allophones of one phoneme
-     *                 FREE_VARIATION → context-overlap without meaning contrast
+     * @return         CONTRASTIVE -> distinct phonemes
+     *                 COMPLEMENTARY -> allophones of one phoneme
+     *                 FREE_VARIATION -> context-overlap without meaning contrast
      */
     public static DistributionType classifyPair(Sound s1,
                                                 Sound s2,
