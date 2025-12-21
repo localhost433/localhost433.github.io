@@ -78,8 +78,14 @@
     }
     ,
     {
-        "slug": "avian",
+        "slug": "AvianAtlas",
         "title": "AvianAtlas Database - Guest Lecture",
         "date": "2025-11-25"
+    }
+    ,
+    {
+        "slug": "13-online",
+        "title": "13 - Online/Usernames",
+        "date": "2025-12-02"
     }
 ]

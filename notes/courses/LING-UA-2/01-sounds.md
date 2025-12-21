@@ -90,3 +90,5 @@ English contrasts stress positions: **OBject** (noun) vs. **obJECT** (verb); **C
 - **Two syllables:** **Trochee** (first-syllable stress) *never, window, sprinkle*; **Iamb** (second-syllable stress) *indeed, perhaps, amuse*.
 - **Three syllables:** **Final** (*introduce, guarantee, comprehend*), **Penultimate** (*bandana, December, regardless*), **Antepenultimate** (*excellent, festival, happily*).
 > **Names & stress:** Try naming examples that fit each pattern; note why some shortened forms are impossible (*Jennifer -> Jen*, but not *Je*; *Alfred -> Al/Alf*, but not *Alfr*).
+
+These phonological tools show up throughout the course, especially in [Naming & Gender](https://robinc.vercel.app/note.html?course=LING-UA-2&note=03-gender) (sound cues to social categories) and [Nickname Formation](https://robinc.vercel.app/note.html?course=LING-UA-2&note=05-nickname) (clipping patterns and constraints).

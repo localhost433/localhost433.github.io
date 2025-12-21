@@ -15,6 +15,14 @@ date: 2025-09-25/30
 **Psycholinguistic evidence**
 - Listeners use stress/length/finality cues to infer a novel name’s gender; such knowledge parallels other category-sound correlations (e.g., noun/verb stress biases).
 
+**“Round” vs. “sharp” names and gendered perception**  
+Experimental tasks with novel names:  
+- “Round-sounding” names (e.g., /b, l, m, n, u, o, ɑ/) are more likely to be matched to round/soft characters and are perceived as more feminine.  
+- “Sharp-sounding” names (e.g., /k, p, t, i, e, ɛ, ʌ/) map to angular characters and are perceived as more masculine.  
+Hypothesis: cultural associations (e.g., size dimorphism) + articulatory/acoustic cues -> implicit gendered expectations.
+
+(These effects overlap with broader sound symbolism patterns, see [Naming & Sound Symbolism](https://robinc.vercel.app/note.html?course=LING-UA-2&note=04-symbolism).)
+
 ---
 
 # Trends

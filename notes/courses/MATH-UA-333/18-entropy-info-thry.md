@@ -7,7 +7,7 @@ date: 2025-12-09
 
 We only consider entropy for **discrete** random variables.
 
-Let $X$ be a discrete random variable taking values in a set $\{a\_i\}\_\text{i\in I}$ (distinct values), with p.m.f.
+Let $X$ be a discrete random variable taking values in a set $(a\_i)\_{i \in I}$ (distinct values), with p.m.f.
 $$
 p_i := \mathbb{P}(X=a_i).
 $$
@@ -106,6 +106,7 @@ Roll two fair dice. Let $Y$ be the first die, and let $X$ be the sum.
   \quad\Rightarrow\quad
   H_Y(X)=\log_2 6.
   $$
+
 Thus $H(X,Y)=H_Y(X)+H(Y)=\log_2 6+\log_2 6=\log_2 36$.
 
 ---

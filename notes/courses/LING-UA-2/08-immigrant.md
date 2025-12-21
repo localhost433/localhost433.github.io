@@ -64,9 +64,9 @@ Topics:
 
 2. **Americanization**
    - Choosing an English name that is a **loose phonetic match**:
-     - e.g. *Soo Fei → Fay*, *Wei Lim → William*, *Teong → Ted*, *Mei Guen → Mae Gwen*, *Yoon → June*.
+     - e.g. *Soo Fei -> Fay*, *Wei Lim -> William*, *Teong -> Ted*, *Mei Guen -> Mae Gwen*, *Yoon -> June*.
    - Surnames sometimes respelled to look more “English”:
-     - *Fan → Fann*, *Lam → Lamm*, *Lin → Lynn*, *Go → Goe*, *Hsu → Hsue*.
+     - *Fan -> Fann*, *Lam -> Lamm*, *Lin -> Lynn*, *Go -> Goe*, *Hsu -> Hsue*.
 
 3. **Translation**
    - Occasionally, children receive an English name that **translates** the meaning of the Chinese name (e.g. naming “Iris” for a Chinese name meaning ‘orchid’).
@@ -109,7 +109,7 @@ Topics:
 
 ### Pressures to conform
 
-- Qualitative work in Canadian cities (e.g. London, Ontario) identifies “forces of conformity”:
+- Qualitative work in Canadian cities (e.g. London, Ontario) identifies "forces of conformity":
   1. **Employment pressure** – belief that an “easier” or more Anglo-sounding name helps with hiring.
   2. **School & peer pressure** – desire not to stand out or be teased.
   3. **Avoiding constant explanations** – fatigue from spelling, correcting pronunciation, etc.
@@ -123,21 +123,9 @@ Topics:
 
 ---
 
-## Names and employment outcomes
+## Names and employment outcomes (pointer)
 
-- Field experiments in Canada (e.g. Oreopoulos 2011):
-  - Researchers send **identical resumes** with different **name types**:
-    - Prototypically **“Canadian”** (Anglo) names.
-    - Chinese/Indian/Pakistani names with **Canadian education & experience**.
-    - Names with **foreign education**, mixed experience, etc.
-    - Mixed combinations (e.g. Anglo first + Chinese last name).
-  - Measure **callback rates** for job interviews.
-
-Key patterns:
-- Resumes with **Anglo names + Canadian credentials** receive the **highest callback rate** (~16%).
-- Adding a clearly **non-Anglo name**, even with Canadian education and experience, **reduces callbacks**.
-- Mixing Anglo first names with non-Anglo last names does **not fully remove** the penalty.
-- There is **no major difference** among different Asian-origin names (Chinese vs Indian vs Pakistani) in the study; they are collectively treated as “foreign”.
+Audit-style evidence on name-based discrimination in hiring (resumes, email requests, callbacks) is summarized in [Naming & Bias](https://robinc.vercel.app/note.html?course=LING-UA-2&note=10-bias). This note focuses on the **pressures and strategies** that shape immigrant naming choices.
 
 ---
 

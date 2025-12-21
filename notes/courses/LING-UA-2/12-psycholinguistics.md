@@ -121,7 +121,7 @@ date: 2025-11-20
 - Words can function as:
   - **Names** (rigid designators tied to a specific individual), or
   - **Labels** (category words with rich semantic networks).
-- Pure names rely more on a direct link from **concept → arbitrary sound pattern**, which may be more fragile.
+- Pure names rely more on a direct link from **concept -> arbitrary sound pattern**, which may be more fragile.
 
 ---
 

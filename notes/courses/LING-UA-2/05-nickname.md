@@ -92,7 +92,7 @@ French uses **truncation** and, in many cases, **reduplication**, governed by ro
      An [an] -> [na] -> **Nana**; Yves [iv] -> [vi] -> **Vivi**; Hugues [yɡ] -> [ɡy] -> **Gugu**.
 
 ## Probabilistic tendencies (French)
-- **Sound symbolism** sometimes exploited (e.g., “lighter” sequences like [ni] in **Nini**).  
+- Sometimes exploits sound symbolism (see [Naming & Sound Symbolism](https://robinc.vercel.app/note.html?course=LING-UA-2&note=04-symbolism), e.g., “lighter” sequences like [ni] in **Nini**).
 - **Avoid typologically unusual sounds**: replace/remove segments dispreferred cross-linguistically or in child acquisition.  
 - Many pressures mirror **child phonology** (preference for open syllables, fewer clusters).
 

@@ -126,6 +126,19 @@ Geographic features:
 
 ---
 
+## Surnames as historical evidence
+
+**Last names and history**
+- The most common **surnames** in a region can encode:
+  - Migration patterns (for example, local concentration of a particular ethnic surname).
+  - Past colonization or slavery.
+  - Religious and linguistic history.
+
+**Combined evidence**
+- **Toponyms + surnames** together provide a richer picture (see [Names & Settlement History](https://robinc.vercel.app/note.html?course=LING-UA-2&note=06-history)):
+  - Toponyms = long-term geographic memory.
+  - Surnames = more recent demographic patterns.
+
 ## Given names and state regulation
 
 - Some states **regulate given names** to:

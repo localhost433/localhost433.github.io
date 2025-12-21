@@ -96,6 +96,24 @@ date: 2025-11-06/11
 - Interpretation:
   - Employers used names as a **signal** of race and discriminated accordingly.
 
+## Oreopoulos (2011): immigrant names and callbacks (Canada)
+
+**Design (field experiment)**
+- Researchers sent **identical resumes** to real job postings, varying only the **name type** and some credential combinations.
+- Name types included:
+  - Prototypically **Anglo/“Canadian”** names,
+  - Chinese/Indian/Pakistani names paired with **Canadian education & experience**,
+  - Other combinations (for example, **foreign education**), and mixed names (Anglo first + non-Anglo last).
+- Outcome: **callback rate** for interviews.
+
+**Key patterns (as summarized in class)**
+- Resumes with **Anglo names + Canadian credentials** received the **highest callback rates**.
+- Holding credentials constant, adding a clearly **non-Anglo name** reduced callbacks.
+- An Anglo first name combined with a non-Anglo last name did **not fully remove** the penalty.
+
+**Interpretation**
+- Employers may use names as signals of **ethnicity/foreignness**, and discrimination can persist even when qualifications are “local”.
+
 ## Names from African and other non-majority languages
 
 - Names from languages such as **Yoruba**, **Arabic**, and others may:
