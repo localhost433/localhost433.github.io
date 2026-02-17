@@ -1,0 +1,37 @@
+[
+    {
+        "slug": "01-sample-probability",
+        "title": "1 - Sample space and probability",
+        "date": "2026-01-21"
+    },
+    {
+        "slug": "02-random-variables",
+        "title": "2 - Random Variables",
+        "date": "2026-01-26"
+    },
+    {
+        "slug": "03-joint-distributions",
+        "title": "3 - Joint Distributions",
+        "date": "2026-01-28"
+    },
+    {
+        "slug": "04-expectation",
+        "title": "4 - Expectation",
+        "date": "2026-02-02"
+    },
+    {
+        "slug": "05-cov-cond-exp",
+        "title": "5 - Covariance, Conditional Expectation",
+        "date": "2026-02-04"
+    },
+    {
+        "slug": "06-limit-theorems",
+        "title": "6 - Limit Theorems",
+        "date": "2026-02-09"
+    },
+    {
+        "slug": "07-t-distributions",
+        "title": "7 - t Distributions",
+        "date": "2026-02-11"
+    }
+]

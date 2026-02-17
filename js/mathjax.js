@@ -1,5 +1,5 @@
 window.MathJax = {
-    loader: { load: ['[tex]/textmacros'] },
+    loader: { load: ['[tex]/ams', '[tex]/noerrors', '[tex]/textmacros'] },
     tex: {
         packages: { '[+]': ['noerrors', 'ams', 'textmacros', 'amssymb'] },
         macros: {
