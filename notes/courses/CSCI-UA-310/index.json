@@ -1,0 +1,52 @@
+[
+    {
+        "slug": "01-insertion",
+        "title": "1 - Insertion Sort & Correctness",
+        "date": "2026-01-20"
+    },
+    {
+        "slug": "02-asymptotics",
+        "title": "2 - Asymptotic Analysis",
+        "date": "2026-01-26"
+    },
+    {
+        "slug": "03-mergesort",
+        "title": "3 - Merge Sort & Recurrences",
+        "date": "2026-01-28"
+    },
+    {
+        "slug": "04-quicksort",
+        "title": "4 - QuickSort",
+        "date": "2026-02-02"
+    },
+    {
+        "slug": "05-selection",
+        "title": "5 - Selection & Median",
+        "date": "2026-02-04"
+    },
+    {
+        "slug": "06-lower-bounds",
+        "title": "6 - Lower Bounds & Linear Sorting",
+        "date": "2026-02-09"
+    },
+    {
+        "slug": "07-int-mult",
+        "title": "7 - Radix Sort & Integer Multiplication",
+        "date": "2026-02-11"
+    },
+    {
+        "slug": "R-1",
+        "title": "Recitation 1 - Mathematical Background",
+        "date": "2026-01-23"
+    },
+    {
+        "slug": "R-2",
+        "title": "Recitation 2 - Exact Analysis & Recurrences",
+        "date": "2026-01-30"
+    },
+    {
+        "slug": "R-3",
+        "title": "Recitation 3 - Merge Sort Variants & QuickSort",
+        "date": "2026-02-06"
+    }
+]

@@ -14,10 +14,24 @@
   }
   ,
   {
+    "slug": "MATH-UA-334",
+    "title": "Mathematical Statistics (MATH-UA 334)",
+    "semester": "Spring 2026",
+    "instructor": "Prof. Han"
+  }
+  ,
+  {
     "slug": "CSCI-UA-201",
     "title": "Computer Systems and Organization (CSCI-UA 201)",
     "semester": "Fall 2025",
     "instructor": "Prof. Aljabbouli"
+  }
+  ,
+  {
+    "slug": "CSCI-UA-310",
+    "title": "Basic Algorithms (CSCI-UA 310)",
+    "semester": "Spring 2026",
+    "instructor": "Prof. Abboud"
   }
   ,
   {

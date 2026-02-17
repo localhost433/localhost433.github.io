@@ -50,6 +50,7 @@ build/
 /notes/courses/*/*reading*
 /notes/courses/*/*exercise*
 /notes/courses/*/*syllabus*
+/notes/courses/*/*recitation*
 
 # Hidden courses
 /notes/courses/FYSEM*
@@ -60,9 +61,9 @@ build/
 /notes/courses/CSCI-UA-101
 /notes/courses/CSCI-UA-102
 /notes/courses/MATH-UA-32*
+/notes/courses/MATH-UA-148
 
 # Haven't taken yet
-/notes/courses/CSCI-UA-310
 /notes/courses/CSCI-UA-473
 /notes/courses/CSCI-UA-474
 /notes/courses/CSCI-UA-469
