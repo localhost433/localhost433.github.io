@@ -40,36 +40,27 @@ function createLanguageBar(languages) {
   return barContainer;
 }
 
-async function fetchLanguages(repo) {
+async function fetchLanguages(project) {
+  if (project.languages && Object.keys(project.languages).length > 0) {
+    return project.languages;
+  }
+
+  const repo = project.repo;
+  if (!repo) return {};
+
   if (langCache.has(repo)) return langCache.get(repo);
 
   const ghurl = `https://api.github.com/repos/${repo}/languages`;
-  let data = {};
-
   try {
     const resp = await fetch(ghurl);
     if (!resp.ok) throw new Error(`GitHub API error: ${resp.status}`);
-    data = await resp.json();
+    const data = await resp.json();
+    langCache.set(repo, data);
+    return data;
   } catch (err) {
-    console.warn(`Could not load languages for ${repo} from GitHub (Private repo), trying local fallback.`, err);
-    const repoName = repo.includes('/') ? repo.split('/')[1] : repo;
-    const fallbackFile = `/projects/languages/${repoName}.json`;
-    try {
-      const r2 = await fetch(fallbackFile);
-      if (r2.ok) {
-        data = await r2.json();
-      } else {
-        console.warn(`Local fallback file not found: ${fallbackFile}`);
-        return {};
-      }
-    } catch (e2) {
-      console.error(`Error loading local fallback for ${repo}:`, e2);
-      data = {};
-    }
+    console.warn(`Could not load languages for ${repo} from GitHub.`, err);
+    return {};
   }
-
-  langCache.set(repo, data);
-  return data;
 }
 
 fetch("projects/metadata.json")
@@ -129,9 +120,9 @@ fetch("projects/metadata.json")
 
       container.appendChild(entry);
 
-      if (project.repo) {
+      if (project.repo || (project.languages && Object.keys(project.languages).length > 0)) {
         try {
-          const languages = await fetchLanguages(project.repo);
+          const languages = await fetchLanguages(project);
           const total = Object.values(languages).reduce((a, b) => a + b, 0);
 
           const languageBar = createLanguageBar(languages);
