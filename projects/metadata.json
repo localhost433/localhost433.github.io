@@ -1,58 +1,66 @@
 [
     {
-        "title": "Semantic Search Engine",
-        "link": "https://github.com/localhost433/Vibe-Search-Engine",
-        "repo": "localhost433/Vibe-Search-Engine",
-        "tech": "Python, FAISS, Sentence Transformers",
-        "description": "Winner of 2025 Corner-DSC-BAC Datathon, collaborated with Tomas Gutierrez & Yarden Morad. A semantic search engine (with interface) that uses FAISS and Sentence Transformers to index and search through trained indices."
+        "title": "LeetHub: Revived & Enhanced",
+        "link": "https://github.com/localhost433/LeetHub",
+        "repo": "localhost433/LeetHub",
+        "tech": "JavaScript, Chrome Extension API (MV3), GitHub API",
+        "description": "Revived and refactored a popular unmaintained open-source extension to automate LeetCode-to-GitHub syncing. Fixed critical authentication bugs, migrated to Manifest V3 for modern browser support, and implemented new features for personal workflow optimization.",
+        "languages": {"JavaScript": 88.1, "HTML": 6.8, "CSS": 5.1}
     },
     {
-        "title": "Robin's Site",
-        "link": "https://github.com/localhost433/localhost433.github.io",
-        "repo": "localhost433/localhost433.github.io",
-        "tech": "HTML, CSS, JavaScript",
-        "description": "This site!"
+        "title": "Vibe Semantic Search",
+        "link": "https://github.com/localhost433/Vibe-Search-Engine",
+        "repo": "localhost433/Vibe-Search-Engine",
+        "tech": "Python, FAISS, Sentence Transformers, Flask",
+        "description": "Winner of the 2025 Corner-DSC-BAC Datathon. Developed a high-performance semantic search engine that utilizes FAISS for vector indexing and Sentence Transformers for contextual query understanding.",
+        "languages": {"Python": 67.1, "JavaScript": 14.9, "HTML": 7.6, "CSS": 7.3, "Shell": 3.1}
     },
     {
         "title": "iCloud MCP Server",
         "link": "https://github.com/localhost433/icloud-mcp",
         "repo": "localhost433/icloud-mcp",
         "tech": "Python, FastAPI, Docker, CalDAV",
-        "description": "An HTTP MCP server exposing iCloud Calendar (CalDAV) tools so MCP-aware clients (e.g., (in my case) ChatGPT custom connectors, IDEs, etc.) can access/edit iCloud Calendar data."
+        "description": "An HTTP Model Context Protocol (MCP) server that bridges LLM-aware clients (ChatGPT, IDEs) with iCloud Calendar. Enables AI agents to autonomously manage schedule data via secure CalDAV integrations.",
+        "languages": {"Python": 97.7, "Dockerfile": 2.3}
+    },
+    {
+        "title": "NYC Mayor Prediction Model",
+        "link": "https://github.com/localhost433/nyc-mayor-prediction",
+        "repo": "localhost433/nyc-mayor-prediction",
+        "tech": "Python, PyMC, JAX, RAG, NLP",
+        "description": "A sophisticated Bayesian precinct-level model forecasting the 2025 NYC mayoral election. Combines ranked-choice voting simulations with RAG-based issue-salience embeddings and ACS covariate analysis.",
+        "languages": {"Python": 100.0}
     },
     {
         "title": "Prime Factorization Game",
         "link": "https://localhost433.github.io/Prime-Factorization-Game/",
         "repo": "localhost433/Prime-Factorization-Game",
-        "tech": "HTML, CSS, JavaScript, Supabase",
-        "description": "A simple web game about prime factorization."
+        "tech": "JS (ES6+), CSS3, Supabase",
+        "description": "An interactive web game focused on prime factorization. Features a global leaderboard and real-time data persistence powered by Supabase.",
+        "languages": {"JavaScript": 61.9, "CSS": 21.6, "HTML": 16.5}
     },
     {
-        "title": "Study Readiness Survey",
-        "link": "https://github.com/localhost433/Study-Readiness",
-        "repo": "localhost433/Study-Readiness",
-        "tech": "Python",
-        "description": "A survey aimed at quantifying mental readiness for study, based on more objective tests instead of self-evaluation."
-    },
-    {
-        "title": "NYC Mayor Prediction",
-        "link": "https://github.com/localhost433/nyc-mayor-prediction",
-        "repo": "localhost433/nyc-mayor-prediction",
-        "tech": "Python, PyMC, JAX, RAG, embeddings",
-        "description": "Bayesian precinct-level model and ranked-choice voting simulation to forecast the 2025 NYC mayoral primary, combining polls, endorsements, ACS covariates, and issue-salience embeddings."
-    },
-    {
-        "title": "Authorship Attribution (Stylometry)",
-        "link": "https://github.com/localhost433/authorship_project",
-        "repo": "localhost433/authorship_project",
-        "tech": "Python, scikit-learn, NLP",
-        "description": "Stylometric pipeline over 19th-century English novels with shared utilities for authorship attribution and author-gender prediction using character n-grams, function words, and linear models."
+        "title": "Robin's Portfolio Site",
+        "link": "https://github.com/localhost433/localhost433.github.io",
+        "repo": "localhost433/localhost433.github.io",
+        "tech": "HTML5, CSS3, JavaScript",
+        "description": "This site being my personal site and project showcase, built with a focus on clean UI and responsive design.",
+        "languages": {"JavaScript": 47.1, "CSS": 28.4, "HTML": 24.5}
     },
     {
         "title": "Test Me Please",
         "link": "https://github.com/marcussleongg/test-me-please",
         "repo": "marcussleongg/test-me-please",
-        "tech": "Python, FastAPI, Streamlit, Weaviate, ONNX, RAG",
-        "description": "HackNYU Fall 2025 practice-exam generation and grading platform using RAG, local embeddings, and a Streamlit UI for course-grounded adaptive assessments and feedback."
+        "tech": "Python, FastAPI, Streamlit, Weaviate, RAG",
+        "description": "HackNYU Fall 2025 project. An adaptive learning platform that generates and grades practice exams using RAG and local embeddings to provide course-grounded feedback.",
+        "languages": {"Python": 77.0, "JavaScript": 14.3, "PowerShell": 3.7, "Shell": 2.2, "Makefile": 1.4, "CSS": 1.2, "HTML": 0.2}
+    },
+    {
+        "title": "Authorship Stylometry Pipeline",
+        "link": "https://github.com/localhost433/authorship_project",
+        "repo": "localhost433/authorship_project",
+        "tech": "Python, scikit-learn, NLP",
+        "description": "An end-to-end stylometric analysis pipeline used to predict authorship and gender in 19th-century literature using character n-grams, function word frequency, and linear classifiers.",
+        "languages": {"Python": 100.0}
     }
 ]
