@@ -18,8 +18,9 @@ Let $X$ and $Y$ be discrete random variables. The behavior of the pair $(X, Y)$ 
 $$p_{X,Y}(x, y) = \mathbb{P}(X = x, Y = y)$$
 
 **Properties:**
-1.  **Non-negativity:** $p_{X,Y}(x, y) \ge 0$.
-2.  **Normalization:** Summing over all possible pairs equals 1.
+
+1. **Non-negativity:** $p_{X,Y}(x, y) \ge 0$.
+2. **Normalization:** Summing over all possible pairs equals 1.
     $$\sum_{x} \sum_{y} p_{X,Y}(x, y) = 1$$
 
 ### 2.2 Marginal Distribution
@@ -76,17 +77,20 @@ $$f_{U,V}(u, v) = f_{X,Y}(x, y) \cdot |J|^{-1}$$
 where $x, y$ are expressed in terms of $u, v$, and $J$ is the Jacobian of the transformation $(u,v) \to (x,y)$ (or inverse of the transformation $(x,y) \to (u,v)$).
 
 Specifically, if we compute the Jacobian of the transformation **from $(x, y)$ to $(u, v)$**:
-$$J = \det \begin{bmatrix} \frac{\partial u}{\partial x} & \frac{\partial u}{\partial y} \\ \frac{\partial v}{\partial x} & \frac{\partial v}{\partial y} \end{bmatrix}$$
+$$
+J = \det \begin{bmatrix} \frac{\partial u}{\partial x} & \frac{\partial u}{\partial y} \\\\ \frac{\partial v}{\partial x} & \frac{\partial v}{\partial y} \end{bmatrix}
+$$
 Then:
 $$f_{U,V}(u, v) = f_{X,Y}(x(u,v), y(u,v)) \cdot \frac{1}{|J(x,y)|}$$
 
 ### Example 1: Sum of Random Variables
 
 Let $U = X + Y$. To use the method, we introduce a dummy variable $V = Y$.
+
 * Transformation: $u = x+y, v = y$.
 * Inverse: $x = u-v, y = v$.
 * Jacobian: $\frac{\partial u}{\partial x} = 1, \dots$ actually it is easier to find the Jacobian of the inverse map directly or just use the formula.
-    $$\frac{\partial(u,v)}{\partial(x,y)} = \det \begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix} = 1$$
+    $$\frac{\partial(u,v)}{\partial(x,y)} = \det \begin{bmatrix} 1 & 1 \\\\ 0 & 1 \end{bmatrix} = 1$$
 * Density:
     $$f_{U,V}(u, v) = f_{X,Y}(u-v, v) \cdot 1$$
 * Marginal of U (Convolution Formula):
@@ -96,18 +100,18 @@ Let $U = X + Y$. To use the method, we introduce a dummy variable $V = Y$.
 ### Example 2: Polar Coordinates
 
 Let $(X, Y)$ be independent standard normals, i.e., $f_{X,Y}(x,y) = \frac{1}{2\pi} e^{-(x^2+y^2)/2}$.
-Transform to polar coordinates $(R, \Theta)$:
-$$X = R \cos \Theta, \quad Y = R \sin \Theta$$
+Transform to polar coordinates $(R, \theta)$:
+$$X = R \cos \theta, \quad Y = R \sin \theta$$
 
-* The Jacobian of the transformation from $(R, \Theta)$ to $(X, Y)$ is $r$.
-* $f_{R, \Theta}(r, \theta) = f_{X,Y}(r\cos\theta, r\sin\theta) \cdot r$
-* $f_{R, \Theta}(r, \theta) = \frac{1}{2\pi} e^{-r^2/2} \cdot r$ for $r \ge 0, \theta \in [0, 2\pi)$.
+* The Jacobian of the transformation from $(R, \theta)$ to $(X, Y)$ is $r$.
+* $f_{R, \theta}(r, \theta) = f_{X,Y}(r\cos\theta, r\sin\theta) \cdot r$
+* $f_{R, \theta}(r, \theta) = \frac{1}{2\pi} e^{-r^2/2} \cdot r$ for $r \ge 0, \theta \in [0, 2\pi)$.
 
-This implies $R$ and $\Theta$ are independent, with $\Theta \sim \text{Unif}[0, 2\pi]$ and $R$ following a Rayleigh distribution.
+This implies $R$ and $\theta$ are independent, with $\theta \sim \text{Unif}[0, 2\pi]$ and $R$ following a Rayleigh distribution.
 
 ---
 
 ## References
 
-1.  Rice, J. A. (2007). *Mathematical Statistics and Data Analysis* (3rd ed.). Thomson Brooks/Cole.
-2.  Han, Y. (2026). Lecture 3: Joint Distributions.
+1. Rice, J. A. (2007). *Mathematical Statistics and Data Analysis* (3rd ed.). Thomson Brooks/Cole.
+2. Han, Y. (2026). Lecture 3: Joint Distributions.

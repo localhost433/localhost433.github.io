@@ -3,7 +3,7 @@ title: Sample space and probability
 date: 2026-01-21
 ---
 
-## Roadmap
+## 0.Roadmap
 
 We model a “random experiment” with a triple $(\Omega, \mathcal F, \mathbb P)$:
 
@@ -23,9 +23,9 @@ The rest of the course basically builds on these ideas: compute probabilities by
 
 **Examples:**
 
-* **Coin Toss:** Toss a coin three times. The sample space is:
+- **Coin Toss:** Toss a coin three times. The sample space is:
     $$\Omega = \{HHH, HHT, HTH, HTT, THH, THT, TTH, TTT\}$$
-* **Card Draw:** Draw one card from a standard 52-card deck. The sample space contains 52 distinct elements.
+- **Card Draw:** Draw one card from a standard 52-card deck. The sample space contains 52 distinct elements.
 
 ### 1.2 Events
 
@@ -47,13 +47,15 @@ For events $A, B \subseteq \Omega$, we define the following set operations:
 **Example (Coin tossed 3 times):**
 
 Let $\Omega$ be the set of 3 coin flips. Define the following events:
-- $A =$ “at most one tail” $= \{HHH, HHT, HTH, THH\}$
-- $B =$ “first flip is tails” $= \{THH, THT, TTH, TTT\}$
+
+- $A =$ “at most one tail” $= \{HHH, HHT, HTH, THH \}$
+- $B =$ “first flip is tails” $= \{THH, THT, TTH, TTT \}$
 
 **Operations:**
-1.  **Union ($A \cup B$):** "At most one tail OR first flip is tails".
+
+1. **Union ($A \cup B$):** "At most one tail OR first flip is tails".
     $$A \cup B = \{HHH, HHT, HTH, THH, THT, TTH, TTT\} = \Omega \setminus \{HTT\}$$
-2.  **Intersection ($A \cap B$):** "At most one tail AND first flip is tails".
+2. **Intersection ($A \cap B$):** "At most one tail AND first flip is tails".
     $$A \cap B = \{THH\}$$
 
 ---
@@ -66,9 +68,9 @@ A probability measure $\mathbb P$ is a function that assigns a real number to ea
 
 A function $\mathbb P: \mathcal{F} \to [0, 1]$ is a probability measure if it satisfies the following three axioms:
 
-1.  **Normalization:** $\mathbb P(\Omega) = 1$.
-2.  **Non-negativity:** $\mathbb P(A) \ge 0$ for all $A \subseteq \Omega$.
-3.  **Countable Additivity (Disjoint Unions):** If $A_1, A_2, \dots$ are disjoint events (i.e., $A_i \cap A_j = \emptyset$ for $i \neq j$), then:
+1. **Normalization:** $\mathbb P(\Omega) = 1$.
+2. **Non-negativity:** $\mathbb P(A) \ge 0$ for all $A \subseteq \Omega$.
+3. **Countable Additivity (Disjoint Unions):** If $A_1, A_2, \dots$ are disjoint events (i.e., $A_i \cap A_j = \emptyset$ for $i \neq j$), then:
     $$\mathbb P\left(\bigcup_{i=1}^{\infty} A_i\right) = \sum_{i=1}^{\infty} \mathbb P(A_i)$$
     *Special case:* For two disjoint events $A$ and $B$, $\mathbb P(A \cup B) = \mathbb P(A) + \mathbb P(B)$.
 
@@ -76,13 +78,19 @@ A function $\mathbb P: \mathcal{F} \to [0, 1]$ is a probability measure if it sa
 
 Using the axioms, we can derive several useful properties:
 
-1.  **Complement Rule:** $\mathbb P(A^c) = 1 - \mathbb P(A)$.
+1. **Complement Rule:** $\mathbb P(A^c) = 1 - \mathbb P(A)$.
+
     *Proof:* Since $A \cup A^c = \Omega$ and $A \cap A^c = \emptyset$, by Axiom 3 and 1: $\mathbb P(A) + \mathbb P(A^c) = \mathbb P(\Omega) = 1$.
-2.  **Empty Set:** $\mathbb P(\emptyset) = 0$.
+
+2. **Empty Set:** $\mathbb P(\emptyset) = 0$.
+
     *Proof:* $\emptyset = \Omega^c$, so $\mathbb P(\emptyset) = 1 - \mathbb P(\Omega) = 0$.
-3.  **Monotonicity:** If $A \subseteq B$, then $\mathbb P(A) \le \mathbb P(B)$.
+
+3. **Monotonicity:** If $A \subseteq B$, then $\mathbb P(A) \le \mathbb P(B)$.
+
     *Proof:* Write $B = A \cup (B \cap A^c)$. Since these are disjoint, $\mathbb P(B) = \mathbb P(A) + \mathbb P(B \cap A^c) \ge \mathbb P(A)$ (by Axiom 2).
-4.  **Inclusion-Exclusion Principle:** For any two events $A$ and $B$:
+
+4. **Inclusion-Exclusion Principle:** For any two events $A$ and $B$:
     $$\mathbb P(A \cup B) = \mathbb P(A) + \mathbb P(B) - \mathbb P(A \cap B)$$
 
 ---
@@ -100,14 +108,15 @@ $$\mathbb P(A) = \frac{|A|}{|\Omega|} = \frac{\text{number of outcomes in } A}{\
 
 To determine $|A|$ and $|\Omega|$, we often use combinatorial methods:
 
-* **Multiplication Rule:** If an experiment has $k$ steps with $n_1, n_2, \dots, n_k$ choices respectively, the total number of outcomes is $n_1 \times n_2 \times \dots \times n_k$.
-* **Permutations:** Ordering $k$ distinct items from a set of $n$.
+- **Multiplication Rule:** If an experiment has $k$ steps with $n_1, n_2, \dots, n_k$ choices respectively, the total number of outcomes is $n_1 \times n_2 \times \dots \times n_k$.
+- **Permutations:** Ordering $k$ distinct items from a set of $n$.
     $$P(n, k) = \frac{n!}{(n-k)!}$$
-* **Combinations:** Choosing $k$ items from a set of $n$ without regard to order.
+- **Combinations:** Choosing $k$ items from a set of $n$ without regard to order.
     $$\binom{n}{k} = \frac{n!}{k!(n-k)!}$$
 
 **Example:**
 What is the probability of drawing a King from a standard deck?
+
 - $|\Omega| = 52$
 - $|A| = 4$ (King of Hearts, Diamonds, Clubs, Spades)
 - $\mathbb P(A) = \frac{4}{52} = \frac{1}{13}$
@@ -116,5 +125,5 @@ What is the probability of drawing a King from a standard deck?
 
 ## References
 
-1.  Rice, J. A. (2007). *Mathematical Statistics and Data Analysis* (3rd ed.). Thomson Brooks/Cole.
-2.  Han, Y. (2026). Lecture 1: Sample space & probability.
+1. Rice, J. A. (2007). *Mathematical Statistics and Data Analysis* (3rd ed.). Thomson Brooks/Cole.
+2. Han, Y. (2026). Lecture 1: Sample space & probability.
