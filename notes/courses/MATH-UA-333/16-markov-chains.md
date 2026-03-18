@@ -113,7 +113,7 @@ For each state $j$,
 $$
 \mathbb{P}(X\_{n+1} = j)
 = \sum\_{i=1}^m \mathbb{P}(X\_{n+1}=j, X\_n = i)
-= \sum\_{i=1}^m \mathbb{P}(X\_{n+1}=j \mid X\_n=i)\, \mathbb{P}(X\_n=i)
+= \sum\_{i=1}^m \mathbb{P}(X\_{n+1}=j \mid X\_n=i)  \mathbb{P}(X\_n=i)
 = \sum\_{i=1}^m v^{(n)}\_i p\_{ij}.
 $$
 

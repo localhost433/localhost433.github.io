@@ -21,7 +21,7 @@ A **permutation** of $n$ distinct objects is an ordering. There are $n! = n\time
 
 To choose $k$ objects from $n$ without regard to order, count the ordered selections and then divide by $k!$. The number of subsets of size $k$ is
 $$
-{n \choose k} = \frac{n!}{k!\,(n-k)!},
+{n \choose k} = \frac{n!}{k! (n-k)!},
 $$
 
 called a **binomial coefficient**.
@@ -36,7 +36,7 @@ Useful identities include ${n \choose k}={n \choose n-k}$ and the recursive sum 
 
 ## Multinomial coefficients
 
-To divide $n$ items into $r$ groups of sizes $n_1,\dots,n_r$ with $n_1+\cdots+n_r=n$, the number of ways is 
+To divide $n$ items into $r$ groups of sizes $n_1,\dots,n_r$ with $n_1+\cdots+n_r=n$, the number of ways is
 $$
 \frac{n!}{n_1!n_2!\cdots n_r!}.
 $$
@@ -45,9 +45,8 @@ For instance, arranging 30 students into ten presentation groups of three has ${
 
 ## Multiset permutations
 
-If a word has repeated letters, e.g.\ P,E,P,P,E,R, the number of distinct rearrangements is $\tfrac{6!}{3!\,2!}$; count all $6!$ permutations and divide by the $3!$ ways to reorder the three P’s and $2!$ ways to reorder the two E’s.
+If a word has repeated letters, e.g.\ P,E,P,P,E,R, the number of distinct rearrangements is $\tfrac{6!}{3! 2!}$; count all $6!$ permutations and divide by the $3!$ ways to reorder the three P’s and $2!$ ways to reorder the two E’s.
 
 ## Stars and bars: integer partitions
 
 To distribute $n$ identical candies among $r$ kids so each gets at least one, find the number of positive integer solutions to $x_1+\cdots+x_r=n$. Imagine placing $r-1$ dividers into $n-1$ slots to separate $n$ candies; there are ${n-1 \choose r-1}$ solutions. If zero candies are allowed, give each child one candy first and then distribute the remaining $n+r-1$ candies; the answer becomes ${n+r-1\choose r-1}$.
-

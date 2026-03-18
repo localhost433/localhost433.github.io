@@ -70,7 +70,7 @@ $$
   $$
   M_Z(t) = \mathbb{E}\big(e^{t(X+Y)}\big)
   = \mathbb{E}\big(e^{tX} e^{tY}\big)
-  = \mathbb{E}(e^{tX}) \, \mathbb{E}(e^{tY})
+  = \mathbb{E}(e^{tX})   \mathbb{E}(e^{tY})
   = M_X(t) M_Y(t).
   $$
   More generally, for independent $X_1,\dots,X_n$,
@@ -91,8 +91,8 @@ $$
 > Let $X \sim \mathrm{Exp}(\lambda)$ with density $\lambda e^{-\lambda x}$ on $[0,\infty)$.  
 > Then for $t \in \mathbb{R}$,
 > $$
-> M_X(t) = \int_0^{\infty} \lambda e^{-\lambda x} e^{tx} \, dx
-> = \lambda \int_0^{\infty} e^{-(\lambda - t)x} \, dx.
+> M_X(t) = \int_0^{\infty} \lambda e^{-\lambda x} e^{tx}   dx
+> = \lambda \int_0^{\infty} e^{-(\lambda - t)x}   dx.
 > $$
 > If $t < \lambda$, the integral converges:
 > $$
@@ -167,7 +167,7 @@ $$
 > Let $X \sim \mathrm{Unif}([a,b])$. Then
 > $$
 > M_X(t) = \mathbb{E}(e^{tX})
-> = \int_a^b \frac{1}{b-a} e^{tx} \, dx
+> = \int_a^b \frac{1}{b-a} e^{tx}   dx
 > = \frac{e^{tb} - e^{ta}}{t(b-a)}, \quad t \ne 0,
 > $$
 > and $M_X(0)=1$ by continuity.  
@@ -177,12 +177,12 @@ $$
 > \operatorname{Var}(X) = \frac{(b-a)^2}{12}.
 > $$
 > **Example (Normal distribution).**  
-> Let $X \sim N(\mu,\sigma^2)$. Then
+> Let $X  \sim \mathcal{N}(\mu,\sigma^2)$. Then
 > $$
 > M_X(t)
 > = \mathbb{E}(e^{tX})
 > = \frac{1}{\sqrt{2\pi}\sigma} \int_{-\infty}^{\infty}
-> \exp\left(-\frac{(x-\mu)^2}{2\sigma^2} + tx\right) \, dx.
+> \exp\left(-\frac{(x-\mu)^2}{2\sigma^2} + tx\right)   dx.
 > $$
 > Completing the square in the exponent yields
 > $$
@@ -192,14 +192,14 @@ $$
 > $$
 > \mathbb{E}X = \mu, \qquad \operatorname{Var}(X) = \sigma^2.
 > $$
-> If $X \sim N(\mu_1,\sigma_1^2)$ and $Y \sim N(\mu_2,\sigma_2^2)$ are independent, then
+> If $X  \sim \mathcal{N}(\mu_1,\sigma_1^2)$ and $Y  \sim \mathcal{N}(\mu_2,\sigma_2^2)$ are independent, then
 > $$
 > M_{X+Y}(t) = M_X(t) M_Y(t)
 > = \exp\left( (\mu_1 + \mu_2)t + \frac{1}{2}(\sigma_1^2 + \sigma_2^2)t^2 \right),
 > $$
 > so
 > $$
-> X+Y \sim N(\mu_1+\mu_2, \sigma_1^2 + \sigma_2^2).
+> X+Y  \sim \mathcal{N}(\mu_1+\mu_2, \sigma_1^2 + \sigma_2^2).
 > $$
 
 ---
@@ -214,9 +214,9 @@ $$
 - Always satisfies $|\varphi_X(t)| \le 1$.
 - If $X,Y$ are independent and $Z=X+Y$, then
   $$
-  \varphi_Z(t) = \varphi_X(t)\,\varphi_Y(t).
+  \varphi_Z(t) = \varphi_X(t) \varphi_Y(t).
   $$
-- For $X\sim N(\mu,\sigma^2)$,
+- For $X \sim \mathcal{N}(\mu,\sigma^2)$,
   $$
   \varphi_X(t) = \exp\big(i\mu t - \tfrac{1}{2}\sigma^2 t^2\big).
   $$

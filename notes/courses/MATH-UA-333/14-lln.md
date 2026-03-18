@@ -196,7 +196,7 @@ Apply Markov to $Y_n = \left|\frac{S_n}{n} - \mu\right|^4$:
 $$
 \mathbb{P}(A_n)
 = \mathbb{P}\left(\left|\frac{S_n}{n} - \mu\right| \ge \frac{1}{k}\right)
-\le k^4 \, \mathbb{E}\left(\frac{S_n}{n} - \mu\right)^4.
+\le k^4   \mathbb{E}\left(\frac{S_n}{n} - \mu\right)^4.
 $$
 
 We want a bound
@@ -223,7 +223,7 @@ S_n - n\mu = \sum_{i=1}^n (X_i - \mu)
 $$
 and use independence and centering to see that only index patterns with either all four equal or two equal pairs contribute. The resulting expression is of order
 $$
-n\,\mathbb{E}(X_1-\mu)^4 + n^2 (\mathbb{E}(X_1-\mu)^2)^2,
+n \mathbb{E}(X_1-\mu)^4 + n^2 (\mathbb{E}(X_1-\mu)^2)^2,
 $$
 which is bounded by a constant times $n^2$ under $\mathbb{E}|X_1|^4<\infty$.
 
