@@ -54,6 +54,7 @@ The PMF $p_X(x)$ gives the probability that $X$ takes the specific value $x$.
 $$p_X(x_i) = \mathbb{P}(X = x_i)$$
 
 **Properties:**
+
 * $p_X(x_i) \ge 0$
 * $\sum_{i} p_X(x_i) = 1$
 * Relation to CDF: $F_X(x) = \sum_{x_i \le x} p_X(x_i)$ (a step function).
@@ -77,9 +78,10 @@ A random variable $X$ is **continuous** if there exists a non-negative function 
 $$\mathbb{P}(X \in B) = \int_B f_X(x) \, dx$$
 
 **Properties:**
+
 * $f_X(x) \ge 0$.
-* $\int_{-\infty}^{\infty} f_X(x) \, dx = 1$.
-* Relation to CDF: $F_X(x) = \int_{-\infty}^{x} f_X(t) \, dt$.
+* $\int_{-\infty}^{\infty} f_X(x) dx = 1$.
+* Relation to CDF: $F_X(x) = \int_{-\infty}^{x} f_X(t) dt$.
 * Fundamental Theorem of Calculus: $f_X(x) = F'_X(x)$ (where derivative exists).
 * **Important:** For continuous RVs, $\mathbb{P}(X = c) = 0$ for any specific point $c$.
 
