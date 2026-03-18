@@ -156,7 +156,7 @@ For $k>0$ and $t>0$,
 $$
 \mathbb{P}(X \ge k)
 = \mathbb{P}\big(e^{tX} \ge e^{tk}\big)
-\le e^{-tk} \, \mathbb{E}(e^{tX})
+\le e^{-tk}   \mathbb{E}(e^{tX})
 = e^{-tk} M_X(t),
 $$
 where we applied Markov’s inequality to the nonnegative random variable $e^{tX}$.
@@ -188,7 +188,7 @@ We can then choose $t$ to minimize the upper bound $e^{-tk} M(t)^n$.
 > For $a>1$,
 > $$
 > \mathbb{P}(X \ge a n p)
-> \le \exp(-t a n p)\, (p e^t + 1 - p)^n.
+> \le \exp(-t a n p)  (p e^t + 1 - p)^n.
 > $$
 > Choose $t = \ln a$:
 > $$

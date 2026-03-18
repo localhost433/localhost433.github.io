@@ -166,7 +166,7 @@ $$
 
 ## Gamma variables and normal variables
 
-If $X\sim N(0,1)$ and $Y=X^2$, then for $t>0$ one finds
+If $X \sim \mathcal{N}(0,1)$ and $Y=X^2$, then for $t>0$ one finds
 $$
 f_Y(t) = \frac{1}{\sqrt{2\pi t}}e^{-t/2},
 $$
@@ -185,9 +185,9 @@ also called $\chi^2(n)$.
 
 ## Sum of independent normals
 
-If $X\sim N(\mu_1,\sigma_1^2)$ and $Y\sim N(\mu_2,\sigma_2^2)$ are independent, then
+If $X \sim \mathcal{N}(\mu_1,\sigma_1^2)$ and $Y \sim \mathcal{N}(\mu_2,\sigma_2^2)$ are independent, then
 $$
-Z=X+Y\sim N(\mu_1+\mu_2,\ \sigma_1^2+\sigma_2^2).
+Z=X+Y \sim \mathcal{N}(\mu_1+\mu_2,\ \sigma_1^2+\sigma_2^2).
 $$
 
 (Convolution of Gaussian densities stays Gaussian; the means add and the variances add.)

@@ -129,7 +129,7 @@ $$
 Equivalently, for $k,\ell\in \mathbb{N}$,
 $$
 \mathbb{P}\big(N(s)=k,\ N(s+t)-N(s)=\ell\big)
-= \mathbb{P}(N(s)=k)\,\mathbb{P}(N(t)=\ell)
+= \mathbb{P}(N(s)=k) \mathbb{P}(N(t)=\ell)
 = \frac{(\lambda s)^k}{k!}e^{-\lambda s}\cdot \frac{(\lambda t)^\ell}{\ell!}e^{-\lambda t}.
 $$
 More generally, for $0<t_1<\cdots<t_n$, the increments
@@ -173,10 +173,12 @@ is a Poisson process with rate $\lambda_1+\lambda_2$.
 Let $\{N(t)\}_{t\ge 0}$ be a Poisson process with rate $\lambda$. Independently mark each event as “type 1” with probability $p$ and “type 2” with probability $1-p$.
 
 Define:
+
 - $N_1(t)$ = number of type 1 events up to time $t$,
 - $N_2(t)$ = number of type 2 events up to time $t$.
 
 Then:
+
 - $\{N_1(t)\}$ is Poisson with rate $\lambda p$,
 - $\{N_2(t)\}$ is Poisson with rate $\lambda(1-p)$,
 - and the two processes are independent.

@@ -116,7 +116,7 @@ i.e. conditional on $Y=b$, $X$ has an exponential-type density on $(0,\infty)$ (
 
 Suppose $X\sim\mathrm{Unif}(0,1)$, and given $X=x$ we sample
 $$
-Y\mid X=x \sim N(2x,1).
+Y\mid X=x  \sim \mathcal{N}(2x,1).
 $$
 
 Then

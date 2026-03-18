@@ -68,7 +68,7 @@ H_{Y=y_j}(X):=\sum_i \big(-p(x_i\mid y_j)\log_2 p(x_i\mid y_j)\big).
 $$
 Then the **conditional entropy of $X$ given $Y$** is the average over $Y$:
 $$
-H_Y(X):=\sum_j H_{Y=y_j}(X)\, \mathbb{P}(Y=y_j).
+H_Y(X):=\sum_j H_{Y=y_j}(X) \mathbb{P}(Y=y_j).
 $$
 
 Note the contrast:
@@ -147,18 +147,18 @@ Think of learning the value of $X$ by asking yes/no questions (equivalently, enc
 
 A **binary code** assigns to each possible value $x_k$ a distinct finite 0/1 string. Let $n_k$ be the length (number of bits) used for $x_k$. The expected code length is
 $$
-\mathbb{E}[\text{bits}]=\sum_k \mathbb{P}(X=x_k)\, n_k.
+\mathbb{E}[\text{bits}]=\sum_k \mathbb{P}(X=x_k) n_k.
 $$
 
 ### Shannon’s coding theorem (as stated in lecture)
 
 - For any such binary encoding, the expected number of bits satisfies
   $$
-  \sum_k \mathbb{P}(X=x_k)\, n_k \ \ge\ H(X).
+  \sum_k \mathbb{P}(X=x_k) n_k \ \ge\ H(X).
   $$
 - There exists an encoding (a good one) for which
   $$
-  \sum_k \mathbb{P}(X=x_k)\, n_k \ \le\ H(X)+1.
+  \sum_k \mathbb{P}(X=x_k) n_k \ \le\ H(X)+1.
   $$
 
 Interpretation: $H(X)$ is the fundamental lower bound (in bits) for average description length, and you can get within $1$ bit of it.
