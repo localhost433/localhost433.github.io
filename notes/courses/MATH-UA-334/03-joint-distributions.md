@@ -5,13 +5,13 @@ date: 2026-01-28
 
 ## 1. Introduction
 
-So far, we have looked at single random variables. In many applications, we are interested in the relationship between two or more random variables (e.g., height and weight). This lecture covers **Joint Distributions** for random vectors $(X, Y)$.
+So far, we have looked at single random variables. In many applications, we are interested in the relationship between two or more random variables simultaneously (e.g., modeling height and weight). This lecture formalizes **Joint Distributions** for random vectors $(X, Y)$.
 
 ---
 
 ## 2. Discrete Case
 
-Let $X$ and $Y$ be discrete random variables. The behavior of the pair $(X, Y)$ is described by the **joint probability mass function (joint pmf)**.
+Let $X$ and $Y$ be discrete random variables. The behavior of the pair $(X, Y)$ is described by the **joint probability mass function (joint PMF)**.
 
 ### 2.1 Joint PMF
 
@@ -25,7 +25,7 @@ $$p_{X,Y}(x, y) = \mathbb{P}(X = x, Y = y)$$
 
 ### 2.2 Marginal Distribution
 
-We can recover the distribution of $X$ alone (marginal distribution) by summing out $Y$.
+We can recover the distribution of $X$ alone (the marginal distribution) by summing out $Y$.
 
 $$p_X(x) = \mathbb{P}(X = x) = \sum_{y} \mathbb{P}(X=x, Y=y) = \sum_{y} p_{X,Y}(x, y)$$
 
@@ -34,18 +34,18 @@ $$p_Y(y) = \sum_{x} p_{X,Y}(x, y)$$
 
 ### 2.3 Conditional Distribution
 
-The conditional pmf of $X$ given $Y=y$ is defined as:
+The conditional PMF of $X$ given that we observed $Y=y$ is defined as:
 
 $$p_{X|Y}(x|y) = \mathbb{P}(X=x \mid Y=y) = \frac{\mathbb{P}(X=x, Y=y)}{\mathbb{P}(Y=y)} = \frac{p_{X,Y}(x, y)}{p_Y(y)}$$
-(Valid only if $p_Y(y) > 0$).
+(This is valid only if $p_Y(y) > 0$).
 
 ---
 
 ## 3. Continuous Case
 
-For continuous random variables $X$ and $Y$, we define the **joint probability density function (joint pdf)** $f_{X,Y}(x, y)$.
+For continuous random variables $X$ and $Y$, we define the **joint probability density function (joint PDF)** $f_{X,Y}(x, y)$.
 
-Probabilities are calculated as volumes under the surface $f_{X,Y}(x, y)$:
+Probabilities are calculated as volumes under the two-dimensional surface $f_{X,Y}(x, y)$:
 $$\mathbb{P}((X, Y) \in A) = \iint_A f_{X,Y}(x, y) \, dx \, dy$$
 
 ### 3.1 Marginals and Conditionals (Continuous)
@@ -66,7 +66,7 @@ Random variables $X$ and $Y$ are **independent** if and only if their joint dist
 
 ## 4. Change of Variables (Jacobian Method)
 
-Suppose we have a random vector $(X, Y)$ with joint density $f_{X,Y}(x, y)$ and we transform it to $(U, V)$ via a differentiable, invertible map:
+Suppose we have a random vector $(X, Y)$ with joint density $f_{X,Y}(x, y)$ and we transform it to a new vector $(U, V)$ via a differentiable, invertible map:
 $$u = g_1(x, y), \quad v = g_2(x, y)$$
 
 To find the joint PDF $f_{U,V}(u, v)$, we use the Jacobian determinant.
@@ -77,23 +77,20 @@ $$f_{U,V}(u, v) = f_{X,Y}(x, y) \cdot |J|^{-1}$$
 where $x, y$ are expressed in terms of $u, v$, and $J$ is the Jacobian of the transformation $(u,v) \to (x,y)$ (or inverse of the transformation $(x,y) \to (u,v)$).
 
 Specifically, if we compute the Jacobian of the transformation **from $(x, y)$ to $(u, v)$**:
-$$
-J = \det \begin{bmatrix} \frac{\partial u}{\partial x} & \frac{\partial u}{\partial y} \\\\ \frac{\partial v}{\partial x} & \frac{\partial v}{\partial y} \end{bmatrix}
-$$
+$$J = \det \begin{bmatrix} \frac{\partial u}{\partial x} & \frac{\partial u}{\partial y} \\\\ \frac{\partial v}{\partial x} & \frac{\partial v}{\partial y} \end{bmatrix}$$
 Then:
 $$f_{U,V}(u, v) = f_{X,Y}(x(u,v), y(u,v)) \cdot \frac{1}{|J(x,y)|}$$
 
-### Example 1: Sum of Random Variables
+### Example 1: Sum of Random Variables (Convolution)
 
 Let $U = X + Y$. To use the method, we introduce a dummy variable $V = Y$.
 
-* Transformation: $u = x+y, v = y$.
-* Inverse: $x = u-v, y = v$.
-* Jacobian: $\frac{\partial u}{\partial x} = 1, \dots$ actually it is easier to find the Jacobian of the inverse map directly or just use the formula.
-    $$\frac{\partial(u,v)}{\partial(x,y)} = \det \begin{bmatrix} 1 & 1 \\\\ 0 & 1 \end{bmatrix} = 1$$
-* Density:
+* **Transformation:** $u = x+y, v = y$.
+* **Inverse:** $x = u-v, y = v$.
+* **Jacobian:** $$J = \frac{\partial(u,v)}{\partial(x,y)} = \det \begin{bmatrix} 1 & 1 \\\\ 0 & 1 \end{bmatrix} = 1$$
+* **Density of (U,V):**
     $$f_{U,V}(u, v) = f_{X,Y}(u-v, v) \cdot 1$$
-* Marginal of U (Convolution Formula):
+* **Marginal of U (Convolution Formula):**
     $$f_U(u) = \int_{-\infty}^{\infty} f_{X,Y}(u-v, v) \, dv$$
     If $X, Y$ are independent: $f_U(u) = \int f_X(u-v) f_Y(v) \, dv$.
 
