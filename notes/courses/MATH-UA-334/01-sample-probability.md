@@ -3,37 +3,41 @@ title: Sample space and probability
 date: 2026-01-21
 ---
 
-## 0.Roadmap
+## 1. Introduction and Roadmap
 
-We model a “random experiment” with a triple $(\Omega, \mathcal F, \mathbb P)$:
+We model a “random experiment” with a formal mathematical triple $(\Omega, \mathcal{F}, \prob)$:
 
-- $\Omega$: sample space (all possible outcomes)
-- $\mathcal F \subseteq 2^{\Omega}$: collection of *events* (the subsets we are allowed to assign probabilities to)
-- $\mathbb P$: probability measure on $\mathcal F$ (satisfies the axioms)
+- $\Omega$: The sample space, representing all possible outcomes.
+- $\mathcal{F} \subseteq 2^{\Omega}$: The collection of *events* (the subsets of the sample space we are allowed to assign probabilities to).
+- $\prob$: The probability measure on $\mathcal{F}$ (which must satisfy Kolmogorov's axioms).
 
-The rest of the course basically builds on these ideas: compute probabilities by (i) set manipulations and axioms, (ii) counting (when the model is uniform), and (iii) conditioning and independence.
+The remainder of the course builds on these core ideas. We compute probabilities by:
+
+1. Set manipulations and applying probability axioms.
+2. Counting methods (when the underlying model is uniform).
+3. Using advanced tools like conditioning and independence.
 
 ---
 
-## 1. Sample spaces and events
+## 2. Sample Spaces and Events
 
-### 1.1 Sample space
+### 2.1 Sample Space
 
-**Definition (sample space).** A **sample space** $\Omega$ is the set of all possible outcomes of an experiment.
+**Definition (Sample Space).** A **sample space** $\Omega$ is the set of all possible outcomes of a random experiment.
 
 **Examples:**
 
 - **Coin Toss:** Toss a coin three times. The sample space is:
     $$\Omega = \{HHH, HHT, HTH, HTT, THH, THT, TTH, TTT\}$$
-- **Card Draw:** Draw one card from a standard 52-card deck. The sample space contains 52 distinct elements.
+- **Card Draw:** Draw one card from a standard 52-card deck. The sample space $\Omega$ contains 52 distinct elements.
 
-### 1.2 Events
+### 2.2 Events
 
-**Definition (event).** An **event** is a subset $A \subseteq \Omega$.
+**Definition (Event).** An **event** is a subset $A \subseteq \Omega$.
 
-> **Formal note:** In full generality, we specify a sigma-algebra $\mathcal F$ of measurable events. For this course, we generally think of events as subsets of $\Omega$, assuming we are working with a collection of subsets closed under complements and countable unions.
+> **Formal note:** In full generality, we specify a sigma-algebra $\mathcal{F}$ of measurable events. For this course, we generally think of events as subsets of $\Omega$, assuming we are working with a collection of subsets closed under complements and countable unions.
 
-### 1.3 Set operations (notation)
+### 2.3 Set Operations
 
 For events $A, B \subseteq \Omega$, we define the following set operations:
 
@@ -44,12 +48,11 @@ For events $A, B \subseteq \Omega$, we define the following set operations:
 - **Difference** ($A \setminus B$): The set of outcomes in $A$ but not in $B$.
   $$A \setminus B := A \cap B^c$$
 
-**Example (Coin tossed 3 times):**
+**Example:**
+Let $\Omega$ be the set of outcomes of 3 coin flips. Define the following events:
 
-Let $\Omega$ be the set of 3 coin flips. Define the following events:
-
-- $A =$ “at most one tail” $= \{HHH, HHT, HTH, THH \}$
-- $B =$ “first flip is tails” $= \{THH, THT, TTH, TTT \}$
+- $A =$ “at most one tail” $= \{HHH, HHT, HTH, THH\}$
+- $B =$ “first flip is tails” $= \{THH, THT, TTH, TTT\}$
 
 **Operations:**
 
@@ -60,51 +63,42 @@ Let $\Omega$ be the set of 3 coin flips. Define the following events:
 
 ---
 
-## 2. Probability Measure
+## 3. Probability Measure
 
-A probability measure $\mathbb P$ is a function that assigns a real number to each event in the sample space.
+A probability measure $\prob$ is a function that assigns a real number to each event in the sample space.
 
-### 2.1 The Axioms of Probability
+### 3.1 The Axioms of Probability
 
-A function $\mathbb P: \mathcal{F} \to [0, 1]$ is a probability measure if it satisfies the following three axioms:
+A function $\prob: \mathcal{F} \to [0, 1]$ is a probability measure if it satisfies the following three axioms:
 
-1. **Normalization:** $\mathbb P(\Omega) = 1$.
-2. **Non-negativity:** $\mathbb P(A) \ge 0$ for all $A \subseteq \Omega$.
+1. **Normalization:** $\prob(\Omega) = 1$.
+2. **Non-negativity:** $\prob(A) \ge 0$ for all $A \subseteq \Omega$.
 3. **Countable Additivity (Disjoint Unions):** If $A_1, A_2, \dots$ are disjoint events (i.e., $A_i \cap A_j = \emptyset$ for $i \neq j$), then:
-    $$\mathbb P\left(\bigcup_{i=1}^{\infty} A_i\right) = \sum_{i=1}^{\infty} \mathbb P(A_i)$$
-    *Special case:* For two disjoint events $A$ and $B$, $\mathbb P(A \cup B) = \mathbb P(A) + \mathbb P(B)$.
+    $$\prob\left(\bigcup_{i=1}^{\infty} A_i\right) = \sum_{i=1}^{\infty} \prob(A_i)$$
+    *Special case:* For two disjoint events $A$ and $B$, $\prob(A \cup B) = \prob(A) + \prob(B)$.
 
-### 2.2 Properties Derived from Axioms
+### 3.2 Properties Derived from Axioms
 
 Using the axioms, we can derive several useful properties:
 
-1. **Complement Rule:** $\mathbb P(A^c) = 1 - \mathbb P(A)$.
-
-    *Proof:* Since $A \cup A^c = \Omega$ and $A \cap A^c = \emptyset$, by Axiom 3 and 1: $\mathbb P(A) + \mathbb P(A^c) = \mathbb P(\Omega) = 1$.
-
-2. **Empty Set:** $\mathbb P(\emptyset) = 0$.
-
-    *Proof:* $\emptyset = \Omega^c$, so $\mathbb P(\emptyset) = 1 - \mathbb P(\Omega) = 0$.
-
-3. **Monotonicity:** If $A \subseteq B$, then $\mathbb P(A) \le \mathbb P(B)$.
-
-    *Proof:* Write $B = A \cup (B \cap A^c)$. Since these are disjoint, $\mathbb P(B) = \mathbb P(A) + \mathbb P(B \cap A^c) \ge \mathbb P(A)$ (by Axiom 2).
-
+1. **Complement Rule:** $\prob(A^c) = 1 - \prob(A)$.
+2. **Empty Set:** $\prob(\emptyset) = 0$.
+3. **Monotonicity:** If $A \subseteq B$, then $\prob(A) \le \prob(B)$.
 4. **Inclusion-Exclusion Principle:** For any two events $A$ and $B$:
-    $$\mathbb P(A \cup B) = \mathbb P(A) + \mathbb P(B) - \mathbb P(A \cap B)$$
+    $$\prob(A \cup B) = \prob(A) + \prob(B) - \prob(A \cap B)$$
 
 ---
 
-## 3. Counting and Uniform Probability
+## 4. Counting and Uniform Probability
 
-When the sample space $\Omega$ is finite and all outcomes are equally likely (uniform model), calculating probabilities reduces to counting.
+When the sample space $\Omega$ is finite and all outcomes are equally likely (the uniform model), calculating probabilities reduces to counting.
 
-**Assumption:** $\Omega = \{\omega_1, \dots, \omega_N\}$ and $\mathbb P(\{\omega_i\}) = \frac{1}{N}$ for all $i$.
+**Assumption:** $\Omega = \{\omega_1, \dots, \omega_N\}$ and $\prob(\{\omega_i\}) = \frac{1}{N}$ for all $i$.
 
 For any event $A \subseteq \Omega$:
-$$\mathbb P(A) = \frac{|A|}{|\Omega|} = \frac{\text{number of outcomes in } A}{\text{total number of outcomes}}$$
+$$\prob(A) = \frac{|A|}{|\Omega|}$$
 
-### 3.1 Counting Principles
+### 4.1 Counting Principles
 
 To determine $|A|$ and $|\Omega|$, we often use combinatorial methods:
 
@@ -114,12 +108,62 @@ To determine $|A|$ and $|\Omega|$, we often use combinatorial methods:
 - **Combinations:** Choosing $k$ items from a set of $n$ without regard to order.
     $$\binom{n}{k} = \frac{n!}{k!(n-k)!}$$
 
-**Example:**
+### 4.2 Card drawing Example
+
 What is the probability of drawing a King from a standard deck?
 
 - $|\Omega| = 52$
 - $|A| = 4$ (King of Hearts, Diamonds, Clubs, Spades)
-- $\mathbb P(A) = \frac{4}{52} = \frac{1}{13}$
+- $\prob(A) = \frac{4}{52} = \frac{1}{13}$
+
+### 4.3 Hypergeometric Distribution Example
+
+Suppose an urn contains $W$ white balls and $B$ black balls. We draw $n$ balls without replacement. What is the probability of drawing exactly $k$ white balls?
+
+1. Total number of ways to draw $n$ balls: $\binom{W+B}{n}$.
+2. Number of ways to draw exactly $k$ white balls and $n-k$ black balls: $\binom{W}{k} \binom{B}{n-k}$.
+
+$$\prob(\text{exactly } k \text{ white}) = \frac{\binom{W}{k} \binom{B}{n-k}}{\binom{W+B}{n}}$$
+
+---
+
+## 5. Conditional Probability and Bayes' Rule
+
+### 5.1 Conditional Probability
+
+**Definition.** The conditional probability of $A$ given $B$ (assuming $\prob(B) > 0$) is:
+$$\prob(A \mid B) = \frac{\prob(A \cap B)}{\prob(B)}$$
+
+This represents updating our sample space to $B$ and evaluating the relative proportion of $A$ inside $B$.
+
+### 5.2 Law of Total Probability
+
+If $B_1, B_2, \dots, B_n$ form a partition of the sample space $\Omega$ (they are disjoint and their union is $\Omega$), then for any event $A$:
+$$\prob(A) = \sum_{i=1}^n \prob(A \cap B_i) = \sum_{i=1}^n \prob(A \mid B_i) \prob(B_i)$$
+
+### 5.3 Bayes' Rule
+
+Using the definition of conditional probability and the Law of Total Probability, we derive Bayes' Rule:
+$$\prob(B_j \mid A) = \frac{\prob(A \mid B_j) \prob(B_j)}{\sum_{i=1}^n \prob(A \mid B_i) \prob(B_i)}$$
+
+---
+
+## 6. Independence
+
+### 6.1 Pairwise Independence
+
+Events $A$ and $B$ are **independent** if and only if:
+$$\prob(A \cap B) = \prob(A)\prob(B)$$
+
+If $\prob(B) > 0$, this is entirely equivalent to:
+$$\prob(A \mid B) = \prob(A)$$
+meaning “knowing $B$ has occurred does not change the probability of $A$ occurring”.
+
+### 6.2 Mutual Independence
+
+Events $A_1, \dots, A_n$ are **mutually independent** if for *every* subcollection $\{A_{i_1}, \dots, A_{i_m}\}$ with $m \ge 2$:
+$$\prob(A_{i_1} \cap \dots \cap A_{i_m}) = \prob(A_{i_1}) \dots \prob(A_{i_m})$$
+Note: Pairwise independence does not guarantee mutual independence.
 
 ---
 

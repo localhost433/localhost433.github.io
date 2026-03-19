@@ -13,6 +13,7 @@ window.MathJax = {
             X: "\\mathbb{X}",
             M: "\\mathcal{M}",
             E: "\\mathbb{E}",
+            prob: "\\mathbb{P}",
             im: "\\text{im}",
             rank: "\\text{rank}",
             Span: "\\text{span}",
@@ -28,7 +29,8 @@ window.MathJax = {
             proj: ["\\text{proj}_{#1}", 1],
             textipa: ['\\class{ipa}{#1}', 1],
             Var: ["\\text{Var}(#1)", 1],
-            Cov: ["\\text{Cov}(#1, #2)", 2]
+            Cov: ["\\text{Cov}(#1, #2)", 2],
+            Cor: ["\\rho(#1, #2)", 2]
         },
         inlineMath: [['$', '$'], ['\\(', '\\)']],
         displayMath: [['$$', '$$'], ['\\[', '\\]']],

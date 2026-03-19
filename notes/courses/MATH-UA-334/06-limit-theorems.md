@@ -7,10 +7,10 @@ date: 2026-02-09
 
 Limit theorems explain "why science works". They describe the universal behavior of sums of independent, identically distributed (i.i.d.) random variables as the number of variables $n$ goes to infinity.
 
-Let $X_1, X_2, \dots$ be i.i.d. random variables with mean $\mu = \E[X]$ and variance $\sigma^2 = \text{Var}(X)$.
+Let $X_1, X_2, \dots$ be i.i.d. random variables with mean $\mu = \E[X]$ and variance $\sigma^2 = \Var{X}$.
 Consider the **sample mean**:
 $$
-\overline{X}\_n = \frac{1}{n} \sum\_{i=1}^n X\_i
+    \overline{X}\_n = \frac{1}{n} \sum_{i=1}^n X_i
 $$
 
 ---
@@ -28,13 +28,16 @@ This is convergence in probability, written as $\overline{X}\_n \xrightarrow{p} 
 
 ### 2.2 Proof (via Chebyshev's Inequality)
 
+First, we establish Chebyshev's Inequality. For any random variable $Y$ with mean $\E[Y]$ and variance $\Var{Y}$, and for any $\epsilon > 0$:
+$$\mathbb{P}(|Y - \E[Y]| \ge \epsilon) \le \frac{\Var{Y}}{\epsilon^2}$$
+
+Now apply this to $Y = \overline{X}\_n$:
+
 1. **Expectation of $\overline{X}\_n$:**
     $$\E[\overline{X}\_n] = \frac{1}{n} \sum \E[X_i] = \frac{1}{n} (n\mu) = \mu$$
 2. **Variance of $\overline{X}\_n$:**
-    $$\text{Var}(\overline{X}\_n) = \text{Var}\left(\frac{1}{n} \sum X_i\right) = \frac{1}{n^2} \sum \text{Var}(X_i) = \frac{1}{n^2} (n\sigma^2) = \frac{\sigma^2}{n}$$
-3. **Chebyshev's Inequality:**
-    $$\mathbb{P}(|Y - \E[Y]| \ge \epsilon) \le \frac{\text{Var}(Y)}{\epsilon^2}$$
-    Applying this to $Y = \overline{X}\_n$:
+    $$\Var{\overline{X}\_n} = \Var{\frac{1}{n} \sum X_i} = \frac{1}{n^2} \sum \Var{X_i} = \frac{1}{n^2} (n\sigma^2) = \frac{\sigma^2}{n}$$
+3. **Applying Chebyshev:**
     $$\mathbb{P}(|\overline{X}\_n - \mu| \ge \epsilon) \le \frac{\sigma^2/n}{\epsilon^2} = \frac{\sigma^2}{n\epsilon^2}$$
     As $n \to \infty$, the RHS goes to $0$.
 
@@ -74,12 +77,8 @@ While LLN tells us $\overline{X}\_n$ concentrates around $\mu$, the CLT tells us
 
 ### 3.1 Theorem
 
-Assume:
-
-1. The expected value exists and is finite: $\E[X_i] = \mu < \infty$.
-2. The variance exists and is strictly positive and finite: $\Var{X_i} = \sigma^2$, where $0 < \sigma^2 < \infty$.
-
-Let $\overline{X}\_n = \frac{1}{n}\sum_{i=1}^n X_i$. Then, the standardized sum converges in distribution to a standard Normal random variable.
+Let $X_1, \dots, X_n$ be i.i.d. with mean $\mu$ and variance $\sigma^2 < \infty$. Let $S_n = \sum X_i$.
+Then the standardized sum converges in distribution to a standard Normal random variable.
 
 $$Z_n = \frac{\sqrt{n}(\overline{X}\_n - \mu)}{\sigma} \xrightarrow{d} \mathcal{N}(0, 1)$$
 
@@ -87,7 +86,7 @@ $$Z_n = \frac{\sqrt{n}(\overline{X}\_n - \mu)}{\sigma} \xrightarrow{d} \mathcal{
 > $$\lim_{n \to \infty} \mathbb{P}(Z_n \le z) = \Phi(z) = \int_{-\infty}^z \frac{1}{\sqrt{2\pi}} e^{-x^2/2} dx$$
 
 **Interpretation:**
-For large $n$, $\overline{X}\_n \approx \mathcal{N}(\mu, \frac{\sigma^2}{n})$.
+For large $n$, $\overline{X}\_n \approx \sim \mathcal{N}(\mu, \frac{\sigma^2}{n})$.
 
 ### 3.2 Proof Sketch (Characteristic Functions)
 
@@ -136,8 +135,8 @@ The function $e^{-t^2/2}$ is the characteristic function of $\mathcal{N}(0,1)$. 
 Let $X_i \sim \text{Unif}[0, 1]$. We want $\mathbb{P}(\sum_{i=1}^{20} X_i \le 10)$.
 
 * $\mu = 1/2$, $\sigma^2 = 1/12$.
-* $S_{20} \approx \mathcal{N}(20 \cdot 0.5, 20 \cdot \frac{1}{12}) = \mathcal{N}(10, \frac{5}{3})$.
-* Standardize and compute using Standard Normal table.
+* $S_{20} \approx \sim \mathcal{N}(20 \cdot 0.5, 20 \cdot \frac{1}{12}) = \sim \mathcal{N}(10, \frac{5}{3})$.
+* Standardize and compute using the Standard Normal table.
 
 ---
 
