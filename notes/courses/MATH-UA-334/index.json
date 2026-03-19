@@ -33,5 +33,15 @@
         "slug": "07-t-distributions",
         "title": "7 - t Distributions",
         "date": "2026-02-11"
+    },
+    {
+        "slug": "08-survey-sampling",
+        "title": "8 - Survey Sampling",
+        "date": "2026-02-16"
+    },
+    {
+        "slug": "09-method-of-moments",
+        "title": "9 - Method of Moments",
+        "date": "2026-02-18"
     }
 ]
