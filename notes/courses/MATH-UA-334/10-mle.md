@@ -127,7 +127,8 @@ $$
 $$
     \begin{align*}
         \frac{\partial \ell\_n}{\partial \mu} = \frac{1}{\sigma^2} \sum\_{i=1}^n (x\_i - \mu) &= 0 \\\\
-        \sum\_{i=1}^n x\_i - n\mu &= 0
+        \sum\_{i=1}^n x\_i - n\mu &= 0\\\\
+        \mu &= \frac{1}{n} \sum\_{i=1}^n x\_i
     \end{align*}
 $$
 which implies $\hat{\mu}\_\text{MLE} = \overline{X}\_n$.

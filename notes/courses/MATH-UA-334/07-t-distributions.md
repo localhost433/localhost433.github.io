@@ -87,6 +87,44 @@ $$
 
 > Dividing by $n-1$ makes $S_n^2$ an unbiased estimator of $\sigma^2$. If divided by $n$, expectation would have been $\frac{n-1}{n}\sigma^2$, which is biased (as an underestimation).
 
+### 2.3 Mean Squared Error (MSE)
+
+While unbiasedness is a desirable property, it is not the only metric for a "good" estimator. We also want the estimator's variance (how much it fluctuates from sample to sample) to be small. The **Mean Squared Error (MSE)** is a comprehensive measure that evaluates the average squared difference between an estimator $\hat{\theta}$ and the true parameter $\theta$.
+
+**Definition:**
+$$
+\text{MSE}(\hat{\theta}) = \E[(\hat{\theta} - \theta)^2]
+$$
+
+#### The Bias-Variance Decomposition
+
+Defined **Bias** as: $\text{Bias}(\hat{\theta}) = \E[\hat{\theta}] - \theta$.
+
+$$
+    \begin{align*}
+        \text{MSE}(\hat{\theta}) &= \E[(\hat{\theta} - \theta)^2] \\\\
+        &= \E[\left( (\hat{\theta} - \E[\hat{\theta}]) + (\E[\hat{\theta}] - \theta) \right)^2] \quad \text{(Add and subtract } \E[\hat{\theta}]\text{)} \\\\
+        &= \E[(\hat{\theta} - \E[\hat{\theta}])^2] + 2\E[(\hat{\theta} - \E[\hat{\theta}])(\E[\hat{\theta}] - \theta)] + \E[(\E[\hat{\theta}] - \theta)^2]
+    \end{align*}
+$$
+
+The first term is $\Var{\hat{\theta}}$. $\E[(\hat{\theta} - \E[\hat{\theta}])] = 0$.
+$(\E[\hat{\theta}] - \theta) = \text{Bias}$, so $\E[(\E[\hat{\theta}] - \theta)^2] = \text{Bias}(\hat{\theta})^2$.
+
+This yields:
+$$
+\text{MSE}(\hat{\theta}) = \Var{\hat{\theta}} + (\text{Bias}(\hat{\theta}))^2
+$$
+
+#### The Bias-Variance Tradeoff
+
+This decomposition highlights a core tension in statistics and machine learning.
+
+- A highly complex model might have zero bias (it perfectly hits the target on average) but massive variance (individual estimates are wildly far apart).
+- A very simple model might have low variance (consistent guesses) but high bias (consistently missing the true target).
+
+An optimal estimator minimizes the total MSE, which sometimes means intentionally accepting a small amount of bias in exchange for a massive reduction in variance.
+
 ---
 
 ## 3. Sampling Distributions under Normality
