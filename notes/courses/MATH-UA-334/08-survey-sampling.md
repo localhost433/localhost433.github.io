@@ -15,18 +15,18 @@ In these cases, the population is **not** random; it is a fixed, deterministic s
 
 ### 1.1 Population Parameters
 
-Let the population consist of $N$ numeric values, which we denote as $\{x_1, x_2, \dots, x_N\}$. We are typically interested in summarizing this population using standard parameters.
+Let the finite population consist of $N$ numeric values, which we denote as $\{x\_1, x\_2, \dots, x\_N\}$. We are typically interested in summarizing this population using standard numerical parameters.
 
 **Population Mean:**
 The true average of the population is given by:
 $$
-    \mu = \frac{1}{N} \sum_{i=1}^N x_i
+    \mu = \frac{1}{N} \sum\_{i=1}^N x\_i
 $$
 
 **Population Variance:**
 The true variance of the population is given by:
 $$
-    \sigma^2 = \frac{1}{N} \sum_{i=1}^N (x_i - \mu)^2
+    \sigma^2 = \frac{1}{N} \sum\_{i=1}^N (x\_i - \mu)^2
 $$
 
 ### 1.2 The Sampling Strategy
@@ -35,8 +35,8 @@ To estimate $\mu$ and $\sigma^2$, we draw a sample of size $n$ (where typically 
 
 We construct **estimators** from our sample to guess the population parameters:
 
-* **Sample Mean:** $\overline{X}\_n = \frac{1}{n} \sum_{i=1}^n X_i$
-* **Sample Variance:** $S_n^2 = \frac{1}{n-1} \sum_{i=1}^n (X_i - \overline{X}\_n)^2$
+* **Sample Mean:** $\overline{X}\_n = \frac{1}{n} \sum\_{i=1}^n X\_i$
+* **Sample Variance:** $S\_n^2 = \frac{1}{n-1} \sum\_{i=1}^n (X\_i - \overline{X}\_n)^2$
 
 By the Law of Large Numbers (LLN), as $n$ grows, our estimators will converge to the true parameters, such that $\overline{X}\_n \approx \mu$ and $S_n^2 \approx \sigma^2$. However, the exact statistical properties of these estimators depend heavily on *how* we draw our sample.
 
@@ -53,7 +53,7 @@ In **sampling with replacement**, after an individual is selected from the popul
 Under this scheme, each draw is completely independent of the others. We can model $X_1, \dots, X_n$ as independent and identically distributed (i.i.d.) random variables. Each $X_i$ is drawn uniformly from the population $\{x_1, \dots, x_N\}$.
 
 $$
-    \mathbb{P}(X_i = x_j) = \frac{1}{N} \quad \text{for any } j \in \{1, \dots, N\}
+    \prob(X\_i = x\_j) = \frac{1}{N} \quad \text{for any } j \in \{1, \dots, N\}
 $$
 
 ### 2.2 Expectation and Variance of the Sample Mean
@@ -61,26 +61,27 @@ $$
 Let's analyze the expected value of a single observation $X_i$:
 $$
     \begin{align*}
-        \E[X_i] &= \sum_{j=1}^N x_j \cdot \mathbb{P}(X_i = x_j) \\\\
-        &= \sum_{j=1}^N x_j \left(\frac{1}{N}\right) \\\\
+        \E[X\_i] &= \sum\_{j=1}^N x\_j \cdot \prob(X\_i = x\_j) \\\\
+        &= \sum\_{j=1}^N x\_j \left(\frac{1}{N}\right) \\\\
         &= \mu
     \end{align*}
 $$
-Similarly, the variance of a single observation is:
+
+Similarly, the exact statistical variance of a single random observation is:
 $$
     \begin{align*}
-        \Var{X_i} &= \E[(X_i - \mu)^2] \\\\
-        &= \sum_{j=1}^N (x_j - \mu)^2 \left(\frac{1}{N}\right) \\\\
+        \Var{X\_i} &= \E[(X\_i - \mu)^2] \\\\
+        &= \sum\_{j=1}^N (x\_j - \mu)^2 \left(\frac{1}{N}\right) \\\\
         &= \sigma^2
     \end{align*}
 $$
 
 Because the samples are independent, the expected value and variance of the sample mean $\overline{X}\_n$ are straightforward:
 $$
-    \E[\overline{X}\_n] = \E\left[ \frac{1}{n} \sum_{i=1}^n X_i \right] = \frac{1}{n} \sum_{i=1}^n \E[X_i] = \frac{1}{n} (n\mu) = \mu
+    \E[\overline{X}\_n] = \E\left[ \frac{1}{n} \sum\_{i=1}^n X\_i \right] = \frac{1}{n} \sum\_{i=1}^n \E[X\_i] = \frac{1}{n} (n\mu) = \mu
 $$
 $$
-    \Var{\overline{X}\_n} = \Var{\frac{1}{n} \sum_{i=1}^n X_i} = \frac{1}{n^2} \sum_{i=1}^n \Var{X_i} = \frac{1}{n^2} (n\sigma^2) = \frac{\sigma^2}{n}
+    \Var{\overline{X}\_n} = \Var{\frac{1}{n} \sum\_{i=1}^n X\_i} = \frac{1}{n^2} \sum\_{i=1}^n \Var{X\_i} = \frac{1}{n^2} (n\sigma^2) = \frac{\sigma^2}{n}
 $$
 
 This shows that $\overline{X}\_n$ is an unbiased estimator for $\mu$, and its variance shrinks linearly with the sample size $n$.
@@ -97,8 +98,8 @@ Under this scheme, $X_1, \dots, X_n$ are identically distributed (each has a $1/
 
 Because the marginal distributions are identical to the with-replacement case:
 
-* $\E[X_i] = \mu$
-* $\Var{X_i} = \sigma^2$
+* $\E[X\_i] = \mu$
+* $\Var{X\_i} = \sigma^2$
 
 The expectation of the sample mean is still unbiased:
 $$
@@ -110,20 +111,21 @@ $$
 Calculating the variance requires accounting for the covariance between different draws $X_i$ and $X_k$ (where $i \neq k$).
 $$
     \begin{align*}
-        \Var{\overline{X}\_n} &= \Var{\frac{1}{n} \sum_{i=1}^n X_i} \\\\
-        &= \frac{1}{n^2} \left( \sum_{i=1}^n \Var{X_i} + \sum_{i \neq k} \text{Cov}(X_i, X_k) \right) \\\\
-        &= \frac{1}{n^2} \left( n\sigma^2 + n(n-1) \text{Cov}(X_1, X_2) \right)
+        \Var{\overline{X}\_n} &= \Var{\frac{1}{n} \sum\_{i=1}^n X\_i} \\\\
+        &= \frac{1}{n^2} \left( \sum\_{i=1}^n \Var{X\_i} + \sum\_{i \neq k} \text{Cov}(X\_i, X\_k) \right) \\\\
+        &= \frac{1}{n^2} \left( n\sigma^2 + n(n-1) \text{Cov}(X\_1, X\_2) \right)
     \end{align*}
 $$
 
 To find $\text{Cov}(X_1, X_2)$, we consider the extreme case where we sample the *entire* population without replacement ($n = N$). If we do this, the sample mean is simply the population mean, so its variance must be zero:
 $$
-    \Var{\overline{X}\_N} = 0 = \frac{1}{N^2} \left( N\sigma^2 + N(N-1)\text{Cov}(X_1, X_2) \right)
+    \Var{\overline{X}\_N} = 0 = \frac{1}{N^2} \left( N\sigma^2 + N(N-1)\text{Cov}(X\_1, X\_2) \right)
 $$
 Solving this for the covariance yields:
 $$
-    \text{Cov}(X_1, X_2) = -\frac{\sigma^2}{N-1}
+    \text{Cov}(X\_1, X\_2) = -\frac{\sigma^2}{N-1}
 $$
+
 The negative covariance makes intuitive sense; drawing a large value makes drawing another large value slightly less likely. Plugging this back into our variance equation for an arbitrary $n$:
 $$
     \begin{align*}
@@ -140,7 +142,7 @@ The term $\left( 1 - \frac{n-1}{N-1} \right)$ is known as the **Finite Populatio
 
 ---
 
-## 4. Confidence Intervals for the Mean
+## 4. Confidence Intervals for the True Mean
 
 Because the random variables $X_1, \dots, X_n$ are dependent in the without-replacement setting, we cannot directly apply the standard Central Limit Theorem. However, a modified version of the CLT holds when $1 \ll n \ll N$.
 
@@ -151,7 +153,7 @@ $$
 
 To construct a confidence interval, we estimate $\sigma^2$ using $S_n^2$. The $(1-\alpha)$ confidence interval for $\mu$ is:
 $$
-    \mu \in \left[ \overline{X}\_n - z_{\alpha/2} \sqrt{\frac{S_n^2}{n} \left(1 - \frac{n-1}{N-1}\right)}, \quad \overline{X}\_n + z_{\alpha/2} \sqrt{\frac{S_n^2}{n} \left(1 - \frac{n-1}{N-1}\right)} \right]
+    \mu \in \left[ \overline{X}\_n - z\_{\alpha/2} \sqrt{\frac{S\_n^2}{n} \left(1 - \frac{n-1}{N-1}\right)}, \quad \overline{X}\_n + z\_{\alpha/2} \sqrt{\frac{S\_n^2}{n} \left(1 - \frac{n-1}{N-1}\right)} \right]
 $$
 For a 95% confidence interval, $z_{\alpha/2} \approx 1.96$.
 

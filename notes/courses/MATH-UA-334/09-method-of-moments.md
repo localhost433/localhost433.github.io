@@ -16,11 +16,11 @@ A parametric family is a collection of probability distributions indexed by a pa
 
 > $\theta$ as the tuple of parameters of this distribution which we want to estimate.
 
-**Examples:**
+**Practical Examples:**
 
-- $X_1, \dots, X_n \sim \mathcal{N}(\mu, \sigma^2)$. Here, the parameter vector is $\theta = (\mu, \sigma^2)$, both of which may be unknown.
-- $X_1, \dots, X_n \sim \text{Poi}(\lambda)$. The parameter is $\theta = \lambda$.
-- $X_1, \dots, X_n \sim \text{Exp}(\lambda)$. The parameter is $\theta = \lambda$.
+- **Normal Distribution:** $X\_1, \dots, X\_n \sim \mathcal{N}(\mu, \sigma^2)$. Here, the relevant parameter vector is exactly $\theta = (\mu, \sigma^2)$, accurately representing the center and the spread, both of which may be completely mathematically unknown.
+- **Poisson Distribution:** $X\_1, \dots, X\_n \sim \text{Poi}(\lambda)$. The single controlling parameter is exactly $\theta = \lambda$, robustly representing the rate of occurrence over time.
+- **Exponential Distribution:** $X\_1, \dots, X\_n \sim \text{Exp}(\lambda)$. The primary parameter is strictly $\theta = \lambda$, continuously governing the waiting time.
 
 **The Core Problem:** Given a sample dataset, how do we systematically construct a good estimator $\hat{\theta}$ to estimate the true, unknown parameter $\theta$?
 
@@ -37,15 +37,16 @@ The Method of Moments (MoM) is one of the oldest and most intuitive strategies f
 **Definition (Theoretical Moments):**
 The $k$-th theoretical moment of a random variable $X$ is defined as the expected value of $X^k$:
 $$
-    \mu_k(\theta) = \E_\theta[X^k]
+    \mu\_k(\theta) = \E\_\theta[X^k]
 $$
 Notice that this moment is entirely a function of the underlying parameter $\theta$.
 
 **Definition (Empirical/Sample Moments):**
 The $k$-th empirical moment is the average of the $k$-th powers of the observed data:
 $$
-    \hat{m}\_k = \frac{1}{n} \sum_{i=1}^n X_i^k
+    \hat{m}\_k = \frac{1}{n} \sum\_{i=1}^n X\_i^k
 $$
+Unlike the deterministic theoretical moment, the computed empirical moment is inherently a random variable, primarily because it is computed precisely from the random sample.
 
 > The analogy here to me is $\mu$ vs. $\overline{X}\_n$, "True Moment" vs. "Sample Moment".
 
@@ -79,19 +80,21 @@ Suppose $X_1, \dots, X_n \sim \mathcal{N}(\mu, \sigma^2)$. We need to estimate t
 #### Theoretical Moments
 
 $$
-    \mu_1 = \E[X] = \mu
+    \mu\_1 = \E[X] = \mu
 $$
+Using the foundational computational formula for statistical variance $\Var{X} = \E[X^2] - (\E[X])^2$:
+
 $$
-    \mu_2 = \E[X^2] = \Var{X} + (\E[X])^2 = \sigma^2 + \mu^2
+    \mu\_2 = \E[X^2] = \Var{X} + (\E[X])^2 = \sigma^2 + \mu^2
 $$
 
 #### Sample Moments
 
 $$
-    \hat{m}\_1 = \frac{1}{n}\sum_{i=1}^n X_i = \overline{X}\_n
+    \hat{m}\_1 = \frac{1}{n} \sum\_{i=1}^n X\_i = \overline{X}\_n
 $$
 $$
-    \hat{m}\_2 = \frac{1}{n}\sum_{i=1}^n X_i^2
+    \hat{m}\_2 = \frac{1}{n} \sum\_{i=1}^n X\_i^2
 $$
 
 #### Solving
@@ -99,18 +102,16 @@ $$
 $$
     \begin{align*}
         \mu &= \overline{X}\_n \\\\
-        \sigma^2 + \mu^2 &= \frac{1}{n}\sum_{i=1}^n X_i^2
+        \sigma^2 + \mu^2 &= \frac{1}{n} \sum\_{i=1}^n X\_i^2
     \end{align*}
 $$
 
 Substituting the first equation into the second:
 $$
     \begin{align*}
-        \sigma^2 + (\overline{X}\_n)^2
-        &= \frac{1}{n}\sum_{i=1}^n X_i^2 \\\\
-        \hat{\sigma}^2\_\text{MoM}
-        &= \frac{1}{n}\sum_{i=1}^n X_i^2 - (\overline{X}\_n)^2 \\\\
-        &= \frac{1}{n}\sum_{i=1}^n (X_i - \overline{X}\_n)^2
+        \sigma^2 + (\overline{X}\_n)^2 &= \frac{1}{n} \sum\_{i=1}^n X\_i^2 \\\\
+        \hat{\sigma}^2\_\text{MoM} &= \frac{1}{n} \sum\_{i=1}^n X\_i^2 - (\overline{X}\_n)^2 \\\\
+        \hat{\sigma}^2\_\text{MoM} &= \frac{1}{n} \sum\_{i=1}^n (X\_i - \overline{X}\_n)^2
     \end{align*}
 $$
 Thus, the MoM estimators for the Normal distribution match the standard sample mean and the (biased) sample variance. That
@@ -132,7 +133,7 @@ Suppose $X_1, \dots, X_n \sim \text{Exp}(\lambda)$. We have one parameter, so we
 
 **Theoretical Moment:**
 $$
-    \mu_1 = \E[X] = \frac{1}{\lambda}
+    \mu\_1 = \E[X] = \frac{1}{\lambda}
 $$
 
 **Sample Moment:**
@@ -147,11 +148,11 @@ $$
 
 ### 3.3 Uniform Distribution
 
-Suppose $X_1, \dots, X_n \sim \text{Unif}(0, \theta)$.
+Suppose $X\_1, \dots, X\_n \sim \text{Unif}(0, \theta)$.
 
 **Theoretical Moment:**
 $$
-    \mu_1 = \E[X] = \frac{\theta}{2}
+    \mu\_1 = \E[X] = \frac{\theta}{2}
 $$
 
 **Equate and Solve:**
