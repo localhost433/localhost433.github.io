@@ -2,8 +2,8 @@ import fetch from "node-fetch";
 
 export default async function handler(req, res) {
   const { repo } = req.query;
-  if (!repo) {
-    return res.status(400).json({ error: "Missing repo query parameter" });
+  if (!repo || typeof repo !== 'string' || !/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(repo)) {
+    return res.status(400).json({ error: "Invalid or missing repo query parameter" });
   }
 
   const token = process.env.GITHUB_PAT || '';

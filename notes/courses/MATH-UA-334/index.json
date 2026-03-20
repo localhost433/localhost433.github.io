@@ -43,5 +43,10 @@
         "slug": "09-method-of-moments",
         "title": "9 - Method of Moments",
         "date": "2026-02-18"
+    },
+    {
+        "slug": "10-maximum-likelihood-estimation",
+        "title": "10 - Maximum Likelihood Estimation",
+        "date": "2026-02-23"
     }
 ]

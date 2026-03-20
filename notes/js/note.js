@@ -64,8 +64,8 @@ fetch(`/notes/courses/${course}/${noteSlug}.md`)
             (_, num) => `<sup id="fnref${num}"><a href="#fn${num}">${num}</a></sup>`
         );
 
-        const back = document.getElementById("back-to-course");
-        back.href = `course.html?id=${encodeURIComponent(course)}`;
+        const back = document.querySelectorAll("#back-to-course, .back-link, .top-back-link");
+        back.forEach(back => back.href = `course.html?id=${encodeURIComponent(course)}`);
 
     const h1 = document.createElement("h1");
     h1.textContent = meta.title || noteSlug;
