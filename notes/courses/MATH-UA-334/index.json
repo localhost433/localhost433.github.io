@@ -40,13 +40,23 @@
         "date": "2026-02-16"
     },
     {
-        "slug": "09-method-of-moments",
+        "slug": "09-mom",
         "title": "9 - Method of Moments",
         "date": "2026-02-18"
     },
     {
-        "slug": "10-maximum-likelihood-estimation",
+        "slug": "10-mle",
         "title": "10 - Maximum Likelihood Estimation",
         "date": "2026-02-23"
+    },
+    {
+        "slug": "11-large-sample-mle",
+        "title": "11 - Large Sample Theory of MLE",
+        "date": "2026-02-25"
+    },
+    {
+        "slug": "12-bayesian-pers",
+        "title": "12 - Bayesian Perspective",
+        "date": "2026-03-02"
     }
 ]
