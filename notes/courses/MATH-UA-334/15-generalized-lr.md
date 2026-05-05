@@ -1,5 +1,5 @@
 ---
-title: Generalized LR Tests
+title: Generalized LR Test
 date: 2026-03-23
 ---
 

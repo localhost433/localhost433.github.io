@@ -65,7 +65,7 @@
         "date": "2026-03-04"
     },
     {
-        "slug": "14-p-value-conf-sets",
+        "slug": "14-p-values-confidence-sets",
         "title": "14 - P-Values and Confidence Sets",
         "date": "2026-03-09"
     },
@@ -78,5 +78,55 @@
         "slug": "16-empirical-cdf",
         "title": "16 - Empirical CDF",
         "date": "2026-03-25"
+    },
+    {
+        "slug": "17-two-sample-t-test",
+        "title": "17 - Two-Sample t-test",
+        "date": "2026-03-30"
+    },
+    {
+        "slug": "18-nonparametric-two-sample",
+        "title": "18 - Nonparametric Two-Sample Tests",
+        "date": "2026-04-01"
+    },
+    {
+        "slug": "19-categorical-data",
+        "title": "19 - Categorical Data",
+        "date": "2026-04-06"
+    },
+    {
+        "slug": "20-simple-linear-reg",
+        "title": "20 - Simple Linear Regression",
+        "date": "2026-04-08"
+    },
+    {
+        "slug": "21-simple-linear-reg-corr",
+        "title": "21 - Simple Linear Regression and Correlation",
+        "date": "2026-04-13"
+    },
+    {
+        "slug": "22-multiple-linear-reg",
+        "title": "22 - Multiple Linear Regression",
+        "date": "2026-04-15"
+    },
+    {
+        "slug": "23-linear-reg-ii",
+        "title": "23 - More on Linear Regression",
+        "date": "2026-04-20"
+    },
+    {
+        "slug": "24-linear-reg-local",
+        "title": "24 - Local Linear Regression",
+        "date": "2026-04-22"
+    },
+    {
+        "slug": "25-log-regression-i",
+        "title": "25 - Logistic Regression I",
+        "date": "2026-04-27"
+    },
+    {
+        "slug": "26-log-regression-ii",
+        "title": "26 - Logistic Regression II",
+        "date": "2026-04-29"
     }
 ]
