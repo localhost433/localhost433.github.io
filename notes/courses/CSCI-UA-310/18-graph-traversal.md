@@ -83,6 +83,7 @@ DFS-VISIT(G, u)
 ### Parenthesis Theorem
 
 For any two vertices $u$ and $v$, exactly one of the following holds:
+
 1. $[u.d, u.f]$ and $[v.d, v.f]$ are **disjoint** ($u$ and $v$ are in different DFS trees).
 2. $[u.d, u.f] \subset [v.d, v.f]$ ($u$ is a **descendant** of $v$).
 3. $[v.d, v.f] \subset [u.d, u.f]$ ($v$ is a **descendant** of $u$).

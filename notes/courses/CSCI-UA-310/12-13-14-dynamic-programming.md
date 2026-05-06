@@ -26,6 +26,7 @@ date: 2026-03-02/04/09
 **Dynamic programming** solves each subproblem exactly once and stores the result in a table.
 
 **Two key properties for DP to apply**:
+
 1. **Optimal substructure**: An optimal solution to the problem contains optimal solutions to subproblems.
 2. **Overlapping subproblems**: The recursive solution revisits the same subproblems repeatedly.
 
@@ -206,6 +207,7 @@ The **0/1** constraint means each item is either taken or not (no fractions).
 ### Optimal Substructure
 
 For item $n$:
+
 * **Skip item $n$**: optimal value from items $\{1,\dots,n-1\}$ with capacity $W$.
 * **Take item $n$** (if $w_n \leq W$): $v_n$ plus optimal value from items $\{1,\dots,n-1\}$ with capacity $W - w_n$.
 
@@ -279,6 +281,7 @@ FIBONACCI-DP(n)
 **Key fact**: Multiplying a $p \times q$ matrix by a $q \times r$ matrix costs $p \cdot q \cdot r$ scalar multiplications.
 
 **Example**: For $A_1 (30 \times 35)$, $A_2 (35 \times 15)$, $A_3 (15 \times 5)$, $A_4 (5 \times 10)$:
+
 * $((A_1 A_2) A_3) A_4$: $30 \cdot 35 \cdot 15 + 30 \cdot 15 \cdot 5 + 30 \cdot 5 \cdot 10 = 18{,}000$ multiplications.
 * $(A_1 (A_2 (A_3 A_4)))$: $15 \cdot 5 \cdot 10 + 35 \cdot 15 \cdot 10 + 30 \cdot 35 \cdot 10 = 16{,}250$ multiplications.
 
@@ -354,6 +357,7 @@ SUBSET-SUM(a[1..n], W)
 **Running time**: $O(nW)$ — pseudopolynomial (Subset Sum is NP-complete).
 
 **Worked Example**: $S = \{3, 5, 1\}$, $W = 9$.
+
 * Subset $\{3, 5, 1\}$: sum $= 9$. Answer: **yes**.
 
 ---

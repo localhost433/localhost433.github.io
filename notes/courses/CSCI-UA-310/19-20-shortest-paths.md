@@ -27,6 +27,7 @@ $$\delta(s, v) = \min \{ w(p) : s \xrightarrow{p} v \}$$
 and $\delta(s, v) = \infty$ if no path exists.
 
 **Shortest-path properties**:
+
 * **Optimal substructure**: Any subpath of a shortest path is itself a shortest path.
 * **Triangle inequality**: $\delta(s, v) \leq \delta(s, u) + w(u, v)$ for all edges $(u,v)$.
 * **No negative cycles**: If a negative cycle is reachable from $s$, shortest paths are undefined (can be made arbitrarily small).
@@ -38,6 +39,7 @@ and $\delta(s, v) = \infty$ if no path exists.
 All SSSP algorithms maintain estimates $v.d \geq \delta(s,v)$ and predecessors $v.\pi$.
 
 **Initialization**:
+
 ```text
 INITIALIZE-SINGLE-SOURCE(G, s)
 1. for each v in V
@@ -47,6 +49,7 @@ INITIALIZE-SINGLE-SOURCE(G, s)
 ```
 
 **Relaxation** of edge $(u, v)$:
+
 ```text
 RELAX(u, v, w)
 1. if v.d > u.d + w(u, v)
@@ -55,6 +58,7 @@ RELAX(u, v, w)
 ```
 
 **Key properties**:
+
 * After `RELAX(u, v, w)`: $v.d \leq u.d + w(u,v)$.
 * If $u.d = \delta(s, u)$ at the time of relaxation, then afterwards $v.d \leq \delta(s, v)$.
 * $v.d$ never increases.
@@ -150,6 +154,7 @@ BELLMAN-FORD(G, w, s)
 **Theorem**: After $k$ iterations of the outer loop, $v.d \leq$ the weight of the shortest path from $s$ to $v$ using **at most $k$ edges**.
 
 **Proof by induction**:
+
 * After 0 iterations: $s.d = 0 = \delta_0(s,s)$ and $v.d = \infty$ for $v \neq s$. Correct (no 0-edge paths to others).
 * After $k$ iterations: Assume $v.d \leq \delta_{k-1}(s,v)$ for all $v$ after $k-1$ iterations. When we relax edge $(u,v)$: $v.d \leq u.d + w(u,v) \leq \delta_{k-1}(s,u) + w(u,v) = \delta_k(s,v)$.
 

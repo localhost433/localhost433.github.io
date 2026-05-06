@@ -70,6 +70,7 @@ Better, but Floyd-Warshall achieves $O(|V|^3)$ with a different subproblem defin
 **Subproblem**: $D[u, v, i]$ = shortest path from $u$ to $v$ using only vertices from $\{v_1, \dots, v_i\}$ as intermediate vertices.
 
 **Key observation**: For the shortest $u \to v$ path using only $\{v_1,\dots,v_i\}$:
+
 * **Case 1**: $v_i$ is **not** on the path. Then $D[u,v,i] = D[u,v,i-1]$.
 * **Case 2**: $v_i$ **is** on the path. Then the sub-paths $u \to v_i$ and $v_i \to v$ both use only $\{v_1,\dots,v_{i-1}\}$. So $D[u,v,i] = D[u,v_i,i-1] + D[v_i,v,i-1]$.
 
@@ -103,6 +104,7 @@ FLOYD-WARSHALL(W)
 Graph with $V = \{v_1, v_2, v_3, v_4, v_5, v_6\}$:
 
 Computing $D[v_3, v_5, i]$ through successive iterations:
+
 * $D[v_3, v_5, 0] = \infty$ (no direct edge)
 * $D[v_3, v_5, 1] = \infty$ (no path through $v_1$ only)
 * $D[v_3, v_5, 2] = 5$ (path $v_3 \to v_2 \to v_5$)

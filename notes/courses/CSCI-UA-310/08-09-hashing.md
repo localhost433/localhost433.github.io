@@ -134,12 +134,15 @@ HASH-SEARCH(T, k)
 ### Probing Strategies
 
 **Linear Probing**: $h(k, i) = (h'(k) + i) \bmod m$.
+
 * Simple but causes **primary clustering**: long runs of occupied slots form and grow.
 
 **Quadratic Probing**: $h(k, i) = (h'(k) + c_1 i + c_2 i^2) \bmod m$.
+
 * Reduces primary clustering but causes **secondary clustering**: two keys with the same $h'(k)$ have identical probe sequences.
 
 **Double Hashing**: $h(k, i) = (h_1(k) + i \cdot h_2(k)) \bmod m$.
+
 * Uses two independent hash functions.
 * Gives $\Theta(m^2)$ distinct probe sequences; approximates uniform hashing well.
 * Requirement: $h_2(k)$ must be coprime to $m$ for all $k$ (e.g., choose $m$ prime).
