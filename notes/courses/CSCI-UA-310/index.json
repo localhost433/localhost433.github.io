@@ -35,6 +35,61 @@
         "date": "2026-02-11"
     },
     {
+        "slug": "08-09-hashing",
+        "title": "08/09 - Hashing",
+        "date": "2026-02-16/18"
+    },
+    {
+        "slug": "10-binary-search-trees",
+        "title": "10 - Binary Search Trees",
+        "date": "2026-02-23"
+    },
+    {
+        "slug": "11-red-black-trees",
+        "title": "11 - Red-Black Trees",
+        "date": "2026-02-25"
+    },
+    {
+        "slug": "12-13-14-dynamic-programming",
+        "title": "12/13/14 - Dynamic Programming",
+        "date": "2026-03-02/04/09"
+    },
+    {
+        "slug": "15-16-greedy",
+        "title": "15/16 - Greedy Algorithms",
+        "date": "2026-03-23/25"
+    },
+    {
+        "slug": "17-graphs",
+        "title": "17 - Graph Representations & Properties",
+        "date": "2026-03-30"
+    },
+    {
+        "slug": "18-graph-traversal",
+        "title": "18 - Graph Traversal (BFS & DFS)",
+        "date": "2026-04-01"
+    },
+    {
+        "slug": "19-20-shortest-paths",
+        "title": "19/20 - Shortest Paths",
+        "date": "2026-04-06/08"
+    },
+    {
+        "slug": "21-22-min-spanning-tree",
+        "title": "21/22 - Minimum Spanning Trees",
+        "date": "2026-04-13/15"
+    },
+    {
+        "slug": "23-apsp-floyd-warshall",
+        "title": "23 - All-Pairs Shortest Paths (Floyd-Warshall)",
+        "date": "2026-04-20"
+    },
+    {
+        "slug": "25-26-27-complexity",
+        "title": "25/26/27 - Complexity & NP-Completeness",
+        "date": "2026-04-27/29/05-04"
+    },
+    {
         "slug": "R-1",
         "title": "Recitation 1 - Mathematical Background",
         "date": "2026-01-23"
