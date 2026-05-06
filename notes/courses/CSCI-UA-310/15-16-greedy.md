@@ -65,6 +65,7 @@ GREEDY-ACTIVITY-SELECTOR(s, f)
 Let $A = \{a_1, a_2, \dots, a_k\}$ (greedy solution, sorted by finish time) and $O = \{o_1, o_2, \dots, o_m\}$ (any optimal solution, sorted by finish time). We show $|A| = |O|$, i.e., $k = m$.
 
 **Key Lemma**: For each $i = 1, \dots, k$: $f(a_i) \leq f(o_i)$.
+
 * Base: Greedy picks the activity with the smallest finish time overall, so $f(a_1) \leq f(o_1)$.
 * Inductive step: Since $f(a_i) \leq f(o_i) \leq s(o_{i+1})$, activity $o_{i+1}$ is also compatible with $a_i$. The greedy algorithm could have picked something with finish time $\leq f(o_{i+1})$, so $f(a_{i+1}) \leq f(o_{i+1})$.
 
@@ -149,6 +150,7 @@ Sort jobs by start time. Maintain a set of machines. For each job, assign it to 
 **Input**: An alphabet $C = \{c_1, \dots, c_n\}$ where character $c_i$ has frequency $f_i$.
 
 **Goal**: Assign a binary codeword to each character such that:
+
 * The code is **prefix-free** (no codeword is a prefix of another).
 * The **total encoding length** $\sum_{c \in C} f_c \cdot d_T(c)$ is minimized, where $d_T(c)$ is the depth of $c$ in the code tree $T$.
 
@@ -185,6 +187,7 @@ HUFFMAN(C)
 Frequencies: $a:45, b:13, c:12, d:16, e:9, f:5$.
 
 Step-by-step merges:
+
 1. Merge $f(5)$ and $e(9)$ → node $fe(14)$.
 2. Merge $c(12)$ and $b(13)$ → node $cb(25)$.
 3. Merge $fe(14)$ and $d(16)$ → node $fed(30)$.

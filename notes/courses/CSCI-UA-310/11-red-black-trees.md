@@ -137,12 +137,12 @@ The key insight is that a "double-black" violation is introduced when a black no
 
 ## Summary
 
-| Operation | Time |
-|---|---|
-| SEARCH | $O(\log n)$ |
-| INSERT | $O(\log n)$ |
-| DELETE | $O(\log n)$ |
-| MINIMUM/MAXIMUM | $O(\log n)$ |
+| Operation             | Time        |
+|-----------------------|-------------|
+| SEARCH                | $O(\log n)$ |
+| INSERT                | $O(\log n)$ |
+| DELETE                | $O(\log n)$ |
+| MINIMUM/MAXIMUM       | $O(\log n)$ |
 | SUCCESSOR/PREDECESSOR | $O(\log n)$ |
 
 ---

@@ -29,6 +29,7 @@ These lectures ask two foundational questions: **which problems can computers so
 We focus on **decision problems**: problems whose answer is "yes" or "no."
 
 **Examples**:
+
 * **MST**: Given graph $G$, weights $w$, and integer $k$: is the MST of $G$ of weight $\leq k$?
 * **Halting**: Given program $P$ and input $x$: does $P(x)$ terminate?
 * **Wang Tiling**: Given a set of colored tile types, can they tile the infinite 2D plane such that adjacent tiles share the same color on touching sides?
@@ -38,10 +39,12 @@ We focus on **decision problems**: problems whose answer is "yes" or "no."
 ## 2. Decidability
 
 **Notation**:
+
 * $\langle P \rangle$ = the source code of program $P$ (in some fixed language).
 * $P(x)$ = running program $P$ on input $x$.
 
 **Definition**: An algorithm $A$ **solves** problem $\Pi$ if for all inputs:
+
 * If the answer is "yes," $A$ outputs "yes" and terminates.
 * If the answer is "no," $A$ outputs "no" and terminates.
 
@@ -93,6 +96,7 @@ Therefore $A^{\text{Halt}}$ cannot exist. $\square$
 ## 4. Reduction: Program Equality is Undecidable
 
 **Program Equality**:
+
 * **Input**: Two programs $\langle A \rangle$ and $\langle B \rangle$.
 * **Goal**: Decide if $A(x) = B(x)$ for all strings $x$.
 
@@ -127,6 +131,7 @@ So $H$ solves Halting — contradicting Turing's theorem. Hence $E$ cannot exist
 More precisely: any semantic property of programs (one that cannot be determined from syntax alone) is undecidable.
 
 **Examples of undecidable problems**:
+
 * Does program $P$ output "yes" on input $x$?
 * Does program $P$ halt on all inputs?
 * Do programs $A$ and $B$ compute the same function? (Program Equality above)
@@ -207,6 +212,7 @@ Thus: if there's a poly-time algorithm for VC, there's one for IS (and vice vers
 ## 9. Class NP
 
 **Formal Definition**: $L \in$ **NP** if there exists a polynomial-time **verifier** $V$ such that:
+
 * For every $x \in L$: there exists a **witness** $w$ with $V(x, w) = \text{"yes"}$.
 * For every $x \notin L$: for all $w$: $V(x, w) = \text{"no"}$.
 * $V$ runs in polynomial time in $|x|$.
@@ -216,6 +222,7 @@ Thus: if there's a poly-time algorithm for VC, there's one for IS (and vice vers
 **Why "NP"**: Non-deterministic Polynomial time.
 
 **Examples in NP**:
+
 * VC: witness = the $k$ vertices.
 * IS: witness = the $k$ independent vertices.
 * Clique: witness = the $k$-clique vertices.
@@ -244,12 +251,12 @@ This is the foundational result: 3SAT is the "hardest" problem in NP. Proved by 
 Computable
 ┌────────────────────────────────────────────────────┐
 │  NP                                                │
-│ ┌──────────────────────┐  ┌────────────────────┐  │
-│ │  P                   │  │  NP-complete        │  │
-│ │  • MST               │  │  • 3SAT             │  │
-│ │  • APSP              │  │  • VC               │  │
-│ └──────────────────────┘  └────────────────────┘  │
-└────────────────────────────────────────────────────┘   • Halting
+│ ┌──────────────────────┐  ┌────────────────────┐   │
+│ │  P                   │  │  NP-complete       │   │
+│ │  • MST               │  │  • 3SAT            │   │
+│ │  • APSP              │  │  • VC              │   │
+│ └──────────────────────┘  └────────────────────┘   │
+└────────────────────────────────────────────────────┘    • Halting
                                                           • Wang Tiling
 ```
 
@@ -260,10 +267,12 @@ Computable
 **The central open question**: Is P = NP?
 
 **If P $\neq$ NP** (widely believed):
+
 * There is no efficient algorithm for any NP-complete problem (3SAT, VC, IS, ...).
 * Cryptography (RSA, etc.) is secure.
 
 **If P $=$ NP**:
+
 * We can solve almost everything in polynomial time.
 * "Can verify $\Rightarrow$ can solve."
 * Modern cryptography would break down.
@@ -332,6 +341,7 @@ Better hardware improves constants but does not change the asymptotic complexity
 ### Strategy 2: Simplify the Problem
 
 Identify special cases that are in P:
+
 * 2SAT (2 literals per clause) $\in$ P.
 * Vertex Cover on trees $\in$ P.
 * Knapsack with small $W$: pseudopolynomial $O(nW)$ DP.

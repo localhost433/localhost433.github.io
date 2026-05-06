@@ -83,6 +83,7 @@ MST-KRUSKAL(G, w)
 ## 4. Union-Find (Disjoint Set Union)
 
 Kruskal's algorithm needs efficient support for:
+
 * `MAKE-SET(x)`: Create a singleton set $\{x\}$.
 * `FIND-SET(x)`: Return the representative of $x$'s set.
 * `UNION(x, y)`: Merge the sets containing $x$ and $y$.
@@ -133,6 +134,7 @@ since $|E| \leq |V|^2$ so $\log E = O(\log V)$.
 **Why safe**: At each step, the cut $(S, V \setminus S)$ where $S$ is the current tree respects $A$. The lightest crossing edge is safe by the safe-edge theorem.
 
 Each vertex $v \notin S$ maintains:
+
 * `v.key`: minimum weight of any edge connecting $v$ to a vertex in $S$ (or $\infty$ if none).
 * `v.π`: the vertex in $S$ that achieves `v.key`.
 
@@ -164,6 +166,7 @@ When $u$ is extracted, `u.key` = $w(u, u.\pi)$ is the minimum-weight edge from $
 Graph: $V = \{a,b,c,d,e,f,g,h,i\}$, with edges of various weights.
 
 Starting from vertex $a$:
+
 * Extract $a$ (key=0). Update neighbors: $b.key=4, h.key=8$.
 * Extract $b$ (key=4). Update: $c.key=8, h.key=11$ (no improvement for $h$).
 * Extract $c$ (key=8). Update: $d.key=7, f.key=4, i.key=2$.

@@ -25,6 +25,7 @@ A **graph** $G = (V, E)$ consists of a set of **vertices** $V$ and a set of **ed
 **Weighted graph**: Each edge $(u, v)$ has a weight $w(u, v) \in \mathbb{R}$.
 
 **Key quantities**:
+
 * $n = |V|$ (number of vertices), $m = |E|$ (number of edges).
 * For undirected graphs: $m \leq \binom{n}{2} = O(n^2)$.
 * For directed graphs: $m \leq n(n-1) = O(n^2)$.
@@ -78,7 +79,8 @@ An $n \times n$ matrix $A$ where $A[u][v] = 1$ if $(u,v) \in E$, else $0$.
 
 **Weakly connected** (directed): The underlying undirected graph is connected.
 
-**Degree**: 
+**Degree**:
+
 * Undirected: $\deg(v)$ = number of incident edges.
 * Directed: $\text{in-deg}(v)$ = edges entering, $\text{out-deg}(v)$ = edges leaving.
 * **Handshake lemma**: $\sum_{v \in V} \deg(v) = 2|E|$.
