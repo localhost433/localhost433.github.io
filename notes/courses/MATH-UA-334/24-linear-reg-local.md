@@ -5,7 +5,7 @@ date: 2026-04-22
 
 ## 1. Introduction to Nonparametric Regression
 
-In traditional simple linear regression, we impose a highly rigid global assumption: the true relationship between the predictor $x$ and the response $y$ is exactly a straight line across the entire infinite domain. 
+In traditional simple linear regression, we impose a highly rigid global assumption: the true relationship between the predictor $x$ and the response $y$ is exactly a straight line across the entire infinite domain.
 
 However, in many complex real-world datasets, the relationship is fundamentally non-linear globally, yet it may appear approximately linear within very small, highly localized neighborhoods.
 
@@ -14,6 +14,7 @@ $$
     y\_i = f(x\_i) + e\_i \\quad \\text{for } i = 1, \\dots, n
 $$
 where:
+
 * $f(x)$ is a completely unknown structural link function.
 * We make absolutely no parametric assumptions about the global shape of $f(x)$. We only assume that $f(x)$ is mathematically smooth (e.g., its second derivative is strictly bounded: $|f''(x)| \\le L$).
 * $e\_i$ represents independent measurement error noise, with $\\E[e\_i] = 0$ and $\\Var{e\_i} = \\sigma^2$.
@@ -33,12 +34,13 @@ $$
     \\hat{f}(x\_0) = \\frac{\\sum\\_{i: |x\_i - x\_0| \\le h} y\_i}{\\#\\{i: |x\_i - x\_0| \\le h\\}}
 $$
 The parameter $h$ is universally known as the **bandwidth**.
+
 * **Small bandwidth ($h \\to 0$):** Extremely small bias (we only use points practically identical to $x\_0$), but massive variance (we average very few points, leaving us highly vulnerable to the noise $e\_i$).
 * **Large bandwidth ($h \\to \\infty$):** Massive bias (we incorrectly average points from fundamentally different regions of the curve), but extremely small variance.
 
 ### 2.2 Kernel Weighting
 
-The binning estimator is mathematically harsh because an observation just inside the boundary receives full weight, while one infinitesimally outside receives zero weight. 
+The binning estimator is mathematically harsh because an observation just inside the boundary receives full weight, while one infinitesimally outside receives zero weight.
 
 To resolve this, we employ a **smooth Kernel function** $K(u)$ that gradually assigns continuous, decaying weights based strictly on the distance from the target. A highly popular choice is the Gaussian kernel:
 $$
@@ -108,5 +110,5 @@ This incredible mathematical formulation proves that local linear regression is 
 
 ## References
 
-1.  Rice, J. A. (2007). *Mathematical Statistics and Data Analysis* (3rd ed.). Thomson Brooks/Cole.
-2.  Han, Y. (2026). Lecture 24: Local linear regression.
+1. Rice, J. A. (2007). *Mathematical Statistics and Data Analysis* (3rd ed.). Thomson Brooks/Cole.
+2. Han, Y. (2026). Lecture 24: Local linear regression.

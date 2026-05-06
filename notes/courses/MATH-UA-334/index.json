@@ -74,20 +74,15 @@
         "title": "15 - Generalized LR Tests",
         "date": "2026-03-23"
     },
-    {    
+    {
         "slug": "16-empirical-cdf",
         "title": "16 - Empirical CDF",
         "date": "2026-03-25"
     },
     {
-        "slug": "17-two-sample-t-test",
-        "title": "17 - Two-Sample t-test",
-        "date": "2026-03-30"
-    },
-    {
-        "slug": "18-nonparametric-two-sample",
-        "title": "18 - Nonparametric Two-Sample Tests",
-        "date": "2026-04-01"
+        "slug": "17-18-two-sample-tests",
+        "title": "17/18 - Two-Sample Tests",
+        "date": "2026-03-30/04-01"
     },
     {
         "slug": "19-categorical-data",
@@ -95,24 +90,14 @@
         "date": "2026-04-06"
     },
     {
-        "slug": "20-simple-linear-reg",
-        "title": "20 - Simple Linear Regression",
-        "date": "2026-04-08"
+        "slug": "20-21-simple-linear-reg",
+        "title": "20/21 - Simple Linear Regression",
+        "date": "2026-04-08/13"
     },
     {
-        "slug": "21-simple-linear-reg-corr",
-        "title": "21 - Simple Linear Regression and Correlation",
-        "date": "2026-04-13"
-    },
-    {
-        "slug": "22-multiple-linear-reg",
-        "title": "22 - Multiple Linear Regression",
-        "date": "2026-04-15"
-    },
-    {
-        "slug": "23-linear-reg-ii",
-        "title": "23 - More on Linear Regression",
-        "date": "2026-04-20"
+        "slug": "22-23-multiple-linear-reg",
+        "title": "22/23 - Multiple Linear Regression",
+        "date": "2026-04-15/20"
     },
     {
         "slug": "24-linear-reg-local",
@@ -120,13 +105,8 @@
         "date": "2026-04-22"
     },
     {
-        "slug": "25-log-regression-i",
-        "title": "25 - Logistic Regression I",
-        "date": "2026-04-27"
-    },
-    {
-        "slug": "26-log-regression-ii",
-        "title": "26 - Logistic Regression II",
-        "date": "2026-04-29"
+        "slug": "25-26-log-regression",
+        "title": "25/26 - Logistic Regression",
+        "date": "2026-04-27/29"
     }
 ]

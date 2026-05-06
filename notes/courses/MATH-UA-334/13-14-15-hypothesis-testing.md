@@ -428,10 +428,10 @@ Under $H\_0$, Pearson's statistic also converges in distribution to $\chi^2\_{m-
 Gregor Mendel observed $n = 556$ peas across four distinct phenotypes.
 The theoretical probabilities under his genetic model, alongside his actual observed counts, were:
 
-* **Smooth yellow:** $\prob = 9/16$, Observed $X\_1 = 315$
-* **Smooth green:** $\prob = 3/16$, Observed $X\_2 = 108$
-* **Wrinkled yellow:** $\prob = 3/16$, Observed $X\_3 = 101$
-* **Wrinkled green:** $\prob = 1/16$, Observed $X\_4 = 32$
+- **Smooth yellow:** $\prob = 9/16$, Observed $X\_1 = 315$
+- **Smooth green:** $\prob = 3/16$, Observed $X\_2 = 108$
+- **Wrinkled yellow:** $\prob = 3/16$, Observed $X\_3 = 101$
+- **Wrinkled green:** $\prob = 1/16$, Observed $X\_4 = 32$
 
 We compute Pearson's statistic using the expected counts $E\_j = n p\_{0j}$:
 $$
