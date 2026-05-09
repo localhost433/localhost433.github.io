@@ -33,13 +33,13 @@ A greedy algorithm is correct when the **greedy choice property** holds: a globa
 
 ## 2. Interval Scheduling (Activity Selection)
 
-### Problem
+### 2.1 Problem
 
 **Input**: $n$ activities, each with start time $s_i$ and finish time $f_i$. Two activities $i$ and $j$ are **compatible** if they do not overlap (i.e., $[s_i, f_i)$ and $[s_j, f_j)$ are disjoint).
 
 **Output**: A maximum-size set of mutually compatible activities.
 
-### Greedy Algorithm
+### 2.2 Greedy Algorithm
 
 **Greedy rule**: Always select the compatible activity with the **earliest finish time**.
 
@@ -57,7 +57,7 @@ GREEDY-ACTIVITY-SELECTOR(s, f)
 
 **Running time**: $O(n \log n)$ for sorting; $O(n)$ for selection. Total: $O(n \log n)$.
 
-### Correctness (Exchange Argument)
+### 2.3 Correctness (Exchange Argument)
 
 **Theorem**: `GREEDY-ACTIVITY-SELECTOR` produces an optimal solution.
 
@@ -75,7 +75,7 @@ Since the greedy finishes no later than optimal at each step, if $O$ has $m$ act
 
 ## 3. Fractional Knapsack
 
-### Problem
+### 3.1 Problem
 
 Same as 0/1 Knapsack but items can be split: take a **fraction** $x_i \in [0,1]$ of item $i$.
 
@@ -83,7 +83,7 @@ Same as 0/1 Knapsack but items can be split: take a **fraction** $x_i \in [0,1]$
 
 **Output**: Fractions $x_1, \dots, x_n \in [0,1]$ maximizing $\sum_i x_i v_i$ subject to $\sum_i x_i w_i \leq W$.
 
-### Greedy Algorithm
+### 3.2 Greedy Algorithm
 
 **Key insight**: Take as much as possible of the item with the highest **value density** $v_i / w_i$.
 
@@ -123,7 +123,7 @@ The exchange argument is the canonical way to prove greedy correctness:
 
 ## 5. Interval Partitioning (Scheduling on Multiple Machines)
 
-### Problem
+### 5.1 Problem
 
 **Input**: $n$ jobs with start times $s_j$ and finish times $f_j$.
 
@@ -133,7 +133,7 @@ The exchange argument is the canonical way to prove greedy correctness:
 
 **Lower bound**: We need at least depth($\mathcal{I}$) machines.
 
-### Greedy Algorithm
+### 5.2 Greedy Algorithm
 
 Sort jobs by start time. Maintain a set of machines. For each job, assign it to any machine that is free; if none is free, open a new machine.
 
@@ -145,7 +145,7 @@ Sort jobs by start time. Maintain a set of machines. For each job, assign it to 
 
 ## 6. Huffman Coding
 
-### Problem
+### 6.1 Problem
 
 **Input**: An alphabet $C = \{c_1, \dots, c_n\}$ where character $c_i$ has frequency $f_i$.
 
@@ -182,7 +182,7 @@ HUFFMAN(C)
 
 **Running time**: $O(n \log n)$ using a binary min-heap.
 
-### Worked Example
+### 7.1 Worked Example
 
 Frequencies: $a:45, b:13, c:12, d:16, e:9, f:5$.
 
@@ -202,13 +202,13 @@ $B(T) = 45 \cdot 1 + 13 \cdot 3 + 12 \cdot 3 + 16 \cdot 3 + 9 \cdot 4 + 5 \cdot 
 
 ## 8. Correctness Proof
 
-### Lemma 1 (Greedy Choice Property)
+### 8.1 Lemma 1 (Greedy Choice Property)
 
 Let $x$ and $y$ be the two characters with the smallest frequencies. There exists an optimal prefix-free code in which $x$ and $y$ have codewords of the same length that differ only in the last bit (i.e., they are siblings in the code tree).
 
 **Proof**: Take any optimal tree $T$. Let $b$ and $c$ be siblings at maximum depth. WLOG $f_b \leq f_c$ and $f_x \leq f_y$. Swapping $x \leftrightarrow b$ and $y \leftrightarrow c$ does not increase $B(T)$ because $x, y$ have the smallest frequencies and move to the deepest positions.
 
-### Lemma 2 (Optimal Substructure)
+### 8.2 Lemma 2 (Optimal Substructure)
 
 Let $T$ be an optimal code tree for $C$, and suppose $x$ and $y$ are sibling leaves. Let $T'$ be $T$ with $x$ and $y$ replaced by their parent $z$ with $f_z = f_x + f_y$. Then $T'$ is optimal for $C' = C \setminus \{x, y\} \cup \{z\}$.
 

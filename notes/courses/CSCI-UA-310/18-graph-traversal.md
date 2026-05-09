@@ -16,7 +16,7 @@ This lecture covers the two fundamental graph traversal algorithms: **Breadth-Fi
 
 ## 1. Breadth-First Search
 
-### Algorithm
+### 1.1 Algorithm
 
 BFS explores the graph level by level, using a FIFO queue. It computes the **shortest path** (fewest edges) from source $s$ to every reachable vertex.
 
@@ -42,7 +42,7 @@ BFS(G, s)
 
 **Running time**: $O(V + E)$ — each vertex is enqueued once, each edge is examined once.
 
-### BFS Properties
+### 1.2 BFS Properties
 
 **Theorem**: When BFS terminates, $v.d = \delta(s, v)$ (shortest-path distance) for all reachable $v$.
 
@@ -52,7 +52,7 @@ The **BFS tree** (predecessor subgraph $G_\pi$) contains the shortest paths from
 
 ## 2. Depth-First Search
 
-### Algorithm
+### 2.1 Algorithm
 
 DFS explores as deep as possible before backtracking. It uses a **timestamp** for discovery (`d`) and finish (`f`) times.
 
@@ -80,7 +80,7 @@ DFS-VISIT(G, u)
 
 **Running time**: $\Theta(V + E)$.
 
-### Parenthesis Theorem
+### 2.2 Parenthesis Theorem
 
 For any two vertices $u$ and $v$, exactly one of the following holds:
 
@@ -88,7 +88,7 @@ For any two vertices $u$ and $v$, exactly one of the following holds:
 2. $[u.d, u.f] \subset [v.d, v.f]$ ($u$ is a **descendant** of $v$).
 3. $[v.d, v.f] \subset [u.d, u.f]$ ($v$ is a **descendant** of $u$).
 
-### Edge Classification
+### 2.3 Edge Classification
 
 In a DFS of a directed graph, edges are classified as:
 
@@ -124,7 +124,7 @@ TOPOLOGICAL-SORT(G)
 
 **Definition**: A **strongly connected component (SCC)** of a directed graph $G$ is a maximal set of vertices $C \subseteq V$ such that for every pair $u, v \in C$, both $u \leadsto v$ and $v \leadsto u$.
 
-### Kosaraju's Algorithm
+### 4.1 Kosaraju's Algorithm
 
 ```text
 STRONGLY-CONNECTED-COMPONENTS(G)

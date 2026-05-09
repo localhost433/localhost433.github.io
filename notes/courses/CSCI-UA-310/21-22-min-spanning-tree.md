@@ -32,7 +32,7 @@ $$w(T) = \sum_{(u,v) \in T} w(u,v)$$
 
 ## 2. The Generic MST Algorithm
 
-### Cuts and Safe Edges
+### 2.1 Cuts and Safe Edges
 
 **Definition (Cut)**: A **cut** $(S, V \setminus S)$ is a partition of $V$ into two non-empty sets.
 
@@ -44,7 +44,7 @@ $$w(T) = \sum_{(u,v) \in T} w(u,v)$$
 
 **Proof sketch**: Let $T$ be an MST containing $A$ but not $(u,v)$. Adding $(u,v)$ to $T$ creates a cycle. This cycle contains another edge $(x,y)$ crossing the cut. Replace $(x,y)$ with $(u,v)$: since $w(u,v) \leq w(x,y)$ (light edge), the new tree $T'$ has $w(T') \leq w(T)$. So $T'$ is also an MST containing $A \cup \{(u,v)\}$.
 
-### Generic Algorithm
+### 2.2 Generic Algorithm
 
 ```text
 GENERIC-MST(G, w)
@@ -88,7 +88,7 @@ Kruskal's algorithm needs efficient support for:
 * `FIND-SET(x)`: Return the representative of $x$'s set.
 * `UNION(x, y)`: Merge the sets containing $x$ and $y$.
 
-### Implementation with Union-by-Rank and Path Compression
+### 4.1 Implementation with Union-by-Rank and Path Compression
 
 Each set is represented as a tree. The root is the representative.
 
@@ -119,7 +119,7 @@ LINK(x, y)
 
 **Amortized running time**: $O(m \cdot \alpha(n))$ for $m$ operations on $n$ elements, where $\alpha$ is the extremely slowly growing inverse Ackermann function ($\alpha(n) \leq 4$ in practice). Essentially $O(1)$ per operation.
 
-### Total Complexity of Kruskal's
+### 4.2 Total Complexity of Kruskal's
 
 $$O(E \log E + E \cdot \alpha(V)) = O(E \log V)$$
 
@@ -155,13 +155,13 @@ MST-PRIM(G, w, r)
 
 The MST is $\{ (v, v.\pi) : v \in V \setminus \{r\} \}$.
 
-### Correctness
+### 5.1 Correctness
 
 **Loop Invariant**: Before each iteration, $A = \{(v, v.\pi) : v \in V \setminus Q \setminus \{r\}\}$ is a subset of some MST.
 
 When $u$ is extracted, `u.key` = $w(u, u.\pi)$ is the minimum-weight edge from $u$ to the current tree. By the safe-edge theorem (with the cut separating $Q$ from $V \setminus Q$), this edge is safe.
 
-### Worked Example
+### 5.2 Worked Example
 
 Graph: $V = \{a,b,c,d,e,f,g,h,i\}$, with edges of various weights.
 
@@ -204,7 +204,7 @@ With a **binary heap**: $O(E \log V)$. Good for sparse graphs.
 
 **Both produce a valid MST**. The choice depends on graph density and implementation constraints.
 
-### MST Uniqueness
+### 7.1 MST Uniqueness
 
 If all edge weights are distinct, the MST is unique. With ties, multiple MSTs may exist, but all have the same total weight.
 

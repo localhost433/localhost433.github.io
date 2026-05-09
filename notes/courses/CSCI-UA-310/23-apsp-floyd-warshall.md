@@ -81,7 +81,7 @@ $$D[u,v,i] = \begin{cases} w(u,v) & i = 0 \\ \min\bigl(D[u,v,i-1],\; D[u,v_i,i-1
 
 **Output**: $D[u,v,n]$ for each pair $u, v \in V$.
 
-### Pseudocode
+### 5.1 Pseudocode
 
 ```text
 FLOYD-WARSHALL(W)
@@ -99,7 +99,7 @@ FLOYD-WARSHALL(W)
 **Running time**: $O(|V|^3)$ — three nested loops.
 **Space**: $O(|V|^2)$ (only two matrices needed at a time, or in-place with care).
 
-### Worked Example
+### 5.2 Worked Example
 
 Graph with $V = \{v_1, v_2, v_3, v_4, v_5, v_6\}$:
 

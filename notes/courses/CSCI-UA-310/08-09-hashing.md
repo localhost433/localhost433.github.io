@@ -51,7 +51,7 @@ The table size $m$ is much smaller than $|U|$.
 
 **Collision**: Two keys $k_1 \neq k_2$ with $h(k_1) = h(k_2)$ is a **collision**. Collisions are unavoidable if $n > m$.
 
-### Hash Function Design
+### 3.1 Hash Function Design
 
 A good hash function satisfies the **simple uniform hashing assumption**: each key is equally likely to hash to any of the $m$ slots, independently of all other keys.
 
@@ -67,7 +67,7 @@ A good hash function satisfies the **simple uniform hashing assumption**: each k
 
 * Slot $j$ contains a pointer to the head of the list of all elements with $h(k) = j$.
 
-### Pseudocode
+### 4.1 Pseudocode
 
 ```text
 CHAINED-HASH-INSERT(T, x)
@@ -131,7 +131,7 @@ HASH-SEARCH(T, k)
 
 **Deletion** is tricky: cannot just set to `NIL` (would break search). Use a special `DELETED` sentinel.
 
-### Probing Strategies
+### 6.1 Probing Strategies
 
 **Linear Probing**: $h(k, i) = (h'(k) + i) \bmod m$.
 

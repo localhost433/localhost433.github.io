@@ -37,7 +37,7 @@ A **graph** $G = (V, E)$ consists of a set of **vertices** $V$ and a set of **ed
 
 ## 2. Representations
 
-### Adjacency List
+### 2.1 Adjacency List
 
 An array $\text{Adj}[1 \dots n]$ where $\text{Adj}[u]$ is a linked list of all vertices $v$ such that $(u, v) \in E$.
 
@@ -46,7 +46,7 @@ An array $\text{Adj}[1 \dots n]$ where $\text{Adj}[u]$ is a linked list of all v
 * **Time to iterate** over all neighbors of $u$: $\Theta(\deg(u))$.
 * **Preferred** for sparse graphs.
 
-### Adjacency Matrix
+### 2.2 Adjacency Matrix
 
 An $n \times n$ matrix $A$ where $A[u][v] = 1$ if $(u,v) \in E$, else $0$.
 

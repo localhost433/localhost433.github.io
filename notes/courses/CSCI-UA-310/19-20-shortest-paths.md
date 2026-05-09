@@ -84,7 +84,7 @@ DIJKSTRA(G, w, s)
 9.         (decrease-key on Q if v.d was updated)
 ```
 
-### Correctness
+### 3.1 Correctness
 
 **Loop Invariant**: At the start of each iteration, $u.d = \delta(s, u)$ for all $u \in S$.
 
@@ -108,7 +108,7 @@ The running time depends on the priority queue implementation:
 
 **With Fibonacci heap**: Theoretically optimal: $O(V \log V + E)$.
 
-### Worked Example
+### 4.1 Worked Example
 
 Graph with vertices $\{s, a, b, c, d\}$ and edges:
 $(s,a,10), (s,c,3), (a,b,1), (a,c,4), (b,d,7), (c,a,4), (c,b,8), (c,d,2), (d,b,5)$.
