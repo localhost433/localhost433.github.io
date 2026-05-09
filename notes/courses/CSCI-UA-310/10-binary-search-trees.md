@@ -48,7 +48,7 @@ Similarly, **pre-order** (root, left, right) and **post-order** (left, right, ro
 
 ## 3. Searching
 
-### SEARCH
+### 3.1 SEARCH
 
 ```text
 TREE-SEARCH(x, k)
@@ -61,7 +61,7 @@ TREE-SEARCH(x, k)
 
 Running time: $O(h)$.
 
-### MINIMUM and MAXIMUM
+### 3.2 MINIMUM and MAXIMUM
 
 ```text
 TREE-MINIMUM(x)
@@ -79,7 +79,7 @@ TREE-MAXIMUM(x)
 
 Both run in $O(h)$.
 
-### SUCCESSOR
+### 3.3 SUCCESSOR
 
 The **successor** of node $x$ is the node with the smallest key greater than $x.\text{key}$.
 
@@ -100,7 +100,7 @@ Running time: $O(h)$.
 
 ## 4. Modification
 
-### INSERT
+### 4.1 INSERT
 
 ```text
 TREE-INSERT(T, z)
@@ -121,7 +121,7 @@ TREE-INSERT(T, z)
 
 Running time: $O(h)$.
 
-### DELETE
+### 4.2 DELETE
 
 Three cases when deleting node $z$:
 

@@ -53,7 +53,7 @@ date: 2026-03-02/04/09
 |---|---|---|---|---|---|---|---|---|---|---|
 | Price $p[i]$ | 1 | 5 | 8 | 9 | 10 | 17 | 17 | 20 | 24 | 30 |
 
-### Naive Recursive Solution
+### 3.1 Naive Recursive Solution
 
 $$r_n = \max_{1 \leq i \leq n}(p[i] + r_{n-i})$$
 
@@ -71,7 +71,7 @@ CUT-ROD(p, n)
 
 **Running time**: $T(n) = 1 + \sum_{j=0}^{n-1} T(j)$, giving $T(n) = 2^n$ — exponential due to redundant subproblems.
 
-### Bottom-Up Dynamic Programming
+### 3.2 Bottom-Up Dynamic Programming
 
 Solve subproblems in order of increasing size, filling a table $r[0 \dots n]$.
 
@@ -89,7 +89,7 @@ BOTTOM-UP-CUT-ROD(p, n)
 
 **Running time**: $\Theta(n^2)$ — two nested loops.
 
-### Top-Down Memoization
+### 3.3 Top-Down Memoization
 
 ```text
 MEMOIZED-CUT-ROD(p, n)
@@ -141,7 +141,7 @@ PRINT-CUT-ROD-SOLUTION(p, n)
 
 ## 5. Longest Common Subsequence
 
-### Problem
+### 5.1 Problem
 
 A **subsequence** of a sequence is the sequence with zero or more elements removed (not necessarily contiguous).
 
@@ -152,7 +152,7 @@ A **subsequence** of a sequence is the sequence with zero or more elements remov
 **Example**: $X = \langle A, B, C, B, D, A, B \rangle$, $Y = \langle B, D, C, A, B, A \rangle$.
 LCS: $\langle B, C, B, A \rangle$ (length 4) or $\langle B, D, A, B \rangle$ (length 4).
 
-### Optimal Substructure
+### 5.2 Optimal Substructure
 
 **Theorem**: Let $Z = \langle z_1, \dots, z_k \rangle$ be any LCS of $X$ and $Y$.
 
@@ -160,13 +160,13 @@ LCS: $\langle B, C, B, A \rangle$ (length 4) or $\langle B, D, A, B \rangle$ (le
 2. If $x_m \neq y_n$ and $z_k \neq x_m$, then $Z$ is an LCS of $X_{m-1}$ and $Y$.
 3. If $x_m \neq y_n$ and $z_k \neq y_n$, then $Z$ is an LCS of $X$ and $Y_{n-1}$.
 
-### Recurrence
+### 5.3 Recurrence
 
 Define $c[i,j]$ = length of LCS of $X_i = \langle x_1,\dots,x_i \rangle$ and $Y_j = \langle y_1,\dots,y_j \rangle$.
 
 $$c[i,j] = \begin{cases} 0 & \text{if } i = 0 \text{ or } j = 0 \\ c[i-1,j-1] + 1 & \text{if } i,j > 0 \text{ and } x_i = y_j \\ \max(c[i-1,j],\; c[i,j-1]) & \text{if } i,j > 0 \text{ and } x_i \neq y_j \end{cases}$$
 
-### Algorithm
+### 5.4 Algorithm
 
 ```text
 LCS-LENGTH(X, Y)
@@ -196,7 +196,7 @@ LCS-LENGTH(X, Y)
 
 ## 6. 0/1 Knapsack
 
-### Problem
+### 6.1 Problem
 
 **Input**: $n$ items where item $i$ has weight $w_i \in \mathbb{Z}^+$ and value $v_i \geq 0$; knapsack capacity $W \in \mathbb{Z}^+$.
 
@@ -204,20 +204,20 @@ LCS-LENGTH(X, Y)
 
 The **0/1** constraint means each item is either taken or not (no fractions).
 
-### Optimal Substructure
+### 6.2 Optimal Substructure
 
 For item $n$:
 
 * **Skip item $n$**: optimal value from items $\{1,\dots,n-1\}$ with capacity $W$.
 * **Take item $n$** (if $w_n \leq W$): $v_n$ plus optimal value from items $\{1,\dots,n-1\}$ with capacity $W - w_n$.
 
-### Recurrence
+### 6.3 Recurrence
 
 Define $\text{OPT}(i, w)$ = maximum value using items $\{1,\dots,i\}$ with capacity $w$.
 
 $$\text{OPT}(i, w) = \begin{cases} 0 & \text{if } i = 0 \\ \text{OPT}(i-1, w) & \text{if } w_i > w \\ \max\bigl(\text{OPT}(i-1, w),\; v_i + \text{OPT}(i-1, w - w_i)\bigr) & \text{otherwise} \end{cases}$$
 
-### Algorithm
+### 6.4 Algorithm
 
 ```text
 KNAPSACK(n, W, w[1..n], v[1..n])
@@ -234,7 +234,7 @@ KNAPSACK(n, W, w[1..n], v[1..n])
 
 **Note**: $O(nW)$ is **pseudopolynomial** — it is polynomial in $n$ and $W$, but $W$ can be exponential in the number of bits required to represent it. The 0/1 Knapsack problem is NP-hard.
 
-### Worked Example
+### 6.5 Worked Example
 
 Items: $(w_1, v_1) = (2, 6)$, $(w_2, v_2) = (2, 10)$, $(w_3, v_3) = (3, 12)$. Capacity $W = 5$.
 
@@ -272,7 +272,7 @@ FIBONACCI-DP(n)
 
 ## 8. Matrix Chain Multiplication
 
-### Problem
+### 8.1 Problem
 
 **Input**: A chain of $n$ matrices $A_1, A_2, \dots, A_n$ where $A_i$ has dimensions $p_{i-1} \times p_i$.
 
@@ -285,11 +285,11 @@ FIBONACCI-DP(n)
 * $((A_1 A_2) A_3) A_4$: $30 \cdot 35 \cdot 15 + 30 \cdot 15 \cdot 5 + 30 \cdot 5 \cdot 10 = 18{,}000$ multiplications.
 * $(A_1 (A_2 (A_3 A_4)))$: $15 \cdot 5 \cdot 10 + 35 \cdot 15 \cdot 10 + 30 \cdot 35 \cdot 10 = 16{,}250$ multiplications.
 
-### Optimal Substructure
+### 8.2 Optimal Substructure
 
 Any optimal parenthesization of $A_i A_{i+1} \cdots A_j$ must split at some $k$ ($i \leq k < j$) into $(A_i \cdots A_k)(A_{k+1} \cdots A_j)$. Each part must also be optimally parenthesized.
 
-### Recurrence
+### 8.3 Recurrence
 
 Define $m[i,j]$ = minimum number of multiplications to compute $A_i \cdots A_j$.
 
@@ -297,7 +297,7 @@ $$m[i,j] = \begin{cases} 0 & \text{if } i = j \\ \min_{i \leq k < j} \bigl( m[i,
 
 **Guess**: the split position $k$.
 
-### Algorithm
+### 8.4 Algorithm
 
 Solve by increasing **chain length** $\ell = j - i$.
 
@@ -325,13 +325,13 @@ MATRIX-CHAIN-ORDER(p)
 
 ## 9. Subset Sum
 
-### Problem
+### 9.1 Problem
 
 **Input**: A set $S = \{a_1, a_2, \dots, a_n\}$ of positive integers and a target $W$.
 
 **Output**: Does there exist a subset $T \subseteq S$ such that $\sum_{a \in T} a = W$?
 
-### Recurrence
+### 9.2 Recurrence
 
 Define $\text{DP}[i][w] = \mathtt{true}$ if some subset of $\{a_1, \dots, a_i\}$ sums to exactly $w$.
 
@@ -339,7 +339,7 @@ $$\text{DP}[i][w] = \text{DP}[i-1][w] \;\lor\; \bigl(w \geq a_i \;\land\; \text{
 
 Base cases: $\text{DP}[i][0] = \mathtt{true}$ for all $i$; $\text{DP}[0][w] = \mathtt{false}$ for $w > 0$.
 
-### Algorithm
+### 9.3 Algorithm
 
 ```text
 SUBSET-SUM(a[1..n], W)

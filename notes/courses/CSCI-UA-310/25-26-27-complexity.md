@@ -56,17 +56,17 @@ We focus on **decision problems**: problems whose answer is "yes" or "no."
 
 ## 3. The Halting Problem
 
-### Statement
+### 3.1 Statement
 
 **Input**: A program $\langle P \rangle$ and a string $x$.
 
 **Output**: Does $P(x)$ terminate?
 
-### Theorem (Turing)
+### 3.2 Theorem (Turing)
 
 **The Halting Problem is not decidable.** No algorithm solves Halting.
 
-### Proof (Diagonal Argument)
+### 3.3 Proof (Diagonal Argument)
 
 Suppose for contradiction that algorithm $A^{\text{Halt}}$ solves Halting. Define a new algorithm:
 
@@ -156,7 +156,7 @@ More precisely: any semantic property of programs (one that cannot be determined
 
 ## 7. Problems Without Known Poly-Time Algorithms
 
-### Vertex Cover (VC)
+### 7.1 Vertex Cover (VC)
 
 **Input**: Undirected graph $G = (V, E)$, integer $k$.
 
@@ -164,7 +164,7 @@ More precisely: any semantic property of programs (one that cannot be determined
 
 A set $S$ is a vertex cover if for every edge $(u,v) \in E$, at least one of $u, v \in S$.
 
-### Independent Set (IS)
+### 7.2 Independent Set (IS)
 
 **Input**: Undirected graph $G = (V, E)$, integer $k$.
 
@@ -172,13 +172,13 @@ A set $S$ is a vertex cover if for every edge $(u,v) \in E$, at least one of $u,
 
 A set $S$ is an independent set if for all $u, v \in S$, $(u,v) \notin E$.
 
-### Clique
+### 7.3 Clique
 
 **Input**: Undirected graph $G = (V, E)$, integer $k$.
 
 **Question**: Are there $k$ nodes such that every pair is connected by an edge?
 
-### 3SAT
+### 7.4 3SAT
 
 **Input**: A Boolean formula $\varphi(x_1, \dots, x_n)$ in **conjunctive normal form (CNF)** with exactly 3 literals per clause (AND of ORs of 3 variables or their negations).
 
@@ -199,7 +199,7 @@ If $R$ runs in polynomial time: **poly-time reduction**, $L \leq_p L'$.
 
 **Interpretation**: If $L \leq_p L'$ and $L' \in P$, then $L \in P$. Equivalently: if $L \notin P$ then $L' \notin P$.
 
-### VC $\leq_p$ IS (and IS $\leq_p$ VC)
+### 8.1 VC $\leq_p$ IS (and IS $\leq_p$ VC)
 
 **Claim**: $G$ has a vertex cover of size $k$ $\iff$ $G$ has an independent set of size $n - k$.
 
@@ -286,7 +286,7 @@ The P vs. NP problem is one of the Millennium Prize Problems ($1 million prize f
 **Given**: A 3SAT formula $\varphi$ with $m$ clauses and $n$ variables. We construct a graph $G_\varphi$ such that:
 $$G_\varphi \text{ has an IS of size } m \iff \varphi \text{ is satisfiable}$$
 
-### Construction
+### 12.1 Construction
 
 **Step 1**: For each clause $C_j = (\ell_{j1} \vee \ell_{j2} \vee \ell_{j3})$, create a **triangle** (3-clique) with one node per literal: nodes $\ell_{j1}, \ell_{j2}, \ell_{j3}$ all connected to each other.
 
@@ -298,7 +298,7 @@ An IS of size $m$ must include **exactly one node per triangle** — i.e., one s
 
 This **consistency constraint** ensures we cannot choose both $x_i$ and $\overline{x}_i$ into the IS.
 
-### Example
+### 12.2 Example
 
 $$\varphi = (x_1 \vee x_2 \vee \overline{x}_3) \wedge (x_1 \vee \overline{x}_2 \vee x_4) \wedge (\overline{x}_1 \vee \overline{x}_2 \vee \overline{x}_4) \wedge (x_2 \vee x_4 \vee x_3)$$
 
@@ -306,7 +306,7 @@ Graph $G_\varphi$ has 4 triangles (one per clause), with inter-triangle edges be
 
 $G_\varphi$ has an IS of size $m = 4$ $\iff$ $\varphi$ is satisfiable (e.g., $x_1 = T, x_2 = F, x_3 = T, x_4 = T$).
 
-### Correctness Proof
+### 12.3 Correctness Proof
 
 **($\Rightarrow$) IS of size $m$ $\Rightarrow$ satisfying assignment**:
 
@@ -334,11 +334,11 @@ Since IS is NP-hard, VC is NP-hard. Since VC $\in$ NP (witness = the $k$ vertice
 
 If a problem is NP-complete, we believe no poly-time algorithm exists (assuming P $\neq$ NP). Practical strategies:
 
-### Strategy 1: Improve Hardware
+### 14.1 Strategy 1: Improve Hardware
 
 Better hardware improves constants but does not change the asymptotic complexity. An algorithm that takes $2^n$ steps on a $10^9$-op/s machine takes $2^{60}$ steps even on a machine $10^9 \times$ faster, if $n = 60$.
 
-### Strategy 2: Simplify the Problem
+### 14.2 Strategy 2: Simplify the Problem
 
 Identify special cases that are in P:
 
@@ -347,11 +347,11 @@ Identify special cases that are in P:
 * Knapsack with small $W$: pseudopolynomial $O(nW)$ DP.
 * Clique on planar graphs $\in$ P.
 
-### Strategy 3: Heuristics
+### 14.3 Strategy 3: Heuristics
 
 Use algorithms without formal guarantees (e.g., local search, simulated annealing, deep learning). Often work well in practice, but may fail on worst-case instances.
 
-### Strategy 4: Approximation Algorithms
+### 14.4 Strategy 4: Approximation Algorithms
 
 Design algorithms that run in polynomial time and guarantee a **near-optimal** solution.
 

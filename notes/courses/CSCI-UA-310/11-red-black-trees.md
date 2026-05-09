@@ -47,7 +47,7 @@ The **black-height** $\text{bh}(x)$ of a node $x$ is the number of black nodes o
 
 **Rotations** are local restructuring operations that preserve the BST property and run in $O(1)$ time.
 
-### Left Rotation on node $x$
+### 3.1 Left Rotation on node $x$
 
 ```text
 LEFT-ROTATE(T, x)
@@ -84,7 +84,7 @@ RB-INSERT(T, z)
 2. RB-INSERT-FIXUP(T, z)
 ```
 
-### Fixup Cases
+### 4.1 Fixup Cases
 
 Let $z$ be the newly inserted red node, $z.\text{parent}$ be red (violation of Property 4), and $y$ be $z$'s **uncle** (sibling of $z$'s parent).
 
