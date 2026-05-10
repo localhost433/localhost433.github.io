@@ -42,8 +42,8 @@ Sorting by MSD (Most Significant Digit) is intuitive (like alphabetizing words) 
 
 ## 2. Integer Multiplication
 
-**Problem**: Multiply two -digit numbers  and .
-Standard grade-school multiplication takes  operations. Can we do better?
+**Problem**: Multiply two $n$-digit numbers $X$ and $Y$.
+Standard grade-school multiplication takes $O(n^2)$ operations. Can we do better?
 
 ### 2.1 Divide and Conquer
 
@@ -68,9 +68,9 @@ $$ (x_h + x_l)(y_h + y_l) - x_h y_h - x_l y_l = x_h y_l + x_l y_h $$
 
 New Recurrence:
 $$ T(n) = 3T(n/2) + \Theta(n) $$
-Using the Master Theorem ():
+Using the Master Theorem with $a=3$, $b=2$, $d=1$:
 $$ T(n) = \Theta(n^{\log_2 3}) \approx \Theta(n^{1.58}) $$
-This is significantly faster than  for large .
+This is significantly faster than $\Theta(n^2)$ for large $n$.
 
 ---
 

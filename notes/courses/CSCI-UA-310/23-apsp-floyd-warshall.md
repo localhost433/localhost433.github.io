@@ -23,7 +23,7 @@ Even with no negative cycles, Dijkstra can give wrong answers. Example: $s \to b
 
 **Input**: Directed graph $G = (V, E)$ with weight function $w: E \to \mathbb{R}$, no negative cycles. Graph given as an $n \times n$ weight matrix:
 
-$$W[u,v] = \begin{cases} 0 & \text{if } u = v \\ w(u,v) & \text{if } (u,v) \in E \\ \infty & \text{if } (u,v) \notin E \end{cases}$$
+$$W[u,v] = \begin{cases} 0 & \text{if } u = v \\\\ w(u,v) & \text{if } (u,v) \in E \\\\ \infty & \text{if } (u,v) \notin E \end{cases}$$
 
 **Output**: $\delta(u,v)$ for all pairs $u, v \in V$.
 
@@ -44,7 +44,7 @@ $$W[u,v] = \begin{cases} 0 & \text{if } u = v \\ w(u,v) & \text{if } (u,v) \in E
 **Observation**: Shortest paths are simple (no cycles), so they use at most $|V|-1$ edges.
 
 **Recurrence**:
-$$W[u,v,k] = \begin{cases} w(u,v) & k = 1 \\ \min_{x \in V} \bigl( W[u,x,k-1] + w(x,v) \bigr) & k > 1 \end{cases}$$
+$$W[u,v,k] = \begin{cases} w(u,v) & k = 1 \\\\ \min_{x \in V} \bigl( W[u,x,k-1] + w(x,v) \bigr) & k > 1 \end{cases}$$
 
 **Running time**: $|V| \times |V| \times |V|$ subproblems $\times$ $|V|$ guess for $x$ = $O(|V|^4)$.
 
@@ -55,7 +55,7 @@ $$W[u,v,k] = \begin{cases} w(u,v) & k = 1 \\ \min_{x \in V} \bigl( W[u,x,k-1] + 
 **Key observation**: Instead of increasing $k$ by 1 each time, use powers of 2.
 
 **Recurrence** (for $k$ a power of 2):
-$$W[u,v,k] = \begin{cases} w(u,v) & k = 1 \\ \min_{x \in V} \bigl( W[u,x,k/2] + W[x,v,k/2] \bigr) & k > 1 \end{cases}$$
+$$W[u,v,k] = \begin{cases} w(u,v) & k = 1 \\\\ \min_{x \in V} \bigl( W[u,x,k/2] + W[x,v,k/2] \bigr) & k > 1 \end{cases}$$
 
 **Running time**: $|V|^2 \times \log|V|$ subproblems $\times |V|$ guess = $O(|V|^3 \log |V|)$.
 
@@ -77,7 +77,7 @@ Better, but Floyd-Warshall achieves $O(|V|^3)$ with a different subproblem defin
 **Guess**: Is $v_i$ on the path or not?
 
 **Recurrence**:
-$$D[u,v,i] = \begin{cases} w(u,v) & i = 0 \\ \min\bigl(D[u,v,i-1],\; D[u,v_i,i-1] + D[v_i,v,i-1]\bigr) & i > 0 \end{cases}$$
+$$D[u,v,i] = \begin{cases} w(u,v) & i = 0 \\\\ \min\bigl(D[u,v,i-1],\; D[u,v_i,i-1] + D[v_i,v,i-1]\bigr) & i > 0 \end{cases}$$
 
 **Output**: $D[u,v,n]$ for each pair $u, v \in V$.
 
