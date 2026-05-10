@@ -164,7 +164,7 @@ LCS: $\langle B, C, B, A \rangle$ (length 4) or $\langle B, D, A, B \rangle$ (le
 
 Define $c[i,j]$ = length of LCS of $X_i = \langle x_1,\dots,x_i \rangle$ and $Y_j = \langle y_1,\dots,y_j \rangle$.
 
-$$c[i,j] = \begin{cases} 0 & \text{if } i = 0 \text{ or } j = 0 \\ c[i-1,j-1] + 1 & \text{if } i,j > 0 \text{ and } x_i = y_j \\ \max(c[i-1,j],\; c[i,j-1]) & \text{if } i,j > 0 \text{ and } x_i \neq y_j \end{cases}$$
+$$c[i,j] = \begin{cases} 0 & \text{if } i = 0 \text{ or } j = 0 \\\\ c[i-1,j-1] + 1 & \text{if } i,j > 0 \text{ and } x_i = y_j \\\\ \max(c[i-1,j],\; c[i,j-1]) & \text{if } i,j > 0 \text{ and } x_i \neq y_j \end{cases}$$
 
 ### 5.4 Algorithm
 
@@ -215,7 +215,7 @@ For item $n$:
 
 Define $\text{OPT}(i, w)$ = maximum value using items $\{1,\dots,i\}$ with capacity $w$.
 
-$$\text{OPT}(i, w) = \begin{cases} 0 & \text{if } i = 0 \\ \text{OPT}(i-1, w) & \text{if } w_i > w \\ \max\bigl(\text{OPT}(i-1, w),\; v_i + \text{OPT}(i-1, w - w_i)\bigr) & \text{otherwise} \end{cases}$$
+$$\text{OPT}(i, w) = \begin{cases} 0 & \text{if } i = 0 \\\\ \text{OPT}(i-1, w) & \text{if } w_i > w \\\\ \max\bigl(\text{OPT}(i-1, w),\; v_i + \text{OPT}(i-1, w - w_i)\bigr) & \text{otherwise} \end{cases}$$
 
 ### 6.4 Algorithm
 
@@ -293,7 +293,7 @@ Any optimal parenthesization of $A_i A_{i+1} \cdots A_j$ must split at some $k$ 
 
 Define $m[i,j]$ = minimum number of multiplications to compute $A_i \cdots A_j$.
 
-$$m[i,j] = \begin{cases} 0 & \text{if } i = j \\ \min_{i \leq k < j} \bigl( m[i,k] + m[k+1,j] + p_{i-1} \cdot p_k \cdot p_j \bigr) & \text{if } i < j \end{cases}$$
+$$m[i,j] = \begin{cases} 0 & \text{if } i = j \\\\ \min_{i \leq k < j} \bigl( m[i,k] + m[k+1,j] + p_{i-1} \cdot p_k \cdot p_j \bigr) & \text{if } i < j \end{cases}$$
 
 **Guess**: the split position $k$.
 
