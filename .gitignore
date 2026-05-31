@@ -51,6 +51,7 @@ build/
 /notes/courses/*/*exercise*
 /notes/courses/*/*syllabus*
 /notes/courses/*/*recitation*
+/notes/courses/*/*.pdf
 
 # Hidden courses
 /notes/courses/FYSEM*
