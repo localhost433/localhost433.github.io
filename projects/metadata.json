@@ -25,11 +25,11 @@
     },
     {
         "title": "NYC Mayor Prediction Model",
-        "link": "https://github.com/localhost433/nyc-mayor-prediction",
+        "link": "https://localhost433.github.io/nyc-mayor-prediction/showcase/",
         "repo": "localhost433/nyc-mayor-prediction",
         "tech": "Python, PyMC, JAX, RAG, NLP",
         "description": "A sophisticated Bayesian precinct-level model forecasting the 2025 NYC mayoral election. Combines ranked-choice voting simulations with RAG-based issue-salience embeddings and ACS covariate analysis.",
-        "languages": {"Python": 100.0}
+        "languages": {"Python": 75.8, "HTML": 24.2}
     },
     {
         "title": "Prime Factorization Game",
