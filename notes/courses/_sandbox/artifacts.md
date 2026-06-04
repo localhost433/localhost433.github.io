@@ -22,16 +22,41 @@ export default function App() {
 }
 ```
 
-## Kit usage (shared components)
+## Kit usage (shadcn-style components)
 
 ```artifact
-import { Card, Slider } from '@kit';
+import { Card, CardHeader, CardTitle, CardContent, CardFooter, Button, Badge, Input, Label, Slider, Switch } from '@kit';
 export default function App() {
   const [v, setV] = React.useState(50);
+  const [on, setOn] = React.useState(true);
+  const [name, setName] = React.useState("");
   return (
-    <Card title="Slider demo">
-      <Slider min="0" max="100" value={v} onChange={e => setV(+e.target.value)} />
-      <p>value: {v}</p>
+    <Card>
+      <CardHeader>
+        <CardTitle>Component showcase <Badge variant="secondary">kit</Badge></CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 16 }}>
+          <Button>Default</Button>
+          <Button variant="secondary">Secondary</Button>
+          <Button variant="outline">Outline</Button>
+          <Button variant="destructive">Destructive</Button>
+          <Button variant="ghost">Ghost</Button>
+        </div>
+        <div style={{ marginBottom: 16 }}>
+          <Label htmlFor="nm">Name</Label>
+          <Input id="nm" placeholder="Type here…" value={name} onChange={e => setName(e.target.value)} />
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 16 }}>
+          <Switch checked={on} onCheckedChange={setOn} />
+          <span>Switch is {on ? "on" : "off"}</span>
+        </div>
+        <Label>Slider: {v}</Label>
+        <Slider min="0" max="100" value={v} onChange={e => setV(+e.target.value)} />
+      </CardContent>
+      <CardFooter>
+        <Badge>{name ? "Hi, " + name : "no name"}</Badge>
+      </CardFooter>
     </Card>
   );
 }
