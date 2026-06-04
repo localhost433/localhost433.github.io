@@ -1,0 +1,15 @@
+:root {
+  --art-bg: #ffffff; --art-fg: #1a1a1a; --art-muted: #666;
+  --art-accent: #2563eb; --art-border: #e3e3e3; --art-radius: 10px;
+  --art-font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+html.dark-mode {
+  --art-bg: #15171a; --art-fg: #e8e8e8; --art-muted: #9aa0a6;
+  --art-accent: #6ea8fe; --art-border: #2c2f33;
+}
+#root { color: var(--art-fg); font-family: var(--art-font); }
+button { font: inherit; }
+.art-card { background: var(--art-bg); color: var(--art-fg); border: 1px solid var(--art-border);
+  border-radius: var(--art-radius); padding: 16px; }
+.art-card h3 { margin: 0 0 12px; font-size: 15px; }
+.art-slider { width: 100%; accent-color: var(--art-accent); }
