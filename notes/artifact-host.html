@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' blob: https://cdn.jsdelivr.net https://esm.sh; style-src 'unsafe-inline' https://cdn.jsdelivr.net https://esm.sh; img-src * data: blob:; font-src https: data:; connect-src https://esm.sh https://cdn.jsdelivr.net;" />
+  <style>
+    html, body { margin: 0; padding: 0; background: transparent; }
+    #root { padding: 12px; box-sizing: border-box; font-family: system-ui, -apple-system, sans-serif; }
+    .artifact-error { font-family: ui-monospace, Menlo, monospace; font-size: 13px; color: #b00020;
+      background: #fff0f1; border: 1px solid #f3c2c7; border-radius: 8px; padding: 12px 14px; white-space: pre-wrap; }
+    html.dark-mode .artifact-error { color: #ff9aa2; background: #2a1416; border-color: #5a2a2f; }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script>
+    (function () {
+      "use strict";
+      var REACT = "https://esm.sh/react@18.3.1";
+      var REACTDOM = "https://esm.sh/react-dom@18.3.1?external=react";
+      var REACTDOM_CLIENT = "https://esm.sh/react-dom@18.3.1/client?external=react";
+      var frameId = null, started = false;
+
+      function post(msg) { msg.source = "artifact"; msg.id = frameId; parent.postMessage(msg, "*"); }
+      function reportHeight() {
+        var h = Math.ceil(document.documentElement.getBoundingClientRect().height);
+        post({ type: "artifact:height", px: h });
+      }
+      function showError(message) {
+        var root = document.getElementById("root");
+        root.innerHTML = "";
+        var card = document.createElement("div");
+        card.className = "artifact-error";
+        card.textContent = "Artifact error:\n" + message;
+        root.appendChild(card);
+        reportHeight();
+        post({ type: "artifact:error", message: String(message) });
+      }
+      function applyTheme(theme) {
+        document.documentElement.classList.toggle("dark-mode", theme === "dark");
+        window.__theme = theme;
+        window.dispatchEvent(new CustomEvent("themechange", { detail: theme }));
+      }
+      function injectStyles(layers) {
+        (layers || []).forEach(function (css) {
+          if (!css) return;
+          var s = document.createElement("style"); s.textContent = css; document.head.appendChild(s);
+        });
+      }
+      function transform(src) {
+        return Babel.transform(src, { presets: ["react"], sourceType: "module", filename: "artifact.jsx" }).code;
+      }
+      function blobUrl(code) { return URL.createObjectURL(new Blob([code], { type: "text/javascript" })); }
+
+      function buildImportMap(payload) {
+        var imports = { "react": REACT, "react-dom": REACTDOM, "react-dom/client": REACTDOM_CLIENT };
+        var modules = payload.modules || {};
+        Object.keys(modules).forEach(function (spec) { imports[spec] = blobUrl(transform(modules[spec])); });
+        var libs = payload.libImports || {};
+        Object.keys(libs).forEach(function (spec) { if (!imports[spec]) imports[spec] = libs[spec]; });
+        return { imports: imports };
+      }
+      function injectImportMap(map) {
+        var s = document.createElement("script"); s.type = "importmap";
+        s.textContent = JSON.stringify(map); document.head.appendChild(s);
+      }
+
+      async function mount(payload) {
+        if (started) return; started = true;
+        try {
+          applyTheme(payload.theme);
+          injectStyles(payload.css);
+          injectImportMap(buildImportMap(payload));   // must precede any module import
+
+          var ReactNS = await import("react");
+          window.React = ReactNS.default || ReactNS;   // one instance; also usable as global
+          var clientNS = await import("react-dom/client");
+
+          var mod = await import(blobUrl(transform(payload.code)));
+          var Comp = mod.default;
+          if (!Comp) throw new Error("Artifact has no default export / App component.");
+
+          clientNS.createRoot(document.getElementById("root")).render(window.React.createElement(Comp));
+
+          requestAnimationFrame(function () {
+            post({ type: "artifact:ready" });
+            reportHeight();
+            if (window.ResizeObserver) new ResizeObserver(reportHeight).observe(document.documentElement);
+            else window.addEventListener("resize", reportHeight);
+          });
+        } catch (err) { showError((err && err.message) || err); }
+      }
+
+      window.addEventListener("message", function (e) {
+        var d = e.data || {};
+        if (d.source !== "note") return;
+        if (d.type === "artifact:init") { frameId = d.id; mount(d); }
+        else if (d.type === "artifact:theme") { applyTheme(d.theme); reportHeight(); }
+      });
+
+      parent.postMessage({ source: "artifact", type: "artifact:hostready" }, "*");
+    })();
+  </script>
+</body>
+</html>
