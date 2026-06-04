@@ -39,6 +39,26 @@ marked.setOptions({
 
 const headingData = [];
 
+const artifactStore = [];
+marked.use({
+  extensions: [{
+    name: "artifact",
+    level: "block",
+    start(src) { const i = src.indexOf("```artifact"); return i === -1 ? undefined : i; },
+    tokenizer(src) {
+      const m = /^```artifact([^\n]*)\n([\s\S]*?)```(?:\n|$)/.exec(src);
+      if (!m) return;
+      return { type: "artifact", raw: m[0], info: (m[1] || "").trim(), code: m[2] };
+    },
+    renderer(token) {
+      const parsed = ArtifactUtils.parseArtifactInfo("artifact " + token.info);
+      const idx = artifactStore.length;
+      artifactStore.push({ src: parsed.src, code: parsed.src ? null : token.code });
+      return `<div class="artifact-mount" data-artifact-index="${idx}"></div>`;
+    }
+  }]
+});
+
 const container = document.getElementById("note-content");
 fetch(`/notes/courses/${course}/${noteSlug}.md`)
     .then(r => {
@@ -111,6 +131,7 @@ fetch(`/notes/courses/${course}/${noteSlug}.md`)
         });
 
         container.append(contentDiv);
+        hydrateArtifacts(contentDiv, course);
 
         if (tocEntries.length) {
             const tocNav = document.createElement("nav");
@@ -190,6 +211,107 @@ fetch(`/notes/courses/${course}/${noteSlug}.md`)
         console.error(err);
         container.innerHTML = "<p>Could not load note.</p>";
     });
+
+/* ---- artifact hydration ---- */
+function currentArtifactTheme() {
+  return document.documentElement.classList.contains("dark-mode") ? "dark" : "light";
+}
+
+const liveArtifactFrames = [];
+const sharedLayerCache = new Map();
+function fetchTextCached(path) {
+  if (sharedLayerCache.has(path)) return sharedLayerCache.get(path);
+  const p = fetch(path).then(r => (r.ok ? r.text() : null)).catch(() => null);
+  sharedLayerCache.set(path, p);
+  return p;
+}
+async function gatherSharedLayers(course) {
+  const [globalCss, courseCss, globalKit, courseKit] = await Promise.all([
+    fetchTextCached("/notes/artifacts/theme.css"),
+    fetchTextCached(`/notes/courses/${course}/demos/_shared.css`),
+    fetchTextCached("/notes/artifacts/kit.jsx"),
+    fetchTextCached(`/notes/courses/${course}/demos/_kit.jsx`)
+  ]);
+  const css = [globalCss, courseCss].filter(Boolean);
+  const modules = {};
+  if (globalKit) modules["@kit"] = globalKit;
+  if (courseKit) modules["@course"] = courseKit;
+  return { css, modules };
+}
+
+function renderArtifactError(mount, message) {
+  mount.classList.add("ready");
+  mount.innerHTML = "";
+  const card = document.createElement("div");
+  card.className = "artifact-error";
+  card.textContent = "Artifact error: " + message;
+  mount.appendChild(card);
+}
+
+async function setupArtifact(mount, course) {
+  const entry = artifactStore[+mount.dataset.artifactIndex];
+  let code;
+  try {
+    if (entry.src) {
+      const path = ArtifactUtils.resolveArtifactSrc(course, entry.src);
+      const r = await fetch(path);
+      if (!r.ok) throw new Error("Could not load " + path);
+      code = await r.text();
+    } else {
+      code = entry.code;
+    }
+  } catch (err) { renderArtifactError(mount, err.message); return; }
+
+  code = ArtifactUtils.ensureDefaultExport(code);
+  const { css, modules } = await gatherSharedLayers(course);
+
+  const specs = new Set(ArtifactUtils.scanBareSpecifiers(code));
+  Object.keys(modules).forEach(k => ArtifactUtils.scanBareSpecifiers(modules[k]).forEach(s => specs.add(s)));
+  const libImports = ArtifactUtils.buildLibImports(Array.from(specs));
+
+  const id = "art-" + mount.dataset.artifactIndex + "-" + Math.random().toString(36).slice(2);
+  const iframe = document.createElement("iframe");
+  iframe.className = "artifact-frame";
+  iframe.title = "Interactive artifact";
+  iframe.setAttribute("sandbox", "allow-scripts");
+  iframe.setAttribute("scrolling", "no");
+  iframe.src = "/notes/artifact-host.html";
+
+  const payload = { source: "note", type: "artifact:init", id, code, css, modules, libImports, theme: currentArtifactTheme() };
+
+  window.addEventListener("message", e => {
+    const d = e.data || {};
+    if (e.source !== iframe.contentWindow) return;
+    if (d.type === "artifact:hostready") iframe.contentWindow.postMessage(payload, "*");
+    else if (d.id !== id) return;
+    else if (d.type === "artifact:ready") mount.classList.add("ready");
+    else if (d.type === "artifact:height") iframe.style.height = d.px + "px";
+    else if (d.type === "artifact:error") mount.classList.add("ready");
+  });
+
+  mount.appendChild(iframe);
+  liveArtifactFrames.push({ id, iframe });
+}
+
+function hydrateArtifacts(root, course) {
+  const mounts = root.querySelectorAll(".artifact-mount");
+  mounts.forEach(m => { m.innerHTML = '<div class="artifact-spinner" role="status" aria-label="Loading demo"></div>'; });
+  if (!mounts.length) return;
+  if (!("IntersectionObserver" in window)) { mounts.forEach(m => setupArtifact(m, course)); return; }
+  const io = new IntersectionObserver((entries, obs) => {
+    entries.forEach(en => { if (en.isIntersecting) { obs.unobserve(en.target); setupArtifact(en.target, course); } });
+  }, { rootMargin: "200px" });
+  mounts.forEach(m => io.observe(m));
+}
+
+/* chain the site's theme hook so live artifacts re-theme on toggle */
+const prevOnThemeChange = window.onThemeChange;
+window.onThemeChange = function (mode) {
+  if (typeof prevOnThemeChange === "function") prevOnThemeChange(mode);
+  liveArtifactFrames.forEach(f => {
+    if (f.iframe.contentWindow) f.iframe.contentWindow.postMessage({ source: "note", type: "artifact:theme", theme: mode }, "*");
+  });
+};
 
 const tokenizer = {
   em(src) {

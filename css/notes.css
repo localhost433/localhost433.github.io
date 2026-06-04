@@ -209,3 +209,12 @@ green {color: #338000;}
 blue {color: #0088dd;}
 pink {color: #dd6388;}
 scarlet{color: #790032;}
+
+/* ---- interactive artifacts ---- */
+.artifact-mount { margin: 1.25rem 0; }
+.artifact-frame { width: 100%; border: 1px solid var(--border-color, #e3e3e3); border-radius: 10px; background: transparent; display: block; }
+.artifact-spinner { width: 22px; height: 22px; margin: 18px auto; border: 3px solid rgba(127,127,127,.3); border-top-color: rgba(127,127,127,.9); border-radius: 50%; animation: artifact-spin .8s linear infinite; }
+@keyframes artifact-spin { to { transform: rotate(360deg); } }
+.artifact-mount.ready .artifact-spinner { display: none; }
+.artifact-error { font-family: ui-monospace, Menlo, monospace; font-size: 13px; color: #b00020; background: #fff0f1; border: 1px solid #f3c2c7; border-radius: 8px; padding: 12px 14px; white-space: pre-wrap; }
+html.dark-mode .artifact-error { color: #ff9aa2; background: #2a1416; border-color: #5a2a2f; }
