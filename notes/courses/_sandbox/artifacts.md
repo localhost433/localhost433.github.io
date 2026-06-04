@@ -51,3 +51,8 @@ export default function App() {
   );
 }
 ```
+
+## File-based artifact
+
+```artifact src=demos/hello.jsx
+```
