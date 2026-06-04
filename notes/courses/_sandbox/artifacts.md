@@ -8,9 +8,20 @@ Test page for interactive artifacts. Not linked from the public course list.
 ## Inline counter
 
 ```artifact
+import { Card, CardContent, Button } from '@kit';
 export default function App() {
   const [n, setN] = React.useState(0);
-  return <button onClick={() => setN(n + 1)}>clicked {n} times</button>;
+  return (
+    <Card>
+      <CardContent>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16 }}>
+          <Button variant="outline" size="icon" onClick={() => setN(n - 1)}>−</Button>
+          <span style={{ fontSize: 32, fontWeight: 600, minWidth: 56, textAlign: "center", fontVariantNumeric: "tabular-nums" }}>{n}</span>
+          <Button variant="outline" size="icon" onClick={() => setN(n + 1)}>+</Button>
+        </div>
+      </CardContent>
+    </Card>
+  );
 }
 ```
 
@@ -65,14 +76,29 @@ export default function App() {
 ## Library import (recharts)
 
 ```artifact
-import { LineChart, Line, XAxis, YAxis, Tooltip } from 'recharts';
-const data = Array.from({ length: 20 }, (_, i) => ({ x: i, y: Math.round(Math.sin(i / 3) * 10 + 10) }));
+import { Card, CardHeader, CardTitle, CardContent, useTheme } from '@kit';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+const data = Array.from({ length: 24 }, (_, i) => ({ x: i, y: Math.round((Math.sin(i / 3) * 10 + 12) * 10) / 10 }));
 export default function App() {
+  const dark = useTheme() === "dark";
+  const line = dark ? "#a78bfa" : "#6d28d9";
+  const grid = dark ? "#2c2f33" : "#e5e7eb";
+  const axis = dark ? "#9aa0a6" : "#6b7280";
   return (
-    <LineChart width={360} height={200} data={data}>
-      <XAxis dataKey="x" /><YAxis /><Tooltip />
-      <Line dataKey="y" dot={false} />
-    </LineChart>
+    <Card>
+      <CardHeader><CardTitle>Sine wave</CardTitle></CardHeader>
+      <CardContent>
+        <ResponsiveContainer width="100%" height={220}>
+          <LineChart data={data} margin={{ top: 8, right: 12, bottom: 0, left: -18 }}>
+            <CartesianGrid stroke={grid} strokeDasharray="3 3" vertical={false} />
+            <XAxis dataKey="x" stroke={axis} tickLine={false} fontSize={12} />
+            <YAxis stroke={axis} tickLine={false} fontSize={12} />
+            <Tooltip contentStyle={{ background: dark ? "#15171a" : "#fff", border: "1px solid " + grid, borderRadius: 8, fontSize: 12 }} />
+            <Line type="monotone" dataKey="y" stroke={line} strokeWidth={2} dot={false} />
+          </LineChart>
+        </ResponsiveContainer>
+      </CardContent>
+    </Card>
   );
 }
 ```
