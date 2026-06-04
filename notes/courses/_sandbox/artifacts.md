@@ -13,3 +13,11 @@ export default function App() {
   return <button onClick={() => setN(n + 1)}>clicked {n} times</button>;
 }
 ```
+
+## Error handling (intentional)
+
+```artifact
+export default function App() {
+  return <div>{this.is.broken}</div>;
+}
+```
