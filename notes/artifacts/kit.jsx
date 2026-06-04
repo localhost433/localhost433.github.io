@@ -59,3 +59,53 @@ export function useTheme() {
   }, []);
   return theme;
 }
+
+const CHART_COLORS_LIGHT = ["#6d28d9", "#2563eb", "#059669", "#d97706", "#dc2626"];
+const CHART_COLORS_DARK = ["#a78bfa", "#60a5fa", "#34d399", "#fbbf24", "#f87171"];
+
+export function useChartTheme() {
+  const dark = useTheme() === "dark";
+  const colors = dark ? CHART_COLORS_DARK : CHART_COLORS_LIGHT;
+  return {
+    colors,
+    line: colors[0],
+    grid: dark ? "#2c2f33" : "#e5e7eb",
+    axis: dark ? "#9aa0a6" : "#6b7280",
+    tooltip: { background: dark ? "#15171a" : "#ffffff", border: "1px solid " + (dark ? "#2c2f33" : "#e5e7eb"), borderRadius: 8, fontSize: 12 },
+  };
+}
+
+export function Field({ label, htmlFor, className, children, ...props }) {
+  return (
+    <div className={cn("ui-field", className)} {...props}>
+      {label != null ? <Label htmlFor={htmlFor}>{label}</Label> : null}
+      {children}
+    </div>
+  );
+}
+
+export function Stat({ label, value, className, ...props }) {
+  return (
+    <div className={cn("ui-stat", className)} {...props}>
+      {label != null ? <div className="ui-stat__label">{label}</div> : null}
+      <div className="ui-stat__value">{value}</div>
+    </div>
+  );
+}
+
+export function ButtonGroup({ className, ...props }) {
+  return <div role="group" className={cn("ui-btn-group", className)} {...props} />;
+}
+
+export function Stepper({ value, onChange, step = 1, min, max, className, ...props }) {
+  const clamp = (n) => (min != null && n < min ? min : max != null && n > max ? max : n);
+  return (
+    <div className={cn("ui-row", className)} {...props}>
+      <Button variant="outline" size="icon" aria-label="Decrease"
+        disabled={min != null && value <= min} onClick={() => onChange(clamp(value - step))}>−</Button>
+      <span className="ui-stat__value" style={{ minWidth: "3ch", textAlign: "center" }}>{value}</span>
+      <Button variant="outline" size="icon" aria-label="Increase"
+        disabled={max != null && value >= max} onClick={() => onChange(clamp(value + step))}>+</Button>
+    </div>
+  );
+}

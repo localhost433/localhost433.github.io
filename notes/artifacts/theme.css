@@ -100,3 +100,27 @@ html.dark-mode {
   background: hsl(var(--background)); box-shadow: 0 1px 3px hsl(222.2 84% 4.9% / .3);
   transition: transform .15s; }
 .ui-switch[data-state="checked"] .ui-switch__thumb { transform: translateX(1.25rem); }
+
+/* Layout helpers */
+.ui-row { display: flex; align-items: center; gap: .75rem; }
+.ui-row--wrap { flex-wrap: wrap; }
+.ui-row--center { justify-content: center; }
+.ui-row--between { justify-content: space-between; }
+.ui-stack { display: flex; flex-direction: column; gap: 1rem; }
+.ui-fill { flex: 1; }
+
+/* Stat / big number */
+.ui-stat { display: flex; flex-direction: column; gap: .125rem; }
+.ui-stat__label { font-size: .8125rem; color: hsl(var(--muted-foreground)); }
+.ui-stat__value { font-size: 2rem; font-weight: 600; line-height: 1; font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+
+/* Field */
+.ui-field { display: flex; flex-direction: column; gap: .375rem; }
+.ui-field .ui-label { margin-bottom: 0; }
+
+/* Button group (segmented) */
+.ui-btn-group { display: inline-flex; }
+.ui-btn-group .ui-btn { border-radius: 0; border: 1px solid hsl(var(--border)); margin-left: -1px; }
+.ui-btn-group .ui-btn:first-child { border-top-left-radius: calc(var(--radius) - 2px); border-bottom-left-radius: calc(var(--radius) - 2px); margin-left: 0; }
+.ui-btn-group .ui-btn:last-child { border-top-right-radius: calc(var(--radius) - 2px); border-bottom-right-radius: calc(var(--radius) - 2px); }
+.ui-btn-group .ui-btn:focus-visible { position: relative; z-index: 1; }
