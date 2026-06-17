@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "dev": "node scripts/dev-server.js",
+    "dev:vercel": "vercel dev",
     "build": "echo \"No build step required for a static site\"",
+    "build:artifacts": "node scripts/build-artifacts.js",
     "test": "node --test notes/js/*.test.js"
   },
   "dependencies": {
@@ -13,6 +16,9 @@
     "node-fetch": "^3.3.2",
     "pg": "^8.11.0",
     "sanitize-html": "^2.8.0"
+  },
+  "devDependencies": {
+    "@babel/standalone": "^7.29.7"
   },
   "overrides": {
     "path-to-regexp": ">=6.2.3",

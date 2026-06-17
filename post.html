@@ -22,7 +22,17 @@
   <link id="hljs-dark" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/github-dark.min.css" disabled>
   <template id="meta-include" data-src="components/meta-tags.html"></template>
 
-  <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/lib/common.js"></script>
+  <!-- highlight.js browser build (exposes window.hljs); common bundle includes c, cpp, java, python, … -->
+  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/highlight.min.js"></script>
+  <!-- assembly is not in the common bundle, so register it explicitly -->
+  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/languages/x86asm.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/languages/armasm.min.js"></script>
+  <script>
+    if (window.hljs) {
+      if (hljs.getLanguage('x86asm')) hljs.registerAliases(['asm', 'assembly', 'nasm'], { languageName: 'x86asm' });
+      if (hljs.getLanguage('armasm')) hljs.registerAliases(['arm'], { languageName: 'armasm' });
+    }
+  </script>
 
   <script>
     function applyHljsTheme(mode) {

@@ -225,18 +225,32 @@ function fetchTextCached(path) {
   sharedLayerCache.set(path, p);
   return p;
 }
+// Prefer a precompiled `.js` (built by `npm run build:artifacts`) over the raw
+// `.jsx`; returns { code, compiled }. compiled=true means Babel can be skipped.
+const moduleCache = new Map();
+function fetchModuleCached(jsxPath) {
+  if (moduleCache.has(jsxPath)) return moduleCache.get(jsxPath);
+  const jsPath = jsxPath.replace(/\.jsx$/, ".js");
+  const p = fetch(jsPath)
+    .then(r => (r.ok ? r.text().then(code => ({ code, compiled: true })) : null))
+    .then(res => res || fetch(jsxPath).then(r => (r.ok ? r.text().then(code => ({ code, compiled: false })) : null)))
+    .catch(() => null);
+  moduleCache.set(jsxPath, p);
+  return p;
+}
 async function gatherSharedLayers(course) {
   const [globalCss, courseCss, globalKit, courseKit] = await Promise.all([
     fetchTextCached("/notes/artifacts/theme.css"),
     fetchTextCached(`/notes/courses/${course}/demos/_shared.css`),
-    fetchTextCached("/notes/artifacts/kit.jsx"),
-    fetchTextCached(`/notes/courses/${course}/demos/_kit.jsx`)
+    fetchModuleCached("/notes/artifacts/kit.jsx"),
+    fetchModuleCached(`/notes/courses/${course}/demos/_kit.jsx`)
   ]);
   const css = [globalCss, courseCss].filter(Boolean);
   const modules = {};
-  if (globalKit) modules["@kit"] = globalKit;
-  if (courseKit) modules["@course"] = courseKit;
-  return { css, modules };
+  let compiled = true;
+  if (globalKit) { modules["@kit"] = globalKit.code; compiled = compiled && globalKit.compiled; }
+  if (courseKit) { modules["@course"] = courseKit.code; compiled = compiled && courseKit.compiled; }
+  return { css, modules, compiled };
 }
 
 function renderArtifactError(mount, message) {
@@ -250,20 +264,21 @@ function renderArtifactError(mount, message) {
 
 async function setupArtifact(mount, course) {
   const entry = artifactStore[+mount.dataset.artifactIndex];
-  let code;
+  let code, codeCompiled = false;
   try {
     if (entry.src) {
-      const path = ArtifactUtils.resolveArtifactSrc(course, entry.src);
-      const r = await fetch(path);
-      if (!r.ok) throw new Error("Could not load " + path);
-      code = await r.text();
+      const jsxPath = ArtifactUtils.resolveArtifactSrc(course, entry.src);
+      const m = await fetchModuleCached(jsxPath);
+      if (!m) throw new Error("Could not load " + jsxPath);
+      code = m.code; codeCompiled = m.compiled;
     } else {
-      code = entry.code;
+      code = entry.code;   // inline blocks are always raw JSX
     }
   } catch (err) { renderArtifactError(mount, err.message); return; }
 
   code = ArtifactUtils.ensureDefaultExport(code);
-  const { css, modules } = await gatherSharedLayers(course);
+  const { css, modules, compiled } = await gatherSharedLayers(course);
+  const precompiled = codeCompiled && compiled;   // skip Babel only if every piece is JS
 
   const specs = new Set(ArtifactUtils.scanBareSpecifiers(code));
   Object.keys(modules).forEach(k => ArtifactUtils.scanBareSpecifiers(modules[k]).forEach(s => specs.add(s)));
@@ -277,7 +292,7 @@ async function setupArtifact(mount, course) {
   iframe.setAttribute("scrolling", "no");
   iframe.src = "/notes/artifact-host.html";
 
-  const payload = { source: "note", type: "artifact:init", id, code, css, modules, libImports, theme: currentArtifactTheme() };
+  const payload = { source: "note", type: "artifact:init", id, code, css, modules, libImports, theme: currentArtifactTheme(), precompiled };
 
   window.addEventListener("message", e => {
     const d = e.data || {};
@@ -293,25 +308,55 @@ async function setupArtifact(mount, course) {
   liveArtifactFrames.push({ id, iframe });
 }
 
+/* Warm up the CDN origins the artifact iframes pull from (Babel on jsdelivr,
+   React on esm.sh) as soon as we know a note has artifacts — this overlaps the
+   DNS/TLS handshake with the rest of the page so the first iframe's downloads
+   start sooner. (Resource hints aren't subject to the page CSP.) */
+let cdnsWarmed = false;
+function warmArtifactCDNs() {
+  if (cdnsWarmed) return;
+  cdnsWarmed = true;
+  const hint = (rel, href, cors) => {
+    const l = document.createElement("link");
+    l.rel = rel; l.href = href;
+    if (cors) l.crossOrigin = "anonymous";
+    document.head.appendChild(l);
+  };
+  hint("dns-prefetch", "https://cdn.jsdelivr.net");
+  hint("dns-prefetch", "https://esm.sh");
+  hint("preconnect", "https://cdn.jsdelivr.net");   // Babel (classic script)
+  hint("preconnect", "https://esm.sh", true);       // React (ES modules → CORS)
+}
+
 function hydrateArtifacts(root, course) {
   const mounts = root.querySelectorAll(".artifact-mount");
   mounts.forEach(m => { m.innerHTML = '<div class="artifact-spinner" role="status" aria-label="Loading demo"></div>'; });
   if (!mounts.length) return;
+  warmArtifactCDNs();
   if (!("IntersectionObserver" in window)) { mounts.forEach(m => setupArtifact(m, course)); return; }
+  // start loading ~a screen early so demos are ready by the time they scroll in
   const io = new IntersectionObserver((entries, obs) => {
     entries.forEach(en => { if (en.isIntersecting) { obs.unobserve(en.target); setupArtifact(en.target, course); } });
-  }, { rootMargin: "200px" });
+  }, { rootMargin: "800px 0px" });
   mounts.forEach(m => io.observe(m));
 }
 
-/* chain the site's theme hook so live artifacts re-theme on toggle */
-const prevOnThemeChange = window.onThemeChange;
-window.onThemeChange = function (mode) {
-  if (typeof prevOnThemeChange === "function") prevOnThemeChange(mode);
+/* Re-theme live artifacts whenever the page's dark-mode class changes.
+   Watching the <html> class directly is robust regardless of how the theme
+   toggle is wired (it doesn't depend on the window.onThemeChange chain, and
+   so leaves the page's own hljs theme handler untouched). */
+function postThemeToFrames(theme) {
   liveArtifactFrames.forEach(f => {
-    if (f.iframe.contentWindow) f.iframe.contentWindow.postMessage({ source: "note", type: "artifact:theme", theme: mode }, "*");
+    if (f.iframe.contentWindow) {
+      f.iframe.contentWindow.postMessage({ source: "note", type: "artifact:theme", theme }, "*");
+    }
   });
-};
+}
+let lastArtifactTheme = currentArtifactTheme();
+new MutationObserver(() => {
+  const t = currentArtifactTheme();
+  if (t !== lastArtifactTheme) { lastArtifactTheme = t; postThemeToFrames(t); }
+}).observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
 
 const tokenizer = {
   em(src) {

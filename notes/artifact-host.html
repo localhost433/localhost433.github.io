@@ -10,7 +10,6 @@
       background: #fff0f1; border: 1px solid #f3c2c7; border-radius: 8px; padding: 12px 14px; white-space: pre-wrap; }
     html.dark-mode .artifact-error { color: #ff9aa2; background: #2a1416; border-color: #5a2a2f; }
   </style>
-  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7/babel.min.js"></script>
 </head>
 <body>
   <div id="root"></div>
@@ -48,15 +47,29 @@
           var s = document.createElement("style"); s.textContent = css; document.head.appendChild(s);
         });
       }
+      var BABEL_URL = "https://cdn.jsdelivr.net/npm/@babel/standalone@7/babel.min.js";
+      var babelReady = null;
+      function loadBabel() {            // only fetched/parsed when raw JSX needs transforming
+        if (babelReady) return babelReady;
+        babelReady = new Promise(function (resolve, reject) {
+          var s = document.createElement("script");
+          s.src = BABEL_URL;
+          s.onload = resolve;
+          s.onerror = function () { reject(new Error("failed to load Babel")); };
+          document.head.appendChild(s);
+        });
+        return babelReady;
+      }
       function transform(src) {
         return Babel.transform(src, { presets: ["react"], sourceType: "module", filename: "artifact.jsx" }).code;
       }
+      function maybeTransform(src, precompiled) { return precompiled ? src : transform(src); }
       function blobUrl(code) { return URL.createObjectURL(new Blob([code], { type: "text/javascript" })); }
 
       function buildImportMap(payload) {
         var imports = { "react": REACT, "react-dom": REACTDOM, "react-dom/client": REACTDOM_CLIENT };
         var modules = payload.modules || {};
-        Object.keys(modules).forEach(function (spec) { imports[spec] = blobUrl(transform(modules[spec])); });
+        Object.keys(modules).forEach(function (spec) { imports[spec] = blobUrl(maybeTransform(modules[spec], payload.precompiled)); });
         var libs = payload.libImports || {};
         Object.keys(libs).forEach(function (spec) { if (!imports[spec]) imports[spec] = libs[spec]; });
         return { imports: imports };
@@ -71,13 +84,14 @@
         try {
           applyTheme(payload.theme);
           injectStyles(payload.css);
+          if (!payload.precompiled) await loadBabel();   // raw JSX needs Babel; precompiled skips it
           injectImportMap(buildImportMap(payload));   // must precede any module import
 
           var ReactNS = await import("react");
           window.React = ReactNS.default || ReactNS;   // one instance; also usable as global
           var clientNS = await import("react-dom/client");
 
-          var mod = await import(blobUrl(transform(payload.code)));
+          var mod = await import(blobUrl(maybeTransform(payload.code, payload.precompiled)));
           var Comp = mod.default;
           if (!Comp) throw new Error("Artifact has no default export / App component.");
 
