@@ -1,0 +1,447 @@
+/* CSCI-UA-470 — shared styling for the interactive memory-model demos.
+   Palette mirrors the textbook C++ process-layout diagram:
+   Stack (blue) · Heap (green) · Global/Static (amber) · Code (purple),
+   on a high->low address axis. Adapts to the host's light / dark mode. */
+:root {
+  --seg-stack-bg:#e6f1fb;  --seg-stack-bd:#b9d4ee;  --seg-stack-fg:#0c447c;  --seg-stack-tx:#185fa5;
+  --seg-heap-bg:#e1f5ee;   --seg-heap-bd:#b3dfd0;   --seg-heap-fg:#085041;   --seg-heap-tx:#0f6e56;
+  --seg-global-bg:#faeeda; --seg-global-bd:#ecd6ad; --seg-global-fg:#633806; --seg-global-tx:#854f0b;
+  --seg-code-bg:#eeedfe;   --seg-code-bd:#cfcbf3;   --seg-code-fg:#3c3489;   --seg-code-tx:#534ab7;
+  /* Java / JVM are a language and its runtime, not memory segments — their own
+     hues (brown, teal) so neither tag reads as one of the four segment colours
+     (blue/green/amber/purple). */
+  --lang-java-bg:#ead9c6;  --lang-java-fg:#6a3f1c;
+  --lang-jvm-bg:#d4ebe9;   --lang-jvm-fg:#0d5150;
+
+  --mm-axis:#9a9a93;  --mm-gap-bd:#d4d3cd;  --mm-muted:#5a6270;
+  --mm-cell-bg:#ffffff; --mm-cell-bd:#d4dbe4; --mm-cell-fg:#1f2733; --mm-addr:#8a8f99;
+  --mm-type-bg:#eef1f6; --mm-type-bd:#dde3ec; --mm-type-fg:#475063;
+  --mm-ptr:#5b53d6;   --mm-ptr-bg:#ecebfb;
+  --mm-ref:#0e8aa0;   --mm-ref-bg:#e2f5fa;
+  --mm-hl:#d9870a;    --mm-dangling:#dc2626;  --mm-reclaimed-bg:#efeee8;
+
+  --mm-code-bg:#f1f4f8; --mm-code-fg:#26303d; --mm-code-ln:#9aa3b2; --mm-code-hl:#ece9fb;
+  /* syntax tokens — GitHub hljs theme (light) so demo code matches the note's code blocks */
+  --tok-kw:#d73a49; --tok-ty:#6f42c1; --tok-fn:#e36209; --tok-str:#032f62; --tok-num:#005cc5; --tok-com:#6a737d; --tok-pre:#d73a49;
+  --mm-con-bar:#e6ebf2; --mm-con-rule:#0000000f; --mm-con-expr:#0e7490;
+  --mm-panel-bg:#f5f7fa; --mm-panel-bd:#e2e7ee;
+  --mm-tip-bg:#1f2733; --mm-tip-fg:#f5f7fa;   /* hover tooltip: dark chip on the light UI */
+}
+html.dark-mode {
+  --seg-stack-bg:#10202f;  --seg-stack-bd:#244660;  --seg-stack-fg:#a8cdf0;  --seg-stack-tx:#84b3e2;
+  --seg-heap-bg:#0e2620;   --seg-heap-bd:#205040;   --seg-heap-fg:#84ddc0;   --seg-heap-tx:#5fc9a6;
+  --seg-global-bg:#291f0d; --seg-global-bd:#574521; --seg-global-fg:#e8ca96; --seg-global-tx:#d8a85f;
+  --seg-code-bg:#1b1832;   --seg-code-bd:#39316a;   --seg-code-fg:#cdc7f2;   --seg-code-tx:#a99ee6;
+  --lang-java-bg:#2a1d10;  --lang-java-fg:#e2b88f;
+  --lang-jvm-bg:#0f2927;   --lang-jvm-fg:#83d2cf;
+
+  --mm-axis:#73726c;  --mm-gap-bd:#3a3f48;  --mm-muted:#9aa5b3;
+  --mm-cell-bg:#161f2c; --mm-cell-bd:#33404f; --mm-cell-fg:#e7ebf1; --mm-addr:#8a93a1;
+  --mm-type-bg:#1b2532; --mm-type-bd:#33404f; --mm-type-fg:#9fb0c4;
+  --mm-ptr:#a78bfa;   --mm-ptr-bg:#2a2450;
+  --mm-ref:#3fc6dd;   --mm-ref-bg:#0f3640;
+  --mm-hl:#f59e0b;    --mm-dangling:#f87171;  --mm-reclaimed-bg:#2b2b29;
+
+  --mm-code-bg:#0c121b; --mm-code-fg:#d7dfeb; --mm-code-ln:#6c7686; --mm-code-hl:#2a2450;
+  /* syntax tokens — GitHub hljs theme (dark) */
+  --tok-kw:#ff7b72; --tok-ty:#d2a8ff; --tok-fn:#ffa657; --tok-str:#a5d6ff; --tok-num:#79c0ff; --tok-com:#8b949e; --tok-pre:#ff7b72;
+  --mm-con-bar:#0000003f; --mm-con-rule:#ffffff10; --mm-con-expr:#7fdce8;
+  --mm-panel-bg:#131b26; --mm-panel-bd:#26303d;
+  --mm-tip-bg:#eef2f8; --mm-tip-fg:#16202c;   /* hover tooltip: light chip on the dark UI */
+}
+
+/* ---- scene shell ---- */
+.mm-scene { display: flex; flex-direction: column; gap: .55rem; }
+/* The note's collapsible bar shows this title, so it's not repeated inside the
+   scene — kept in the DOM (not removed) so the host can read it for the bar. */
+.mm-scene__title { display: none; }
+.mm-scene__caption { margin: 0; font-size: .85rem; line-height: 1.45; color: hsl(var(--foreground));
+  background: var(--mm-panel-bg); border: 1px solid var(--mm-panel-bd); border-radius: var(--radius); padding: .5rem .7rem; }
+.mm-scene__caption--struct { display: flex; flex-direction: column; gap: .4rem; }
+.mm-cap-row { margin: 0; display: flex; gap: .55rem; align-items: flex-start;
+  font-size: .82rem; line-height: 1.45; color: hsl(var(--foreground)); }
+.mm-cap-tag { flex: 0 0 4.8rem; margin-top: .12em; padding: .15em .4em; border-radius: 4px;
+  font-size: .56rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; text-align: center; }
+.mm-cap-tag--cpp  { background: var(--seg-stack-bg);  color: var(--seg-stack-fg); }
+.mm-cap-tag--asm  { background: var(--seg-code-bg);   color: var(--seg-code-fg); }
+.mm-cap-tag--int  { background: var(--seg-global-bg); color: var(--seg-global-fg); }
+.mm-cap-tag--java { background: var(--lang-java-bg);  color: var(--lang-java-fg); }
+.mm-cap-tag--jvm  { background: var(--lang-jvm-bg);   color: var(--lang-jvm-fg); }
+.mm-cap-txt { flex: 1; min-width: 0; }
+.mm-scene__nav { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; }
+
+/* collapsible sections — a clear, full-width clickable bar */
+.mm-sec__head { display: flex; align-items: center; gap: .5rem; width: 100%; padding: .4rem .6rem; margin: 0;
+  background: var(--mm-panel-bg); border: 1px solid var(--mm-panel-bd); border-radius: 7px; cursor: pointer;
+  color: var(--mm-muted); font-family: inherit; font-size: .72rem; font-weight: 700;
+  letter-spacing: .06em; text-transform: uppercase; transition: border-color .12s, color .12s; }
+.mm-sec__head:hover { color: hsl(var(--foreground)); border-color: var(--mm-cell-bd); }
+.mm-sec__chev { display: inline-grid; place-items: center; width: 1.1rem; height: 1.1rem; flex: 0 0 auto;
+  font-size: .8rem; line-height: 1; border-radius: 4px; color: var(--mm-ptr);
+  background: var(--mm-ptr-bg); transition: transform .15s; }
+.mm-sec__chev--open { transform: rotate(90deg); }
+.mm-sec__body { margin-top: .4rem; }
+.mm-scene__dots { display: flex; gap: .4rem; }
+.mm-dot { width: .55rem; height: .55rem; border-radius: 9999px; border: none; padding: 0;
+  background: var(--mm-gap-bd); cursor: pointer; transition: background .15s, transform .15s; }
+.mm-dot--on { background: var(--mm-ptr); transform: scale(1.25); }
+.mm-scene__step { margin-left: auto; font-size: .8rem; color: var(--mm-muted); font-variant-numeric: tabular-nums; }
+
+/* ---- code panel ---- */
+.mm-code { margin: 0; background: var(--mm-code-bg); color: var(--mm-code-fg);
+  border-radius: var(--radius); padding: .5rem 0;
+  font-family: ui-monospace, "JetBrains Mono", Menlo, monospace; font-size: .76rem; line-height: 1.5; }
+.mm-code__line { display: flex; gap: .7rem; padding: 0 .8rem; }
+.mm-code__line--active { background: var(--mm-code-hl); }
+.mm-code__ln { color: var(--mm-code-ln); user-select: none; min-width: 2ch; text-align: right; flex: 0 0 auto; }
+/* wrap long lines (hanging indent under the code column) instead of a horizontal scrollbar */
+.mm-code__txt { flex: 1; min-width: 0; white-space: pre-wrap; overflow-wrap: break-word; }
+/* curated-asm elision rows ("… prologue elided") render muted with a ⋯ gutter */
+.mm-code__line--elide { color: var(--mm-muted); font-style: italic; opacity: .85; }
+.mm-code__line--elide .mm-code__ln { color: var(--mm-muted); }
+/* lines that map to a step are clickable -> jump the stepper there */
+.mm-code__line--pick { cursor: pointer; }
+.mm-code__line--pick:hover { background: var(--mm-code-hl); }
+
+/* ---- C++ ↔ assembly dual pane (each column is a .mm-code block) ---- */
+.mm-codeasm { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; align-items: start; }
+.mm-codeasm__col { display: flex; flex-direction: column; gap: .3rem; min-width: 0; }
+.mm-codeasm__head { font-size: .64rem; font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--mm-muted); padding: 0 .2rem; }
+/* the side-by-side columns are narrow, so shave the code a hair to fit more */
+.mm-codeasm .mm-code { font-size: .72rem; }
+@media (max-width: 560px) {
+  .mm-codeasm { grid-template-columns: 1fr; }
+}
+
+/* C++/Java syntax tokens (palette adapts to light / dark mode) */
+.mm-tok-kw  { color: var(--tok-kw); font-weight: 600; }
+.mm-tok-ty  { color: var(--tok-ty); }
+.mm-tok-fn  { color: var(--tok-fn); }
+.mm-tok-str { color: var(--tok-str); }
+.mm-tok-num { color: var(--tok-num); }
+.mm-tok-com { color: var(--tok-com); font-style: italic; }
+.mm-tok-pre { color: var(--tok-pre); }
+
+/* inline code inside captions */
+.mm-ic { font-family: ui-monospace, "JetBrains Mono", Menlo, monospace; font-size: .86em;
+  background: var(--mm-type-bg); border: 1px solid var(--mm-type-bd); border-radius: 4px;
+  padding: .02em .32em; color: var(--mm-cell-fg); }
+
+/* object byte-layout */
+.mm-sizes { display: flex; flex-direction: column; gap: 1.1rem; }
+.mm-layout { display: flex; flex-direction: column; gap: .4rem; }
+.mm-layout__title { font-family: ui-monospace, "JetBrains Mono", Menlo, monospace; font-size: .78rem; font-weight: 600; }
+.mm-layout__bar { display: flex; gap: 2px; border-radius: 7px; overflow: hidden;
+  background: var(--mm-cell-bd); border: 1px solid var(--mm-cell-bd); }
+.mm-layout__block { min-width: 1.7rem; padding: .4rem .2rem; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: .1rem; text-align: center; }
+.mm-layout__block--field  { background: var(--seg-stack-bg); color: var(--seg-stack-fg); }
+.mm-layout__block--header { background: var(--seg-global-bg); color: var(--seg-global-fg); }
+.mm-layout__block--vptr   { background: var(--seg-code-bg); color: var(--seg-code-fg); font-style: italic; }
+.mm-layout__block--ptr    { box-shadow: inset 0 -2px 0 var(--mm-ptr); }   /* this field points out */
+/* subobject grouping: each inherited layer (base -> derived) gets its own tint.
+   Placed after the kind colours so field/vptr blocks adopt their layer's hue. */
+.mm-layout__block--sub0 { background: var(--seg-stack-bg);  color: var(--seg-stack-fg); }
+.mm-layout__block--sub1 { background: var(--seg-heap-bg);   color: var(--seg-heap-fg); }
+.mm-layout__block--sub2 { background: var(--seg-global-bg); color: var(--seg-global-fg); }
+.mm-layout__block--sub3 { background: var(--seg-code-bg);   color: var(--seg-code-fg); }
+.mm-layout__block--pad { color: var(--mm-muted); background-color: var(--mm-panel-bg);
+  background-image: repeating-linear-gradient(45deg, transparent, transparent 4px, var(--mm-cell-bd) 4px, var(--mm-cell-bd) 5px); }
+.mm-layout__lbl { font-family: ui-monospace, monospace; font-size: .72rem; font-weight: 600; white-space: nowrap; }
+.mm-layout__sz { font-size: .58rem; opacity: .8; }
+.mm-layout__foot { display: flex; justify-content: space-between; gap: .5rem;
+  font-family: ui-monospace, monospace; font-size: .74rem; color: var(--mm-muted); }
+.mm-layout__foot b { color: hsl(var(--foreground)); }
+
+/* ---- output console ---- */
+.mm-console { background: var(--mm-code-bg); border-radius: var(--radius); overflow: hidden;
+  font-family: ui-monospace, "JetBrains Mono", Menlo, monospace; font-size: .74rem; }
+.mm-console__bar { background: var(--mm-con-bar); color: var(--mm-code-ln); padding: .18rem .8rem;
+  font-size: .64rem; letter-spacing: .1em; text-transform: uppercase; }
+.mm-console__row { display: flex; flex-wrap: wrap; align-items: baseline; gap: .5rem; padding: .2rem .8rem; color: var(--mm-code-fg); }
+.mm-console__row + .mm-console__row { border-top: 1px solid var(--mm-con-rule); }
+.mm-console__expr { color: var(--mm-con-expr); }
+.mm-console__arrow { color: var(--mm-code-ln); font-size: .68rem; }
+.mm-console__out { font-weight: 600; }
+.mm-console__note { color: var(--mm-code-ln); font-size: .7rem; }
+
+/* ---- memory model ---- */
+.mm { display: flex; flex-direction: column; gap: .5rem; }
+.mm-canvas { position: relative; display: flex; gap: .45rem; align-items: stretch; }
+.mm-arrows { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 3; }
+
+.mm-axis { flex: 0 0 26px; display: flex; flex-direction: column; align-items: center; padding: 1px 0; color: var(--mm-axis); }
+.mm-axis__cap { font-size: .6rem; letter-spacing: .04em; }
+.mm-axis__line { flex: 1; width: 1px; background: currentColor; opacity: .35; margin: 5px 0; }
+
+.mm-segs { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: .35rem; }
+.mm-seg { border: 1px solid; border-radius: 8px; padding: .4rem .6rem; }
+.mm-seg--empty { opacity: .5; padding: .26rem .6rem; }
+.mm-seg__head { display: flex; align-items: baseline; gap: .55rem; flex-wrap: wrap; }
+.mm-seg__label { font-weight: 600; font-size: .8rem; letter-spacing: -.01em; }
+.mm-seg__hint { font-size: .67rem; opacity: .85; }
+.mm-seg__cells { display: flex; flex-wrap: wrap; align-items: stretch; gap: .4rem; margin-top: .4rem; }
+
+.mm-seg--stack  { background: var(--seg-stack-bg);  border-color: var(--seg-stack-bd);  }
+.mm-seg--stack  .mm-seg__label { color: var(--seg-stack-fg);  } .mm-seg--stack  .mm-seg__hint { color: var(--seg-stack-tx);  }
+.mm-seg--heap   { background: var(--seg-heap-bg);   border-color: var(--seg-heap-bd);   }
+.mm-seg--heap   .mm-seg__label { color: var(--seg-heap-fg);   } .mm-seg--heap   .mm-seg__hint { color: var(--seg-heap-tx);   }
+.mm-seg--global { background: var(--seg-global-bg); border-color: var(--seg-global-bd); }
+.mm-seg--global .mm-seg__label { color: var(--seg-global-fg); } .mm-seg--global .mm-seg__hint { color: var(--seg-global-tx); }
+.mm-seg--code   { background: var(--seg-code-bg);   border-color: var(--seg-code-bd);   }
+.mm-seg--code   .mm-seg__label { color: var(--seg-code-fg);   } .mm-seg--code   .mm-seg__hint { color: var(--seg-code-tx);   }
+
+.mm-gap { display: flex; align-items: center; gap: .5rem; font-size: .62rem; color: var(--mm-axis);
+  border: 1px dashed var(--mm-gap-bd); border-radius: 6px; padding: .18rem .4rem; }
+.mm-gap__txt { flex: 1; text-align: center; }
+.mm-null { flex: 0 0 auto; display: inline-block; font-family: ui-monospace, monospace;
+  font-size: .66rem; color: var(--mm-muted); background: var(--mm-cell-bg);
+  border: 1.5px solid var(--mm-gap-bd); border-radius: 6px; padding: .08rem .4rem; }
+
+/* ---- cells (uniform width, prominent type chip) ---- */
+/* size drives WIDTH only; every cell is a fixed 3-line, no-wrap layout so
+   heights stay uniform (overlong text is ellipsized — hover shows the full text) */
+.mm-cell { position: relative; z-index: 1; width: 9.5rem; overflow: hidden;
+  background: var(--mm-cell-bg); color: var(--mm-cell-fg);
+  border: 1.5px solid var(--mm-cell-bd); border-radius: 8px; padding: .45rem .55rem;
+  box-shadow: 0 1px 3px rgba(15,30,50,.08); }
+.mm-cell__top { display: flex; align-items: center; gap: .35rem; flex-wrap: nowrap; margin-bottom: .2rem; }
+.mm-cell__name { flex: 1; min-width: 0; font-weight: 700; font-size: .82rem; font-family: ui-monospace, monospace;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mm-cell__name--anon { font-weight: 500; font-style: italic; color: var(--mm-addr); }
+/* type on its own row so a long class name (above) never crowds it out of view */
+.mm-cell__typerow { margin-bottom: .25rem; }
+.mm-cell__type { display: inline-block; max-width: 100%; vertical-align: bottom;
+  font-size: .68rem; font-weight: 600; font-family: ui-monospace, monospace;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  color: var(--mm-type-fg); background: var(--mm-type-bg); border: 1px solid var(--mm-type-bd);
+  border-radius: 5px; padding: .04rem .32rem; }
+.mm-cell__value { font-family: ui-monospace, monospace; font-size: .9rem; font-weight: 700; line-height: 1.25;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mm-cell__meta { display: flex; align-items: baseline; justify-content: space-between; gap: .4rem; margin-top: .2rem; min-height: .85rem; }
+.mm-cell__addr { font-family: ui-monospace, monospace; font-size: .64rem; color: var(--mm-addr); white-space: nowrap; }
+.mm-cell__size { font-family: ui-monospace, monospace; font-size: .62rem; font-weight: 700;
+  color: var(--mm-type-fg); background: var(--mm-type-bg); border: 1px solid var(--mm-type-bd);
+  border-radius: 4px; padding: 0 .3rem; white-space: nowrap; }
+
+.mm-cell--ptr { border-color: var(--mm-ptr); background: var(--mm-ptr-bg); }
+.mm-cell--ptr .mm-cell__value { color: var(--mm-ptr); }
+.mm-cell--ptr .mm-cell__type { color: var(--mm-ptr); border-color: var(--mm-ptr); }
+.mm-cell--ref { border-color: var(--mm-ref); background: var(--mm-ref-bg); }
+.mm-cell--ref .mm-cell__value { color: var(--mm-ref); }
+.mm-cell--ref .mm-cell__type { color: var(--mm-ref); border-color: var(--mm-ref); }
+.mm-cell--hl { border-color: var(--mm-hl); box-shadow: 0 0 0 3px color-mix(in srgb, var(--mm-hl) 32%, transparent); }
+.mm-cell--reclaimed { border-style: dashed; border-color: var(--mm-gap-bd); background: var(--mm-reclaimed-bg); }
+.mm-cell--destroyed { border-style: dashed; border-color: var(--mm-muted); }
+.mm-cell__value--reclaimed { color: var(--mm-muted); text-decoration: line-through; }
+
+/* in-cell "physical mapping" row: a full-bleed byte strip banded off from the
+   info above by a divider, so the two rows read as distinct parts of the cell */
+/* full-bleed two-row table at the bottom of a cell: value row over memory row,
+   columns aligned because both bars use identical byte-proportional blocks. */
+.mm-cell__table { margin: .4rem -.55rem -.45rem; border-top: 1.5px solid var(--mm-cell-bd); }
+.mm-cell__table .mm-layout__bar { gap: 1px; border: 0; border-radius: 0; background: var(--mm-cell-bd); }
+.mm-cell__table .mm-layout__bar--value + .mm-layout__bar { border-top: 1.5px solid var(--mm-cell-bd); }
+/* flex-basis:0 + identical metrics on BOTH bars -> value columns line up exactly
+   over their memory columns (otherwise wide values widen their own column). */
+.mm-cell__table .mm-layout__block { min-width: 1.3rem; flex-basis: 0; box-sizing: border-box; padding: .26rem .15rem; gap: 0; }
+.mm-cell__table .mm-layout__lbl { font-size: .6rem; }
+.mm-cell__table .mm-layout__sz { font-size: .5rem; opacity: .75; }
+/* the value row: light blocks holding each component's stored value */
+.mm-cell__table .mm-layout__bar--value .mm-layout__block { background: var(--mm-cell-bg); padding: .22rem .15rem; }
+.mm-cell__table .mm-layout__val { font-family: ui-monospace, monospace; font-size: .72rem; font-weight: 700;
+  color: var(--mm-cell-fg); max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mm-cell__table .mm-layout__bar--value .mm-layout__block--ptr { box-shadow: none; }
+/* a scalar pointer/reference cell: its single byte block is the pointer, so
+   give it the same accent + value colour an object's pointer field gets. */
+.mm-cell--ptr .mm-cell__table .mm-layout__bar--value + .mm-layout__bar .mm-layout__block { box-shadow: inset 0 -2px 0 var(--mm-ptr); }
+.mm-cell--ref .mm-cell__table .mm-layout__bar--value + .mm-layout__bar .mm-layout__block { box-shadow: inset 0 -2px 0 var(--mm-ref); }
+.mm-cell--ptr .mm-cell__table .mm-layout__val { color: var(--mm-ptr); }
+.mm-cell--ref .mm-cell__table .mm-layout__val { color: var(--mm-ref); }
+
+/* hover tooltip — reveals a cell's full identity when a row is ellipsized
+   (a long class name in a narrow, byte-sized cell). Lives in the canvas, which
+   doesn't clip, so it escapes the cell's overflow:hidden. Inverts the cell
+   palette for contrast and adapts to light / dark mode automatically. */
+.mm-tip { position: absolute; z-index: 30; pointer-events: none;
+  max-width: 22rem; padding: .4rem .6rem; border-radius: 7px;
+  background: var(--mm-tip-bg); color: var(--mm-tip-fg);
+  box-shadow: 0 6px 22px rgba(15,30,50,.32);
+  font-family: ui-monospace, "JetBrains Mono", Menlo, monospace;
+  font-size: .74rem; line-height: 1.45; }
+.mm-tip--above { transform: translate(-50%, -100%); }
+.mm-tip--below { transform: translate(-50%, 0); }
+.mm-tip::after { content: ""; position: absolute; left: 50%; width: 9px; height: 9px;
+  background: inherit; transform: translateX(-50%) rotate(45deg); }
+.mm-tip--above::after { bottom: -3px; }
+.mm-tip--below::after { top: -3px; }
+.mm-tip__line { white-space: nowrap; }
+.mm-tip__id { font-weight: 700; }
+.mm-tip__type { font-size: .66rem; opacity: .72; letter-spacing: .02em; }
+.mm-tip__field { opacity: .92; }
+/* deletion state, mirroring the cell: a status note + struck-through stale values */
+.mm-tip__note { font-size: .6rem; font-weight: 700; opacity: .85; text-transform: uppercase; letter-spacing: .06em; }
+.mm-tip__stale { opacity: .65; text-decoration: line-through; }
+
+/* ---- arrows ---- */
+.mm-arrow { fill: none; stroke: var(--mm-ptr); stroke-width: 1.6; stroke-linecap: round; stroke-opacity: .9; }
+.mm-arrow--ref { stroke: var(--mm-ref); stroke-dasharray: 5 4; }
+.mm-arrow-src { fill: var(--mm-ptr); }
+.mm-arrow-src--ref { fill: var(--mm-ref); }
+.mm-head { fill: none; stroke: var(--mm-ptr); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.mm-head--ref { stroke: var(--mm-ref); }
+.mm-arrow--dangling { stroke: var(--mm-dangling); stroke-dasharray: 3 4; }
+.mm-arrow-src--dangling { fill: var(--mm-dangling); }
+.mm-head--dangling { stroke: var(--mm-dangling); }
+
+/* ---- legend ---- */
+.mm-legend { display: flex; flex-wrap: wrap; gap: .9rem; padding-left: 30px; }
+.mm-legend__item { display: inline-flex; align-items: center; gap: .35rem; font-size: .68rem; color: var(--mm-muted); }
+.mm-swatch { width: .8rem; height: .8rem; border-radius: 3px; display: inline-block; }
+.mm-swatch--ptr { background: var(--mm-ptr-bg); border: 1.5px solid var(--mm-ptr); }
+.mm-swatch--ref { background: var(--mm-ref-bg); border: 1.5px solid var(--mm-ref); }
+.mm-swatch--reclaimed { background: var(--mm-reclaimed-bg); border: 1.5px dashed var(--mm-gap-bd); }
+.mm-swatch--dangling { background: transparent; border: 1.5px dashed var(--mm-dangling); }
+.mm-swatch--destroyed { background: transparent; border: 1.5px dashed var(--mm-muted); }
+.mm-swatch--sub0 { background: var(--seg-stack-bg);  border: 1.5px solid var(--seg-stack-bd); }
+.mm-swatch--sub1 { background: var(--seg-heap-bg);   border: 1.5px solid var(--seg-heap-bd); }
+.mm-swatch--sub2 { background: var(--seg-global-bg); border: 1.5px solid var(--seg-global-bd); }
+.mm-swatch--sub3 { background: var(--seg-code-bg);   border: 1.5px solid var(--seg-code-bd); }
+
+/* ---- ObjectLayout: full-width inheritance / offset diagram ----
+   strip, ruler and brackets are all byte-proportional (flex-grow=size,
+   flex-basis:0, no gaps, inset separators) so columns line up exactly. */
+.ol { display: flex; flex-direction: column; }
+.ol__title { font-family: ui-monospace, monospace; font-size: .82rem; font-weight: 700; color: var(--mm-cell-fg); margin-bottom: .55rem; }
+
+.ol__ptrs { position: relative; }
+/* each marker is a 0-width anchor at its byte offset: a label box on top, a thin
+   stem dropping to the strip. align-items places the box so edge offsets (+0, +N)
+   don't overflow; the stem length grows with the stagger level. */
+.ol__ptr { position: absolute; bottom: 0; width: 0; display: flex; flex-direction: column; align-items: center; }
+.ol__ptr--l { align-items: flex-start; }
+.ol__ptr--r { align-items: flex-end; }
+.ol__ptr-box { display: flex; flex-direction: column; align-items: center; line-height: 1.18;
+  border: 1.5px solid var(--mm-ptr); background: var(--mm-ptr-bg); color: var(--mm-ptr);
+  border-radius: 6px; padding: .1rem .4rem; font-family: ui-monospace, monospace; white-space: nowrap; }
+.ol__ptr-stem { width: 1.5px; background: var(--mm-ptr); height: calc(.5rem + var(--lvl, 0) * 1.8rem); }
+.ol__ptr-name { font-size: .68rem; font-weight: 700; }
+.ol__ptr-off { font-size: .56rem; opacity: .85; }
+.ol__ptr--ref .ol__ptr-box { border-color: var(--mm-ref); background: var(--mm-ref-bg); color: var(--mm-ref); }
+.ol__ptr--ref .ol__ptr-stem { background: var(--mm-ref); }
+
+/* Strip / ruler / brackets are CSS grids whose columns come from the SAME byte
+   sizes (minmax(0,<bytes>fr) — set inline). fr tracks are exactly proportional
+   and minmax(0,…) stops content from ever widening a track, so the three rows
+   line up column-for-column with zero drift. Border is an inset ring so it adds
+   no layout width. */
+.ol__strip { display: grid; border-radius: 8px; overflow: hidden; box-shadow: inset 0 0 0 1.5px var(--mm-cell-bd); }
+.ol__cell { position: relative; box-sizing: border-box; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center; gap: .14rem; padding: .55rem .28rem;
+  min-height: 3rem; background: var(--mm-cell-bg); box-shadow: inset -1px 0 0 var(--mm-cell-bd); overflow: hidden; }
+.ol__cell:last-child { box-shadow: none; }
+.ol__cell-lab { font-family: ui-monospace, monospace; font-size: .74rem; font-weight: 700;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+.ol__cell-val { font-family: ui-monospace, monospace; font-size: .6rem; opacity: .82;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+.ol__cell--vptr .ol__cell-lab { font-style: italic; }
+.ol__cell--pad { background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, var(--mm-cell-bd) 5px, var(--mm-cell-bd) 6px); }
+.ol__cell--pad .ol__cell-lab { color: var(--mm-muted); font-weight: 500; }
+.ol__cell--ptr { box-shadow: inset -1px 0 0 var(--mm-cell-bd), inset 0 -3px 0 var(--mm-ptr); }
+.ol__cell--hl { outline: 2px solid var(--mm-hl); outline-offset: -2px; z-index: 1; }
+
+.ol__ruler { position: relative; display: grid; height: 1.1rem; margin-top: .15rem; }
+.ol__tick { position: relative; box-sizing: border-box; }
+.ol__tick > span { position: absolute; left: 0; top: .28rem; transform: translateX(-50%);
+  font-family: ui-monospace, monospace; font-size: .56rem; color: var(--mm-muted); white-space: nowrap; }
+.ol__tick::before { content: ""; position: absolute; left: 0; top: 0; width: 1px; height: .25rem; background: var(--mm-cell-bd); }
+.ol__tick-end { position: absolute; right: 0; top: .28rem; font-family: ui-monospace, monospace;
+  font-size: .56rem; color: var(--mm-muted); white-space: nowrap; }
+
+.ol__brk { display: grid; margin-top: .35rem; }
+.ol__grp { box-sizing: border-box; text-align: center; border: 1.5px solid var(--mm-cell-bd);
+  border-radius: 6px; padding: .2rem .15rem; min-height: 1.1rem;
+  font-family: ui-monospace, monospace; font-size: .64rem; font-weight: 700;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ol__grp--gap { border: 0; background: none; }
+.ol__note { margin-top: .85rem; font-size: .82rem; line-height: 1.5; color: var(--mm-cell-fg); }
+
+/* ---- L08 platform fan-out (interactive C++-vs-Java compilation comparison) ----
+   Side-by-side stage axis with a per-platform fan-out in each column; highlighting a
+   platform lights its route down both columns. Colour is role-only; accent is --mm-ptr. */
+.pf-legend { justify-content: center; padding-left: 0; margin-bottom: .3rem; row-gap: .3rem; }
+.pf-controls { display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+  gap: .4rem; margin: 0 0 .5rem; font-size: .72rem; color: var(--mm-muted); }
+.pf-btn { font-family: inherit; font-size: .72rem; cursor: pointer; padding: .12rem .55rem; border-radius: 999px;
+  border: 1.5px solid var(--mm-cell-bd); background: var(--mm-cell-bg); color: hsl(var(--foreground));
+  transition: background .15s, border-color .15s, color .15s; }
+.pf-btn:hover { border-color: var(--mm-ptr); }
+.pf-btn:focus-visible { outline: none; border-color: var(--mm-ptr);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--mm-ptr) 30%, transparent); }
+.pf-btn--on { background: var(--mm-ptr-bg); border-color: var(--mm-ptr); color: var(--mm-ptr); font-weight: 700; }
+.pf-route { transition: opacity .15s ease; }
+.pf-hit { fill: transparent; pointer-events: all; cursor: pointer; }
+@media (prefers-reduced-motion: reduce) { .pf-route, .pf-btn { transition: none; } }
+
+/* ---- comparison captions (CompareTitles / CompareCaption) — shared tagged "A vs B"
+   labels for any compare figure; tags reuse mm-cap-tag, columns scale via --cols. ---- */
+.mm-compare-titles { display: flex; flex-wrap: wrap; justify-content: space-around; gap: .2rem 1rem;
+  font-weight: 700; font-size: .8rem; letter-spacing: .02em; color: var(--mm-muted); margin: 0 0 .35rem; padding: 0 1rem; }
+.mm-compare { display: grid; grid-template-columns: repeat(var(--cols, 2), 1fr); gap: .5rem 1.4rem;
+  max-width: 44rem; margin: .8rem auto 0; }
+.mm-compare__col { font-size: .78rem; line-height: 1.45; color: var(--mm-muted); }
+.mm-compare__col + .mm-compare__col { padding-left: 1.1rem; border-left: 1px solid var(--mm-panel-bd); }
+/* the tag is the shared caption chip (mm-cap-tag--*); make it a content-width block
+   sitting on its own line above the text */
+.mm-compare__tag { display: block; width: fit-content; margin-bottom: .3rem; }
+.mm-compare__punch { grid-column: 1 / -1; text-align: left; font-size: .78rem; line-height: 1.45;
+  color: var(--mm-muted); margin: .1rem 0 0; padding-top: .55rem; border-top: 1px solid var(--mm-panel-bd); }
+@media (max-width: 520px) {
+  .mm-compare { grid-template-columns: 1fr; }
+  .mm-compare__col + .mm-compare__col { padding-left: 0; border-left: 0; }
+}
+
+/* ---- MemoryCompare (compare()) — side-by-side stage columns. Each column pairs a
+   one-line declaration with a stack-only MemoryModel, a byte-cost chip and a reading;
+   the highlight ring marks the storage introduced at that stage. ---- */
+.mm-cmp { display: grid; grid-template-columns: repeat(var(--cols, 3), 1fr);
+  gap: 0 1.1rem; align-items: start; max-width: 46rem; margin: .2rem auto 0; }
+.mm-cmp__col { display: flex; flex-direction: column; align-items: center; gap: .55rem;
+  padding: 0 .9rem; text-align: center; min-width: 0; }
+.mm-cmp__col + .mm-cmp__col { border-left: 1px solid var(--mm-panel-bd); }
+.mm-cmp__code { max-width: 100%; white-space: pre; overflow-x: auto;
+  font-family: ui-monospace, "JetBrains Mono", Menlo, monospace; font-size: .82rem;
+  background: var(--mm-code-bg); color: var(--mm-code-fg);
+  border: 1px solid var(--mm-panel-bd); border-radius: 6px; padding: .26rem .5rem; }
+.mm-cmp__col .mm { margin: 0; width: 100%; }
+/* centre the cells in each column, and widen them enough that an alias label
+   like "x · r" isn't clipped to the int's narrow 4-byte width */
+.mm-cmp .mm-seg__cells { justify-content: center; }
+.mm-cmp .mm-cell { min-width: 3.9rem; }
+.mm-cmp__tag { font-size: .7rem; }
+.mm-cmp__note { font-size: .76rem; line-height: 1.4; color: var(--mm-muted); margin: 0; max-width: 15rem; }
+.mm-cmp__foot { max-width: 42rem; margin: .9rem auto 0; padding-top: .55rem;
+  border-top: 1px solid var(--mm-panel-bd); text-align: center; }
+.mm-cmp__punch { font-size: .82rem; line-height: 1.5; color: var(--mm-cell-fg); margin: 0; }
+.mm-cmp__hint { font-size: .72rem; color: var(--mm-muted); margin: .3rem 0 0; font-style: italic; }
+@media (max-width: 560px) {
+  .mm-cmp { grid-template-columns: 1fr; gap: .9rem 0; }
+  .mm-cmp__col { padding: .9rem 0 0; }
+  .mm-cmp__col + .mm-cmp__col { border-left: 0; border-top: 1px solid var(--mm-panel-bd); }
+}
+
+/* ---- MemoryDualScene (dualScene()) — two MemoryScene-style columns sharing one
+   stepper. Each column stacks memory + C++ + asm vertically (forced one-column so
+   the narrow column fits), with a divider between the two columns. ---- */
+.mm-dual { display: grid; grid-template-columns: 1fr 1fr; gap: 0 1.1rem; align-items: start; }
+.mm-dual__col { display: flex; flex-direction: column; gap: .55rem; min-width: 0; }
+.mm-dual__col + .mm-dual__col { border-left: 1px solid var(--mm-panel-bd); padding-left: 1.1rem; }
+.mm-dual__head { font-size: .64rem; font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--mm-muted); padding: 0 .2rem; }
+/* each column is narrow, so stack its C++ and asm vertically instead of side by side */
+.mm-dual .mm-codeasm { grid-template-columns: 1fr; }
+@media (max-width: 640px) {
+  .mm-dual { grid-template-columns: 1fr; }
+  .mm-dual__col + .mm-dual__col { border-left: 0; border-top: 1px solid var(--mm-panel-bd); padding-left: 0; padding-top: .9rem; }
+}
