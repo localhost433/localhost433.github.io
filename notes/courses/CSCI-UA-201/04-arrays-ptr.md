@@ -157,11 +157,11 @@ if (q != NULL) {
 
 ## Traditional vs dynamic arrays summary
 
-| Feature            | Traditional array     | Dynamic array           |
-|--------------------|----------------------|-------------------------|
-| Declaration        | `int a[3];`          | `int *a;` then `malloc` |
-| Storage location   | Usually stack        | Heap                    |
-| Size               | Fixed                | Chosen at runtime       |
-| Lifetime           | Function scope       | Until `free`           |
-| Management         | Automatic            | Manual                  |
-| Typical use        | Small fixed buffers  | Large or resizable data |
+| Feature          | Traditional array   | Dynamic array           |
+| ---------------- | ------------------- | ----------------------- |
+| Declaration      | `int a[3];`         | `int *a;` then `malloc` |
+| Storage location | Usually stack       | Heap                    |
+| Size             | Fixed               | Chosen at runtime       |
+| Lifetime         | Function scope      | Until `free`            |
+| Management       | Automatic           | Manual                  |
+| Typical use      | Small fixed buffers | Large or resizable data |

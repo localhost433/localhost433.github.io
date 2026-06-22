@@ -29,9 +29,9 @@ Fisher's Exact Test provides a highly elegant framework for evaluating $2 \times
 
 Let the observed counts be denoted as $n\_{ij}$. We define the fixed marginal totals:
 
-* Row totals: $n\_{i\cdot} = \sum\_j n\_{ij}$ (e.g., total promoted $n\_{1\cdot} = 35$)
-* Column totals: $n\_{\cdot j} = \sum\_i n\_{ij}$ (e.g., total males $n\_{\cdot 1} = 24$)
-* Grand total: $n\_{\cdot \cdot} = \sum\_{i,j} n\_{ij} = 48$
+- Row totals: $n\_{i\cdot} = \sum\_j n\_{ij}$ (e.g., total promoted $n\_{1\cdot} = 35$)
+- Column totals: $n\_{\cdot j} = \sum\_i n\_{ij}$ (e.g., total males $n\_{\cdot 1} = 24$)
+- Grand total: $n\_{\cdot \cdot} = \sum\_{i,j} n\_{ij} = 48$
 
 **Fisher's Core Assumption:** We treat the row sums and column sums as strictly fixed parameters, rather than random variables. Consequently, the single upper-left cell count $N\_{11}$ mathematically dictates the entire contingency table.
 

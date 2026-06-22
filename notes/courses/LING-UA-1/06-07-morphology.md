@@ -3,11 +3,11 @@ title: Morphology
 date: 2025-05-28/29
 ---
 
-# Morphology
+## Morphology
 
 ---
 
-## Different types of words
+### Different types of words
 Content words (open class words):
 - Nouns
 - Verbs
@@ -22,22 +22,22 @@ Function words (close class words):
 
 ---
 
-## What is morphology?
+### What is morphology?
 Study of morphemes, smallest meaningful units in language.
 
 ---
 
-### Morpheme vs. Phoneme
+#### Morpheme vs. Phoneme
 Phonemes are contrastive units of sounds, do not carry any meaning on their own.
 
 ---
 
-### Morpheme vs. Syllable
+#### Morpheme vs. Syllable
 A syllable is a prosodic unit based on sounds, not meaning.
 
 ---
 
-### Morpheme vs. Word
+#### Morpheme vs. Word
 Both have meanings.
 - A word is a freestanding unit of meaning
   - can be simple, made up of a single morpheme
@@ -46,13 +46,13 @@ Both have meanings.
 
 ---
 
-### Meaning of morphemes
+#### Meaning of morphemes
 - Meaning of morpheme must be constant.
 - Some morphemes sharing the same form may have multiple meanings.
 
 ---
 
-### Form of morphemes
+#### Form of morphemes
 Sometimes, morphemes come in different forms, which is referred to as **allomorphs**.
 - Form of a morpheme may change based on phonotactic rules.
 - Other times, the different forms are remnants of older varieties of the language.
@@ -60,12 +60,12 @@ Sometimes, morphemes come in different forms, which is referred to as **allomorp
 
 ---
 
-## Type of morphemes
+### Type of morphemes
 Not all morphemes are created equal.
 
 ---
 
-### Language specific
+#### Language specific
 What's bound in one language can be free in another.
 
 In English, most bound morphemes are affixes. Affixes are classified by where they attached to a word
@@ -76,7 +76,7 @@ In English, most bound morphemes are affixes. Affixes are classified by where th
 
 ---
 
-### Roots vs. Stems
+#### Roots vs. Stems
 - Morphologically complex words consist of a **root** and one or more affixes.
 - Some roots can stand along as a word.
 - Other roots cannot stand alone as a word (so-called bound roots)
@@ -84,17 +84,17 @@ In English, most bound morphemes are affixes. Affixes are classified by where th
 
 ---
 
-## Morphological Analysis
+### Morphological Analysis
 Perform morphological analysis to identify morphemes.
 Identify **recurring forms** with **recurring meanings**.
 
 ---
 
-## Word Building
+### Word Building
 
 ---
 
-### How languages build words
+#### How languages build words
 - **Non-concatenative** morphology build words by modifying a root. (Semitic languages)
 - **Concatenative** morphology build words by attaching affixes to a root
   - **Agglutination** is when each affix attaches to a root seemingly one-by-one. (undrinkable)
@@ -102,7 +102,7 @@ Identify **recurring forms** with **recurring meanings**.
 
 ---
 
-### Inflectional vs. Derivational morphemes
+#### Inflectional vs. Derivational morphemes
 - **Derivational** morphemes create new words with a different meaning and may change the grammatical category.
   - A word may contain multiple derivational affixes.
   - *Class-changing*
@@ -114,7 +114,7 @@ Identify **recurring forms** with **recurring meanings**.
 
 ---
 
-### Multiple affix problem
+#### Multiple affix problem
 - In English, affixes have rules about what word class they attach to and what word class they create.
 - Sometimes affixes can be attached to more than one word class.
   - In these cases the meaning of the affixes are related
@@ -122,31 +122,31 @@ Identify **recurring forms** with **recurring meanings**.
 
 ---
 
-### Building morphology trees
+#### Building morphology trees
 - Represent word internal structures as hierarchical trees
-- Features:    
+- Features:
   - Binary-branching
   - Labelling each node with the grammatical category
   - **Each level must be a well-formed word**.
 
 ---
 
-### Compounding
+#### Compounding
 **Compounding** is the process of combining two already existing words into one.
 
 ---
 
-### Zero Derivation
+#### Zero Derivation
 **Zero-Derivation** when a word changes word class, with no new morphemes added.
 
 ---
 
-### Acronyms and initialisms
+#### Acronyms and initialisms
 **Acronym**: Initials pronounced as a regular word.
 **Initialism**: Initials pronounced as letters.
 
 ---
 
-### Clipping and blending
+#### Clipping and blending
 **Clipping** refers to cutting off part of a word
 **Blends** (portmanteaux) are created by putting clippings together.

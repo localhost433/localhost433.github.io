@@ -7,7 +7,7 @@ Overview of what will be covered in the course.
 
 ---
 
-# What is Language?
+## What is Language?
 - Cultural artifact
 - Articulation of thoughts
 - Code for communication
@@ -15,7 +15,7 @@ Overview of what will be covered in the course.
 
 ---
 
-## How does language work?
+### How does language work?
 - Language as a mapping
     ```text
     form                 <->               function
@@ -25,23 +25,23 @@ Overview of what will be covered in the course.
 
 ---
 
-## What does it mean to 'know' a language
+### What does it mean to 'know' a language
 
 ---
 
-### Linguistic competence
+#### Linguistic competence
 - Our knowledge of sounds, words, linguistic structures, linguistic
 meanings, etc.
 - Mostly unconscious
 
 ---
 
-#### vs... Linguistic performance
+##### vs... Linguistic performance
 - The way people use languages, including errors.
 
 ---
 
-#### Knowledge of sound patterns: Phonetics
+##### Knowledge of sound patterns: Phonetics
 - Inventory of sounds
   - Which sounds exists in the language?
   - Which sounds are meaningfully distinct from others?
@@ -51,29 +51,29 @@ meanings, etc.
 
 ---
 
-#### Knowledge of Word patterns: Morphology
+##### Knowledge of Word patterns: Morphology
 [Morpheme:= smallest meaningful unit.](https://en.wikipedia.org/wiki/Morpheme)
 
-#### Knowledge of sentence patterns: Syntax
+##### Knowledge of sentence patterns: Syntax
 
-#### Knowledge of meaning patterns: Semantics
+##### Knowledge of meaning patterns: Semantics
 Logical implication for the sentence.
 
 ---
 
-### Communicative competence
+#### Communicative competence
 - Our knowledge of how and when to use those linguistic structures.
 - Our evaluations ((un)/conscious) of others’ linguistic (in)competence
 and linguistic performance.
 
 ---
 
-#### Knowledge of usage patterns: Sociolinguistics
+##### Knowledge of usage patterns: Sociolinguistics
 Association of meaning with the words
 
 ---
 
-## Key features of language
+### Key features of language
 1. Arbitrariness
    No inherent connection between the word and the object, just **convention**.
 2. Displacement
@@ -93,7 +93,7 @@ Association of meaning with the words
 
 ---
 
-## What exactly is Linguistics?
+### What exactly is Linguistics?
 - Scientific study of language
   - Unconscious knowledge we have
   - the way we learn language
@@ -103,7 +103,7 @@ Association of meaning with the words
 
 ---
 
-### Descriptivism vs. Prescriptivism
+#### Descriptivism vs. Prescriptivism
 - Descriptive grammar: description or model of the mental grammar, what speaker know about their language.
 - Prescriptive Grammar: attempts to prescribe what rules of language people should use to speak "properly”.
 

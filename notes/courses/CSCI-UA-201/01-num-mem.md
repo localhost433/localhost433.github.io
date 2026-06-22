@@ -28,8 +28,8 @@ $$
 
 ### To decimal (positional expansion)
 
-- **Binary -> decimal:** multiply each bit by the corresponding power of $2$ and add.
-- **Hex -> decimal:** multiply each hex digit by the corresponding power of $16$ and add.
+- **Binary → decimal:** multiply each bit by the corresponding power of $2$ and add.
+- **Hex → decimal:** multiply each hex digit by the corresponding power of $16$ and add.
 
 Example:
 
@@ -45,8 +45,8 @@ $$
 
 Use repeated division by the target base, tracking remainders:
 
-- **Decimal -> binary:** divide by $2$ until the quotient is $0$, read remainders bottom-to-top.
-- **Decimal -> hex:** same idea but divide by $16$.
+- **Decimal → binary:** divide by $2$ until the quotient is $0$, read remainders bottom-to-top.
+- **Decimal → hex:** same idea but divide by $16$.
 
 Example:
 
@@ -57,8 +57,8 @@ Example:
 
 Because $16 = 2^4$, $4$ binary bits correspond to $1$ hex digit:
 
-- **Binary -> hex:** group bits into $4$-bit chunks from the right, pad with leading zeros if needed, convert each chunk to hex.
-- **Hex -> binary:** replace each hex digit with its $4$-bit binary equivalent.
+- **Binary → hex:** group bits into $4$-bit chunks from the right, pad with leading zeros if needed, convert each chunk to hex.
+- **Hex → binary:** replace each hex digit with its $4$-bit binary equivalent.
 
 Example:
 
@@ -80,8 +80,8 @@ A small table (for $0$–$15$) links decimal, hex, and $4$-bit binary.
 
 An $n$-bit quantity can represent $2^n$ distinct values:
 
-- $1$ bit -> $2$ values.
-- $8$ bits ($1$ byte) -> $2^8 = 256$ values.
+- $1$ bit → $2$ values.
+- $8$ bits ($1$ byte) → $2^8 = 256$ values.
 
 ### Where text and numeric formats live
 
@@ -109,8 +109,8 @@ For an $n$-bit **address**:
 
 Example:
 
-- $32$-bit data cell -> $2^{32}$ possible contents.
-- $16$-bit address -> $2^{16} = 64\text{K}$ addressable locations.
+- $32$-bit data cell → $2^{32}$ possible contents.
+- $16$-bit address → $2^{16} = 64\text{K}$ addressable locations.
 
 ### Size and powers of two
 
@@ -148,14 +148,14 @@ The width of the address bus determines the maximum directly addressable memory.
 The note includes worked examples on:
 
 1. **Base conversions:**
-   - Binary <-> decimal.
-   - Hex <-> decimal.
-   - Decimal <-> binary via repeated division.
-   - Hex <-> binary via $4$-bit grouping.
+   - Binary ↔ decimal.
+   - Hex ↔ decimal.
+   - Decimal ↔ binary via repeated division.
+   - Hex ↔ binary via $4$-bit grouping.
 
 2. **Memory calculations:**
    - Bits needed to address a given memory size (e.g., $8\text{MB}$ requires $23$ address bits).
-   - Maximum memory size from a given address width (e.g., $24$-bit address bus -> $16\text{MB}$).
+   - Maximum memory size from a given address width (e.g., $24$-bit address bus → $16\text{MB}$).
 
 3. **Data values in $n$-bit locations:**
    - Counting the number of distinct values (e.g., a $12$-bit cell stores $2^{12} = 4096$ values).
@@ -170,7 +170,7 @@ Common facts:
 - $1$ GB $= 1024$ MB.
 - $1$ TB $= 1024$ GB.
 
-Hex <-> $4$-bit binary shortcuts:
+Hex ↔ $4$-bit binary shortcuts:
 
 - $A = 1010$, $B = 1011$, $C = 1100$, $D = 1101$, $E = 1110$, $F = 1111$.
 

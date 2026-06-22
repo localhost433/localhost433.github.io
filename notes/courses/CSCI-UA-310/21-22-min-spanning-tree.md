@@ -84,9 +84,9 @@ MST-KRUSKAL(G, w)
 
 Kruskal's algorithm needs efficient support for:
 
-* `MAKE-SET(x)`: Create a singleton set $\{x\}$.
-* `FIND-SET(x)`: Return the representative of $x$'s set.
-* `UNION(x, y)`: Merge the sets containing $x$ and $y$.
+- `MAKE-SET(x)`: Create a singleton set $\{x\}$.
+- `FIND-SET(x)`: Return the representative of $x$'s set.
+- `UNION(x, y)`: Merge the sets containing $x$ and $y$.
 
 ### 4.1 Implementation with Union-by-Rank and Path Compression
 
@@ -135,8 +135,8 @@ since $|E| \leq |V|^2$ so $\log E = O(\log V)$.
 
 Each vertex $v \notin S$ maintains:
 
-* `v.key`: minimum weight of any edge connecting $v$ to a vertex in $S$ (or $\infty$ if none).
-* `v.π`: the vertex in $S$ that achieves `v.key`.
+- `v.key`: minimum weight of any edge connecting $v$ to a vertex in $S$ (or $\infty$ if none).
+- `v.π`: the vertex in $S$ that achieves `v.key`.
 
 ```text
 MST-PRIM(G, w, r)
@@ -167,12 +167,12 @@ Graph: $V = \{a,b,c,d,e,f,g,h,i\}$, with edges of various weights.
 
 Starting from vertex $a$:
 
-* Extract $a$ (key=0). Update neighbors: $b.key=4, h.key=8$.
-* Extract $b$ (key=4). Update: $c.key=8, h.key=11$ (no improvement for $h$).
-* Extract $c$ (key=8). Update: $d.key=7, f.key=4, i.key=2$.
-* Extract $i$ (key=2). Update: $h.key=7, g.key=6$.
-* Extract $f$ (key=4). Update: $g.key=2, e.key=10$.
-* ... (continue until all vertices extracted)
+- Extract $a$ (key=0). Update neighbors: $b.key=4, h.key=8$.
+- Extract $b$ (key=4). Update: $c.key=8, h.key=11$ (no improvement for $h$).
+- Extract $c$ (key=8). Update: $d.key=7, f.key=4, i.key=2$.
+- Extract $i$ (key=2). Update: $h.key=7, g.key=6$.
+- Extract $f$ (key=4). Update: $g.key=2, e.key=10$.
+- ... (continue until all vertices extracted)
 
 At the end, $A = \{(a,b), (b,c), (c,i), (c,f), (f,g), (g,h), (c,d), (d,e)\}$ with total weight 37.
 
@@ -180,10 +180,10 @@ At the end, $A = \{(a,b), (b,c), (c,i), (c,f), (f,g), (g,h), (c,d), (d,e)\}$ wit
 
 ## 6. Analysis of Prim's
 
-| Priority Queue | EXTRACT-MIN | DECREASE-KEY | Total |
-|---|---|---|---|
-| Array | $O(V)$ | $O(1)$ | $O(V^2)$ |
-| Binary heap | $O(\log V)$ | $O(\log V)$ | $O(E \log V)$ |
+| Priority Queue | EXTRACT-MIN        | DECREASE-KEY  | Total             |
+| -------------- | ------------------ | ------------- | ----------------- |
+| Array          | $O(V)$             | $O(1)$        | $O(V^2)$          |
+| Binary heap    | $O(\log V)$        | $O(\log V)$   | $O(E \log V)$     |
 | Fibonacci heap | $O(\log V)$ amort. | $O(1)$ amort. | $O(E + V \log V)$ |
 
 With a **simple array**: $O(V)$ per `EXTRACT-MIN` $\times$ $V$ extractions + $O(1)$ per edge relaxation = $O(V^2 + E) = O(V^2)$. Good for dense graphs.
@@ -194,13 +194,13 @@ With a **binary heap**: $O(E \log V)$. Good for sparse graphs.
 
 ## 7. Comparison: Kruskal's vs. Prim's
 
-| Property | Kruskal's | Prim's |
-|---|---|---|
-| Strategy | Add lightest safe edge globally | Grow one tree from root |
-| Data structure | Union-Find | Priority queue |
-| Time (sparse) | $O(E \log V)$ | $O(E \log V)$ |
-| Time (dense) | $O(E \log V)$ | $O(V^2)$ with array |
-| Best for | Sparse graphs | Dense graphs |
+| Property       | Kruskal's                       | Prim's                  |
+| -------------- | ------------------------------- | ----------------------- |
+| Strategy       | Add lightest safe edge globally | Grow one tree from root |
+| Data structure | Union-Find                      | Priority queue          |
+| Time (sparse)  | $O(E \log V)$                   | $O(E \log V)$           |
+| Time (dense)   | $O(E \log V)$                   | $O(V^2)$ with array     |
+| Best for       | Sparse graphs                   | Dense graphs            |
 
 **Both produce a valid MST**. The choice depends on graph density and implementation constraints.
 
@@ -212,4 +212,4 @@ If all edge weights are distinct, the MST is unique. With ties, multiple MSTs ma
 
 ## References
 
-* **CLRS**: Chapter 23 — Minimum Spanning Trees (Sections 23.1–23.2); Chapter 21 — Disjoint Sets.
+- **CLRS**: Chapter 23 — Minimum Spanning Trees (Sections 23.1–23.2); Chapter 21 — Disjoint Sets.

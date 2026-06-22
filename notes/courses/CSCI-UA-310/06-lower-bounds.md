@@ -21,10 +21,10 @@ We shift perspective from "how fast can we sort?" to "what is the theoretical li
 
 We can view any comparison sort as a binary tree.
 
-* **Internal Node**: A comparison $a_i : a_j$.
-* **Left Branch**: Case $a_i \le a_j$.
-* **Right Branch**: Case $a_i > a_j$.
-* **Leaf Node**: A permutation of the input (a potential sorted order).
+- **Internal Node**: A comparison $a_i : a_j$.
+- **Left Branch**: Case $a_i \le a_j$.
+- **Right Branch**: Case $a_i > a_j$.
+- **Leaf Node**: A permutation of the input (a potential sorted order).
 
 For the algorithm to be correct, every possible permutation of the $n$ elements must appear as a leaf. There are $n!$ permutations.
 
@@ -56,11 +56,11 @@ To beat the $\Omega(n \log n)$ bound, we must stop comparing elements. **Countin
 
 ### 2.2 Analysis
 
-* Initializing $C$: $\Theta(k)$.
-* Counting frequencies: $\Theta(n)$.
-* Accumulating: $\Theta(k)$.
-* Placing elements: $\Theta(n)$.
-* **Total Time**: $\Theta(n + k)$.
+- Initializing $C$: $\Theta(k)$.
+- Counting frequencies: $\Theta(n)$.
+- Accumulating: $\Theta(k)$.
+- Placing elements: $\Theta(n)$.
+- **Total Time**: $\Theta(n + k)$.
 
 If $k = O(n)$, the running time is $\Theta(n)$.
 
@@ -70,4 +70,4 @@ If $k = O(n)$, the running time is $\Theta(n)$.
 
 ## References
 
-* **CLRS**: Chapter 8: "Sorting in Linear Time".
+- **CLRS**: Chapter 8: "Sorting in Linear Time".

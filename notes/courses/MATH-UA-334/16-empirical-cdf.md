@@ -7,8 +7,8 @@ date: 2026-03-25
 
 Suppose $X\_1, \dots, X\_n$ are i.i.d. observations and we would like to summarize the data without first imposing a parametric model on the underlying distribution. Recall that the distribution of a random variable can be described through:
 
-* Its Cumulative Distribution Function (CDF), Probability Mass Function (pmf), or Probability Density Function (pdf).
-* Important functionals such as the mean, median, quartiles, and so on.
+- Its Cumulative Distribution Function (CDF), Probability Mass Function (pmf), or Probability Density Function (pdf).
+- Important functionals such as the mean, median, quartiles, and so on.
 
 ### 1.1 Definition and Interpretation
 

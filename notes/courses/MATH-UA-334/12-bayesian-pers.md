@@ -7,8 +7,8 @@ date: 2026-03-02
 
 Up until now, our statistical methods (Method of Moments, Maximum Likelihood Estimation) have relied entirely on the **Frequentist** interpretation of statistics.
 
-* **Frequentist Setting:** The true parameter $\theta$ is an unknown, but strictly fixed, constant. It is not a random variable. Probabilities are strictly interpreted as long-run frequencies of repeated experiments. Consequently, we cannot make probabilistic statements about $\theta$ itself (e.g., saying there is a $95%$ probability that $\theta$ is greater than $0$ is technically invalid in Frequentist statistics).
-* **Bayesian Setting:** The parameter $\theta$ is mathematically treated as a **random variable** itself. We start with prior subjective beliefs about the distribution of $\theta$, and we update these beliefs as we observe more data. Probabilities reflect our *degree of belief* or uncertainty regarding the parameter.
+- **Frequentist Setting:** The true parameter $\theta$ is an unknown, but strictly fixed, constant. It is not a random variable. Probabilities are strictly interpreted as long-run frequencies of repeated experiments. Consequently, we cannot make probabilistic statements about $\theta$ itself (e.g., saying there is a $95%$ probability that $\theta$ is greater than $0$ is technically invalid in Frequentist statistics).
+- **Bayesian Setting:** The parameter $\theta$ is mathematically treated as a **random variable** itself. We start with prior subjective beliefs about the distribution of $\theta$, and we update these beliefs as we observe more data. Probabilities reflect our *degree of belief* or uncertainty regarding the parameter.
 
 ---
 
@@ -20,8 +20,8 @@ The entire Bayesian approach to statistical inference centers around three funda
 
 Before we observe any data, we must encode our subjective beliefs, intuitions, or historical knowledge about $\theta$ into a probability density function called the **Prior Distribution**, denoted as $\pi(\theta)$.
 
-* If we absolutely know that $\theta$ must be positive (like a variance), $\pi(\theta)$ is strictly defined only on $(0, \infty)$.
-* If we have no idea what $\theta$ might be, we might deliberately choose an "uninformative" prior (e.g., a flat uniform distribution across all possible values).
+- If we absolutely know that $\theta$ must be positive (like a variance), $\pi(\theta)$ is strictly defined only on $(0, \infty)$.
+- If we have no idea what $\theta$ might be, we might deliberately choose an "uninformative" prior (e.g., a flat uniform distribution across all possible values).
 
 ### 2.2 The Likelihood
 
@@ -52,15 +52,15 @@ A significant challenge in Bayesian statistics is calculating the denominator in
 
 Suppose we want to estimate the unknown bias $\theta \in [0, 1]$ of a coin.
 
-* **Data/Likelihood:** We flip the coin $n$ times and observe $X$ heads. The likelihood follows a Binomial distribution:
+- **Data/Likelihood:** We flip the coin $n$ times and observe $X$ heads. The likelihood follows a Binomial distribution:
     $$
         f(X | \theta) = \binom{n}{X} \theta^X (1-\theta)^{n-X} \propto \theta^X (1-\theta)^{n-X}
     $$
-* **Prior:** We choose an uninformative Uniform prior on $[0, 1]$. Note that the Uniform distribution is actually a special mathematical case of the Beta distribution, $\text{Beta}(1, 1)$:
+- **Prior:** We choose an uninformative Uniform prior on $[0, 1]$. Note that the Uniform distribution is actually a special mathematical case of the Beta distribution, $\text{Beta}(1, 1)$:
     $$
         \pi(\theta) = 1 \propto \theta^{1-1} (1-\theta)^{1-1}
     $$
-* **Posterior:** We multiply the prior by the likelihood:
+- **Posterior:** We multiply the prior by the likelihood:
     $$
         \begin{align*}
             \pi(\theta | X) &\propto \pi(\theta) f(X | \theta) \\\\
@@ -128,7 +128,7 @@ $$
 $$
 
 > **Proof: Laplace Approximation of the Posterior**
-> 
+>
 > Start with Bayes' Theorem in proportional form:
 > $$
 >     \pi(\theta | X) \propto \pi(\theta) L_n(\theta)

@@ -3,17 +3,17 @@ title: Phonology
 date: 2025-05-22/27
 ---
 
-# Phonology
+## Phonology
 
 The study of the structures and patterns of speech sounds, at a more abstract level than phonetics.
 
 ---
 
-## Phones, Phonemes, Allophones
+### Phones, Phonemes, Allophones
 
 ---
 
-### Phone
+#### Phone
 
 Basic unit of speech sound, concrete, what we hear. (Correspond to individual IPA symbols)
 
@@ -23,40 +23,40 @@ Basic unit of speech sound, concrete, what we hear. (Correspond to individual IP
 
 ---
 
-### Phoneme
+#### Phoneme
 Phoneme is the smallest contrastive unit.
 
 ---
 
-#### Checking for minimal pairs
+##### Checking for minimal pairs
 - A minimal pair is word tuple where everything is identical except for a single sound.
 
 Word pair where everything is identical except for a sound is called a minimal pair.
 
 ---
 
-##### Contrastive distribution
+###### Contrastive distribution
 There is a minimal pair, that two phones can occur in the same phonological context.
 
 ---
 
-##### Complementary distribution
+###### Complementary distribution
 If there are no minimal pairs, it is *not* contrastive. That is a complementary distribution, meaning these two are used in different phonological contexts.
 
 ---
 
-##### Free Variation
+###### Free Variation
 Can occur in the same context, but do *not* result in a contrast in meaning.
 
 ---
 
-### Allophones
+#### Allophones
 
 Two sounds are in complementary distribution that represent the same underlying sounds.
 
 ---
 
-#### Phonemes are not universal
+##### Phonemes are not universal
 Different ways to pronounce the phonemes are called allophones.
 Phonemes and their allophones are language-specific.
 
@@ -64,7 +64,7 @@ one phone can be an allophone of more than one phoneme (Sounds like some type of
 
 ---
 
-## Phonotactics
+### Phonotactics
 - How languages differ in their phonemic inventory.
 - Differ how they use phonemes.
 
@@ -72,7 +72,7 @@ How phonemes can be sequenced.
 
 ---
 
-### Syllables
+#### Syllables
 - Smallest prosodic unit in most languages.
 
 ```text
@@ -83,16 +83,16 @@ syllable
 |--onset
 ```
 
-#### Phonotactic constraints of English
+##### Phonotactic constraints of English
 
 ---
 
-### Sonority hierarchy
+#### Sonority hierarchy
 Sounds are ranked based on how 'loud' phones are.
 
 ---
 
-### Tests
+#### Tests
 - Look for minimal pairs
   - Y: are phonemes
   - N: Allophones for the same phoneme
@@ -154,15 +154,15 @@ A java style psuedocode for the process (this is added at Jun 14, after I felt t
 
 ---
 
-## Phonological Rules
+### Phonological Rules
 
 ---
 
-### Examples
+#### Examples
 
 ---
 
-#### Flapping rule
+##### Flapping rule
 ```text
 /t/ -> [r] | 'V_V
 /t/ -> [t] | *elsewhere
@@ -170,7 +170,7 @@ A java style psuedocode for the process (this is added at Jun 14, after I felt t
 
 ---
 
-#### Aspiration
+##### Aspiration
 ```text
 /t/ -> [t^h] | _.'
 /t/ -> [t] | elsewhere*
@@ -180,7 +180,7 @@ A java style psuedocode for the process (this is added at Jun 14, after I felt t
 
 ---
 
-### Natural classes
+#### Natural classes
 Groups of phones that can be defined by some phonetic similarity.
 
 |              | **Obstruent** | **Sonorant** | **Noncontinuant** | **Continuant** | **Sibilant** |
@@ -193,7 +193,7 @@ Groups of phones that can be defined by some phonetic similarity.
 
 ---
 
-#### Feature specifications (based on the manner of articulation)
+##### Feature specifications (based on the manner of articulation)
 To determine the minimal distinguishing feature between two sounds.
 - Continuants vs. Noncontinuants
 - Obstruents vs. Sonorants
@@ -201,7 +201,7 @@ To determine the minimal distinguishing feature between two sounds.
 
 ---
 
-## Phonological Rules
+### Phonological Rules
 
 Humans have the tendency to increase the place of articulation.
 

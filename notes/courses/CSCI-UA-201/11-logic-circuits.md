@@ -21,11 +21,11 @@ This recitation develops digital logic from the physics of transistors up throug
 A transistor is an electrically controlled switch. For CMOS logic:
 
 - N-type transistor:
-  - Gate = 0 -> switch OFF.
-  - Gate = 1 -> switch ON (connects output to ground).
+  - Gate = 0 → switch OFF.
+  - Gate = 1 → switch ON (connects output to ground).
 - P-type transistor:
-  - Gate = 0 -> switch ON (connects output to $V_{dd}$).
-  - Gate = 1 -> switch OFF.
+  - Gate = 0 → switch ON (connects output to $V_{dd}$).
+  - Gate = 1 → switch OFF.
 
 ### Building a NOT gate (inverter)
 
@@ -38,9 +38,9 @@ Configuration:
 Operation:
 
 - Input = 0:
-  - P-type ON, N-type OFF -> output is connected to $V_{dd}$ (logic 1).
+  - P-type ON, N-type OFF → output is connected to $V_{dd}$ (logic 1).
 - Input = 1:
-  - P-type OFF, N-type ON -> output is connected to ground (logic 0).
+  - P-type OFF, N-type ON → output is connected to ground (logic 0).
 
 Key idea: the output is always strongly driven to 0 or 1 (never floating).
 
@@ -228,8 +228,8 @@ $$
 Design trick:
 
 - Insert an XOR gate on each bit of $B$, controlled by a mode signal $M$:
-  - $M = 0$ -> $B$ passes through (addition).
-  - $M = 1$ -> $\lnot B$ (subtraction).
+  - $M = 0$ → $B$ passes through (addition).
+  - $M = 1$ → $\lnot B$ (subtraction).
 - Feed $M$ as the initial $\text{Cin}$ into the least significant full adder.
 
 Then the same N-bit adder can perform:

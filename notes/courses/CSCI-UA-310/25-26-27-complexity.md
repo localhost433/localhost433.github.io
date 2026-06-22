@@ -30,9 +30,9 @@ We focus on **decision problems**: problems whose answer is "yes" or "no."
 
 **Examples**:
 
-* **MST**: Given graph $G$, weights $w$, and integer $k$: is the MST of $G$ of weight $\leq k$?
-* **Halting**: Given program $P$ and input $x$: does $P(x)$ terminate?
-* **Wang Tiling**: Given a set of colored tile types, can they tile the infinite 2D plane such that adjacent tiles share the same color on touching sides?
+- **MST**: Given graph $G$, weights $w$, and integer $k$: is the MST of $G$ of weight $\leq k$?
+- **Halting**: Given program $P$ and input $x$: does $P(x)$ terminate?
+- **Wang Tiling**: Given a set of colored tile types, can they tile the infinite 2D plane such that adjacent tiles share the same color on touching sides?
 
 ---
 
@@ -40,13 +40,13 @@ We focus on **decision problems**: problems whose answer is "yes" or "no."
 
 **Notation**:
 
-* $\langle P \rangle$ = the source code of program $P$ (in some fixed language).
-* $P(x)$ = running program $P$ on input $x$.
+- $\langle P \rangle$ = the source code of program $P$ (in some fixed language).
+- $P(x)$ = running program $P$ on input $x$.
 
 **Definition**: An algorithm $A$ **solves** problem $\Pi$ if for all inputs:
 
-* If the answer is "yes," $A$ outputs "yes" and terminates.
-* If the answer is "no," $A$ outputs "no" and terminates.
+- If the answer is "yes," $A$ outputs "yes" and terminates.
+- If the answer is "no," $A$ outputs "no" and terminates.
 
 **Definition**: A problem $\Pi$ is **decidable** (computable) if there exists an algorithm that solves it.
 
@@ -97,8 +97,8 @@ Therefore $A^{\text{Halt}}$ cannot exist. $\square$
 
 **Program Equality**:
 
-* **Input**: Two programs $\langle A \rangle$ and $\langle B \rangle$.
-* **Goal**: Decide if $A(x) = B(x)$ for all strings $x$.
+- **Input**: Two programs $\langle A \rangle$ and $\langle B \rangle$.
+- **Goal**: Decide if $A(x) = B(x)$ for all strings $x$.
 
 **Claim**: Program Equality is not computable.
 
@@ -132,11 +132,11 @@ More precisely: any semantic property of programs (one that cannot be determined
 
 **Examples of undecidable problems**:
 
-* Does program $P$ output "yes" on input $x$?
-* Does program $P$ halt on all inputs?
-* Do programs $A$ and $B$ compute the same function? (Program Equality above)
-* Wang Tiling (shown to be equivalent to a halting problem).
-* Deciding if a theorem in first-order logic is true.
+- Does program $P$ output "yes" on input $x$?
+- Does program $P$ halt on all inputs?
+- Do programs $A$ and $B$ compute the same function? (Program Equality above)
+- Wang Tiling (shown to be equivalent to a halting problem).
+- Deciding if a theorem in first-order logic is true.
 
 **TL;DR**: There are some problems that no algorithm can solve. Most natural computational problems are decidable, but a surprisingly rich class — especially those that reason about program behavior — are not.
 
@@ -213,9 +213,9 @@ Thus: if there's a poly-time algorithm for VC, there's one for IS (and vice vers
 
 **Formal Definition**: $L \in$ **NP** if there exists a polynomial-time **verifier** $V$ such that:
 
-* For every $x \in L$: there exists a **witness** $w$ with $V(x, w) = \text{"yes"}$.
-* For every $x \notin L$: for all $w$: $V(x, w) = \text{"no"}$.
-* $V$ runs in polynomial time in $|x|$.
+- For every $x \in L$: there exists a **witness** $w$ with $V(x, w) = \text{"yes"}$.
+- For every $x \notin L$: for all $w$: $V(x, w) = \text{"no"}$.
+- $V$ runs in polynomial time in $|x|$.
 
 **Alternative**: NP = problems solvable by a non-deterministic polynomial-time algorithm (one allowed to "guess" the witness).
 
@@ -223,11 +223,11 @@ Thus: if there's a poly-time algorithm for VC, there's one for IS (and vice vers
 
 **Examples in NP**:
 
-* VC: witness = the $k$ vertices.
-* IS: witness = the $k$ independent vertices.
-* Clique: witness = the $k$-clique vertices.
-* 3SAT: witness = the satisfying assignment.
-* Subset Sum, Hamiltonian Cycle, ...
+- VC: witness = the $k$ vertices.
+- IS: witness = the $k$ independent vertices.
+- Clique: witness = the $k$-clique vertices.
+- 3SAT: witness = the satisfying assignment.
+- Subset Sum, Hamiltonian Cycle, ...
 
 **Note**: $P \subseteq NP$ (a poly-time algorithm is its own verifier).
 
@@ -247,7 +247,7 @@ This is the foundational result: 3SAT is the "hardest" problem in NP. Proved by 
 
 **Complexity landscape**:
 
-```
+```text
 Computable
 ┌────────────────────────────────────────────────────┐
 │  NP                                                │
@@ -268,14 +268,14 @@ Computable
 
 **If P $\neq$ NP** (widely believed):
 
-* There is no efficient algorithm for any NP-complete problem (3SAT, VC, IS, ...).
-* Cryptography (RSA, etc.) is secure.
+- There is no efficient algorithm for any NP-complete problem (3SAT, VC, IS, ...).
+- Cryptography (RSA, etc.) is secure.
 
 **If P $=$ NP**:
 
-* We can solve almost everything in polynomial time.
-* "Can verify $\Rightarrow$ can solve."
-* Modern cryptography would break down.
+- We can solve almost everything in polynomial time.
+- "Can verify $\Rightarrow$ can solve."
+- Modern cryptography would break down.
 
 The P vs. NP problem is one of the Millennium Prize Problems ($1 million prize for a solution).
 
@@ -342,10 +342,10 @@ Better hardware improves constants but does not change the asymptotic complexity
 
 Identify special cases that are in P:
 
-* 2SAT (2 literals per clause) $\in$ P.
-* Vertex Cover on trees $\in$ P.
-* Knapsack with small $W$: pseudopolynomial $O(nW)$ DP.
-* Clique on planar graphs $\in$ P.
+- 2SAT (2 literals per clause) $\in$ P.
+- Vertex Cover on trees $\in$ P.
+- Knapsack with small $W$: pseudopolynomial $O(nW)$ DP.
+- Clique on planar graphs $\in$ P.
 
 ### 14.3 Strategy 3: Heuristics
 
@@ -378,19 +378,19 @@ APPROX-VERTEX-COVER(G)
 
 ## Summary
 
-| Problem | Complexity | Notes |
-|---|---|---|
-| MST | P ($O(E \log V)$) | Exact solution |
-| APSP | P ($O(V^3)$) | Exact solution |
-| 3SAT | NP-complete | No poly-time algorithm known |
-| Vertex Cover | NP-complete | 2-approximation exists |
-| Independent Set | NP-complete | Hard to approximate |
-| Clique | NP-complete | Hard to approximate |
-| Halting | Undecidable | Not even computable |
+| Problem         | Complexity        | Notes                        |
+| --------------- | ----------------- | ---------------------------- |
+| MST             | P ($O(E \log V)$) | Exact solution               |
+| APSP            | P ($O(V^3)$)      | Exact solution               |
+| 3SAT            | NP-complete       | No poly-time algorithm known |
+| Vertex Cover    | NP-complete       | 2-approximation exists       |
+| Independent Set | NP-complete       | Hard to approximate          |
+| Clique          | NP-complete       | Hard to approximate          |
+| Halting         | Undecidable       | Not even computable          |
 
 ---
 
 ## References
 
-* **CLRS**: Chapter 34 — NP-Completeness; Chapter 35 — Approximation Algorithms.
-* Sipser, *Introduction to the Theory of Computation*, Chapters 4–5, 7.
+- **CLRS**: Chapter 34 — NP-Completeness; Chapter 35 — Approximation Algorithms.
+- Sipser, *Introduction to the Theory of Computation*, Chapters 4–5, 7.

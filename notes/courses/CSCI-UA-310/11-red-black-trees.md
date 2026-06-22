@@ -35,9 +35,9 @@ The **black-height** $\text{bh}(x)$ of a node $x$ is the number of black nodes o
 
 **Proof sketch**:
 
-* By Property 5, the subtree rooted at any node $x$ contains at least $2^{\text{bh}(x)} - 1$ internal nodes.
-* By Property 4, at least half the nodes on any root-to-leaf path are black, so $\text{bh}(\text{root}) \geq h/2$.
-* Therefore $n \geq 2^{h/2} - 1$, giving $h \leq 2\lg(n+1)$.
+- By Property 5, the subtree rooted at any node $x$ contains at least $2^{\text{bh}(x)} - 1$ internal nodes.
+- By Property 4, at least half the nodes on any root-to-leaf path are black, so $\text{bh}(\text{root}) \geq h/2$.
+- Therefore $n \geq 2^{h/2} - 1$, giving $h \leq 2\lg(n+1)$.
 
 **Consequence**: All BST operations (SEARCH, MINIMUM, MAXIMUM, SUCCESSOR, PREDECESSOR) run in $O(\log n)$ worst-case time.
 
@@ -90,17 +90,17 @@ Let $z$ be the newly inserted red node, $z.\text{parent}$ be red (violation of P
 
 **Case 1: Uncle $y$ is RED.**
 
-* Recolor: $z.\text{parent}$ and $y$ become BLACK; $z.\text{grandparent}$ becomes RED.
-* Move $z$ up to grandparent and continue.
+- Recolor: $z.\text{parent}$ and $y$ become BLACK; $z.\text{grandparent}$ becomes RED.
+- Move $z$ up to grandparent and continue.
 
 **Case 2: Uncle $y$ is BLACK, $z$ is a right child.**
 
-* Left-rotate on $z$'s parent to convert to Case 3.
+- Left-rotate on $z$'s parent to convert to Case 3.
 
 **Case 3: Uncle $y$ is BLACK, $z$ is a left child.**
 
-* Recolor $z$'s parent BLACK and $z$'s grandparent RED.
-* Right-rotate on $z$'s grandparent. Done.
+- Recolor $z$'s parent BLACK and $z$'s grandparent RED.
+- Right-rotate on $z$'s grandparent. Done.
 
 ```text
 RB-INSERT-FIXUP(T, z)
@@ -149,4 +149,4 @@ The key insight is that a "double-black" violation is introduced when a black no
 
 ## References
 
-* **CLRS**: Chapter 13 — Red-Black Trees.
+- **CLRS**: Chapter 13 — Red-Black Trees.

@@ -3,7 +3,7 @@ title: Names & Settlement History
 date: 2025-10-21
 ---
 
-# Toponyms & Settlement History
+## Toponyms & Settlement History
 
 **Key idea**  
 Place names (**toponyms**) encode the linguistic and settlement history of a region. By analyzing their structure and spatial distribution, we can infer **who** settled there and **when**.
@@ -20,7 +20,7 @@ Place names (**toponyms**) encode the linguistic and settlement history of a reg
 
 ---
 
-# Specifier + Generic Patterns
+## Specifier + Generic Patterns
 
 **Structure**
 - Many toponyms are of the form **[specifier + generic]**:
@@ -40,7 +40,7 @@ Place names (**toponyms**) encode the linguistic and settlement history of a reg
 
 ---
 
-# Layers of Settlement in Place Names (UK Example)
+## Layers of Settlement in Place Names (UK Example)
 
 **Idea**  
 In England, toponyms preserve **multiple settlement layers**:
@@ -59,7 +59,7 @@ In England, toponyms preserve **multiple settlement layers**:
 
 ---
 
-# Multilingual Toponyms within a Single Country
+## Multilingual Toponyms within a Single Country
 
 **Pattern**
 - Within one country, different regions may show different **place-name languages**:
@@ -67,12 +67,12 @@ In England, toponyms preserve **multiple settlement layers**:
 - When certain generics cluster in one area, they point to the **prior inhabitants’ language**.
 
 **Inference**
-- Spatial clustering of one language’s generics -> region was once dominated by that language group.
+- Spatial clustering of one language’s generics → region was once dominated by that language group.
 - Sudden changes/boundaries in place-name language can match **historical political or settlement boundaries**.
 
 ---
 
-# NYC & US Examples
+## NYC & US Examples
 
 **NYC area**
 - Many NYC-area names are from **Native American** languages:
@@ -87,14 +87,13 @@ In England, toponyms preserve **multiple settlement layers**:
   - County names, townships, and landmarks commemorating heroes, battles, presidents, etc.
 - Named maps can show **paths of settlement**, ethnic enclaves, and changing political priorities.
 
- 
-# Surnames as Parallel Evidence (pointer)
+## Surnames as Parallel Evidence (pointer)
 
 If you want a general framing of how surnames can function as historical evidence (and how they complement toponyms), see [Names Around the World](https://robinc.vercel.app/note.html?course=LING-UA-2&note=07-world).
 
 ---
 
-# Takeaways
+## Takeaways
 
 - Place names are **linguistic fossils**: they preserve traces of past languages, peoples, and power.
 - The combination of **specifier + generic**, their **languages**, and their **geographic clustering** gives evidence for:

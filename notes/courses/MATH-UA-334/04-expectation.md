@@ -15,12 +15,12 @@ Once we know the distribution of a random variable (RV), it is often useful to c
 
 The expected value $\E[X]$ is the probability-weighted average of the possible values of $X$.
 
-* **Discrete Case:**
+- **Discrete Case:**
     If $X$ has PMF $p(x)$:
     $$\E[X] = \sum_{x} x \cdot p(x)$$
     (Provided $\sum |x|p(x) < \infty$, otherwise undefined).
 
-* **Continuous Case:**
+- **Continuous Case:**
     If $X$ has PDF $f(x)$:
     $$\E[X] = \int_{-\infty}^{+\infty} x \cdot f(x) dx$$
     (Provided $\int |x|f(x) dx < \infty$).
@@ -92,21 +92,21 @@ $$
 
 1. **Non-negative:** $\Var{X} \ge 0$.
 2. **Scaling:** $\Var{aX + b} = a^2 \Var{X}$.
-    * Adding a constant ($b$) shifts the distribution but does not change the spread.
-    * Multiplying by $a$ scales the spread by $|a|$, so variance scales by $a^2$.
+    - Adding a constant ($b$) shifts the distribution but does not change the spread.
+    - Multiplying by $a$ scales the spread by $|a|$, so variance scales by $a^2$.
 3. **Sum of Independent RVs:** If $X$ and $Y$ are independent:
     $$\Var{X + Y} = \Var{X} + \Var{Y}$$
 
 ### 3.4 Examples
 
 1. **Bernoulli($p$):**
-    * $\E[X] = p$.
-    * $\E[X^2] = 1^2 \cdot p + 0^2 \cdot (1-p) = p$.
-    * $\Var{X} = p - p^2 = p(1-p)$.
+    - $\E[X] = p$.
+    - $\E[X^2] = 1^2 \cdot p + 0^2 \cdot (1-p) = p$.
+    - $\Var{X} = p - p^2 = p(1-p)$.
 
 2. **Normal($\mu, \sigma^2$):**
-    * Calculation of $\Var{X}$ involves integration by parts or recognizing the second moment of the standard normal is 1.
-    * Result: $\Var{X} = \sigma^2$.
+    - Calculation of $\Var{X}$ involves integration by parts or recognizing the second moment of the standard normal is 1.
+    - Result: $\Var{X} = \sigma^2$.
 
 ---
 

@@ -44,11 +44,11 @@ PARTITION(A, p, r)
 
 **Mechanics**:
 
-* The pivot $x = A[r]$ is chosen as the last element.
-* The index $i$ marks the boundary between "small elements" and "large elements".
-* As $j$ scans, if we find a small element ($A[j] \le x$), we move the boundary $i$ forward and swap $A[i]$ into the small region.
-* Finally, the pivot is placed between the two regions.
-* **Time Complexity**: $\Theta(n)$ for a subarray of size $n$.
+- The pivot $x = A[r]$ is chosen as the last element.
+- The index $i$ marks the boundary between "small elements" and "large elements".
+- As $j$ scans, if we find a small element ($A[j] \le x$), we move the boundary $i$ forward and swap $A[i]$ into the small region.
+- Finally, the pivot is placed between the two regions.
+- **Time Complexity**: $\Theta(n)$ for a subarray of size $n$.
 
 ---
 
@@ -60,24 +60,24 @@ The running time of QuickSort depends on whether the partitioning is balanced.
 
 The worst case occurs when the partitioning routine produces one subproblem with $n-1$ elements and one with 0 elements.
 
-* This happens if the array is already sorted or reverse sorted (assuming pivot is last element).
-* Recurrence: $T(n) = T(n-1) + \Theta(n)$.
-* Summation: $\Theta(n^2)$.
-* This is no better than Insertion Sort!
+- This happens if the array is already sorted or reverse sorted (assuming pivot is last element).
+- Recurrence: $T(n) = T(n-1) + \Theta(n)$.
+- Summation: $\Theta(n^2)$.
+- This is no better than Insertion Sort!
 
 ### 3.2 Best-Case Analysis
 
 The pivot partitions the array into two even halves of size $n/2$.
 
-* Recurrence: $T(n) = 2T(n/2) + \Theta(n)$.
-* Solution: $\Theta(n \log n)$.
+- Recurrence: $T(n) = 2T(n/2) + \Theta(n)$.
+- Solution: $\Theta(n \log n)$.
 
 ### 3.3 Average Case
 
 Even a 9-to-1 split yields $\Theta(\log n)$ depth.
 
-* The tree height becomes $\Theta(\log n)$, which is still $\Theta(\log n)$.
-* Therefore, the average running time is $\Theta(n \log n)$.
+- The tree height becomes $\Theta(\log n)$, which is still $\Theta(\log n)$.
+- Therefore, the average running time is $\Theta(n \log n)$.
 
 ---
 
@@ -90,12 +90,12 @@ Instead of always picking $A[r]$ as the pivot, we pick a random index $i$ from $
 
 **Result**:
 
-* The running time is independent of the input ordering.
-* The **expected** running time is $\Theta(n \log n)$.
-* The probability of hitting the $\Theta(n^2)$ worst case is vanishingly small.
+- The running time is independent of the input ordering.
+- The **expected** running time is $\Theta(n \log n)$.
+- The probability of hitting the $\Theta(n^2)$ worst case is vanishingly small.
 
 ---
 
 ## References
 
-* **CLRS**: Chapter 7: "Quicksort".
+- **CLRS**: Chapter 7: "Quicksort".

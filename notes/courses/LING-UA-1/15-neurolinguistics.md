@@ -3,15 +3,15 @@ title: Neurolinguistics
 date: 2025-06-17
 ---
 
-# Neurolinguistics
+## Neurolinguistics
 
 ---
 
-## What is Newrolinguistics?
+### What is Newrolinguistics?
 
 ---
 
-### Intro
+#### Intro
 Uncovering the **neural bases of language**. Specifically, what parts of the brain are responsible for performing specific **linguistic computations** on **mental representations**?
 - What the brain does?
 - Where it does it?
@@ -21,7 +21,7 @@ To identify a brain region that supports(correspond) to a type of linguistic pro
 
 ---
 
-### Human brain - crash course
+#### Human brain - crash course
 Parts:
 - **Brain stem**
 - **Cerebellum**
@@ -45,11 +45,11 @@ Parts:
 
 ---
 
-## Aphasia and the origin of neurolinguistics
+### Aphasia and the origin of neurolinguistics
 
 ---
 
-### How to study language before neuroimaging?
+#### How to study language before neuroimaging?
 Study impaired language, as different types of **apahsias**. Aphasia arises from brain damage of some sort, common causes include:
 - Stroke
 - Traumatic brain injuries
@@ -65,7 +65,7 @@ Rationale is known as the **deficit-lesion method**.
 
 ---
 
-### Broca's aphasia
+#### Broca's aphasia
 Paul Broca and the patient "Tan" (1861)
 - His conclusion: **Broca's area** responsible for language production.
 - Found the patient actually have had more extensive damage later on. (so that might not be it?)
@@ -77,7 +77,7 @@ Characteristics of Broca's aphasia:
 
 ---
 
-### Fluent (Wernicke's) aphasia
+#### Fluent (Wernicke's) aphasia
 Carl Wernicke's subsequent discovery (1874)
 - damage to left temporal and parietal areas as **Wernicke's area**
 - no consensus about the exact location of this area, term isn't really used
@@ -90,7 +90,7 @@ Characteristics of Fluent (Wernicke's) aphasia:
 
 ---
 
-### How much can we learn from aphasias?
+#### How much can we learn from aphasias?
 Get an idea of *where* and *how* language is organized in the brain by comparing behavior and lesion sites. Many disadvantages of relying on apasia studies:
 - Inter-individual variability, no patients are identical, and very difficult to replicate.
 - Lot of reorganization can happen during recovery.
@@ -98,11 +98,11 @@ Get an idea of *where* and *how* language is organized in the brain by comparing
 
 ---
 
-## Modern neuroimaging techniques
+### Modern neuroimaging techniques
 
 ---
 
-### Overview of modern neuroimaging techniques
+#### Overview of modern neuroimaging techniques
 To investigate *what* the brain does, *where* it does it, and *when* it does it.
 - **Structural imagining** (measuring the structure of the brain)
 - **Functional imagining** (measuring an aspect of brain function)
@@ -111,37 +111,37 @@ To investigate *what* the brain does, *where* it does it, and *when* it does it.
 
 ---
 
-### Hemodynamic techniques (PET & fMRI)
+#### Hemodynamic techniques (PET & fMRI)
 Measure *blood*, a dependent measure of neural activity
 - PET: Positron Emission Tomography
 - fMRI: Functional Magnetic Resonance Imagining
 
 Premise:
 
-Increase in neuronal activity -> Increase in metabolic demand for glucose and oxygen -> Increase in cerebral blood flow to the activated region
+Increase in neuronal activity → Increase in metabolic demand for glucose and oxygen → Increase in cerebral blood flow to the activated region
 
 *Measures the work of the brain after it has happened.*
 Hemodynamic techniques have *excellent spatial resolution* but *bad temporal resolution*.
 
 ---
 
-### Electrophysiological techniques (EEG & MEG)
+#### Electrophysiological techniques (EEG & MEG)
 Measure actual electrical activity of neurons
 - EEG: Electroencephalography
 - MEG: Magnetoencephalography
 
-Neurons use electricity to communicate with each other -> Neuronal networks fire in synchrony -> the correlates of this combined electrical activity can be measured
+Neurons use electricity to communicate with each other → Neuronal networks fire in synchrony → the correlates of this combined electrical activity can be measured
 
 *Measures the work of the brain as it is happening.*
 Electrophysiology techniques have *~bad spatial resolution* but *excellent temporal resolution*.
 
 ---
 
-## Some classic and modern findings (Case Studies)
+### Some classic and modern findings (Case Studies)
 
 ---
 
-### Phonemes in the brain
+#### Phonemes in the brain
 Phillips et al. (2000)
 
 *Does auditory cortex have access to phonemic categories? And when is phonemic category information accessed?*
@@ -157,7 +157,7 @@ Conclusion:
 
 ---
 
-### Semantics and syntax in the brain
+#### Semantics and syntax in the brain
 Finding evidence for high-level processes? (higher than phonemes)
 
 So called **violation studies** use EEG has investigated brain responses to when languages goes awry.
@@ -172,7 +172,7 @@ The brain gets surprised by semantically and syntactically anomalous stimuli.
 
 ---
 
-### Putting two words together
+#### Putting two words together
 Combining two lexical items involves at least three processes
 - Syntactic composition
 - Logico-semantic composition (properties combine to to form set of entities)
@@ -190,9 +190,8 @@ Approach:
   - To account for the visual presence of two words
   - Task varied for composition and list stimuli to avoid composition in list stimuli
 
-Results: 
+Results:
 - difference from two-word composition and one-word composition.
 
 Conclusion:
 - The combination of minimal stimuli reflects **conceptual combination**-not syntactic nor semantic.
-

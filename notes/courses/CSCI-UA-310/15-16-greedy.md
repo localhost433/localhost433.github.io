@@ -22,8 +22,8 @@ date: 2026-03-23/25
 
 Both exploit **optimal substructure**. The difference:
 
-* **DP**: Considers all choices (filling a table of subproblems).
-* **Greedy**: Makes one locally optimal choice and never looks back.
+- **DP**: Considers all choices (filling a table of subproblems).
+- **Greedy**: Makes one locally optimal choice and never looks back.
 
 A greedy algorithm is correct when the **greedy choice property** holds: a globally optimal solution can always be reached by making the locally greedy choice first.
 
@@ -66,8 +66,8 @@ Let $A = \{a_1, a_2, \dots, a_k\}$ (greedy solution, sorted by finish time) and 
 
 **Key Lemma**: For each $i = 1, \dots, k$: $f(a_i) \leq f(o_i)$.
 
-* Base: Greedy picks the activity with the smallest finish time overall, so $f(a_1) \leq f(o_1)$.
-* Inductive step: Since $f(a_i) \leq f(o_i) \leq s(o_{i+1})$, activity $o_{i+1}$ is also compatible with $a_i$. The greedy algorithm could have picked something with finish time $\leq f(o_{i+1})$, so $f(a_{i+1}) \leq f(o_{i+1})$.
+- Base: Greedy picks the activity with the smallest finish time overall, so $f(a_1) \leq f(o_1)$.
+- Inductive step: Since $f(a_i) \leq f(o_i) \leq s(o_{i+1})$, activity $o_{i+1}$ is also compatible with $a_i$. The greedy algorithm could have picked something with finish time $\leq f(o_{i+1})$, so $f(a_{i+1}) \leq f(o_{i+1})$.
 
 Since the greedy finishes no later than optimal at each step, if $O$ has $m$ activities, the greedy can always extend to at least $m$ activities, so $k \geq m$. Hence $k = m$.
 
@@ -151,8 +151,8 @@ Sort jobs by start time. Maintain a set of machines. For each job, assign it to 
 
 **Goal**: Assign a binary codeword to each character such that:
 
-* The code is **prefix-free** (no codeword is a prefix of another).
-* The **total encoding length** $\sum_{c \in C} f_c \cdot d_T(c)$ is minimized, where $d_T(c)$ is the depth of $c$ in the code tree $T$.
+- The code is **prefix-free** (no codeword is a prefix of another).
+- The **total encoding length** $\sum_{c \in C} f_c \cdot d_T(c)$ is minimized, where $d_T(c)$ is the depth of $c$ in the code tree $T$.
 
 **Prefix-free codes** are represented by binary trees where characters are leaves.
 
@@ -220,4 +220,4 @@ Let $T$ be an optimal code tree for $C$, and suppose $x$ and $y$ are sibling lea
 
 ## References
 
-* **CLRS**: Chapter 16 — Greedy Algorithms (Sections 16.1–16.3).
+- **CLRS**: Chapter 16 — Greedy Algorithms (Sections 16.1–16.3).

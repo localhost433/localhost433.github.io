@@ -1,19 +1,19 @@
 ---
-title: Syntax
+title: Sociolinguistics
 date: 2025-06-23/24/25
 ---
 
-# Sociolinguistics
+## Sociolinguistics
 
-## Language Variation
-
----
-
-### What is language variation
+### Language Variation
 
 ---
 
-#### Terminology
+#### What is language variation
+
+---
+
+##### Terminology
 - **Lect**: A variety of a language
 - **Idiolect**: the variety of a language spoken by a single individual
 - **Dialect**: the variety of a language shared by a geographical area
@@ -25,7 +25,7 @@ date: 2025-06-23/24/25
 
 ---
 
-#### Not two speakers speak the same way
+##### Not two speakers speak the same way
 Speakers can vary across:
 - Lexicon
 - Grammatical Rules (phonetic/phonological, morphological, semantic, syntactic)
@@ -44,14 +44,14 @@ Also Microsocial categories, such as locally specific social variables.
 
 ---
 
-#### Shared Norms
+##### Shared Norms
 - Across a given group, tend to be a shared set of linguistic and social norms.
 - Everyone speaks a different **variety** of a language (and many people use several varieties across different contexts).
 - Some variety emerges as the **"standard" variety** in a given context.
 
 ---
 
-#### Standard vs. "Non-Standard"
+##### Standard vs. "Non-Standard"
 A "standard" variety:
 - Associated with the dominant social/political group (*elite*)
 - Is used in formal settings
@@ -67,7 +67,7 @@ A "non-standard" variety:
 
 ---
 
-#### "Covert" vs. "Overt" Prestige
+##### "Covert" vs. "Overt" Prestige
 Covert Prestige
 - Hidden or community-based recognition
 - Linked to non-standard varieties and local identities
@@ -80,7 +80,7 @@ Overt prestige
 
 ---
 
-#### How is the "Standard" Established
+##### How is the "Standard" Established
 - A standard variety is determined by social, economic, historical etc. factors, not because any linguistic features
 - A given linguistic feature is never inherently “standard” / “non-standard
 - Social context dynamically assigns perceptions of “standardness” or “non-standardness” to certain features
@@ -88,7 +88,7 @@ Overt prestige
 
 ---
 
-#### Standard is arbitrary
+##### Standard is arbitrary
 - Standard British English, SBE (aka. Received pronounciation, RP) omits /ɹ/ when not followed by a vowel, and RP is considered "standard".
 - But in US, dialects that does this is considered "non-standard" (e.g., Boston English)
 - What considered a "standard" dialect has a social basis, not a linguistic one.
@@ -98,11 +98,11 @@ Overt prestige
 
 ---
 
-### Analyzing the Variation
+#### Analyzing the Variation
 
 ---
 
-#### Varieties are *systematic* in their differences
+##### Varieties are *systematic* in their differences
 - linguists investigate these differences by looking at linguistic variables
 - Variables can be:
   - Phonetic/Phonological
@@ -114,14 +114,14 @@ Overt prestige
 
 ---
 
-#### Terminology
+##### Terminology
 **Variable**:= The thing that varies
 **Variants**:= The possible realizations of the thing that varies
 **Envelope of variation**:= The (linguistic) environements in which the variation can occur
 
 ---
 
-#### Example: Phonological Variation
+##### Example: Phonological Variation
 - Standard American English (SAE) vs. some varieties of Southern English
   - /ɑ͡ɪ/ monophthongization
     - Variable: Vowel /ɑ͡ɪ/
@@ -134,7 +134,7 @@ Overt prestige
 
 ---
 
-#### Example: Lexical variation
+##### Example: Lexical variation
 - Standard American English (SAE) vs. Standard British English (SBE)
   - SAE *elevator* vs. SBE *lift*
     - Variable: The word meaning ‘that thing that takes you between floors'
@@ -150,7 +150,7 @@ Overt prestige
 
 ---
 
-#### Example: Syntactic Variation
+##### Example: Syntactic Variation
 - Appalachian English vs. SAE
   - Double Modals
     - Variable: Modal Constructions
@@ -158,12 +158,12 @@ Overt prestige
     - Envelope of variation: Anywhere you can use a modal.
   - Double Objects
     - Variable: Object Constructions
-    - Variants: *‘a fish*’ vs. ‘*me a fish*’ etc. -> ‘OBJ’ vs. ‘OBJ + OBJ'
+    - Variants: *‘a fish*’ vs. ‘*me a fish*’ etc. → ‘OBJ’ vs. ‘OBJ + OBJ'
     - Envelope of variation: After transitive verbs
 
 ---
 
-#### Example: Morphological Variation
+##### Example: Morphological Variation
 - Appalachian English vs. SAE
   - a-prefixing
     - Variable: a-prefixing
@@ -172,7 +172,7 @@ Overt prestige
 
 ---
 
-#### Example: Pragmatic Variation
+##### Example: Pragmatic Variation
 - Southern American English vs. SAE
   - Yes ma’am/sir
     - Variable: Terms of Address
@@ -181,16 +181,16 @@ Overt prestige
 
 ---
 
-### Case Studies
+#### Case Studies
 Linguistic Profiling - Purnell et al., 1999
 
 ---
 
-#### African American English
+##### African American English
 
 ---
 
-##### Terminology
+###### Terminology
 - African American English (AAE)
 - African American Vernacular English (AAVE)
 - African American Language (AAL)
@@ -198,7 +198,7 @@ Linguistic Profiling - Purnell et al., 1999
 
 ---
 
-##### What is AAE?
+###### What is AAE?
 Dialect spoken by a large population of Americans of African descent
 But
 - Not all African Americans speak AAE
@@ -207,7 +207,7 @@ But
 
 ---
 
-##### Where does AAE come from
+###### Where does AAE come from
 Two main hypotheses about the origins of AAE:
 - Anglicist hypotheses: AAE developed from features of various British English dialects (specifically those from the British Isles)
 - Creolist hypotheses: AAE devekoped from the extended contact between English and various West African languages (e.g., Yoruba)
@@ -216,14 +216,13 @@ Most linguists today adopt a creolist hypothesis.
 
 ---
 
-##### Phonological Features
+###### Phonological Features
 - “Th”-stopping: in certain environments where SAE uses /ð/, AAE uses /d/
 - Consonant Cluster Simplification/Reduction
 
-
 ---
 
-##### Morphological Features
+###### Morphological Features
 - Possessives
   - SAE forms possessives by adding the suffix -s to the possessor
   - AAE does not require this morpheme on the possessor
@@ -233,7 +232,7 @@ Most linguists today adopt a creolist hypothesis.
 
 ---
 
-##### Syntactic Features
+###### Syntactic Features
 - Negative Concord (common cross linguistically)
 - Copula Dropping
 - Habitual be
@@ -241,11 +240,11 @@ Most linguists today adopt a creolist hypothesis.
 
 ---
 
-#### Chicano English
+##### Chicano English
 
 ---
 
-##### What is Chicano English(ChE)?
+###### What is Chicano English(ChE)?
 Dialect spoken by many Mexican Americans in California and the Southwestern region of the US
 - Many ChE speakers (and AAE speakers) are bidialectal, which means they use both ChE and SAE depending on the context
   - Code-switching
@@ -254,25 +253,25 @@ Dialect spoken by many Mexican Americans in California and the Southwestern regi
 
 ---
 
-##### Phonological Features
+###### Phonological Features
 - Word-final /z/ devoicing: Where SAE uses [z], ChE uses [s]
 - Less vowel reduction than SAE
 - Like AAE, ChE simplifies/reduces word-final consonant cluster
 
 ---
 
-##### Syntactic Features
+###### Syntactic Features
 - Negative Concord
 
 ---
 
-##### Semantic Features
-- *barely* -> 'just'
-- *borrow* -> 'lend'
+###### Semantic Features
+- *barely* → 'just'
+- *borrow* → 'lend'
 
 ---
 
-##### How broad is this term?
+###### How broad is this term?
 - Norteño/a, Sureño/a
 - Latino/a English
 - Latinx English
@@ -282,11 +281,11 @@ Dialect spoken by many Mexican Americans in California and the Southwestern regi
 
 ---
 
-##### How to Tame a Wild Tongue (1987)
+###### How to Tame a Wild Tongue (1987)
 
 ---
 
-### Languages in Context
+#### Languages in Context
 **Pidgins & Creoles**
 
 Rule-governed with simplified grammatical system and lexicons
@@ -298,11 +297,11 @@ Pidginization and Creolization
 
 ---
 
-### Linguistic Discrimination in Education
+#### Linguistic Discrimination in Education
 
 ---
 
-#### The Ebonics Controversy (Oakland, 1996)
+##### The Ebonics Controversy (Oakland, 1996)
 Children who speak a dialect of English other than SAE, may be at a disadvantage in school (where SAE tends to be the Language Of Instruction, and also the Object Of Instruction)
 - One approach is to discourage students from speaking AAE/ChE/etc. and to present SAE as superior
   - This has been criticized as damaging and impractical, and it does not lead to improved learning outcomes
@@ -312,40 +311,40 @@ Children who speak a dialect of English other than SAE, may be at a disadvantage
 
 ---
 
-## Language and Style
+### Language and Style
 
 ---
 
-### Foundational notions
+#### Foundational notions
 Two dimensions of variation in langugage:
-1. <cyan>**Inter-speaker**</cyan> = variation that patterns by user  
-2. <red>**Intra-speaker**</red> = variation that patterns by use  
-   - <orange>**Style**</orange>  
+1. <cyan>**Inter-speaker**</cyan> = variation that patterns by user
+2. <red>**Intra-speaker**</red> = variation that patterns by use
+   - <orange>**Style**</orange>
      - <purple>**Register**</purple>: language associated with a particular occupational or social group; may contain <green>**jargon**</green>
        - <blue>**genre**</blue>: register with a conventional structure
 
 ---
 
-### Register
+#### Register
 e.g., legalese
 e.g., sports announcer play-by-play commentar
-    <cyan>Bases loaded</cyan>, <purple>swing and a miss</purple>. <red>One and one</red>. 
+    <cyan>Bases loaded</cyan>, <purple>swing and a miss</purple>. <red>One and one</red>.
 e.g., meeting royalty
     Address Queen as <purple>Your Majesty</purple>, other royals as <red>Your Royal Highness</red>
 
 ---
 
-### Foundational Notions
+#### Foundational Notions
 There are no single style speakers:
 everyone engages in **style-shifting**
 
 ---
 
-### Style as Attention Paid to Speech
+#### Style as Attention Paid to Speech
 
 ---
 
-#### Style-shifting by task & context of speech
+##### Style-shifting by task & context of speech
 
 Some Methodologies:
 - Sociolinguistic Interview
@@ -357,7 +356,7 @@ Some Methodologies:
 
 ---
 
-##### Labov’s NYC Department Store Study
+###### Labov’s NYC Department Store Study
 William Labov - University of Pennsylvania
 
 Some Key Results:
@@ -367,7 +366,7 @@ Some Key Results:
 
 ---
 
-#### Findings
+##### Findings
 
 The <red>more closely</red> speakers monitor their speech, the more they shift into <cyan>formal styles</cyan>, characterized as speech that resembles that of <purple>high-prestige social groups</purple>.
 
@@ -386,43 +385,43 @@ Variants' usage can shift over time:
 
 ---
 
-#### Limitations of the Attention-Paid-to-Speech Model
+##### Limitations of the Attention-Paid-to-Speech Model
 - "Attention" is difficult to define & quantify
 - Speecific to sociolinguistic interview tasks
   - How do we think about reframing this model when dealing with more naturalistic speech contexts?
 
 ---
 
-### Style as Audience Design
+#### Style as Audience Design
 Speakers design their speech <red>toward their audience</red>.
 
 ---
 
-#### Accommodation
+##### Accommodation
 - Convergence
 - Divergence
 
-Task effects -> Audience effects
+Task effects → Audience effects
 
 ---
 
-#### Bell's Style Axiom
+##### Bell's Style Axiom
 Allan Bell - Auckland University of Technology
 
 “Variation on the style dimension within the speech of a single speaker derives from and echoes the variation which exists between speakers on the ‘social’ dimension." (Bell 1984)
 
 ---
 
-#### Hypercorrection
+##### Hypercorrection
 
 ---
 
-### Style as Speaker Design
+#### Style as Speaker Design
 Speakers adjust their speech <red>agentively</red>, selecting variants depending on their <cyan>social associations</cyan>, to express different <purple>attitudes</purple>, different aspects of their <orange>identities</orange>, etc.
 
 ---
 
-#### Jocks & Burnouts
+##### Jocks & Burnouts
 Penny Eckert - Stanford University
 
 Eckert’s research site:
@@ -437,32 +436,32 @@ What affects students’ language at Belten High?
 
 ---
 
-#### Pop Music
+##### Pop Music
 Identities are not *stable*
 
 ---
 
-#### Lifespan Change
+##### Lifespan Change
 
 ---
 
-#### Anwar
+##### Anwar
 
 ---
 
-## Language, Power, 
+### Language, Power,
 
 ---
 
-### Language and (Generative) AI
+#### Language and (Generative) AI
 
 ---
 
-#### Implicit vs. Explicit Bias
+##### Implicit vs. Explicit Bias
 
 Bias against different languages
 
-### Language and Government
+#### Language and Government
 
 1. Language in the Courtroom
 Language equity
@@ -472,4 +471,3 @@ Language in
 shibboleth, 'archaic' but here, the word used that align with certain groups
 
 Discursive Frames, Narrative Expectations
-

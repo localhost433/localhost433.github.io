@@ -77,11 +77,11 @@ Properties:
 > **Example (Gambler’s dice game).**  
 > You start with $6$ dollars. At each step:
 >
-> - Pay $1$ dollar to play.  
+> - Pay $1$ dollar to play.
 > - Roll a fair die:
->   - If you roll a $6$, you win $6$ dollars.  
->   - Otherwise, you win nothing.  
-> - You must stop once your money hits $0$.  
+>   - If you roll a $6$, you win $6$ dollars.
+>   - Otherwise, you win nothing.
+> - You must stop once your money hits $0$.
 >
 > Let $X_n$ be the amount of money you have after the $n$-th play. Then $(X_n)_{n\ge 0}$ is a Markov chain with state space $\{0,1,2,\dots\}$.
 >

@@ -238,10 +238,10 @@ We heavily rely on **Cross-Validation**, a highly rigorous resampling technique 
 
 1. **Split:** Randomly partition the original dataset into $K$ roughly equal-sized, mutually exclusive subsets (folds).
 2. **Iterate:** For each specific fold $k = 1, \dots, K$:
-    * Designate fold $k$ as the strict **validation set**.
-    * Aggressively merge the remaining $K-1$ folds to form the **training set**.
-    * Fit the specific model (e.g., LASSO with a fixed $\lambda$) exclusively on the training set.
-    * Evaluate the model's predictive performance (e.g., compute the Mean Squared Error) exclusively on the unseen validation set $k$.
+    - Designate fold $k$ as the strict **validation set**.
+    - Aggressively merge the remaining $K-1$ folds to form the **training set**.
+    - Fit the specific model (e.g., LASSO with a fixed $\lambda$) exclusively on the training set.
+    - Evaluate the model's predictive performance (e.g., compute the Mean Squared Error) exclusively on the unseen validation set $k$.
 3. **Aggregate:** Calculate the final cross-validation score by strictly averaging the validation performance across all $K$ iterations.
 4. **Select:** Repeat this entire procedure for various candidate values of $\lambda$ and definitively select the $\lambda$ that rigorously yields the absolute best average validation performance.
 

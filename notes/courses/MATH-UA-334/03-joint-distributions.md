@@ -50,17 +50,17 @@ $$\mathbb{P}((X, Y) \in A) = \iint_A f_{X,Y}(x, y) \, dx \, dy$$
 
 ### 3.1 Marginals and Conditionals (Continuous)
 
-* **Marginal PDF of X:**
+- **Marginal PDF of X:**
     $$f_X(x) = \int_{-\infty}^{\infty} f_{X,Y}(x, y) \, dy$$
-* **Conditional PDF of X given Y=y:**
+- **Conditional PDF of X given Y=y:**
     $$f_{X|Y}(x|y) = \frac{f_{X,Y}(x, y)}{f_Y(y)}$$
 
 ### 3.2 Independence
 
 Random variables $X$ and $Y$ are **independent** if and only if their joint distribution factors into the product of their marginals.
 
-* **Discrete:** $p_{X,Y}(x, y) = p_X(x) p_Y(y)$ for all $x, y$.
-* **Continuous:** $f_{X,Y}(x, y) = f_X(x) f_Y(y)$ for all $x, y$.
+- **Discrete:** $p_{X,Y}(x, y) = p_X(x) p_Y(y)$ for all $x, y$.
+- **Continuous:** $f_{X,Y}(x, y) = f_X(x) f_Y(y)$ for all $x, y$.
 
 ---
 
@@ -85,12 +85,12 @@ $$f_{U,V}(u, v) = f_{X,Y}(x(u,v), y(u,v)) \cdot \frac{1}{|J(x,y)|}$$
 
 Let $U = X + Y$. To use the method, we introduce a dummy variable $V = Y$.
 
-* **Transformation:** $u = x+y, v = y$.
-* **Inverse:** $x = u-v, y = v$.
-* **Jacobian:** $$J = \frac{\partial(u,v)}{\partial(x,y)} = \det \begin{bmatrix} 1 & 1 \\\\ 0 & 1 \end{bmatrix} = 1$$
-* **Density of (U,V):**
+- **Transformation:** $u = x+y, v = y$.
+- **Inverse:** $x = u-v, y = v$.
+- **Jacobian:** $$J = \frac{\partial(u,v)}{\partial(x,y)} = \det \begin{bmatrix} 1 & 1 \\\\ 0 & 1 \end{bmatrix} = 1$$
+- **Density of (U,V):**
     $$f_{U,V}(u, v) = f_{X,Y}(u-v, v) \cdot 1$$
-* **Marginal of U (Convolution Formula):**
+- **Marginal of U (Convolution Formula):**
     $$f_U(u) = \int_{-\infty}^{\infty} f_{X,Y}(u-v, v) \, dv$$
     If $X, Y$ are independent: $f_U(u) = \int f_X(u-v) f_Y(v) \, dv$.
 
@@ -100,9 +100,9 @@ Let $(X, Y)$ be independent standard normals, i.e., $f_{X,Y}(x,y) = \frac{1}{2\p
 Transform to polar coordinates $(R, \theta)$:
 $$X = R \cos \theta, \quad Y = R \sin \theta$$
 
-* The Jacobian of the transformation from $(R, \theta)$ to $(X, Y)$ is $r$.
-* $f_{R, \theta}(r, \theta) = f_{X,Y}(r\cos\theta, r\sin\theta) \cdot r$
-* $f_{R, \theta}(r, \theta) = \frac{1}{2\pi} e^{-r^2/2} \cdot r$ for $r \ge 0, \theta \in [0, 2\pi)$.
+- The Jacobian of the transformation from $(R, \theta)$ to $(X, Y)$ is $r$.
+- $f_{R, \theta}(r, \theta) = f_{X,Y}(r\cos\theta, r\sin\theta) \cdot r$
+- $f_{R, \theta}(r, \theta) = \frac{1}{2\pi} e^{-r^2/2} \cdot r$ for $r \ge 0, \theta \in [0, 2\pi)$.
 
 This implies $R$ and $\theta$ are independent, with $\theta \sim \text{Unif}[0, 2\pi]$ and $R$ following a Rayleigh distribution.
 

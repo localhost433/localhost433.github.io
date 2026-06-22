@@ -3,9 +3,9 @@ title: Foreign Place Name Pronunciation
 date: 2025-11-04
 ---
 
-# Foreign Place Name Pronunciation
+## Foreign Place Name Pronunciation
 
-## Overview
+### Overview
 
 Topics:
 - How **politics and ideology** influence pronunciations of foreign place names.
@@ -14,7 +14,7 @@ Topics:
 
 ---
 
-## Political and ideological influences
+### Political and ideological influences
 
 - Foreign place names like **Iran, Iraq, Pakistan, Afghanistan, Chile** can have:
   - Multiple **competing pronunciations** in English.
@@ -34,9 +34,9 @@ The central idea:
 
 ---
 
-## Case study: “Iraq” in US politics
+### Case study: “Iraq” in US politics
 
-### Hall-Lew et al. (2010)
+#### Hall-Lew et al. (2010)
 
 - Study of **US Congress members’** pronunciations of *Iraq*.
 - Main findings:
@@ -49,7 +49,7 @@ Interpretation:
   - Listeners can hear subtle cues about **political affiliation**.
   - Pronunciation of foreign place names becomes part of **political style**.
 
-### A fuller picture
+#### A fuller picture
 
 - Follow-up work (e.g. Jaggers 2018) suggests:
   - Variation also interacts with **region**, **age**, and **media norms**.
@@ -57,7 +57,7 @@ Interpretation:
 
 ---
 
-## Bilingualism and local norms
+### Bilingualism and local norms
 
 - Foreign place-name pronunciation is shaped by **who is speaking** and **for whom**:
 
@@ -81,7 +81,7 @@ Interpretation:
 
 ---
 
-## Broader patterns
+### Broader patterns
 
 - Place names can carry **symbolic weight**:
   - How a public figure pronounces a name may be interpreted as:
@@ -89,14 +89,14 @@ Interpretation:
     - Cosmopolitan vs. provincial,
     - Aligned with particular **political camps**.
 - Over time, repeated exposure to a particular variant in:
-  - **News broadcasts**,  
-  - **Government briefings**,  
+  - **News broadcasts**,
+  - **Government briefings**,
   - **Entertainment media**,  
   helps entrench that variant as the **default** for many speakers.
 
 ---
 
-## Takeaways
+### Takeaways
 
 - Pronunciations of foreign place names are **not neutral**:
   - They index **identity**, **ideology**, and **group membership**.

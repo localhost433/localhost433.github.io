@@ -23,9 +23,9 @@ These lectures introduce **hash tables**, the primary data structure for impleme
 
 We want a data structure supporting:
 
-* `INSERT(S, x)`: Insert element $x$ into set $S$.
-* `DELETE(S, x)`: Remove element $x$ from set $S$.
-* `SEARCH(S, k)`: Find element with key $k$ in $S$.
+- `INSERT(S, x)`: Insert element $x$ into set $S$.
+- `DELETE(S, x)`: Remove element $x$ from set $S$.
+- `SEARCH(S, k)`: Find element with key $k$ in $S$.
 
 **Goal**: All three operations in $O(1)$ expected time.
 
@@ -65,7 +65,7 @@ A good hash function satisfies the **simple uniform hashing assumption**: each k
 
 **Chaining** resolves collisions by placing all elements that hash to the same slot into a **linked list**.
 
-* Slot $j$ contains a pointer to the head of the list of all elements with $h(k) = j$.
+- Slot $j$ contains a pointer to the head of the list of all elements with $h(k) = j$.
 
 ### 4.1 Pseudocode
 
@@ -135,17 +135,17 @@ HASH-SEARCH(T, k)
 
 **Linear Probing**: $h(k, i) = (h'(k) + i) \bmod m$.
 
-* Simple but causes **primary clustering**: long runs of occupied slots form and grow.
+- Simple but causes **primary clustering**: long runs of occupied slots form and grow.
 
 **Quadratic Probing**: $h(k, i) = (h'(k) + c_1 i + c_2 i^2) \bmod m$.
 
-* Reduces primary clustering but causes **secondary clustering**: two keys with the same $h'(k)$ have identical probe sequences.
+- Reduces primary clustering but causes **secondary clustering**: two keys with the same $h'(k)$ have identical probe sequences.
 
 **Double Hashing**: $h(k, i) = (h_1(k) + i \cdot h_2(k)) \bmod m$.
 
-* Uses two independent hash functions.
-* Gives $\Theta(m^2)$ distinct probe sequences; approximates uniform hashing well.
-* Requirement: $h_2(k)$ must be coprime to $m$ for all $k$ (e.g., choose $m$ prime).
+- Uses two independent hash functions.
+- Gives $\Theta(m^2)$ distinct probe sequences; approximates uniform hashing well.
+- Requirement: $h_2(k)$ must be coprime to $m$ for all $k$ (e.g., choose $m$ prime).
 
 ---
 
@@ -155,8 +155,8 @@ Assume **uniform hashing**: each key is equally likely to have any of the $m!$ p
 
 **Theorem**: Under uniform hashing with load factor $\alpha = n/m < 1$:
 
-* Expected number of probes in an **unsuccessful search**: $\leq \dfrac{1}{1 - \alpha}$.
-* Expected number of probes in a **successful search**: $\leq \dfrac{1}{\alpha} \ln \dfrac{1}{1-\alpha}$.
+- Expected number of probes in an **unsuccessful search**: $\leq \dfrac{1}{1 - \alpha}$.
+- Expected number of probes in a **successful search**: $\leq \dfrac{1}{\alpha} \ln \dfrac{1}{1-\alpha}$.
 
 **Implication**: For $\alpha$ bounded away from 1, operations take $O(1)$ expected time. As $\alpha \to 1$, performance degrades sharply.
 
@@ -191,4 +191,4 @@ The family $\mathcal{H} = \{ h_{a,b} : a \in \{1,\dots,p-1\}, b \in \{0,\dots,p-
 
 ## References
 
-* **CLRS**: Chapter 11 — Hash Tables (Sections 11.1–11.5).
+- **CLRS**: Chapter 11 — Hash Tables (Sections 11.1–11.5).

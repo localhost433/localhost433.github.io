@@ -134,9 +134,9 @@ The function $e^{-t^2/2}$ is the characteristic function of $\mathcal{N}(0,1)$. 
 
 Let $X_i \sim \text{Unif}[0, 1]$. We want $\mathbb{P}(\sum_{i=1}^{20} X_i \le 10)$.
 
-* $\mu = 1/2$, $\sigma^2 = 1/12$.
-* $S_{20} \approx \sim \mathcal{N}(20 \cdot 0.5, 20 \cdot \frac{1}{12}) = \sim \mathcal{N}(10, \frac{5}{3})$.
-* Standardize and compute using the Standard Normal table.
+- $\mu = 1/2$, $\sigma^2 = 1/12$.
+- $S_{20} \approx \sim \mathcal{N}(20 \cdot 0.5, 20 \cdot \frac{1}{12}) = \sim \mathcal{N}(10, \frac{5}{3})$.
+- Standardize and compute using the Standard Normal table.
 
 ---
 

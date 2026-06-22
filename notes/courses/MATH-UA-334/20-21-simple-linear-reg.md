@@ -22,9 +22,9 @@ $$
 
 To operationalize this, we must guess the structural "shape" of the function $f$. This is known as parametric modeling. By visually inspecting a scatter plot of our data, we might propose various functional forms:
 
-* **Linear:** $f(x) = \beta\_0 + \beta\_1 x$
-* **Polynomial:** $f(x) = \sum\_{k=0}^d a\_k x^k$
-* **Exponential:** $f(x) = C\_0 e^{C\_1 x}$
+- **Linear:** $f(x) = \beta\_0 + \beta\_1 x$
+- **Polynomial:** $f(x) = \sum\_{k=0}^d a\_k x^k$
+- **Exponential:** $f(x) = C\_0 e^{C\_1 x}$
 
 For this lecture, we will focus exclusively on the **Simple Linear Regression** model, where the relationship between the predictor and the response is assumed to be a straight line.
 
@@ -81,9 +81,9 @@ $$
 $$
 Where:
 
-* $x\_i$ are strictly fixed, deterministic constants (not random variables).
-* $\beta\_0, \beta\_1$ are the true, unknown population parameters.
-* $e\_i$ are independent and identically distributed (i.i.d.) random error terms.
+- $x\_i$ are strictly fixed, deterministic constants (not random variables).
+- $\beta\_0, \beta\_1$ are the true, unknown population parameters.
+- $e\_i$ are independent and identically distributed (i.i.d.) random error terms.
 
 **Error Assumptions:**
 
@@ -218,9 +218,9 @@ $$
     \text{SST} = \text{RSS} + \text{Explained SS}
 $$
 
-* **Total Sum of Squares (SST):** $\sum\_{i=1}^n (y\_i - \bar{y})^2$ (The baseline variability of $y$).
-* **Residual Sum of Squares (RSS):** $\sum\_{i=1}^n \hat{e}\_i^2$ (The variability strictly left unexplained by the model).
-* **Explained Sum of Squares:** $\sum\_{i=1}^n (\hat{y}\_i - \bar{y})^2$ (The variability successfully explained by the regression line).
+- **Total Sum of Squares (SST):** $\sum\_{i=1}^n (y\_i - \bar{y})^2$ (The baseline variability of $y$).
+- **Residual Sum of Squares (RSS):** $\sum\_{i=1}^n \hat{e}\_i^2$ (The variability strictly left unexplained by the model).
+- **Explained Sum of Squares:** $\sum\_{i=1}^n (\hat{y}\_i - \bar{y})^2$ (The variability successfully explained by the regression line).
 
 The **Coefficient of Determination**, heavily denoted as $R^2$, represents the strict proportion of the total variance in $y$ that is predictably explained by $x$:
 $$
@@ -236,8 +236,8 @@ As we transition toward Multiple Linear Regression involving multiple predictors
 
 A random vector $Z = (Z\_1, \dots, Z\_n)^T$ is simply a column vector where each element is a distinct random variable.
 
-* **Expectation:** $\E[Z]$ is the vector of individual expectations.
-* **Covariance Matrix:** The covariance matrix $\Sigma\_{ZZ}$ is an $n \times n$ matrix capturing all pairwise covariances:
+- **Expectation:** $\E[Z]$ is the vector of individual expectations.
+- **Covariance Matrix:** The covariance matrix $\Sigma\_{ZZ}$ is an $n \times n$ matrix capturing all pairwise covariances:
     $$
         (\Sigma\_{ZZ})\_{ij} = \text{Cov}(Z\_i, Z\_j)
     $$

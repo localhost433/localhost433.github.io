@@ -28,9 +28,9 @@ and $\delta(s, v) = \infty$ if no path exists.
 
 **Shortest-path properties**:
 
-* **Optimal substructure**: Any subpath of a shortest path is itself a shortest path.
-* **Triangle inequality**: $\delta(s, v) \leq \delta(s, u) + w(u, v)$ for all edges $(u,v)$.
-* **No negative cycles**: If a negative cycle is reachable from $s$, shortest paths are undefined (can be made arbitrarily small).
+- **Optimal substructure**: Any subpath of a shortest path is itself a shortest path.
+- **Triangle inequality**: $\delta(s, v) \leq \delta(s, u) + w(u, v)$ for all edges $(u,v)$.
+- **No negative cycles**: If a negative cycle is reachable from $s$, shortest paths are undefined (can be made arbitrarily small).
 
 ---
 
@@ -59,9 +59,9 @@ RELAX(u, v, w)
 
 **Key properties**:
 
-* After `RELAX(u, v, w)`: $v.d \leq u.d + w(u,v)$.
-* If $u.d = \delta(s, u)$ at the time of relaxation, then afterwards $v.d \leq \delta(s, v)$.
-* $v.d$ never increases.
+- After `RELAX(u, v, w)`: $v.d \leq u.d + w(u,v)$.
+- If $u.d = \delta(s, u)$ at the time of relaxation, then afterwards $v.d \leq \delta(s, v)$.
+- $v.d$ never increases.
 
 ---
 
@@ -96,11 +96,11 @@ DIJKSTRA(G, w, s)
 
 The running time depends on the priority queue implementation:
 
-| Priority Queue | EXTRACT-MIN | DECREASE-KEY | Total |
-|---|---|---|---|
-| Array | $O(V)$ | $O(1)$ | $O(V^2 + E) = O(V^2)$ |
-| Binary heap | $O(\log V)$ | $O(\log V)$ | $O((V + E) \log V)$ |
-| Fibonacci heap | $O(\log V)$ amort. | $O(1)$ amort. | $O(V \log V + E)$ |
+| Priority Queue | EXTRACT-MIN        | DECREASE-KEY  | Total                 |
+| -------------- | ------------------ | ------------- | --------------------- |
+| Array          | $O(V)$             | $O(1)$        | $O(V^2 + E) = O(V^2)$ |
+| Binary heap    | $O(\log V)$        | $O(\log V)$   | $O((V + E) \log V)$   |
+| Fibonacci heap | $O(\log V)$ amort. | $O(1)$ amort. | $O(V \log V + E)$     |
 
 **With array**: Best for dense graphs ($E = \Theta(V^2)$). Total: $O(V^2)$.
 
@@ -116,12 +116,12 @@ $(s,a,10), (s,c,3), (a,b,1), (a,c,4), (b,d,7), (c,a,4), (c,b,8), (c,d,2), (d,b,5
 Initial: $s.d=0$, all others $\infty$.
 
 | Step | Extract | Distances after relaxation |
-|---|---|---|
-| 1 | $s$ | $a.d=10, c.d=3$ |
-| 2 | $c$ | $a.d=7, b.d=11, d.d=5$ |
-| 3 | $d$ | $b.d=10$ |
-| 4 | $a$ | $b.d=8$ |
-| 5 | $b$ | done |
+| ---- | ------- | -------------------------- |
+| 1    | $s$     | $a.d=10, c.d=3$            |
+| 2    | $c$     | $a.d=7, b.d=11, d.d=5$     |
+| 3    | $d$     | $b.d=10$                   |
+| 4    | $a$     | $b.d=8$                    |
+| 5    | $b$     | done                       |
 
 Final: $\delta(s,a)=7, \delta(s,b)=8, \delta(s,c)=3, \delta(s,d)=5$.
 
@@ -155,8 +155,8 @@ BELLMAN-FORD(G, w, s)
 
 **Proof by induction**:
 
-* After 0 iterations: $s.d = 0 = \delta_0(s,s)$ and $v.d = \infty$ for $v \neq s$. Correct (no 0-edge paths to others).
-* After $k$ iterations: Assume $v.d \leq \delta_{k-1}(s,v)$ for all $v$ after $k-1$ iterations. When we relax edge $(u,v)$: $v.d \leq u.d + w(u,v) \leq \delta_{k-1}(s,u) + w(u,v) = \delta_k(s,v)$.
+- After 0 iterations: $s.d = 0 = \delta_0(s,s)$ and $v.d = \infty$ for $v \neq s$. Correct (no 0-edge paths to others).
+- After $k$ iterations: Assume $v.d \leq \delta_{k-1}(s,v)$ for all $v$ after $k-1$ iterations. When we relax edge $(u,v)$: $v.d \leq u.d + w(u,v) \leq \delta_{k-1}(s,u) + w(u,v) = \delta_k(s,v)$.
 
 After $|V|-1$ iterations, since shortest simple paths use at most $|V|-1$ edges: $v.d = \delta(s,v)$ for all reachable $v$.
 
@@ -193,16 +193,16 @@ DAG-SHORTEST-PATHS(G, w, s)
 
 ## Summary: SSSP Algorithms
 
-| Algorithm | Weights | Time |
-|---|---|---|
-| Dijkstra (array) | Non-negative | $O(V^2)$ |
-| Dijkstra (binary heap) | Non-negative | $O((V+E) \log V)$ |
-| Dijkstra (Fibonacci heap) | Non-negative | $O(V \log V + E)$ |
-| Bellman-Ford | Any (no neg. cycles) | $O(VE)$ |
-| DAG Shortest Paths | Any (DAG) | $\Theta(V+E)$ |
+| Algorithm                 | Weights              | Time              |
+| ------------------------- | -------------------- | ----------------- |
+| Dijkstra (array)          | Non-negative         | $O(V^2)$          |
+| Dijkstra (binary heap)    | Non-negative         | $O((V+E) \log V)$ |
+| Dijkstra (Fibonacci heap) | Non-negative         | $O(V \log V + E)$ |
+| Bellman-Ford              | Any (no neg. cycles) | $O(VE)$           |
+| DAG Shortest Paths        | Any (DAG)            | $\Theta(V+E)$     |
 
 ---
 
 ## References
 
-* **CLRS**: Chapter 24 — Single-Source Shortest Paths (Sections 24.1–24.3).
+- **CLRS**: Chapter 24 — Single-Source Shortest Paths (Sections 24.1–24.3).

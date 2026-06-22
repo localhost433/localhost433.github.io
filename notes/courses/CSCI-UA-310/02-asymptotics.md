@@ -34,7 +34,7 @@ $O(g(n))$ is the set of functions that grow **no faster** than $g(n)$.
 **Definition**: $f(n) = O(g(n))$ if there exist positive constants $c$ and $n_0$ such that:
 $$0 \le f(n) \le c \cdot g(n) \quad \text{for all } n \ge n_0$$
 
-* *Usage*: Worst-case analysis. "The algorithm takes *at most* quadratic time."
+- *Usage*: Worst-case analysis. "The algorithm takes *at most* quadratic time."
 
 ### 2.2 Big-Omega Notation ($\Omega$) - The Lower Bound
 
@@ -43,7 +43,7 @@ $\Omega(g(n))$ is the set of functions that grow **at least as fast** as $g(n)$.
 **Definition**: $f(n) = \Omega(g(n))$ if there exist positive constants $c$ and $n_0$ such that:
 $$0 \le c \cdot g(n) \le f(n) \quad \text{for all } n \ge n_0$$
 
-* *Usage*: Best-case analysis or lower bounds on problems. "Sorting requires *at least* $n \log n$ time."
+- *Usage*: Best-case analysis or lower bounds on problems. "Sorting requires *at least* $n \log n$ time."
 
 ### 2.3 Big-Theta Notation ($\Theta$) - The Tight Bound
 
@@ -60,9 +60,9 @@ $$0 \le c_1 \cdot g(n) \le f(n) \le c_2 \cdot g(n) \quad \text{for all } n \ge n
 To determine the relationship between $f(n)$ and $g(n)$, we can often use limits.
 Calculate $L = \lim_{n \to \infty} \frac{f(n)}{g(n)}$.
 
-* If $L = 0$: $f(n)$ grows strictly slower than $g(n)$. ($f = O(g), f \ne \Theta(g)$).
-* If $0 < L < \infty$: $f(n)$ and $g(n)$ grow at the same rate. ($f = \Theta(g)$).
-* If $L = \infty$: $f(n)$ grows strictly faster than $g(n)$. ($f = \Omega(g), f \ne \Theta(g)$).
+- If $L = 0$: $f(n)$ grows strictly slower than $g(n)$. ($f = O(g), f \ne \Theta(g)$).
+- If $0 < L < \infty$: $f(n)$ and $g(n)$ grow at the same rate. ($f = \Theta(g)$).
+- If $L = \infty$: $f(n)$ grows strictly faster than $g(n)$. ($f = \Omega(g), f \ne \Theta(g)$).
 
 ### Example 1: Polynomials
 
@@ -98,4 +98,4 @@ Sorted from slowest to fastest:
 
 ## References
 
-* **CLRS**: Chapter 3: "Growth of Functions".
+- **CLRS**: Chapter 3: "Growth of Functions".
