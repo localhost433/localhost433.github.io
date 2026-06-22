@@ -3,14 +3,22 @@ const assert = require("node:assert/strict");
 const U = require("./artifact-utils.js");
 
 test("parseArtifactInfo: bare", () => {
-  assert.deepEqual(U.parseArtifactInfo("artifact"), { isArtifact: true, src: null });
+  assert.deepEqual(U.parseArtifactInfo("artifact"), { isArtifact: true, src: null, static: false });
 });
 test("parseArtifactInfo: leading/trailing space stays artifact", () => {
   assert.equal(U.parseArtifactInfo("artifact ").isArtifact, true);
 });
 test("parseArtifactInfo: unquoted src", () => {
   assert.deepEqual(U.parseArtifactInfo("artifact src=demos/quicksort.jsx"),
-    { isArtifact: true, src: "demos/quicksort.jsx" });
+    { isArtifact: true, src: "demos/quicksort.jsx", static: false });
+});
+test("parseArtifactInfo: static flag", () => {
+  const r = U.parseArtifactInfo("artifact src=demos/compile-pipeline.jsx static");
+  assert.equal(r.src, "demos/compile-pipeline.jsx");
+  assert.equal(r.static, true);
+});
+test("parseArtifactInfo: 'static' inside a filename is not the flag", () => {
+  assert.equal(U.parseArtifactInfo("artifact src=demos/static-layout.jsx").static, false);
 });
 test("parseArtifactInfo: quoted src with space", () => {
   assert.equal(U.parseArtifactInfo('artifact src="demos/a b.jsx"').src, "demos/a b.jsx");
