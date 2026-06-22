@@ -40,4 +40,11 @@
     "semester": "Fall 2025",
     "instructor": "Prof. McKenzie, Prof. Davidson"
   }
+  ,
+  {
+    "slug": "CSCI-UA-470",
+    "title": "Object-Oriented Programming (CSCI-UA 470)",
+    "semester": "Summer 2026",
+    "instructor": "Prof. Aljabbouli"
+  }
 ]

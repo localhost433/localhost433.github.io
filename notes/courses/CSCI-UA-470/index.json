@@ -1,0 +1,52 @@
+[
+    {
+        "slug": "01-foundations",
+        "title": "01 - C++ Foundations",
+        "date": "2026-05-18"
+    },
+    {
+        "slug": "02-pointers-memory",
+        "title": "02 - Pointers, References & Memory",
+        "date": "2026-05-18/20"
+    },
+    {
+        "slug": "03-classes-objects",
+        "title": "03 - Classes & Objects",
+        "date": "2026-05-20/27"
+    },
+    {
+        "slug": "04-resource-management",
+        "title": "04 - Copy, Operators & Resource Management",
+        "date": "2026-05-27/06-01"
+    },
+    {
+        "slug": "05-inheritance",
+        "title": "05 - Inheritance",
+        "date": "2026-06-03"
+    },
+    {
+        "slug": "06-polymorphism",
+        "title": "06 - Polymorphism & Virtual Functions",
+        "date": "2026-06-03/08"
+    },
+    {
+        "slug": "07-templates",
+        "title": "07 - Templates",
+        "date": "2026-06-10"
+    },
+    {
+        "slug": "08-cpp-vs-java",
+        "title": "08 - C++ vs. Java",
+        "date": "2026-06-10/15"
+    },
+    {
+        "slug": "09-polymorphism-design-java",
+        "title": "09 - Polymorphism & Abstract Classes",
+        "date": "2026-06-17"
+    },
+    {
+        "slug": "10-oop-pillars",
+        "title": "10 - OOP: The Four Pillars",
+        "date": "2026-06-17"
+    }
+]
