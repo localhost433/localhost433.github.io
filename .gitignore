@@ -23,6 +23,15 @@ Thumbs.db
 dist/
 build/
 
+# design-sync (claude.ai/design): staged scripts, generated bundle, machine state.
+# The durable inputs under .design-sync/ (config.json, NOTES.md, conventions.md,
+# previews/, overrides/) stay tracked.
+.ds-sync/
+ds-bundle/
+.design-sync/.cache/
+.design-sync/learnings/
+.design-sync/node_modules
+
 # Git files
 .git/
 .vercel
