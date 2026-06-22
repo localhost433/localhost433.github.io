@@ -1,3 +1,6 @@
+# ============================================================
+#  Dependencies & build
+# ============================================================
 # Node.js dependencies
 node_modules/
 npm-debug.log*
@@ -9,6 +12,13 @@ logs/
 *.log
 *.log.*
 
+# Build output
+dist/
+build/
+
+# ============================================================
+#  OS & editor files
+# ============================================================
 # OS generated files
 .DS_Store
 Thumbs.db
@@ -19,10 +29,16 @@ Thumbs.db
 *.swo
 *.bak
 
-# Build output
-dist/
-build/
+# ============================================================
+#  Git & deploy
+# ============================================================
+# Git files
+.git/
+.vercel
 
+# ============================================================
+#  Tooling
+# ============================================================
 # design-sync (claude.ai/design): staged scripts, generated bundle, machine state.
 # The durable inputs under .design-sync/ (config.json, NOTES.md, conventions.md,
 # previews/, overrides/) stay tracked.
@@ -32,9 +48,15 @@ ds-bundle/
 .design-sync/learnings/
 .design-sync/node_modules
 
-# Git files
-.git/
-.vercel
+# Working docs (handoffs, plans, specs)
+docs/
+
+# ============================================================
+#  Posts & media
+# ============================================================
+# Media files
+*.mov
+*.mp3
 
 # Forbidden post entries
 /posts/entries/004-*.md
@@ -45,10 +67,9 @@ ds-bundle/
 /posts/entries/018-*.md
 /posts/entries/019-*.md
 
-# Media files
-*.mov
-*.mp3
-
+# ============================================================
+#  Course notes (notes/courses/)
+# ============================================================
 # Forbidden course materials
 /notes/courses/*/*HW*
 /notes/courses/*/*Book*
@@ -62,6 +83,16 @@ ds-bundle/
 /notes/courses/*/*recitation*
 /notes/courses/*/*.pdf
 /notes/courses/*/*/assets
+# ...and the same source-material binaries at ANY depth — the single-level rules
+# above miss subfolders like presentations/ or fordlandia/, which is how the
+# course .pptx/.pdf slides slip in. Keep copyrighted materials out of the repo.
+/notes/courses/*/**/*.pdf
+/notes/courses/*/**/*.ppt
+/notes/courses/*/**/*.pptx
+/notes/courses/*/**/*.doc
+/notes/courses/*/**/*.docx
+/notes/courses/*/**/*.key
+/notes/courses/*/**/assets/
 
 # Hidden courses
 /notes/courses/FYSEM*
