@@ -3,9 +3,9 @@ title: Brand Names
 date: 2025-11-13/18
 ---
 
-# Brand Names
+## Brand Names
 
-## Overview
+### Overview
 
 These notes bring together two class sessions on how **brand names** work in natural language. We look at:
 
@@ -19,20 +19,20 @@ The main idea: brand naming is not random. Sound patterns, word structure, and m
 
 ---
 
-## Phonology and Brand Names
+### Phonology and Brand Names
 
-### Sound symbolism: basic idea
+#### Sound symbolism: basic idea
 
 - **Sound symbolism**: when a sound or sound pattern is perceived as directly linked to some meaning (e.g. size, sharpness, speed), rather than being completely arbitrary.
 - Earlier work on **sound symbolism in names** (for people, animals, etc.) suggested patterns like:
-  - High/front vowels (e.g. [i]) -> “small, light, sharp”.
-  - Low/back vowels (e.g. [ɑ]) -> “big, heavy, round”.
+  - High/front vowels (e.g. [i]) → “small, light, sharp”.
+  - Low/back vowels (e.g. [ɑ]) → “big, heavy, round”.
   - Certain consonants also pattern with “round vs. sharp” impressions.
 - Question: Do these patterns carry over to **brand names**, especially nonsense ones?
 
 ---
 
-### Klink (2000): phonetic symbolism in brand naming
+#### Klink (2000): phonetic symbolism in brand naming
 
 **Method**
 
@@ -60,7 +60,7 @@ The main idea: brand naming is not random. Sound patterns, word structure, and m
 
 ---
 
-### Yorkston & Menon (2004): ice cream names
+#### Yorkston & Menon (2004): ice cream names
 
 **Question**
 
@@ -82,21 +82,21 @@ The main idea: brand naming is not random. Sound patterns, word structure, and m
 
 ---
 
-### Lowrey & Shrum (2007): generalizing sound symbolism
+#### Lowrey & Shrum (2007): generalizing sound symbolism
 
 Yorkston & Menon studied one product and one vowel pair. Lowrey & Shrum tested:
 
 1. Whether vowel symbolism generalizes across **many products**.
 2. How people react to vowels reported as **“unpleasant”** (e.g. [ju]) vs. more “positive” vowels.
 
-#### Vowel contrasts
+##### Vowel contrasts
 
 - **Front vs. back** vowel pairs in nonsense names:
   - e.g. *gimmel/gommel*, *tiddip/toddip*, *pinner/ponner*.
 - **Positive vs. “unpleasant”** vowels:
   - e.g. *pawdex/pewdex*, *mawlad/mewlad* (contrast [ɑ] vs. [ju]).
 
-#### Experiment 1: multiple product types
+##### Experiment 1: multiple product types
 
 - Participants saw each name pair with a **product** and **attribute**, such as:
   - Two-seater convertible vs. SUV.
@@ -105,11 +105,11 @@ Yorkston & Menon studied one product and one vowel pair. Lowrey & Shrum tested:
 
 **Patterns**
 
-- Front vowels -> preferred for **smaller/faster/lighter/sharper** products.
-- Back vowels -> preferred for **larger/slower/heavier/richer** products.
+- Front vowels → preferred for **smaller/faster/lighter/sharper** products.
+- Back vowels → preferred for **larger/slower/heavier/richer** products.
 - “Positive” vowels (like [ɑ]) were consistently preferred over [ju]-words, across product types.
 
-#### Experiment 2: beers
+##### Experiment 2: beers
 
 - Same vowel contrasts, now used for **beer**:
   - One beer described as *cold, clean, crisp*.
@@ -128,7 +128,7 @@ Yorkston & Menon studied one product and one vowel pair. Lowrey & Shrum tested:
 
 ---
 
-### Unconventional spelling: vowelless brand names
+#### Unconventional spelling: vowelless brand names
 
 **Study idea**
 
@@ -164,7 +164,7 @@ Yorkston & Menon studied one product and one vowel pair. Lowrey & Shrum tested:
 
 ---
 
-### Pronounceability and perceived risk: Song & Schwartz (2009)
+#### Pronounceability and perceived risk: Song & Schwartz (2009)
 
 **Core idea**
 
@@ -172,18 +172,18 @@ Yorkston & Menon studied one product and one vowel pair. Lowrey & Shrum tested:
   - Safety vs. danger.
   - Dullness vs. adventurousness.
 
-#### Study 1: food additives
+##### Study 1: food additives
 
 - Participants rated food additives on harmfulness (1–7):
   - Easy names (e.g. *Magnalroxate*).
   - Hard names (e.g. *Hnegripitrom*).
 - Harder-to-pronounce names were judged **more harmful** on average.
 
-#### Study 2: amusement park rides
+##### Study 2: amusement park rides
 
 - Participants rated ride names along:
-  1. **Safety** (very safe -> very risky).
-  2. **Excitement** (very dull -> very adventurous).
+  1. **Safety** (very safe → very risky).
+  2. **Excitement** (very dull → very adventurous).
 
 - Easy vs. hard ride names:
   - Easy: *Chunta, Ohanzee, Tihkoosue*.
@@ -202,9 +202,9 @@ Yorkston & Menon studied one product and one vowel pair. Lowrey & Shrum tested:
 
 ---
 
-## Morphology in Brand Names
+### Morphology in Brand Names
 
-### Why morphology?
+#### Why morphology?
 
 - **Morphology**: the structure of words, and how they are built from smaller units (**morphemes**).
 - Brand names often combine morphemes to hint at:
@@ -216,7 +216,7 @@ Yorkston & Menon studied one product and one vowel pair. Lowrey & Shrum tested:
 
 ---
 
-### Blends
+#### Blends
 
 **Definition**
 
@@ -244,7 +244,7 @@ Yorkston & Menon studied one product and one vowel pair. Lowrey & Shrum tested:
 
 ---
 
-### Compounds
+#### Compounds
 
 **Definition**
 
@@ -268,7 +268,7 @@ Yorkston & Menon studied one product and one vowel pair. Lowrey & Shrum tested:
 
 ---
 
-### Affixation
+#### Affixation
 
 **Definition**
 
@@ -283,7 +283,7 @@ Yorkston & Menon studied one product and one vowel pair. Lowrey & Shrum tested:
 - Suffixes:
   - *Jell-O, Gatorade, Walmart, Kleenex* (compare *Windex, Pyrex*).
 
-#### “Techy” and online-sounding affixes
+##### “Techy” and online-sounding affixes
 
 - **i-**:
   - Dominated by Apple (*iPhone, iPad, iMac, iCloud*).
@@ -298,9 +298,9 @@ These patterns signal **tech**, **online services**, or **modernity**.
 
 ---
 
-## Meaning in Brand Names
+### Meaning in Brand Names
 
-### Connotation
+#### Connotation
 
 Brand names often carry **associations** beyond literal meaning.
 
@@ -322,7 +322,7 @@ Connotations help position brands in terms of **price, quality, lifestyle, and v
 
 ---
 
-### Metaphor
+#### Metaphor
 
 **Definition**
 
@@ -343,7 +343,7 @@ Connotations help position brands in terms of **price, quality, lifestyle, and v
   - *Nike* (Greek goddess of victory).
   - *Gap* (identity/generational gap, youth culture).
 - Automobiles:
-  - *Jaguar, Dodge Ram, Mustang* -> speed, strength, agility.
+  - *Jaguar, Dodge Ram, Mustang* → speed, strength, agility.
   - VW *Passat* (“trade wind”).
   - Subaru (Japanese name for the Pleiades star cluster).
   - Hyundai (“modernity” in Korean).
@@ -352,13 +352,13 @@ Metaphor lets brands **borrow cultural imagery** without directly describing the
 
 ---
 
-### Metonymy and genericization
+#### Metonymy and genericization
 
 **Definition**
 
 - **Metonymy**: using a related concept to stand for something else (e.g. “The White House” for the US presidency).
 
-**Brand -> generic product**
+**Brand → generic product**
 
 - Certain brand names become generic terms for the whole product category:
   - *Kleenex* (tissue).
@@ -379,9 +379,9 @@ Metaphor lets brands **borrow cultural imagery** without directly describing the
 
 ---
 
-## Language Change, Ethics, and Brand Renaming
+### Language Change, Ethics, and Brand Renaming
 
-### Changing norms and offensive names
+#### Changing norms and offensive names
 
 Social awareness of racism, sexism, and other discrimination has pushed many organizations to:
 
@@ -390,7 +390,7 @@ Social awareness of racism, sexism, and other discrimination has pushed many org
 
 ---
 
-### Sports team rebranding
+#### Sports team rebranding
 
 - Historical example:
   - Houston Astros were once the **Colt .45s** (gun imagery).
@@ -403,13 +403,13 @@ These cases show how **politics, activism, and public opinion** directly affect 
 
 ---
 
-### Food brands with racist imagery
+#### Food brands with racist imagery
 
 Several well-known US food brands rebranded in the early 2020s:
 
-- **Aunt Jemima** -> **Pearl Milling Company** (pancake syrup).
-- **Uncle Ben’s** -> **Ben’s Original** (rice).
-- **Eskimo Pie** -> **Edy’s Pie** (ice cream).
+- **Aunt Jemima** → **Pearl Milling Company** (pancake syrup).
+- **Uncle Ben’s** → **Ben’s Original** (rice).
+- **Eskimo Pie** → **Edy’s Pie** (ice cream).
 
 In each case:
 
@@ -418,7 +418,7 @@ In each case:
 
 ---
 
-### Case study: Darlie toothpaste
+#### Case study: Darlie toothpaste
 
 **History**
 
@@ -436,7 +436,7 @@ In each case:
 
 ---
 
-### Cross-linguistic taboos and local renaming
+#### Cross-linguistic taboos and local renaming
 
 Names that are harmless in one language can be offensive in another, forcing **market-specific name changes**:
 
@@ -453,9 +453,9 @@ Names that are harmless in one language can be offensive in another, forcing **m
 
 ---
 
-## Drug Naming Constraints
+### Drug Naming Constraints
 
-### Regulatory constraints (FDA and others)
+#### Regulatory constraints (FDA and others)
 
 Drug brand names must satisfy several conditions:
 
@@ -474,7 +474,7 @@ Drug brand names must satisfy several conditions:
 
 ---
 
-### Why all the X, Z, Q, and Y?
+#### Why all the X, Z, Q, and Y?
 
 - Drug names often contain letters like **X, Z, Q, Y** because:
   - They look and sound **high-tech** and “scientific”.
@@ -485,21 +485,21 @@ Drug brand names must satisfy several conditions:
 
 ---
 
-### Gendered and affective associations
+#### Gendered and affective associations
 
 - Some letters are perceived as more **“feminine”** in certain branding contexts:
   - Letters like **S, M, L** appear frequently in birth-control brands:
     - *Lutera, Lessina, Yasmin, Lybrel, Levora, Jolessa, Alesse*, etc.
 - Drug names often hint at desired emotional states or outcomes:
-  - **Lunesta** (sleep aid) -> evokes “luna” (moon, night).
-  - **Ambien** (sleep aid) -> often interpreted as suggesting waking up feeling good in the morning.
-  - **Allegra** (allergy medication) -> echoes “cheerful, lively, joyful”.
+  - **Lunesta** (sleep aid) → evokes “luna” (moon, night).
+  - **Ambien** (sleep aid) → often interpreted as suggesting waking up feeling good in the morning.
+  - **Allegra** (allergy medication) → echoes “cheerful, lively, joyful”.
 
 These associations are subtle but help make scientific names feel **approachable** and **positive**.
 
 ---
 
-## Big Picture Summary
+### Big Picture Summary
 
 1. **Phonology**
    - Vowel quality, consonant type, and pronounceability influence perceptions of:

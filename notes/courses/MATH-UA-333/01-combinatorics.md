@@ -10,7 +10,7 @@ $$
 n_1 \times n_2 \times \cdots \times n_k.
 $$
 
-When different cases must be considered separately, the addition principle says that if there are $m_1,\dots,m_\ell$ possibilities in each case, then the total number is $m_1 + \cdots + m_\ell$.  
+When different cases must be considered separately, the addition principle says that if there are $m_1,\dots,m_\ell$ possibilities in each case, then the total number is $m_1 + \cdots + m_\ell$.
 
 ## Permutations
 
@@ -25,7 +25,7 @@ $$
 $$
 
 called a **binomial coefficient**.
-> Example: from 30 students, the number of ways to choose 3 for a presentation is ${30 \choose 3}$.  
+> Example: from 30 students, the number of ways to choose 3 for a presentation is ${30 \choose 3}$.
 
 The binomial theorem expands $(a+b)^n$ as
 $$
@@ -41,7 +41,7 @@ $$
 \frac{n!}{n_1!n_2!\cdots n_r!}.
 $$
 
-For instance, arranging 30 students into ten presentation groups of three has ${30 \choose 3,3,\dots,3} = \tfrac{30!}{(3!)^{10}}$ possibilities.  
+For instance, arranging 30 students into ten presentation groups of three has ${30 \choose 3,3,\dots,3} = \tfrac{30!}{(3!)^{10}}$ possibilities.
 
 ## Multiset permutations
 

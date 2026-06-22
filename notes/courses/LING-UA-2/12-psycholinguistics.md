@@ -3,7 +3,7 @@ title: The Psycholinguistics of Naming
 date: 2025-11-20
 ---
 
-# Overview: Names vs Other Words
+## Overview: Names vs Other Words
 
 **Questions**
 - How do we **perceive** and **produce** names?
@@ -24,9 +24,9 @@ date: 2025-11-20
 
 ---
 
-# The Name-Letter Effect & Implicit Egotism
+## The Name-Letter Effect & Implicit Egotism
 
-## Name-letter effect (Nuttin 1985)
+### Name-letter effect (Nuttin 1985)
 
 **Observation**
 - People tend to rate letters that appear in **their own name** as more **attractive**.
@@ -36,7 +36,7 @@ date: 2025-11-20
 - Our own name is highly familiar and emotionally salient.
 - Positive feelings toward our self can “spill over” to the letters composing our name.
 
-## Implicit egotism (Simonsohn 2011 and others)
+### Implicit egotism (Simonsohn 2011 and others)
 
 **Idea**
 - We may subconsciously prefer:
@@ -51,9 +51,9 @@ date: 2025-11-20
 
 ---
 
-# Names and the Self: Perception & Attention
+## Names and the Self: Perception & Attention
 
-## Attitudinal tasks (Hodson & Olson 2005)
+### Attitudinal tasks (Hodson & Olson 2005)
 
 **Design**
 - Participants rate how much they like:
@@ -67,7 +67,7 @@ date: 2025-11-20
 - Small but systematic tendency to favor items that **match** one’s own initials.
 - Supports the idea that **self-related features** influence preferences.
 
-## Cocktail party effect
+### Cocktail party effect
 
 **Phenomenon**
 - In a noisy room, we can selectively attend to relevant speech.
@@ -80,7 +80,7 @@ date: 2025-11-20
 
 ---
 
-# Infants, Names & the Head-Turn Preference Paradigm
+## Infants, Names & the Head-Turn Preference Paradigm
 
 **Method**
 - Infants sit on a caregiver’s lap, facing a central light.
@@ -95,9 +95,9 @@ date: 2025-11-20
 
 ---
 
-# Names vs Other Nouns: Tip-of-the-Tongue (TOT) & Retrieval
+## Names vs Other Nouns: Tip-of-the-Tongue (TOT) & Retrieval
 
-## Tip-of-the-tongue (TOT) states
+### Tip-of-the-tongue (TOT) states
 
 **Definition**
 - A state in which:
@@ -116,16 +116,16 @@ date: 2025-11-20
   - Less embedded in a **network of meaning** (unlike *teacher*, *hammer*, etc.).
 - A missing link anywhere in the retrieval path can make the whole name unavailable.
 
-## Names vs labels
+### Names vs labels
 
 - Words can function as:
   - **Names** (rigid designators tied to a specific individual), or
   - **Labels** (category words with rich semantic networks).
-- Pure names rely more on a direct link from **concept -> arbitrary sound pattern**, which may be more fragile.
+- Pure names rely more on a direct link from **concept → arbitrary sound pattern**, which may be more fragile.
 
 ---
 
-# Summary
+## Summary
 
 - Names are processed both as **ordinary linguistic objects** and as **special self-related cues**.
 - Psycholinguistic evidence shows:

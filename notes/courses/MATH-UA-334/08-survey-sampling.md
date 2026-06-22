@@ -7,9 +7,9 @@ date: 2026-02-16
 
 In many real-world scenarios, we want to understand the properties of a large but finite population without observing every single individual. For example:
 
-* What is the average age of undergraduate students at a university?
-* What proportion of the population approves of a certain policy?
-* How many typographical errors exist in a printed textbook?
+- What is the average age of undergraduate students at a university?
+- What proportion of the population approves of a certain policy?
+- How many typographical errors exist in a printed textbook?
 
 In these cases, the population is **not** random; it is a fixed, deterministic set of values. However, because it is impractical to measure the entire population, we use randomness in our data collection process—called **sampling**—to estimate the population's properties.
 
@@ -35,8 +35,8 @@ To estimate $\mu$ and $\sigma^2$, we draw a sample of size $n$ (where typically 
 
 We construct **estimators** from our sample to guess the population parameters:
 
-* **Sample Mean:** $\overline{X}\_n = \frac{1}{n} \sum\_{i=1}^n X\_i$
-* **Sample Variance:** $S\_n^2 = \frac{1}{n-1} \sum\_{i=1}^n (X\_i - \overline{X}\_n)^2$
+- **Sample Mean:** $\overline{X}\_n = \frac{1}{n} \sum\_{i=1}^n X\_i$
+- **Sample Variance:** $S\_n^2 = \frac{1}{n-1} \sum\_{i=1}^n (X\_i - \overline{X}\_n)^2$
 
 By the Law of Large Numbers (LLN), as $n$ grows, our estimators will converge to the true parameters, such that $\overline{X}\_n \approx \mu$ and $S_n^2 \approx \sigma^2$. However, the exact statistical properties of these estimators depend heavily on *how* we draw our sample.
 
@@ -98,8 +98,8 @@ Under this scheme, $X_1, \dots, X_n$ are identically distributed (each has a $1/
 
 Because the marginal distributions are identical to the with-replacement case:
 
-* $\E[X\_i] = \mu$
-* $\Var{X\_i} = \sigma^2$
+- $\E[X\_i] = \mu$
+- $\Var{X\_i} = \sigma^2$
 
 The expectation of the sample mean is still unbiased:
 $$
@@ -136,9 +136,9 @@ $$
 
 The term $\left( 1 - \frac{n-1}{N-1} \right)$ is known as the **Finite Population Correction (FPC)**.
 
-* It shows that sampling without replacement always leads to a strictly lower variance than sampling with replacement.
-* If $n \ll N$, the FPC is approximately 1, and the variance is practically identical to the with-replacement case.
-* If $n = N$, the FPC becomes 0, indicating absolute certainty about the population mean.
+- It shows that sampling without replacement always leads to a strictly lower variance than sampling with replacement.
+- If $n \ll N$, the FPC is approximately 1, and the variance is practically identical to the with-replacement case.
+- If $n = N$, the FPC becomes 0, indicating absolute certainty about the population mean.
 
 ---
 

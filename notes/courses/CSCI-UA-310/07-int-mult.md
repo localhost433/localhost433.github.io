@@ -29,10 +29,10 @@ Typically, **Counting Sort** is used as the intermediate stable sort.
 
 ### 1.2 Analysis
 
-* We perform $d$ passes.
-* Each pass takes $O(n + k)$ time (where $k$ is the base, e.g., 10).
-* **Total Time**: $O(d(n + k))$.
-* If $d$ is constant and $k = O(n)$, Radix Sort runs in **linear time** $O(n)$.
+- We perform $d$ passes.
+- Each pass takes $O(n + k)$ time (where $k$ is the base, e.g., 10).
+- **Total Time**: $O(d(n + k))$.
+- If $d$ is constant and $k = O(n)$, Radix Sort runs in **linear time** $O(n)$.
 
 ### 1.3 Why LSD?
 
@@ -76,4 +76,4 @@ This is significantly faster than $\Theta(n^2)$ for large $n$.
 
 ## References
 
-* **CLRS**: Chapter 8 (Radix Sort), Chapter 4 (Divide and Conquer - Karatsuba).
+- **CLRS**: Chapter 8 (Radix Sort), Chapter 4 (Divide and Conquer - Karatsuba).

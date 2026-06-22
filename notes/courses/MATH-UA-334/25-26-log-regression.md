@@ -15,7 +15,7 @@ Up to this point, our regression models have explicitly assumed that the respons
 
 When the outcome is strictly binary, we say $Y\_i \in \{0, 1\}$.
 
-* **Examples:** Clicking an ad vs. not clicking; an image being a dog vs. a cat; a medical treatment succeeding vs. failing.
+- **Examples:** Clicking an ad vs. not clicking; an image being a dog vs. a cat; a medical treatment succeeding vs. failing.
 
 ### 1.1 The Failure of Ordinary Least Squares
 
@@ -35,9 +35,9 @@ $$
 
 **Properties of the Sigmoid Function:**
 
-* It is strictly bounded: $\lim\_{t \to -\infty} \sigma(t) = 0$ and $\lim\_{t \to \infty} \sigma(t) = 1$.
-* It is perfectly symmetric around the center: $\sigma(0) = 0.5$.
-* It is strictly increasing.
+- It is strictly bounded: $\lim\_{t \to -\infty} \sigma(t) = 0$ and $\lim\_{t \to \infty} \sigma(t) = 1$.
+- It is perfectly symmetric around the center: $\sigma(0) = 0.5$.
+- It is strictly increasing.
 
 We define the probabilistic model for Logistic Regression as:
 $$
@@ -98,8 +98,8 @@ Once we compute the optimal $\hat{\beta}$, we use it for physical prediction. Fo
 
 Because $\sigma(0) = 0.5$, the prediction rule simplifies strictly to evaluating the sign of the linear combination:
 
-* Predict $1$ if $x^T \hat{\beta} > 0$
-* Predict $0$ if $x^T \hat{\beta} < 0$
+- Predict $1$ if $x^T \hat{\beta} > 0$
+- Predict $0$ if $x^T \hat{\beta} < 0$
 
 The geometric **decision boundary** is therefore the exact mathematical hyperplane defined by $x^T \hat{\beta} = 0$.
 
@@ -107,8 +107,8 @@ The geometric **decision boundary** is therefore the exact mathematical hyperpla
 
 A profound theoretical failure occurs if the training data is **linearly separable**. Data is defined as linearly separable if there exists *any* vector $v \in \mathbb{R}^p$ such that a perfect hyperplane divides the classes:
 
-* $y\_i = 1 \implies x\_i^T v > 0$
-* $y\_i = 0 \implies x\_i^T v < 0$
+- $y\_i = 1 \implies x\_i^T v > 0$
+- $y\_i = 0 \implies x\_i^T v < 0$
 
 If such a vector exists, the maximum likelihood estimator literally fails to exist. The optimization algorithm will simply scale the magnitude of $v$ towards infinity ($c \cdot v$ as $c \to \infty$), attempting to push the probabilities to exactly $1$ and $0$, resulting in numerical overflow and divergent parameters. In modern machine learning, this is mitigated by imposing $L\_2$ regularization (Ridge penalty) on the logistic objective.
 
@@ -160,7 +160,7 @@ This powerful statistic enables us to calculate precise p-values and construct r
 
 The standard logistic model rigorously handles strictly binary outcomes. We now comprehensively generalize this framework to handle multi-class categorical outcomes, where the response variable $Y\_i \in \{0, 1, \dots, K-1\}$.
 
-* **Examples:** Classifying an image strictly into one of $K$ digit classes (0 through 9); predicting a patient's medical condition as 'healthy', 'mild', or 'severe'.
+- **Examples:** Classifying an image strictly into one of $K$ digit classes (0 through 9); predicting a patient's medical condition as 'healthy', 'mild', or 'severe'.
 
 ### 6.1 The Softmax Formulation
 

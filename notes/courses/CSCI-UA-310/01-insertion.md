@@ -46,9 +46,9 @@ INSERTION-SORT(A)
 
 ### 2.2 Mechanics
 
-* The index $j$ indicates the "current card" being inserted.
-* The subarray $A[1..j-1]$ constitutes the currently sorted hand.
-* The remaining subarray $A[j+1..n]$ corresponds to the pile of cards still on the table.
+- The index $j$ indicates the "current card" being inserted.
+- The subarray $A[1..j-1]$ constitutes the currently sorted hand.
+- The remaining subarray $A[j+1..n]$ corresponds to the pile of cards still on the table.
 
 ---
 
@@ -80,9 +80,9 @@ We analyze algorithms by predicting the resources they require, typically **comp
 
 We assume a generic one-processor, random-access machine (RAM) model. Instructions are executed one after another, with no concurrent operations.
 
-* Arithmetic, data movement, and control instructions take constant time.
-* Let $c_k$ be the cost of the $k$-th line of the pseudocode.
-* Let $t_j$ be the number of times the `while` loop test is executed for that value of $j$.
+- Arithmetic, data movement, and control instructions take constant time.
+- Let $c_k$ be the cost of the $k$-th line of the pseudocode.
+- Let $t_j$ be the number of times the `while` loop test is executed for that value of $j$.
 
 The running time $T(n)$ is the sum of running times for each statement executed.
 
@@ -90,28 +90,28 @@ The running time $T(n)$ is the sum of running times for each statement executed.
 
 The best case occurs when the array is **already sorted**.
 
-* For each $j$, $A[j] \le key$ immediately.
-* The `while` loop terminates after one check ($t_j = 1$).
-* The running time is a linear function of $n$:
+- For each $j$, $A[j] \le key$ immediately.
+- The `while` loop terminates after one check ($t_j = 1$).
+- The running time is a linear function of $n$:
 $$ T(n) = an + b = \Theta(n) $$
 
 ### 4.3 Worst-Case Analysis
 
 The worst case occurs when the array is **reverse sorted**.
 
-* We must compare `key` with every element in the sorted subarray $A[1..j-1]$.
-* $t_j = j$ for $j = 2,\dots,n$.
-* Note that $\sum_{j=2}^n j = \frac{n(n+1)}{2} - 1$.
-* The running time is a quadratic function of $n$:
+- We must compare `key` with every element in the sorted subarray $A[1..j-1]$.
+- $t_j = j$ for $j = 2,\dots,n$.
+- Note that $\sum_{j=2}^n j = \frac{n(n+1)}{2} - 1$.
+- The running time is a quadratic function of $n$:
 $$ T(n) = an^2 + bn + c = \Theta(n^2) $$
 
 ### 4.4 Average-Case Analysis
 
 On average, half the elements in $A[1..j-1]$ are less than $A[j]$ and half are greater.
 
-* $t_j \approx j/2$.
-* The summation still yields a quadratic term.
-* $$ T(n) = \Theta(n^2) $$
+- $t_j \approx j/2$.
+- The summation still yields a quadratic term.
+- $$ T(n) = \Theta(n^2) $$
 
 Consequently, Insertion Sort is effective for small inputs but inefficient for large inputs compared to algorithms like Merge Sort ($O(n \log n)$).
 
@@ -119,4 +119,4 @@ Consequently, Insertion Sort is effective for small inputs but inefficient for l
 
 ## References
 
-* **CLRS**: Cormen, Leiserson, Rivest, and Stein, *Introduction to Algorithms*, Chapter 2: "Getting Started" (Sections 2.1, 2.2).
+- **CLRS**: Cormen, Leiserson, Rivest, and Stein, *Introduction to Algorithms*, Chapter 2: "Getting Started" (Sections 2.1, 2.2).

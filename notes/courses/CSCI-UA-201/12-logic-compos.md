@@ -38,10 +38,10 @@ Each bit slice has:
 
 Mode behavior:
 
-- $M = 0$ -> addition:
+- $M = 0$ → addition:
   - Effective $B$ bit is just $B$.
   - Initial carry in (LSB) is $0$.
-- $M = 1$ -> subtraction:
+- $M = 1$ → subtraction:
   - Effective $B$ bit is $\lnot B$ (through XOR with $M$).
   - Initial carry in (LSB) is $1$.
 
@@ -138,7 +138,7 @@ $$
 
 ### 3-to-8 decoder and uses
 
-- 3 inputs -> 8 outputs.
+- 3 inputs → 8 outputs.
 - Used for:
   - Memory chip select.
   - Instruction decoding.
@@ -233,7 +233,7 @@ To build an N-bit ALU:
 
 1. Use N copies of the 1-bit ALU slice.
 2. Connect corresponding bits of $A$ and $B$ into each slice.
-3. Chain carries: $\text{Cout}$ of bit $i$ -> $\text{Cin}$ of bit $i+1$.
+3. Chain carries: $\text{Cout}$ of bit $i$ → $\text{Cin}$ of bit $i+1$.
 4. Broadcast the same operation select signals to all slices.
 
 The ALU also typically outputs **status flags**:
@@ -256,6 +256,6 @@ Given $A = 1100_2$ and $B = 0101_2$:
 
 - Adder/subtractor: uses XOR with a mode bit and an initial carry to unify addition and subtraction.
 - Binary multiplier: uses partial products (AND gates) and adders; result width doubles.
-- Decoder: N inputs -> $2^N$ outputs with one-hot behavior, used for selection and addressing.
-- Multiplexer: $2^N$ inputs -> 1 output, with N select bits; can implement arbitrary Boolean functions.
+- Decoder: N inputs → $2^N$ outputs with one-hot behavior, used for selection and addressing.
+- Multiplexer: $2^N$ inputs → 1 output, with N select bits; can implement arbitrary Boolean functions.
 - Multi-bit ALU: built from 1-bit slices, performs arithmetic and logical operations and sets flags for the CPU.

@@ -15,9 +15,9 @@ $$
 $$
 where:
 
-* $f(x)$ is a completely unknown structural link function.
-* We make absolutely no parametric assumptions about the global shape of $f(x)$. We only assume that $f(x)$ is mathematically smooth (e.g., its second derivative is strictly bounded: $|f''(x)| \\le L$).
-* $e\_i$ represents independent measurement error noise, with $\\E[e\_i] = 0$ and $\\Var{e\_i} = \\sigma^2$.
+- $f(x)$ is a completely unknown structural link function.
+- We make absolutely no parametric assumptions about the global shape of $f(x)$. We only assume that $f(x)$ is mathematically smooth (e.g., its second derivative is strictly bounded: $|f''(x)| \\le L$).
+- $e\_i$ represents independent measurement error noise, with $\\E[e\_i] = 0$ and $\\Var{e\_i} = \\sigma^2$.
 
 Our primary statistical target is to estimate the true value $f(x\_0)$ at some specific target point $x\_0$.
 
@@ -35,8 +35,8 @@ $$
 $$
 The parameter $h$ is universally known as the **bandwidth**.
 
-* **Small bandwidth ($h \\to 0$):** Extremely small bias (we only use points practically identical to $x\_0$), but massive variance (we average very few points, leaving us highly vulnerable to the noise $e\_i$).
-* **Large bandwidth ($h \\to \\infty$):** Massive bias (we incorrectly average points from fundamentally different regions of the curve), but extremely small variance.
+- **Small bandwidth ($h \\to 0$):** Extremely small bias (we only use points practically identical to $x\_0$), but massive variance (we average very few points, leaving us highly vulnerable to the noise $e\_i$).
+- **Large bandwidth ($h \\to \\infty$):** Massive bias (we incorrectly average points from fundamentally different regions of the curve), but extremely small variance.
 
 ### 2.2 Kernel Weighting
 

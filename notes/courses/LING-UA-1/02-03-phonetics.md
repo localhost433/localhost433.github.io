@@ -3,11 +3,11 @@ title: Phonetics
 date: 2025-05-20/21
 ---
 
-# Phonetics
+## Phonetics
 
 ---
 
-## Ineternation Phonetic Alphabet (IPA)
+### Ineternation Phonetic Alphabet (IPA)
 Write IPA in [square brackets] for phonetic transcription.
 
 | Manner \ Place      | Bilabial    | Labiodental | Dental      | Alveolar     | Postalveolar | Retroflex | Palatal | Velar       | Uvular | Pharyngeal | Glottal |
@@ -25,24 +25,24 @@ Bold ones are in English. There are different levels of specificity of transcrip
 
 ---
 
-### What is phonetics?
+#### What is phonetics?
 branch of linguistics that focuses on the inventory and structure of speech sounds
 
 ---
 
-### What do phoneticians study?
+#### What do phoneticians study?
 Articulatory Phonetics: How speech sounds are produces
 
 ---
 
-### Speech production system
+#### Speech production system
 Move different part of mouth for different sounds.
 
 ![](notes/courses/LING-UA-1/images/02-1.png) Image of human vocal tract, from [ here](https://www.researchgate.net/figure/PA-articulation-points-left-Human-vocal-tract-right-IPA-vowels-consonants_fig2_357296500).
 
 ---
 
-## Consonants
+### Consonants
 Three key features:
 - Voicing
   - Voiced: Vibrating (Vowels in English are voiced)
@@ -87,7 +87,7 @@ Three key features:
 
 ---
 
-## Vowels
+### Vowels
 
 **Bold** = tense, *italic* = lax
 
@@ -99,13 +99,13 @@ Three key features:
 
 ---
 
-### What are vowels?
+#### What are vowels?
 
 - Relative to consonants.
 
 ---
 
-### Three features to describe vowels
+#### Three features to describe vowels
 
 - Tongue height
 - Tongue backness/frontness
@@ -113,13 +113,13 @@ Three key features:
 
 ---
 
-#### Monophthongs vs. Diphthongs
+##### Monophthongs vs. Diphthongs
 - Monophthongs [^1] for one syllable.
 - Diphthongs [^2] for two put together
 
 ---
 
-## Acoustics and perception
+### Acoustics and perception
 - Periodic sounds: Vowels
 - Non-periodic sounds: Fricatives
 

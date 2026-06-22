@@ -65,10 +65,10 @@ Suppose we have a sample $X\_1, \dots, X\_n \sim \mathcal{N}(\mu, \sigma^2)$ wit
 
 Whenever we make a decision using a statistical test, we risk making one of two distinct types of errors:
 
-| Truth \ Output | $H\_0$ | $H\_1$ |
-| :--- | :--- | :--- |
-| **$H\_0$ is true** | Correct decision; $\prob(\text{Output } H\_0 \mid H\_0 \text{ is true}) = 1 - \alpha$ | **Type I Error** (False Positive); $\alpha = \prob(\text{Output } H\_1 \mid H\_0 \text{ is true})$ |
-| **$H\_1$ is true** | **Type II Error** (False Negative); $\beta = \prob(\text{Output } H\_0 \mid H\_1 \text{ is true})$ | Correct decision (**Power**); $1 - \beta = \prob(\text{Output } H\_1 \mid H\_1 \text{ is true})$ |
+| Truth \ Output     | $H\_0$                                                                                             | $H\_1$                                                                                             |
+| :----------------- | :------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------- |
+| **$H\_0$ is true** | Correct decision; $\prob(\text{Output } H\_0 \mid H\_0 \text{ is true}) = 1 - \alpha$              | **Type I Error** (False Positive); $\alpha = \prob(\text{Output } H\_1 \mid H\_0 \text{ is true})$ |
+| **$H\_1$ is true** | **Type II Error** (False Negative); $\beta = \prob(\text{Output } H\_0 \mid H\_1 \text{ is true})$ | Correct decision (**Power**); $1 - \beta = \prob(\text{Output } H\_1 \mid H\_1 \text{ is true})$   |
 
 In rigorous statistical practice, it is mathematically impossible to simultaneously minimize both $\alpha$ and $\beta$ for a fixed sample size $n$. The standard frequentist paradigm dictates that we fix the significance level $\alpha$ at a pre-determined, strictly controlled threshold (such as $0.05$ or $0.01$) and then actively seek the specific test that maximizes the statistical power $1 - \beta$.
 

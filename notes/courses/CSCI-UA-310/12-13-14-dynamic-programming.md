@@ -49,9 +49,9 @@ date: 2026-03-02/04/09
 
 **Example price table**:
 
-| Length $i$ | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
-|---|---|---|---|---|---|---|---|---|---|---|
-| Price $p[i]$ | 1 | 5 | 8 | 9 | 10 | 17 | 17 | 20 | 24 | 30 |
+| Length $i$   | 1   | 2   | 3   | 4   | 5   | 6   | 7   | 8   | 9   | 10  |
+| ------------ | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Price $p[i]$ | 1   | 5   | 8   | 9   | 10  | 17  | 17  | 20  | 24  | 30  |
 
 ### 3.1 Naive Recursive Solution
 
@@ -208,8 +208,8 @@ The **0/1** constraint means each item is either taken or not (no fractions).
 
 For item $n$:
 
-* **Skip item $n$**: optimal value from items $\{1,\dots,n-1\}$ with capacity $W$.
-* **Take item $n$** (if $w_n \leq W$): $v_n$ plus optimal value from items $\{1,\dots,n-1\}$ with capacity $W - w_n$.
+- **Skip item $n$**: optimal value from items $\{1,\dots,n-1\}$ with capacity $W$.
+- **Take item $n$** (if $w_n \leq W$): $v_n$ plus optimal value from items $\{1,\dots,n-1\}$ with capacity $W - w_n$.
 
 ### 6.3 Recurrence
 
@@ -238,12 +238,12 @@ KNAPSACK(n, W, w[1..n], v[1..n])
 
 Items: $(w_1, v_1) = (2, 6)$, $(w_2, v_2) = (2, 10)$, $(w_3, v_3) = (3, 12)$. Capacity $W = 5$.
 
-| $i \backslash w$ | 0 | 1 | 2 | 3 | 4 | 5 |
-|---|---|---|---|---|---|---|
-| 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| 1 | 0 | 0 | 6 | 6 | 6 | 6 |
-| 2 | 0 | 0 | 10 | 10 | 16 | 16 |
-| 3 | 0 | 0 | 10 | 12 | 16 | 22 |
+| $i \backslash w$ | 0   | 1   | 2   | 3   | 4   | 5   |
+| ---------------- | --- | --- | --- | --- | --- | --- |
+| 0                | 0   | 0   | 0   | 0   | 0   | 0   |
+| 1                | 0   | 0   | 6   | 6   | 6   | 6   |
+| 2                | 0   | 0   | 10  | 10  | 16  | 16  |
+| 3                | 0   | 0   | 10  | 12  | 16  | 22  |
 
 Optimal value: $\text{OPT}(3,5) = 22$ (take items 2 and 3).
 
@@ -282,8 +282,8 @@ FIBONACCI-DP(n)
 
 **Example**: For $A_1 (30 \times 35)$, $A_2 (35 \times 15)$, $A_3 (15 \times 5)$, $A_4 (5 \times 10)$:
 
-* $((A_1 A_2) A_3) A_4$: $30 \cdot 35 \cdot 15 + 30 \cdot 15 \cdot 5 + 30 \cdot 5 \cdot 10 = 18{,}000$ multiplications.
-* $(A_1 (A_2 (A_3 A_4)))$: $15 \cdot 5 \cdot 10 + 35 \cdot 15 \cdot 10 + 30 \cdot 35 \cdot 10 = 16{,}250$ multiplications.
+- $((A_1 A_2) A_3) A_4$: $30 \cdot 35 \cdot 15 + 30 \cdot 15 \cdot 5 + 30 \cdot 5 \cdot 10 = 18{,}000$ multiplications.
+- $(A_1 (A_2 (A_3 A_4)))$: $15 \cdot 5 \cdot 10 + 35 \cdot 15 \cdot 10 + 30 \cdot 35 \cdot 10 = 16{,}250$ multiplications.
 
 ### 8.2 Optimal Substructure
 
@@ -358,10 +358,10 @@ SUBSET-SUM(a[1..n], W)
 
 **Worked Example**: $S = \{3, 5, 1\}$, $W = 9$.
 
-* Subset $\{3, 5, 1\}$: sum $= 9$. Answer: **yes**.
+- Subset $\{3, 5, 1\}$: sum $= 9$. Answer: **yes**.
 
 ---
 
 ## References
 
-* **CLRS**: Chapter 15 — Dynamic Programming (Sections 15.1–15.4).
+- **CLRS**: Chapter 15 — Dynamic Programming (Sections 15.1–15.4).

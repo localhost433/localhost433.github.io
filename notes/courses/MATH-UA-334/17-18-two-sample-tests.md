@@ -30,14 +30,14 @@ $$
 ### 1.1 Motivating Examples
 
 1. **Home Field Advantage in Sports:** Does a sports team truly perform better when playing at their home stadium?
-    * $X\_1, \dots, X\_n$: The outcomes or scores from home games.
-    * $Y\_1, \dots, Y\_m$: The outcomes or scores from away games.
-    * We test if the distribution of home scores is statistically different from the away scores.
+    - $X\_1, \dots, X\_n$: The outcomes or scores from home games.
+    - $Y\_1, \dots, Y\_m$: The outcomes or scores from away games.
+    - We test if the distribution of home scores is statistically different from the away scores.
 
 2. **Treatment Effect in Medicine:** Does a new drug significantly improve patient outcomes compared to a placebo?
-    * $X\_1, \dots, X\_n$: The clinical outcomes from the control (placebo) group.
-    * $Y\_1, \dots, Y\_m$: The clinical outcomes from the treatment group.
-    * We test if the treatment distribution represents a distinct improvement.
+    - $X\_1, \dots, X\_n$: The clinical outcomes from the control (placebo) group.
+    - $Y\_1, \dots, Y\_m$: The clinical outcomes from the treatment group.
+    - We test if the treatment distribution represents a distinct improvement.
 
 ---
 
@@ -174,11 +174,11 @@ Suppose we observe $X = (1, 3)$ and $Y = (6, 2, 7)$.
 1. The pooled sample is $(1, 3, 6, 2, 7)$.
 2. We sort the pooled sample: $1, 2, 3, 6, 7$.
 3. We assign ranks based on the sorted order:
-   * Rank 1: $X$ (value 1)
-   * Rank 2: $Y$ (value 2)
-   * Rank 3: $X$ (value 3)
-   * Rank 4: $Y$ (value 6)
-   * Rank 5: $Y$ (value 7)
+   - Rank 1: $X$ (value 1)
+   - Rank 2: $Y$ (value 2)
+   - Rank 3: $X$ (value 3)
+   - Rank 4: $Y$ (value 6)
+   - Rank 5: $Y$ (value 7)
 4. The test statistic $T\_Y$ is strictly defined as the sum of the relative ranks of the $Y$ group:
 
 $$
@@ -191,11 +191,11 @@ Under the null hypothesis, $T\_Y$ is distributed as the sum of $m$ distinct inte
 
 We can rigorously calculate the expectation and variance of this specific random sum:
 
-* **Expectation:** The average rank in the pool is $\frac{n+m+1}{2}$. Since we select $m$ items, the expected sum is:
+- **Expectation:** The average rank in the pool is $\frac{n+m+1}{2}$. Since we select $m$ items, the expected sum is:
     $$
         \E[T\_Y] = m \frac{n+m+1}{2}
     $$
-* **Variance:** Using the variance formulas for sampling without replacement (which introduces a finite population correction factor):
+- **Variance:** Using the variance formulas for sampling without replacement (which introduces a finite population correction factor):
     $$
         \Var{T\_Y} = \frac{nm(n+m+1)}{12}
     $$

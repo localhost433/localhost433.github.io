@@ -60,10 +60,10 @@ We suspect the solution is $T(n) = \Theta(n \log n)$. We verify this using two m
 
 ### 4.1 Recursion Tree Method
 We visualize the recurrence as a tree of costs.
-* **Root (Level 0)**: Cost $cn$ (for the merge).
-* **Level 1**: Two nodes of size $n/2$. Cost $2 \times (c \cdot n/2) = cn$.
-* **Level 2**: Four nodes of size $n/4$. Cost $4 \times (c \cdot n/4) = cn$.
-* **Level $i$**: $2^i$ nodes of size $n/2^i$. Cost $2^i \times (c \cdot n/2^i) = cn$.
+- **Root (Level 0)**: Cost $cn$ (for the merge).
+- **Level 1**: Two nodes of size $n/2$. Cost $2 \times (c \cdot n/2) = cn$.
+- **Level 2**: Four nodes of size $n/4$. Cost $4 \times (c \cdot n/4) = cn$.
+- **Level $i$**: $2^i$ nodes of size $n/2^i$. Cost $2^i \times (c \cdot n/2^i) = cn$.
 
 **Height of Tree**: The recursion bottoms out when $n/2^h = 1$, so $h = \log_2 n$.  
 **Total Cost**: sum of costs at each level.
@@ -105,4 +105,4 @@ Thus, $T(n) = O(n \log n)$.
 
 ## References
 
-* **CLRS**: Chapter 2 (Merge Sort), Chapter 4 (Divide-and-Conquer, Recurrences).
+- **CLRS**: Chapter 2 (Merge Sort), Chapter 4 (Divide-and-Conquer, Recurrences).

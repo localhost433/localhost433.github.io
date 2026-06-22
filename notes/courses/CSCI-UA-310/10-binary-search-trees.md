@@ -21,8 +21,8 @@ A **binary search tree** is a rooted binary tree where each node $x$ has fields:
 
 **BST Property**: For any node $x$:
 
-* If $y$ is in the **left subtree** of $x$: $y.\text{key} \leq x.\text{key}$.
-* If $y$ is in the **right subtree** of $x$: $y.\text{key} \geq x.\text{key}$.
+- If $y$ is in the **left subtree** of $x$: $y.\text{key} \leq x.\text{key}$.
+- If $y$ is in the **right subtree** of $x$: $y.\text{key} \geq x.\text{key}$.
 
 The **height** $h$ of a BST determines the cost of all operations. In the worst case $h = \Theta(n)$ (degenerate tree); for a balanced tree $h = \Theta(\log n)$.
 
@@ -166,10 +166,10 @@ Running time: $O(h)$.
 
 All BST operations run in $O(h)$ time. The height $h$ depends on how balanced the tree is:
 
-| Tree Shape | Height | Operation Cost |
-|---|---|---|
-| Balanced | $\Theta(\log n)$ | $\Theta(\log n)$ |
-| Degenerate (sorted input) | $\Theta(n)$ | $\Theta(n)$ |
+| Tree Shape                   | Height           | Operation Cost   |
+| ---------------------------- | ---------------- | ---------------- |
+| Balanced                     | $\Theta(\log n)$ | $\Theta(\log n)$ |
+| Degenerate (sorted input)    | $\Theta(n)$      | $\Theta(n)$      |
 | Random insertions (expected) | $\Theta(\log n)$ | $\Theta(\log n)$ |
 
 **Problem**: Without rebalancing, adversarial input order yields a degenerate tree. This motivates **Red-Black Trees**, which maintain balance explicitly.
@@ -178,4 +178,4 @@ All BST operations run in $O(h)$ time. The height $h$ depends on how balanced th
 
 ## References
 
-* **CLRS**: Chapter 12 — Binary Search Trees.
+- **CLRS**: Chapter 12 — Binary Search Trees.

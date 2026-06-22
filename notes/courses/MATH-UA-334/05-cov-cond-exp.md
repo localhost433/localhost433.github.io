@@ -104,8 +104,8 @@ The variance of a variable can be decomposed into the "expected conditional vari
 
 $$\Var{Y} = \E[\Var{Y \mid X}] + \Var{\E[Y \mid X]}$$
 
-* **Intra-group variance ($\E[\Var{Y|X}]$):** The average variance within each group defined by $X$.
-* **Inter-group variance ($\Var{\E[Y|X]}$):** The variance of the group means.
+- **Intra-group variance ($\E[\Var{Y|X}]$):** The average variance within each group defined by $X$.
+- **Inter-group variance ($\Var{\E[Y|X]}$):** The variance of the group means.
 
 ---
 

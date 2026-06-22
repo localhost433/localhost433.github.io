@@ -121,8 +121,8 @@ $$
 
 > Here:
 >
-> - The estimator $\hat{\theta}$ is the tuple.  
-> - The components $\hat{\theta}_i$ are individual estimators.  
+> - The estimator $\hat{\theta}$ is the tuple.
+> - The components $\hat{\theta}_i$ are individual estimators.
 >
 > In this case $\hat{\theta} = (\hat{\theta}\_1, \hat{\theta}\_2)$  
 > $\hat{\theta}_1 = \hat{\mu}$ and $\hat{\theta}_2 = \hat{\sigma}^2$

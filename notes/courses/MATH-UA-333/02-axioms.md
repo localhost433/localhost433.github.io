@@ -26,7 +26,7 @@ $$
 P(E)=\frac{\text{Number of elements in } E}{\text{Number of elements in } S}.
 $$
 
-> Example: two dice have $36$ equally likely outcomes; the event “sum = 7” contains six outcomes, so the probability is $6/36=1/6$.  Drawing 7 cards from a 52‑card deck, the probability of getting a four‑of‑a‑kind is 
+> Example: two dice have $36$ equally likely outcomes; the event “sum = 7” contains six outcomes, so the probability is $6/36=1/6$.  Drawing 7 cards from a 52‑card deck, the probability of getting a four‑of‑a‑kind is
 > $$
 > P(E)=\frac{13\cdot {48\choose 3}}{{52\choose 7}}.
 > $$
@@ -38,4 +38,3 @@ In the birthday problem with 23 people, the probability that at least two share 
 - **Coin‑flip experiment:** sample space $\{HH,HT,TH,TT\}$; event “flips differ” has two outcomes, so $P=2/4=1/2$.
 - **Presentation order:** the six permutations of three presenters form the sample space; the event “Alice goes first” has two outcomes, giving probability $1/3$.
 - **Derangements:** permuting $n$ students’ seats, let $A_k$ be the event that student $k$ stays put.  By inclusion–exclusion, the probability at least one student remains fixed is $\sum_{k=1}^n(-1)^{k-1}{n\choose k}\frac{(n-k)!}{n!}$.
-

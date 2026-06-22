@@ -111,11 +111,9 @@ Example: $5.75$.
 
 So the bit pattern is
 
-
 $$
 0\ 10000001\ 01110000000000000000000.
 $$
-
 
 ### Key floating point ideas
 

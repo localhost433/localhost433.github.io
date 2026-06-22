@@ -92,10 +92,10 @@ For any two vertices $u$ and $v$, exactly one of the following holds:
 
 In a DFS of a directed graph, edges are classified as:
 
-* **Tree edges**: Edges in the DFS forest $(v.\pi = u)$.
-* **Back edges**: $(u, v)$ where $v$ is an ancestor of $u$ in the DFS tree. *Indicate cycles.*
-* **Forward edges**: $(u, v)$ where $v$ is a descendant of $u$, but not a tree edge.
-* **Cross edges**: All other edges.
+- **Tree edges**: Edges in the DFS forest $(v.\pi = u)$.
+- **Back edges**: $(u, v)$ where $v$ is an ancestor of $u$ in the DFS tree. *Indicate cycles.*
+- **Forward edges**: $(u, v)$ where $v$ is a descendant of $u$, but not a tree edge.
+- **Cross edges**: All other edges.
 
 **Key fact**: An undirected graph is acyclic if and only if DFS produces no back edges.
 
@@ -142,4 +142,4 @@ STRONGLY-CONNECTED-COMPONENTS(G)
 
 ## References
 
-* **CLRS**: Chapter 22 — Elementary Graph Algorithms (Sections 22.2–22.5).
+- **CLRS**: Chapter 22 — Elementary Graph Algorithms (Sections 22.2–22.5).

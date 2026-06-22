@@ -3,7 +3,7 @@ title: Naming & Bias
 date: 2025-11-06/11
 ---
 
-# Implicit Bias & Names
+## Implicit Bias & Names
 
 **Definition**
 - **Implicit bias**: behavior shaped by **unconscious** or **unintended** attitudes and stereotypes (Moss-Racusin et al. 2012).
@@ -18,9 +18,9 @@ date: 2025-11-06/11
 
 ---
 
-# Gender Bias in Academic Evaluations
+## Gender Bias in Academic Evaluations
 
-## Steinpreis, Anders & Ritzke (1999)
+### Steinpreis, Anders & Ritzke (1999)
 
 **Design**
 - Sent identical academic CVs (e.g. Assistant Professor position) with only the **name** changed:
@@ -33,7 +33,7 @@ date: 2025-11-06/11
   - Rated higher on **competence** and **hirability**, despite identical records.
 - Shows **gender bias** even among trained scientists.
 
-## Carlsson et al. (2021)
+### Carlsson et al. (2021)
 
 **Design**
 - Similar CV experiment in **Iceland, Sweden, and the US**.
@@ -47,7 +47,7 @@ date: 2025-11-06/11
 
 ---
 
-# Name Femaleness & Vote Share (Urbatsch 2018)
+## Name Femaleness & Vote Share (Urbatsch 2018)
 
 **Question**
 - Does having a more **“feminine”** name affect a political candidate’s **vote share**?
@@ -81,9 +81,9 @@ date: 2025-11-06/11
 
 ---
 
-# Racial & Ethnic Bias: Resumé and Request Studies
+## Racial & Ethnic Bias: Resumé and Request Studies
 
-## Bertrand & Mullainathan (2004)
+### Bertrand & Mullainathan (2004)
 
 **Design**
 - Sent pairs of **identical resumes** to real job ads in Chicago/Boston newspapers.
@@ -96,7 +96,7 @@ date: 2025-11-06/11
 - Interpretation:
   - Employers used names as a **signal** of race and discriminated accordingly.
 
-## Oreopoulos (2011): immigrant names and callbacks (Canada)
+### Oreopoulos (2011): immigrant names and callbacks (Canada)
 
 **Design (field experiment)**
 - Researchers sent **identical resumes** to real job postings, varying only the **name type** and some credential combinations.
@@ -114,7 +114,7 @@ date: 2025-11-06/11
 **Interpretation**
 - Employers may use names as signals of **ethnicity/foreignness**, and discrimination can persist even when qualifications are “local”.
 
-## Names from African and other non-majority languages
+### Names from African and other non-majority languages
 
 - Names from languages such as **Yoruba**, **Arabic**, and others may:
   - Be misread as **foreign**, **Muslim**, or **Black**.
@@ -123,7 +123,7 @@ date: 2025-11-06/11
 
 ---
 
-# Faculty Email & Response Studies (Milkman et al. 2012, etc.)
+## Faculty Email & Response Studies (Milkman et al. 2012, etc.)
 
 **Design**
 - Sent standardized email requests (e.g. asking to meet) to faculty, changing only:
@@ -142,7 +142,7 @@ date: 2025-11-06/11
 
 ---
 
-# Names, Accent & Perceived Professionalism
+## Names, Accent & Perceived Professionalism
 
 **Accent-based bias**
 - Names can prime expectations about **accent**.
@@ -157,7 +157,7 @@ date: 2025-11-06/11
 
 ---
 
-# Where Do We Go From Here?
+## Where Do We Go From Here?
 
 **Key insights**
 - Names do not merely label individuals; they **trigger stereotypes** about:
@@ -179,7 +179,7 @@ date: 2025-11-06/11
 
 ---
 
-# Summary
+## Summary
 
 - Experimental designs that hold everything constant except the **name** reveal pervasive **implicit bias**.
 - Names are a major channel through which **social inequality** is reproduced, even when people believe they are acting “objectively”.

@@ -8,7 +8,7 @@ date: 2025-10-21/11-04
 This recitation connects “how the CPU runs instructions” with “why memory is slow,” and how caches hide that slowness:
 
 - CPU components: **control unit** + **datapath**, and the role of **rip** (instruction pointer).
-- The **four-stage instruction cycle**: Fetch -> Decode -> Execute -> Update.
+- The **four-stage instruction cycle**: Fetch → Decode → Execute → Update.
 - **DRAM** organization: capacitor-based cells, destructive reads, sense amplifiers, and refresh.
 - Memory hierarchy intuition (why caches exist, locality).
 - For detailed cache organization, mapping, replacement/write policies, and AMAT math, see **[10 - Cache Organization and Performance](https://robinc.vercel.app/note.html?course=CSCI-UA-201&note=10-cache-perf)**.
@@ -82,9 +82,9 @@ Because charge leaks, the memory controller refreshes rows periodically
 
 ## Cache memory organization
 
-### Memory hierarchy (fast -> slow)
+### Memory hierarchy (fast → slow)
 
-Registers -> L1 -> L2 -> L3 -> DRAM -> disk
+Registers → L1 → L2 → L3 → DRAM → disk
 
 The huge speed gap is why caches exist.
 

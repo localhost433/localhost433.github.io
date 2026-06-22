@@ -3,9 +3,9 @@ title: Immigrant Names
 date: 2025-10-30
 ---
 
-# Immigrant Names
+## Immigrant Names
 
-## Overview
+### Overview
 
 Topics:
 - **20th-century** immigrant naming practices.
@@ -15,7 +15,7 @@ Topics:
 
 ---
 
-## Myth-busting: Ellis Island name changes
+### Myth-busting: Ellis Island name changes
 
 - Common myth: “Officials at Ellis Island **changed immigrants’ names**.”
 - Historical evidence contradicts this:
@@ -31,9 +31,9 @@ Topics:
 
 ---
 
-## 20th-century family naming choices
+### 20th-century family naming choices
 
-### Assimilation and Anglo names
+#### Assimilation and Anglo names
 
 - In the US and Canada, many families:
   - Adopted **Anglo given names** to **assimilate**.
@@ -43,7 +43,7 @@ Topics:
   - Some names were translated or approximated; others were replaced while keeping **initials**.
   - Shows both **pressure to conform** and **emotional cost** (loss of desired “special” names).
 
-### “Official” vs “home” names
+#### “Official” vs “home” names
 
 - Interviews with Italian and Jewish families show:
   - Children might have **ethnic names** used at home,
@@ -54,7 +54,7 @@ Topics:
 
 ---
 
-## East and Southeast Asian naming patterns
+### East and Southeast Asian naming patterns
 
 - Major factors (e.g. Wu 1999, Louie 1985):
 
@@ -64,9 +64,9 @@ Topics:
 
 2. **Americanization**
    - Choosing an English name that is a **loose phonetic match**:
-     - e.g. *Soo Fei -> Fay*, *Wei Lim -> William*, *Teong -> Ted*, *Mei Guen -> Mae Gwen*, *Yoon -> June*.
+     - e.g. *Soo Fei → Fay*, *Wei Lim → William*, *Teong → Ted*, *Mei Guen → Mae Gwen*, *Yoon → June*.
    - Surnames sometimes respelled to look more “English”:
-     - *Fan -> Fann*, *Lam -> Lamm*, *Lin -> Lynn*, *Go -> Goe*, *Hsu -> Hsue*.
+     - *Fan → Fann*, *Lam → Lamm*, *Lin → Lynn*, *Go → Goe*, *Hsu → Hsue*.
 
 3. **Translation**
    - Occasionally, children receive an English name that **translates** the meaning of the Chinese name (e.g. naming “Iris” for a Chinese name meaning ‘orchid’).
@@ -79,9 +79,9 @@ Topics:
 
 ---
 
-## Late 20th / 21st-century trends
+### Late 20th / 21st-century trends
 
-### Gender and assimilation (Spanish–English)
+#### Gender and assimilation (Spanish–English)
 
 - Work with Los Angeles county data (1990s):
   - Parents often faster to give **daughters** English/assimilated names.
@@ -90,7 +90,7 @@ Topics:
   - e.g. **José / Joseph**, **María / Mary**.
   - Some families pick forms that **work in both languages** or have direct equivalents.
 
-### Ethiopian immigrants in the US
+#### Ethiopian immigrants in the US
 
 - Parents balance:
   - Desire for children to **“fit in”** and avoid stigma, and
@@ -105,9 +105,9 @@ Topics:
 
 ---
 
-## Immigrant names in Anglo culture
+### Immigrant names in Anglo culture
 
-### Pressures to conform
+#### Pressures to conform
 
 - Qualitative work in Canadian cities (e.g. London, Ontario) identifies "forces of conformity":
   1. **Employment pressure** – belief that an “easier” or more Anglo-sounding name helps with hiring.
@@ -123,13 +123,13 @@ Topics:
 
 ---
 
-## Names and employment outcomes (pointer)
+### Names and employment outcomes (pointer)
 
 Audit-style evidence on name-based discrimination in hiring (resumes, email requests, callbacks) is summarized in [Naming & Bias](https://robinc.vercel.app/note.html?course=LING-UA-2&note=10-bias). This note focuses on the **pressures and strategies** that shape immigrant naming choices.
 
 ---
 
-## Takeaways
+### Takeaways
 
 - Immigrant naming is shaped by:
   - **Historical myths** (like Ellis Island) vs. the real, self-driven process of name change.

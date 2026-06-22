@@ -18,9 +18,9 @@ We address the **Selection Problem**: finding the $i$-th smallest element in an 
 **Input**: A set $A$ of $n$ distinct numbers and an integer $i$, with $1 \le i \le n$.
 **Output**: The element $x \in A$ that is larger than exactly $i-1$ other elements of $A$.
 
-* $i=1$: Minimum.
-* $i=n$: Maximum.
-* $i = \lfloor (n+1)/2 \rfloor$: Median.
+- $i=1$: Minimum.
+- $i=n$: Maximum.
+- $i = \lfloor (n+1)/2 \rfloor$: Median.
 
 ---
 
@@ -46,8 +46,8 @@ RANDOMIZED-SELECT(A, p, r, i)
 
 **Analysis**:
 
-* **Worst Case**: Like QuickSort, if we always pick bad pivots, $T(n) = T(n-1) + \Theta(n) = \Theta(n^2)$.
-* **Expected Case**: On average, the pivot splits the array well.
+- **Worst Case**: Like QuickSort, if we always pick bad pivots, $T(n) = T(n-1) + \Theta(n) = \Theta(n^2)$.
+- **Expected Case**: On average, the pivot splits the array well.
 $$ T(n) \le T(n/2) + O(n) $$
 This is a geometric series summing to $O(n)$.
 
@@ -76,9 +76,9 @@ The recursive step runs on at most $7n/10$ elements.
 
 $$ T(n) = T(\lceil n/5 \rceil) + T(7n/10) + O(n) $$
 
-* $T(\lceil n/5 \rceil)$: To find the pivot $m$.
-* $T(7n/10)$: The worst-case recursive call.
-* $O(n)$: Partitioning overhead.
+- $T(\lceil n/5 \rceil)$: To find the pivot $m$.
+- $T(7n/10)$: The worst-case recursive call.
+- $O(n)$: Partitioning overhead.
 
 Using the substitution method, one can prove $T(n) = O(n)$ for sufficiently large $n$, since $7/10 < 1$.
 
@@ -86,4 +86,4 @@ Using the substitution method, one can prove $T(n) = O(n)$ for sufficiently larg
 
 ## References
 
-* **CLRS**: Chapter 9: "Medians and Order Statistics".
+- **CLRS**: Chapter 9: "Medians and Order Statistics".

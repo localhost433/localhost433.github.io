@@ -41,12 +41,12 @@ An **SR latch** is built from two cross-coupled NOR gates, producing a stable fe
 
 Truth table (classic SR latch behavior):
 
-| R | S | Meaning | Q (next) |
-|---|---|---------|----------|
-| 0 | 0 | Hold    | stays at previous value |
-| 0 | 1 | Set     | 1 |
-| 1 | 0 | Reset   | 0 |
-| 1 | 1 | Invalid | undefined/meaningless |
+| R   | S   | Meaning | Q (next)                |
+| --- | --- | ------- | ----------------------- |
+| 0   | 0   | Hold    | stays at previous value |
+| 0   | 1   | Set     | 1                       |
+| 1   | 0   | Reset   | 0                       |
+| 1   | 1   | Invalid | undefined/meaningless   |
 
 Why the invalid case matters: we are commanding “set” and “reset” simultaneously.
 
@@ -72,11 +72,11 @@ Behavior:
 
 Truth table (conceptual):
 
-| Data | WE | Action |
-|------|----|--------|
-| X    | 0  | Hold (no change) |
-| 0    | 1  | Reset (Q <- 0) |
-| 1    | 1  | Set (Q <- 1) |
+| Data | WE  | Action           |
+| ---- | --- | ---------------- |
+| X    | 0   | Hold (no change) |
+| 0    | 1   | Reset (Q ← 0)    |
+| 1    | 1   | Set (Q ← 1)      |
 
 **Why the invalid state disappears:** the inverter ensures S and R can’t both be 1 at once
 (the data and NOT-data cannot simultaneously be 1).
@@ -88,8 +88,8 @@ different parts of the CPU might read a value while it is changing.
 
 A CPU clock provides a global rhythm:
 
-- rising edge: 0 -> 1
-- falling edge: 1 -> 0
+- rising edge: 0 → 1
+- falling edge: 1 → 0
 
 ### Parent-child (master-slave) D flip-flop
 
@@ -130,7 +130,7 @@ Address width:
 
 Example:
 
-- 16 registers -> 4 select bits (since 2^4 = 16).
+- 16 registers → 4 select bits (since 2^4 = 16).
 
 Write sequence idea:
 

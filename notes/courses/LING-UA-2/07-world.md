@@ -3,9 +3,9 @@ title: Names Around the World
 date: 2025-10-23
 ---
 
-# Names Around the World
+## Names Around the World
 
-## Overview
+### Overview
 
 - Two main questions:
   1. **Surnames** – How are they formed and assigned in different societies?
@@ -18,9 +18,9 @@ date: 2025-10-23
 
 ---
 
-## Patronymic & Matronymic systems
+### Patronymic & Matronymic systems
 
-### Iceland
+#### Iceland
 
 - Canonical modern patronymic system:
   - Child’s “surname” = **parent’s given name + suffix**.
@@ -30,7 +30,7 @@ date: 2025-10-23
   - Introduces **-bur** ‘child’ as a **gender-neutral** option when a parent is registered non-binary.
 - Some Icelandic last names come from other sources, but **most** follow the patronymic pattern.
 
-### Ethiopia / Eritrea / Djibouti
+#### Ethiopia / Eritrea / Djibouti
 
 - Similar logic but with **three names**:
   - **Given name** (person),
@@ -40,14 +40,14 @@ date: 2025-10-23
   - e.g. *ato Mohamed* (‘Mr. Mohamed’), *Professor Tsehay*.
 - Emphasis is on **lineage**, but usage in everyday address focuses on the **given name + title**.
 
-### Russia
+#### Russia
 
 - **Hereditary surname** + **patronymic middle name**:
   - Patronymic is formed from the father’s given name:
     - Male: **-ovich / -evich**
     - Female: **-ovna / -evna**
-  - Example:  
-    - *Rodion Romanovich Raskolnikov* (father = Roman).  
+  - Example:
+    - *Rodion Romanovich Raskolnikov* (father = Roman).
     - Sister: *Avdotya Romanovna Raskolnikova*.
 - Patronymics are a core part of **formal address**:
   - Workplace, school, official contexts use **first name + patronymic**.
@@ -55,11 +55,11 @@ date: 2025-10-23
 
 ---
 
-## Hereditary surnames and their origins
+### Hereditary surnames and their origins
 
 Many hereditary surnames started out as **descriptive phrases**, then fossilized.
 
-### Former patronymics
+#### Former patronymics
 
 - Originally indicated **“X’s son/daughter”**, but now just **family names**:
   - Anglo: **Johnson, Robertson, Davidson**.
@@ -67,7 +67,7 @@ Many hereditary surnames started out as **descriptive phrases**, then fossilized
   - Spanish: **-ez** suffix (from Latin “descendant of”):  
     **Domínguez, López, Martínez, Pérez, Rodríguez, Sánchez**, etc.
 
-### Geographic / toponymic surnames
+#### Geographic / toponymic surnames
 
 - Refer to **places** or **landscape features**:
 
@@ -79,7 +79,7 @@ Geographic features:
 - Japanese: **Yamamoto** (‘mountain base’), **Tanaka** (‘rice field’), **Nakamura** (‘central village’), **Kimura** (‘tree village’).
 - Finnish: **Nieminen** (‘peninsula’), **Virtanen** (‘small stream’), **Mäkelä** (‘hill / farmstead’).
 
-### Occupational surnames
+#### Occupational surnames
 
 - Encode **traditional professions**:
 
@@ -90,7 +90,7 @@ Geographic features:
   - French: **Meunier** (‘miller’), **Berger** (‘shepherd’), **Boucher** (‘butcher’).
   - Indian subcontinent: **Acharya** (‘teacher’), **Patel** (‘village head’), **Gandhi** (‘perfumer’).
 
-### Traits and personal characteristics
+#### Traits and personal characteristics
 
 - Some surnames derive from **qualities** or **physical traits**:
 
@@ -101,9 +101,9 @@ Geographic features:
 
 ---
 
-## Clan and tribal surnames
+### Clan and tribal surnames
 
-### Scottish clans
+#### Scottish clans
 
 - Historically, clan surnames encoded **membership and allegiance**:
   - Not only blood relatives; anyone living on the **chief’s land** could adopt the name.
@@ -114,7 +114,7 @@ Geographic features:
   - **Mac/Mc** = ‘son of’ (Gaelic).
   - **-son** and **-s** in English also serve as patronymic markers (e.g. **Robertson, Adams**).
 
-### Korean clans
+#### Korean clans
 
 - Modern Korean surnames often reflect **historical clan affiliation**.
 - A clan is defined by:
@@ -126,7 +126,7 @@ Geographic features:
 
 ---
 
-## Surnames as historical evidence
+### Surnames as historical evidence
 
 **Last names and history**
 - The most common **surnames** in a region can encode:
@@ -139,20 +139,20 @@ Geographic features:
   - Toponyms = long-term geographic memory.
   - Surnames = more recent demographic patterns.
 
-## Given names and state regulation
+### Given names and state regulation
 
 - Some states **regulate given names** to:
-  - Ensure they use the **official writing system**,  
-  - Protect children from **offensive or impractical names**, or  
+  - Ensure they use the **official writing system**,
+  - Protect children from **offensive or impractical names**, or
   - Preserve **cultural traditions**.
 - Mechanisms include:
   - **Approved name lists**,
-  - Requiring names to be **spelled in a particular script**,  
+  - Requiring names to be **spelled in a particular script**,
   - Allowing or restricting certain **morphological patterns** (e.g. gendered endings).
 
 ---
 
-## Takeaways
+### Takeaways
 
 - Surname systems encode:
   - **Family structure** (patronymic vs hereditary),
