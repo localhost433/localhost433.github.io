@@ -211,7 +211,24 @@ pink {color: #dd6388;}
 scarlet{color: #790032;}
 
 /* ---- interactive artifacts ---- */
-.artifact-mount { margin: 1.25rem 0; }
+.artifact-block { margin: 1.25rem 0; }
+.artifact-mount { margin: 0; }
+/* collapsible title bar over each artifact (click to fold the whole demo) */
+.artifact-bar { display: flex; align-items: center; gap: .5rem; width: 100%; margin: 0 0 .5rem;
+  padding: .45rem .7rem; background: #f5f7fa; color: #5a6270;
+  border: 1px solid var(--border-color, #e3e3e3); border-radius: 8px; cursor: pointer;
+  font-family: inherit; font-size: .92rem; font-weight: 600; text-align: left;
+  transition: border-color .12s, color .12s; }
+.artifact-bar:hover { color: #1f2733; border-color: #c7d0db; }
+.artifact-bar__chev { flex: 0 0 auto; display: inline-grid; place-items: center; width: 1.2rem; height: 1.2rem;
+  font-size: .8rem; line-height: 1; color: #5b53d6; background: #ecebfb; border-radius: 5px;
+  transition: transform .15s; }
+.artifact-block:not(.artifact-block--collapsed) .artifact-bar__chev { transform: rotate(90deg); }
+.artifact-bar__title { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.artifact-block--collapsed .artifact-mount { display: none; }
+html.dark-mode .artifact-bar { background: #131b26; color: #9aa5b3; border-color: #26303d; }
+html.dark-mode .artifact-bar:hover { color: #e7ebf1; border-color: #3a4756; }
+html.dark-mode .artifact-bar__chev { color: #a78bfa; background: #2a2450; }
 .artifact-frame { width: 100%; border: 1px solid var(--border-color, #e3e3e3); border-radius: 10px; background: transparent; display: block; }
 .artifact-spinner { width: 22px; height: 22px; margin: 18px auto; border: 3px solid rgba(127,127,127,.3); border-top-color: rgba(127,127,127,.9); border-radius: 50%; animation: artifact-spin .8s linear infinite; }
 @keyframes artifact-spin { to { transform: rotate(360deg); } }

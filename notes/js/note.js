@@ -54,7 +54,23 @@ marked.use({
       const parsed = ArtifactUtils.parseArtifactInfo("artifact " + token.info);
       const idx = artifactStore.length;
       artifactStore.push({ src: parsed.src, code: parsed.src ? null : token.code });
-      return `<div class="artifact-mount" data-artifact-index="${idx}"></div>`;
+      // A `static` artifact (a non-interactive diagram) renders bare — no
+      // collapsible bar, no "Interactive demo" title — just the mount.
+      if (parsed.static) {
+        return `<div class="artifact-block artifact-block--static" data-artifact-index="${idx}">` +
+          `<div class="artifact-mount" data-artifact-index="${idx}"></div>` +
+        `</div>`;
+      }
+      // Otherwise wrap in a collapsible block: a clickable title bar over the
+      // mount. Starts expanded; the bar's title is filled in from the artifact's
+      // own title once the frame reports ready (see setupArtifact).
+      return `<div class="artifact-block" data-artifact-index="${idx}">` +
+        `<button type="button" class="artifact-bar" aria-expanded="true">` +
+          `<span class="artifact-bar__chev" aria-hidden="true">▸</span>` +
+          `<span class="artifact-bar__title">Interactive demo</span>` +
+        `</button>` +
+        `<div class="artifact-mount" data-artifact-index="${idx}"></div>` +
+      `</div>`;
     }
   }]
 });
@@ -299,7 +315,14 @@ async function setupArtifact(mount, course) {
     if (e.source !== iframe.contentWindow) return;
     if (d.type === "artifact:hostready") iframe.contentWindow.postMessage(payload, "*");
     else if (d.id !== id) return;
-    else if (d.type === "artifact:ready") mount.classList.add("ready");
+    else if (d.type === "artifact:ready") {
+      mount.classList.add("ready");
+      if (d.title) {
+        const block = mount.closest(".artifact-block");
+        const titleEl = block && block.querySelector(".artifact-bar__title");
+        if (titleEl) titleEl.textContent = d.title;
+      }
+    }
     else if (d.type === "artifact:height") iframe.style.height = d.px + "px";
     else if (d.type === "artifact:error") mount.classList.add("ready");
   });
@@ -331,6 +354,15 @@ function warmArtifactCDNs() {
 function hydrateArtifacts(root, course) {
   const mounts = root.querySelectorAll(".artifact-mount");
   mounts.forEach(m => { m.innerHTML = '<div class="artifact-spinner" role="status" aria-label="Loading demo"></div>'; });
+  // clicking an artifact's bar folds/unfolds the whole demo (all start expanded)
+  root.querySelectorAll(".artifact-bar").forEach(bar => {
+    bar.addEventListener("click", () => {
+      const block = bar.closest(".artifact-block");
+      if (!block) return;
+      const collapsed = block.classList.toggle("artifact-block--collapsed");
+      bar.setAttribute("aria-expanded", String(!collapsed));
+    });
+  });
   if (!mounts.length) return;
   warmArtifactCDNs();
   if (!("IntersectionObserver" in window)) { mounts.forEach(m => setupArtifact(m, course)); return; }

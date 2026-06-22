@@ -98,7 +98,10 @@
           clientNS.createRoot(document.getElementById("root")).render(window.React.createElement(Comp));
 
           requestAnimationFrame(function () {
-            post({ type: "artifact:ready" });
+            // hand the note the artifact's own title so its collapsible bar can show it
+            var tEl = document.querySelector("[data-artifact-title]");
+            var title = tEl ? (tEl.textContent || "").trim() : "";
+            post({ type: "artifact:ready", title: title });
             reportHeight();
             if (window.ResizeObserver) new ResizeObserver(reportHeight).observe(document.documentElement);
             else window.addEventListener("resize", reportHeight);

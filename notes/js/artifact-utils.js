@@ -7,12 +7,19 @@
 })(typeof self !== "undefined" ? self : this, function () {
   "use strict";
 
-  // "artifact" | "artifact src=demos/x.jsx" | 'artifact src="a b.jsx"'
+  // "artifact" | "artifact src=demos/x.jsx" | 'artifact src="a b.jsx"' |
+  // "artifact src=demos/x.jsx static"  (the `static` flag = a non-interactive
+  // diagram: the host renders it bare, with no collapsible "Interactive demo" bar)
   function parseArtifactInfo(info) {
     const t = String(info || "").trim();
     if (t !== "artifact" && !t.startsWith("artifact ")) return { isArtifact: false, src: null };
     const m = /\bsrc\s*=\s*(?:"([^"]+)"|'([^']+)'|([^\s]+))/.exec(t);
-    return { isArtifact: true, src: m ? (m[1] || m[2] || m[3]) : null };
+    // flags = whatever's left after dropping `artifact` and any `src=...` value,
+    // so a filename containing "static" can't be mistaken for the flag.
+    const flags = t.replace(/^artifact\b/, "")
+      .replace(/\bsrc\s*=\s*(?:"[^"]+"|'[^']+'|[^\s]+)/, " ")
+      .trim().split(/\s+/).filter(Boolean);
+    return { isArtifact: true, src: m ? (m[1] || m[2] || m[3]) : null, static: flags.includes("static") };
   }
 
   function resolveArtifactSrc(course, src) {
