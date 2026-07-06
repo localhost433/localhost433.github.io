@@ -111,10 +111,11 @@ export default function JvmArchitectureMap() {
         {arrow(354, 500, 393, 500)}
         {arrow(545, 500, 604, 500)}
 
-        <WhyDot n={1} x={253} y={112} active={open === 1} onToggle={toggle} label="Class loader" />
-        <WhyDot n={2} x={477} y={112} active={open === 2} onToggle={toggle} label="Runtime data areas" />
-        <WhyDot n={3} x={681} y={112} active={open === 3} onToggle={toggle} label="Execution engine" />
-        <WhyDot n={4} x={262} y={500} active={open === 4} onToggle={toggle} label="JNI bridge" />
+        {/* markers sit in each region's top-left corner, clear of the centred title text */}
+        <WhyDot n={1} x={180} y={118} active={open === 1} onToggle={toggle} label="Class loader" />
+        <WhyDot n={2} x={374} y={118} active={open === 2} onToggle={toggle} label="Runtime data areas" />
+        <WhyDot n={3} x={626} y={118} active={open === 3} onToggle={toggle} label="Execution engine" />
+        <WhyDot n={4} x={258} y={489} active={open === 4} onToggle={toggle} label="JNI bridge" />
       </DiagramSvg>
 
       <WhyNotes notes={WHY} open={open} />

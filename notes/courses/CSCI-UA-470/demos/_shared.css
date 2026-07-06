@@ -461,6 +461,10 @@ html.dark-mode {
 .mm-knob__opt:hover { color: hsl(var(--foreground)); }
 .mm-knob__opt--on { background: var(--mm-ptr-bg); color: var(--mm-ptr); font-weight: 600; }
 
+/* Predict keeps the current state visible: prior-step memory as context, question below. */
+.mm-predict-wrap { display: flex; flex-direction: column; gap: .55rem; }
+.mm-predict-ctx__tag { display: inline-block; margin-bottom: .3rem; font-size: .62rem; font-weight: 700;
+  letter-spacing: .07em; text-transform: uppercase; color: var(--mm-muted); }
 .mm-predict { display: flex; flex-direction: column; gap: .5rem; padding: .6rem .7rem;
   background: var(--mm-panel-bg); border: 1px solid var(--mm-panel-bd); border-radius: var(--radius); }
 .mm-predict__ask { margin: 0; font-size: .85rem; line-height: 1.45; color: hsl(var(--foreground)); }
