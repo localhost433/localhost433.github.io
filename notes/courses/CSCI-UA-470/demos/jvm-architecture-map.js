@@ -205,29 +205,29 @@ export default function JvmArchitectureMap() {
     }
   }, "native call"), arrow(354, 500, 393, 500), arrow(545, 500, 604, 500), /*#__PURE__*/React.createElement(WhyDot, {
     n: 1,
-    x: 253,
-    y: 112,
+    x: 180,
+    y: 118,
     active: open === 1,
     onToggle: toggle,
     label: "Class loader"
   }), /*#__PURE__*/React.createElement(WhyDot, {
     n: 2,
-    x: 477,
-    y: 112,
+    x: 374,
+    y: 118,
     active: open === 2,
     onToggle: toggle,
     label: "Runtime data areas"
   }), /*#__PURE__*/React.createElement(WhyDot, {
     n: 3,
-    x: 681,
-    y: 112,
+    x: 626,
+    y: 118,
     active: open === 3,
     onToggle: toggle,
     label: "Execution engine"
   }), /*#__PURE__*/React.createElement(WhyDot, {
     n: 4,
-    x: 262,
-    y: 500,
+    x: 258,
+    y: 489,
     active: open === 4,
     onToggle: toggle,
     label: "JNI bridge"
