@@ -18,7 +18,7 @@
   --mm-type-bg:#eef1f6; --mm-type-bd:#dde3ec; --mm-type-fg:#475063;
   --mm-ptr:#5b53d6;   --mm-ptr-bg:#ecebfb;
   --mm-ref:#0e8aa0;   --mm-ref-bg:#e2f5fa;
-  --mm-hl:#d9870a;    --mm-dangling:#dc2626;  --mm-reclaimed-bg:#efeee8;
+  --mm-hl:#d9870a;    --mm-dangling:#dc2626;  --mm-ok:#16a34a;  --mm-reclaimed-bg:#efeee8;
 
   --mm-code-bg:#f1f4f8; --mm-code-fg:#26303d; --mm-code-ln:#9aa3b2; --mm-code-hl:#ece9fb;
   /* syntax tokens — GitHub hljs theme (light) so demo code matches the note's code blocks */
@@ -40,7 +40,7 @@ html.dark-mode {
   --mm-type-bg:#1b2532; --mm-type-bd:#33404f; --mm-type-fg:#9fb0c4;
   --mm-ptr:#a78bfa;   --mm-ptr-bg:#2a2450;
   --mm-ref:#3fc6dd;   --mm-ref-bg:#0f3640;
-  --mm-hl:#f59e0b;    --mm-dangling:#f87171;  --mm-reclaimed-bg:#2b2b29;
+  --mm-hl:#f59e0b;    --mm-dangling:#f87171;  --mm-ok:#4ade80;  --mm-reclaimed-bg:#2b2b29;
 
   --mm-code-bg:#0c121b; --mm-code-fg:#d7dfeb; --mm-code-ln:#6c7686; --mm-code-hl:#2a2450;
   /* syntax tokens — GitHub hljs theme (dark) */
@@ -444,4 +444,66 @@ html.dark-mode {
 @media (max-width: 640px) {
   .mm-dual { grid-template-columns: 1fr; }
   .mm-dual__col + .mm-dual__col { border-left: 0; border-top: 1px solid var(--mm-panel-bd); padding-left: 0; padding-top: .9rem; }
+}
+
+/* ---- interactive primitives: knobs (manipulate-and-observe) + predict-then-reveal.
+   One shared vocabulary, reused by every scene type; theme-aware via --mm-* tokens.
+   No scoring/gamification — the verdict is a neutral, explanatory mark. ---- */
+.mm-knobs { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1.1rem;
+  padding: .4rem .6rem; background: var(--mm-panel-bg); border: 1px solid var(--mm-panel-bd); border-radius: 7px; }
+.mm-knob { display: flex; align-items: center; gap: .45rem; }
+.mm-knob__label { font-size: .68rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--mm-muted); }
+.mm-knob__opts { display: inline-flex; gap: 2px; padding: 2px; border-radius: 7px;
+  background: var(--mm-code-bg); border: 1px solid var(--mm-panel-bd); }
+.mm-knob__opt { appearance: none; border: none; cursor: pointer; font: inherit; font-size: .76rem;
+  padding: .2rem .55rem; border-radius: 5px; color: var(--mm-muted); background: transparent;
+  transition: background .12s, color .12s; white-space: nowrap; }
+.mm-knob__opt:hover { color: hsl(var(--foreground)); }
+.mm-knob__opt--on { background: var(--mm-ptr-bg); color: var(--mm-ptr); font-weight: 600; }
+
+.mm-predict { display: flex; flex-direction: column; gap: .5rem; padding: .6rem .7rem;
+  background: var(--mm-panel-bg); border: 1px solid var(--mm-panel-bd); border-radius: var(--radius); }
+.mm-predict__ask { margin: 0; font-size: .85rem; line-height: 1.45; color: hsl(var(--foreground)); }
+.mm-predict__ask::before { content: "Predict"; display: inline-block; margin-right: .5rem; vertical-align: middle;
+  padding: .12em .45em; border-radius: 4px; font-size: .56rem; font-weight: 700; letter-spacing: .05em;
+  text-transform: uppercase; background: var(--mm-ptr-bg); color: var(--mm-ptr); }
+.mm-predict__choices { display: flex; flex-wrap: wrap; gap: .4rem; }
+.mm-predict__choice { appearance: none; cursor: pointer; font: inherit; font-size: .8rem; text-align: left;
+  padding: .35rem .6rem; border-radius: 6px; background: var(--mm-cell-bg); border: 1px solid var(--mm-cell-bd);
+  color: hsl(var(--foreground)); transition: border-color .12s, background .12s; }
+.mm-predict__choice:hover { border-color: var(--mm-ptr); background: var(--mm-ptr-bg); }
+.mm-predict__skip { align-self: flex-start; appearance: none; cursor: pointer; font: inherit; font-size: .74rem;
+  color: var(--mm-muted); background: none; border: none; padding: .1rem 0; text-decoration: underline; text-underline-offset: 2px; }
+.mm-predict__skip:hover { color: hsl(var(--foreground)); }
+
+.mm-verdict { margin: 0; display: flex; align-items: baseline; gap: .5rem; flex-wrap: wrap;
+  font-size: .85rem; line-height: 1.45; color: hsl(var(--foreground));
+  background: var(--mm-panel-bg); border: 1px solid var(--mm-panel-bd); border-radius: var(--radius); padding: .5rem .7rem; }
+.mm-verdict__mark { font-weight: 700; }
+.mm-verdict__mark--ok { color: var(--mm-ok); }
+.mm-verdict__mark--no { color: var(--mm-dangling); }
+
+/* Why — annotated callouts (SVG markers + caption panel). Reuses pointer tokens. */
+.mm-why { margin-top: .5rem; min-height: 1.6rem; }
+.mm-why__hint { margin: 0; font-size: .8rem; font-style: italic; color: var(--mm-muted); }
+.mm-why__note { margin: 0; display: flex; align-items: flex-start; gap: .5rem;
+  font-size: .85rem; line-height: 1.45; color: hsl(var(--foreground)); }
+.mm-why__badge { flex: none; display: inline-flex; align-items: center; justify-content: center;
+  width: 1.35rem; height: 1.35rem; border-radius: 50%;
+  background: var(--mm-ptr-bg); color: var(--mm-ptr); font-size: .72rem; font-weight: 700; }
+.mm-why__dot circle { fill: var(--mm-ptr-bg); stroke: var(--mm-ptr); stroke-width: 1.4;
+  cursor: pointer; transition: fill .12s ease; }
+.mm-why__dot text { fill: var(--mm-ptr); font-size: 12px; font-weight: 800; pointer-events: none; }
+.mm-why__dot:hover circle,
+.mm-why__dot--on circle { fill: var(--mm-ptr); }
+.mm-why__dot:hover text,
+.mm-why__dot--on text { fill: var(--mm-panel-bg); }
+.mm-why__dot:focus-visible { outline: none; }
+.mm-why__dot:focus-visible circle { stroke-width: 2.6; }
+@media (prefers-reduced-motion: reduce) {
+  .mm-why__dot circle { transition: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mm-knob__opt, .mm-predict__choice, .mm-predict__skip { transition: none; }
 }
