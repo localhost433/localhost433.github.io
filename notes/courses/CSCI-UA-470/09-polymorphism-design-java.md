@@ -285,5 +285,11 @@ class TA extends Student {
 
 ## Practice
 
-```artifact src=demos/practice-09.jsx
+```artifact src=demos/practice-09-compare.jsx
+```
+
+```artifact src=demos/practice-09-predict.jsx
+```
+
+```artifact src=demos/practice-09-mcq.jsx
 ```
