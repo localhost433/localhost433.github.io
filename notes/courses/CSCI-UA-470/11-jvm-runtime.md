@@ -166,5 +166,11 @@ For exam-style questions, the most important distinctions are:
 
 ## Practice
 
-```artifact src=demos/practice-11.jsx
+```artifact src=demos/practice-11-compare.jsx
+```
+
+```artifact src=demos/practice-11-predict.jsx
+```
+
+```artifact src=demos/practice-11-mcq.jsx
 ```
