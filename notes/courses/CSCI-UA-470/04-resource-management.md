@@ -307,5 +307,8 @@ The other way classes relate -- one class *deriving* from another and inheriting
 
 ## Practice
 
-```artifact src=demos/practice-04.jsx
+```artifact src=demos/practice-04-predict.jsx
+```
+
+```artifact src=demos/practice-04-mcq.jsx
 ```
