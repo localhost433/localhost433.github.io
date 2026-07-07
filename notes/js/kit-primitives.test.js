@@ -16,10 +16,6 @@ const EXPECTED = [
   "export function Verdict",
   "export function WhyDot",
   "export function WhyNotes",
-  "export function firstSatisfying",
-  "export function GoalBanner",
-  "export function Quiz",
-  "export function quiz",
   "export function Mcq",
   "export function mcq",
 ];

@@ -516,21 +516,6 @@ html.dark-mode {
 .mm-quiz__btn:hover:not(:disabled) { border-color: var(--mm-ptr); color: var(--mm-ptr); }
 .mm-quiz__btn:disabled { opacity: .45; cursor: default; }
 
-/* Goal — manipulate-to-goal banner (shares pointer/ok tokens with predict). */
-.mm-goal { padding: .5rem .7rem; border-radius: 8px; background: var(--mm-panel-bg); }
-.mm-goal--met { background: var(--mm-ptr-bg); }
-.mm-goal__ask { margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: .5rem;
-  font-size: .85rem; line-height: 1.45; color: hsl(var(--foreground)); }
-.mm-goal__ask::before { content: "Goal"; display: inline-block; margin-right: .3rem;
-  font-size: .62rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
-  color: var(--mm-ptr); }
-.mm-goal__skip { appearance: none; cursor: pointer; font: inherit; font-size: .74rem;
-  background: none; border: none; color: var(--mm-muted); text-decoration: underline; padding: 0; }
-.mm-goal__skip:hover { color: hsl(var(--foreground)); }
-.mm-goal__done { margin: 0; display: flex; align-items: baseline; gap: .5rem; flex-wrap: wrap;
-  font-size: .85rem; line-height: 1.45; color: hsl(var(--foreground)); }
-.mm-goal__mark { font-weight: 700; color: var(--mm-ok); }
-
 /* MCQ — paged multiple-choice quiz (reuses .mm-quiz nav). No score. */
 .mm-mcq { display: flex; flex-direction: column; gap: .6rem; }
 .mm-mcq__stem { margin: 0; font-size: .9rem; line-height: 1.5; color: hsl(var(--foreground)); }
