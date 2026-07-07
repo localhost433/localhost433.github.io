@@ -205,7 +205,7 @@ html.dark-mode {
 .mm-seg--active {
   outline: 2px solid var(--mm-ptr, #6366f1);
   outline-offset: 1px;
-  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.20);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--mm-ptr) 20%, transparent);
   transition: box-shadow .18s ease, outline-color .18s ease;
 }
 @media (prefers-reduced-motion: reduce) { .mm-seg--active { transition: none; } }

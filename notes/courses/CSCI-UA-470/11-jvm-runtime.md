@@ -12,7 +12,8 @@ Use [note 10](note.html?course=CSCI-UA-470&note=10-java-files-final) for files, 
 ## The life of one Java program
 
 These are the stages a single program passes through, source to reclaimed
-memory -- the same seven steps the demos on this page show in isolation:
+memory -- the same seven steps this page walks through, several of them shown
+step-by-step in the demos below:
 
 | # | Stage | Who acts | What happens |
 |---|---|---|---|
