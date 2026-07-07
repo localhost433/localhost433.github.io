@@ -192,6 +192,24 @@ html.dark-mode {
 .mm-seg--code   { background: var(--seg-code-bg);   border-color: var(--seg-code-bd);   }
 .mm-seg--code   .mm-seg__label { color: var(--seg-code-fg);   } .mm-seg--code   .mm-seg__hint { color: var(--seg-code-tx);   }
 
+/* JVM runtime regions (note 11 mini-VM) — reuse the four base palettes. */
+.mm-seg--method  { background: var(--seg-global-bg); border-color: var(--seg-global-bd); }
+.mm-seg--method  .mm-seg__label { color: var(--seg-global-fg); } .mm-seg--method  .mm-seg__hint { color: var(--seg-global-tx); }
+.mm-seg--opstack { background: var(--seg-stack-bg);  border-color: var(--seg-stack-bd);  }
+.mm-seg--opstack .mm-seg__label { color: var(--seg-stack-fg);  } .mm-seg--opstack .mm-seg__hint { color: var(--seg-stack-tx);  }
+.mm-seg--pc      { background: var(--seg-code-bg);   border-color: var(--seg-code-bd);   }
+.mm-seg--pc      .mm-seg__label { color: var(--seg-code-fg);   } .mm-seg--pc      .mm-seg__hint { color: var(--seg-code-tx);   }
+
+/* the region currently doing work: a ring + soft glow. reduced-motion keeps the
+   ring but drops the transition. --mm-ptr is the arrow accent; literal fallback. */
+.mm-seg--active {
+  outline: 2px solid var(--mm-ptr, #6366f1);
+  outline-offset: 1px;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.20);
+  transition: box-shadow .18s ease, outline-color .18s ease;
+}
+@media (prefers-reduced-motion: reduce) { .mm-seg--active { transition: none; } }
+
 .mm-gap { display: flex; align-items: center; gap: .5rem; font-size: .62rem; color: var(--mm-axis);
   border: 1px dashed var(--mm-gap-bd); border-radius: 6px; padding: .18rem .4rem; }
 .mm-gap__txt { flex: 1; text-align: center; }
