@@ -9,6 +9,24 @@ This note isolates the runtime model behind Java. [Note 08](note.html?course=CSC
 
 Use [note 10](note.html?course=CSCI-UA-470&note=10-java-files-final) for files, serialization, and `final`; use this note for the execution platform.
 
+## The life of one Java program
+
+These are the stages a single program passes through, source to reclaimed
+memory -- the same seven steps the demos on this page show in isolation:
+
+| # | Stage | Who acts | What happens |
+|---|---|---|---|
+| 1 | Compile | `javac` | `.java` source becomes portable `.class` bytecode |
+| 2 | Load | class loader | the delegation chain brings the class into the Method Area |
+| 3 | Verify | verifier | bytecode is checked for safety before it can run |
+| 4 | Execute | interpreter | fetch-decode-execute over the operand stack; objects land on the Heap |
+| 5 | Native call | JNI | `native` methods cross into a platform library |
+| 6 | Optimize | JIT | hot methods are compiled to native code |
+| 7 | Reclaim | GC | unreachable objects are marked and swept |
+
+> A hands-on companion that builds this VM yourself in C++: Prof. Hussain's
+> [mini-VM workshop](https://ha2285.github.io/oop-activities/mini-vm-workshop.html).
+
 ## C++ native execution versus Java bytecode execution
 
 This comparison is one of the main bridges from earlier C++ notes to Java.
@@ -122,6 +140,35 @@ The lecture names three loaders:
 
 The job of a class loader is to bring class definitions into the JVM so they can be verified, linked, initialized, and executed.
 
+The three loaders form a **parent-first delegation** chain. A loader does not
+load a requested class immediately -- it first asks its parent, which asks *its*
+parent, up to the bootstrap loader. Only if every ancestor fails does the
+original loader load the class itself:
+
+**application → extension / platform → bootstrap** (ask upward), then load on the
+way back down.
+
+This guarantees the core classes are loaded once by the trusted bootstrap loader:
+a `java.lang.String` you drop on the class path can never shadow or spoof the
+real one, because the bootstrap loader answers first.
+
+### Verification
+
+Before any bytecode runs, the JVM **verifies** each loaded `.class` during the
+link step (the `verify` in load → link → initialize). Verification rejects
+malformed or hostile bytecode up front, so the interpreter and JIT can then run
+it without re-checking safety on every instruction. It confirms, among other
+things:
+
+- the bytecode is **well-formed** and its constant-pool references are valid;
+- the **operand stack** never underflows or overflows, and the types on it match
+  each instruction (no using an `int` where a reference is required);
+- every **branch** targets a real instruction inside the method;
+- **access rules** hold (for example, a `final` class is never subclassed).
+
+This is why a `.class` produced by a different -- or malicious -- tool still
+cannot corrupt the JVM: it must pass the same verification as any other.
+
 ### Runtime areas
 
 The lecture JVM memory diagram includes the following areas:
@@ -152,6 +199,10 @@ The execution engine is responsible for making bytecode run. The lecture lists:
 | JIT compiler | provides native code for repeated/hot methods |
 | Garbage collector | reclaims the memory of objects that are no longer *reachable* from the live program (not merely "unreferenced" -- an isolated cycle of objects that reference each other is still collected) |
 
+The interpreter runs a **fetch-decode-execute** loop: read the opcode the PC
+register points at, decode it to the matching operation, execute it against the
+operand stack and heap, then advance the PC to the next instruction.
+
 The interpreter and JIT compiler are not an either/or choice. Every method starts interpreted (fast startup), and once it becomes *hot* the JIT compiles it to native code for the remaining calls:
 
 ```artifact src=demos/interp-jit-tiers.jsx static
@@ -159,10 +210,31 @@ The interpreter and JIT compiler are not an either/or choice. Every method start
 
 The garbage collector keeps whatever is **reachable** from a GC root and reclaims the rest. "Reachable" is the operative word, not "referenced": a self-referential island of garbage is still garbage.
 
+Reclamation is two phases: a **mark** phase walks outward from the GC roots and
+flags every reachable object, then a **sweep** phase frees everything left
+unmarked. Because marking starts from the roots and follows references, a
+self-referential island with no path from a root is never marked -- and is
+therefore swept.
+
 ```artifact src=demos/gc-reachability.jsx static
 ```
 
 The important idea is that Java execution is not simply "source code runs on the CPU." Instead: **source code → bytecode → JVM loading/runtime/execution machinery → native work on the physical machine**.
+
+### Native calls (JNI)
+
+Some methods are declared `native`: their body is not bytecode but compiled
+native code in a platform library (`.so` on Linux, `.dll` on Windows, `.dylib`
+on macOS). Calling one crosses the **Java Native Interface (JNI)** -- the thread
+leaves the ordinary bytecode path, uses its **native method stack** instead of
+the usual JVM stack, runs the native function, and returns the result back into
+bytecode execution.
+
+JNI is the managed runtime's escape hatch: it is how Java reaches operating-system
+and hardware facilities (file I/O, graphics, vendor libraries) that pure bytecode
+cannot express. It is also where portability stops -- the native library is
+platform-specific, so a program that calls into one is only as portable as that
+library.
 
 ## What to retain from L11
 
@@ -176,6 +248,11 @@ For exam-style questions, the most important distinctions are:
 | Physical machine | real CPU, registers, RAM, stack, heap, code, and storage executing native instructions |
 | Virtual machine | software-defined instruction set, runtime memory areas, and execution rules |
 | JVM internals | class loaders, runtime areas, execution engine, and JNI |
+| Class loading | parent-first delegation loads core classes once via the trusted bootstrap loader |
+| Verification | the link-time safety check that lets bytecode run without per-instruction checks |
+| Object creation | `NEW` reads the Method-Area blueprint, allocates on the Heap, pushes a reference |
+| JNI | `native` methods cross to a platform library via the native method stack; portability stops there |
+| Garbage collection | mark reachable objects from the roots, then sweep the unmarked |
 | Runtime areas | stack area, PC register, native method area/stack, heap area, and method area |
 | Execution engine | interpreter, JIT compiler, and garbage collector cooperate to execute bytecode |
 
