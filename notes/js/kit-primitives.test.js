@@ -16,6 +16,10 @@ const EXPECTED = [
   "export function Verdict",
   "export function WhyDot",
   "export function WhyNotes",
+  "export function firstSatisfying",
+  "export function GoalBanner",
+  "export function Quiz",
+  "export function quiz",
 ];
 
 for (const sig of EXPECTED) {
