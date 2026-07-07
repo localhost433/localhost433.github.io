@@ -505,7 +505,7 @@ html.dark-mode {
 .mm-why__dot:focus-visible { outline: none; }
 .mm-why__dot:focus-visible circle { stroke-width: 2.6; }
 
-/* Quiz — navigable no-score container hosting mixed question items. */
+/* Quiz nav shell — shared Prev/Next chrome, reused by Mcq. */
 .mm-quiz { display: flex; flex-direction: column; gap: .6rem; }
 .mm-quiz__nav { display: flex; align-items: center; justify-content: space-between; gap: .6rem; }
 .mm-quiz__pos { font-size: .72rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
