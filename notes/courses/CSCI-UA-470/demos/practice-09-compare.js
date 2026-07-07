@@ -1,0 +1,48 @@
+/* AUTO-GENERATED from practice-09-compare.jsx by `npm run build:artifacts` — do not edit. */
+import { compare, stack } from "@course";
+
+/* Static side-by-side: C++ virtual opt-in vs Java's always-on dispatch. Both
+   columns show the same call; the right column adds the vtable the vptr follows. */
+const handle = type => stack("s", type, "→ obj", {
+  id: "s"
+});
+const object = klass => stack("obj", "object", "", {
+  id: "obj",
+  fields: [{
+    name: "class",
+    type: "ptr",
+    size: 8,
+    value: "→ " + klass
+  }]
+});
+const vtable = body => stack("vt", "Circle vtable", "", {
+  id: "vt",
+  fields: [{
+    name: "draw",
+    type: "ptr",
+    size: 8,
+    value: body
+  }]
+});
+export default compare({
+  title: "C++ dispatch: virtual opt-in vs Java's always-on",
+  lang: "cpp",
+  stages: [{
+    code: "Shape* s = new Circle();\ns->draw();   // non-virtual",
+    cells: [handle("Shape*"), object("Circle")],
+    tag: {
+      kind: "cpp",
+      text: "early binding"
+    },
+    note: "Non-virtual → resolved at **compile time** from the static type `Shape`, so `Shape::draw` runs."
+  }, {
+    code: "Shape* s = new Circle();\ns->draw();   // virtual",
+    cells: [handle("Shape*"), object("Circle"), vtable("Circle::draw")],
+    tag: {
+      kind: "cpp",
+      text: "late binding"
+    },
+    note: "`virtual` → follows the object's vptr to the `Circle` vtable, so `Circle::draw` runs — like Java always does."
+  }],
+  punch: "C++ dispatches statically unless you write `virtual`; Java is **always** virtual."
+});
