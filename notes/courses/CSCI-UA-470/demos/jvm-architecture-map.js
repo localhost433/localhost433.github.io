@@ -1,6 +1,6 @@
 /* AUTO-GENERATED from jvm-architecture-map.jsx by `npm run build:artifacts` — do not edit. */
 import React from "react";
-import { DiagramSvg, DiagramBox, CompareCaption, WhyDot, WhyNotes } from "@course";
+import { DiagramSvg, DiagramBox, CompareCaption } from "@course";
 
 /* L11 - JVM architecture map.
    The map keeps JVM pieces in their proper roles. Class loading reads .class
@@ -82,21 +82,6 @@ function mini(cx, y, w, label, note, sub) {
   });
 }
 export default function JvmArchitectureMap() {
-  const [open, setOpen] = React.useState(null);
-  const toggle = n => setOpen(cur => cur === n ? null : n);
-  const WHY = [{
-    title: "Class loader",
-    body: "Reads `.class` bytecode and turns it into in-memory `Class` metadata, running load → link (verify · prepare · resolve) → initialize on first active use."
-  }, {
-    title: "Runtime data areas",
-    body: "JVM-defined storage. Method area and heap are **shared** by all threads; JVM stacks, PC registers, and native method stacks are **per-thread**."
-  }, {
-    title: "Execution engine",
-    body: "Runs the bytecode: the interpreter steps it one instruction at a time; the JIT compiles hot code to native; GC reclaims dead heap objects."
-  }, {
-    title: "JNI",
-    body: "The bridge from Java/native method calls out to platform-specific native libraries (`.dll`/`.so`/`.dylib`) and ultimately the host OS/CPU — outside the ordinary Java runtime path."
-  }];
   return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
     "data-artifact-title": true,
     style: {
@@ -203,38 +188,7 @@ export default function JvmArchitectureMap() {
       fontSize: 10.5,
       fontStyle: "italic"
     }
-  }, "native call"), arrow(354, 500, 393, 500), arrow(545, 500, 604, 500), /*#__PURE__*/React.createElement(WhyDot, {
-    n: 1,
-    x: 180,
-    y: 118,
-    active: open === 1,
-    onToggle: toggle,
-    label: "Class loader"
-  }), /*#__PURE__*/React.createElement(WhyDot, {
-    n: 2,
-    x: 374,
-    y: 118,
-    active: open === 2,
-    onToggle: toggle,
-    label: "Runtime data areas"
-  }), /*#__PURE__*/React.createElement(WhyDot, {
-    n: 3,
-    x: 626,
-    y: 118,
-    active: open === 3,
-    onToggle: toggle,
-    label: "Execution engine"
-  }), /*#__PURE__*/React.createElement(WhyDot, {
-    n: 4,
-    x: 258,
-    y: 489,
-    active: open === 4,
-    onToggle: toggle,
-    label: "JNI bridge"
-  })), /*#__PURE__*/React.createElement(WhyNotes, {
-    notes: WHY,
-    open: open
-  }), /*#__PURE__*/React.createElement(CompareCaption, {
+  }, "native call"), arrow(354, 500, 393, 500), arrow(545, 500, 604, 500)), /*#__PURE__*/React.createElement(CompareCaption, {
     cols: [{
       tag: "loader",
       kind: "java",
