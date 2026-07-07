@@ -80,6 +80,21 @@ The JVM model is largely **stack-based**: many bytecode operations push values o
 ```artifact src=demos/jvm-operand-stack.jsx
 ```
 
+### The life of an object: `NEW` / `STORE` / `DESCRIBE`
+
+The operand-stack trace above is pure arithmetic. Object creation adds two more
+regions: the **Method Area** (the class blueprint) and the **Heap** (the object
+itself). Step through the workshop's Program A -- `new Point()`, set `x` and `y`,
+print -- and watch each JVM region light up as its opcode runs:
+
+```artifact src=demos/jvm-object-lifecycle.jsx
+```
+
+The key move is `NEW`: it reads the blueprint from the Method Area, allocates the
+object on the Heap, and pushes a **reference** onto the operand stack. Every later
+field access follows that reference. When the reference goes away, the object
+becomes unreachable -- the hand-off to garbage collection.
+
 ## JVM architecture
 
 At the high level: **`.java` files → Java compiler → `.class` files → JVM**.
