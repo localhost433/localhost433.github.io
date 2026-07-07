@@ -1,5 +1,5 @@
 import React from "react";
-import { DiagramSvg, DiagramBox, CompareCaption, WhyDot, WhyNotes } from "@course";
+import { DiagramSvg, DiagramBox, CompareCaption } from "@course";
 
 /* L11 - JVM architecture map.
    The map keeps JVM pieces in their proper roles. Class loading reads .class
@@ -44,14 +44,6 @@ function mini(cx, y, w, label, note, sub) {
 }
 
 export default function JvmArchitectureMap() {
-  const [open, setOpen] = React.useState(null);
-  const toggle = (n) => setOpen((cur) => (cur === n ? null : n));
-  const WHY = [
-    { title: "Class loader", body: "Reads `.class` bytecode and turns it into in-memory `Class` metadata, running load → link (verify · prepare · resolve) → initialize on first active use." },
-    { title: "Runtime data areas", body: "JVM-defined storage. Method area and heap are **shared** by all threads; JVM stacks, PC registers, and native method stacks are **per-thread**." },
-    { title: "Execution engine", body: "Runs the bytecode: the interpreter steps it one instruction at a time; the JIT compiles hot code to native; GC reclaims dead heap objects." },
-    { title: "JNI", body: "The bridge from Java/native method calls out to platform-specific native libraries (`.dll`/`.so`/`.dylib`) and ultimately the host OS/CPU — outside the ordinary Java runtime path." },
-  ];
   return (
     <div>
       <span data-artifact-title style={{ display: "none" }}>JVM architecture - class loading, runtime data areas, execution engine, JNI</span>
@@ -110,15 +102,7 @@ export default function JvmArchitectureMap() {
           style={{ fill: "var(--mm-muted)", fontSize: 10.5, fontStyle: "italic" }}>native call</text>
         {arrow(354, 500, 393, 500)}
         {arrow(545, 500, 604, 500)}
-
-        {/* markers sit in each region's top-left corner, clear of the centred title text */}
-        <WhyDot n={1} x={180} y={118} active={open === 1} onToggle={toggle} label="Class loader" />
-        <WhyDot n={2} x={374} y={118} active={open === 2} onToggle={toggle} label="Runtime data areas" />
-        <WhyDot n={3} x={626} y={118} active={open === 3} onToggle={toggle} label="Execution engine" />
-        <WhyDot n={4} x={258} y={489} active={open === 4} onToggle={toggle} label="JNI bridge" />
       </DiagramSvg>
-
-      <WhyNotes notes={WHY} open={open} />
 
       <CompareCaption
         cols={[
