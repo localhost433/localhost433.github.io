@@ -1,4 +1,4 @@
-import { scene, obj, heap, methodArea, opstack, pcreg } from "@course";
+import { scene, obj, methodArea, opstack, pcreg } from "@course";
 
 /* L11 - JVM object lifecycle (workshop Program A).
    new Point() -> x=3 -> y=4 -> print. Shows the JVM runtime *regions* as boxes
