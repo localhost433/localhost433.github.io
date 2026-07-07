@@ -531,6 +531,26 @@ html.dark-mode {
   font-size: .85rem; line-height: 1.45; color: hsl(var(--foreground)); }
 .mm-goal__mark { font-weight: 700; color: var(--mm-ok); }
 
+/* MCQ — paged multiple-choice quiz (reuses .mm-quiz nav). No score. */
+.mm-mcq { display: flex; flex-direction: column; gap: .6rem; }
+.mm-mcq__stem { margin: 0; font-size: .9rem; line-height: 1.5; color: hsl(var(--foreground)); }
+.mm-mcq__fig { margin: .1rem 0; }
+.mm-mcq__img { max-width: 100%; border-radius: 8px; }
+.mm-mcq__choices { display: flex; flex-direction: column; gap: .4rem; }
+.mm-mcq__choice { appearance: none; cursor: pointer; font: inherit; font-size: .84rem; text-align: left;
+  padding: .5rem .7rem; border-radius: 8px; border: 1px solid var(--mm-panel-bd);
+  background: var(--mm-panel-bg); color: hsl(var(--foreground)); }
+.mm-mcq__choice:hover:not(:disabled) { border-color: var(--mm-ptr); background: var(--mm-ptr-bg); }
+.mm-mcq__choice:disabled { cursor: default; }
+.mm-mcq__choice--correct { border-color: var(--mm-ok); background: color-mix(in srgb, var(--mm-ok) 12%, transparent); }
+.mm-mcq__choice--wrong { border-color: var(--mm-dangling); background: color-mix(in srgb, var(--mm-dangling) 12%, transparent); }
+.mm-mcq__mark { font-weight: 700; color: var(--mm-ok); }
+.mm-mcq__mark--no { color: var(--mm-dangling); }
+.mm-mcq__show { align-self: flex-start; appearance: none; cursor: pointer; font: inherit; font-size: .74rem;
+  background: none; border: none; color: var(--mm-muted); text-decoration: underline; padding: 0; }
+.mm-mcq__show:hover { color: hsl(var(--foreground)); }
+.mm-mcq__why { margin: 0; font-size: .85rem; line-height: 1.45; color: hsl(var(--foreground)); }
+
 @media (prefers-reduced-motion: reduce) {
   .mm-why__dot circle { transition: none; }
 }
