@@ -61,6 +61,26 @@ Where do these actually live in memory? Step through it -- the static members si
 ```artifact src=demos/mem-static.jsx
 ```
 
+### Static *local* variables
+
+A `static` inside a **function** is a different thing from a static class member. A function-scope `static` lives in Global/Static storage -- *not* on the stack -- so it is initialized once and **keeps its value between calls**:
+
+```cpp
+void f1() {
+    static int x = 0;   // initialized ONCE, persists across calls
+    x++;
+    cout << x;
+}
+
+int main() {
+    f1();   // 1
+    f1();   // 2
+    f2();   // (f2 has its own separate static)
+}
+```
+
+Each call to `f1` resumes from the last value -- the two calls print `1` then `2` -- because the variable is not re-created on the stack each time the function runs. A different function `f2` gets its own independent static variable.
+
 ## Operator overloading
 
 C++ lets you define what built-in operators mean for *your* types. The `circle` class overloads arithmetic so you can "add" two circles:
@@ -92,6 +112,33 @@ Trace the actual `code/lectures/L03/main.cpp`: two circles `c1 = {red, 10}` and 
 ```artifact src=demos/trace-l03.jsx
 ```
 
+### A container motivates the operators
+
+Overloading isn't just for arithmetic. Consider a `List` you build up and then query:
+
+```cpp
+List l1;
+l1.add(5);
+l1.add(6);
+l1.add(10);
+l1.add(15);
+int x = l1.pop();     // removes/returns the last element (15)
+```
+
+After the four adds and one `pop`, the remaining elements form a chain:
+
+```
+5 -> 6 -> 10
+```
+
+Now the natural things to *do* with a list all want overloaded operators:
+
+- `l1 == l2` -- overload `operator==` to compare contents (returns `true`/`false`),
+- `l1 != l2` -- overload `operator!=` for the negation,
+- `cout << l1;` -- overload `operator<<` to print the whole list.
+
+Without these, `==` would compare objects member-by-member (or not compile) and `cout << l1` would have no meaning at all -- so a real container class defines them.
+
 ## Default copy semantics
 
 The statement `c1 = c2;` invokes the **assignment operator** `operator=`. The compiler gives you a default that copies members one by one. That default -- together with the default **copy constructor** -- is fine for value attributes but dangerous once a class holds a **pointer** -- exactly the problem the copy constructor and deep-copy sections below tackle.
@@ -109,7 +156,7 @@ Circle(const Circle& other) {
 
 It runs whenever you:
 
-- initialize one object from another -- `Circle c2 = c1;`
+- initialize one object from another -- both `Circle c2(c1);` (direct-init) and `Circle c2 = c1;` (copy-init) invoke the copy constructor,
 - pass an object **by value** to a function, or
 - **return** an object by value.
 
@@ -149,6 +196,32 @@ See the two strategies stepped through side by side -- the same operation on the
 
 ```artifact src=demos/mem-copy-compare.jsx
 ```
+
+### Why all three special members exist
+
+Think about who *uses* a class. **Programmer-1** authors `circle` with a heap-owning `int* radius`, a constructor that allocates it, `// copy constructor` and `// assignment operator` left as stubs, and a destructor that frees it:
+
+```cpp
+class circle {
+public:
+    string color;
+    int*   radius;
+    circle() { color = "Red"; radius = new int(0); }
+    // copy constructor          (left empty by programmer-1)
+    // assignment operator       (left empty by programmer-1)
+    ~circle() { delete radius; radius = nullptr; }
+};
+```
+
+Now several *other* programmers use it independently, each writing whatever they need:
+
+```cpp
+circle c1;                                   // programmer-2
+circle c2;                                   // programmer-3
+circle* c3 = new circle(); delete c3;        // programmer-4
+```
+
+Programmer-1 can't see how each of them will copy, assign, or destroy circles. The moment someone writes `circle a = c1;` or `c2 = c1;`, the compiler-supplied shallow copy makes two objects share one `radius` allocation -- and both destructors will `delete` it. Because the class **owns heap memory**, programmer-1 must define all three -- the copy constructor, the assignment operator, *and* the destructor -- so it stays safe for every independent user.
 
 ## The assignment operator
 
@@ -210,13 +283,29 @@ A `friend` may access the **private** members of the class that grants the frien
 ```cpp
 class Person {
 private:
-    string SSN;
+    string SSN;                 // private
+    int    age;                 // private
 public:
-    int    age;
-    string name;
+    string name;                // public
     friend void f();            // a friend function
-    friend class Manager;       // a friend class: Manager can see SSN
+    friend class Manager;       // a friend class: Manager can see SSN and age
 };
 ```
 
+Only `name` is public; `SSN` and `age` are both private. That shapes what code outside the class may read:
+
+| Accessor | `p.SSN` (private) | `p.age` (private) | `p.name` (public) |
+| --- | --- | --- | --- |
+| Non-friend `f()` | ✗ | ✗ | ✓ |
+| Friend `f()` / `Manager` | ✓ | ✓ | ✓ |
+
+A non-friend function can only reach `name`; reading `SSN` or `age` fails to compile. Once `f` (or a `Manager` class) is declared a `friend`, it reads all three -- SSN, age, and name.
+
 Use friendship sparingly -- it deliberately breaks encapsulation -- but it's the standard tool for stream operators like `<<` and for tightly-coupled helpers (e.g., a `Manager` that evaluates a `Person`).
+
+The other way classes relate -- one class *deriving* from another and inheriting its members -- is covered in [Inheritance](note.html?course=CSCI-UA-470&note=05-inheritance).
+
+## Practice
+
+```artifact src=demos/practice-04.jsx
+```
