@@ -399,8 +399,19 @@ function buildWork(){
 function qOf(it){ return QUESTIONS[it.qi]; }
 function optsOf(it){ return it.optOrder.map(k => QUESTIONS[it.qi].options[k]); }
 
+function LS(){ try { return window.localStorage; } catch(_) { return null; } }
+function saveProgress(){
+  const s = LS(); if (!s || typeof serializeProgress !== "function" || view!=="quiz") return;
+  try { s.setItem(progressKey(window.EXAM.id), serializeProgress({work, current, remaining})); } catch(_){}
+}
+function clearProgress(){ const s=LS(); if(!s) return; try { s.removeItem(progressKey(window.EXAM.id)); } catch(_){} }
+
 function begin(){
   buildWork();
+  enterQuiz();
+}
+
+function enterQuiz(){
   document.getElementById("view-start").style.display="none";
   document.getElementById("topbar").style.display="block";
   document.getElementById("view-quiz").style.display="block";
@@ -419,6 +430,7 @@ function startTimer(){
   timerId=setInterval(()=>{
     remaining--;
     updateClock();
+    saveProgress();
     if(remaining<=0){clearInterval(timerId); submit(true);}
   },1000);
 }
@@ -464,10 +476,10 @@ function render(){
   updateGrid();
 }
 
-function selectOpt(i){ work[current].answer=i; render(); }
-function go(d){ const n=current+d; if(n>=0&&n<work.length){current=n; render(); window.scrollTo({top:0,behavior:"smooth"});} }
-function gotoQ(i){ current=i; render(); window.scrollTo({top:0,behavior:"smooth"}); }
-function toggleFlag(){ work[current].flagged=!work[current].flagged; render(); }
+function selectOpt(i){ work[current].answer=i; render(); saveProgress(); }
+function go(d){ const n=current+d; if(n>=0&&n<work.length){current=n; render(); window.scrollTo({top:0,behavior:"smooth"}); saveProgress();} }
+function gotoQ(i){ current=i; render(); window.scrollTo({top:0,behavior:"smooth"}); saveProgress(); }
+function toggleFlag(){ work[current].flagged=!work[current].flagged; render(); saveProgress(); }
 function toggleMap(){ document.getElementById("mapwrap").classList.toggle("collapsed"); }
 
 function buildGrid(){
@@ -498,6 +510,7 @@ function confirmSubmit(){
 }
 
 function submit(auto){
+  clearProgress();
   clearInterval(timerId);
   view="results";
   document.getElementById("view-quiz").style.display="none";
@@ -723,6 +736,23 @@ document.addEventListener("keydown",e=>{
 document.getElementById("exam-intro").innerHTML = window.EXAM.introHtml +
   '<div style="margin-top:22px"><button class="btn-primary" onclick="begin()">Begin' +
   (TOTAL_TIME ? ' <span class="t">[ ' + fmt(TOTAL_TIME) + ' ]</span>' : '') + '</button></div>';
+
+(function offerResume(){
+  const s = LS(); if (!s || typeof hasResumable !== "function") return;
+  const raw = s.getItem(progressKey(window.EXAM.id));
+  if (!raw || !hasResumable(raw)) return;
+  const slot = document.getElementById("resume-slot");
+  slot.innerHTML = '<div class="score-hero" style="margin-bottom:18px"><div class="score-meta">' +
+    '<p class="big">Unfinished attempt found</p><p class="sub">Pick up where you left off, or start fresh.</p>' +
+    '<div style="margin-top:12px"><button class="btn-primary" id="btn-resume">Resume</button> ' +
+    '<button class="nbtn" id="btn-fresh">Start over</button></div></div></div>';
+  document.getElementById("btn-resume").onclick = function(){
+    const st = deserializeProgress(raw); if (!st) return;
+    work = st.work; current = st.current; remaining = st.remaining;
+    enterQuiz();  // shared helper: hides start view, shows quiz view, starts timer, renders
+  };
+  document.getElementById("btn-fresh").onclick = function(){ clearProgress(); slot.innerHTML=""; };
+})();
 </script>
 </body>
 </html>
