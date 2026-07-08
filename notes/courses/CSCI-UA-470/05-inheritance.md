@@ -122,6 +122,43 @@ Resolve it the same two ways as before:
 - **`using`** to pick one: `using Student::id;` inside `TA` makes the bare `t.id` mean `Student::id`.
 - **Redefine** `id` in `TA` (e.g. `int id = 7;`) so `t.id` refers to `TA`'s own member; the base versions remain reachable as `t.Student::id` / `t.Teacher::id`.
 
+## Early binding
+
+Inheritance lets a subclass **override** a method: `Student` redefines `intro()` from `Person`.
+
+```cpp
+class Person {
+public:
+    string name = "James";
+    void intro() { cout << "I am a person"; }
+};
+
+class Student : public Person {   // Student IS-A Person
+public:
+    double gpa = 3.0;
+    void intro() { cout << "I am a student"; }
+};
+```
+
+Which `intro()` runs? Without `virtual`, the compiler decides **at compile time** from the *declared* (static) type of the expression -- not the object's actual runtime type:
+
+```cpp
+int main() {
+    Person  p1;
+    Student s1;
+
+    p1.intro();          // p1.Person::intro()   -> "I am a person"
+    s1.intro();          // s1.Student::intro()  -> "I am a student"
+
+    Person* ptr = &s1;   // base pointer to a Student object
+    ptr->intro();        // ptr->Person::intro() -> "I am a person"  (!)
+}
+```
+
+The first two calls are unsurprising. The third is the point: `ptr` *points at a `Student`*, but its **static type** is `Person*`, so the compiler binds `ptr->intro()` to `Person::intro()` and prints **"I am a person"** -- the `Student` override is never reached. The choice is frozen at compile time from the pointer's declared type, ignoring what the object really is at runtime.
+
+This is **early binding** (a.k.a. *static binding*): method-to-call is resolved by the compiler from static types. It is exactly the limitation that motivates polymorphism -- making the call dispatch on the object's *runtime* type instead requires `virtual` functions, covered in [Polymorphism & Virtual Functions](note.html?course=CSCI-UA-470&note=06-polymorphism).
+
 ## The map of class relations
 
 Two classes can relate in two broad ways:

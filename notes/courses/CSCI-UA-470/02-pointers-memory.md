@@ -8,9 +8,9 @@ date: "2026-05-18/20"
 Every variable has a value *and* an address. C++ gives you three ways to work with them:
 
 ```cpp
-char x = 5;
-char* p = &x;   // pointer: holds the ADDRESS of x   (&  = address-of)
-char& v = x;    // reference: an ALIAS for x
+int x = 5;
+int* p = &x;    // pointer: holds the ADDRESS of x   (&  = address-of)
+int& v = x;     // reference: an ALIAS for x
 
 cout << x;      // 5
 cout << p;      // 0xfA...  (the address)
@@ -54,6 +54,31 @@ A reference is *another name* for the same storage -- not a new object -- while 
 
 ```artifact src=demos/mem-reference-compare.jsx static
 ```
+
+### A reference has no address of its own
+
+Take the address of each name and the difference shows up directly. Given `char x = 5;`, `char* p = &x;`, and `char& r = x;`:
+
+```cpp
+cout << x;      // 5
+cout << r;      // 5      (r reads x)
+cout << p;      // 0xFA   (p holds x's address)
+cout << *p;     // 5      (dereference p -> x's value)
+
+cout << &x;     // 0xFA
+cout << &r;     // 0xFA   (SAME as &x -- r is x, not a separate cell)
+cout << &p;     // 0xFFF  (p's OWN address -- a distinct cell)
+```
+
+`&r == &x`: the reference introduces **no new storage**, so asking for its address just gives you the address of the variable it aliases. The pointer `p`, by contrast, is a real object that lives somewhere (`0xFFF`) and holds a value (`0xFA`) -- so it has its own distinct address.
+
+> **Gotcha -- a pointer holds an address, not an integer.** You cannot assign a plain integer literal to a pointer:
+>
+> ```cpp
+> char* p;
+> p = 5;      // WRONG -- 5 is not an address
+> p = &x;     // right -- p must hold an address
+> ```
 
 ## Pointers and the regions of memory
 
@@ -103,8 +128,8 @@ delete[] arr_ptr;  // free an array
 
 ### Common pointer bugs
 
-- **Double free** -- deleting the same memory twice (two pointers to the same location) raises an error.
-- **Dangling pointer** -- a pointer that still points at deleted memory. Reading it sometimes works, sometimes crashes; `delete`-ing it again crashes.
+- **Double free** -- deleting the same memory twice (two pointers to the same location) is *undefined behavior*: it often crashes or corrupts the heap, but the standard guarantees nothing -- it may even appear to work.
+- **Dangling pointer** -- a pointer that still points at deleted memory. Reading it is also undefined behavior: sometimes it works, sometimes it crashes; `delete`-ing it again is a double free.
 - **Fix:** set the pointer to `nullptr` right after deleting.
 
 ```cpp

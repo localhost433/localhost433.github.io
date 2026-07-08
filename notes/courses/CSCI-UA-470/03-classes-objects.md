@@ -5,7 +5,7 @@ date: "2026-05-20/27"
 
 ## From structs to classes
 
-This note is your first brush with all four OOP pillars -- **encapsulation** (classes bundling state with behavior, plus access control), and the seeds of inheritance, abstraction, and polymorphism that follow; the full map of how they fit together lives in [OOP: The Four Pillars](note.html?course=CSCI-UA-470&note=10-oop-pillars).
+This note is your first brush with all four OOP pillars -- **encapsulation** (classes bundling state with behavior, plus access control), and the seeds of inheritance, abstraction, and polymorphism that follow; the full map of how they fit together lives in [OOP: The Four Pillars](note.html?course=CSCI-UA-470&note=14-oop-pillars-roadmap).
 
 A C-style `struct` is just a bundle of data; a *separate* free function operates on it and receives the data explicitly:
 
@@ -182,3 +182,5 @@ A **destructor** runs automatically when an object is destroyed -- when it goes 
 ```
 
 For objects whose attributes are plain values there's nothing to clean up. Destructors become essential once an object owns **heap memory** (see **Resource Management**).
+
+> **Static members** (a per-class field or method shared by every object) and the stack/heap/static **storage model** for attributes are covered in [Copy, Operators & Resource Management](note.html?course=CSCI-UA-470&note=04-resource-management), alongside where objects live in memory.
