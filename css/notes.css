@@ -151,14 +151,19 @@ nav.table-of-contents a:hover,
 
 #note-content table {
   border-collapse: collapse;
-  white-space: nowrap;
-  min-width: max-content;
 }
 
 #note-content th,
 #note-content td {
   border: 1px solid #cccccc;
   padding: 0.5em 1em;
+  /* Wrap prose-heavy cells instead of forcing one long line (which pushed wide
+     comparison tables off-screen). Short tables stay under the cap and never
+     wrap, so they render exactly as before. */
+  white-space: normal;
+  vertical-align: top;
+  max-width: 24rem;
+  overflow-wrap: break-word;
 }
 
 #note-content tr:nth-child(even) {
@@ -176,13 +181,16 @@ nav.table-of-contents a:hover,
 
 .table-wrapper table {
   border-collapse: collapse;
-  white-space: nowrap;
 }
 
 .table-wrapper th,
 .table-wrapper td {
   border: 1px solid #cccccc;
   padding: 0.5em 1em;
+  white-space: normal;
+  vertical-align: top;
+  max-width: 24rem;
+  overflow-wrap: break-word;
 }
 
 .dark-mode .table-wrapper th,
