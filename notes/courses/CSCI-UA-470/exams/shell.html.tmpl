@@ -308,6 +308,7 @@ details.rev[open] .sm-chev{transform:rotate(90deg)}
       <p class="big" id="scoreBig">0 / 24 correct</p>
       <p class="sub" id="scoreSub"></p>
       <p class="time mono" id="scoreTime"></p>
+      <div id="resultsActions"></div>
     </div>
   </div>
 
@@ -386,6 +387,7 @@ function shuffle(arr){const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=
 const QUESTION_COUNT = (window.QUESTIONS || []).length;
 const TOTAL_TIME = Math.max(0, (window.EXAM.minutes || 0) * 60);
 let work=[], current=0, remaining=TOTAL_TIME, timerId=null, view="start", filter="all";
+let reviewMode = false;
 
 function buildWork(){
   const order = window.EXAM.shuffleQuestions ? shuffle(QUESTIONS.map((_,i)=>i)) : QUESTIONS.map((_,i)=>i);
@@ -411,17 +413,23 @@ function saveProgress(){
 function clearProgress(){ const s=LS(); if(!s) return; try { s.removeItem(progressKey(window.EXAM.id)); } catch(_){} }
 
 function begin(){
+  reviewMode = false;
   buildWork();
   enterQuiz();
 }
 
-function enterQuiz(){
+function enterQuiz(untimed){
   document.getElementById("view-start").style.display="none";
   document.getElementById("topbar").style.display="block";
   document.getElementById("view-quiz").style.display="block";
   document.getElementById("tot").textContent="/ "+String(work.length).padStart(2,"0");
   view="quiz";
-  startTimer();
+  if(untimed){
+    document.getElementById("timer").style.display="none";
+  } else {
+    document.getElementById("timer").style.display="";
+    startTimer();
+  }
   buildGrid();
   render();
   window.scrollTo(0,0);
@@ -514,7 +522,7 @@ function confirmSubmit(){
 }
 
 function submit(auto){
-  clearProgress();
+  if(!reviewMode) clearProgress();
   clearInterval(timerId);
   view="results";
   document.getElementById("view-quiz").style.display="none";
@@ -568,6 +576,29 @@ function renderResults(auto){
 
   setupExport();
   buildReview();
+  renderResultsActions();
+}
+
+function renderResultsActions(){
+  const host = document.getElementById("resultsActions");
+  if(!host) return;
+  host.innerHTML = "";
+  const missed = (typeof missedIndices === "function") ? missedIndices(work, QUESTIONS) : [];
+  if(missed.length && !reviewMode){
+    const btn = document.createElement("button");
+    btn.className = "btn-primary";
+    btn.textContent = "Review incorrect (" + missed.length + ")";
+    btn.onclick = function(){
+      if(typeof buildRetryWork !== "function") return;
+      reviewMode = true;
+      work = buildRetryWork(work, missed);
+      current = 0; remaining = 0;           // untimed retry
+      clearInterval(timerId); timerId = null;
+      document.getElementById("view-results").style.display = "none";
+      enterQuiz(/*untimed*/ true);
+    };
+    host.appendChild(btn);
+  }
 }
 
 /* ---------- study export ---------- */
