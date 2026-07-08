@@ -42,7 +42,7 @@ function inlineExam({ shell, engineLib, data }) {
   out = replaceMarkerLine(out, "/*__CONFIG__*/", "window.EXAM = " + jsonForScript(data.meta) + ";");
   out = replaceMarkerLine(out, "/*__QUESTIONS__*/", "window.QUESTIONS = " + jsonForScript(data.questions) + ";");
   out = replaceMarkerLine(out, "/*__ENGINE_LIB__*/", engineLib);
-  if (/__[A-Z]+__/.test(out)) throw new Error("unfilled marker remains after inlining");
+  if (/\/\*__[A-Z_]+__\*\//.test(out)) throw new Error("unfilled marker remains after inlining");
   return out;
 }
 
