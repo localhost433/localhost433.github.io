@@ -22,12 +22,12 @@ This is the headline difference between the two languages.
 
 ## Java data types
 
-```
-whole numbers : byte (1), short (2), int (4), long (8)   ->  + - * / % ++ --
-floats        : float (4), double (8)                    ->  + - * /
-boolean
-char
-```
+| Category | Types (size in bytes) | Operators |
+|---|---|---|
+| whole numbers | `byte` (1), `short` (2), `int` (4), `long` (8) | `+ - * / % ++ --` |
+| floats | `float` (4), `double` (8) | `+ - * /` |
+| boolean | `boolean` | |
+| char | `char` | |
 
 ### Wrapper classes
 
@@ -51,12 +51,20 @@ Both are objects (unlike a C++ `std::string` value on the stack).
 
 ### Casting
 
-```
-Widening (automatic):  byte -> short -> int -> long -> float -> double
-    int x = 10;   double y = x;          // implicit, no loss
+**Widening** conversions happen automatically along `byte → short → int → long → float → double`:
 
-Narrowing (manual):    double -> float -> long -> int -> short -> byte
-    double x = 3.5;   int y = (int) x;   // explicit cast required
+```java
+int x = 10;
+double y = x;          // implicit; int -> double is exact
+```
+
+Caution: `int`/`long → float` and `long → double` are automatic but may **lose precision**.
+
+**Narrowing** conversions go the other way (`double → float → long → int → short → byte`) and require an explicit cast:
+
+```java
+double x = 3.5;
+int y = (int) x;       // explicit cast required
 ```
 
 ## Basic Java instructions
@@ -87,14 +95,10 @@ int[][]    a = { {10, 20, 30}, {40, 50, 60} };
 
 ### Special methods
 
-```
-constructors -- with-parameters
-             -- without-parameters
-             -- copy constructor
-getters & setters
-toString()      // returns a string representation of the object
-~~destructor~~  // Java has no destructor -- the garbage collector reclaims memory
-```
+- **Constructors** -- with-parameters, without-parameters, and copy constructor
+- **Getters & setters**
+- **`toString()`** -- returns a string representation of the object
+- **No destructor** -- unlike C++, Java has none; the garbage collector reclaims memory
 
 ### Statics (true in **both** C++ and Java)
 
@@ -230,5 +234,10 @@ Step through why the naive reference swap is a no-op and the field swap works:
 | Single | yes | yes |
 | Multi-level | yes | yes |
 | **Multiple** | yes (risks the diamond problem) | no **not allowed** for classes |
+| **Multi-level + multiple** (the diamond) | yes | no **not allowed** for classes |
 
-Java forbids multiple class inheritance precisely to avoid the diamond problem -- instead a class may implement **multiple interfaces**. How C++'s pure-virtual classes map onto Java's `abstract` classes and `interface`s -- and the full concrete/abstract/interface comparison -- is laid out in [OOP: The Four Pillars](note.html?course=CSCI-UA-470&note=10-oop-pillars#concrete-vs-abstract-vs-interface).
+The slide draws inheritance as four shapes -- *single*, *multi-level*, *multiple*, and *multi-level + multiple* (the **diamond**) -- and crosses out the last **two** for Java: both *multiple* and the *diamond* are forbidden for classes.
+
+Java forbids multiple class inheritance precisely to avoid the diamond problem -- instead a class may implement **multiple interfaces**.
+
+The slide also gives the one-line C++ -> Java mapping: a C++ class with a **pure virtual** method corresponds to an `abstract` class in Java, and a C++ class with **all** methods pure virtual corresponds to an `interface`. The full concrete/abstract/interface comparison is laid out in [OOP: The Four Pillars](note.html?course=CSCI-UA-470&note=14-oop-pillars-roadmap#concrete-vs-abstract-vs-interface).

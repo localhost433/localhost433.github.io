@@ -1,17 +1,22 @@
 /* AUTO-GENERATED from swap-by-ref.jsx by `npm run build:artifacts` — do not edit. */
 import { scene, stack, obj } from "@course";
 
-/* Java passes references BY VALUE. A naive reference swap rebinds the local
-   parameter copies (x, y) — the caller's p1/p2 are untouched. Swapping the
-   objects' FIELDS through the references actually exchanges state. Two code
-   panels toggle via step.code; all explanation lives in captions. */
+/* Java passes references BY VALUE. The `pass` knob toggles two swap strategies:
 
-const codeWrong = `static void swap(Person x, Person y) {
+   - "val" (by value): the method rebinds the local parameter copies (x, y). The
+     caller's p1/p2 are untouched — the classic "swap does nothing" outcome.
+   - "ref" (by reference): the method aliases the caller's objects through the
+     references and swaps their FIELDS, so the caller sees swapped state.
+
+   Both are faithful to how Java executes; the two code panels toggle via
+   step.code and all explanation lives in captions. */
+
+const codeVal = `static void swap(Person x, Person y) {
     Person tmp = x;
     x = y;
     y = tmp;
 }`;
-const codeCorrect = `static void swap(Person x, Person y) {
+const codeRef = `static void swap(Person x, Person y) {
     int tmp = x.age;    String s = x.name;
     x.age = y.age;      x.name = y.name;
     y.age = tmp;        y.name = s;
@@ -74,25 +79,35 @@ const TMP = (target, hl) => stack("tmp", "Person", "", {
   size: 8,
   hl
 });
-const steps = [{
+
+/* Shared opening: p1/p2 reference two heap objects before swap is called. */
+const intro = code => ({
   line: [1, 2, 3, 4, 5],
-  code: codeWrong,
+  code,
   cells: [P1(), P2(), A('"James"', "20"), B('"Maya"', "18")],
   caption: {
     java: "`p1` and `p2` are **reference** variables — each holds a reference to a heap `Person` object, not the object itself.",
     intuition: "Variables hold references (handles to objects). `p1`→A(James,20), `p2`→B(Maya,18)."
   }
-}, {
+});
+
+/* Shared call step: swap(p1, p2) copies the reference VALUES into x and y. */
+const call = code => ({
   line: 1,
-  code: codeWrong,
+  code,
   cells: [P1(), P2(), X("objA", true), Y("objB", true), A('"James"', "20"), B('"Maya"', "18")],
   caption: {
     java: "`swap(p1, p2)` copies the **reference values** into fresh parameters `x` and `y`. Both `x`→A and `y`→B — the **same** heap objects `p1`/`p2` point to.",
     intuition: "`x` is not `p1`; it is an independent copy of the same reference. Java passes references **by value**."
   }
-}, {
+});
+
+/* --------------------------------------------------------------------------
+   by value: rebind the local parameter copies. Caller's p1/p2 unchanged.
+   -------------------------------------------------------------------------- */
+const valSteps = [intro(codeVal), call(codeVal), {
   line: [2, 3, 4],
-  code: codeWrong,
+  code: codeVal,
   cells: [P1(), P2(), TMP("objA"), X("objB", true), Y("objA", true), A('"James"', "20"), B('"Maya"', "18")],
   caption: {
     java: "`tmp = x; x = y; y = tmp;` rebinds the **local** copies: `x`→B, `y`→A. The heap objects A and B are **unchanged**. `p1` still points to A; `p2` still points to B.",
@@ -100,15 +115,34 @@ const steps = [{
   }
 }, {
   line: [1, 2, 3, 4, 5],
-  code: codeWrong,
+  code: codeVal,
   cells: [P1(), P2(), A('"James"', "20"), B('"Maya"', "18")],
   caption: {
     java: "`swap` returns; the stack frame (with `x`, `y`, `tmp`) is popped. `p1`→A(James,20) and `p2`→B(Maya,18) — **no visible change**.",
-    intuition: "A reference swap is a no-op outside the method. Swapping the handles leaves the contents untouched."
-  }
-}, {
+    intuition: "Passing references by value, then swapping the handles, is a no-op outside the method. The contents are left untouched."
+  },
+  outputs: [{
+    expr: "p1.name",
+    result: '"James"'
+  }, {
+    expr: "p1.age",
+    result: "20"
+  }, {
+    expr: "p2.name",
+    result: '"Maya"'
+  }, {
+    expr: "p2.age",
+    result: "18"
+  }]
+}];
+
+/* --------------------------------------------------------------------------
+   by reference: alias the caller's objects and swap their FIELDS.
+   Caller's p1/p2 see swapped state.
+   -------------------------------------------------------------------------- */
+const refSteps = [intro(codeRef), call(codeRef), {
   line: [2, 3, 4],
-  code: codeCorrect,
+  code: codeRef,
   cells: [P1(), P2(), X("objA", true), Y("objB", true), A('"James"', "20", true), B('"Maya"', "18", true)],
   caption: {
     java: "`x.age = y.age; x.name = y.name; ...` write **through** the references into the heap objects. Both fields of A and B are swapped; `x` and `y` still point to A and B.",
@@ -116,11 +150,11 @@ const steps = [{
   }
 }, {
   line: [1, 2, 3, 4, 5],
-  code: codeCorrect,
+  code: codeRef,
   cells: [P1(), P2(), A('"Maya"', "18"), B('"James"', "20")],
   caption: {
-    java: "After the correct `swap`: A now holds (Maya,18) and B holds (James,20). `p1`→A reads Maya/18; `p2`→B reads James/20. The **references never moved**; the state did.",
-    intuition: "Same objects, swapped contents — the correct pattern for exchanging Java objects is to swap their fields, not their references."
+    java: "After the by-reference `swap`: A now holds (Maya,18) and B holds (James,20). `p1`→A reads Maya/18; `p2`→B reads James/20. The **references never moved**; the state did.",
+    intuition: "Same objects, swapped contents — the pattern for exchanging Java objects is to swap their fields, not their references."
   },
   outputs: [{
     expr: "p1.name",
@@ -137,8 +171,20 @@ const steps = [{
   }]
 }];
 export default scene({
-  title: "Swap by reference — Java passes references by value",
-  code: codeWrong,
-  steps,
-  lang: "java"
+  title: "Swapping Java objects: reassign the handles, or mutate the fields?",
+  code: codeVal,
+  lang: "java",
+  knobs: [{
+    id: "pass",
+    label: "Swap by",
+    options: [{
+      value: "val",
+      label: "reassigning handles"
+    }, {
+      value: "ref",
+      label: "mutating fields"
+    }],
+    default: "val"
+  }],
+  steps: k => k.pass === "ref" ? refSteps : valSteps
 });

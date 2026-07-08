@@ -16,21 +16,24 @@ date: "2026-05-18"
 - Header files contain *declarations* of classes, methods, functions, globals, and constants.
 - Compilation and static linking proceed in stages:
   1. The **preprocessor** combines implementation and header files.
-  2. The result is compiled into an unlinked **`.o`** object file.
-  3. The `.o` is **linked** with other precompiled libraries.
-  4. An executable binary results -- named **`a.out`** by default.
+  2. The result is **compiled** into **assembly** (`.s`).
+  3. The **assembler** turns that into an unlinked **`.o`** object file.
+  4. The `.o` is **linked** with other precompiled libraries.
+  5. An executable binary results -- named **`a.out`** by default.
 
 ```sh
 g++ main.cpp   # produces a.out
 ./a.out        # run it
 ```
 
-Those stages, end to end -- source through preprocess, compile, and link to a runnable binary:
+Those stages, end to end -- source through preprocess, compile, assemble, and link to a runnable binary:
 
 ```artifact src=demos/compile-pipeline.jsx static
 ```
 
-> **Gotcha:** C++ does not check that you actually returned a value. `int main()` compiles even with no `return`, leaving whatever happens to be in the `EAX` register as the exit code.
+> **Gotcha:** C++ does not check that a value-returning function actually returns one -- falling off the end of a non-`void`, non-`main` function is undefined behavior (you get whatever happens to be in the return register). `main` is the special case: the standard defines reaching its closing brace as `return 0;`, so `int main()` with no `return` is well-defined and exits with status `0`.
+
+> **Reality vs. slide:** the slide phrases this as "C++ will happily leave whatever happens to be in `EAX` as the return code," implying `main` too leaks the register (`EAX` is the x86 return register). That is what a *non-`main`* value-returning function does -- the caller reads whatever garbage is left in the return register. But `main` is genuinely special: falling off its end is defined to return `0`, so its exit status is `0`, not leftover register contents.
 
 ## The preprocessor
 
@@ -105,6 +108,17 @@ Typical sizes (use `sizeof(x)` to check on your machine):
 | `int` | 4 bytes | $-2{,}147{,}483{,}648 \dots 2{,}147{,}483{,}647$ |
 | `long long` | 8 bytes | $\approx -9.2 \times 10^{18} \dots 9.2 \times 10^{18}$ |
 
+Those are the sizes you will typically *see*, but the C++ standard only guarantees a **minimum** width for each integer type -- the exact width is chosen by the platform/compiler. This matters for how code actually runs: the same source can wrap around at a different value on a different target.
+
+| Type | Standard minimum | Typical (64-bit) |
+|---|---|---|
+| `short` | 16 bits | 16 bits |
+| `int` | 16 bits | 32 bits |
+| `long` | 32 bits | **32 or 64 bits** |
+| `long long` | 64 bits | 64 bits |
+
+> **Gotcha:** `long` is the treacherous one -- it is 32 bits on some platforms (e.g. 64-bit Windows) and 64 bits on others (e.g. 64-bit Linux/macOS), even though both satisfy the standard's 32-bit minimum. Never assume `long` and `long long` are the same size, and use `sizeof(x)` to confirm on your machine.
+
 - A `char` is just a 1-byte integer (used where Java uses `byte`).
 - Integers are **signed** by default; `unsigned int` covers `0 ... 4,294,967,295`.
 
@@ -123,6 +137,14 @@ if (1 == variable)  // "Yoda" style avoids the mistake
 if (3 < a < 8)      // ALWAYS true: parses as (3 < a) < 8
 ```
 
+The reason is that an assignment *expression* evaluates to the value it assigned, and the `if` tests that value directly:
+
+```cpp
+if (a = b)   // true unless b is 0 (the condition is the value of b)
+if (c = 0)   // ALWAYS false: assigns 0, then tests 0
+if (a = 9)   // ALWAYS true: assigns 9, then tests 9 (non-zero)
+```
+
 ## Strings
 
 C++ has **two** kinds of strings.
@@ -133,8 +155,16 @@ C++ has **two** kinds of strings.
 - `char name[10] = "HELLO";` stores `H E L L O \0`.
 - Prone to **buffer overflow** -- everything is read until the null byte.
 - Only array operations work: `=` works *only* at declaration (not for copying), and `==`, `<`, `>` do **not** compare contents.
-- `<cstring>`: `strncpy` (copy), `strncat` (concatenate), `strncmp` (compare), `strlen` (length), `strchr`/`strstr` (search).
-- `<cctype>`: `isalpha`, `isdigit`, `isalnum`, `isspace`, `isupper`, `tolower`, `toupper`, ...
+- Read a whole line into a C-string with `inStream.getline(aCString, numOfCharsToRead)` -- the C-string form (distinct from `std::getline` for the `string` class, covered below).
+- `<cstring>`: `strncpy` (copy), `strncat` (concatenate), `strncmp` (compare), `strlen` (length), `strchr`/`strrchr`/`strstr` (search).
+- `<cctype>`: `isalpha`, `isdigit`, `isalnum`, `isspace`, `isupper`, `tolower`, `toupper`, and more:
+  - `isblank` -- whitespace, but **not** a newline.
+  - `isgraph` -- has a visible glyph (can be "written").
+  - `isprint` -- printable: a graphical character **or** a space.
+  - `ispunct` -- punctuation.
+  - `isxdigit` -- a hex digit (`0`-`9`, `A`-`F`).
+  - `iscntrl` -- a control character.
+  - `islower` -- a lowercase letter.
 
 ### The `string` class
 
@@ -145,8 +175,18 @@ std::string s = "Hello";
 
 - More flexible, easier, and no buffer-overflow problem.
 - Like Java's `String` but **mutable** (closer to `StringBuffer`). `=`, `==`, and `[]` all work as expected.
-- Member methods: `length`/`size` (same thing), `clear`, `empty`, `at`, `insert`, `erase`, `replace`, `append`, `find`, `substr`, `compare`, `c_str` (returns a C-string).
+- Member methods: `iterators`, `length`/`size` (same thing), `clear`, `empty`, `at`, `insert`, `erase`, `replace`, `append`, `find`, `substr`, `compare`, `c_str` (returns a C-string).
 - Non-member: `+`, `+=`, comparisons, `swap`, `<<`/`>>`, and `getline(inStream, str, delimiter='\n')`.
+
+Single-character stream methods (useful when `>>` and `getline` are too coarse):
+
+| Call | What it does |
+|---|---|
+| `inStream.get()` | Read the next character (whitespace included) |
+| `inStream.peek()` | Look at the next character **without** removing it from the stream |
+| `outStream.put(ch)` | Write a single character |
+| `inStream.putback(ch)` | Put a character back into the stream after reading it |
+| `inStream.ignore(n)` | Ignore (discard) the next `n` characters |
 
 | Feature | C-string | `string` class |
 |---|---|---|

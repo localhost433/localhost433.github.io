@@ -65,6 +65,8 @@ That vptr isn't free: the first virtual function adds a hidden 8-byte pointer to
 ## Polymorphism
 
 > **Polymorphism:** the ability to hold objects of different types through a common base pointer, and call one method they all share -- each running its own implementation.
+>
+> **Overriding:** providing a *different implementation for an inherited method*. It's what lets each subclass supply its own version of the shared method above.
 
 ```cpp
 class Person   { public: virtual void intro() = 0; };
@@ -93,7 +95,9 @@ public:
 A class with at least one pure virtual method is **abstract**:
 
 - You **cannot** create objects of it -- only **pointers** (or references).
-- It **forces** every concrete subclass to provide an implementation.
+- It **forces** every subclass into one of **two** choices:
+  1. **Provide an implementation** for the method -- then that subclass is concrete and can be instantiated, or
+  2. **Re-declare the method as pure virtual** (`= 0`) -- then that subclass stays **abstract** too ("no objects can be created from this subclass").
 
 ```cpp
 Person   p;     // ERROR -- abstract, no objects
@@ -103,6 +107,18 @@ Employee  e;    // OK only if Employee implements every pure virtual
 Employee& er = e;   // OK
 Teacher*  t;        // OK
 ```
+
+**A subclass that leaves the pure virtual unimplemented is itself abstract.** Say `Student` inherits `intro() = 0` but never gives it a body -- `Student` is still abstract, so you get the same object-vs-pointer split as the base:
+
+| Declaration | Legal? | Why |
+|---|---|---|
+| `Person p;` | no | `Person` is abstract |
+| `Person* p;` | yes | pointer/reference handle is fine |
+| `Student s;` | no | `Student` still has an unimplemented pure virtual -- also abstract |
+| `Student* t;` | yes | pointer is fine |
+| `Employee e;` | yes | only if `Employee` implements every pure virtual |
+| `Employee& er = e;` | yes | reference is fine |
+| `Teacher t;` | yes | `Teacher` implements `intro()` |
 
 This is C++'s tool for **abstraction**: define the interface in the base, defer the details to subclasses.
 
