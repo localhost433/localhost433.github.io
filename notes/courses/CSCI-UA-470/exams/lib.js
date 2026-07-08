@@ -31,14 +31,14 @@ function jsonForScript(value) {
 function replaceMarkerLine(shell, marker, replacement) {
   const re = new RegExp("^.*" + marker.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ".*$", "m");
   if (!re.test(shell)) throw new Error("missing marker: " + marker);
-  return shell.replace(re, replacement);
+  return shell.replace(re, () => replacement);
 }
 
 function inlineExam({ shell, engineLib, data }) {
   validateExam(data);
   const title = String(data.meta.title).replace(/</g, "&lt;").replace(/>/g, "&gt;");
   if (!/<title>[\s\S]*?<\/title>/.test(shell)) throw new Error("missing marker: <title>");
-  let out = shell.replace(/<title>[\s\S]*?<\/title>/, "<title>" + title + "</title>");
+  let out = shell.replace(/<title>[\s\S]*?<\/title>/, () => "<title>" + title + "</title>");
   out = replaceMarkerLine(out, "/*__CONFIG__*/", "window.EXAM = " + jsonForScript(data.meta) + ";");
   out = replaceMarkerLine(out, "/*__QUESTIONS__*/", "window.QUESTIONS = " + jsonForScript(data.questions) + ";");
   out = replaceMarkerLine(out, "/*__ENGINE_LIB__*/", engineLib);
