@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample Exam</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f7f9; --surface:#ffffff; --surface-2:#eef1f5; --border:#dde2e8; --border-strong:#c6cdd7;
+  --text:#19212e; --muted:#5a6473; --faint:#8b94a2;
+  --accent:#4f46e5; --accent-hover:#4338ca; --accent-fg:#ffffff; --accent-soft:#ecedfd;
+  --correct:#15803d; --correct-bg:#e9f6ec; --correct-border:#9ed4ad;
+  --wrong:#b91c1c; --wrong-bg:#fcecec; --wrong-border:#e7a8a8;
+  --flag:#b45309; --flag-bg:#fbf2e0; --flag-border:#e6c98e;
+  --ring:rgba(79,70,229,.38);
+  --t-output-fg:#6d28d9; --t-output-bg:#f0ecfe;
+  --t-debug-fg:#b45309;  --t-debug-bg:#fbf2e0;
+  --code-bg:#f3f6fa; --code-border:#e1e7ef; --code-text:#28303d;
+  --code-com:#79859a; --code-str:#b15a16; --code-kw:#6d28d9; --code-ty:#0e7490; --code-num:#b45309; --code-fn:#1d4ed8;
+  --shadow:0 1px 2px rgba(20,30,50,.04), 0 4px 16px rgba(20,30,50,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0f1620; --surface:#161f2c; --surface-2:#1c2634; --border:#28323f; --border-strong:#3a4658;
+    --text:#e7ebf1; --muted:#9aa5b3; --faint:#6c7686;
+    --accent:#818cf8; --accent-hover:#a5b0ff; --accent-fg:#0f1620; --accent-soft:#1f2640;
+    --correct:#4ade80; --correct-bg:#11241a; --correct-border:#2f6042;
+    --wrong:#f87171; --wrong-bg:#2a1718; --wrong-border:#6e3434;
+    --flag:#fbbf24; --flag-bg:#2a2212; --flag-border:#5a4a1f;
+    --ring:rgba(129,140,248,.42);
+    --t-output-fg:#c4b5fd; --t-output-bg:#241d3a;
+    --t-debug-fg:#fbbf24;  --t-debug-bg:#2a2212;
+    --code-bg:#0c121b; --code-border:#232d3b; --code-text:#d7dfeb;
+    --code-com:#6c7686; --code-str:#e0a35e; --code-kw:#c4b5fd; --code-ty:#67e8f9; --code-num:#f0b46b; --code-fn:#93c5fd;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 6px 24px rgba(0,0,0,.28);
+  }
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--text);
+  font-family:"Hanken Grotesk",system-ui,-apple-system,sans-serif;
+  font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased;
+}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace; font-variant-numeric:tabular-nums}
+.wrap{max-width:840px; margin:0 auto; padding:0 20px}
+button{font-family:inherit; cursor:pointer; border:none; background:none; color:inherit}
+:focus-visible{outline:2px solid var(--ring); outline-offset:2px; border-radius:8px}
+@media (prefers-reduced-motion: reduce){*{animation:none!important; transition:none!important}}
+
+/* ---------- START ---------- */
+#view-start{padding:48px 0 64px}
+.eyebrow{font-family:"JetBrains Mono",monospace; font-size:12.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); font-weight:600}
+.h1{font-size:clamp(30px,5vw,42px); font-weight:800; letter-spacing:-.02em; line-height:1.05; margin:14px 0 10px}
+.lede{color:var(--muted); font-size:17px; max-width:60ch}
+.meta-row{display:flex; flex-wrap:wrap; gap:10px; margin:26px 0 30px}
+.chip{display:inline-flex; align-items:center; gap:7px; padding:7px 13px; border:1px solid var(--border); background:var(--surface); border-radius:999px; font-family:"JetBrains Mono",monospace; font-size:13px; font-weight:500}
+.chip b{color:var(--accent); font-weight:700}
+.panel{background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:24px 26px; box-shadow:var(--shadow)}
+.panel h3{margin:0 0 14px; font-size:14px; font-family:"JetBrains Mono",monospace; letter-spacing:.06em; text-transform:uppercase; color:var(--faint); font-weight:600}
+.rules{list-style:none; margin:0; padding:0; display:grid; gap:12px}
+.rules li{display:flex; gap:12px; align-items:flex-start; font-size:15.5px; color:var(--text)}
+.rules .ix{flex:0 0 auto; width:24px; height:24px; border-radius:7px; background:var(--accent-soft); color:var(--accent); display:grid; place-items:center; font-family:"JetBrains Mono",monospace; font-weight:700; font-size:13px; margin-top:1px}
+.split{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:18px}
+@media (max-width:660px){.split{grid-template-columns:1fr}}
+.mix{display:flex; gap:10px; flex-wrap:wrap; margin-top:6px}
+.mix span{font-family:"JetBrains Mono",monospace; font-size:12.5px; padding:5px 11px; border-radius:8px; font-weight:600}
+.mix .m-out{color:var(--t-output-fg); background:var(--t-output-bg)}
+.mix .m-dbg{color:var(--t-debug-fg); background:var(--t-debug-bg)}
+.mix .m-con{color:var(--accent); background:var(--accent-soft)}
+.kbd{font-family:"JetBrains Mono",monospace; font-size:12px; border:1px solid var(--border-strong); border-bottom-width:2px; border-radius:6px; padding:1px 7px; background:var(--surface-2); color:var(--muted)}
+.btn-primary{display:inline-flex; align-items:center; gap:10px; margin-top:30px; padding:15px 26px; background:var(--accent); color:var(--accent-fg); border-radius:12px; font-weight:700; font-size:16px; letter-spacing:-.01em; transition:background .15s, transform .08s; box-shadow:var(--shadow)}
+.btn-primary:hover{background:var(--accent-hover)}
+.btn-primary:active{transform:translateY(1px)}
+.btn-primary .t{font-family:"JetBrains Mono",monospace; font-weight:700; font-size:14px; opacity:.85}
+
+/* ---------- TOP BAR ---------- */
+#topbar{position:sticky; top:0; z-index:30; background:color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter:blur(8px); border-bottom:1px solid var(--border)}
+.topbar-in{max-width:840px; margin:0 auto; padding:11px 20px; display:flex; align-items:center; justify-content:space-between; gap:14px}
+.counter{font-family:"JetBrains Mono",monospace; font-weight:600; font-size:14px; letter-spacing:.02em}
+.counter .cur{color:var(--text)} .counter .tot{color:var(--faint)}
+.timer{display:flex; align-items:center; gap:9px}
+.timer .lab{font-family:"JetBrains Mono",monospace; font-size:10px; letter-spacing:.13em; text-transform:uppercase; color:var(--faint); font-weight:600}
+.timer .clock{font-family:"JetBrains Mono",monospace; font-weight:700; font-size:19px; letter-spacing:.04em; padding:3px 11px; border-radius:9px; background:var(--surface); border:1px solid var(--border)}
+.timer.warn .clock{color:var(--flag); border-color:var(--flag-border); background:var(--flag-bg)}
+.timer.danger .clock{color:var(--wrong); border-color:var(--wrong-border); background:var(--wrong-bg); animation:pulse 1s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+#prog{height:3px; background:var(--surface-2)}
+#prog .bar{height:100%; width:0%; background:var(--accent); transition:width .3s ease}
+
+/* ---------- QUIZ ---------- */
+#view-quiz{padding:26px 0 56px; display:none}
+.qhead{display:flex; align-items:center; gap:12px; margin-bottom:16px}
+.badge{font-family:"JetBrains Mono",monospace; font-size:11.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; padding:5px 11px; border-radius:8px}
+.badge.t-concept{color:var(--accent); background:var(--accent-soft)}
+.badge.t-output{color:var(--t-output-fg); background:var(--t-output-bg)}
+.badge.t-debug{color:var(--t-debug-fg); background:var(--t-debug-bg)}
+.qnum{font-family:"JetBrains Mono",monospace; font-size:13px; color:var(--faint); font-weight:600}
+.qcard{background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:26px 28px; box-shadow:var(--shadow); animation:fade .25s ease}
+@keyframes fade{from{opacity:0; transform:translateY(4px)}to{opacity:1; transform:none}}
+.qprompt{font-size:18.5px; font-weight:600; letter-spacing:-.01em; line-height:1.4; margin:0 0 4px}
+.qsub{color:var(--muted); font-size:15px; margin:8px 0 0}
+pre.code{font-family:"JetBrains Mono",monospace; font-size:13.5px; line-height:1.6; background:var(--code-bg); border:1px solid var(--code-border); border-radius:11px; padding:16px 18px; margin:18px 0 6px; overflow-x:auto; color:var(--code-text); tab-size:2}
+.c-com{color:var(--code-com); font-style:italic} .c-str{color:var(--code-str)} .c-kw{color:var(--code-kw); font-weight:600} .c-ty{color:var(--code-ty)} .c-num{color:var(--code-num)} .c-fn{color:var(--code-fn)}
+.opts{display:grid; gap:11px; margin-top:20px}
+.opt{display:flex; align-items:flex-start; gap:13px; width:100%; text-align:left; padding:14px 16px; border:1.5px solid var(--border); background:var(--surface); border-radius:12px; transition:border-color .12s, background .12s; font-size:15.5px; line-height:1.45}
+.opt:hover{border-color:var(--border-strong); background:var(--surface-2)}
+.opt.sel{border-color:var(--accent); background:var(--accent-soft)}
+.opt .tag{flex:0 0 auto; width:26px; height:26px; border-radius:7px; display:grid; place-items:center; font-family:"JetBrains Mono",monospace; font-weight:700; font-size:13px; background:var(--surface-2); color:var(--muted); border:1px solid var(--border); margin-top:1px; transition:.12s}
+.opt.sel .tag{background:var(--accent); color:var(--accent-fg); border-color:var(--accent)}
+.opt .txt{flex:1; font-family:"JetBrains Mono",monospace; font-size:14px; padding-top:2px}
+.opt .txt.prose{font-family:"Hanken Grotesk",sans-serif; font-size:15.5px; padding-top:1px}
+.navrow{display:flex; align-items:center; gap:10px; margin-top:22px}
+.nbtn{display:inline-flex; align-items:center; gap:7px; padding:11px 17px; border:1px solid var(--border); background:var(--surface); border-radius:10px; font-weight:600; font-size:14.5px; color:var(--text); transition:.12s}
+.nbtn:hover:not(:disabled){border-color:var(--border-strong); background:var(--surface-2)}
+.nbtn:disabled{opacity:.4; cursor:not-allowed}
+.nbtn.flag.on{color:var(--flag); border-color:var(--flag-border); background:var(--flag-bg)}
+.spacer{flex:1}
+.nbtn.submit{background:var(--accent); color:var(--accent-fg); border-color:var(--accent)}
+.nbtn.submit:hover{background:var(--accent-hover)}
+
+/* ---------- PALETTE ---------- */
+.mapwrap{margin-top:24px; border:1px solid var(--border); border-radius:14px; background:var(--surface); overflow:hidden}
+.maphead{display:flex; align-items:center; justify-content:space-between; padding:12px 16px; cursor:pointer; user-select:none}
+.maphead .mt{font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint); font-weight:600}
+.maphead .leg{display:flex; gap:13px; font-size:11.5px; color:var(--muted); align-items:center; flex-wrap:wrap}
+.maphead .leg i{width:11px; height:11px; border-radius:3px; display:inline-block; vertical-align:-1px; margin-right:5px}
+.leg .l-ans{background:var(--accent)} .leg .l-non{background:var(--surface-2); border:1px solid var(--border-strong)} .leg .l-flg{background:var(--flag)}
+.grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(42px,1fr)); gap:8px; padding:0 16px 16px}
+.mapwrap.collapsed .grid, .mapwrap.collapsed .maphead .leg{display:none}
+.pcell{position:relative; aspect-ratio:1; min-height:40px; border:1.5px solid var(--border); background:var(--surface); border-radius:9px; font-family:"JetBrains Mono",monospace; font-weight:600; font-size:13px; color:var(--muted); display:grid; place-items:center; transition:.1s}
+.pcell:hover{border-color:var(--border-strong)}
+.pcell.ans{background:var(--accent); color:var(--accent-fg); border-color:var(--accent)}
+.pcell.cur{box-shadow:0 0 0 2px var(--bg), 0 0 0 4px var(--accent)}
+.pcell.flag::after{content:""; position:absolute; top:4px; right:4px; width:7px; height:7px; border-radius:50%; background:var(--flag)}
+.pcell.ans.flag::after{background:var(--flag); box-shadow:0 0 0 1.5px var(--accent)}
+
+/* ---------- RESULTS ---------- */
+#view-results{padding:36px 0 64px; display:none}
+.score-hero{background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:30px 30px; box-shadow:var(--shadow); display:flex; align-items:center; gap:30px; flex-wrap:wrap}
+.ring{position:relative; width:128px; height:128px; flex:0 0 auto}
+.ring svg{transform:rotate(-90deg)}
+.ring .pct{position:absolute; inset:0; display:grid; place-items:center; font-family:"JetBrains Mono",monospace; font-weight:700; font-size:28px; letter-spacing:-.02em}
+.score-meta{flex:1; min-width:220px}
+.score-meta .big{font-size:26px; font-weight:800; letter-spacing:-.02em; margin:0}
+.score-meta .sub{color:var(--muted); margin:6px 0 0; font-size:15px}
+.score-meta .time{font-family:"JetBrains Mono",monospace; font-size:13px; color:var(--faint); margin-top:10px}
+.bars{margin:22px 0 8px; display:grid; gap:14px}
+.barrow{display:grid; grid-template-columns:120px 1fr 56px; gap:14px; align-items:center}
+.barrow .nm{font-family:"JetBrains Mono",monospace; font-size:12.5px; font-weight:600; color:var(--muted)}
+.track{height:9px; background:var(--surface-2); border-radius:999px; overflow:hidden}
+.track .fill{height:100%; border-radius:999px; transition:width .6s ease}
+.barrow .frac{font-family:"JetBrains Mono",monospace; font-size:12.5px; text-align:right; color:var(--text); font-weight:600}
+.rev-head{display:flex; align-items:center; justify-content:space-between; margin:34px 0 14px}
+.rev-head h2{font-size:20px; font-weight:800; letter-spacing:-.01em; margin:0}
+.filterbtns{display:flex; gap:7px; flex-wrap:wrap}
+.fbtn{font-family:"JetBrains Mono",monospace; font-size:12px; font-weight:600; padding:6px 12px; border:1px solid var(--border); border-radius:8px; background:var(--surface); color:var(--muted)}
+.fbtn.active{background:var(--accent-soft); color:var(--accent); border-color:var(--accent)}
+.review{display:grid; gap:12px}
+details.rev{background:var(--surface); border:1px solid var(--border); border-radius:13px; overflow:hidden}
+details.rev[hidden]{display:none}
+details.rev>summary{list-style:none; cursor:pointer; padding:15px 18px; display:flex; align-items:center; gap:12px}
+details.rev>summary::-webkit-details-marker{display:none}
+.sm-num{font-family:"JetBrains Mono",monospace; font-size:13px; font-weight:700; color:var(--faint)}
+.sm-mark{flex:0 0 auto; width:24px; height:24px; border-radius:7px; display:grid; place-items:center; font-weight:800; font-size:14px}
+.sm-mark.ok{background:var(--correct-bg); color:var(--correct)}
+.sm-mark.no{background:var(--wrong-bg); color:var(--wrong)}
+.sm-q{flex:1; font-size:14.5px; font-weight:600; color:var(--text); overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.sm-chev{color:var(--faint); transition:transform .2s; font-family:"JetBrains Mono",monospace}
+details.rev[open] .sm-chev{transform:rotate(90deg)}
+.rev-body{padding:4px 18px 20px; border-top:1px solid var(--border)}
+.rev-body .qp{font-size:16px; font-weight:600; margin:14px 0 0; line-height:1.4}
+.ans-line{font-family:"JetBrains Mono",monospace; font-size:12.5px; margin:14px 0 4px; color:var(--muted)}
+.ans-line b{color:var(--text)}
+.ropt{border:1.5px solid var(--border); border-radius:11px; padding:12px 14px; margin-top:10px; background:var(--surface)}
+.ropt.correct{border-color:var(--correct-border); background:var(--correct-bg)}
+.ropt.chosen-wrong{border-color:var(--wrong-border); background:var(--wrong-bg)}
+.ropt .rtop{display:flex; align-items:center; gap:10px}
+.ropt .rtag{font-family:"JetBrains Mono",monospace; font-weight:700; font-size:12px; width:22px; height:22px; display:grid; place-items:center; border-radius:6px; background:var(--surface-2); color:var(--muted); flex:0 0 auto}
+.ropt.correct .rtag{background:var(--correct); color:#fff}
+.ropt.chosen-wrong .rtag{background:var(--wrong); color:#fff}
+.ropt .rotxt{font-family:"JetBrains Mono",monospace; font-size:13px; flex:1}
+.ropt .rotxt.prose{font-family:"Hanken Grotesk",sans-serif; font-size:14.5px}
+.ropt .rpill{font-family:"JetBrains Mono",monospace; font-size:10px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; padding:3px 8px; border-radius:6px}
+.rpill.ok{background:var(--correct); color:#fff} .rpill.you{background:var(--wrong); color:#fff} .rpill.youok{background:var(--correct); color:#fff}
+.why{font-size:13.5px; color:var(--muted); margin:9px 0 0; line-height:1.5; padding-left:32px}
+.why b{color:var(--text)}
+.retake{display:inline-flex; align-items:center; gap:9px; margin-top:30px; padding:14px 24px; background:var(--accent); color:var(--accent-fg); border-radius:12px; font-weight:700; font-size:15px; box-shadow:var(--shadow)}
+.retake:hover{background:var(--accent-hover)}
+.foot{color:var(--faint); font-size:12.5px; text-align:center; margin-top:34px; font-family:"JetBrains Mono",monospace}
+
+/* ---------- EXPORT ---------- */
+.export-panel{background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:18px 20px; margin-top:24px; box-shadow:var(--shadow)}
+.export-panel h3{margin:0 0 4px; font-size:14px; font-family:"JetBrains Mono",monospace; letter-spacing:.04em; text-transform:uppercase; color:var(--faint); font-weight:600}
+.export-panel p{margin:0 0 14px; color:var(--muted); font-size:14px}
+.export-row{display:flex; flex-wrap:wrap; gap:10px; align-items:center}
+.ebtn{display:inline-flex; align-items:center; gap:8px; padding:11px 16px; border:1px solid var(--border); background:var(--surface); border-radius:10px; font-weight:600; font-size:14px; color:var(--text); transition:.12s}
+.ebtn:hover{border-color:var(--border-strong); background:var(--surface-2)}
+.ebtn.primary{background:var(--accent); color:var(--accent-fg); border-color:var(--accent)}
+.ebtn.primary:hover{background:var(--accent-hover)}
+.ehint{font-family:"JetBrains Mono",monospace; font-size:12.5px; color:var(--muted)}
+.export-area{width:100%; margin-top:14px; min-height:200px; background:var(--code-bg); border:1px solid var(--code-border); border-radius:11px; padding:14px 16px; color:var(--code-text); font-family:"JetBrains Mono",monospace; font-size:12.5px; line-height:1.5; resize:vertical; -webkit-text-size-adjust:100%}
+.export-area[hidden]{display:none}
+
+/* ---------- MOBILE ---------- */
+.opt .txt, .ropt .rotxt{overflow-wrap:anywhere}
+.rev-head{flex-wrap:wrap; gap:12px}
+@media (max-width:560px){
+  .wrap{padding:0 14px}
+  #view-start{padding:30px 0 44px}
+  .h1{font-size:29px}
+  .lede{font-size:15.5px}
+  .panel{padding:18px 16px}
+  .meta-row{gap:8px; margin:20px 0 24px}
+  #view-quiz{padding:18px 0 44px}
+  .qcard{padding:20px 17px}
+  .qhead{margin-bottom:12px}
+  .qprompt{font-size:16.5px}
+  pre.code{font-size:12px; padding:13px 13px; margin:14px 0 4px}
+  .opts{margin-top:16px; gap:9px}
+  .opt{padding:12px 13px; font-size:15px}
+  .opt .txt{font-size:13px}
+  .opt .tag{width:24px; height:24px; font-size:12px}
+  .navrow{flex-wrap:wrap; gap:8px; margin-top:18px}
+  .navrow .spacer{display:none}
+  .nbtn{flex:1 1 auto; justify-content:center; padding:11px 10px; font-size:14px}
+  .nbtn.submit{flex:1 1 100%; order:9}
+  .topbar-in{padding:9px 14px; gap:10px}
+  .timer .lab{display:none}
+  .timer .clock{font-size:17px}
+  #view-results{padding:28px 0 48px}
+  .score-hero{padding:22px 18px; gap:18px}
+  .ring, .ring svg{width:104px; height:104px}
+  .ring .pct{font-size:23px}
+  .score-meta .big{font-size:22px}
+  .barrow{grid-template-columns:78px 1fr 42px; gap:10px}
+  .export-panel{padding:16px 16px}
+  .ebtn{flex:1 1 auto; justify-content:center}
+  .rev-body{padding:4px 14px 18px}
+  .why{padding-left:0}
+  .ropt{padding:11px 12px}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ START ============ -->
+<section id="view-start"><div class="wrap">
+  <div id="resume-slot"></div>
+  <div id="exam-intro"></div>
+</div></section>
+
+<!-- ============ TOP BAR ============ -->
+<div id="topbar" style="display:none">
+  <div class="topbar-in">
+    <div class="counter"><span class="cur" id="cur">Q01</span> <span class="tot" id="tot">/ 75</span></div>
+    <div class="timer" id="timer">
+      <span class="lab">Time left</span>
+      <span class="clock mono" id="clock">75:00</span>
+    </div>
+  </div>
+  <div id="prog"><div class="bar" id="progbar"></div></div>
+</div>
+
+<!-- ============ QUIZ ============ -->
+<section id="view-quiz"><div class="wrap">
+  <div class="qhead">
+    <span class="badge" id="qbadge">Concept</span>
+    <span class="qnum mono" id="qnum">question 01</span>
+  </div>
+  <div class="qcard" id="qcard"><!-- injected --></div>
+
+  <div class="navrow">
+    <button class="nbtn" id="prevBtn" onclick="go(-1)">&larr; Prev</button>
+    <button class="nbtn flag" id="flagBtn" onclick="toggleFlag()">&#9873; Flag</button>
+    <div class="spacer"></div>
+    <button class="nbtn" id="nextBtn" onclick="go(1)">Next &rarr;</button>
+    <button class="nbtn submit" onclick="confirmSubmit()">Review &amp; submit</button>
+  </div>
+
+  <div class="mapwrap" id="mapwrap">
+    <div class="maphead" onclick="toggleMap()">
+      <span class="mt">Question map</span>
+      <span class="leg">
+        <span><i class="l-ans"></i>answered</span>
+        <span><i class="l-non"></i>blank</span>
+        <span><i class="l-flg"></i>flagged</span>
+      </span>
+    </div>
+    <div class="grid" id="grid"></div>
+  </div>
+</div></section>
+
+<!-- ============ RESULTS ============ -->
+<section id="view-results"><div class="wrap">
+  <div class="score-hero">
+    <div class="ring">
+      <svg width="128" height="128" viewBox="0 0 128 128">
+        <circle cx="64" cy="64" r="56" fill="none" stroke="var(--surface-2)" stroke-width="12"/>
+        <circle id="ringFill" cx="64" cy="64" r="56" fill="none" stroke="var(--accent)" stroke-width="12" stroke-linecap="round" stroke-dasharray="351.86" stroke-dashoffset="351.86"/>
+      </svg>
+      <div class="pct mono" id="ringPct">0%</div>
+    </div>
+    <div class="score-meta">
+      <p class="big" id="scoreBig">0 / 24 correct</p>
+      <p class="sub" id="scoreSub"></p>
+      <p class="time mono" id="scoreTime"></p>
+    </div>
+  </div>
+
+  <div class="bars" id="bars"></div>
+
+  <div class="export-panel" id="exportPanel">
+    <h3>Study export</h3>
+    <p id="exportLede">Copy the questions you missed — with your answer and the correct one — to paste into an AI and ask for an explanation.</p>
+    <div class="export-row">
+      <button class="ebtn primary" id="copyWrong" onclick="copyWrong()">&#10697; Copy my mistakes</button>
+      <button class="ebtn" id="dlWrong" onclick="downloadWrong()">&#11015; Download .md</button>
+      <span class="ehint" id="exportHint"></span>
+    </div>
+    <textarea class="export-area" id="exportArea" readonly hidden spellcheck="false"></textarea>
+  </div>
+
+  <div class="rev-head">
+    <h2>Review</h2>
+    <div class="filterbtns" id="filters">
+      <button class="fbtn active" data-f="all" onclick="setFilter('all')">All</button>
+      <button class="fbtn" data-f="wrong" onclick="setFilter('wrong')">Incorrect</button>
+      <button class="fbtn" data-f="output" onclick="setFilter('output')">Output</button>
+      <button class="fbtn" data-f="debug" onclick="setFilter('debug')">Debug</button>
+      <button class="fbtn" data-f="concept" onclick="setFilter('concept')">Concept</button>
+    </div>
+  </div>
+  <div class="review" id="review"></div>
+
+  <button class="retake" onclick="retake()">&#8635; Retake with a fresh shuffle</button>
+  <p class="foot">Review pattern: first identify language, then access level, storage/lifetime, static type versus runtime type, construction/destruction context, and whether the code is testing a C++ rule or a Java rule.</p>
+</div></section>
+
+<script>
+/* Build fills these; the defaults let the template open standalone for dev. */
+window.EXAM = { title:"Sample Exam", minutes:1, shuffleQuestions:false, shuffleOptions:false, introHtml:"<p class='lede'>Dev sample. Real intro is injected per exam.</p>" }; /*__CONFIG__*/
+window.QUESTIONS = [ { type:"concept", prose:true, prompt:"Sample question — is this the dev placeholder?", options:[{text:"Yes",correct:true,why:"Yes: replaced at build time."},{text:"No",correct:false,why:"It is."}] } ]; /*__QUESTIONS__*/
+</script>
+
+<script>
+/*__ENGINE_LIB__*/
+/* ============================ QUESTION BANK ============================ */
+const TYPE_META = {
+  concept:{label:"Concept", cls:"t-concept"},
+  output:{label:"Predict Output", cls:"t-output"},
+  debug:{label:"Debug", cls:"t-debug"}
+};
+
+const QUESTIONS = window.QUESTIONS || [];
+
+/* ============================ ENGINE ============================ */
+const KW = new Set(["struct","class","public","private","protected","virtual","override","final","static","const","return","new","delete","using","namespace","this","if","else","for","while","switch","case","break","continue","extends","implements","interface","abstract","package","import","try","catch","throws","throw"]);
+const TYPES = new Set(["int","double","float","char","bool","boolean","void","unsigned","long","short","auto","byte","String","Integer","Double","Character"]);
+const BUILTIN = new Set(["cout","cin","endl","std","sizeof","true","false","nullptr","System","out","print","println","Scanner","File","FileWriter","FileInputStream","FileOutputStream","ObjectInputStream","ObjectOutputStream","Serializable"]);
+
+function escapeHtml(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function highlight(code){
+  const re=/(\/\/[^\n]*)|("(?:[^"\\]|\\.)*")|('(?:[^'\\]|\\.)*')|(\b\d+\.?\d*\b)|([A-Za-z_]\w*)|(\s+)|([^\sA-Za-z_0-9"'])/g;
+  let out="",m;
+  while((m=re.exec(code))!==null){
+    if(m[1]) out+=`<span class="c-com">${escapeHtml(m[1])}</span>`;
+    else if(m[2]||m[3]) out+=`<span class="c-str">${escapeHtml(m[2]||m[3])}</span>`;
+    else if(m[4]) out+=`<span class="c-num">${m[4]}</span>`;
+    else if(m[5]){const w=m[5];
+      if(KW.has(w)) out+=`<span class="c-kw">${w}</span>`;
+      else if(TYPES.has(w)) out+=`<span class="c-ty">${w}</span>`;
+      else if(BUILTIN.has(w)) out+=`<span class="c-fn">${w}</span>`;
+      else out+=w;
+    }
+    else if(m[6]) out+=m[6];
+    else out+=escapeHtml(m[7]);
+  }
+  return out;
+}
+function shuffle(arr){const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+const QUESTION_COUNT = (window.QUESTIONS || []).length;
+const TOTAL_TIME = Math.max(0, (window.EXAM.minutes || 0) * 60);
+let work=[], current=0, remaining=TOTAL_TIME, timerId=null, view="start", filter="all";
+
+function buildWork(){
+  const order = window.EXAM.shuffleQuestions ? shuffle(QUESTIONS.map((_,i)=>i)) : QUESTIONS.map((_,i)=>i);
+  work = order.map((qi)=>{
+    const q = QUESTIONS[qi];
+    const optOrder = window.EXAM.shuffleOptions ? shuffle(q.options.map((_,i)=>i)) : q.options.map((_,i)=>i);
+    return { qi, optOrder, answer:null, flagged:false };
+  });
+  current=0; remaining=TOTAL_TIME;
+}
+function qOf(it){ return QUESTIONS[it.qi]; }
+function optsOf(it){ return it.optOrder.map(k => QUESTIONS[it.qi].options[k]); }
+
+function begin(){
+  buildWork();
+  document.getElementById("view-start").style.display="none";
+  document.getElementById("topbar").style.display="block";
+  document.getElementById("view-quiz").style.display="block";
+  document.getElementById("tot").textContent="/ "+String(work.length).padStart(2,"0");
+  view="quiz";
+  startTimer();
+  buildGrid();
+  render();
+  window.scrollTo(0,0);
+}
+
+function startTimer(){
+  clearInterval(timerId);
+  updateClock();
+  timerId=setInterval(()=>{
+    remaining--;
+    updateClock();
+    if(remaining<=0){clearInterval(timerId); submit(true);}
+  },1000);
+}
+function updateClock(){
+  const mm=String(Math.floor(remaining/60)).padStart(2,"0");
+  const ss=String(remaining%60).padStart(2,"0");
+  document.getElementById("clock").textContent=`${mm}:${ss}`;
+  const t=document.getElementById("timer");
+  t.className="timer"+(remaining<=60?" danger":remaining<=300?" warn":"");
+}
+function fmt(sec){ const m=String(Math.floor(sec/60)).padStart(2,"0"), s=String(sec%60).padStart(2,"0"); return m+":"+s; }
+
+const LETTERS=["A","B","C","D","E","F"];
+function render(){
+  const it=work[current], q=qOf(it), opts=optsOf(it), meta=TYPE_META[q.type];
+  document.getElementById("cur").textContent="Q"+String(current+1).padStart(2,"0");
+  document.getElementById("tot").textContent="/ "+String(work.length).padStart(2,"0");
+  document.getElementById("progbar").style.width=((current+1)/work.length*100)+"%";
+  const badge=document.getElementById("qbadge");
+  badge.textContent=meta.label; badge.className="badge "+meta.cls;
+  document.getElementById("qnum").textContent="question "+String(current+1).padStart(2,"0");
+
+  let html=`<p class="qprompt">${q.prompt}</p>`;
+  if(q.sub) html+=`<p class="qsub">${q.sub}</p>`;
+  if(q.code) html+=`<pre class="code">${highlight(q.code)}</pre>`;
+  html+=`<div class="opts">`;
+  opts.forEach((opt,i)=>{
+    const sel=it.answer===i?" sel":"";
+    const txtCls=q.prose?"txt prose":"txt";
+    html+=`<button class="opt${sel}" onclick="selectOpt(${i})" aria-pressed="${it.answer===i}">
+      <span class="tag">${LETTERS[i]}</span>
+      <span class="${txtCls}">${escapeHtml(opt.text)}</span>
+    </button>`;
+  });
+  html+=`</div>`;
+  document.getElementById("qcard").innerHTML=html;
+
+  document.getElementById("prevBtn").disabled=(current===0);
+  document.getElementById("nextBtn").disabled=(current===work.length-1);
+  const fb=document.getElementById("flagBtn");
+  fb.className="nbtn flag"+(it.flagged?" on":"");
+  fb.textContent=it.flagged?"⚑ Flagged":"⚑ Flag";
+  updateGrid();
+}
+
+function selectOpt(i){ work[current].answer=i; render(); }
+function go(d){ const n=current+d; if(n>=0&&n<work.length){current=n; render(); window.scrollTo({top:0,behavior:"smooth"});} }
+function gotoQ(i){ current=i; render(); window.scrollTo({top:0,behavior:"smooth"}); }
+function toggleFlag(){ work[current].flagged=!work[current].flagged; render(); }
+function toggleMap(){ document.getElementById("mapwrap").classList.toggle("collapsed"); }
+
+function buildGrid(){
+  const g=document.getElementById("grid"); g.innerHTML="";
+  work.forEach((_,i)=>{
+    const c=document.createElement("button");
+    c.className="pcell"; c.textContent=i+1;
+    c.onclick=()=>gotoQ(i);
+    g.appendChild(c);
+  });
+}
+function updateGrid(){
+  const cells=document.getElementById("grid").children;
+  work.forEach((it,i)=>{
+    let cls="pcell";
+    if(it.answer!==null) cls+=" ans";
+    if(it.flagged) cls+=" flag";
+    if(i===current) cls+=" cur";
+    cells[i].className=cls;
+  });
+}
+
+function confirmSubmit(){
+  const blank=work.filter(w=>w.answer===null).length;
+  let ok=true;
+  if(blank>0) ok=confirm(`You have ${blank} unanswered question${blank>1?"s":""}. Submit anyway?`);
+  if(ok) submit(false);
+}
+
+function submit(auto){
+  clearInterval(timerId);
+  view="results";
+  document.getElementById("view-quiz").style.display="none";
+  document.getElementById("topbar").style.display="none";
+  document.getElementById("view-results").style.display="block";
+  renderResults(auto);
+  window.scrollTo(0,0);
+}
+
+function renderResults(auto){
+  const total=work.length;
+  let correct=0;
+  const byType={concept:{c:0,t:0},output:{c:0,t:0},debug:{c:0,t:0}};
+  work.forEach(it=>{
+    byType[qOf(it).type].t++;
+    const isC = it.answer!==null && optsOf(it)[it.answer].correct;
+    if(isC){correct++; byType[qOf(it).type].c++;}
+  });
+  const pct=Math.round(correct/total*100);
+
+  // ring
+  const circ=2*Math.PI*56;
+  const fill=document.getElementById("ringFill");
+  fill.style.strokeDashoffset=circ*(1-pct/100);
+  fill.style.transition="stroke-dashoffset 1s ease";
+  fill.setAttribute("stroke", pct>=80?"var(--correct)":pct>=60?"var(--accent)":"var(--wrong)");
+  document.getElementById("ringPct").textContent=pct+"%";
+
+  document.getElementById("scoreBig").textContent=`${correct} / ${total} correct`;
+  let verdict = pct>=88?"Midterm-ready. The core C++/Java/OOP traps are not tripping you up." :
+                pct>=72?"Solid. Tighten up the gotchas flagged in red below." :
+                pct>=52?"Getting there — focus your review on the incorrect ones." :
+                "Worth another pass through the review sheet, then retake.";
+  document.getElementById("scoreSub").textContent=verdict;
+  const used=TOTAL_TIME-remaining;
+  const um=String(Math.floor(used/60)).padStart(2,"0"), us=String(used%60).padStart(2,"0");
+  document.getElementById("scoreTime").textContent=(auto?"Time expired · ":"Time used · ")+um+":"+us+" of "+fmt(TOTAL_TIME);
+
+  // type bars
+  const order=[["output","Predict output","var(--t-output-fg)"],["debug","Debug","var(--t-debug-fg)"],["concept","Concept","var(--accent)"]];
+  let bh="";
+  order.forEach(([k,nm,col])=>{
+    const d=byType[k]; const p=d.t?Math.round(d.c/d.t*100):0;
+    bh+=`<div class="barrow">
+      <span class="nm">${nm}</span>
+      <div class="track"><div class="fill" style="width:${p}%; background:${col}"></div></div>
+      <span class="frac">${d.c}/${d.t}</span>
+    </div>`;
+  });
+  document.getElementById("bars").innerHTML=bh;
+
+  setupExport();
+  buildReview();
+}
+
+/* ---------- study export ---------- */
+function wrongItems(){
+  return work.filter(it => !(it.answer!==null && optsOf(it)[it.answer].correct));
+}
+function stripHtml(s){
+  return String(s)
+    .replace(/<[^>]+>/g,"")
+    .replace(/&amp;/g,"&").replace(/&lt;/g,"<").replace(/&gt;/g,">")
+    .replace(/&rarr;/g,"->").replace(/&larr;/g,"<-")
+    .replace(/&ndash;/g,"-").replace(/&mdash;/g,"--").replace(/&nbsp;/g," ")
+    .replace(/&#10697;/g,"").replace(/&#11015;/g,"");
+}
+function buildWrongMarkdown(){
+  const wrong=wrongItems();
+  if(!wrong.length) return null;
+  let out=`# CSCI-UA 470 Practice Midterm 3 — questions I got wrong (${wrong.length})\n\n`;
+  out+=`For each question below, please explain the correct answer and why my answer was wrong.\n`;
+  wrong.forEach((it,n)=>{
+    const q=qOf(it);
+    const opts=optsOf(it);
+    out+=`\n---\n\n## ${n+1}. ${stripHtml(q.prompt)}\n`;
+    if(q.sub) out+=`\n_${stripHtml(q.sub)}_\n`;
+    if(q.code) out+="\n```cpp\n"+q.code+"\n```\n";
+    out+="\nOptions:\n";
+    opts.forEach((opt,i)=>{ out+=`- ${LETTERS[i]}. ${stripHtml(opt.text)}\n`; });
+    const your = it.answer===null ? "(not answered)" : `${LETTERS[it.answer]}. ${stripHtml(opts[it.answer].text)}`;
+    const ci = opts.findIndex(o=>o.correct);
+    out+=`\n**My answer:** ${your}\n`;
+    out+=`**Correct answer:** ${LETTERS[ci]}. ${stripHtml(opts[ci].text)}\n`;
+  });
+  return out;
+}
+function setupExport(){
+  const n=wrongItems().length;
+  const lede=document.getElementById("exportLede");
+  const copyBtn=document.getElementById("copyWrong");
+  const dlBtn=document.getElementById("dlWrong");
+  const ta=document.getElementById("exportArea");
+  const hint=document.getElementById("exportHint");
+  ta.hidden=true; ta.value=""; hint.textContent="";
+  if(n===0){
+    lede.textContent="Perfect score — nothing to export.";
+    copyBtn.disabled=true; dlBtn.disabled=true;
+    copyBtn.style.opacity=dlBtn.style.opacity=".5";
+    copyBtn.style.cursor=dlBtn.style.cursor="not-allowed";
+  } else {
+    lede.textContent=`Copy the ${n} question${n>1?"s":""} you missed — with your answer and the correct one — to paste into an AI and ask for an explanation.`;
+    copyBtn.disabled=false; dlBtn.disabled=false;
+    copyBtn.style.opacity=dlBtn.style.opacity="";
+    copyBtn.style.cursor=dlBtn.style.cursor="";
+  }
+}
+function revealExport(md){
+  const ta=document.getElementById("exportArea");
+  ta.value=md; ta.hidden=false; ta.focus();
+  try{ ta.setSelectionRange(0, md.length); }catch(e){ ta.select(); }
+}
+function copyWrong(){
+  const md=buildWrongMarkdown();
+  const hint=document.getElementById("exportHint");
+  if(!md){ hint.textContent="Nothing incorrect — nice work!"; return; }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(md)
+      .then(()=>{ hint.textContent="Copied to clipboard."; })
+      .catch(()=>{ revealExport(md); hint.textContent="Auto-copy blocked — select the text below and copy."; });
+  } else {
+    revealExport(md); hint.textContent="Select the text below and copy.";
+  }
+}
+function downloadWrong(){
+  const md=buildWrongMarkdown();
+  const hint=document.getElementById("exportHint");
+  if(!md){ hint.textContent="Nothing incorrect — nice work!"; return; }
+  try{
+    const blob=new Blob([md],{type:"text/markdown"});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement("a");
+    a.href=url; a.download="csci-ua-470-practice-midterm-3-mistakes.md";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+    hint.textContent="Downloaded csci-ua-470-practice-midterm-3-mistakes.md";
+  }catch(e){
+    revealExport(md); hint.textContent="Download blocked — copy the text below instead.";
+  }
+}
+
+function buildReview(){
+  const box=document.getElementById("review");
+  box.innerHTML="";
+  work.forEach((it,idx)=>{
+    const q=qOf(it);
+    const optList=optsOf(it);
+    const isC = it.answer!==null && optList[it.answer].correct;
+    const meta=TYPE_META[q.type];
+    const d=document.createElement("details");
+    d.className="rev";
+    d.dataset.type=q.type;
+    d.dataset.correct=isC?"1":"0";
+    if(!isC) d.open=true;
+
+    let opts="";
+    optList.forEach((opt,i)=>{
+      const chosen = it.answer===i;
+      let cls="ropt", pill="";
+      if(opt.correct){ cls+=" correct"; pill=chosen?`<span class="rpill youok">Your answer ✓</span>`:`<span class="rpill ok">Correct</span>`; }
+      else if(chosen){ cls+=" chosen-wrong"; pill=`<span class="rpill you">Your answer ✗</span>`; }
+      const txtCls=q.prose?"rotxt prose":"rotxt";
+      opts+=`<div class="${cls}">
+        <div class="rtop"><span class="rtag">${LETTERS[i]}</span><span class="${txtCls}">${escapeHtml(opt.text)}</span>${pill}</div>
+        <p class="why">${opt.why}</p>
+      </div>`;
+    });
+
+    const yourTxt = it.answer===null ? "Not answered" : LETTERS[it.answer];
+    const corrIdx = optList.findIndex(o=>o.correct);
+
+    d.innerHTML=`
+      <summary>
+        <span class="sm-num">Q${String(idx+1).padStart(2,"0")}</span>
+        <span class="sm-mark ${isC?"ok":"no"}">${isC?"✓":"✗"}</span>
+        <span class="badge ${meta.cls}" style="font-size:10px; padding:3px 8px">${meta.label}</span>
+        <span class="sm-q">${escapeHtml(q.prompt)}</span>
+        <span class="sm-chev">›</span>
+      </summary>
+      <div class="rev-body">
+        ${q.code?`<pre class="code">${highlight(q.code)}</pre>`:""}
+        ${q.sub?`<p class="qsub" style="margin-top:12px">${q.sub}</p>`:""}
+        <p class="ans-line">Your answer: <b>${yourTxt}</b> &nbsp;·&nbsp; Correct: <b>${LETTERS[corrIdx]}</b></p>
+        ${opts}
+      </div>`;
+    box.appendChild(d);
+  });
+  applyFilter();
+}
+
+function setFilter(f){
+  filter=f;
+  document.querySelectorAll(".fbtn").forEach(b=>b.classList.toggle("active", b.dataset.f===f));
+  applyFilter();
+}
+function applyFilter(){
+  document.querySelectorAll("details.rev").forEach(d=>{
+    let show=true;
+    if(filter==="wrong") show=d.dataset.correct==="0";
+    else if(filter!=="all") show=d.dataset.type===filter;
+    d.hidden=!show;
+  });
+}
+
+function retake(){
+  document.getElementById("view-results").style.display="none";
+  setFilter("all");
+  begin();
+}
+
+// keyboard
+document.addEventListener("keydown",e=>{
+  if(view!=="quiz") return;
+  if(e.target.tagName==="INPUT"||e.target.tagName==="TEXTAREA") return;
+  const it=work[current];
+  if(e.key>="1"&&e.key<="6"){const i=+e.key-1; if(i<it.optOrder.length){selectOpt(i); e.preventDefault();}}
+  else if(e.key==="ArrowRight"||e.key.toLowerCase()==="n"){go(1); e.preventDefault();}
+  else if(e.key==="ArrowLeft"||e.key.toLowerCase()==="p"){go(-1); e.preventDefault();}
+  else if(e.key.toLowerCase()==="f"){toggleFlag(); e.preventDefault();}
+});
+
+document.getElementById("exam-intro").innerHTML = window.EXAM.introHtml +
+  '<div style="margin-top:22px"><button class="btn-primary" onclick="begin()">Begin' +
+  (TOTAL_TIME ? ' <span class="t">[ ' + fmt(TOTAL_TIME) + ' ]</span>' : '') + '</button></div>';
+</script>
+</body>
+</html>
