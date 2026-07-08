@@ -53,3 +53,30 @@ test("inlineExam escapes </script> inside data to avoid breaking the tag", () =>
   assert.doesNotMatch(out, /<\/script> attack/);      // raw closer must be escaped
   assert.match(out, /<\\\/script> attack/);            // to <\/script>
 });
+
+test("inlineExam throws when an unfilled __MARKER__ remains in output", () => {
+  // shell with a stray marker that no replacement fills
+  const shell = [
+    "<title>__TITLE__</title>",
+    "<script>",
+    "window.EXAM = {}; /*__CONFIG__*/",
+    "window.QUESTIONS = []; /*__QUESTIONS__*/",
+    "/*__ENGINE_LIB__*/",
+    "</script>",
+    "<!-- __LEFTOVER__ -->",
+  ].join("\n");
+  assert.throws(() => inlineExam({ shell, engineLib: "", data: goodData }), /marker remains/);
+});
+
+test("inlineExam inserts data containing $-substitution sequences literally", () => {
+  const d = { ...goodData, questions: [{ ...goodQ, prompt: "cost is $$5 and $& and $1" }] };
+  const out = inlineExam({ shell: SHELL, engineLib: "", data: d });
+  // The literal text must survive JSON-encoded, not be mangled by $-substitution
+  assert.ok(out.includes(JSON.stringify("cost is $$5 and $& and $1").slice(1, -1)));
+});
+
+test("inlineExam neutralizes </script> case-insensitively and repeatedly", () => {
+  const d = { ...goodData, questions: [{ ...goodQ, prompt: "</SCRIPT> then </script> again" }] };
+  const out = inlineExam({ shell: SHELL, engineLib: "", data: d });
+  assert.doesNotMatch(out, /<\/script> again/i);
+});
