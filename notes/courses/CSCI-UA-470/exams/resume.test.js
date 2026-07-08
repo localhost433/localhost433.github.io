@@ -22,3 +22,27 @@ test("hasResumable is true only when an answer or flag exists", () => {
   const fresh = { current: 0, remaining: 4500, work: [{ qi:0, optOrder:[0,1], answer:null, flagged:false }] };
   assert.equal(R.hasResumable(R.serializeProgress(fresh)), false);
 });
+test("deserializeProgress returns null (does not throw) when a work entry is not an object", () => {
+  assert.doesNotThrow(() => {
+    assert.equal(R.deserializeProgress(JSON.stringify({ current: 0, remaining: 10, work: [null] })), null);
+  });
+});
+
+const questions = [{ options: [{}, {}] }, { options: [{}, {}, {}] }];
+
+test("isCompatible is true for a state that matches the current question bank", () => {
+  const s = { current: 0, work: [{ qi: 0, optOrder: [0,1], answer: 1, flagged: false }] };
+  assert.equal(R.isCompatible(s, questions), true);
+});
+test("isCompatible is false when current is out of range for work.length", () => {
+  const s = { current: 1, work: [{ qi: 0, optOrder: [0,1], answer: null, flagged: false }] };
+  assert.equal(R.isCompatible(s, questions), false);
+});
+test("isCompatible is false when work[0].qi is out of range for questions", () => {
+  const s = { current: 0, work: [{ qi: 5, optOrder: [0,1], answer: null, flagged: false }] };
+  assert.equal(R.isCompatible(s, questions), false);
+});
+test("isCompatible is false when work[0].optOrder.length mismatches questions[qi].options.length", () => {
+  const s = { current: 0, work: [{ qi: 1, optOrder: [0,1], answer: null, flagged: false }] };
+  assert.equal(R.isCompatible(s, questions), false);
+});

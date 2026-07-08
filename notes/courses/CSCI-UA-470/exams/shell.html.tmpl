@@ -400,6 +400,10 @@ function qOf(it){ return QUESTIONS[it.qi]; }
 function optsOf(it){ return it.optOrder.map(k => QUESTIONS[it.qi].options[k]); }
 
 function LS(){ try { return window.localStorage; } catch(_) { return null; } }
+function getProgress(){
+  const s = LS(); if (!s || typeof progressKey !== "function") return null;
+  try { return s.getItem(progressKey(window.EXAM.id)); } catch(_) { return null; }
+}
 function saveProgress(){
   const s = LS(); if (!s || typeof serializeProgress !== "function" || view!=="quiz") return;
   try { s.setItem(progressKey(window.EXAM.id), serializeProgress({work, current, remaining})); } catch(_){}
@@ -738,17 +742,24 @@ document.getElementById("exam-intro").innerHTML = window.EXAM.introHtml +
   (TOTAL_TIME ? ' <span class="t">[ ' + fmt(TOTAL_TIME) + ' ]</span>' : '') + '</button></div>';
 
 (function offerResume(){
-  const s = LS(); if (!s || typeof hasResumable !== "function") return;
-  const raw = s.getItem(progressKey(window.EXAM.id));
-  if (!raw || !hasResumable(raw)) return;
+  if (typeof hasResumable !== "function" || typeof deserializeProgress !== "function" || typeof isCompatible !== "function") return;
+  const raw = getProgress();
+  if (!raw) return;
+  if (!hasResumable(raw)) { clearProgress(); return; }
+  const state = deserializeProgress(raw);
+  if (!state || !isCompatible(state, QUESTIONS)) { clearProgress(); return; }
   const slot = document.getElementById("resume-slot");
   slot.innerHTML = '<div class="score-hero" style="margin-bottom:18px"><div class="score-meta">' +
     '<p class="big">Unfinished attempt found</p><p class="sub">Pick up where you left off, or start fresh.</p>' +
     '<div style="margin-top:12px"><button class="btn-primary" id="btn-resume">Resume</button> ' +
     '<button class="nbtn" id="btn-fresh">Start over</button></div></div></div>';
   document.getElementById("btn-resume").onclick = function(){
-    const st = deserializeProgress(raw); if (!st) return;
-    work = st.work; current = st.current; remaining = st.remaining;
+    // Re-read and re-validate at click time so a race/edit can't slip a stale or
+    // incompatible state through.
+    const raw2 = getProgress();
+    const st2 = raw2 ? deserializeProgress(raw2) : null;
+    if (!st2 || !isCompatible(st2, QUESTIONS)) { clearProgress(); slot.innerHTML=""; return; }
+    work = st2.work; current = st2.current; remaining = st2.remaining;
     enterQuiz();  // shared helper: hides start view, shows quiz view, starts timer, renders
   };
   document.getElementById("btn-fresh").onclick = function(){ clearProgress(); slot.innerHTML=""; };
