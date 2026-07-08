@@ -93,11 +93,20 @@ docs/
 /notes/courses/*/**/*.docx
 /notes/courses/*/**/*.key
 /notes/courses/*/**/assets/
+# Saved practice-exam pages are copyrighted source material; the PDFs above are
+# already ignored, so keep the accompanying HTML out too.
+/notes/courses/*/**/*.html
+
+# Local study material (practice exams/quizzes + personal review sheets) — kept
+# out of the published site; not listed in any index.json.
+/notes/courses/CSCI-UA-470/midterm/
+/notes/courses/CSCI-UA-470/quiz/
 
 # Hidden courses
 /notes/courses/FYSEM*
 /notes/courses/EXPOS*
 /notes/courses/J*
+/notes/courses/CORE*
 
 # Insufficient content
 /notes/courses/CSCI-UA-101
