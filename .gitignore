@@ -102,6 +102,12 @@ docs/
 /notes/courses/CSCI-UA-470/midterm/
 /notes/courses/CSCI-UA-470/quiz/
 
+# Exam-shell SOURCE must stay tracked. The "*Exam*" rule above ignores "exams"
+# (core.ignorecase makes it case-insensitive), so re-include the dir and its
+# contents. Built exams still land in the ignored midterm/ and quiz/ dirs above.
+!/notes/courses/CSCI-UA-470/exams/
+!/notes/courses/CSCI-UA-470/exams/**
+
 # Hidden courses
 /notes/courses/FYSEM*
 /notes/courses/EXPOS*
