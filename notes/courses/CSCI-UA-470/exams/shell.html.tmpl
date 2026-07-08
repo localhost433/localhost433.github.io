@@ -342,7 +342,7 @@ details.rev[open] .sm-chev{transform:rotate(90deg)}
 
 <script>
 /* Build fills these; the defaults let the template open standalone for dev. */
-window.EXAM = { title:"Sample Exam", minutes:1, shuffleQuestions:false, shuffleOptions:false, introHtml:"<p class='lede'>Dev sample. Real intro is injected per exam.</p>" }; /*__CONFIG__*/
+window.EXAM = { title:"Sample Exam", id:"sample", minutes:1, shuffleQuestions:false, shuffleOptions:false, introHtml:"<p class='lede'>Dev sample. Real intro is injected per exam.</p>" }; /*__CONFIG__*/
 window.QUESTIONS = [ { type:"concept", prose:true, prompt:"Sample question — is this the dev placeholder?", options:[{text:"Yes",correct:true,why:"Yes: replaced at build time."},{text:"No",correct:false,why:"It is."}] } ]; /*__QUESTIONS__*/
 </script>
 
@@ -413,6 +413,7 @@ function begin(){
 }
 
 function startTimer(){
+  if(!TOTAL_TIME) return;
   clearInterval(timerId);
   updateClock();
   timerId=setInterval(()=>{
@@ -526,10 +527,10 @@ function renderResults(auto){
   document.getElementById("ringPct").textContent=pct+"%";
 
   document.getElementById("scoreBig").textContent=`${correct} / ${total} correct`;
-  let verdict = pct>=88?"Midterm-ready. The core C++/Java/OOP traps are not tripping you up." :
-                pct>=72?"Solid. Tighten up the gotchas flagged in red below." :
+  let verdict = pct>=88?"Strong — you're in good shape." :
+                pct>=72?"Solid, with gaps to close." :
                 pct>=52?"Getting there — focus your review on the incorrect ones." :
-                "Worth another pass through the review sheet, then retake.";
+                "Worth another pass.";
   document.getElementById("scoreSub").textContent=verdict;
   const used=TOTAL_TIME-remaining;
   const um=String(Math.floor(used/60)).padStart(2,"0"), us=String(used%60).padStart(2,"0");
@@ -567,7 +568,7 @@ function stripHtml(s){
 function buildWrongMarkdown(){
   const wrong=wrongItems();
   if(!wrong.length) return null;
-  let out=`# CSCI-UA 470 Practice Midterm 3 — questions I got wrong (${wrong.length})\n\n`;
+  let out="# " + window.EXAM.title + " — Questions to Review" + ` (${wrong.length})\n\n`;
   out+=`For each question below, please explain the correct answer and why my answer was wrong.\n`;
   wrong.forEach((it,n)=>{
     const q=qOf(it);
@@ -626,13 +627,14 @@ function downloadWrong(){
   const hint=document.getElementById("exportHint");
   if(!md){ hint.textContent="Nothing incorrect — nice work!"; return; }
   try{
+    const fname = String(window.EXAM.id || "exam").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"") + "-mistakes.md";
     const blob=new Blob([md],{type:"text/markdown"});
     const url=URL.createObjectURL(blob);
     const a=document.createElement("a");
-    a.href=url; a.download="csci-ua-470-practice-midterm-3-mistakes.md";
+    a.href=url; a.download=fname;
     document.body.appendChild(a); a.click(); a.remove();
     setTimeout(()=>URL.revokeObjectURL(url),1000);
-    hint.textContent="Downloaded csci-ua-470-practice-midterm-3-mistakes.md";
+    hint.textContent="Downloaded "+fname;
   }catch(e){
     revealExport(md); hint.textContent="Download blocked — copy the text below instead.";
   }
