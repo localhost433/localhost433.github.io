@@ -45,8 +45,28 @@
         "date": "2026-06-17"
     },
     {
-        "slug": "10-oop-pillars",
-        "title": "10 - OOP: The Four Pillars",
-        "date": "2026-06-17"
+        "slug": "10-java-files-final",
+        "title": "10 - Java Files, Serialization & final",
+        "date": "2026-06-22"
+    },
+    {
+        "slug": "11-jvm-runtime",
+        "title": "11 - JVM, Bytecode & Runtime Architecture",
+        "date": "2026-06-22/24"
+    },
+    {
+        "slug": "12-uml-use-case-diagrams",
+        "title": "12 - UML & Use Case Diagrams",
+        "date": "2026-07-01"
+    },
+    {
+        "slug": "13-java-cpp-systematic-comparison",
+        "title": "13 - Java vs. C++: Systematic Comparison",
+        "date": "2026-06-24"
+    },
+    {
+        "slug": "14-oop-pillars-roadmap",
+        "title": "14 - OOP Pillars & Course Roadmap",
+        "date": "2026-05-18/07-01"
     }
 ]
