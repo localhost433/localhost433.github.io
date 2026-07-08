@@ -407,7 +407,7 @@ function getProgress(){
   try { return s.getItem(progressKey(window.EXAM.id)); } catch(_) { return null; }
 }
 function saveProgress(){
-  const s = LS(); if (!s || typeof serializeProgress !== "function" || view!=="quiz") return;
+  const s = LS(); if (!s || typeof serializeProgress !== "function" || view!=="quiz" || reviewMode) return;
   try { s.setItem(progressKey(window.EXAM.id), serializeProgress({work, current, remaining})); } catch(_){}
 }
 function clearProgress(){ const s=LS(); if(!s) return; try { s.removeItem(progressKey(window.EXAM.id)); } catch(_){} }
@@ -522,7 +522,7 @@ function confirmSubmit(){
 }
 
 function submit(auto){
-  if(!reviewMode) clearProgress();
+  clearProgress();
   clearInterval(timerId);
   view="results";
   document.getElementById("view-quiz").style.display="none";
@@ -557,9 +557,14 @@ function renderResults(auto){
                 pct>=52?"Getting there — focus your review on the incorrect ones." :
                 "Worth another pass.";
   document.getElementById("scoreSub").textContent=verdict;
-  const used=TOTAL_TIME-remaining;
-  const um=String(Math.floor(used/60)).padStart(2,"0"), us=String(used%60).padStart(2,"0");
-  document.getElementById("scoreTime").textContent=(auto?"Time expired · ":"Time used · ")+um+":"+us+" of "+fmt(TOTAL_TIME);
+  const scoreTimeEl=document.getElementById("scoreTime");
+  if(reviewMode){
+    scoreTimeEl.textContent="Untimed review";
+  } else {
+    const used=TOTAL_TIME-remaining;
+    const um=String(Math.floor(used/60)).padStart(2,"0"), us=String(used%60).padStart(2,"0");
+    scoreTimeEl.textContent=(auto?"Time expired · ":"Time used · ")+um+":"+us+" of "+fmt(TOTAL_TIME);
+  }
 
   // type bars
   const order=[["output","Predict output","var(--t-output-fg)"],["debug","Debug","var(--t-debug-fg)"],["concept","Concept","var(--accent)"]];

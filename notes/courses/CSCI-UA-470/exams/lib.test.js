@@ -54,18 +54,26 @@ test("inlineExam escapes </script> inside data to avoid breaking the tag", () =>
   assert.match(out, /<\\\/script> attack/);            // to <\/script>
 });
 
-test("inlineExam throws when an unfilled __MARKER__ remains in output", () => {
-  // shell with a stray marker that no replacement fills
+test("inlineExam throws when an unfilled comment marker remains in output", () => {
+  // shell with a stray comment marker that no replacement fills
   const shell = [
     "<title>__TITLE__</title>",
     "<script>",
     "window.EXAM = {}; /*__CONFIG__*/",
     "window.QUESTIONS = []; /*__QUESTIONS__*/",
     "/*__ENGINE_LIB__*/",
+    "/*__EXTRA__*/",
     "</script>",
-    "<!-- __LEFTOVER__ -->",
   ].join("\n");
   assert.throws(() => inlineExam({ shell, engineLib: "", data: goodData }), /marker remains/);
+});
+
+test("inlineExam does not false-trip on bare __FILE__/__LINE__ tokens in question content", () => {
+  // A C++ exam question may legitimately mention __FILE__, __LINE__, __cplusplus, etc.
+  // These are not marker-comment syntax, so they must not trigger the leftover-marker guard.
+  const d = { ...goodData, questions: [{ ...goodQ,
+    prompt: "What does __FILE__ expand to? Also consider __LINE__ and __cplusplus." }] };
+  assert.doesNotThrow(() => inlineExam({ shell: SHELL, engineLib: "function ok(){}", data: d }));
 });
 
 test("inlineExam inserts data containing $-substitution sequences literally", () => {
