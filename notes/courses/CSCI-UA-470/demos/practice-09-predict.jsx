@@ -29,7 +29,7 @@ export default scene({
           { label: "`Circle.draw` — the runtime object is a `Circle`", correct: true },
           { label: "A compile error — `draw()` is ambiguous" },
         ],
-        why: "Java dispatches on the object's **runtime class**, not the reference's declared type. Every non-`static`, non-`private` method is **virtual** by default, so `s.draw()` follows the object's class pointer to `Circle.draw`. The `Shape` in `Shape s` only limits what the compiler lets you call.",
+        why: "Java dispatches on the object's **runtime class**, not the reference's declared type. Every non-`static`, non-`final`, non-`private` method is **virtual** by default, so `s.draw()` follows the object's class pointer to `Circle.draw`. The `Shape` in `Shape s` only limits what the compiler lets you call.",
       },
       cells: [handle("s", "Shape", "→ obj"), object("Circle", true)],
       caption: {

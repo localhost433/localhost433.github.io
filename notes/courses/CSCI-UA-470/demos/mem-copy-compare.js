@@ -144,11 +144,11 @@ const deepMap = {
   // radius = new int(0)         -> default ctor: call operator new
   18: [3],
   // Circle a;                   -> runs that constructor
-  12: [7],
+  11: [7],
   // radius = new int(*o.radius) -> deep copy ctor: call operator new
   19: [7],
   // Circle b = a;               -> runs the copy ctor (fresh alloc)
-  15: [11, 12] // delete radius;              -> load radius + call operator delete
+  14: [11, 12] // delete radius;              -> load radius + call operator delete
 };
 const deepSteps = [{
   line: [7, 18],
@@ -159,7 +159,7 @@ const deepSteps = [{
     intuition: "`a` **owns** a heap block from the moment it is constructed."
   }
 }, {
-  line: [12, 19],
+  line: [11, 19],
   cells: [circle("a", "ra", true), circle("b", "rb", true), RA(), RB()],
   caption: {
     cpp: "The user-defined copy ctor does `radius = new int(*o.radius)` — `b` gets its **own** heap int.",
@@ -167,7 +167,7 @@ const deepSteps = [{
     intuition: "A deep copy means two allocations, so `a` and `b` own **independent** blocks (Rule of Three)."
   }
 }, {
-  line: 15,
+  line: 14,
   cells: [circle("a", "ra", true), RA(true), RB(true)],
   caption: {
     cpp: "`delete radius;` runs in reverse: `~b` frees `rb`, then `~a` frees `ra` — two **separate** addresses.",

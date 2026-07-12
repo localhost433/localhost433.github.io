@@ -5,7 +5,7 @@ date: "2026-05-20/27"
 
 ## From structs to classes
 
-This note is your first brush with all four OOP pillars -- **encapsulation** (classes bundling state with behavior, plus access control), and the seeds of inheritance, abstraction, and polymorphism that follow; the full map of how they fit together lives in [OOP: The Four Pillars](note.html?course=CSCI-UA-470&note=14-oop-pillars-roadmap).
+This note is your first brush with all four OOP pillars -- **encapsulation** (classes bundling state with behavior, plus access control), and the seeds of inheritance, abstraction, and polymorphism that follow; the full map of how they fit together lives in [OOP: The Four Pillars](note.html?course=CSCI-UA-470&note=15-oop-pillars-roadmap).
 
 A C-style `struct` is just a bundle of data; a *separate* free function operates on it and receives the data explicitly:
 
@@ -97,7 +97,7 @@ p2.age  = 25;                    // changing p1 has no effect on p2
 | Defined **once** | Instantiated **many** times |
 | Occupies no data memory | Has its own data |
 
-Watch one blueprint stamp out two independent objects -- same layout, different data:
+Watch one blueprint stamp out two independent objects -- same layout, different data. (The figure switches to the course's running `circle` example instead of `Person`, but the idea is identical: one class, many independent instances.)
 
 ```artifact src=demos/class-blueprint.jsx static
 ```

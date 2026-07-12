@@ -19,10 +19,10 @@ const A = (hl) => stack("a", "int[4]", "", { id: "a", hl, fields: [
 const Q = (hl) => stack("q", "int*", "&a[0]", { id: "q", to: "a", hl });
 const ARR = (hl) => stack("arr", "int*", "0x…", { id: "arr", to: "harr", hl });
 const HARR = (rec) => heap("", "int[4]", "", { id: "harr", reclaimed: rec, fields: [
-  { name: "[0]", type: "int", value: "0" },
-  { name: "[1]", type: "int", value: "0" },
-  { name: "[2]", type: "int", value: "0" },
-  { name: "[3]", type: "int", value: "0" },
+  { name: "[0]", type: "int", value: "?" },
+  { name: "[1]", type: "int", value: "?" },
+  { name: "[2]", type: "int", value: "?" },
+  { name: "[3]", type: "int", value: "?" },
 ]});
 
 const steps = [
@@ -47,9 +47,9 @@ const steps = [
     line: 3,
     cells: [A(), Q(), ARR(true), HARR()],
     caption: {
-      cpp: "`int* arr = new int[4];` puts an 8-byte **pointer** on the stack aimed at a 4-int block on the **heap**.",
+      cpp: "`int* arr = new int[4];` puts an 8-byte **pointer** on the stack aimed at a 4-int block on the **heap**. The four ints are **uninitialized** (indeterminate `?`) — `new int[4]` default-initializes them; only `new int[4]{}` would zero them.",
       asm: "`new int[4]` -> `call operator new[]` returns a pointer; the variable is just an 8-byte pointer, not the array.",
-      intuition: "`sizeof(arr) == 8`, not 16 — once it's a pointer the array's size is **gone**.",
+      intuition: "`sizeof(arr) == 8`, not 16 — once it's a pointer the array's size is **gone**. And unlike a stack `{...}` initializer, the heap block starts with **garbage**.",
     },
   },
   {

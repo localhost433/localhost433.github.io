@@ -32,11 +32,11 @@ const person = obj("Person", [
 const A = (nameVal, ageVal, hl) => person("objA", { name: nameVal, age: ageVal }, { hl });
 const B = (nameVal, ageVal, hl) => person("objB", { name: nameVal, age: ageVal }, { hl });
 
-const P1 = (hl) => stack("p1", "Person", "", { id: "p1", to: "objA", link: "ref", size: 8, hl });
-const P2 = (hl) => stack("p2", "Person", "", { id: "p2", to: "objB", link: "ref", size: 8, hl });
-const X  = (target, hl) => stack("x",  "Person", "", { id: "x",  to: target, link: "ref", size: 8, hl });
-const Y  = (target, hl) => stack("y",  "Person", "", { id: "y",  to: target, link: "ref", size: 8, hl });
-const TMP = (target, hl) => stack("tmp", "Person", "", { id: "tmp", to: target, link: "ref", size: 8, hl });
+const P1 = (hl) => stack("p1", "Person", "", { id: "p1", to: "objA", link: "ptr", size: 8, hl });
+const P2 = (hl) => stack("p2", "Person", "", { id: "p2", to: "objB", link: "ptr", size: 8, hl });
+const X  = (target, hl) => stack("x",  "Person", "", { id: "x",  to: target, link: "ptr", size: 8, hl });
+const Y  = (target, hl) => stack("y",  "Person", "", { id: "y",  to: target, link: "ptr", size: 8, hl });
+const TMP = (target, hl) => stack("tmp", "Person", "", { id: "tmp", to: target, link: "ptr", size: 8, hl });
 
 /* Shared opening: p1/p2 reference two heap objects before swap is called. */
 const intro = (code) => ({

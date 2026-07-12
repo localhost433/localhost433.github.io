@@ -44,7 +44,7 @@ const steps = [
       intuition: "Each object gets its own `call` — the **address in `rdi`** is the only thing that changes.",
     },
   },
-  { line: [3, 4], cells: [c("c1", "red", 10, true), c("c2", "no color", 0)],
+  { line: [3, 4], cells: [c("c1", "red", 10, true), c("c2", "No color", 0)],
     caption: {
       cpp: "`c1.set_radius(10)` then `c1.set_color(\"red\")` update c1 in place — result: `{red, 10}`.",
       asm: "`lea rdi, [c1]` sets `this = &c1`; `call circle::set_color` passes the string argument in `rsi` (set_radius is elided above).",

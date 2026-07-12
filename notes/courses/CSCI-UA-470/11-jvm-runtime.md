@@ -59,6 +59,15 @@ This is why the lecture labels Java as **platform independent / portable**.
 
 The portability is not magic. It comes from moving the platform-specific part into the JVM. Each platform needs its own JVM implementation, but the same `.class` file can be fed to those JVMs.
 
+## The JVM at a glance
+
+Before we trace bytecode through it, here is the whole machine at once. The lecture diagram separates the JVM into three major parts -- **class loaders**, **runtime areas**, and an **execution engine** -- plus the **Java Native Interface (JNI)** that bridges out to platform-native libraries (`.dll`, `.so`, `.dylib`):
+
+```artifact src=demos/jvm-architecture-map.jsx static
+```
+
+Keep this map in view: every section that follows zooms into **one box** of it, and each box maps onto a stage of the seven-step table above. The two *machine models* next fill in the **runtime areas** (stacks, heap, method area). *Class loading* and *verification* are the **class loaders** (the *load* and *verify* stages). The interpreter, JIT, and garbage collector are the **execution engine** (*execute*, *optimize*, *reclaim*). And a `native` call crosses **JNI**.
+
 ## Physical machine versus virtual machine
 
 The lecture contrasts a **physical machine** with a **virtual machine**.
@@ -96,6 +105,13 @@ The JVM is a **software machine**. It defines a virtual instruction set, virtual
 
 The JVM model is largely **stack-based**: many bytecode operations push values onto, or pop values from, an operand stack.
 
+The contrast with the register machine above is easiest to see side by side -- the **same** sum `a + b` computed both ways. The register machine names every operand (`add %rbx, %rax`); the stack machine names none, leaving them implicit on the operand stack:
+
+```artifact src=demos/register-vs-stack.jsx static
+```
+
+That is exactly why bytecode names no registers: it needn't know how many a given CPU has -- the JVM maps the operand stack onto real registers when it runs. The trace below steps through the stack machine on its own, `iload`/`iadd`/`ireturn` over one operand stack:
+
 ```artifact src=demos/jvm-operand-stack.jsx
 ```
 
@@ -114,20 +130,9 @@ object on the Heap, and pushes a **reference** onto the operand stack. Every lat
 field access follows that reference. When the reference goes away, the object
 becomes unreachable -- the hand-off to garbage collection.
 
-## JVM architecture
+## Inside the JVM: the three subsystems
 
-At the high level: **`.java` files → Java compiler → `.class` files → JVM**.
-
-Inside the JVM, the lecture diagram separates three major parts:
-
-1. **Class loaders**
-2. **Runtime areas**
-3. **Execution engine**
-
-It also shows the **Java Native Interface** connecting the JVM to native libraries such as `.dll`, `.so`, and similar platform-native files.
-
-```artifact src=demos/jvm-architecture-map.jsx static
-```
+Now we zoom into each box of the map above ("The JVM at a glance"), in the order a class meets them: the **class loaders** bring it in, the **runtime areas** hold its state, and the **execution engine** runs its bytecode -- with **JNI** as the exit to native code.
 
 ### Class loaders
 

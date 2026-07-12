@@ -222,7 +222,7 @@ export default function ClassRelations() {
     cx: BR.c.cx,
     cy: BR.c.cy,
     label: "C",
-    note: "base",
+    note: "derived base",
     sub: 2
   }), /*#__PURE__*/React.createElement(DiagramBox, {
     cx: BR.d.cx,

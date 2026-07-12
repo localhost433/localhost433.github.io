@@ -15,7 +15,7 @@ os.writeObject(c);
 Integer i = (Integer) is.readObject();
 Circle cir = (Circle) is.readObject();
 
-Circle wrong = (Circle) is.readObject(); // wrong if Integer is first`;
+Circle wrong = (Circle) is.readObject(); // ✗ if the FIRST read were cast to Circle`;
 
 const X = (hl) => stack("x", "Integer ref", "-> Integer(10)", { id: "x", to: "xobj", hl });
 const C = (hl) => stack("c", "Circle ref", "-> Circle", { id: "c", to: "cobj", hl });
@@ -74,7 +74,7 @@ const steps = [
     line: 10,
     cells: [X(), C(), XOBJ(true), COBJ(), R1(true), R2(), BAD(true)],
     caption: {
-      java: "If the first read is cast to `Circle`, the stream still returns the first record, an `Integer`. The cast is invalid.",
+      java: "Counterfactual: had the **first** read been cast to `Circle`, it would still hand back `file[0]` — an `Integer` — and the cast would fail. (This is an alternative to the correct first read above, not a third read: the stream has already been consumed.)",
       intuition: "`readObject()` returns `Object`, but the runtime object still has its real class. A wrong cast fails.",
     },
   },

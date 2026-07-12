@@ -68,7 +68,7 @@ export default function ClassRelations() {
       <DiagramEdge {...up(BR.d, BR.c)} />
       <DiagramBox cx={BR.a.cx} cy={BR.a.cy} label="A" note="base" sub={0} />
       <DiagramBox cx={BR.b.cx} cy={BR.b.cy} label="B" note="derived base" sub={1} />
-      <DiagramBox cx={BR.c.cx} cy={BR.c.cy} label="C" note="base" sub={2} />
+      <DiagramBox cx={BR.c.cx} cy={BR.c.cy} label="C" note="derived base" sub={2} />
       <DiagramBox cx={BR.d.cx} cy={BR.d.cy} label="D" note="derived" sub={3} />
       <Cap x={480} y={502} label="-> the diamond problem" accent />
     </DiagramSvg>

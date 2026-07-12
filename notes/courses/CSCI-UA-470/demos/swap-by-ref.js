@@ -47,35 +47,35 @@ const B = (nameVal, ageVal, hl) => person("objB", {
 const P1 = hl => stack("p1", "Person", "", {
   id: "p1",
   to: "objA",
-  link: "ref",
+  link: "ptr",
   size: 8,
   hl
 });
 const P2 = hl => stack("p2", "Person", "", {
   id: "p2",
   to: "objB",
-  link: "ref",
+  link: "ptr",
   size: 8,
   hl
 });
 const X = (target, hl) => stack("x", "Person", "", {
   id: "x",
   to: target,
-  link: "ref",
+  link: "ptr",
   size: 8,
   hl
 });
 const Y = (target, hl) => stack("y", "Person", "", {
   id: "y",
   to: target,
-  link: "ref",
+  link: "ptr",
   size: 8,
   hl
 });
 const TMP = (target, hl) => stack("tmp", "Person", "", {
   id: "tmp",
   to: target,
-  link: "ref",
+  link: "ptr",
   size: 8,
   hl
 });
