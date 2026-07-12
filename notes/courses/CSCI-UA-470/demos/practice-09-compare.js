@@ -6,6 +6,11 @@ import { compare, stack } from "@course";
 const handle = type => stack("s", type, "→ obj", {
   id: "s"
 });
+// non-virtual: a plain object with NO vptr (a non-polymorphic C++ class carries none)
+const plainObject = () => stack("obj", "Circle", "", {
+  id: "obj"
+});
+// virtual: the object gains a hidden class/vtable pointer
 const object = klass => stack("obj", "object", "", {
   id: "obj",
   fields: [{
@@ -29,12 +34,12 @@ export default compare({
   lang: "cpp",
   stages: [{
     code: "Shape* s = new Circle();\ns->draw();   // non-virtual",
-    cells: [handle("Shape*"), object("Circle")],
+    cells: [handle("Shape*"), plainObject()],
     tag: {
       kind: "cpp",
       text: "early binding"
     },
-    note: "Non-virtual → resolved at **compile time** from the static type `Shape`, so `Shape::draw` runs."
+    note: "Non-virtual → the object has **no vptr**; the call is resolved at **compile time** from the static type `Shape`, so `Shape::draw` runs."
   }, {
     code: "Shape* s = new Circle();\ns->draw();   // virtual",
     cells: [handle("Shape*"), object("Circle"), vtable("Circle::draw")],

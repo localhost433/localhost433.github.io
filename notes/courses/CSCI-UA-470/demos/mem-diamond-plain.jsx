@@ -17,7 +17,7 @@ int main() {
     t.name;
 }`;
 
-const title = "TA object · NON-virtual diamond — sizeof 88";
+const title = "TA object · NON-virtual diamond — sizeof 80";
 
 // Always the full TA layout; `m` highlights the part a step is about:
 // "teacher"/"student"/"ta" = that branch's slots, "amb" = both person copies.
@@ -48,7 +48,7 @@ const steps = [
   {
     line: 4, layout: view("ta"),
     caption: {
-      cpp: "`class TA : public teacher, public student` lays the two branches back-to-back, then appends its **own** `age` — `sizeof 88` (two 40-byte branches + 4, padded to 8).",
+      cpp: "`class TA : public teacher, public student` lays the two branches back-to-back, then appends its **own** `age` — **`sizeof 80`**: the two `person`+`age` branches sit at **+0** and **+40**, and TA's `age` packs into the second branch's trailing padding (the Itanium ABI reuses base tail-padding) rather than adding another 8.",
       intuition: "A most-derived object is just its base subobjects concatenated, plus its own members.",
     },
   },

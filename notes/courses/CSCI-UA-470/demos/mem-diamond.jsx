@@ -58,7 +58,7 @@ const steps = [
   {
     line: 7, layout: view("person"),
     caption: {
-      cpp: "`TA t;` — and exactly **one** shared `person`, relocated to the **end** (`name` at **+32**). `sizeof 64`, versus **88** for the non-virtual diamond's two copies.",
+      cpp: "`TA t;` — and exactly **one** shared `person`, relocated to the **end** (`name` at **+32**). `sizeof 64`, versus **80** for the non-virtual diamond's two copies.",
       intuition: "Virtual inheritance collapses the duplicate base into a single shared sub-object.",
     },
   },
