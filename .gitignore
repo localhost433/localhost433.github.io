@@ -1,4 +1,25 @@
 # ============================================================
+#  Privacy safety net — THIS REPO IS PUBLIC
+# ============================================================
+# Documents and media are never part of the published site: course PDFs,
+# lectures and readings are private, and personal files have drifted in here
+# before (a vocab .xlsx into js/, an ebook into scripts/). Ignore these formats
+# repo-wide so a stray `git add .` can't publish them. Nothing of these types
+# has ever been committed, so this breaks nothing.
+# To publish one deliberately, force it: git add -f <path>
+*.pdf
+*.docx
+*.doc
+*.epub
+*.xlsx
+*.xls
+*.pptx
+*.ppt
+*.m4a
+*.mp3
+*.heic
+
+# ============================================================
 #  Dependencies & build
 # ============================================================
 # Node.js dependencies
