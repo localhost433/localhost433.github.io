@@ -65,13 +65,18 @@
         "date": "2026-07-08"
     },
     {
-        "slug": "14-java-cpp-systematic-comparison",
-        "title": "14 - Java vs. C++: Systematic Comparison",
+        "slug": "14-uml-class-diagrams",
+        "title": "14 - UML Class Diagrams & Iterative Design",
+        "date": "2026-07-09"
+    },
+    {
+        "slug": "15-java-cpp-systematic-comparison",
+        "title": "15 - Java vs. C++: Systematic Comparison",
         "date": "2026-06-24"
     },
     {
-        "slug": "15-oop-pillars-roadmap",
-        "title": "15 - OOP Pillars & Course Roadmap",
+        "slug": "16-oop-pillars-roadmap",
+        "title": "16 - OOP Pillars & Course Roadmap",
         "date": "2026-05-18/07-01"
     }
 ]

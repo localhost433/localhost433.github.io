@@ -25,7 +25,7 @@ The back half of the course does not introduce a fifth pillar. It either deepens
 - **Polymorphic design** -- abstract base types and shape hierarchies are developed in [Polymorphism & Abstract Classes](note.html?course=CSCI-UA-470&note=09-polymorphism-design-java).
 - **Java I/O and `final`** -- text files, binary files, serialization, and `final` are covered in [Java Files, Serialization & final](note.html?course=CSCI-UA-470&note=10-java-files-final).
 - **JVM mechanics** -- bytecode, class loading, runtime areas, interpretation, JIT compilation, and garbage collection are covered in [JVM, Bytecode & Runtime Architecture](note.html?course=CSCI-UA-470&note=11-jvm-runtime).
-- **Systematic Java/C++ comparison** -- the consolidated table of Java versus C++ rules is in [Java vs. C++: Systematic Comparison](note.html?course=CSCI-UA-470&note=14-java-cpp-systematic-comparison).
+- **Systematic Java/C++ comparison** -- the consolidated table of Java versus C++ rules is in [Java vs. C++: Systematic Comparison](note.html?course=CSCI-UA-470&note=15-java-cpp-systematic-comparison).
 - **UML and design patterns** -- these are reusable notations and designs built mostly from **Inheritance**, **Abstraction**, and **Polymorphism**. UML is developed in [UML & Use Case Diagrams](note.html?course=CSCI-UA-470&note=12-uml-use-case-diagrams).
 
 ### Inheritance shapes, and who allows which
@@ -80,8 +80,8 @@ Two practical differences carry their weight:
 
 | Concept | Main note entries |
 |---|---|
-| Encapsulation | [03 - Classes & Objects](note.html?course=CSCI-UA-470&note=03-classes-objects), [08 - C++ vs. Java](note.html?course=CSCI-UA-470&note=08-cpp-vs-java), [14 - Java vs. C++](note.html?course=CSCI-UA-470&note=14-java-cpp-systematic-comparison) |
-| Inheritance | [05 - Inheritance](note.html?course=CSCI-UA-470&note=05-inheritance), [08 - C++ vs. Java](note.html?course=CSCI-UA-470&note=08-cpp-vs-java), [14 - Java vs. C++](note.html?course=CSCI-UA-470&note=14-java-cpp-systematic-comparison) |
-| Polymorphism | [06 - Polymorphism & Virtual Functions](note.html?course=CSCI-UA-470&note=06-polymorphism), [09 - Polymorphism & Abstract Classes](note.html?course=CSCI-UA-470&note=09-polymorphism-design-java), [14 - Java vs. C++](note.html?course=CSCI-UA-470&note=14-java-cpp-systematic-comparison) |
-| Abstraction | [09 - Polymorphism & Abstract Classes](note.html?course=CSCI-UA-470&note=09-polymorphism-design-java), this note's [concrete/abstract/interface comparison](#concrete-vs-abstract-vs-interface), [14 - Java vs. C++](note.html?course=CSCI-UA-470&note=14-java-cpp-systematic-comparison) |
-| Runtime / JVM | [11 - JVM, Bytecode & Runtime Architecture](note.html?course=CSCI-UA-470&note=11-jvm-runtime), [14 - Java vs. C++](note.html?course=CSCI-UA-470&note=14-java-cpp-systematic-comparison) |
+| Encapsulation | [03 - Classes & Objects](note.html?course=CSCI-UA-470&note=03-classes-objects), [08 - C++ vs. Java](note.html?course=CSCI-UA-470&note=08-cpp-vs-java), [15 - Java vs. C++](note.html?course=CSCI-UA-470&note=15-java-cpp-systematic-comparison) |
+| Inheritance | [05 - Inheritance](note.html?course=CSCI-UA-470&note=05-inheritance), [08 - C++ vs. Java](note.html?course=CSCI-UA-470&note=08-cpp-vs-java), [15 - Java vs. C++](note.html?course=CSCI-UA-470&note=15-java-cpp-systematic-comparison) |
+| Polymorphism | [06 - Polymorphism & Virtual Functions](note.html?course=CSCI-UA-470&note=06-polymorphism), [09 - Polymorphism & Abstract Classes](note.html?course=CSCI-UA-470&note=09-polymorphism-design-java), [15 - Java vs. C++](note.html?course=CSCI-UA-470&note=15-java-cpp-systematic-comparison) |
+| Abstraction | [09 - Polymorphism & Abstract Classes](note.html?course=CSCI-UA-470&note=09-polymorphism-design-java), this note's [concrete/abstract/interface comparison](#concrete-vs-abstract-vs-interface), [15 - Java vs. C++](note.html?course=CSCI-UA-470&note=15-java-cpp-systematic-comparison) |
+| Runtime / JVM | [11 - JVM, Bytecode & Runtime Architecture](note.html?course=CSCI-UA-470&note=11-jvm-runtime), [15 - Java vs. C++](note.html?course=CSCI-UA-470&note=15-java-cpp-systematic-comparison) |

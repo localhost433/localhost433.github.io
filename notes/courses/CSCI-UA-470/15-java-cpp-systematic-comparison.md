@@ -15,7 +15,7 @@ This note is a compact comparison checklist for final review. It does not re-tea
 | Java polymorphism and design | [09 - Polymorphism & Abstract Classes](note.html?course=CSCI-UA-470&note=09-polymorphism-design-java) |
 | Files, serialization, and `final` | [10 - Java Files, Serialization & final](note.html?course=CSCI-UA-470&note=10-java-files-final) |
 | JVM, bytecode, and runtime architecture | [11 - JVM, Bytecode & Runtime Architecture](note.html?course=CSCI-UA-470&note=11-jvm-runtime) |
-| OOP pillars and conceptual roadmap | [15 - OOP Pillars Roadmap](note.html?course=CSCI-UA-470&note=15-oop-pillars-roadmap) |
+| OOP pillars and conceptual roadmap | [16 - OOP Pillars Roadmap](note.html?course=CSCI-UA-470&note=16-oop-pillars-roadmap) |
 
 ## Core language comparison
 
