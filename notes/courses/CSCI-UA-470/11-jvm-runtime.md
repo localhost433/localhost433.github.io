@@ -99,7 +99,7 @@ This is a register-based execution model: instructions often name registers expl
 
 In the Java virtual-machine picture: `.java` source → compiler → `.class` bytecode → JVM.
 
-The `.class` file contains bytecode plus other class metadata. The lecture diagram uses stack-style bytecode such as `iload_1`, `iload_2`, `iadd`, `ireturn`.
+The `.class` file contains bytecode plus other class metadata. The lecture diagram uses stack-style bytecode such as `iload_1`, `iload_2`, `iadd`, `ireturn`. That is not a simplification: it is exactly what `javac` emits for `int add(int a, int b) { return a + b; }`, and the operand-stack demo below shows the real `javap -c` output beside the method that produced it.
 
 The JVM is a software machine. It defines a virtual instruction set, virtual runtime memory areas, and rules for loading and executing bytecode. The physical CPU still does the final work, but Java bytecode is not itself the physical CPU's native instruction set.
 
@@ -147,7 +147,7 @@ The lecture names three loaders:
 |---|---|
 | Bootstrap loader | standard packages such as `java.lang`, `java.util`, etc., from the core runtime archive, historically shown as `rt.jar` |
 | Application loader | files in the class path, including your own `.class` files |
-| Extension loader | optional libraries installed into the runtime extension area, historically `jre/lib/ext` (note: the core `java.sql` JDBC API is *not* an extension -- it is a platform package loaded by the bootstrap loader) |
+| Extension loader | optional libraries installed into the runtime extension area, historically `jre/lib/ext` (note: the core `java.sql` JDBC API is *not* an extension -- since JDK 9 the extension loader is the **platform loader**, and `java.sql` is loaded by *it*, not by the bootstrap loader) |
 
 The job of a class loader is to bring class definitions into the JVM so they can be verified, linked, initialized, and executed.
 
