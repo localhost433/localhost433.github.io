@@ -31,7 +31,7 @@ class Game {
 }
 ```
 
-It works, but the moment you want rectangles and triangles too, every line that mentions `Circle` has to be duplicated. The program is **welded to one concrete type**.
+It works, but the moment rectangles and triangles are needed too, every line that mentions `Circle` has to be duplicated. The program is welded to one concrete type.
 
 ## v2 -- a hierarchy with a `type` tag (and its smell)
 
@@ -48,7 +48,7 @@ class Rectangle extends Shape { int width, length; }
 class Triangle  extends Shape { int base, height; }
 ```
 
-Now the `Game` can hold a `Shape` reference -- but it still decides *which* subclass to build with an `if`/`else` chain keyed on a `type`:
+Now the `Game` can hold a `Shape` reference, but it still decides which subclass to build with an `if`/`else` chain keyed on a `type`:
 
 ```java
 int type = r.nextInt(3);
@@ -59,14 +59,14 @@ else if (type == 3) s = new Rectangle(/* ... */);
 s.draw();
 ```
 
-> **The smell.** That `if`/`else` ladder grows by one branch *every* time you add a shape. Code that must be edited whenever the data changes is fragile -- and if you also branched on `type` to choose *how to draw*, you'd have a second ladder to maintain.
+> The smell: that `if`/`else` ladder grows by one branch every time a shape is added. Code that must be edited whenever the data changes is fragile. Branching on `type` a second time to choose how to draw would give you a second ladder to maintain.
 
 ```artifact src=demos/uml-v2.jsx static
 ```
 
 ## v3 -- polymorphism: let the object decide
 
-Give each subclass its **own** `draw()`:
+Give each subclass its own `draw()`:
 
 ```java
 class Circle extends Shape {
@@ -77,14 +77,14 @@ class Rectangle extends Shape { /* ... */ public void draw() { /* draw a rectang
 class Triangle  extends Shape { /* ... */ public void draw() { /* draw a triangle */ } }
 ```
 
-Then the entire drawing logic is **one line**:
+Then the entire drawing logic is one line:
 
 ```java
 Shape s = /* some Circle, Rectangle, or Triangle */;
 s.draw();   // dispatches to the object's actual runtime type
 ```
 
-`s` is *declared* `Shape`, but at run time it **is** a `Circle` (or ...), so `s.draw()` runs `Circle.draw()`. To add a `Pentagon`, you write a `Pentagon extends Shape` with its own `draw()` -- and the drawing loop **never changes**. The behavior travels with the object, not with a `switch`.
+`s` is declared `Shape`, but at run time it is a `Circle` (or one of the others), so `s.draw()` runs `Circle.draw()`. To add a `Pentagon`, write a `Pentagon extends Shape` with its own `draw()`; the drawing loop stays exactly as it is. The behavior travels with the object, so the loop needs no `switch`.
 
 ```artifact src=demos/uml-v3.jsx static
 ```
@@ -92,26 +92,26 @@ s.draw();   // dispatches to the object's actual runtime type
 ```artifact src=demos/draw-dispatch.jsx
 ```
 
-**Two C++ contrasts worth flagging:**
+Two C++ contrasts:
 
 | | C++ | Java |
 |---|---|---|
-| Overridable methods | opt-in: must mark `virtual` | **every** method is virtual by default |
+| Overridable methods | opt-in: must mark `virtual` | every method is virtual by default |
 | Marking an override | `override` (optional) | `@Override` (optional, recommended) |
 | Base reference to derived | `Shape*` / `Shape&` | a plain `Shape` variable (references only) |
 
-So in Java you get polymorphic dispatch *for free* -- there is no `virtual` keyword because it's always on.
+Java dispatches polymorphically with no extra syntax: there is no `virtual` keyword because it is always on.
 
-**What polymorphism did NOT remove:** the **construction** `if`/`else` (deciding which subclass to `new`) is still there. Choosing *which* object to create from data is a separate problem, usually solved with a **factory** -- a topic for later.
+Polymorphism did not remove the construction `if`/`else`, the one that decides which subclass to `new`. Choosing which object to create from data is a separate problem, usually solved with a factory, a topic for later.
 
-The machinery behind "always on" is a per-class **method table**: each object header carries a pointer to its class's table, and a call resolves to a fixed slot in it. Overriding swaps just that one slot, so the object's class decides which body runs:
+The machinery behind "always on" is a per-class method table: each object header carries a pointer to its class's table, and a call resolves to a fixed slot in it. Overriding swaps just that one slot, so the object's class decides which body runs:
 
 ```artifact src=demos/java-dispatch.jsx
 ```
 
 ## v4 -- abstract classes & methods
 
-In v3, `Shape` itself is meaningless -- there is no such thing as a generic "shape" you can draw. Make that explicit:
+In v3, `Shape` itself carries no meaning; there is no such thing as a generic "shape" you can draw. Make that explicit:
 
 ```java
 abstract class Shape {
@@ -121,8 +121,8 @@ abstract class Shape {
 }
 ```
 
-- An **abstract method** has no body; declaring one forces the class to be `abstract`.
-- An **abstract class cannot be instantiated** -- `new Shape()` is a compile error. You can only `new` a *concrete* subclass that implements every abstract method.
+- **Abstract method** -- has no body; declaring one forces the class to be `abstract`.
+- **Abstract class** -- cannot be instantiated. `new Shape()` is a compile error. You can only `new` a concrete subclass that implements every abstract method.
 
 ```java
 Cylinder c = new Cylinder();   // OK  -- Cylinder implements draw()
@@ -130,7 +130,7 @@ Shape    s = new Shape();      // ERROR -- Shape is abstract
 Shape    s = new Cylinder();   // OK  -- base reference, concrete object
 ```
 
-Adding `Cylinder extends Shape` *requires* you to write `draw()`, or the compiler rejects it -- the hierarchy enforces its own contract.
+Adding `Cylinder extends Shape` requires you to write `draw()`, or the compiler rejects it. The hierarchy enforces its own contract.
 
 ```artifact src=demos/uml-v4.jsx static
 ```
@@ -141,26 +141,26 @@ Adding `Cylinder extends Shape` *requires* you to write `draw()`, or the compile
 | Abstract class | any class with a pure-virtual method | marked `abstract class` |
 | Can instantiate base? | no (has a pure virtual) | no (`abstract`) |
 
-The next step past an abstract class -- where *every* method is abstract -- is an **interface**. For its definition and a side-by-side concrete/abstract/interface comparison, see [OOP: The Four Pillars](note.html?course=CSCI-UA-470&note=16-oop-pillars-roadmap#concrete-vs-abstract-vs-interface).
+The next step past an abstract class, where every method is abstract, is an interface. For its definition and a side-by-side concrete/abstract/interface comparison, see [OOP: The Four Pillars](note.html?course=CSCI-UA-470&note=16-oop-pillars-roadmap#concrete-vs-abstract-vs-interface).
 
 ## v5 -- designing the hierarchy
 
-Polymorphism is only as good as the **tree** you put classes in. Dumping every class as a direct child of one base is a flat list, not a design -- e.g. making `Circle`, `Rectangle`, `Triangle`, `Car`, `Bike`, `Student`, and `Employee` all extend `Shape`, which wrongly claims a `Car` *is a* `Shape`.
+Polymorphism is only as good as the tree you put the classes in. Making `Circle`, `Rectangle`, `Triangle`, `Car`, `Bike`, `Student`, and `Employee` all extend `Shape` produces a flat list of unrelated classes and wrongly claims a `Car` is a `Shape`.
 
-Group by genuine **"is-a"** relationships and introduce intermediate (often abstract) bases:
+Group by genuine "is-a" relationships and introduce intermediate (often abstract) bases:
 
-- **`Shape`** (abstract) -- `Circle`, `Rectangle`, `Triangle`
-- **`Vehicle`** (abstract) -- `Car`, `Bike`
-- **`Person`** (abstract) -- `Student`, `Employee`
+- `Shape` (abstract) -- `Circle`, `Rectangle`, `Triangle`
+- `Vehicle` (abstract) -- `Car`, `Bike`
+- `Person` (abstract) -- `Student`, `Employee`
 
 ```artifact src=demos/uml-v5.jsx static
 ```
 
-**The test for an edge:** "*is* a `Student` a `Person`?" yes $\to$ `Student extends Person`. "*is* a `Car` a `Shape`?" no $\to$ different tree. Shared behavior (`draw()`, `move()`, `speak()`) lives on the **base**; specifics live on the leaves.
+Test an edge by asking the is-a question. Is a `Student` a `Person`? Yes $\to$ `Student extends Person`. Is a `Car` a `Shape`? No $\to$ different tree. Shared behavior (`draw()`, `move()`, `speak()`) lives on the base; specifics live on the leaves.
 
 ## v6 -- interface polymorphism: many handles onto one object
 
-A subclass gets exactly **one** parent (`extends`), but a class can `implements` **any number** of interfaces. Each interface is a separate *capability* -- a promise to provide certain methods -- and an object can be referenced through **every** interface it declares.
+A subclass gets exactly one parent (`extends`), but a class can `implements` any number of interfaces. Each interface is a separate capability, a promise to provide certain methods, and an object can be referenced through every interface it declares.
 
 Three tiny capability interfaces:
 
@@ -212,11 +212,11 @@ Which class carries which capability:
 | `Bird` | `Animal` | `Flyable` | -- | -- | yes |
 | `Crawler` | `Animal` | -- | -- | -- | -- |
 
-> **The subtle runtime point.** `Person` and `Animal` each *have* a `move()` (and `draw()`) method -- yet a `Bird`, `Crawler`, `Student`, or `Employee` is **not** a `Movable`. Java is **not** structurally typed: owning a method with the matching name/signature does not make you the interface. You are that interface only if you (or an ancestor) explicitly declare `implements Movable`. `Student` becomes `Drawable` purely by adding the `implements` clause -- it then satisfies it with the `draw()` body it *inherited* from `Person`.
+> `Person` and `Animal` each have a `move()` (and a `draw()`) method, yet a `Bird`, `Crawler`, `Student`, or `Employee` is still not a `Movable`. Java typing is nominal rather than structural: owning a method with the matching name and signature does not make a class an implementer of the interface. A class is that interface only if it (or an ancestor) explicitly declares `implements Movable`. `Student` becomes `Drawable` purely by adding the `implements` clause, and it then satisfies the interface with the `draw()` body it inherited from `Person`.
 
 ### Interface-reference assignment
 
-An interface handle can point at **any** object whose class implements that interface -- and at **nothing else**:
+An interface handle can point at any object whose class implements that interface, and at nothing else:
 
 ```java
 Flyable f;
@@ -239,11 +239,11 @@ d = new Student();                                               // implements D
 //   -- ERRORS: Vehicle/Flight do not implement Drawable
 ```
 
-Through `m`, the only thing you can call is `m.move()` -- the handle exposes exactly the interface's contract, regardless of the object's fuller runtime type. At run time the call still dispatches to the object's actual class body (a `Flight`'s `move()`, a `Car`'s `move()`), so **interface references are just another form of polymorphic dispatch** -- narrowed to one capability.
+Through `m`, the only callable method is `m.move()`. The handle exposes exactly the interface's contract, regardless of the object's fuller runtime type. At run time the call still dispatches to the object's actual class body (a `Flight`'s `move()`, a `Car`'s `move()`), so an interface reference is one more form of polymorphic dispatch, narrowed to a single capability.
 
 ## Overloading vs. overriding
 
-Two similar-sounding mechanisms that are resolved at **different times** -- keeping them straight is essential to reading polymorphic code.
+Two similar-sounding mechanisms, resolved at different times.
 
 ```java
 class Student {
@@ -258,19 +258,19 @@ class TA extends Student {
 }
 ```
 
-- **Overloading** -- *same method name, different parameter lists*, in the **same** class. The two `add` methods are unrelated bodies that merely share a name. The compiler picks which one to call from the **argument types at the call site**, so overloading is resolved at **compile time** (static / early binding). `add(2, 3)` binds to `add(int,int)`; `add(2.0, 3.0)` binds to `add(double,double)`.
-- **Overriding** -- *same signature* (name **and** parameter list), in a **subclass**, replacing the inherited method. `TA.intro()` shadows `Student.intro()`. The JVM picks which body runs from the **object's actual runtime type**, so overriding is resolved at **run time** (dynamic / late binding). A `Student s = new TA(); s.intro();` prints `"I am a Teaching Assistant"`.
+- **Overloading** -- same method name, different parameter lists, in the same class. The two `add` methods are unrelated bodies that merely share a name. The compiler picks which one to call from the argument types at the call site, so overloading is resolved at compile time (static / early binding). `add(2, 3)` binds to `add(int,int)`; `add(2.0, 3.0)` binds to `add(double,double)`.
+- **Overriding** -- same signature (name and parameter list), in a subclass, replacing the inherited method. `TA.intro()` shadows `Student.intro()`. The JVM picks which body runs from the object's actual runtime type, so overriding is resolved at run time (dynamic / late binding). A `Student s = new TA(); s.intro();` prints `"I am a Teaching Assistant"`.
 
 | | Overloading | Overriding |
 |---|---|---|
 | Where | same class (or inherited alongside) | subclass replaces parent method |
-| Signature | **different** parameter lists, same name | **identical** signature |
+| Signature | different parameter lists, same name | identical signature |
 | Return type | may differ | same (or covariant) |
-| Resolved | **compile time** -- from argument types | **run time** -- from the object's class |
+| Resolved | compile time -- from argument types | run time -- from the object's class |
 | Binding | static / early | dynamic / late |
 | Enables | convenient same-named variants | polymorphism |
 
-> Overriding is the mechanism every earlier version on this page relied on -- `s.draw()` running `Circle.draw()` is late binding. Overloading is a compile-time convenience and has nothing to do with the object's runtime type.
+> Every earlier version on this page relied on overriding: `s.draw()` running `Circle.draw()` is late binding. Overloading is a compile-time convenience and does not depend on the object's runtime type.
 
 ## C++ <-> Java quick reference
 
