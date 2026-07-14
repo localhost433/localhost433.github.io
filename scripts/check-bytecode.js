@@ -57,24 +57,32 @@ function embeddedInstructions(jsx) {
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "javap-"));
 let failed = 0;
 
-for (const c of CASES) {
-  execFileSync("javac", ["-d", tmp, path.join(SRC, c.java)], { stdio: "pipe" });
-  const out = execFileSync("javap", ["-c", "-classpath", tmp, c.cls], { encoding: "utf8" });
+try {
+  for (const c of CASES) {
+    try {
+      execFileSync("javac", ["-d", tmp, path.join(SRC, c.java)], { stdio: "pipe" });
+      const out = execFileSync("javap", ["-c", "-classpath", tmp, c.cls], { encoding: "utf8" });
 
-  const real = realInstructions(out, c.method);
-  const embedded = embeddedInstructions(fs.readFileSync(path.join(DEMOS, c.jsx), "utf8"));
+      const real = realInstructions(out, c.method);
+      const embedded = embeddedInstructions(fs.readFileSync(path.join(DEMOS, c.jsx), "utf8"));
 
-  if (real.join("\n") === embedded.join("\n")) {
-    console.log(`OK   ${c.jsx} — ${embedded.length} opcodes match javap -c ${c.cls}`);
-  } else {
-    failed++;
-    console.error(`FAIL ${c.jsx} — bytecode column has drifted from ${c.java}`);
-    console.error(`  real (javap -c ${c.cls}, "${c.method}"):`);
-    for (const l of real) console.error(`    ${l}`);
-    console.error("  embedded in the demo:");
-    for (const l of embedded) console.error(`    ${l}`);
+      if (real.join("\n") === embedded.join("\n")) {
+        console.log(`OK   ${c.jsx} — ${embedded.length} opcodes match javap -c ${c.cls}`);
+      } else {
+        failed++;
+        console.error(`FAIL ${c.jsx} — bytecode column has drifted from ${c.java}`);
+        console.error(`  real (javap -c ${c.cls}, "${c.method}"):`);
+        for (const l of real) console.error(`    ${l}`);
+        console.error("  embedded in the demo:");
+        for (const l of embedded) console.error(`    ${l}`);
+      }
+    } catch (err) {
+      failed++;
+      console.error(`FAIL ${c.jsx} — ${err.message}`);
+    }
   }
+} finally {
+  fs.rmSync(tmp, { recursive: true, force: true });
 }
 
-fs.rmSync(tmp, { recursive: true, force: true });
 process.exit(failed ? 1 : 0);
