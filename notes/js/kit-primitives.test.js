@@ -56,3 +56,16 @@ test("_kit.jsx defines a bytecode tokenizer", () => {
   assert.ok(src.includes('lang === "bytecode"'),
     "highlight() must route lang=bytecode to highlightBytecode");
 });
+
+test("CodeAsmPane accepts a target language + a per-step target-line override", () => {
+  assert.ok(src.includes('asmLang = "asm"'),
+    "CodeAsmPane must take asmLang, defaulting to asm (C++ demos unchanged)");
+  assert.ok(src.includes("activeAsmLine"),
+    "CodeAsmPane must accept activeAsmLine to override the asmMap-derived group");
+  assert.ok(src.includes("SRC_LABEL"),
+    "the left header must derive from `lang`, not be hardcoded to C++");
+  assert.ok(!src.includes('{column("C++"'),
+    "the hardcoded C++ column header must be gone");
+  assert.ok(src.includes("st.asmLine"),
+    "MemoryScene's nav map must index step.asmLine so clicking an opcode jumps to its step");
+});
