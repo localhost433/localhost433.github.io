@@ -21,6 +21,35 @@ Shape s = new Circle();
 s.draw();
 s.area();`;
 
+// Real `javap -c Demo` output (JDK 22) for the fragment above, compiled inside a
+// real main(). Only the default constructor is elided.
+// Regenerate/verify with: npm run check:bytecode
+const asm = `class Demo {
+… Demo() — default constructor elided
+  public static void main(java.lang.String[]);
+    Code:
+       0: new           #7    // class Circle
+       3: dup
+       4: invokespecial #9    // Method Circle."<init>":()V
+       7: astore_1
+       8: aload_1
+       9: invokevirtual #10   // Method Shape.draw:()V
+      12: aload_1
+      13: invokevirtual #15   // Method Shape.area:()D
+      16: pop2
+      17: return
+}`;
+
+// source line (in `code`) -> bytecode line numbers (in `asm`)
+const asmMap = {
+  9: [5, 6, 7, 8],
+  // Shape s = new Circle();  -> new, dup, invokespecial, astore_1
+  10: [9, 10],
+  // s.draw();                -> aload_1, invokevirtual #10
+  11: [11, 12, 13] // s.area();                -> aload_1, invokevirtual #15, pop2
+};
+const asmLabel = "javap -c · JDK 22";
+
 // each method body lives once in the Code segment, shared by every instance.
 const SHAPE_DRAW = hl => text("Shape.draw", "method", "(default)", {
   id: "shape_draw",
@@ -104,7 +133,7 @@ const steps = [{
   cells: [SHAPE_MT(), SHAPE_DRAW(), SHAPE_AREA(), CIRCLE_MT(), CIRCLE_DRAW(), OBJ(true)],
   caption: {
     java: "`Shape s = new Circle();` — `s` is declared `Shape`, but the object is a `Circle`.",
-    jvm: "The object's header carries a **class pointer**, set at construction, pointing at **`Circle`'s table**. The static type of `s` never changes it.",
+    jvm: "`new #7` allocates a raw `Circle` on the heap and `dup`s the reference so one copy survives the constructor call; `invokespecial #9` runs `Circle.<init>`, and `astore_1` stores the reference in local slot 1. The object's header carries a **class pointer**, set here, pointing at **`Circle`'s table**. The static type of `s` never changes it.",
     intuition: "The object carries its class; the **declared type** doesn't decide which table."
   }
 }, {
@@ -112,7 +141,7 @@ const steps = [{
   cells: [SHAPE_MT(), SHAPE_DRAW(), SHAPE_AREA(), CIRCLE_MT(true), CIRCLE_DRAW(true), OBJ(true)],
   caption: {
     java: "`s.draw()` runs **`Circle.draw`** — the override, chosen by the object's class.",
-    jvm: "`invokevirtual Shape.draw:()V` names a method; the JVM resolves it to a fixed **`draw` slot**. The model: follow the receiver's class pointer to **`Circle`'s table**, index the `draw` slot → `Circle.draw`. (The JIT may inline this once it knows the class — the slot is the dispatch *model*, not a guaranteed lookup.)",
+    jvm: "`invokevirtual #10` — and the constant pool says `// Method **Shape**.draw:()V`. The bytecode names **`Shape`**, not `Circle`, even though the object *is* a `Circle`: `javac` only knew the **declared** type. The JVM resolves that to a fixed `draw` **slot**, follows the receiver's class pointer to **`Circle`'s table**, and runs the override. (The JIT may inline this once it knows the class — the slot is the dispatch *model*, not a guaranteed lookup.)",
     intuition: "The **slot index** is fixed; the **class pointer** picks the table."
   }
 }, {
@@ -120,7 +149,7 @@ const steps = [{
   cells: [SHAPE_MT(), SHAPE_DRAW(), SHAPE_AREA(true), CIRCLE_MT(true), CIRCLE_DRAW(), OBJ(true)],
   caption: {
     java: "`s.area()` runs **`Shape.area`** — inherited, because `Circle` never overrode it.",
-    jvm: "`invokevirtual Shape.area:()D` resolves to the **`area` slot** of the same `Circle` table, which still holds **`Shape.area`**. A different slot index → a different method.",
+    jvm: "`invokevirtual #15` — a **different constant-pool entry** (`// Method Shape.area:()D`) resolving to the **`area` slot** of the same `Circle` table, which still holds **`Shape.area`**. The trailing `pop2` discards the returned `double`, which occupies two stack slots. A different slot index → a different method.",
     intuition: "Same object, **different slot** → different method. The **slot is the method**; the **class pointer is the object**."
   }
 }];
@@ -128,5 +157,9 @@ export default scene({
   title: "Inside Java dispatch: a method table is an array of slots, one swapped by an override",
   code,
   steps,
-  lang: "java"
+  lang: "java",
+  asm,
+  asmMap,
+  asmLabel,
+  asmLang: "bytecode"
 });
