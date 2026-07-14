@@ -390,29 +390,11 @@ new MutationObserver(() => {
   if (t !== lastArtifactTheme) { lastArtifactTheme = t; postThemeToFrames(t); }
 }).observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
 
-const tokenizer = {
-  em(src) {
-    // Only treat *...* as emphasis, ignore underscores
-    const match = /^\*([^*]+)\*/.exec(src);
-    if (!match) return;
-    return {
-      type: 'em',
-      raw: match[0],
-      text: match[1],
-      tokens: this.lexer.inlineTokens(match[1])
-    };
-  },
-  strong(src) {
-    // Only treat **...** as strong emphasis, ignore __
-    const match = /^\*\*([^*]+)\*\*/.exec(src);
-    if (!match) return;
-    return {
-      type: 'strong',
-      raw: match[0],
-      text: match[1],
-      tokens: this.lexer.inlineTokens(match[1])
-    };
-  }
-};
-
-marked.use({ tokenizer });
+/* NOTE: there used to be a `marked.use({ tokenizer: { em, strong } })` override here,
+   meant to stop `_underscores_` from italicizing. It never did anything: marked merged
+   those two tokenizers into a single `emStrong` back in v2, so the override silently
+   matched no hook. Once marked v12 added strict validation of `use()`, the same dead
+   code started THROWING ("tokenizer 'em' does not exist"), which killed this module
+   before the artifact mounts were wired — every demo on every note went blank. Removed.
+   Underscores are already safe without it: CommonMark forbids intra-word `_` emphasis,
+   so `foo_bar` and `__init__` render literally. */

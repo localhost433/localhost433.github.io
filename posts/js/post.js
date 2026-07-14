@@ -139,29 +139,8 @@ fetch(`./posts/entries/${slug}.md`)
     content.innerHTML = "<h2>Post not found</h2>";
   });
 
-const tokenizer = {
-  em(src) {
-    // Only treat *...* as emphasis, ignore underscores
-    const match = /^\*([^*]+)\*/.exec(src);
-    if (!match) return;
-    return {
-      type: 'em',
-      raw: match[0],
-      text: match[1],
-      tokens: this.lexer.inlineTokens(match[1])
-    };
-  },
-  strong(src) {
-    // Only treat **...** as strong emphasis, ignore __
-    const match = /^\*\*([^*]+)\*\*/.exec(src);
-    if (!match) return;
-    return {
-      type: 'strong',
-      raw: match[0],
-      text: match[1],
-      tokens: this.lexer.inlineTokens(match[1])
-    };
-  }
-};
-
-marked.use({ tokenizer });
+/* NOTE: a `marked.use({ tokenizer: { em, strong } })` override lived here, meant to stop
+   `_underscores_` from italicizing. It never did anything — marked merged those hooks into
+   `emStrong` in v2 — and once marked v12 added strict `use()` validation the dead code
+   began THROWING ("tokenizer 'em' does not exist"), taking this module down with it.
+   Removed. CommonMark already forbids intra-word `_` emphasis, so `foo_bar` is safe. */
