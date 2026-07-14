@@ -46,3 +46,13 @@ test("MemoryModel accepts a custom segment set + active glow", () => {
   assert.ok(src.includes("!segments && segs.some"),
     "the C++ stack/heap gap band must be suppressed for custom segments");
 });
+
+// Java ↔ bytecode pane: the javap tokenizer + the pane's target-language prop.
+test("_kit.jsx defines a bytecode tokenizer", () => {
+  assert.ok(src.includes("function highlightBytecode"),
+    "missing highlightBytecode tokenizer");
+  assert.ok(src.includes("BYTECODE_OPS"),
+    "highlightBytecode must classify opcodes from a mnemonic set");
+  assert.ok(src.includes('lang === "bytecode"'),
+    "highlight() must route lang=bytecode to highlightBytecode");
+});
