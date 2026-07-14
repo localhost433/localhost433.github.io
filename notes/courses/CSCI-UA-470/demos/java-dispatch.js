@@ -141,7 +141,7 @@ const steps = [{
   cells: [SHAPE_MT(), SHAPE_DRAW(), SHAPE_AREA(), CIRCLE_MT(true), CIRCLE_DRAW(true), OBJ(true)],
   caption: {
     java: "`s.draw()` runs **`Circle.draw`** — the override, chosen by the object's class.",
-    jvm: "`invokevirtual #10` — and the constant pool says `// Method **Shape**.draw:()V`. The bytecode names **`Shape`**, not `Circle`, even though the object *is* a `Circle`: `javac` only knew the **declared** type. The JVM resolves that to a fixed `draw` **slot**, follows the receiver's class pointer to **`Circle`'s table**, and runs the override. (The JIT may inline this once it knows the class — the slot is the dispatch *model*, not a guaranteed lookup.)",
+    jvm: "`invokevirtual #10` — and the constant pool says `// Method Shape.draw:()V`. The bytecode names **`Shape`**, not `Circle`, even though the object *is* a `Circle`: `javac` only knew the **declared** type. The JVM resolves that to a fixed `draw` **slot**, follows the receiver's class pointer to **`Circle`'s table**, and runs the override. (The JIT may inline this once it knows the class — the slot is the dispatch *model*, not a guaranteed lookup.)",
     intuition: "The **slot index** is fixed; the **class pointer** picks the table."
   }
 }, {
