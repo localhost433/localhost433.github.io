@@ -89,3 +89,17 @@ for (const sig of BEX) {
     assert.ok(src.includes(sig), `missing helper export: ${sig}`);
   });
 }
+
+// SequenceOrderBuilder: the interactive drag-to-order exercise built on top of
+// the existing SequenceDiagram renderer + the seq-order shared logic.
+test("_kit.jsx exports the sequence-order builder", () => {
+  assert.ok(src.includes("export function SequenceOrderBuilder"), "missing SequenceOrderBuilder");
+  assert.ok(src.includes("export function sequenceOrder"), "missing sequenceOrder factory");
+});
+test("_kit.jsx imports the shared ordering logic", () => {
+  assert.ok(/from\s+["']@course\/seq-order["']/.test(src), "must import from @course/seq-order");
+});
+test("SequenceOrderBuilder withholds activations until complete", () => {
+  assert.ok(src.includes("placed.length === messages.length"),
+    "activations must be gated on a fully-placed board");
+});
