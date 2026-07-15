@@ -80,3 +80,12 @@ test("note.js registers @course/seq-order as an iframe module", () => {
   assert.ok(noteSrc.includes("seq-order-logic.mjs"),
     "must fetch the seq-order-logic.mjs source");
 });
+
+// Shared build-exercise UI helpers (Chip, BuilderControls, useTapOrDrag) used
+// by the UML "build from scratch" demos.
+const BEX = ["export function Chip", "export function BuilderControls", "export function useTapOrDrag"];
+for (const sig of BEX) {
+  test(`_kit.jsx exports build-exercise helper: ${sig}`, () => {
+    assert.ok(src.includes(sig), `missing helper export: ${sig}`);
+  });
+}
