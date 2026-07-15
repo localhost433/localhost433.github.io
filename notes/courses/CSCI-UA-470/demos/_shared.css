@@ -579,3 +579,10 @@ html.dark-mode {
 .bex-slot { border: 1.5px dashed var(--mm-cell-bd); border-radius: 6px; min-height: 2rem; display: flex; align-items: center; padding: 0.25rem 0.5rem; gap: 0.5rem; }
 .bex-slot--over { border-style: solid; border-color: var(--mm-ptr); }
 .bex-why { font-size: 0.8rem; color: var(--mm-muted); margin-top: 0.15rem; }
+.bex-prompt { margin: 0 0 0.75rem; font-size: 0.95rem; }
+.bex-seq__cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: start; }
+@media (max-width: 560px) { .bex-seq__cols { grid-template-columns: 1fr; } }
+.bex-bank { display: flex; flex-direction: column; gap: 0.4rem; }
+.bex-slots { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.4rem; counter-reset: none; }
+.bex-slots > li { margin: 0; }
+.bex-slot__n { font-size: 0.75rem; color: var(--mm-muted); min-width: 1.2rem; }
