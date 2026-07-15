@@ -69,3 +69,14 @@ test("CodeAsmPane accepts a target language + a per-step target-line override", 
   assert.ok(src.includes("st.asmLine"),
     "MemoryScene's nav map must index step.asmLine so clicking an opcode jumps to its step");
 });
+
+// note.js registers the seq-order-logic.mjs shared module as an iframe import.
+const NOTE_JS = path.join(__dirname, "note.js");
+const noteSrc = fs.readFileSync(NOTE_JS, "utf8");
+
+test("note.js registers @course/seq-order as an iframe module", () => {
+  assert.ok(noteSrc.includes("@course/seq-order"),
+    "gatherSharedLayers must register the seq-order logic module");
+  assert.ok(noteSrc.includes("seq-order-logic.mjs"),
+    "must fetch the seq-order-logic.mjs source");
+});
