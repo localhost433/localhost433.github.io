@@ -111,6 +111,13 @@ The two diagrams are a pair, one zooming into the other:
 | Building blocks | actors, use-case ovals, relations | participants, lifelines, messages, activations |
 | Emphasis | goals | time ordering |
 
+## Practice
+
+Reading a finished sequence diagram is one skill; drawing one is another. Build the "Make order" interaction yourself — drag each message into its place in time and watch the diagram assemble. The lifelines and message directions are given; the ordering is yours.
+
+```artifact src=demos/practice-13-sequence.jsx
+```
+
 ---
 
 > Where this sits in the course: a sequence diagram is the Interaction-family companion to the use-case diagram in [note 12](note.html?course=CSCI-UA-470&note=12-uml-use-case-diagrams). A use case names a goal from the outside; the sequence diagram writes out the message-by-message collaboration that fulfils it. Both stay at the level of design notation, above the C++/Java implementation detail of the earlier notes. The [next note](note.html?course=CSCI-UA-470&note=14-uml-class-diagrams) reads the objects on those lifelines off as a class diagram, completing the UML trilogy with the Structural family.
