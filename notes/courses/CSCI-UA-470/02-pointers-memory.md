@@ -141,3 +141,10 @@ Walk the full lifecycle on the textbook memory model -- allocate on the heap, us
 
 ```artifact src=demos/mem-heap.jsx
 ```
+
+## Practice
+
+The pointer/reference model and its manual cleanup are the parts that differ most from Java. Check that they hold:
+
+```artifact src=demos/practice-02-mcq.jsx
+```
