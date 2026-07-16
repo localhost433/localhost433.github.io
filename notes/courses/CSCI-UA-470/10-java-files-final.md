@@ -279,3 +279,10 @@ For exam-style questions, the most important distinctions are:
 | Java text I/O | `File`, `FileWriter`, `Scanner`, `try` / `catch`, `close()` |
 | Java binary I/O | `Serializable`, `FileOutputStream`, `ObjectOutputStream`, `FileInputStream`, `ObjectInputStream`, casts after `readObject()` |
 | `final` | final variable = cannot reassign; final method = cannot override; final class = cannot extend |
+
+## Practice
+
+These are the exam distinctions the table above names — the text/binary split, the serialization read/write contract, and the three meanings of `final`:
+
+```artifact src=demos/practice-10-mcq.jsx
+```
