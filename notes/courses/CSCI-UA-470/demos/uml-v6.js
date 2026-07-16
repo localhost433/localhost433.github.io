@@ -1,6 +1,6 @@
 /* AUTO-GENERATED from uml-v6.jsx by `npm run build:artifacts` — do not edit. */
 import React from "react";
-import { DiagramSvg, DiagramCard, treeLayout, ClassTree } from "@course";
+import { DiagramSvg, DiagramCard, treeLayout, ClassTree, UmlLink, diagramCardHeight, ab, cls } from "@course";
 
 /* v6 (note 09) — interface polymorphism. THREE trees (Shape / Vehicle / Animal,
    per the v6 code) plus the Drawable and Movable interface cards (italic titles,
@@ -15,24 +15,11 @@ const iface = (title, method) => ({
   title,
   abstract: true,
   sections: [{
-    rows: [{
-      text: method,
-      italic: true
-    }]
+    rows: [ab(method)]
   }]
 });
 const drawable = iface("Drawable", "+ draw()");
 const movable = iface("Movable", "+ move()");
-
-// leaf class: empty attr compartment + (possibly empty) method compartment
-const leaf = (title, methods = []) => ({
-  title,
-  sections: [{
-    rows: []
-  }, {
-    rows: methods
-  }]
-});
 
 // Tree 1 — Shape (abstract) with a CONCRETE default draw() (non-italic row).
 const shape = {
@@ -48,7 +35,7 @@ const T1 = treeLayout({
   cx: 170,
   topY: 112,
   parent: shape,
-  children: [leaf("Circle"), leaf("Rectangle"), leaf("Triangle")],
+  children: [cls("Circle", [], []), cls("Rectangle", [], []), cls("Triangle", [], [])],
   cardW: 92,
   gap: 12
 });
@@ -67,7 +54,7 @@ const T2 = treeLayout({
   cx: 540,
   topY: 112,
   parent: vehicle,
-  children: [leaf("Car", ["+ draw()"]), leaf("Bike", ["+ draw()"]), leaf("Flight", ["+ fly()"])],
+  children: [cls("Car", [], ["+ draw()"]), cls("Bike", [], ["+ draw()"]), cls("Flight", [], ["+ fly()"])],
   cardW: 92,
   gap: 12
 });
@@ -86,7 +73,7 @@ const T3 = treeLayout({
   cx: 350,
   topY: T1.bottom + 36,
   parent: animal,
-  children: [leaf("Bird", ["+ fly()"]), leaf("Crawler")],
+  children: [cls("Bird", [], ["+ fly()"]), cls("Crawler", [], [])],
   cardW: 92,
   gap: 26
 });
@@ -94,36 +81,19 @@ const T3 = treeLayout({
 // interface cards across the top; Movable sits directly above Vehicle
 const IW = 104,
   IY = 16,
-  IBOT = IY + 56; // card h = 26 + (12 + 18)
+  IBOT = IY + diagramCardHeight(drawable.sections);
 const drawCx = 350,
   movCx = T2.parent.cx;
 const M = 14;
 const W = Math.round(Math.max(T1.right, T2.right, T3.right) + M);
 const H = Math.round(T3.bottom + M);
 
-// dashed `implements` edge — same stroke/marker InheritFork uses for the relation
-const impl = {
-  stroke: "var(--mm-ref)",
-  strokeWidth: 1.5,
-  strokeDasharray: "5 4"
-};
-const IEdge = ({
-  x1,
-  y1,
-  x2,
-  y2
-}) => /*#__PURE__*/React.createElement("line", {
-  x1: x1,
-  y1: y1,
-  x2: x2,
-  y2: y2,
-  style: impl,
-  markerEnd: "url(#dia-implements)"
-});
-
 // Car / Bike centres (leftmost two children of the Vehicle tree)
 const carCx = T2.children[0].cx,
   bikeCx = T2.children[1].cx;
+
+// the nominal-typing punchline, beside the Animal tree
+const punchLines = ["has draw()/move() bodies,", "implements nothing →", "not Drawable, not Movable"];
 export default function UmlV6() {
   return /*#__PURE__*/React.createElement(DiagramSvg, {
     viewBox: `0 0 ${W} ${H}`,
@@ -153,52 +123,59 @@ export default function UmlV6() {
     sections: movable.sections,
     abstract: true,
     neutral: true
-  }), /*#__PURE__*/React.createElement(IEdge, {
-    x1: T1.parent.cx,
-    y1: T1.parent.y,
-    x2: drawCx - 28,
-    y2: IBOT
-  }), /*#__PURE__*/React.createElement(IEdge, {
-    x1: movCx,
-    y1: T2.parent.y,
-    x2: movCx,
-    y2: IBOT
-  }), /*#__PURE__*/React.createElement(IEdge, {
-    x1: carCx - 10,
-    y1: T2.childTop,
-    x2: drawCx + 2,
-    y2: IBOT
-  }), /*#__PURE__*/React.createElement(IEdge, {
-    x1: bikeCx - 28,
-    y1: T2.childTop,
-    x2: drawCx + 32,
-    y2: IBOT
+  }), /*#__PURE__*/React.createElement(UmlLink, {
+    from: {
+      x: T1.parent.cx,
+      y: T1.parent.y
+    },
+    to: {
+      x: drawCx - 28,
+      y: IBOT
+    },
+    kind: "realize"
+  }), /*#__PURE__*/React.createElement(UmlLink, {
+    from: {
+      x: movCx,
+      y: T2.parent.y
+    },
+    to: {
+      x: movCx,
+      y: IBOT
+    },
+    kind: "realize"
+  }), /*#__PURE__*/React.createElement(UmlLink, {
+    from: {
+      x: carCx - 10,
+      y: T2.childTop
+    },
+    to: {
+      x: drawCx + 2,
+      y: IBOT
+    },
+    kind: "realize"
+  }), /*#__PURE__*/React.createElement(UmlLink, {
+    from: {
+      x: bikeCx - 28,
+      y: T2.childTop
+    },
+    to: {
+      x: drawCx + 32,
+      y: IBOT
+    },
+    kind: "realize"
   }), /*#__PURE__*/React.createElement(ClassTree, {
     layout: T1
   }), /*#__PURE__*/React.createElement(ClassTree, {
     layout: T2
   }), /*#__PURE__*/React.createElement(ClassTree, {
     layout: T3
-  }), /*#__PURE__*/React.createElement("text", {
+  }), punchLines.map((ln, i) => /*#__PURE__*/React.createElement("text", {
+    key: ln,
     x: T3.right + 14,
-    y: T3.parent.y + 48,
+    y: T3.parent.y + 48 + i * 15,
     style: {
       fill: "var(--mm-muted)",
       fontSize: 11
     }
-  }, "has draw()/move() bodies,"), /*#__PURE__*/React.createElement("text", {
-    x: T3.right + 14,
-    y: T3.parent.y + 63,
-    style: {
-      fill: "var(--mm-muted)",
-      fontSize: 11
-    }
-  }, "implements nothing \u2192"), /*#__PURE__*/React.createElement("text", {
-    x: T3.right + 14,
-    y: T3.parent.y + 78,
-    style: {
-      fill: "var(--mm-muted)",
-      fontSize: 11
-    }
-  }, "not Drawable, not Movable"));
+  }, ln)));
 }

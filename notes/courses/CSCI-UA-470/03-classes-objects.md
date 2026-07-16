@@ -62,7 +62,7 @@ p1.intro();
   int w  = op->add(n1, n2);
   ```
 
-  Here the `Receptionist` gathers the input and the `Operator` owns the computation -- each piece of data lives with the code that acts on it.
+  Here the `Receptionist` gathers the input and the `Operator` owns the computation.
 
 Grouping state with behavior is what makes large programs manageable -- the stated goal of this course.
 
