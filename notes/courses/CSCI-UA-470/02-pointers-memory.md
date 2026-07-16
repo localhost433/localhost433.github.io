@@ -144,7 +144,12 @@ Walk the full lifecycle on the textbook memory model -- allocate on the heap, us
 
 ## Practice
 
-The pointer/reference model and its manual cleanup are the parts that differ most from Java. Check that they hold:
+First predict the dangling moment. Step to `delete p;` and, before it is revealed, decide what happens to `p` and the heap block:
+
+```artifact src=demos/practice-02-predict.jsx
+```
+
+Then the conceptual round — the pointer/reference model and its manual cleanup are the parts that differ most from Java:
 
 ```artifact src=demos/practice-02-mcq.jsx
 ```
