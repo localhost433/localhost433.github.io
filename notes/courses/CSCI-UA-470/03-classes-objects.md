@@ -184,3 +184,10 @@ A **destructor** runs automatically when an object is destroyed -- when it goes 
 For objects whose attributes are plain values there's nothing to clean up. Destructors become essential once an object owns **heap memory** (see **Resource Management**).
 
 > **Static members** (a per-class field or method shared by every object) and the stack/heap/static **storage model** for attributes are covered in [Copy, Operators & Resource Management](note.html?course=CSCI-UA-470&note=04-resource-management), alongside where objects live in memory.
+
+## Practice
+
+Class-vs-object, the private-by-default rule, and the constructor/destructor basics are the encapsulation foundation everything later builds on:
+
+```artifact src=demos/practice-03-mcq.jsx
+```

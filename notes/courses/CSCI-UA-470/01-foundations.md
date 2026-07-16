@@ -198,3 +198,10 @@ Single-character stream methods, for when `>>` and `getline` are too coarse:
 | Copy with `=` | only at declaration | yes |
 | Compare with `==`/`<` | no | yes |
 | Resizable / safe | no (overflow risk) | yes |
+
+## Practice
+
+Most of the traps in this note are the ones Java would catch at compile time but C++ accepts silently. Work through them:
+
+```artifact src=demos/practice-01-mcq.jsx
+```
