@@ -118,6 +118,14 @@ Reading a finished sequence diagram is one skill; drawing one is another. Build 
 ```artifact src=demos/practice-13-sequence.jsx
 ```
 
+Two more interactions to order. The first admits a patient and turns on the self-call from the Messages table — `Admit(patientID, roomType)` is the very message named there. The second withdraws cash at an ATM, where the order is forced entirely by data dependencies: you cannot withdraw before you are authorized, and no cash comes out before the account is debited.
+
+```artifact src=demos/practice-13-sequence-admit.jsx
+```
+
+```artifact src=demos/practice-13-sequence-atm.jsx
+```
+
 ---
 
 > Where this sits in the course: a sequence diagram is the Interaction-family companion to the use-case diagram in [note 12](note.html?course=CSCI-UA-470&note=12-uml-use-case-diagrams). A use case names a goal from the outside; the sequence diagram writes out the message-by-message collaboration that fulfils it. Both stay at the level of design notation, above the C++/Java implementation detail of the earlier notes. The [next note](note.html?course=CSCI-UA-470&note=14-uml-class-diagrams) reads the objects on those lifelines off as a class diagram, completing the UML trilogy with the Structural family.
