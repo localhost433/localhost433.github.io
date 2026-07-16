@@ -169,6 +169,11 @@ The design loop reads left to right, and each arrow removes something. A use cas
 
 ## Practice
 
+Recognising correct notation is one thing; producing it is another. Build the `Circle` class box yourself — stamp each member's visibility, drop its type after the colon, and choose the line that joins it to `Shape`. The box and its preview update as you go.
+
+```artifact src=demos/practice-14-classbox.jsx
+```
+
 ```artifact src=demos/practice-14-derive.jsx
 ```
 
