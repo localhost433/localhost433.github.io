@@ -188,6 +188,13 @@ The finished diagram, for reference:
 ```artifact src=demos/use-case-recorder.jsx static
 ```
 
+## Practice
+
+Reading these diagrams is one skill; drawing one is another. Assemble a small Library System yourself. First place each element — actors belong *outside* the boundary, use cases *inside* it — then connect the actors to their use cases and join `Borrow Book` to `Search for book`. The diagram lays itself out as you build.
+
+```artifact src=demos/practice-12-usecase.jsx
+```
+
 ## Common UML tools
 
 Edraw Max, Moqups, Visio, ConceptDraw, StarUML, Umbrello, UML Designer Tool, UMLet.
