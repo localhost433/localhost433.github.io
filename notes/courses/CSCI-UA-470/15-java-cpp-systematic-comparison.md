@@ -143,3 +143,10 @@ A useful dispatch test is:
 | Virtual dispatch | Default for ordinary instance methods | Only with `virtual` |
 | Abstract class | `abstract` keyword | At least one pure virtual method |
 | Interface | `interface` keyword | Pure-virtual class pattern |
+
+## Practice
+
+A final-review drill on the contrasts most likely to be picked as exam traps — `new` semantics, `class` vs `struct` defaults, C++ static locals, the virtual-destructor rule, and C++-vs-Java references:
+
+```artifact src=demos/practice-15-mcq.jsx
+```
