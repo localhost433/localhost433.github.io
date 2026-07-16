@@ -200,7 +200,12 @@ Now a second diagram that forces the relationship you have to reach for most on 
 ```artifact src=demos/practice-12-usecase-store.jsx
 ```
 
-Finally, the include/extend/generalization distinction is the part of this note most likely to be tested. Drill it directly:
+That leaves the third case-to-case relation, generalization. Build the note's own example: `Phone Order` and `Internet Order` are two specialized *kinds* of `Place Order`, so each joins it with the hollow-triangle arrow — the same is-a notation as class inheritance, not a dashed step arrow.
+
+```artifact src=demos/practice-12-usecase-generalize.jsx
+```
+
+Having built all three, drill the distinction directly — it is the part of this note most likely to be tested:
 
 ```artifact src=demos/practice-12-mcq.jsx
 ```
