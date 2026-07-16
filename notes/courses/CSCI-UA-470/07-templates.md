@@ -28,10 +28,12 @@ f("Ten");   // OK — myType = const char*
 
 ### How templates compile: monomorphization
 
-A template emits no machine code by itself. The first time you call it with a given type, the compiler **stamps out** a separate concrete function for that type — `max<int>`, `max<double>`, and `max<string>` become three independent functions in the Code segment, generated from one source pattern and resolved entirely at compile time. Calling again with a type the compiler has already seen reuses that instantiation. Step through it:
+A template emits no machine code by itself. The first time you call it with a given type, the compiler **stamps out** a separate concrete function for that type — for a template like the `max` in the demo below, `max<int>`, `max<double>`, and `max<string>` become three independent functions in the Code segment, generated from one source pattern and resolved entirely at compile time. Calling again with a type the compiler has already seen reuses that instantiation. Step through it:
 
 ```artifact src=demos/templates-mono.jsx
 ```
+
+One consequence: the compiler can only stamp out an instantiation if it can see the template's full **definition** at the call site. That's why templates live in header files — define one in a `.cpp` and other translation units that use it compile fine but fail at link time, because no instantiation was ever generated.
 
 ### Generic by class type
 
@@ -55,7 +57,18 @@ void f(T x1, T x2) { /* ... */ }
 
 f(p1, p2);   // OK — both Person
 f(p1, c1);   // ERROR — T can't be both Person and Circle
+```
 
+The same conflict bites with primitives — and naming the type explicitly sidesteps deduction:
+
+```cpp
+max(3, 7.5);          // ERROR — T = int or double?
+max<double>(3, 7.5);  // OK — T fixed explicitly
+```
+
+When the arguments genuinely differ, give each its own parameter:
+
+```cpp
 template <class T1, class T2>
 void f(T1 x1, T2 x2) { /* ... */ }
 
@@ -65,9 +78,9 @@ f(p1, c1);   // OK — T1 = Person, T2 = Circle
 
 ### Class templates
 
-The same pattern works for whole **classes**, not just functions. A class template is a recipe for a *family of types*: each distinct type argument stamps out a separate, unrelated concrete class with its own object layout -- `Box<int>` is 4 bytes, `Box<double>` 8, `Box<string>` 32, and none is assignable to another.[^stringsize]
+The same pattern works for whole **classes**, not just functions. A class template is a recipe for a *family of types*: each distinct type argument stamps out a separate, unrelated concrete class with its own object layout -- `Box<int>` is 4 bytes, `Box<double>` 8, `Box<string>` 32, and none is assignable to another.[^stringsize] Like function-template monomorphization, every instantiation is resolved at compile time, with full type-checking and no runtime cost.
 
-[^stringsize]: `sizeof(std::string)` is implementation-defined. These notes assume the 64-bit GNU libstdc++ value of **32** (Linux / typical `g++`). On Clang's libc++ -- the default on macOS -- `std::string` is **24** bytes, so anything sized through a `string` member differs there (the diamond figures in [note 06](note.html?course=CSCI-UA-470&note=06-polymorphism) shift from 80/64 to 64/56). If you measure a different number on your machine, that's why. Like function-template monomorphization, every instantiation is resolved at compile time, with full type-checking and no runtime cost.
+[^stringsize]: `sizeof(std::string)` is implementation-defined. These notes assume the 64-bit GNU libstdc++ value of **32** (Linux / typical `g++`). On Clang's libc++ -- the default on macOS -- `std::string` is **24** bytes, so anything sized through a `string` member differs there (the diamond figures in [note 06](note.html?course=CSCI-UA-470&note=06-polymorphism) shift from 80/64 to 64/56). If you measure a different number on your machine, that's why.
 
 ```artifact src=demos/templates-class.jsx
 ```

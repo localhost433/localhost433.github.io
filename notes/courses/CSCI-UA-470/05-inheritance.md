@@ -33,6 +33,8 @@ The object `s` physically holds **four** slots -- `Person::id`, `Person::name`, 
 | `s.Person::name` | `"James"` |
 | `s.gpa` | `3.0` |
 
+(`s.name` and `s.Person::name` name the same single slot -- only `id` is doubled.)
+
 ## How a derived object is laid out in memory
 
 Inheritance isn't magic -- under the hood it's just **struct embedding**. A derived object begins with the *entire* base subobject laid out inline at **offset 0**, then appends its own members after it. So a `student` is literally "a `person`, followed by the extra `student` fields."
@@ -170,7 +172,7 @@ Two classes can relate in two broad ways:
 
 Each inheritance link carries a **mode** -- `private`, `protected`, or `public` -- controlling how the base's members surface in the subclass. Multiple inheritance is what eventually leads to the *diamond problem* (covered under **Polymorphism & Virtual Functions**).
 
-The two inheritance shapes at a glance:
+The four combinations at a glance:
 
 ```artifact src=demos/class-relations.jsx static
 ```

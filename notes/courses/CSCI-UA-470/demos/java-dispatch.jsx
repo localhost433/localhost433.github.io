@@ -67,7 +67,7 @@ const CIRCLE_MT = (hl) => glob("Circle methods", "method table", "", { id: "mt_c
 ]});
 
 // the Circle on the heap: Java header + a class pointer selecting Circle's table.
-const circleObj = obj("Circle", [{ name: "color", type: "String", size: 32 }], { region: "heap", header: 12, vptr: "mt_circle" });
+const circleObj = obj("Circle", [{ name: "color", type: "String", size: 8 }], { region: "heap", header: 12, vptr: "mt_circle" });
 const OBJ = (hl) => circleObj("s", { color: '"red"' }, { hl });
 
 const steps = [

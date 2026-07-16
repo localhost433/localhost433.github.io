@@ -12,7 +12,7 @@ export default sizes({
       type: "int"
     }]
   }, {
-    title: "struct Poly { virtual void f(); int id; };  // one virtual -> hidden vptr",
+    title: "struct Poly { virtual void f(); int id; };",
     vptr: true,
     fields: [{
       name: "id",

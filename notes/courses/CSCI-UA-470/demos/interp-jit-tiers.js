@@ -23,7 +23,7 @@ const THRESH = 372; // hot-threshold line
 
 const INTERP = {
   x0: 92,
-  n: 7,
+  n: 9,
   step: 30,
   w: 20
 };

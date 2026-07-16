@@ -43,7 +43,7 @@ export default function UmlV3() {
     <DiagramSvg viewBox={`0 0 ${W} ${H}`} maxWidth={700}
       ariaLabel="Version 3 UML: a concrete Shape base class with color, x and y and a draw method; Circle, Rectangle and Triangle each extend Shape and now override draw() with their own implementation. A fourth dashed placeholder box, an empty extension point, hangs off the same extends fork with the note: add a new shape. The external type-switch is gone — behaviour moved into each subclass.">
       <text x={annoX} y={annoY} textAnchor="end"
-        style={{ fill: "var(--mm-muted)", fontSize: 11 }}>{"① add a new shape"}</text>
+        style={{ fill: "var(--mm-muted)", fontSize: 11 }}>{"add a new shape"}</text>
 
       <ClassTree layout={L} />
     </DiagramSvg>

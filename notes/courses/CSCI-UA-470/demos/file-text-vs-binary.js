@@ -32,25 +32,25 @@ const values = [{
 }];
 const rows = [{
   value: "'A'",
-  textOp: "print char A",
+  textOp: "print('A')",
   textBytes: ["41"],
   binaryOp: "writeChar('A')",
   binaryBytes: ["00", "41"]
 }, {
   value: '"Hi"',
-  textOp: "print chars H i",
+  textOp: 'print("Hi")',
   textBytes: ["48", "69"],
   binaryOp: 'writeUTF("Hi")',
   binaryBytes: ["00", "02", "48", "69"]
 }, {
   value: "2",
-  textOp: "print digit 2",
+  textOp: "print(2)",
   textBytes: ["32"],
   binaryOp: "writeInt(2)",
   binaryBytes: ["00", "00", "00", "02"]
 }, {
   value: "3.4567",
-  textOp: "print 3 . 4 5 6 7",
+  textOp: "print(3.4567)",
   textBytes: ["33", "2E", "34", "35", "36", "37"],
   binaryOp: "writeDouble(3.4567)",
   binaryBytes: ["40", "0B", "A7", "52", "54", "60", "AA", "65"]

@@ -57,8 +57,12 @@ p1.intro();
   ```cpp
   Receptionist* v  = new Receptionist();
   Operator*     op = new Operator();
-  int w = op->add(n1, n2);
+  int n1 = v->ask_number();
+  int n2 = v->ask_number();
+  int w  = op->add(n1, n2);
   ```
+
+  Here the `Receptionist` gathers the input and the `Operator` owns the computation -- each piece of data lives with the code that acts on it.
 
 Grouping state with behavior is what makes large programs manageable -- the stated goal of this course.
 
@@ -97,16 +101,16 @@ p2.age  = 25;                    // changing p1 has no effect on p2
 | Defined **once** | Instantiated **many** times |
 | Occupies no data memory | Has its own data |
 
-Watch one blueprint stamp out two independent objects -- same layout, different data. (The figure switches to the course's running `circle` example instead of `Person`, but the idea is identical: one class, many independent instances.)
+The figure shows one blueprint and two independent objects -- same layout, different data. (The figure switches to the course's running `circle` example instead of `Person`, but the idea is identical: one class, many independent instances.)
 
 ```artifact src=demos/class-blueprint.jsx static
 ```
 
-The rest of this note fleshes out a class -- its anatomy, encapsulation, constructors, and destructor; operator overloading and copy semantics come under **Resource Management**.
+The rest of this note fleshes out a class -- its anatomy, encapsulation, constructors, and destructor.
 
 ## Anatomy of a class
 
-A full-featured class is built from these pieces (operators and copy semantics arrive under **Resource Management**):
+A full-featured class is built from these pieces:
 
 - **attributes** (data, living on the stack or heap)
 - **constructors** -- with and without parameters
@@ -138,7 +142,7 @@ public:
 };
 ```
 
-> **Watch out:** the in-class draft wrote the setter as `if (r < 0) { radius = 0; } radius = r;` -- the final `radius = r;` runs unconditionally, so it *always* overwrites the guard. Use `else` (above) so the validation actually holds. The same pattern appears in the constructors below.
+> **Watch out:** the in-class draft wrote the setter as `if (r < 0) { radius = 0; } radius = r;` -- the final `radius = r;` runs unconditionally, so it *always* overwrites the guard. Use `else` (above) so the validation actually holds. The in-class constructor drafts had the same bug; the versions below are written with the fix.
 
 ## Constructors
 

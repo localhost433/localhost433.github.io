@@ -7,24 +7,24 @@ import { mcq } from "@course";
 
 export default mcq({
   questions: [{
-    stem: "After these three calls, what is `a`? (each `inc` is overloaded by parameter mode)",
+    stem: "After these three calls, what is `a`? (one `inc` per parameter mode)",
     figure: {
-      code: "void inc(int x)  { x = x + 1; }   // by value\nvoid inc(int* x) { *x = *x + 1; } // by pointer\nvoid inc(int& x) { x = x + 1; }   // by reference\n\nint a = 5;\ninc(a);    // by value\ninc(&a);   // by pointer\ninc(a);    // by reference",
+      code: "void inc_val(int x)  { x = x + 1; }   // by value\nvoid inc_ptr(int* x) { *x = *x + 1; } // by pointer\nvoid inc_ref(int& x) { x = x + 1; }   // by reference\n\nint a = 5;\ninc_val(a);    // by value\ninc_ptr(&a);   // by pointer\ninc_ref(a);    // by reference",
       lang: "cpp"
     },
     choices: [{
       text: "7 — by value leaves `a` at 5, then by pointer makes it 6, then by reference makes it 7",
       correct: true
     }, {
-      text: "8 — all three calls increment `a`"
+      text: "8 — all three parameter modes reach the caller's storage, so each of the three calls adds one to `a`"
     }, {
       text: "5 — none of the calls can change `a`"
     }, {
-      text: "6 — only the by-pointer call changes `a`"
+      text: "6 — only the by-pointer call reaches `a`; a reference parameter copies just like by value does"
     }],
-    why: "**By value** copies the argument, so the first `inc(a)` changes only the copy — `a` stays 5. **By pointer** (`inc(&a)`) and **by reference** (`inc(a)`) both reach the caller's storage, so each adds one: 5 → 6 → 7. Reference just gives the cleaner syntax for the same effect."
+    why: "**By value** copies the argument, so `inc_val(a)` changes only the copy — `a` stays 5. **By pointer** (`inc_ptr(&a)`) and **by reference** (`inc_ref(a)`) both reach the caller's storage, so each adds one: 5 → 6 → 7. Reference just gives the cleaner syntax for the same effect."
   }, {
-    stem: "Given `char x = 5; char* p = &x; char& r = x;`, which is true of the addresses?",
+    stem: "Given `int x = 5; int* p = &x; int& r = x;`, which is true of the addresses?",
     figure: {
       code: "cout << &x;   // 0xFA\ncout << &r;   // ?\ncout << &p;   // ?",
       lang: "cpp"
@@ -33,11 +33,11 @@ export default mcq({
       text: "`&r` equals `&x` (a reference is no new storage), but `&p` is a different address (the pointer is its own object)",
       correct: true
     }, {
-      text: "`&r`, `&x`, and `&p` are all the same address"
+      text: "`&r`, `&x`, and `&p` are all the same address — the pointer, the reference, and the variable share one cell"
     }, {
       text: "`&r` and `&p` are the same; `&x` differs"
     }, {
-      text: "All three are different addresses"
+      text: "All three are different addresses — each of the three declarations introduces its own separate storage"
     }],
     why: "A **reference introduces no new storage** — `r` *is* `x`, so `&r == &x`. A **pointer is a real object** that lives somewhere and holds an address, so `&p` is its own distinct cell (different from `&x`). That is the core difference: an alias vs. an object-that-holds-an-address."
   }, {
@@ -82,18 +82,18 @@ export default mcq({
     }, {
       text: "It is a no-op unless `p` is the last pointer to that memory"
     }],
-    why: "`delete` only tells the allocator the memory may be reused; it does **not** change `p`'s value or the bytes at the target. So `p` still holds the old address — it is now **dangling**. Reading it, or `delete`-ing it again (a **double free**), is undefined behavior. The fix: `p = nullptr;` right after the delete."
+    why: "`delete` only tells the allocator the memory may be reused; it does **not** change `p`'s value, and it typically leaves the target's bytes as-is — but they are formally indeterminate, so never read them. `p` still holds the old address — it is now **dangling**. Reading it, or `delete`-ing it again (a **double free**), is undefined behavior. The fix: `p = nullptr;` right after the delete."
   }, {
     stem: "What is a **double free**, and what does the standard promise about it?",
     choices: [{
       text: "Calling `delete` twice on the same memory — undefined behavior; it may crash, corrupt the heap, or appear to work",
       correct: true
     }, {
-      text: "Allocating twice without freeing — a guaranteed leak"
+      text: "Allocating twice without freeing the first block — the standard guarantees a memory leak"
     }, {
       text: "A safe operation the runtime silently ignores the second time"
     }, {
-      text: "Freeing memory that was never allocated — always a clean crash"
+      text: "Freeing memory that was never allocated — the standard guarantees a clean, immediate crash"
     }],
     why: "A **double free** is releasing the same block twice (often via two pointers to it, or a `delete` on a dangling pointer). It is **undefined behavior** — the standard guarantees nothing, so it might crash, silently corrupt the heap, or seem to work. Setting a pointer to `nullptr` after deleting prevents the second `delete` from doing harm (`delete nullptr` is a safe no-op)."
   }]

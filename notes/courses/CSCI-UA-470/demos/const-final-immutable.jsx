@@ -104,6 +104,10 @@ function Panel({ col, i }) {
       {col.locks.includes("name") && <Lock cx={nameBox.x + nameBox.w / 2} cy={nameBox.y - 8} color={fg} r={0.95} faint />}
       {col.locks.includes("link") && <Lock cx={linkMid} cy={cyc + 15} color={fg} r={col.locks.length > 1 ? 0.95 : 1.18} faint={col.locks.length > 1} />}
       {col.locks.includes("obj") && <Lock cx={objBox.x + objBox.w - 7} cy={objBox.y - 6} color={fg} r={col.locks.length > 1 ? 0.95 : 1.18} faint={col.locks.length > 1} />}
+      {col.locks.length > 1 && (
+        <text x={cx} y={cyc + 44} textAnchor="middle"
+          style={{ fill: "var(--mm-muted)", fontSize: 9, fontStyle: "italic" }}>pick one, not all at once</text>
+      )}
 
       {/* one-line "what gets locked" tag */}
       <text x={cx} y={PANEL.top + PANEL.h - 28} textAnchor="middle"

@@ -32,7 +32,7 @@ export default mcq({
     }, {
       text: "A run-time type check that throws on mismatch"
     }],
-    why: "Templates are a **compile-time** mechanism (unlike Java generics' type erasure or C++ virtual dispatch). Each instantiation is fully type-checked and generates concrete code with **no runtime cost** — it is exactly as if you had written the type-specific function yourself."
+    why: "Templates are a **compile-time** mechanism. Each instantiation is fully type-checked and generates concrete code with **no runtime cost** — it is exactly as if you had written the type-specific function yourself."
   }, {
     stem: "With `template <class T> void f(T x1, T x2)`, which call is an error?",
     figure: {

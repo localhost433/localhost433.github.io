@@ -107,7 +107,7 @@ Typical sizes (use `sizeof(x)` to check on your machine):
 
 | Type | Size | Signed range |
 |---|---|---|
-| `char` | 1 byte | $-128 \dots 127$ |
+| `char` | 1 byte | $-128 \dots 127$ (plain `char`'s signedness is platform-defined; this is the signed range) |
 | `short` | 2 bytes | $-32{,}768 \dots 32{,}767$ |
 | `int` | 4 bytes | $-2{,}147{,}483{,}648 \dots 2{,}147{,}483{,}647$ |
 | `long long` | 8 bytes | $\approx -9.2 \times 10^{18} \dots 9.2 \times 10^{18}$ |
@@ -133,20 +133,13 @@ When you bundle these types into an object, the compiler aligns each field to it
 
 ### A classic C++ gotcha
 
-What Java catches at compile time can become a silent logic bug in C++:
+What Java catches at compile time can become a silent logic bug in C++. An assignment expression evaluates to the value it assigned, and the `if` tests that value directly:
 
 ```cpp
-if (variable = 1)   // assignment, evaluates to 1 -> ALWAYS true
+if (a = b)          // true unless b is 0 (the condition is the value of b)
+if (c = 0)          // ALWAYS false: assigns 0, then tests 0
 if (1 == variable)  // "Yoda" style avoids the mistake
 if (3 < a < 8)      // ALWAYS true: parses as (3 < a) < 8
-```
-
-An assignment expression evaluates to the value it assigned, and the `if` tests that value directly:
-
-```cpp
-if (a = b)   // true unless b is 0 (the condition is the value of b)
-if (c = 0)   // ALWAYS false: assigns 0, then tests 0
-if (a = 9)   // ALWAYS true: assigns 9, then tests 9 (non-zero)
 ```
 
 ## Strings
@@ -162,11 +155,11 @@ C++ has two kinds of strings.
 - Read a whole line into a C-string with `inStream.getline(aCString, numOfCharsToRead)`. This is the C-string form, distinct from `std::getline` for the `string` class, covered below.
 - `<cstring>`: `strncpy` (copy), `strncat` (concatenate), `strncmp` (compare), `strlen` (length), `strchr`/`strrchr`/`strstr` (search).
 - `<cctype>`: `isalpha`, `isdigit`, `isalnum`, `isspace`, `isupper`, `tolower`, `toupper`, and more:
-  - `isblank` -- whitespace, but not a newline.
+  - `isblank` -- space or tab (the "blank" subset of whitespace).
   - `isgraph` -- has a visible glyph (can be "written").
   - `isprint` -- printable: a graphical character or a space.
   - `ispunct` -- punctuation.
-  - `isxdigit` -- a hex digit (`0`-`9`, `A`-`F`).
+  - `isxdigit` -- a hex digit (`0`-`9`, `A`-`F`, `a`-`f`).
   - `iscntrl` -- a control character.
   - `islower` -- a lowercase letter.
 
@@ -179,8 +172,8 @@ std::string s = "Hello";
 
 - More flexible, easier, and no buffer-overflow problem.
 - Like Java's `String`, but mutable (closer to `StringBuffer`). `=`, `==`, and `[]` all work as expected.
-- Member methods: `iterators`, `length`/`size` (same thing), `clear`, `empty`, `at`, `insert`, `erase`, `replace`, `append`, `find`, `substr`, `compare`, `c_str` (returns a C-string).
-- Non-member: `+`, `+=`, comparisons, `swap`, `<<`/`>>`, and `getline(inStream, str, delimiter='\n')`.
+- Member methods: `iterators`, `length`/`size` (same thing), `clear`, `empty`, `at`, `insert`, `erase`, `replace`, `append`, `+=`, `find`, `substr`, `compare`, `c_str` (returns a C-string).
+- Non-member: `+`, comparisons, `swap`, `<<`/`>>`, and `getline(inStream, str, delimiter='\n')`.
 
 Single-character stream methods, for when `>>` and `getline` are too coarse:
 

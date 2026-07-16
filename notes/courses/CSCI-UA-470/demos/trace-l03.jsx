@@ -14,7 +14,7 @@ c1.set_color("red");
 c2.set_radius(5);
 c2.set_color("blue");
 circle c3;
-
+// cout after each op elided; so is c3 = c1 % c2
 c3 = c1 - c2;
 c3 = c1 * c2;
 c3 = c1 / c2;
@@ -30,21 +30,21 @@ const out = (r, col) => ({ expr: "c1 " + (r === 5 ? "-" : r === 50 ? "*" : "/") 
   result: "c3: radius = " + r + ", color = " + col });
 
 const steps = [
-  { line: 1, cells: [c("c1", "No color", 0, true)],
+  { line: 1, cells: [c("c1", "no color", 0, true)],
     caption: {
-      cpp: "`circle c1;` — the default constructor builds `c1 = {No color, 0}` on the stack.",
+      cpp: "`circle c1;` — the default constructor builds `c1 = {no color, 0}` on the stack.",
       asm: "`lea rdi, [c1]` loads `c1`'s address as `this`; `call circle::circle` runs the default constructor.",
       intuition: "Even a default constructor is a **function call** — `this` arrives in `rdi` just like any argument.",
     },
   },
-  { line: 2, cells: [c("c1", "No color", 0), c("c2", "No color", 0, true)],
+  { line: 2, cells: [c("c1", "no color", 0), c("c2", "no color", 0, true)],
     caption: {
-      cpp: "`circle c2;` — a second default circle, also `{No color, 0}`.",
+      cpp: "`circle c2;` — a second default circle, also `{no color, 0}`.",
       asm: "`lea rdi, [c2]` points `this` at `c2`'s slot; `call circle::circle` constructs it in place.",
       intuition: "Each object gets its own `call` — the **address in `rdi`** is the only thing that changes.",
     },
   },
-  { line: [3, 4], cells: [c("c1", "red", 10, true), c("c2", "No color", 0)],
+  { line: [3, 4], cells: [c("c1", "red", 10, true), c("c2", "no color", 0)],
     caption: {
       cpp: "`c1.set_radius(10)` then `c1.set_color(\"red\")` update c1 in place — result: `{red, 10}`.",
       asm: "`lea rdi, [c1]` sets `this = &c1`; `call circle::set_color` passes the string argument in `rsi` (set_radius is elided above).",
@@ -58,7 +58,7 @@ const steps = [
       intuition: "`this` is the only thing distinguishing `c1.set_color` from `c2.set_color` — **same function, different pointer**.",
     },
   },
-  { line: 7, cells: [c("c1", "red", 10), c("c2", "blue", 5), c("c3", "No color", 0, true)],
+  { line: 7, cells: [c("c1", "red", 10), c("c2", "blue", 5), c("c3", "no color", 0, true)],
     caption: {
       cpp: "`circle c3;` — a third default circle, ready to receive operator results.",
       asm: "`lea rdi, [c3]` targets the new slot; `call circle::circle` default-constructs it.",
@@ -69,7 +69,7 @@ const steps = [
     outputs: [out(5, "No color")],
     caption: {
       cpp: "`c3 = c1 - c2` is shorthand for `c3 = c1.operator-(c2)`: radius 10 − 5 = 5, color \"No color\"; a brand-new circle is returned by value.",
-      asm: "`lea rdi, [c3]` passes the **hidden return slot**; `lea rsi, [c1]` is `this` (left operand); `lea rdx, [c2]` is the argument; then `call circle::operator-`.",
+      asm: "`lea rdi, [tmp]` passes the **hidden return slot**; `lea rsi, [c1]` is `this` (left operand); `lea rdx, [c2]` is the argument; then `call circle::operator-` — the temp is then assigned into `c3` by `operator=` (elided).",
       intuition: "A binary operator is **three arguments**: a hidden return slot, `this` (left side), and the right-hand operand.",
     },
   },
@@ -116,14 +116,17 @@ const asm =
   call circle::set_color
   lea  rdi, [c3]
   call circle::circle
-  lea  rdi, [c3]
+  lea  rdi, [tmp]
   lea  rsi, [c1]
   lea  rdx, [c2]
   call circle::operator-
+… tmp assigned to c3 via circle::operator= (elided)
 … lea rdi/rsi/rdx setup for operator*
   call circle::operator*
+… tmp assigned to c3 via operator= (elided)
 … lea rdi/rsi/rdx setup for operator/
   call circle::operator/
+… tmp assigned to c3 via operator= (elided)
   lea  rdi, [c1]
   lea  rsi, [c2]
   call circle::operator=
@@ -137,9 +140,9 @@ const asmMap = {
   6:  [10, 11],        // c2.set_color(...)  -> lea [c2] + call circle::set_color
   7:  [12, 13],        // circle c3;         -> lea [c3] + call circle::circle
   9:  [14, 15, 16, 17], // c3 = c1 - c2     -> hidden slot + this + arg + call operator-
-  10: [19],            // c3 = c1 * c2       -> call circle::operator*
-  11: [21],            // c3 = c1 / c2       -> call circle::operator/
-  12: [22, 23, 24],   // c1 = c2            -> lea [c1] + lea [c2] + call operator=
+  10: [20],            // c3 = c1 * c2       -> call circle::operator*
+  11: [23],            // c3 = c1 / c2       -> call circle::operator/
+  12: [25, 26, 27],   // c1 = c2            -> lea [c1] + lea [c2] + call operator=
 };
 
 const asmLabel = "x86-64 · Intel (idealized)";

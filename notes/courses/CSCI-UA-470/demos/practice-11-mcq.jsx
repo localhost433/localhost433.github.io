@@ -33,7 +33,7 @@ export default mcq({
     },
     {
       stem: "After `iconst_1`, `iconst_2`, `iadd`, what is on top of the operand stack?",
-      figure: { code: "iconst_1   // push 1\niconst_2   // push 2\niadd       // pop 2, pop 1, push sum", lang: "java" },
+      figure: { code: "iconst_1   // push 1\niconst_2   // push 2\niadd", lang: "java" },
       choices: [
         { text: "`3`", correct: true },
         { text: "`2`, with `1` below it" },

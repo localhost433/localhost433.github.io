@@ -38,13 +38,15 @@ const rectangle = cls("Rectangle", ["- width : int", "- length : int"], ["+ draw
 const triangle = cls("Triangle", ["- base : int", "- height : int"], ["+ draw()"]);
 
 // Tree 2 — Vehicle (abstract), methods-only classes (empty attr compartment).
+// Vehicle declares move() only — aligning with v6, where the leaves' draw()
+// arrives via the Drawable interface instead of the base class.
 const vehicle = {
   title: "Vehicle",
   abstract: true,
   sections: [{
     rows: []
   }, {
-    rows: [ab("+ draw()"), ab("+ move()")]
+    rows: [ab("+ move()")]
   }]
 };
 const car = cls("Car", [], ["+ draw()", "+ move()"]);
@@ -96,7 +98,7 @@ export default function UmlV5() {
   return /*#__PURE__*/React.createElement(DiagramSvg, {
     viewBox: `0 0 ${W} ${H}`,
     maxWidth: 720,
-    ariaLabel: "Version 5 UML: three separate class hierarchies grouped by genuine is-a relationships, each under its own abstract base with an extends fork. Top: abstract Shape (color, x, y; abstract draw) extended by Circle, Rectangle and Triangle, each implementing draw. Lower left: abstract Vehicle (abstract draw and move) extended by Car and Bike. Lower right: abstract Person (abstract draw, move and speak) extended by Student and Employee. A Car is not a Shape, so each lives in its own tree under its own abstract base."
+    ariaLabel: "Version 5 UML: three separate class hierarchies grouped by genuine is-a relationships, each under its own abstract base with an extends fork. Top: abstract Shape (color, x, y; abstract draw) extended by Circle, Rectangle and Triangle, each implementing draw. Lower left: abstract Vehicle (abstract move) extended by Car and Bike. Lower right: abstract Person (abstract draw, move and speak) extended by Student and Employee. A Car is not a Shape, so each lives in its own tree under its own abstract base."
   }, /*#__PURE__*/React.createElement(ClassTree, {
     layout: T1
   }), /*#__PURE__*/React.createElement(ClassTree, {

@@ -29,8 +29,10 @@ const codeV3 = `void drawAll(Shape[] shapes) {
 }`;
 
 // v2: free static helpers in scope (Java has no free functions; these are static
-// methods, fine to call unqualified). One body each in the Code segment.
-const DRAW_CIRCLE = hl => text("drawCircle", "fn", "g.oval(s.x,s.y,s.r)", {
+// methods, fine to call unqualified). One body each in the Code segment. Note the
+// downcast: `r` lives on the subclass, so a helper reached via a `Shape` reference
+// must cast — the tag switch forces it.
+const DRAW_CIRCLE = hl => text("drawCircle", "fn", "g.oval(s.x,s.y,((Circle)s).r)", {
   id: "h_circle",
   hl
 });
@@ -116,7 +118,7 @@ const v2Circle = obj("Circle", [{
 }, {
   name: "color",
   type: "String",
-  size: 32
+  size: 8
 }], {
   region: "heap",
   header: 12
@@ -128,7 +130,7 @@ const v2Pent = obj("Pentagon", [{
 }, {
   name: "color",
   type: "String",
-  size: 32
+  size: 8
 }], {
   region: "heap",
   header: 12
@@ -139,7 +141,7 @@ const v2Pent = obj("Pentagon", [{
 const v3Circle = obj("Circle", [{
   name: "color",
   type: "String",
-  size: 32
+  size: 8
 }], {
   region: "heap",
   header: 12,
@@ -148,7 +150,7 @@ const v3Circle = obj("Circle", [{
 const v3Pent = obj("Pentagon", [{
   name: "color",
   type: "String",
-  size: 32
+  size: 8
 }], {
   region: "heap",
   header: 12,

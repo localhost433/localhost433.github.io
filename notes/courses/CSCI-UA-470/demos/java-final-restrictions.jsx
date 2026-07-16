@@ -31,7 +31,7 @@ const codeLines = [
   "",
   "// 3. final class: the inheritance edge is forbidden",
   "final class Utility { }",
-  "Utility u = new Utility();  // OK: normal use",
+  "// elsewhere: Utility u = new Utility();  // OK: normal use",
   "class MoreUtility extends Utility { } // ERROR",
 ];
 

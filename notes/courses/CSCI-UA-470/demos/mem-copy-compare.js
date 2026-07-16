@@ -88,7 +88,7 @@ const shallowSteps = [{
   line: 15,
   cells: [circle("a", "ra"), circle("b", "ra", true), RA()],
   caption: {
-    cpp: "`Circle b = a;` with the **default** copy: members are copied bitwise.",
+    cpp: "`Circle b = a;` with the **default** copy: members are copied memberwise.",
     asm: "Two movs: `mov rax, [a.radius]` then `mov [b.radius], rax` — the **pointer value** is copied, no new allocation.",
     intuition: "A shallow copy duplicates the **pointer**, so `a` and `b` share **one** heap block."
   }
@@ -168,7 +168,7 @@ const deepSteps = [{
   }
 }, {
   line: 14,
-  cells: [circle("a", "ra", true), RA(true), RB(true)],
+  cells: [circle("a", "ra", true), RA(), RB(true)],
   caption: {
     cpp: "`delete radius;` runs in reverse: `~b` frees `rb`, then `~a` frees `ra` — two **separate** addresses.",
     asm: "Each dtor loads its OWN `radius` and calls `operator delete` once — the two frees never touch the same block.",

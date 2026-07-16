@@ -49,5 +49,6 @@ export default compare({
     },
     note: "`virtual` → follows the object's vptr to the `Circle` vtable, so `Circle::draw` runs — like Java always does."
   }],
-  punch: "C++ dispatches statically unless you write `virtual`; Java is **always** virtual."
+  punch: "C++ dispatches statically unless you write `virtual`; Java is **always** virtual.",
+  hint: "Segments elided for the side-by-side — the object and vtable actually live in heap/static memory; only the handle s is a stack variable."
 });

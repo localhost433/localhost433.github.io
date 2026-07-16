@@ -8,7 +8,7 @@ date: "2026-05-27/06-01"
 An object can be created on the stack, on the heap, or as a global, and a reference can alias any of them.
 
 ```cpp
-class Circle { public: string color; int radius; };
+class Circle { public: string color; double radius; };
 
 Circle  c1;                 // stack
 Circle& c2 = c1;            // reference (alias for c1)
@@ -54,7 +54,7 @@ public:
 int Circle::counter = 0;                // initialize once, outside the class
 ```
 
-- Accessed through the class: `Circle::counter`, `Circle::resetCounter()`.
+- Outside code accesses it through the class as `Circle::resetCounter()`; `Circle::counter` is how the class itself (and the out-of-class definition) names the private member.
 
 The static members sit in Global/Static storage, outside every object, and the static method is a plain Code-segment function with no `this`. Step through it:
 
@@ -249,7 +249,8 @@ class Circle {
     string color;
     double radius;
 public:
-    Circle(string c, double r) : color(c), radius(r) {}
+    Circle()                   { color = ""; radius = 0; }
+    Circle(string c, double r) { color = c;  radius = r; }
 
     friend ostream& operator<<(ostream& os, const Circle& c);
     friend istream& operator>>(istream& is, Circle& c);
@@ -271,7 +272,7 @@ cin  >> c3;            // operator>>(cin, c3)
 cout << c3 << endl;    // operator<<(cout, c3)
 ```
 
-This is `code/lectures/L04/main.cpp`. Trace it, typing `green 4.5` at the prompt, to see the friend operators read into and print from `c3`:
+This is adapted from `code/lectures/L04/main.cpp` (which also overloads `+`, `-`, and `*`). Trace it, typing `green 4.5` at the prompt, to see the friend operators read into and print from `c3`:
 
 ```artifact src=demos/trace-l04.jsx
 ```

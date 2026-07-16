@@ -89,7 +89,7 @@ export default function JvmArchitectureMap() {
         {mini(681, 314, 124, "GC", "heap cleanup", 2)}
 
         {arrow(342, 192, 358, 192, "loads")}
-        {arrow(596, 200, 610, 200, "uses")}
+        {arrow(610, 200, 596, 200, "uses")}
 
         {/* JNI bridge out to the host */}
         <DiagramBox cx={300} cy={500} w={108} h={46} label="JNI" note="native bridge" sub={0} />

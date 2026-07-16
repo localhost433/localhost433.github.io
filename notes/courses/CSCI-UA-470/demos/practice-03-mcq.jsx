@@ -25,7 +25,7 @@ export default mcq({
         { text: "`protected` by default, usable only in subclasses" },
         { text: "Unspecified — it depends on the compiler" },
       ],
-      why: "**By default everything in a C++ class is `private`.** Without a `public:` specifier, outside code cannot touch `name`, so `p1.name = ...` is a compiler error. (A `struct` is the opposite — public by default — which is the only real difference between `struct` and `class` in C++.)",
+      why: "**By default everything in a C++ class is `private`.** Without a `public:` specifier, outside code cannot touch `name`, so `p1.name = ...` is a compiler error. (A `struct` is the opposite — public by default — which is the main difference between `struct` and `class` in C++: default access, for both members and base classes.)",
     },
     {
       stem: "Which statement about **classes vs. objects** is correct?",

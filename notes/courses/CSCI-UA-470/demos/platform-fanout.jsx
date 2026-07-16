@@ -12,7 +12,7 @@ import { DiagramSvg, DiagramBox, CompareTitles, CompareCaption } from "@course";
 
    Each language's stages are grouped into labelled PHASE ZONES (large background blocks):
      C++  -> Compilation (Source..Link)            + Execution (CPU)
-     Java -> Compilation (Source..Compile) + Interpretation (JVM) + Execution (CPU)
+     Java -> Compilation (Source..Compile) + Interpretation / JIT (JVM) + Execution (CPU)
    The zones are per-column because the phases differ; faint per-stage bands nest inside.
 
    Each column forks to the three platforms (macOS / Linux / Windows): C++ forks EARLY
@@ -66,7 +66,7 @@ const PHASES = {
   ],
   java: [
     { label: "Compilation",   from: "src", to: "compile" },
-    { label: "Interpretation", from: "vm",  to: "vm" },
+    { label: "Interpretation / JIT", from: "vm",  to: "vm" },
     { label: "Execution",      from: "cpu", to: "cpu" },
   ],
 };
@@ -84,7 +84,7 @@ const ARIA =
   "the source separately for each target — compile, assemble and link are redone per platform — " +
   "producing three native binaries: a.out for macOS, a.out for Linux, app.exe for Windows. " +
   "Java's Compilation phase runs javac from " +
-  "Main.java to portable bytecode Main.class; its Interpretation phase is the JVM, one per " +
+  "Main.java to portable bytecode Main.class; its Interpretation / JIT phase is the JVM, one per " +
   "operating system, that runs that single Main.class; its Execution phase is the CPU. So " +
   "C++ multiplies its artifact at build time while Java keeps one file and multiplies only " +
   "the JVM at run time: recompile everywhere versus write once, run anywhere.";
@@ -103,7 +103,7 @@ const MachineBox = ({ cx, cy, label, note }) => (
     <text x={cx} y={cy - 4} textAnchor="middle" dominantBaseline="central"
       style={{ fill: "hsl(var(--foreground))", fontSize: 13, fontWeight: 700 }}>{label}</text>
     <text x={cx} y={cy + 9} textAnchor="middle" dominantBaseline="central"
-      style={{ fill: "var(--mm-muted)", fontSize: 9 }}>{note}</text>
+      style={{ fill: "var(--mm-muted)", fontSize: 10 }}>{note}</text>
   </g>
 );
 
@@ -114,7 +114,7 @@ const StepChip = ({ cx, cy, label, note }) => (
     <text x={cx} y={cy - 3} textAnchor="middle" dominantBaseline="central"
       style={{ fill: "var(--mm-muted)", fontSize: 11, fontStyle: "italic", fontWeight: 600 }}>{label}</text>
     <text x={cx} y={cy + 8} textAnchor="middle" dominantBaseline="central"
-      style={{ fill: "var(--mm-muted)", fontSize: 8.5 }}>{note}</text>
+      style={{ fill: "var(--mm-muted)", fontSize: 10 }}>{note}</text>
   </g>
 );
 
@@ -192,6 +192,7 @@ export default function PlatformFanout() {
       ]} />
 
       <div className="mm-legend pf-legend">
+        <span className="mm-legend__item"><i className="mm-swatch mm-swatch--sub0" /> source</span>
         <span className="mm-legend__item"><i className="mm-swatch mm-swatch--sub2" /> native (assembly · object · binary)</span>
         <span className="mm-legend__item"><i className="mm-swatch mm-swatch--sub3" /> bytecode (one file)</span>
         <span className="mm-legend__item"><i className="mm-swatch mm-swatch--sub1" /> JVM (per OS)</span>
@@ -278,7 +279,7 @@ export default function PlatformFanout() {
 
         {/* run-style note under each column's CPU row */}
         <Via x={COL.cpp} y={botY(ROW.cpu, FBOX) + 13} anchor="middle">runs a.out directly</Via>
-        <Via x={COL.java} y={botY(ROW.cpu, FBOX) + 13} anchor="middle">runs JIT-compiled code</Via>
+        <Via x={COL.java} y={botY(ROW.cpu, FBOX) + 13} anchor="middle">runs bytecode via the JVM (interpreted + JIT)</Via>
 
         {/* active-route accent: ring the lit platform's forked boxes (mid + CPU per column) */}
         {activeP ? (
@@ -301,7 +302,8 @@ export default function PlatformFanout() {
           { tag: "C++", kind: "cpp", children: (
             <>Has a <strong>preprocessor</strong>, <strong>assembler</strong> and <strong>linker</strong> Java lacks. Forks at <strong>build</strong> time:
             because assembly and objects are already CPU/OS-specific, the source is <strong>recompiled per target</strong> into
-            <strong> three native binaries</strong>, each running directly on its OS.</>
+            <strong> three native binaries</strong>, each running directly on its OS (compile and assemble are also redone
+            per target — the stacked cards).</>
           ) },
           { tag: "Java", kind: "java", children: (
             <>No preprocessor, assembler or linker. Forks at <strong>run</strong> time (the JVM): <strong>one</strong>{" "}

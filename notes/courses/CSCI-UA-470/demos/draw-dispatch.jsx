@@ -33,8 +33,10 @@ const codeV3 =
 }`;
 
 // v2: free static helpers in scope (Java has no free functions; these are static
-// methods, fine to call unqualified). One body each in the Code segment.
-const DRAW_CIRCLE = (hl) => text("drawCircle", "fn", "g.oval(s.x,s.y,s.r)", { id: "h_circle", hl });
+// methods, fine to call unqualified). One body each in the Code segment. Note the
+// downcast: `r` lives on the subclass, so a helper reached via a `Shape` reference
+// must cast — the tag switch forces it.
+const DRAW_CIRCLE = (hl) => text("drawCircle", "fn", "g.oval(s.x,s.y,((Circle)s).r)", { id: "h_circle", hl });
 const DRAW_RECT   = (hl) => text("drawRect",   "fn", "g.rect(s.x,s.y,s.w,s.h)", { id: "h_rect", hl });
 const DRAW_TRI    = (hl) => text("drawTri",    "fn", "g.poly(s,3)", { id: "h_tri", hl });
 const DRAW_PENT   = (hl) => text("drawPent",   "fn", "g.poly(s,5)", { id: "h_pent", hl });
@@ -63,17 +65,17 @@ const MT_PENT = (hl) => glob("Pentagon methods", "method table", "", { id: "mt_p
 // caller switches on. (No class pointer is used by the v2 code path.)
 const v2Circle = obj("Circle", [
   { name: "type", type: "int", size: 4 },
-  { name: "color", type: "String", size: 32 },
+  { name: "color", type: "String", size: 8 },
 ], { region: "heap", header: 12 });
 const v2Pent = obj("Pentagon", [
   { name: "type", type: "int", size: 4 },
-  { name: "color", type: "String", size: 32 },
+  { name: "color", type: "String", size: 8 },
 ], { region: "heap", header: 12 });
 
 // v3 heap objects: Java header carries a class pointer (vptr) to the method
 // table — no `type` tag. The class picks the method.
-const v3Circle = obj("Circle", [{ name: "color", type: "String", size: 32 }], { region: "heap", header: 12, vptr: "mt_circle" });
-const v3Pent   = obj("Pentagon", [{ name: "color", type: "String", size: 32 }], { region: "heap", header: 12, vptr: "mt_pent" });
+const v3Circle = obj("Circle", [{ name: "color", type: "String", size: 8 }], { region: "heap", header: 12, vptr: "mt_circle" });
+const v3Pent   = obj("Pentagon", [{ name: "color", type: "String", size: 8 }], { region: "heap", header: 12, vptr: "mt_pent" });
 
 const steps = [
   {

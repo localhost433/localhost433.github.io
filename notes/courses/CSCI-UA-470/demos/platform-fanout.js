@@ -13,7 +13,7 @@ import { DiagramSvg, DiagramBox, CompareTitles, CompareCaption } from "@course";
 
    Each language's stages are grouped into labelled PHASE ZONES (large background blocks):
      C++  -> Compilation (Source..Link)            + Execution (CPU)
-     Java -> Compilation (Source..Compile) + Interpretation (JVM) + Execution (CPU)
+     Java -> Compilation (Source..Compile) + Interpretation / JIT (JVM) + Execution (CPU)
    The zones are per-column because the phases differ; faint per-stage bands nest inside.
 
    Each column forks to the three platforms (macOS / Linux / Windows): C++ forks EARLY
@@ -117,7 +117,7 @@ const PHASES = {
     from: "src",
     to: "compile"
   }, {
-    label: "Interpretation",
+    label: "Interpretation / JIT",
     from: "vm",
     to: "vm"
   }, {
@@ -140,7 +140,7 @@ const BAND_H = 56,
   BAND_HALF = 28,
   ZONE_PAD = 12,
   ZONE_HEADER = 22;
-const ARIA = "C++ versus Java compilation compared stage by stage, with each language's phases " + "grouped into labelled background blocks. Stages top to bottom: Source, Preprocess " + "(C++ only), Compile, Assemble (C++ only), Link (C++ only), Run on the JVM (Java only), " + "then Machine and CPU. C++'s Compilation phase runs main.cpp through the preprocessor, " + "the compiler to assembly main.s, the assembler to the native object main.o, and the " + "linker to an executable; its Execution phase runs that binary directly on the CPU. " + "Because assembly and object code are already architecture and OS specific, C++ recompiles " + "the source separately for each target — compile, assemble and link are redone per platform — " + "producing three native binaries: a.out for macOS, a.out for Linux, app.exe for Windows. " + "Java's Compilation phase runs javac from " + "Main.java to portable bytecode Main.class; its Interpretation phase is the JVM, one per " + "operating system, that runs that single Main.class; its Execution phase is the CPU. So " + "C++ multiplies its artifact at build time while Java keeps one file and multiplies only " + "the JVM at run time: recompile everywhere versus write once, run anywhere.";
+const ARIA = "C++ versus Java compilation compared stage by stage, with each language's phases " + "grouped into labelled background blocks. Stages top to bottom: Source, Preprocess " + "(C++ only), Compile, Assemble (C++ only), Link (C++ only), Run on the JVM (Java only), " + "then Machine and CPU. C++'s Compilation phase runs main.cpp through the preprocessor, " + "the compiler to assembly main.s, the assembler to the native object main.o, and the " + "linker to an executable; its Execution phase runs that binary directly on the CPU. " + "Because assembly and object code are already architecture and OS specific, C++ recompiles " + "the source separately for each target — compile, assemble and link are redone per platform — " + "producing three native binaries: a.out for macOS, a.out for Linux, app.exe for Windows. " + "Java's Compilation phase runs javac from " + "Main.java to portable bytecode Main.class; its Interpretation / JIT phase is the JVM, one per " + "operating system, that runs that single Main.class; its Execution phase is the CPU. So " + "C++ multiplies its artifact at build time while Java keeps one file and multiplies only " + "the JVM at run time: recompile everywhere versus write once, run anywhere.";
 
 // a flow line; `on` lights it as the highlighted route (--mm-ptr + matching arrowhead)
 const FlowEdge = ({
@@ -195,7 +195,7 @@ const MachineBox = ({
   dominantBaseline: "central",
   style: {
     fill: "var(--mm-muted)",
-    fontSize: 9
+    fontSize: 10
   }
 }, note));
 const StepChip = ({
@@ -233,7 +233,7 @@ const StepChip = ({
   dominantBaseline: "central",
   style: {
     fill: "var(--mm-muted)",
-    fontSize: 8.5
+    fontSize: 10
   }
 }, note));
 
@@ -400,6 +400,10 @@ export default function PlatformFanout() {
   }), /*#__PURE__*/React.createElement("div", {
     className: "mm-legend pf-legend"
   }, /*#__PURE__*/React.createElement("span", {
+    className: "mm-legend__item"
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "mm-swatch mm-swatch--sub0"
+  }), " source"), /*#__PURE__*/React.createElement("span", {
     className: "mm-legend__item"
   }, /*#__PURE__*/React.createElement("i", {
     className: "mm-swatch mm-swatch--sub2"
@@ -624,7 +628,7 @@ export default function PlatformFanout() {
     x: COL.java,
     y: botY(ROW.cpu, FBOX) + 13,
     anchor: "middle"
-  }, "runs JIT-compiled code"), activeP ? /*#__PURE__*/React.createElement("g", null, COLS.flatMap(c => [c.forkRow, ROW.cpu].map(y => ring(sx(c.col, activeP.dx), y, FBOX, c.col + "-" + y)))) : null, PLATFORMS.flatMap(p => COLS.map(c => /*#__PURE__*/React.createElement("rect", {
+  }, "runs bytecode via the JVM (interpreted + JIT)"), activeP ? /*#__PURE__*/React.createElement("g", null, COLS.flatMap(c => [c.forkRow, ROW.cpu].map(y => ring(sx(c.col, activeP.dx), y, FBOX, c.col + "-" + y)))) : null, PLATFORMS.flatMap(p => COLS.map(c => /*#__PURE__*/React.createElement("rect", {
     key: "hit-" + c.col + "-" + p.key,
     className: "pf-hit",
     x: sx(c.col, p.dx) - GAP / 2,
@@ -636,7 +640,7 @@ export default function PlatformFanout() {
     cols: [{
       tag: "C++",
       kind: "cpp",
-      children: /*#__PURE__*/React.createElement(React.Fragment, null, "Has a ", /*#__PURE__*/React.createElement("strong", null, "preprocessor"), ", ", /*#__PURE__*/React.createElement("strong", null, "assembler"), " and ", /*#__PURE__*/React.createElement("strong", null, "linker"), " Java lacks. Forks at ", /*#__PURE__*/React.createElement("strong", null, "build"), " time: because assembly and objects are already CPU/OS-specific, the source is ", /*#__PURE__*/React.createElement("strong", null, "recompiled per target"), " into", /*#__PURE__*/React.createElement("strong", null, " three native binaries"), ", each running directly on its OS.")
+      children: /*#__PURE__*/React.createElement(React.Fragment, null, "Has a ", /*#__PURE__*/React.createElement("strong", null, "preprocessor"), ", ", /*#__PURE__*/React.createElement("strong", null, "assembler"), " and ", /*#__PURE__*/React.createElement("strong", null, "linker"), " Java lacks. Forks at ", /*#__PURE__*/React.createElement("strong", null, "build"), " time: because assembly and objects are already CPU/OS-specific, the source is ", /*#__PURE__*/React.createElement("strong", null, "recompiled per target"), " into", /*#__PURE__*/React.createElement("strong", null, " three native binaries"), ", each running directly on its OS (compile and assemble are also redone per target \u2014 the stacked cards).")
     }, {
       tag: "Java",
       kind: "java",

@@ -8,9 +8,9 @@ import { scene } from "@course";
    inheritance fixes. */
 
 const code = `class person  { string name; };
-class teacher : public person { int age; };
-class student : public person { int age; };
-class TA : public teacher, public student { int age; };
+class teacher : public person { int age = 25; };
+class student : public person { int age = 20; };
+class TA : public teacher, public student { int age = 27; };
 
 int main() {
     TA t;

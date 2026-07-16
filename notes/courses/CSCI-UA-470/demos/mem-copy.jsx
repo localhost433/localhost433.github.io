@@ -48,7 +48,7 @@ const steps = [
     line: 19,
     cells: [circle("a", "ra"), circle("b", "ra", true), RA()],
     caption: {
-      cpp: "`Circle b = a;` with the **default** copy (*imagine the copy ctor below isn't defined*): members are copied bitwise.",
+      cpp: "`Circle b = a;` — **alternate timeline**: pretend the copy ctor (lines 9–12 in the listing) isn't defined, so the compiler's **default** copy runs: members are copied memberwise.",
       asm: "Just two movs: `mov rax, [a.radius]` then `mov [b.radius], rax` — the **pointer value** is copied, no new allocation.",
       intuition: "A shallow copy duplicates the **pointer**, so both `a` and `b` share **one** heap block. `color` is copied by value either way — only the owned `radius` pointer is the problem.",
     },
@@ -57,7 +57,7 @@ const steps = [
     line: 14,
     cells: [circle("a", "ra", true), RA(true)],
     caption: {
-      cpp: "`delete radius;` in `~Circle` runs (in reverse order): `~b` fires first, then `~a` deletes the **same** address.",
+      cpp: "Still in the shallow timeline: `delete radius;` in `~Circle` runs (in reverse order): `~b` fires first, then `~a` deletes the **same** address.",
       asm: "`mov rdi, [radius]` loads the shared address; `call operator delete` frees it — with a shared pointer this happens **twice**.",
       intuition: "Shared ownership leads to a **double free** (undefined behaviour).",
     },
@@ -66,7 +66,7 @@ const steps = [
     line: 11,
     cells: [circle("a", "ra", true), circle("b", "rb", true), RA(), RB()],
     caption: {
-      cpp: "The user-defined copy ctor does `radius = new int(*o.radius)` — `b` gets its **own** heap int.",
+      cpp: "**Rewind to line 19, real code this time**: `Circle b = a;` invokes the user-defined copy ctor, whose `radius = new int(*o.radius)` gives `b` its **own** heap int.",
       asm: "`call operator new` gives `b` a **separate** block; `b.radius` now holds a **different** address from `a.radius`.",
       intuition: "A deep copy means two allocations, so `~b` and `~a` free **different** blocks — no double free (Rule of Three). `color` is copied by value either way — only the owned `radius` pointer is the problem.",
     },

@@ -10,7 +10,7 @@ const RA = () => heap("", "int", "0", { id: "ra" });
 
 export default scene({
   title: "Default copy of a pointer-owning object",
-  code: "class Circle { string color; int* radius; };\nCircle a;        // radius = new int(0)\nCircle b = a;    // default (memberwise) copy",
+  code: "class Circle { string color; int* radius; };\nCircle a;        // assume ctor: radius = new int(0)\nCircle b = a;    // default (memberwise) copy",
   steps: [
     {
       line: 2,
@@ -32,7 +32,7 @@ export default scene({
       },
       cells: [circle("a", "ra"), circle("b", "ra", true), RA()],
       caption: {
-        cpp: "Members are copied bitwise, so `b.radius` holds the **same address** as `a.radius`.",
+        cpp: "Members are copied memberwise, so `b.radius` holds the **same address** as `a.radius`.",
         intuition: "A shallow copy duplicates the pointer, not the pointee.",
       },
     },

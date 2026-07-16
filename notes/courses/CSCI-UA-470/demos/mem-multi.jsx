@@ -56,7 +56,7 @@ const steps = [
   },
 ];
 
-// Curated x86-64 (Intel syntax). main only; struct definitions emit no code.
+// Curated x86-64 Intel syntax (idealized). main only; struct definitions emit no code.
 // asm line numbers below are 1-based positions in this string, counting every line.
 const asm =
 `main:
@@ -78,6 +78,6 @@ const asmMap = {
   11: [8, 9],     // C* pc = &obj;  lea [obj], mov [pc]  — most-derived, offset +0
 };
 
-const asmLabel = "x86-64 · clang -O1 · Intel";
+const asmLabel = "x86-64 · Intel (idealized)";
 
 export default scene({ title: "Multiple inheritance: a base pointer may point into the middle of the object", code, steps, asm, asmMap, asmLabel });
