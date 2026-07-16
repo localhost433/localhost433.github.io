@@ -103,3 +103,32 @@ test("SequenceOrderBuilder withholds activations until complete", () => {
   assert.ok(src.includes("placed.length === messages.length"),
     "activations must be gated on a fully-placed board");
 });
+
+// gradedChipState: the one grading→colour mapping shared by all three builders.
+test("_kit.jsx exports the shared gradedChipState helper", () => {
+  assert.ok(src.includes("export function gradedChipState"), "missing gradedChipState");
+});
+
+// ClassBoxBuilder: the note-14 build exercise — fill visibility + type slots in a
+// three-compartment UML box and pick the relationship, on the real DiagramCard.
+test("_kit.jsx exports the class-box builder", () => {
+  assert.ok(src.includes("export function ClassBoxBuilder"), "missing ClassBoxBuilder");
+  assert.ok(src.includes("export function classBuild"), "missing classBuild factory");
+});
+test("ClassBoxBuilder grades visibility, type, and relationship", () => {
+  // the three graded dimensions the note drills: the vis mark, the type-after-colon,
+  // and which relationship line joins the two boxes.
+  assert.ok(/whyVis/.test(src) && /whyType/.test(src), "must surface per-part why on vis/type");
+  assert.ok(/relationship/.test(src), "must grade the relationship kind");
+});
+
+// UseCaseBuilder: the note-12 build exercise — drop elements inside/outside the
+// system boundary, then connect actors to cases and cases to cases.
+test("_kit.jsx exports the use-case builder", () => {
+  assert.ok(src.includes("export function UseCaseBuilder"), "missing UseCaseBuilder");
+  assert.ok(src.includes("export function useCaseBuild"), "missing useCaseBuild factory");
+});
+test("UseCaseBuilder drives the real UseCaseDiagram from placement + connections", () => {
+  assert.ok(/UseCaseDiagram/.test(src), "must render a live UseCaseDiagram preview");
+  assert.ok(/associations/.test(src) && /relations/.test(src), "must grade associations and relations");
+});
