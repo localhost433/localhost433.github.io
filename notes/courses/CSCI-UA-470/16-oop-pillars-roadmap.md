@@ -79,3 +79,10 @@ Two practical differences:
 | Polymorphism | [06 - Polymorphism & Virtual Functions](note.html?course=CSCI-UA-470&note=06-polymorphism), [09 - Polymorphism & Abstract Classes](note.html?course=CSCI-UA-470&note=09-polymorphism-design-java), [15 - Java vs. C++](note.html?course=CSCI-UA-470&note=15-java-cpp-systematic-comparison) |
 | Abstraction | [09 - Polymorphism & Abstract Classes](note.html?course=CSCI-UA-470&note=09-polymorphism-design-java), this note's [concrete/abstract/interface comparison](#concrete-vs-abstract-vs-interface), [15 - Java vs. C++](note.html?course=CSCI-UA-470&note=15-java-cpp-systematic-comparison) |
 | Runtime / JVM | [11 - JVM, Bytecode & Runtime Architecture](note.html?course=CSCI-UA-470&note=11-jvm-runtime), [15 - Java vs. C++](note.html?course=CSCI-UA-470&note=15-java-cpp-systematic-comparison) |
+
+## Practice
+
+Tie the pillars together — the four-pillar taxonomy, the define-vs-create distinction, and the concrete/abstract/interface trio this note settles:
+
+```artifact src=demos/practice-16-mcq.jsx
+```
