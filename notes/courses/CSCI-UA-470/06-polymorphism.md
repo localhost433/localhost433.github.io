@@ -198,3 +198,10 @@ The L06 program (`code/lectures/L06/main.cpp`) prints from every constructor and
 
 ```artifact src=demos/trace-l06-diamond.jsx
 ```
+
+## Practice
+
+Virtual dispatch, abstract classes, and the diamond are the core of the C++ OOP material — drill them:
+
+```artifact src=demos/practice-06-mcq.jsx
+```
