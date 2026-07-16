@@ -1,11 +1,13 @@
-import { scene, stack } from "@course";
+import { scene, stack, obj } from "@course";
 
 /* Standalone predict: Java dispatches on the object's runtime class. The reveal
-   shows the object's class pointer resolving to Circle.draw. */
-const handle = (name, type, to, hl) => stack(name, type, to, { id: name, hl });
-const object = (klass, hl) => stack("obj", "object", "", { id: "obj", hl, fields: [
-  { name: "class", type: "ptr", size: 8, value: "→ " + klass },
-]});
+   shows the object's class pointer resolving to Circle.draw. The Circle lives on
+   the HEAP (Java objects always do) behind a Java header; the stack holds only
+   the reference `s`, drawn as a ref arrow — draw-dispatch.jsx's visual language. */
+const handle = (hl) => stack("s", "Shape", "", { id: "s", hl, to: "obj", link: "ref" });
+const circleObj = obj("Circle", [{ name: "class", type: "ptr", size: 8 }],
+  { region: "heap", header: 12 });
+const object = (klass, hl) => circleObj("obj", { class: "→ " + klass }, { hl });
 
 export default scene({
   title: "Which draw() runs?",
@@ -14,7 +16,7 @@ export default scene({
   steps: [
     {
       line: 1,
-      cells: [handle("s", "Shape", "→ obj", true), object("Circle", true)],
+      cells: [handle(true), object("Circle", true)],
       caption: {
         java: "`s` is declared `Shape` but references a `new Circle()`; the object carries a **class pointer** to `Circle`.",
         intuition: "The declared type of `s` is just a compile-time constraint.",
@@ -31,7 +33,7 @@ export default scene({
         ],
         why: "Java dispatches on the object's **runtime class**, not the reference's declared type. Every non-`static`, non-`final`, non-`private` method is **virtual** by default, so `s.draw()` follows the object's class pointer to `Circle.draw`. The `Shape` in `Shape s` only limits what the compiler lets you call.",
       },
-      cells: [handle("s", "Shape", "→ obj"), object("Circle", true)],
+      cells: [handle(), object("Circle", true)],
       caption: {
         java: "`s.draw()` runs **`Circle.draw`** — chosen by the object's class, not by `s`'s type.",
         intuition: "Runtime type wins; the declared type never picks the body.",

@@ -17,8 +17,8 @@ Student s1;
 p1.intro();        // "I am a person"
 s1.intro();        // "I am a student"
 
-Person* ptr = &p1;
-ptr->intro();      // "I am a person" -- chosen by ptr's type (Person*)
+Person* ptr = &s1;
+ptr->intro();      // "I am a person" (!) -- chosen by ptr's type (Person*)
 ```
 
 The catch: a `Person*` that actually points at a `Student` still calls `Person::intro()`, because the decision used the declared type of the pointer rather than the type of the object. Dispatching on the runtime type takes `virtual`, which the rest of this note covers.
@@ -37,6 +37,7 @@ public:
     virtual void intro() { cout << "I am a student"; }  // overrides
 };
 
+Person p1;
 Person* ptr = &p1;     // p1 is a Person
 ptr->intro();          // "I am a person"
 
@@ -57,7 +58,7 @@ A vtable is an array, one slot per virtual function, indexed by a fixed compile-
 ```artifact src=demos/vtable-internals.jsx
 ```
 
-The vptr costs space. The first virtual function adds a hidden 8-byte pointer to every object of the class, while the vtable itself is shared, one per class:
+The vptr costs space. The first virtual function adds a hidden pointer to every object of the class (on a typical 64-bit implementation the 4 -> 16 jump below is 8 for the vptr, the rest alignment padding), while the vtable itself is shared, one per class:
 
 ```artifact src=demos/size-vptr.jsx static
 ```
@@ -123,19 +124,7 @@ This is C++'s tool for abstraction: the base defines the interface, the subclass
 
 ## Resolving inherited members
 
-For inherited attributes:
-
-| | Single inheritance | Multiple inheritance |
-|---|---|---|
-| Change visibility (`using`) | optional | optional |
-| Redefine with same name | optional | must, to avoid ambiguity |
-
-For inherited methods:
-
-| | Single inheritance | Multiple inheritance |
-|---|---|---|
-| Early binding | default | default |
-| Late binding | `virtual` | `virtual` |
+When two bases declare the same name, pick one with `using`, qualify each access (`t.Teacher::x`), or redefine the member in the derived class -- any of the three resolves the ambiguity. Method dispatch is unchanged by multiple inheritance: early-bound by default, `virtual` for late binding, exactly as in single inheritance.
 
 ## The diamond problem
 
@@ -149,12 +138,14 @@ class Student : public Person { public: int age = 20; };
 class TA : public Teacher, public Student { public: int age = 27; };
 ```
 
+(The three `age`s -- 25, 20, 27 -- return in the virtual-inheritance section; here the story is the duplicated `Person`.)
+
 The name comes from the shape: `Teacher` and `Student` both derive from `Person`, and `TA` derives from both, so the four classes meet at the top and at the bottom. Plain multiple inheritance gives each branch its own `Person`, so the real shape is a forked tree with two `Person`s rather than the single-apex diamond of the picture. Virtual inheritance (next section) restores the shared apex:
 
 ```artifact src=demos/diamond-chart.jsx static
 ```
 
-Each box is a class; arrows mean "inherits from." Node colours match the byte-layout demos below -- Person (blue), Teacher (green), Student (amber), TA (purple).
+Each box is a class; arrows mean "inherits from." Node colours match the plain-diamond byte-layout demo below -- Person (blue), Teacher (green), Student (amber), TA (purple). (The virtual-diamond demo assigns its own colours.)
 
 Building a `TA` makes it "a Teacher" and "a Student", so it ends up with two copies of everything in `Person`. The demo shows the two separate `Person` subobjects in the object, and why `t.name` then won't compile:
 
@@ -174,7 +165,7 @@ The first three treat the symptom, the name clash. Only `virtual` removes the ca
 
 ## Virtual inheritance -- the fix
 
-Declare the shared base `virtual` in each intermediate class. The common ancestor is then stored once and shared, reached through a hidden `vbptr` (virtual-base pointer) in each branch.
+Declare the shared base `virtual` in each intermediate class. The common ancestor is then stored once and shared, reached through a hidden `vbptr` (virtual-base pointer) in each branch (implementation detail; shown in the common 64-bit layout -- some ABIs fold the offset into the vtable).
 
 ```cpp
 class Teacher : virtual public Person { /* ... */ };

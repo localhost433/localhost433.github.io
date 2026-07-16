@@ -43,23 +43,23 @@ class Shape {
     int x, y;
     public void draw() { /* generic / empty */ }
 }
-class Circle    extends Shape { int radius; }
-class Rectangle extends Shape { int width, length; }
-class Triangle  extends Shape { int base, height; }
+class Circle    extends Shape { int radius;        /* constructor elided */ }
+class Rectangle extends Shape { int width, length; /* constructor elided */ }
+class Triangle  extends Shape { int base, height;  /* constructor elided */ }
 ```
 
 Now the `Game` can hold a `Shape` reference, but it still decides which subclass to build with an `if`/`else` chain keyed on a `type`:
 
 ```java
-int type = r.nextInt(3);
+int type = r.nextInt(3);   // 0, 1, or 2
 Shape s;
-if      (type == 1) s = new Circle(colors[c], x, y, rad);
-else if (type == 2) s = new Triangle(/* ... */);
-else if (type == 3) s = new Rectangle(/* ... */);
+if      (type == 0) s = new Circle(colors[c], x, y, rad);
+else if (type == 1) s = new Triangle(/* ... */);
+else                s = new Rectangle(/* ... */);
 s.draw();
 ```
 
-> The smell: that `if`/`else` ladder grows by one branch every time a shape is added. Code that must be edited whenever the data changes is fragile. Branching on `type` a second time to choose how to draw would give you a second ladder to maintain.
+> The smell: that `if`/`else` ladder grows by one branch every time a shape is added. Code that must be edited whenever the data changes is fragile. Branching on `type` a second time to choose how to draw would give you a second ladder to maintain — the diagram and demo below show where that leads: the tag stored as an `int type` field on `Shape`, compared against named constants to drive a second ladder at draw time.
 
 ```artifact src=demos/uml-v2.jsx static
 ```
@@ -96,7 +96,7 @@ Two C++ contrasts:
 
 | | C++ | Java |
 |---|---|---|
-| Overridable methods | opt-in: must mark `virtual` | every method is virtual by default |
+| Overridable methods | opt-in: must mark `virtual` | every non-`static`, non-`final`, non-`private` method is virtual by default |
 | Marking an override | `override` (optional) | `@Override` (optional, recommended) |
 | Base reference to derived | `Shape*` / `Shape&` | a plain `Shape` variable (references only) |
 
@@ -127,7 +127,7 @@ abstract class Shape {
 ```java
 Cylinder c = new Cylinder();   // OK  -- Cylinder implements draw()
 Shape    s = new Shape();      // ERROR -- Shape is abstract
-Shape    s = new Cylinder();   // OK  -- base reference, concrete object
+Shape    s2 = new Cylinder();  // OK  -- base reference, concrete object
 ```
 
 Adding `Cylinder extends Shape` requires you to write `draw()`, or the compiler rejects it. The hierarchy enforces its own contract.
@@ -170,7 +170,7 @@ interface Movable  { void move(); }
 interface Flyable  { void fly();  }
 ```
 
-Now wire the existing trees to them. Solid arrows are `extends` (is-a); dashed arrows are `implements` (can-do):
+Now wire the existing trees to them. v6 also adds a `Flight` vehicle and an `Animal` tree to stress-test the rules, and it deliberately gives `Shape` a default `draw()` body (and drops `Vehicle`'s abstract `draw()`) — the point here is the interface wiring, not forced overrides. Solid arrows are `extends` (is-a); dashed arrows are `implements` (can-do):
 
 ```java
 // Shape branch -- Shape implements Drawable, so every shape is Drawable
@@ -197,6 +197,9 @@ class Employee extends Person { }                       // does not
 abstract class Animal { public void draw() { } public void move() { } }
 class Bird    extends Animal implements Flyable { public void fly() { } }  // draw, move, fly
 class Crawler extends Animal { }                                          // draw, move
+```
+
+```artifact src=demos/uml-v6.jsx static
 ```
 
 Which class carries which capability:
@@ -236,10 +239,11 @@ d = new Circle();    d = new Rectangle();   d = new Triangle();  // via Shape
 d = new Car();       d = new Bike();                             // implement Drawable
 d = new Student();                                               // implements Drawable
 // d = new Vehicle();  d = new Flight();
-//   -- ERRORS: Vehicle/Flight do not implement Drawable
+//   -- ERRORS: Vehicle is abstract (can't new), and neither it
+//      nor Flight implements Drawable
 ```
 
-Through `m`, the only callable method is `m.move()`. The handle exposes exactly the interface's contract, regardless of the object's fuller runtime type. At run time the call still dispatches to the object's actual class body (a `Flight`'s `move()`, a `Car`'s `move()`), so an interface reference is one more form of polymorphic dispatch, narrowed to a single capability.
+Through `m`, the only callable method (besides `Object`'s methods) is `m.move()`. The handle exposes exactly the interface's contract, regardless of the object's fuller runtime type. At run time the call still dispatches to the object's actual class body (a `Flight`'s `move()`, a `Car`'s `move()`), so an interface reference is one more form of polymorphic dispatch, narrowed to a single capability.
 
 ## Overloading vs. overriding
 

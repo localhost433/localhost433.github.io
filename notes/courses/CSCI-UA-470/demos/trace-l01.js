@@ -107,7 +107,7 @@ const steps = [{
   }
 }];
 export default scene({
-  title: "L01 — namespaces, macros & I/O (real run: 20, 30, 100, Hello World!, 5)",
+  title: "L01 — namespaces, macros & I/O: what does it print?",
   code,
   steps
 });

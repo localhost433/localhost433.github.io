@@ -15,7 +15,7 @@ This is the headline difference between the two languages.
 | Run step | run the native binary directly | a JVM interprets the `.class` on each OS |
 
 - C++ compiles all the way down to machine code for one specific platform. You must recompile, producing a different binary (`a.out` on macOS/Linux, `.exe` on Windows), for each target.
-- Java compiles once to bytecode, and then the JVM on each machine (macOS, Linux, Windows) interprets it. Write once, run anywhere.
+- Java compiles once to bytecode, and then the JVM on each machine (macOS, Linux, Windows) interprets it (modern JVMs also JIT-compile hot code to native). Write once, run anywhere.
 
 ```artifact src=demos/platform-fanout.jsx
 ```
@@ -31,11 +31,9 @@ This is the headline difference between the two languages.
 
 ### Wrapper classes
 
-Every primitive has an object wrapper with useful static helpers:
+Every primitive has an object wrapper (`Integer`, `Double`, `Character`, ...) with useful static helpers:
 
 ```java
-Integer, Double, Character, ...
-
 Integer.parseInt("42");        // String -> int
 Integer.toString(intValue);    // int -> String
 ```
@@ -51,7 +49,7 @@ Both are objects, unlike a C++ `std::string` value on the stack.
 
 ### Casting
 
-Widening conversions happen automatically along `byte → short → int → long → float → double`:
+Widening conversions happen automatically along `byte → short → int → long → float → double` (plus `char → int`):
 
 ```java
 int x = 10;
@@ -95,17 +93,18 @@ int[][]    a = { {10, 20, 30}, {40, 50, 60} };
 
 ### Special methods
 
-- **Constructors** — with parameters, without parameters, and the copy constructor.
+- **Constructors** — with parameters, without parameters, and the copy constructor (by convention only — Java never generates or implicitly calls one).
 - **Getters and setters**.
 - **`toString()`** — returns a string representation of the object.
 - **No destructor** — unlike C++, Java has none; the garbage collector reclaims memory.
 
-### Statics (true in both C++ and Java)
+### Statics
 
-- `static` applies to attributes and methods, not to local variables in functions the way C++ allows.
-- A static method cannot use non-static members.
-- A static method has no `this`.
-- A non-static method can use static members.
+- The one Java/C++ difference: in Java, `static` applies to attributes and methods, not to local variables in functions the way C++ allows.
+- True in both C++ and Java:
+  - A static method cannot use non-static members.
+  - A static method has no `this`.
+  - A non-static method can use static members.
 
 ## Access specifiers
 
@@ -149,7 +148,7 @@ Person p4 = new Person("Maya", 19);
 // no 'delete' -- the garbage collector handles it
 ```
 
-The C++ forms `Person p1;` and `Person p2("James", 20)` have no Java equivalent.
+The C++ forms `Person p1;` and `Person p2("James", 20)` have no Java equivalent: in Java the same syntax `Person p1;` declares only a null reference and calls no constructor.
 
 Where each object actually lives, inline on the stack or on the heap with a handle pointing at it:
 
@@ -214,7 +213,7 @@ static void swap(Person x, Person y) {
 
 Person p1 = new Person("James", 20);
 Person p2 = new Person("Maya", 18);
-util.swap(p1, p2);
+swap(p1, p2);
 
 p1.age;  // 18      p1.name; // "Maya"
 p2.age;  // 20      p2.name; // "James"

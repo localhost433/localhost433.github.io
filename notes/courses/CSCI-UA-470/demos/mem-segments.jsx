@@ -49,7 +49,7 @@ const steps = [
   {
     line: 8, cells: view("heap"),
     caption: {
-      cpp: "`new char(10)` allocates fresh memory on the **HEAP** and returns its address into `ph`.",
+      cpp: "`new char(10)` allocates fresh memory on the **HEAP** and returns its address into `ph`. (This snippet deliberately omits the `delete` — the next section is about exactly that.)",
       intuition: "The pointer is on the stack but the object it owns is on the heap (remember to `delete` it).",
     },
   },

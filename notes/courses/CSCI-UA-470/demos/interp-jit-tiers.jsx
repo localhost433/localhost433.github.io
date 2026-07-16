@@ -19,7 +19,7 @@ const HIGH = 92;             // top of an interpreted bar (high per-call cost)
 const LOW = 224;             // top of a native bar (low per-call cost)
 const THRESH = 372;          // hot-threshold line
 
-const INTERP = { x0: 92, n: 7, step: 30, w: 20 };
+const INTERP = { x0: 92, n: 9, step: 30, w: 20 };
 const NATIVE = { x0: 432, n: 9, step: 30, w: 20 };
 const interpBars = Array.from({ length: INTERP.n }, (_, i) => INTERP.x0 + i * INTERP.step);
 const nativeBars = Array.from({ length: NATIVE.n }, (_, i) => NATIVE.x0 + i * NATIVE.step);

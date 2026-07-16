@@ -31,4 +31,5 @@ export default compare({
     },
   ],
   punch: "C++ dispatches statically unless you write `virtual`; Java is **always** virtual.",
+  hint: "Segments elided for the side-by-side — the object and vtable actually live in heap/static memory; only the handle s is a stack variable.",
 });

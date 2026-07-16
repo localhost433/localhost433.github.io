@@ -69,7 +69,7 @@ const steps = [{
   active: ["method"],
   cells: [BP(true), PC("before 0")],
   caption: {
-    jvm: "The class `Point` is already loaded: its blueprint (field names and types) lives in the **Method Area**. The Heap and operand stack are empty; the PC sits before the first opcode.",
+    jvm: "The class `Point` is already loaded: its blueprint (field names and types) lives in the **Method Area**. The Heap and operand stack are empty; the PC sits before the first opcode. (`NEW` / `STORE` / `DESCRIBE` are the workshop's simplified opcodes — real `javac` output would use `new` / `dup` / `invokespecial` / `putfield`.)",
     intuition: "A class is loaded once as a blueprint; individual objects are stamped from it later."
   }
 }, {

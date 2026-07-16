@@ -50,7 +50,7 @@ const steps = [
     line: 7,
     cells: [MI(true), I(true)],
     caption: {
-      cpp: "`max(3, 7)` deduces `T = int`, so the compiler **stamps out** `max<int>` into the Code segment and calls it; the result `7` lands in `i`.",
+      cpp: "`max(3, 7)` deduces `T = int`, so the compiler **stamps out** `max<int>` into the Code segment (this happens at compile time, when the compiler first sees the call) and calls it; the result `7` lands in `i`.",
       intuition: "The first use with `int` **instantiates** one concrete function — `max<int>` — real machine code for that type.",
     },
   },

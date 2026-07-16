@@ -7,10 +7,10 @@ import { scene } from "@course";
    non-virtual case: each branch carries a hidden `vbptr` (a run-time offset to
    the shared base) instead of its own `person`. */
 
-const code = `class person  { string name; };
-class teacher : virtual public person { int age; };
-class student : virtual public person { int age; };
-class TA : public teacher, public student { int age; };
+const code = `class person  { string name = "james"; };
+class teacher : virtual public person { int age = 25; };
+class student : virtual public person { int age = 20; };
+class TA : public teacher, public student { int age = 27; };
 
 int main() {
     TA t;

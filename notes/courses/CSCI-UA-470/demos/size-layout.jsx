@@ -16,7 +16,7 @@ export default sizes({
       ],
     },
     {
-      title: "struct B { char a; char c; double b; };  // same fields, reordered",
+      title: "struct B { char a; char c; double b; };",
       fields: [
         { name: "a", type: "char" },
         { name: "c", type: "char" },

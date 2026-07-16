@@ -70,7 +70,7 @@ export default function UmlV3() {
       fill: "var(--mm-muted)",
       fontSize: 11
     }
-  }, "① add a new shape"), /*#__PURE__*/React.createElement(ClassTree, {
+  }, "add a new shape"), /*#__PURE__*/React.createElement(ClassTree, {
     layout: L
   }));
 }

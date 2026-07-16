@@ -146,7 +146,7 @@ export default function JvmArchitectureMap() {
       fontSize: 10,
       fontWeight: 800
     }
-  }, "one set per thread"), mini(434, 264, 116, "JVM Stack", "frames", 1), mini(548, 264, 84, "PC Reg", "cur. instr", 1), mini(477, 342, 140, "Native Stack", "native calls", 1), group(610, 100, 142, 320, "Execution engine", "runs bytecode"), mini(681, 174, 124, "Interpreter", "stepwise", 2), mini(681, 244, 124, "JIT", "hot code → native", 2), mini(681, 314, 124, "GC", "heap cleanup", 2), arrow(342, 192, 358, 192, "loads"), arrow(596, 200, 610, 200, "uses"), /*#__PURE__*/React.createElement(DiagramBox, {
+  }, "one set per thread"), mini(434, 264, 116, "JVM Stack", "frames", 1), mini(548, 264, 84, "PC Reg", "cur. instr", 1), mini(477, 342, 140, "Native Stack", "native calls", 1), group(610, 100, 142, 320, "Execution engine", "runs bytecode"), mini(681, 174, 124, "Interpreter", "stepwise", 2), mini(681, 244, 124, "JIT", "hot code → native", 2), mini(681, 314, 124, "GC", "heap cleanup", 2), arrow(342, 192, 358, 192, "loads"), arrow(610, 200, 596, 200, "uses"), /*#__PURE__*/React.createElement(DiagramBox, {
     cx: 300,
     cy: 500,
     w: 108,

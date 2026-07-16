@@ -16,7 +16,7 @@ import { Button } from "@kit";
 
    Drawn at viewBox width 780 / maxWidth 780 so the per-panel text stays legible. */
 
-const codeLines = ["// 1. final variable: the binding is fixed", "final Circle c = new Circle();", "c.radius = 10;              // OK: object state may change", "c = new Circle();           // ERROR: c cannot be rebound", "", "// 2. final method: the implementation slot is fixed", "class Shape {", "    final void id() { }", "}", "class Circle extends Shape {", "    void id() { }           // ERROR: cannot override final method", "}", "", "// 3. final class: the inheritance edge is forbidden", "final class Utility { }", "Utility u = new Utility();  // OK: normal use", "class MoreUtility extends Utility { } // ERROR"];
+const codeLines = ["// 1. final variable: the binding is fixed", "final Circle c = new Circle();", "c.radius = 10;              // OK: object state may change", "c = new Circle();           // ERROR: c cannot be rebound", "", "// 2. final method: the implementation slot is fixed", "class Shape {", "    final void id() { }", "}", "class Circle extends Shape {", "    void id() { }           // ERROR: cannot override final method", "}", "", "// 3. final class: the inheritance edge is forbidden", "final class Utility { }", "// elsewhere: Utility u = new Utility();  // OK: normal use", "class MoreUtility extends Utility { } // ERROR"];
 const steps = [{
   key: "overview",
   label: "overview",

@@ -13,7 +13,7 @@ int* p = &x;    // pointer: holds the ADDRESS of x   (&  = address-of)
 int& v = x;     // reference: an ALIAS for x
 
 cout << x;      // 5
-cout << p;      // 0xfA...  (the address)
+cout << p;      // 0xFA...  (the address)
 cout << *p;     // 5        (* = dereference: value at the address)
 cout << v;      // 5        (v is just another name for x)
 ```
@@ -23,14 +23,14 @@ cout << v;      // 5        (v is just another name for x)
 How you declare a parameter decides whether the function can change the caller's variable:
 
 ```cpp
-void inc(int x)  { x = x + 1; }   // by value:     caller's copy unchanged
-void inc(int* x) { *x = *x + 1; } // by pointer:   caller's variable changes
-void inc(int& x) { x = x + 1; }   // by reference: caller's variable changes
+void inc_val(int x)  { x = x + 1; }   // by value:     caller's copy unchanged
+void inc_ptr(int* x) { *x = *x + 1; } // by pointer:   caller's variable changes
+void inc_ref(int& x) { x = x + 1; }   // by reference: caller's variable changes
 
 int a = 5;
-inc(a);    // by value     -> a is still 5
-inc(&a);   // by pointer   -> a is 6
-inc(a);    // by reference -> a is 7
+inc_val(a);    // by value     -> a is still 5
+inc_ptr(&a);   // by pointer   -> a is 6
+inc_ref(a);    // by reference -> a is 7
 ```
 
 - **By value** copies the argument -- safe but the original is untouched.
@@ -57,7 +57,7 @@ A reference is *another name* for the same storage -- not a new object -- while 
 
 ### A reference has no address of its own
 
-Take the address of each name and the difference shows up directly. Given `char x = 5;`, `char* p = &x;`, and `char& r = x;`:
+Take the address of each name and the difference shows up directly. Given `int x = 5;`, `int* p = &x;`, and `int& r = x;`:
 
 ```cpp
 cout << x;      // 5
@@ -72,10 +72,12 @@ cout << &p;     // 0xFFF  (p's OWN address -- a distinct cell)
 
 `&r == &x`: the reference introduces **no new storage**, so asking for its address just gives you the address of the variable it aliases. The pointer `p`, by contrast, is a real object that lives somewhere (`0xFFF`) and holds a value (`0xFA`) -- so it has its own distinct address.
 
+> **Gotcha -- `char*` is special with `cout`.** Try this with `char` instead of `int` and the address lines break: `cout` treats a `char*` as a C-string and prints the *characters* at that address, not the address itself.
+
 > **Gotcha -- a pointer holds an address, not an integer.** You cannot assign a plain integer literal to a pointer:
 >
 > ```cpp
-> char* p;
+> int* p;
 > p = 5;      // WRONG -- 5 is not an address
 > p = &x;     // right -- p must hold an address
 > ```
@@ -86,7 +88,8 @@ A pointer holds a memory address. What it points *at* can live in different regi
 
 - **Stack** -- local variables; allocated/freed automatically as functions enter/return.
 - **Heap** -- memory you request at runtime with `new`.
-- **Code / globals** -- fixed-location data and functions.
+- **Global/Static** -- fixed-location data that lives for the whole program.
+- **Code** -- the program's functions themselves.
 
 A pointer's size depends on the machine architecture (e.g., 8 bytes on a 64-bit CPU). The zero pointer is written `NULL` or, preferably, `nullptr` (the equivalent of Java's `null`).
 
@@ -124,7 +127,7 @@ delete ptr;        // free a single object
 delete[] arr_ptr;  // free an array
 ```
 
-`delete` doesn't change the pointer's value or the target's value; it only tells the system the memory is free to reuse.
+`delete` doesn't change the pointer's value, and it typically leaves the target's bytes as-is -- but they are formally indeterminate, so never read them. It only tells the system the memory is free to reuse.
 
 ### Common pointer bugs
 

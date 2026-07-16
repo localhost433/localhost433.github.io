@@ -273,7 +273,16 @@ function Panel({
     color: fg,
     r: col.locks.length > 1 ? 0.95 : 1.18,
     faint: col.locks.length > 1
-  }), /*#__PURE__*/React.createElement("text", {
+  }), col.locks.length > 1 && /*#__PURE__*/React.createElement("text", {
+    x: cx,
+    y: cyc + 44,
+    textAnchor: "middle",
+    style: {
+      fill: "var(--mm-muted)",
+      fontSize: 9,
+      fontStyle: "italic"
+    }
+  }, "pick one, not all at once"), /*#__PURE__*/React.createElement("text", {
     x: cx,
     y: PANEL.top + PANEL.h - 28,
     textAnchor: "middle",

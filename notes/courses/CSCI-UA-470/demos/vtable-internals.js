@@ -92,7 +92,7 @@ const steps = [{
   cells: [PVT(true), PIN(), PEAT()],
   caption: {
     cpp: "`virtual void intro();` — marking a member `virtual` means the call target is chosen at **run time**, not from the static type.",
-    asm: "The compiler emits **`Person::vtable`** in `.rodata`: one `.quad` per virtual, in declaration order — slot **#0** = `intro`, slot **#1** = `eat`, each the **address** of a body in the Code segment.",
+    asm: "The compiler emits **`Person::vtable`** in `.rodata`: one `.quad` per virtual, in declaration order — slot **#0** = `intro`, slot **#1** = `eat`, each the **address** of a body in the Code segment (real vtables carry extra RTTI slots first — elided here).",
     intuition: "A vtable is just a **constant array of function pointers** — one table per polymorphic class."
   }
 }, {
@@ -165,7 +165,7 @@ const asmMap = {
   // p->eat();   load vptr, index slot #1, call
   15: [16, 17] // p->intro(); load vptr, index slot #0, call
 };
-const asmLabel = "x86-64 · clang -O1 · Intel, demangled";
+const asmLabel = "x86-64 · Intel (idealized, demangled)";
 export default scene({
   title: "Inside the vtable: an array indexed by a compile-time slot offset",
   code,

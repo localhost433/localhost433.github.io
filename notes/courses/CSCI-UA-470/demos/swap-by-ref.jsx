@@ -2,9 +2,9 @@ import { scene, stack, obj } from "@course";
 
 /* Java passes references BY VALUE. The `pass` knob toggles two swap strategies:
 
-   - "val" (by value): the method rebinds the local parameter copies (x, y). The
-     caller's p1/p2 are untouched — the classic "swap does nothing" outcome.
-   - "ref" (by reference): the method aliases the caller's objects through the
+   - "val" (reassigning handles): the method rebinds the local parameter copies
+     (x, y). The caller's p1/p2 are untouched — the classic "swap does nothing" outcome.
+   - "ref" (mutating fields): the method aliases the caller's objects through the
      references and swaps their FIELDS, so the caller sees swapped state.
 
    Both are faithful to how Java executes; the two code panels toggle via
@@ -25,7 +25,7 @@ const codeRef =
 }`;
 
 const person = obj("Person", [
-  { name: "name", type: "String", size: 32 },
+  { name: "name", type: "String", size: 8 },
   { name: "age",  type: "int" },
 ], { region: "heap", header: 12 });
 
@@ -107,7 +107,7 @@ const valSteps = [
 ];
 
 /* --------------------------------------------------------------------------
-   by reference: alias the caller's objects and swap their FIELDS.
+   mutating fields: alias the caller's objects and swap their FIELDS.
    Caller's p1/p2 see swapped state.
    -------------------------------------------------------------------------- */
 const refSteps = [
@@ -134,7 +134,7 @@ const refSteps = [
       A('"Maya"', "18"), B('"James"', "20"),
     ],
     caption: {
-      java: "After the by-reference `swap`: A now holds (Maya,18) and B holds (James,20). `p1`→A reads Maya/18; `p2`→B reads James/20. The **references never moved**; the state did.",
+      java: "After the field-swapping `swap`: A now holds (Maya,18) and B holds (James,20). `p1`→A reads Maya/18; `p2`→B reads James/20. The **references never moved**; the state did.",
       intuition: "Same objects, swapped contents — the pattern for exchanging Java objects is to swap their fields, not their references.",
     },
     outputs: [

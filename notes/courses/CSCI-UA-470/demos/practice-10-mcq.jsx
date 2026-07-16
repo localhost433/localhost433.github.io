@@ -46,7 +46,7 @@ export default mcq({
         { text: "Read once into a single array of all objects" },
         { text: "No cast is needed — `readObject()` returns the exact type written" },
       ],
-      why: "Serialization is **positional**: the first `readObject()` must match the first `writeObject`, and so on. And `readObject()` is declared to return `Object`, so each result needs an **explicit cast** to the type you wrote.",
+      why: "Serialization is **positional**: the first `readObject()` must match the first `writeObject`, and so on. And `readObject()` is declared to return `Object`, so each result needs an **explicit cast** to the type you wrote. The stream does record each object's class — that's how a wrong cast is detected — but reads are still strictly positional.",
     },
     {
       stem: "What do the three uses of `final` restrict?",

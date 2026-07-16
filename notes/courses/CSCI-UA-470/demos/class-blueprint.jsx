@@ -11,7 +11,7 @@ import { DiagramSvg, DiagramCard, DiagramEdge, diagramCardHeight } from "@course
 
 const blueprintSections = [
   { rows: ["color : string", "radius : double"] },
-  { rows: ["get_color()", "set_radius(double)"] },
+  { rows: ["get_radius()", "set_radius(double)"] },
 ];
 const c1Sections = [{ rows: ['color = "red"', "radius = 2.0"] }];
 const c2Sections = [{ rows: ['color = "blue"', "radius = 3.0"] }];

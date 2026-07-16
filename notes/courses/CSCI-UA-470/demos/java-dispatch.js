@@ -101,7 +101,7 @@ const CIRCLE_MT = hl => glob("Circle methods", "method table", "", {
 const circleObj = obj("Circle", [{
   name: "color",
   type: "String",
-  size: 32
+  size: 8
 }], {
   region: "heap",
   header: 12,

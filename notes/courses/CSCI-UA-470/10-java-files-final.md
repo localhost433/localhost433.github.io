@@ -45,6 +45,8 @@ The key distinction is not that text files contain bits while binary files do no
 
 Because a binary file is not necessarily a sequence of printable character codes, opening a `.bin` file in a text editor usually gives unreadable or misleading output.
 
+The demo uses Java's `DataOutputStream` primitive writers (`writeChar`, `writeUTF`, `writeInt`, `writeDouble`) to show concrete binary layouts; object serialization (next section) is a different, richer binary format.
+
 ```artifact src=demos/file-text-vs-binary.jsx
 ```
 
@@ -106,7 +108,7 @@ try {
 Important points:
 
 - `Scanner` reads tokens or lines from a file.
-- `s.hasNext()` checks whether there is more input.
+- `s.hasNext()` checks whether another *token* remains — pairing it with `nextLine()` works here but skips trailing blank lines; `hasNextLine()` is the matching check.
 - `s.nextLine()` reads the next whole line as a `String`.
 - `s.close()` releases the resource.
 
@@ -204,6 +206,8 @@ Important points:
 
 ```artifact src=demos/serialization-stream-order.jsx
 ```
+
+Two related keywords are worth knowing. A field marked `transient` is skipped during writing and comes back as its default value (`0`, `null`, etc.) when the object is read. A class can also declare a `serialVersionUID`, which guards against a class-version mismatch between the time of writing and the time of reading. If the versions do not match, `readObject()` throws `InvalidClassException`.
 
 ## The keyword `final`
 
