@@ -174,3 +174,10 @@ The two inheritance shapes at a glance:
 
 ```artifact src=demos/class-relations.jsx static
 ```
+
+## Practice
+
+The layout rules and the early-binding trap are what the next note builds on — make sure they hold before `virtual` enters:
+
+```artifact src=demos/practice-05-mcq.jsx
+```

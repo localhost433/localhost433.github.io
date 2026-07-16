@@ -241,3 +241,10 @@ The slide draws inheritance as four shapes (single, multi-level, multiple, and m
 Java forbids multiple class inheritance precisely to avoid the diamond problem. Instead a class may implement multiple interfaces.
 
 The slide also gives the one-line C++ to Java mapping: a C++ class with a pure virtual method corresponds to an `abstract` class in Java, and a C++ class with all methods pure virtual corresponds to an `interface`. The full concrete/abstract/interface comparison is laid out in [OOP: The Four Pillars](note.html?course=CSCI-UA-470&note=16-oop-pillars-roadmap#concrete-vs-abstract-vs-interface).
+
+## Practice
+
+The contrasts that trip people up are Java's reference-by-value semantics and the object/inheritance model. Work through them:
+
+```artifact src=demos/practice-08-mcq.jsx
+```

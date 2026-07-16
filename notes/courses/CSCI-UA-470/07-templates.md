@@ -72,4 +72,11 @@ The same pattern works for whole **classes**, not just functions. A class templa
 ```artifact src=demos/templates-class.jsx
 ```
 
+## Practice
+
+Templates are a compile-time mechanism — monomorphization, not runtime generics. Check the model:
+
+```artifact src=demos/practice-07-mcq.jsx
+```
+
 > The second half of this lecture pivots from C++ to Java -- the compilation-to-bytecode model, Java's primitive types and wrappers, `String`, casting, and basic I/O. That material is developed in [C++ vs. Java](note.html?course=CSCI-UA-470&note=08-cpp-vs-java).
