@@ -174,6 +174,11 @@ Recognising correct notation is one thing; producing it is another. Build the `C
 ```artifact src=demos/practice-14-classbox.jsx
 ```
 
+That first box ended in a generalization triangle. Now build one that ends in the relationship the exam most often catches people on — the aggregation/composition split, where both lines are diamonds and only the *fill* tells them apart. Reason from the lifetime rule ("does the part die with the whole?") and watch which diamond, and at which end, the preview draws.
+
+```artifact src=demos/practice-14-classbox-compose.jsx
+```
+
 ```artifact src=demos/practice-14-derive.jsx
 ```
 
