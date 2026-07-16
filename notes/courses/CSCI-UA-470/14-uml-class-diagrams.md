@@ -179,6 +179,11 @@ That first box ended in a generalization triangle. Now build one that ends in th
 ```artifact src=demos/practice-14-classbox-compose.jsx
 ```
 
+Now the other half of the pair. Same diamond, same end — but this time the part *survives* the whole, so the fill flips. Build it and put the two boxes side by side in your head: filled means "dies with," hollow means "outlives."
+
+```artifact src=demos/practice-14-classbox-aggregate.jsx
+```
+
 ```artifact src=demos/practice-14-derive.jsx
 ```
 
