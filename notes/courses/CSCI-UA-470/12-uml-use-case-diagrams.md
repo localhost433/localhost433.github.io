@@ -195,6 +195,16 @@ Reading these diagrams is one skill; drawing one is another. Assemble a small Li
 ```artifact src=demos/practice-12-usecase.jsx
 ```
 
+Now a second diagram that forces the relationship you have to reach for most on the exam. In this Online Store, one case-to-case link is `<<include>>` (a step that *always* runs as part of its base) and the other is `<<extend>>` (optional behavior on a base that stands alone). Watch which way each dashed arrow points as you place them — `include` runs base → included, `extend` runs extension → base.
+
+```artifact src=demos/practice-12-usecase-store.jsx
+```
+
+Finally, the include/extend/generalization distinction is the part of this note most likely to be tested. Drill it directly:
+
+```artifact src=demos/practice-12-mcq.jsx
+```
+
 ## Common UML tools
 
 Edraw Max, Moqups, Visio, ConceptDraw, StarUML, Umbrello, UML Designer Tool, UMLet.
