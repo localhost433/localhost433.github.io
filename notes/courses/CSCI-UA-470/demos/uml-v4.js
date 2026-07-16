@@ -1,6 +1,6 @@
 /* AUTO-GENERATED from uml-v4.jsx by `npm run build:artifacts` — do not edit. */
 import React from "react";
-import { DiagramSvg, treeLayout, ClassTree } from "@course";
+import { DiagramSvg, treeLayout, ClassTree, ab, cls } from "@course";
 
 /* v4 (note 09) — Shape is now ABSTRACT. Its title is italic (UML abstract class)
    and draw() is an italic row (UML abstract method), so `new Shape()` is illegal
@@ -15,22 +15,12 @@ const shape = {
   sections: [{
     rows: ["- color : string", "- x : int", "- y : int"]
   }, {
-    rows: [{
-      text: "+ draw()",
-      italic: true
-    }]
+    rows: [ab("+ draw()")]
   }]
 };
 
 // concrete subclass: its own data + a concrete draw()
-const concrete = (title, attrs) => ({
-  title,
-  sections: [{
-    rows: attrs
-  }, {
-    rows: ["+ draw()"]
-  }]
-});
+const concrete = (title, attrs) => cls(title, attrs, ["+ draw()"]);
 const cylinder = concrete("Cylinder", []);
 const circle = concrete("Circle", ["- radius : int"]);
 const rectangle = concrete("Rectangle", ["- width : int", "- length : int"]);

@@ -1,5 +1,5 @@
 import React from "react";
-import { DiagramSvg, treeLayout, ClassTree } from "@course";
+import { DiagramSvg, treeLayout, ClassTree, ab, cls } from "@course";
 
 /* v5 (note 09) — designing the hierarchy. THREE separate trees, each with its
    own abstract base (italic title) and an indigo `extends` fork. Grouping is by
@@ -7,10 +7,6 @@ import { DiagramSvg, treeLayout, ClassTree } from "@course";
    a Person, not a Shape, so Person gets its own. Shared behaviour (draw / move /
    speak) is declared abstract on each base; the leaves implement it. Boxes are
    neutral; colour is reserved for the relation. */
-
-const ab  = (text) => ({ text, italic: true });           // abstract method row
-const cls = (title, attrs, methods) => ({                  // concrete: attrs + methods
-  title, sections: [{ rows: attrs }, { rows: methods }] });
 
 // Tree 1 — Shape (abstract) with real attributes.
 const shape = {

@@ -121,9 +121,7 @@ trace below steps through the stack machine on its own, running
 The operand-stack trace above is pure arithmetic. Object creation adds two more
 regions: the Method Area (the class blueprint) and the Heap (the object
 itself). Step through the workshop's Program A (`new Point()`, set `x` and `y`,
-print) and watch each JVM region light up as its opcode runs. Note that `NEW`,
-`STORE`, and `DESCRIBE` are the workshop's simplified opcodes — real `javac`
-output would use `new` / `dup` / `invokespecial` / `putfield`:
+print) and watch each JVM region light up as its opcode runs:
 
 ```artifact src=demos/jvm-object-lifecycle.jsx
 ```
