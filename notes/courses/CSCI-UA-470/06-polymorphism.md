@@ -201,7 +201,12 @@ The L06 program (`code/lectures/L06/main.cpp`) prints from every constructor and
 
 ## Practice
 
-Virtual dispatch, abstract classes, and the diamond are the core of the C++ OOP material — drill them:
+First predict the dispatch itself. Step to the `ptr->intro()` call and, before revealing it, decide which body runs when a `person*` points at a `student`:
+
+```artifact src=demos/practice-06-predict.jsx
+```
+
+Then the conceptual round — virtual dispatch, abstract classes, and the diamond are the core of the C++ OOP material:
 
 ```artifact src=demos/practice-06-mcq.jsx
 ```
