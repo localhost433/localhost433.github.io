@@ -67,5 +67,11 @@ export default sequenceOrder({
     p: "ward",
     from: 2,
     to: 3
-  }]
+  }, {
+    p: "adm",
+    from: 1,
+    to: 1,
+    dx: 4
+  } // nested self-call bar
+  ]
 });

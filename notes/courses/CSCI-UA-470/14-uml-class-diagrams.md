@@ -184,11 +184,17 @@ Now the other half of the pair. Same diamond, same end — but this time the par
 ```artifact src=demos/practice-14-classbox-aggregate.jsx
 ```
 
+Boxes are only half the skill; the other half is knowing where they come from. Each of these starts from a sequence diagram and asks what structure falls out of it — the direction this note insists on: the interaction discovers the classes.
+
 ```artifact src=demos/practice-14-derive.jsx
 ```
 
+Next, the mechanical marks that slip under exam pressure — the visibility symbols, the type after the colon, what italics mean, and how many compartments a class box has:
+
 ```artifact src=demos/practice-14-notation.jsx
 ```
+
+And the conceptual traps to finish: class diagram versus object diagram, the relationship ladder from dependency up to generalization, and what refactoring in the model actually buys:
 
 ```artifact src=demos/practice-14-mcq.jsx
 ```

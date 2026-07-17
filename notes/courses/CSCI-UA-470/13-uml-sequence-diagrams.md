@@ -126,7 +126,7 @@ Two more interactions to order. The first admits a patient and turns on the self
 ```artifact src=demos/practice-13-sequence-atm.jsx
 ```
 
-One more, this time with an **asynchronous** message in the mix. This is the Model–View–Controller click-to-redraw loop: the model's `notify()` is a fire-and-forget push to its view, so it draws with the **open** arrowhead, next to the **filled** heads of the blocking calls around it. The order is forced by causality — you cannot notify before the state changes, or redraw before reading the new value.
+One more, this time with an **asynchronous** message in the mix. This is an MVC-style redraw loop — the button plays the controller, telling the model to change — and the model's `notify()` is a fire-and-forget observer push to its view, so it draws with the **open** arrowhead, next to the **filled** heads of the blocking calls around it. The order is forced by causality — you cannot notify before the state changes, or redraw before reading the new value.
 
 ```artifact src=demos/practice-13-sequence-observer.jsx
 ```

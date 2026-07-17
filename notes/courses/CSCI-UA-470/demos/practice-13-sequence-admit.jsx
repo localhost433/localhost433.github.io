@@ -30,5 +30,6 @@ export default sequenceOrder({
   activations: [
     { p: "adm", from: 0, to: 4 },
     { p: "ward", from: 2, to: 3 },
+    { p: "adm", from: 1, to: 1, dx: 4 }, // nested self-call bar
   ],
 });
