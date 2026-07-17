@@ -10,7 +10,7 @@ Before any code exists, a software project passes through a chain of roles:
 ```artifact src=demos/use-case-roles.jsx static
 ```
 
-UML (Unified Modeling Language) is the shared notation the analyst and designer use to capture a design and communicate it to everyone downstream. It is a communication tool, not a programming language, and it sits above the C++/Java implementation details covered in [note 11](note.html?course=CSCI-UA-470&note=11-jvm-runtime) and [note 15](note.html?course=CSCI-UA-470&note=15-java-cpp-systematic-comparison).
+UML (Unified Modeling Language) is the shared notation the analyst and designer use to capture a design and communicate it to everyone downstream. It is a communication tool, not a programming language, and it sits above the C++/Java implementation details covered in [note 11](note.html?course=CSCI-UA-470&note=11-jvm-runtime) and [note 17](note.html?course=CSCI-UA-470&note=17-java-cpp-systematic-comparison).
 
 The mindset that governs every UML model:
 
@@ -26,7 +26,7 @@ UML diagrams split into three groups. The one this note develops is the use case
 | Behavioral | dynamic parts of the system | Use case, Activity, State machine |
 | Interaction | how parts exchange messages over time | Sequence, Collaboration, Timing |
 
-- **Structural** diagrams freeze the system and show its parts and how they are wired. The class diagram (types, fields, methods, and associations) is the one most tied to the OOP pillars in [note 16](note.html?course=CSCI-UA-470&note=16-oop-pillars-roadmap); the object diagram shows a concrete snapshot of instances; package, component, and deployment diagrams zoom out to modules, binaries, and physical nodes.
+- **Structural** diagrams freeze the system and show its parts and how they are wired. The class diagram (types, fields, methods, and associations) is the one most tied to the OOP pillars in [note 18](note.html?course=CSCI-UA-470&note=18-oop-pillars-roadmap); the object diagram shows a concrete snapshot of instances; package, component, and deployment diagrams zoom out to modules, binaries, and physical nodes.
 - **Behavioral** diagrams show the system in motion: the use case diagram (external actors and the goals they pursue), the activity diagram (a flowchart of a process with forks/joins and decisions), and the state machine diagram (the states of one object and its transitions).
 - **Interaction** diagrams are a zoom-in on behavior: the [sequence diagram](note.html?course=CSCI-UA-470&note=13-uml-sequence-diagrams) (messages ordered top-to-bottom along lifelines), collaboration (the same messages numbered on an object graph), and timing (state against time).
 
@@ -216,4 +216,4 @@ Edraw Max, Moqups, Visio, ConceptDraw, StarUML, Umbrello, UML Designer Tool, UML
 
 ---
 
-> Where this sits in the course: UML is a notation for design, applied on top of the OOP ideas summarized in [note 16](note.html?course=CSCI-UA-470&note=16-oop-pillars-roadmap). A use case diagram captures requirements from the outside, what and not how, before those requirements are turned into the classes, inheritance, and polymorphism built throughout the earlier notes.
+> Where this sits in the course: UML is a notation for design, applied on top of the OOP ideas summarized in [note 18](note.html?course=CSCI-UA-470&note=18-oop-pillars-roadmap). A use case diagram captures requirements from the outside, what and not how, before those requirements are turned into the classes, inheritance, and polymorphism built throughout the earlier notes.

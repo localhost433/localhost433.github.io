@@ -1,6 +1,6 @@
 import { mcq } from "@course";
 
-/* note 16 practice — the synthesis note. Drills the four-pillar taxonomy and the
+/* note 18 practice — the synthesis note. Drills the four-pillar taxonomy and the
    abstraction trio the note settles: define-vs-create, concrete vs abstract vs
    interface, and why an interface is more than "an abstract class with no fields". */
 

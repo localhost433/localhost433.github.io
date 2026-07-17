@@ -141,7 +141,7 @@ Adding `Cylinder extends Shape` requires you to write `draw()`, or the compiler 
 | Abstract class | any class with a pure-virtual method | marked `abstract class` |
 | Can instantiate base? | no (has a pure virtual) | no (`abstract`) |
 
-The next step past an abstract class, where every method is abstract, is an interface. For its definition and a side-by-side concrete/abstract/interface comparison, see [OOP: The Four Pillars](note.html?course=CSCI-UA-470&note=16-oop-pillars-roadmap#concrete-vs-abstract-vs-interface).
+The next step past an abstract class, where every method is abstract, is an interface. For its definition and a side-by-side concrete/abstract/interface comparison, see [OOP: The Four Pillars](note.html?course=CSCI-UA-470&note=18-oop-pillars-roadmap#concrete-vs-abstract-vs-interface).
 
 ## v5 -- designing the hierarchy
 
