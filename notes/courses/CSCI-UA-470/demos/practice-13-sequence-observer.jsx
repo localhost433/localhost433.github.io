@@ -4,12 +4,12 @@ import { sequenceOrder } from "@course";
 /* note 13 practice — the first ordering drill with an ASYNCHRONOUS message, so the
    assembled diagram shows both arrowheads: the FILLED head of a blocking sync call
    and the OPEN head of `notify()`, the fire-and-forget observer push (a Model
-   telling its View it changed, without waiting). A classic MVC click→update→notify→
+   telling its View it changed, without waiting). A classic MVC-style click→update→notify→
    render loop; every step is forced by causality (you cannot notify before the
    state changes, or render before being notified), so the order is unambiguous. */
 
 export default sequenceOrder({
-  prompt: "Order this MVC interaction top-to-bottom as time. Watch the arrowheads as it assembles: get_payment-style blocking calls are FILLED, the async notify() is OPEN. Direction is given — you choose only the sequence.",
+  prompt: "Order this button→model→view redraw loop top-to-bottom as time. Watch the arrowheads as it assembles: get_payment-style blocking calls are FILLED, the async notify() is OPEN. Direction is given — you choose only the sequence.",
   participants: [
     { id: "user", label: "User", kind: "actor" },
     { id: "btn", label: "b : Button" },
@@ -35,5 +35,6 @@ export default sequenceOrder({
     { p: "model", from: 1, to: 2 },   // handling setValue, firing notify
     { p: "model", from: 3, to: 4 },   // answering the view's getValue
     { p: "view", from: 2, to: 5 },
+    { p: "view", from: 5, to: 5, dx: 4 }, // nested self-call bar
   ],
 });

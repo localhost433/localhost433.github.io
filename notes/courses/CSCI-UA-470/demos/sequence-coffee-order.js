@@ -85,5 +85,11 @@ export default sequenceDiagram({
     p: "recep",
     from: 4,
     to: 6
-  }]
+  }, {
+    p: "recep",
+    from: 5,
+    to: 5,
+    dx: 4
+  } // nested self-call bar
+  ]
 });
