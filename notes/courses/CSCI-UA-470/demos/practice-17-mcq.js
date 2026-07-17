@@ -1,7 +1,7 @@
-/* AUTO-GENERATED from practice-15-mcq.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from practice-17-mcq.jsx by `npm run build:artifacts` — do not edit. */
 import { mcq } from "@course";
 
-/* note 15 practice — the systematic-comparison review. Deliberately drills traps
+/* note 17 practice — the systematic-comparison review. Deliberately drills traps
    that note 08's MCQ did NOT: `new` semantics, class-vs-struct default access,
    C++ static locals, the virtual-destructor rule, C++-vs-Java reference semantics,
    and friend/arrays. A final-review checklist, so the angle is breadth of contrasts. */

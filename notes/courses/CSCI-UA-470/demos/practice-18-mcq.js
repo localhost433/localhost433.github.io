@@ -1,7 +1,7 @@
-/* AUTO-GENERATED from practice-16-mcq.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from practice-18-mcq.jsx by `npm run build:artifacts` — do not edit. */
 import { mcq } from "@course";
 
-/* note 16 practice — the synthesis note. Drills the four-pillar taxonomy and the
+/* note 18 practice — the synthesis note. Drills the four-pillar taxonomy and the
    abstraction trio the note settles: define-vs-create, concrete vs abstract vs
    interface, and why an interface is more than "an abstract class with no fields". */
 

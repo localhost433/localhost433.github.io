@@ -5,7 +5,7 @@ date: "2026-05-20/27"
 
 ## From structs to classes
 
-This note is your first brush with all four OOP pillars -- **encapsulation** (classes bundling state with behavior, plus access control), and the seeds of inheritance, abstraction, and polymorphism that follow; the full map of how they fit together lives in [OOP: The Four Pillars](note.html?course=CSCI-UA-470&note=16-oop-pillars-roadmap).
+This note is your first brush with all four OOP pillars -- **encapsulation** (classes bundling state with behavior, plus access control), and the seeds of inheritance, abstraction, and polymorphism that follow; the full map of how they fit together lives in [OOP: The Four Pillars](note.html?course=CSCI-UA-470&note=18-oop-pillars-roadmap).
 
 A C-style `struct` is just a bundle of data; a *separate* free function operates on it and receives the data explicitly:
 
