@@ -21,7 +21,8 @@ The back half of the course introduces no fifth pillar. It deepens these four id
 - Java I/O and `final`: text files, binary files, serialization, and `final` are covered in [Java Files, Serialization & final](note.html?course=CSCI-UA-470&note=10-java-files-final).
 - JVM mechanics: bytecode, class loading, runtime areas, interpretation, JIT compilation, and garbage collection are covered in [JVM, Bytecode & Runtime Architecture](note.html?course=CSCI-UA-470&note=11-jvm-runtime).
 - Systematic Java/C++ comparison: the consolidated table of Java versus C++ rules is in [Java vs. C++: Systematic Comparison](note.html?course=CSCI-UA-470&note=17-java-cpp-systematic-comparison).
-- UML and design patterns: reusable notations and designs, built mostly from inheritance, abstraction, and polymorphism. UML is developed in [UML & Use Case Diagrams](note.html?course=CSCI-UA-470&note=12-uml-use-case-diagrams).
+- UML and design patterns: reusable notations and designs, built mostly from inheritance, abstraction, and polymorphism. UML is developed in [UML & Use Case Diagrams](note.html?course=CSCI-UA-470&note=12-uml-use-case-diagrams), and each class-diagram relationship is translated back into Java in [From Class Diagram to Code](note.html?course=CSCI-UA-470&note=15-uml-to-code).
+- Design judgment: the five SOLID principles — rules for which designs survive change, built on all four pillars — are covered in [SOLID Principles](note.html?course=CSCI-UA-470&note=16-solid).
 
 ### Inheritance shapes, and who allows which
 
