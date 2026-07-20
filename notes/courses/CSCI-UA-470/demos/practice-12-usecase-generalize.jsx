@@ -6,11 +6,23 @@ import { useCaseBuild } from "@course";
    so each GENERALIZES to it — the hollow-triangle arrow, child → parent, the same
    notation as class inheritance. The library build drilled «extend» and the store
    build drilled «include»; this one closes the set with generalization. The actor
-   associates only with the parent Place Order — the children inherit that link. */
+   associates only with the parent Place Order — the children inherit that link.
+   Like the other two builds it opens with the Identify stage: tag the actor and the
+   three use cases in the requirements sentence before placing anything. */
 
 export default useCaseBuild({
-  prompt: "Build the Order System diagram. Place the actor and the three use cases, join the Customer to Place Order, then add the two case-to-case relations: Phone Order and Internet Order are each a specialized kind of Place Order.",
+  prompt: "Build the Order System diagram. First read the requirements and tag the actor and use cases; then drop each element inside or outside the boundary, connect the Customer to Place Order, and add the two case-to-case relations: Phone Order and Internet Order are each a specialized kind of Place Order.",
   system: "Order System",
+  // Identify stage: the requirements as clickable words. Customer names a user
+  // (actor); each order the system carries out is a use case; the connecting words
+  // are left untagged.
+  source: {
+    tokens: [
+      "A", { w: "Customer", role: "actor" }, "can", { w: "place an order,", role: "case", id: "place" },
+      "either", "a", { w: "phone order", role: "case", id: "phone" }, "or", "an",
+      { w: "internet order.", role: "case", id: "internet" },
+    ],
+  },
   elements: [
     { id: "customer", label: "Customer", role: "actor",
       whyZone: "The Customer is a person the system serves — an actor OUTSIDE the boundary." },

@@ -132,3 +132,12 @@ test("UseCaseBuilder drives the real UseCaseDiagram from placement + connections
   assert.ok(/UseCaseDiagram/.test(src), "must render a live UseCaseDiagram preview");
   assert.ok(/associations/.test(src) && /relations/.test(src), "must grade associations and relations");
 });
+test("UseCaseBuilder Reset clears only the current stage", () => {
+  const uc = src.slice(src.indexOf("export function UseCaseBuilder"));
+  const reset = uc.slice(uc.indexOf("const reset = () => {"));
+  const body = reset.slice(0, reset.indexOf("\n  };") + 1);
+  assert.ok(/if \(stage === "identify"\)/.test(body), "reset must branch on the current stage");
+  assert.ok(!/setRevealedSet\(new Set\(\)\)/.test(body), "reset must not wipe every stage's revealed flag");
+  assert.ok(!/setStage\(/.test(body), "reset must stay on the current stage, not jump back");
+  assert.ok(/placeViaConnect/.test(body), "resetting Connect must roll back an auto-completed Place");
+});

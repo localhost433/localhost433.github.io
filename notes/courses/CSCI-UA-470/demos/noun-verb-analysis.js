@@ -52,13 +52,21 @@ const SENTENCE = [{
   w: "Alice.",
   tag: "instance"
 }];
-const TAG_STYLE = {
-  class: "mm-cap-tag--java",
-  instance: "mm-cap-tag--int",
-  inheritance: "mm-cap-tag--cpp",
-  aggregation: "mm-cap-tag--asm",
-  operation: "mm-cap-tag--java",
-  constraint: "mm-cap-tag--asm"
+
+// one distinct hue per role (the readable text variant of each theme colour),
+// used for both the word's underline and the small label above it.
+const TAG_COLOR = {
+  class: "var(--seg-stack-tx)",
+  // blue
+  instance: "var(--seg-global-tx)",
+  // amber
+  inheritance: "var(--seg-code-tx)",
+  // purple
+  aggregation: "var(--seg-heap-tx)",
+  // green
+  operation: "var(--lang-java-fg)",
+  // brown
+  constraint: "var(--lang-jvm-fg)" // teal
 };
 export default function NounVerbAnalysis() {
   return /*#__PURE__*/React.createElement("div", {
@@ -67,27 +75,28 @@ export default function NounVerbAnalysis() {
     className: "mm-scene__title",
     "data-artifact-title": true
   }, "Natural-language analysis \u2014 nouns become classes, verbs become operations"), /*#__PURE__*/React.createElement("p", {
-    style: {
-      margin: "10px 2px 4px",
-      fontSize: 14,
-      lineHeight: 2.1,
-      maxWidth: 700,
-      whiteSpace: "normal"
-    }
-  }, SENTENCE.map((t, i) => /*#__PURE__*/React.createElement(React.Fragment, {
-    key: i
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      whiteSpace: "nowrap"
-    }
-  }, t.tag ? /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("strong", null, t.w), /*#__PURE__*/React.createElement("span", {
-    className: "mm-cap-tag " + (TAG_STYLE[t.tag] || "mm-cap-tag--java"),
-    style: {
-      marginLeft: 3,
-      fontSize: 8.5,
-      verticalAlign: "super"
-    }
-  }, t.tag)) : t.w), " "))), /*#__PURE__*/React.createElement("div", {
+    className: "nv-sentence"
+  }, SENTENCE.map((t, i) => {
+    if (!t.tag) return /*#__PURE__*/React.createElement(React.Fragment, {
+      key: i
+    }, t.w, " ");
+    const c = TAG_COLOR[t.tag] || "var(--mm-cell-fg)";
+    return /*#__PURE__*/React.createElement(React.Fragment, {
+      key: i
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "nv-gloss"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "nv-gloss__tag",
+      style: {
+        color: c
+      }
+    }, t.tag), /*#__PURE__*/React.createElement("span", {
+      className: "nv-gloss__word",
+      style: {
+        borderColor: c
+      }
+    }, t.w)), " ");
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       overflowX: "auto"
     }

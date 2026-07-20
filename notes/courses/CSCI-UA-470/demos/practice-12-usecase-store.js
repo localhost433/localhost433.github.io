@@ -9,11 +9,45 @@ import { useCaseBuild } from "@course";
      checkout, so it is mandatory factored-out behavior: base → included.
    - Write Review «extend» View Product — a review is written only sometimes, on top
      of a View Product that stands alone, so it is optional: extension → base.
-   Getting both right (and their opposite arrow directions) is the whole exam trap. */
+   Getting both right (and their opposite arrow directions) is the whole exam trap.
+   Like the library build it opens with the Identify stage: tag the two actors and
+   the five use cases in the requirements sentence before placing anything. */
 
 export default useCaseBuild({
-  prompt: "Build the Online Store diagram: place actors outside and use cases inside, join each actor to its cases, then add the two case-to-case relations — Checkout to Verify Payment, and Write Review to View Product. One is «include», one is «extend».",
+  prompt: "Build the Online Store diagram. First read the requirements and tag the actors and use cases; then drop each element inside or outside the boundary, connect each actor to its use cases, and add the two case-to-case relations — Checkout to Verify Payment, and Write Review to View Product. One is «include», one is «extend».",
   system: "Online Store",
+  // Identify stage: the requirements as clickable words. Customer and Admin name
+  // users (actors); each action the system carries out is a use case; the object
+  // nouns (products, a review, payment) and glue words are left untagged.
+  source: {
+    tokens: ["A", {
+      w: "Customer",
+      role: "actor"
+    }, "can", {
+      w: "check out,",
+      role: "case",
+      id: "checkout"
+    }, {
+      w: "view",
+      role: "case",
+      id: "view"
+    }, "a", "product,", "and", {
+      w: "write",
+      role: "case",
+      id: "review"
+    }, "a", "review;", "the", "system", "must", {
+      w: "verify",
+      role: "case",
+      id: "verify"
+    }, "payment,", "and", "an", {
+      w: "Admin",
+      role: "actor"
+    }, "can", {
+      w: "add",
+      role: "case",
+      id: "addprod"
+    }, "a", "product."]
+  },
   elements: [{
     id: "customer",
     label: "Customer",

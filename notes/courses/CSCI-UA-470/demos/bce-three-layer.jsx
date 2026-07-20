@@ -65,16 +65,17 @@ export default function BceThreeLayer() {
       <DiagramBox cx={DBB.cx} cy={DBB.cy} w={84} h={34} label="DBConn" note="boundary" sub={0} />
       <DiagramEdge from={{ x: CTRL.cx + 46, y: CTRL.cy }} to={{ x: DBB.cx - 42, y: DBB.cy }} />
 
-      {/* external DBMS */}
+      {/* external DBMS — a proper database cylinder (top rim + curved base) */}
       <g>
-        <rect x={760} y={150} width={84} height={60} rx={8}
+        <path d="M 774 160 L 774 210 A 30 8 0 0 0 834 210 L 834 160"
           style={{ fill: "var(--mm-cell-bg)", stroke: "var(--mm-cell-bd)", strokeWidth: 1.5 }} />
-        <ellipse cx={802} cy={162} rx={26} ry={7}
-          style={{ fill: "none", stroke: "var(--mm-cell-bd)", strokeWidth: 1.2 }} />
-        <text x={802} y={190} textAnchor="middle" style={{ fill: "var(--mm-cell-fg)", fontSize: 12, fontWeight: 700 }}>DBMS</text>
+        <ellipse cx={804} cy={160} rx={30} ry={8}
+          style={{ fill: "var(--mm-cell-bg)", stroke: "var(--mm-cell-bd)", strokeWidth: 1.5 }} />
+        <text x={804} y={191} textAnchor="middle" style={{ fill: "var(--mm-cell-fg)", fontSize: 12, fontWeight: 700 }}>DBMS</text>
       </g>
-      <DiagramEdge from={{ x: DBB.cx + 42, y: DBB.cy - 6 }} to={{ x: 760, y: 172 }} />
-      <DiagramEdge from={{ x: 760, y: 192 }} to={{ x: DBB.cx + 42, y: DBB.cy + 8 }} />
+      {/* request out to the store, rows back — two clean parallel arrows */}
+      <DiagramEdge from={{ x: 694, y: 174 }} to={{ x: 770, y: 174 }} />
+      <DiagramEdge from={{ x: 770, y: 192 }} to={{ x: 694, y: 192 }} />
 
       {/* legend */}
       {legend.map((l) => (

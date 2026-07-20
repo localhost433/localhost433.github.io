@@ -191,30 +191,26 @@ export default function BceThreeLayer() {
       x: DBB.cx - 42,
       y: DBB.cy
     }
-  }), /*#__PURE__*/React.createElement("g", null, /*#__PURE__*/React.createElement("rect", {
-    x: 760,
-    y: 150,
-    width: 84,
-    height: 60,
-    rx: 8,
+  }), /*#__PURE__*/React.createElement("g", null, /*#__PURE__*/React.createElement("path", {
+    d: "M 774 160 L 774 210 A 30 8 0 0 0 834 210 L 834 160",
     style: {
       fill: "var(--mm-cell-bg)",
       stroke: "var(--mm-cell-bd)",
       strokeWidth: 1.5
     }
   }), /*#__PURE__*/React.createElement("ellipse", {
-    cx: 802,
-    cy: 162,
-    rx: 26,
-    ry: 7,
+    cx: 804,
+    cy: 160,
+    rx: 30,
+    ry: 8,
     style: {
-      fill: "none",
+      fill: "var(--mm-cell-bg)",
       stroke: "var(--mm-cell-bd)",
-      strokeWidth: 1.2
+      strokeWidth: 1.5
     }
   }), /*#__PURE__*/React.createElement("text", {
-    x: 802,
-    y: 190,
+    x: 804,
+    y: 191,
     textAnchor: "middle",
     style: {
       fill: "var(--mm-cell-fg)",
@@ -223,21 +219,21 @@ export default function BceThreeLayer() {
     }
   }, "DBMS")), /*#__PURE__*/React.createElement(DiagramEdge, {
     from: {
-      x: DBB.cx + 42,
-      y: DBB.cy - 6
+      x: 694,
+      y: 174
     },
     to: {
-      x: 760,
-      y: 172
+      x: 770,
+      y: 174
     }
   }), /*#__PURE__*/React.createElement(DiagramEdge, {
     from: {
-      x: 760,
+      x: 770,
       y: 192
     },
     to: {
-      x: DBB.cx + 42,
-      y: DBB.cy + 8
+      x: 694,
+      y: 192
     }
   }), legend.map(l => /*#__PURE__*/React.createElement("g", {
     key: l.label

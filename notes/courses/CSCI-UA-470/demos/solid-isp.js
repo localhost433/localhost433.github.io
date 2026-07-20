@@ -1,6 +1,6 @@
 /* AUTO-GENERATED from solid-isp.jsx by `npm run build:artifacts` — do not edit. */
 import React from "react";
-import { DiagramSvg, DiagramCard, UmlLink, diagramCardHeight, ab, cls } from "@course";
+import { DiagramSvg, DiagramCard, UmlLink, CrossOut, diagramCardHeight, ab, cls } from "@course";
 
 /* note 16 — ISP. Left, crossed out: one fat Movable interface with move() AND
    jump(), realized by Vehicle, Person, and Bird — forcing Vehicle to stub
@@ -26,20 +26,20 @@ const IW = 176,
   CW = 132;
 const FAT = {
   x: 90,
-  y: 20,
+  y: 50,
   h: diagramCardHeight(fat.sections)
 };
-const BROW = 170; // bad row y
+const BROW = 200; // bad row y
 const badX = [10, 152, 294];
 const MOV = {
   x: 560,
-  y: 20
+  y: 50
 };
 const JMP = {
   x: 800,
-  y: 20
+  y: 50
 };
-const GROW = 170;
+const GROW = 200;
 const goodX = [560, 702, 844];
 export default function SolidIsp() {
   const badKids = [{
@@ -67,10 +67,28 @@ export default function SolidIsp() {
     to: [MOV, JMP]
   }];
   return /*#__PURE__*/React.createElement(DiagramSvg, {
-    viewBox: "0 0 990 330",
+    viewBox: "0 0 990 362",
     maxWidth: 760,
     ariaLabel: "Interface Segregation Principle. Left, crossed out: a fat Movable interface declaring move and jump, realized by Vehicle, Person, and Bird \u2014 Vehicle is forced to stub jump with an empty body. Right: the split into Movable (move) and Jump-able (jump); Vehicle realizes only Movable, while Person and Bird realize both. All realization edges are dashed with hollow triangles."
-  }, badKids.map((k, i) => /*#__PURE__*/React.createElement(UmlLink, {
+  }, /*#__PURE__*/React.createElement("text", {
+    x: 218,
+    y: 34,
+    textAnchor: "middle",
+    style: {
+      fill: "var(--mm-hl)",
+      fontSize: 15,
+      fontWeight: 800
+    }
+  }, "BEFORE \u2014 one fat interface"), /*#__PURE__*/React.createElement("text", {
+    x: 768,
+    y: 34,
+    textAnchor: "middle",
+    style: {
+      fill: "var(--mm-cell-fg)",
+      fontSize: 15,
+      fontWeight: 800
+    }
+  }, "AFTER \u2014 two thin interfaces"), badKids.map((k, i) => /*#__PURE__*/React.createElement(UmlLink, {
     key: i,
     orth: true,
     elbow: "vhv",
@@ -99,29 +117,15 @@ export default function SolidIsp() {
     title: k.spec.title,
     sections: k.spec.sections,
     sub: i
-  })), /*#__PURE__*/React.createElement("line", {
-    x1: 2,
-    y1: 6,
-    x2: 434,
-    y2: 300,
-    style: {
-      stroke: "var(--mm-hl)",
-      strokeWidth: 3,
-      opacity: 0.7
-    }
-  }), /*#__PURE__*/React.createElement("line", {
-    x1: 434,
-    y1: 6,
-    x2: 2,
-    y2: 300,
-    style: {
-      stroke: "var(--mm-hl)",
-      strokeWidth: 3,
-      opacity: 0.7
-    }
+  })), /*#__PURE__*/React.createElement(CrossOut, {
+    x: FAT.x,
+    y: FAT.y,
+    w: IW,
+    h: FAT.h,
+    size: FAT.h + 14
   }), /*#__PURE__*/React.createElement("text", {
     x: 218,
-    y: 318,
+    y: 348,
     textAnchor: "middle",
     style: {
       fill: "var(--mm-muted)",
@@ -129,7 +133,7 @@ export default function SolidIsp() {
     }
   }, "vehicles don't jump \u2014 the fat interface forces the empty stub"), /*#__PURE__*/React.createElement("text", {
     x: 492,
-    y: 160,
+    y: 190,
     textAnchor: "middle",
     style: {
       fill: "var(--mm-cell-fg)",
@@ -175,7 +179,7 @@ export default function SolidIsp() {
     sub: i
   })), /*#__PURE__*/React.createElement("text", {
     x: 770,
-    y: 318,
+    y: 348,
     textAnchor: "middle",
     style: {
       fill: "var(--mm-muted)",
