@@ -130,6 +130,21 @@ test("ClassBoxBuilder omits the type slot for void operations (UML omits ': void
     "a null-ret operation must not add a token to the type bank");
 });
 
+// MatchBuilder: the note-16 classify exercise — stamp a label chip on each scenario.
+test("_kit.jsx exports the match builder", () => {
+  assert.ok(src.includes("export function MatchBuilder"), "missing MatchBuilder");
+  assert.ok(src.includes("export function matchBuild"), "missing matchBuild factory");
+});
+test("MatchBuilder is one-shot: Check locks the board", () => {
+  const mb = src.slice(src.indexOf("export function MatchBuilder"),
+    src.indexOf("export function matchBuild"));
+  assert.ok(/const locked = revealed \|\| checked/.test(mb),
+    "edits must be guarded on checked as well as revealed");
+  assert.ok(/filledCount === 0 \|\| checked/.test(mb), "Check must disable after grading");
+  assert.ok(!/setChecked\(false\)[\s\S]*const okAt/.test(mb.slice(mb.indexOf("const pick"))),
+    "edit handlers must not clear the checked state");
+});
+
 // UseCaseBuilder: the note-12 build exercise — drop elements inside/outside the
 // system boundary, then connect actors to cases and cases to cases.
 test("_kit.jsx exports the use-case builder", () => {

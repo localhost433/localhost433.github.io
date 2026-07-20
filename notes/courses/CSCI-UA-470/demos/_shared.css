@@ -667,3 +667,12 @@ html.dark-mode {
 .bex-uc-zone__label { flex-basis: 100%; font-size: 0.72rem; color: var(--mm-muted); font-weight: 700;
   text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 0.1rem; }
 .bex-uc-fb { margin: 0.5rem 0; display: flex; flex-direction: column; gap: 0.25rem; }
+
+/* MatchBuilder (note 16): scenario cards, each with a graded stamp slot */
+.bex-match { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.35rem; }
+.bex-match__item { border: 1px solid var(--mm-cell-bd); border-radius: 8px; background: var(--mm-panel-bg);
+  padding: 0.55rem 0.7rem; display: flex; flex-direction: column; gap: 0.45rem; }
+.bex-match__item .mm-code { margin: 0; }
+.bex-match__scene { font-size: 0.85rem; }
+.bex-match__row { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+.bex-match__label { font-size: 0.75rem; color: var(--mm-muted); font-style: italic; }
