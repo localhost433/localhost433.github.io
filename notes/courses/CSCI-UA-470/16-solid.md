@@ -74,7 +74,12 @@ After the flip, the service depends only on `«interface» MessageSender`, and t
 
 ## Practice
 
-Spot the principle, pick the fix — the way it's examined:
+The exam skill is diagnosis: given a design you have never seen, name the principle it breaks. These five are fresh — none is the note's own example — and the letters are used once each, so the real work is telling the neighbours apart: an SRP hoard from an ISP stub, an ISP stub from an LSP throw. Check is one-shot; commit before you grade.
+
+```artifact src=demos/practice-16-solid-match.jsx
+```
+
+Then spot the principle *and* pick the fix — the way it's examined:
 
 ```artifact src=demos/practice-16-mcq.jsx
 ```
