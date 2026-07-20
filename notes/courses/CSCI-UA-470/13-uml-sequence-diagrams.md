@@ -80,7 +80,9 @@ An `opt` is this shape with a single branch and no divider; a `loop` is the same
 
 ## Worked example: "Make order" at the coffee shop
 
-Take a coffee shop's `Make order` use case — one oval, in [note 12](note.html?course=CSCI-UA-470&note=12-uml-use-case-diagrams)'s notation — and write out the conversation it stands for between four objects. The customer pays the cashier, the cashier hands the job to the barista, the barista passes the finished drink to the receptionist, who checks its quality with a self-call and returns the order.
+L13 opens with a quick use-case diagram in [note 12](note.html?course=CSCI-UA-470&note=12-uml-use-case-diagrams)'s notation: a coffee shop whose one actor, the customer, has four goals — `Make order` (covering coffee, tea, and cookies alike), `Make a Complaint`, `Apply for work`, and `Apply for membership`. The rest of the lecture zooms into two of those ovals and writes out the conversation each stands for.
+
+Start with `Make order`, a conversation between four objects. The customer pays the cashier, the cashier hands the job to the barista, the barista passes the finished drink to the receptionist, who checks its quality with a self-call and returns the order.
 
 ```artifact src=demos/sequence-coffee-order.jsx static
 ```
@@ -99,6 +101,21 @@ Read it top-to-bottom as time:
 
 The lecture built this up in versions, first `Customer → Cashier → Barista`, then adding the receptionist and the quality check. The activation bars grow the same way: each new collaborator adds a stack frame further down the page. Earlier versions have fewer participants and messages, but the shape is the same.
 
+## Second worked example: "Make a Complaint"
+
+The second oval L13 explodes is `Make a Complaint`, and it is worth drawing because it settles the return-arrow question the callout above raised. Three participants: the customer, `Tara : Receptionist`, and `Sam : Manager`.
+
+```artifact src=demos/sequence-complaint.jsx static
+```
+
+1. `record_complaint(complaint_details)` — the customer reports the problem to the receptionist.
+2. `notify(complaint_details)` — the receptionist escalates to the manager.
+3. `resolve()` — the manager handles it, a self-call that nests a new activation.
+4. `notify_client(result)` — the manager hands the outcome back to the receptionist, as a real message.
+5. `result` — the receptionist returns it to the customer (dashed).
+
+The lecture drew this one twice. The first version collapses the ending: after `resolve()`, one dashed `result` arrow runs from Sam all the way back to the customer, the same narrative shortcut the coffee order used. The version above is the fuller one — the manager *explicitly* notifies the receptionist, so every arrow connects two objects that actually talk, and only the last hop is a return. Same use case, two drawings; choosing between them is choosing how much of the call structure the diagram should keep.
+
 ## Sequence vs. use case: where each fits
 
 The two diagrams are a pair, one zooming into the other:
@@ -110,6 +127,20 @@ The two diagrams are a pair, one zooming into the other:
 | Viewpoint | outside the system boundary | inside a single use case |
 | Building blocks | actors, use-case ovals, relations | participants, lifelines, messages, activations |
 | Emphasis | goals | time ordering |
+
+## What to retain from L13
+
+| Topic | Key test point |
+|---|---|
+| What it shows | the objects that carry out one use case and the messages between them, ordered by time |
+| Axes | horizontal = who is acting; vertical = time, later further down |
+| Participant | box with underlined `name : Class`; an external initiator is an actor stick figure |
+| Lifeline / activation | dashed line = the object existing; thin bar = its method on the stack (nested bar = self-call/recursion) |
+| Arrowheads | filled = synchronous (blocking), open = asynchronous, dashed + open = return |
+| Self-call | a loop off the object's own lifeline, nesting a new activation |
+| Lifetime | `new` arrow starts a lifeline mid-page; an X ends it |
+| Fragments | `opt` (guarded body), `alt` (branches + `[else]`), `loop` (repeats while guard holds); `*[guard] msg()` inlines iteration |
+| Return arrows | strict UML unwinds the stack one frame at a time; lectures often collapse returns to whoever the story follows next — recognize both |
 
 ## Practice
 

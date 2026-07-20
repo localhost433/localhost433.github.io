@@ -188,6 +188,25 @@ The finished diagram, for reference:
 ```artifact src=demos/use-case-recorder.jsx static
 ```
 
+## Common UML tools
+
+None of this is drawn by hand in practice; the lecture closes with a list of dedicated diagram editors, any of which can produce every diagram in the UML unit: Edraw Max, Moqups, Visio, ConceptDraw, StarUML, Umbrello, UML Designer Tool, UMLet.
+
+## What to retain from L12
+
+| Topic | Key test point |
+|---|---|
+| UML's job | a shared notation for communicating design — describes *what* a system does, never *how* |
+| Three families | Structural (class, object, …), Behavioral (use case, activity, state), Interaction (sequence, collaboration, timing) |
+| Use case | an oval, labeled verb-noun (`Make Appointment`); a goal an actor can pursue |
+| Actor | stick figure, labeled with a noun; the initiator — and not necessarily a person (an external system counts) |
+| Association | plain line between an actor and a use case; actors sit *outside* the system boundary |
+| Building steps | identify actors → identify use cases → draw the relations; back each oval with a textual description |
+| Include | dashed `<<include>>` arrow, base → included; mandatory factored-out step, the base cannot stand alone without it |
+| Extend | dashed `<<extend>>` arrow, extending → base; optional behavior on a base that is complete on its own |
+| Generalization | hollow-triangle arrow, child → parent, for use cases *and* for actors — the same is-a notation as class inheritance |
+| The exam trap | include = always runs, arrow leaves the base; extend = conditional, arrow points at the base |
+
 ## Practice
 
 Reading these diagrams is one skill; drawing one is another. Assemble a small Library System yourself. First place each element — actors belong *outside* the boundary, use cases *inside* it — then connect the actors to their use cases and join `Borrow Book` to `Search for book`. The diagram lays itself out as you build.
@@ -195,12 +214,12 @@ Reading these diagrams is one skill; drawing one is another. Assemble a small Li
 ```artifact src=demos/practice-12-usecase.jsx
 ```
 
-Now a second diagram that forces the relationship you have to reach for most on the exam. In this Online Store, one case-to-case link is `<<include>>` (a step that *always* runs as part of its base) and the other is `<<extend>>` (optional behavior on a base that stands alone). Watch which way each dashed arrow points as you place them — `include` runs base → included, `extend` runs extension → base.
+Now a second diagram that forces the relationship you have to reach for most on the exam. In this Online Store, one case-to-case link is `<<include>>` and the other is `<<extend>>` — watch which way each dashed arrow points as you place them.
 
 ```artifact src=demos/practice-12-usecase-store.jsx
 ```
 
-That leaves the third case-to-case relation, generalization. Build the note's own example: `Phone Order` and `Internet Order` are two specialized *kinds* of `Place Order`, so each joins it with the hollow-triangle arrow — the same is-a notation as class inheritance, not a dashed step arrow.
+That leaves the third case-to-case relation, generalization. Build the note's own example: `Phone Order` and `Internet Order` are two specialized *kinds* of `Place Order`, so each joins it with the hollow triangle, not a dashed step arrow.
 
 ```artifact src=demos/practice-12-usecase-generalize.jsx
 ```
@@ -209,10 +228,6 @@ Having built all three, drill the distinction directly — it is the part of thi
 
 ```artifact src=demos/practice-12-mcq.jsx
 ```
-
-## Common UML tools
-
-Edraw Max, Moqups, Visio, ConceptDraw, StarUML, Umbrello, UML Designer Tool, UMLet.
 
 ---
 
