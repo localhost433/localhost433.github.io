@@ -11,8 +11,32 @@ import { useCaseBuild } from "@course";
    what connects to what. */
 
 export default useCaseBuild({
-  prompt: "Build the Library System diagram: drop each element inside or outside the boundary, then connect the actors to their use cases and Borrow Book to Search for book.",
+  prompt: "Build the Library System diagram. First read the requirements and tag the actors and use cases; then drop each element inside or outside the boundary, and connect the actors to their use cases and Borrow Book to Search for book.",
   system: "Library System",
+  // Identify stage: the requirements as clickable words. Nouns naming a user are
+  // actors; the things the system does for them are use cases; everything else
+  // (books, the shelf, glue words) is left untagged.
+  source: {
+    tokens: ["A", {
+      w: "Member",
+      role: "actor"
+    }, "can", {
+      w: "borrow",
+      role: "case",
+      id: "borrow"
+    }, "and", {
+      w: "search for",
+      role: "case",
+      id: "search"
+    }, "books,", "while", "a", {
+      w: "Librarian",
+      role: "actor"
+    }, "can", {
+      w: "add",
+      role: "case",
+      id: "add"
+    }, "new", "books", "to", "the", "shelf."]
+  },
   elements: [{
     id: "member",
     label: "Member",

@@ -1,6 +1,6 @@
 /* AUTO-GENERATED from solid-srp.jsx by `npm run build:artifacts` — do not edit. */
 import React from "react";
-import { DiagramSvg, DiagramCard, UmlLink, diagramCardHeight, cls } from "@course";
+import { DiagramSvg, DiagramCard, UmlLink, CrossOut, diagramCardHeight, cls } from "@course";
 
 /* note 16 — SRP, drawn as the lecture drew it: the Invoice god-class crossed
    out on the left, the split on the right. Invoice keeps the DATA (its one
@@ -17,9 +17,11 @@ const BAD = {
   w: 200,
   h: diagramCardHeight(bad.sections)
 };
+// Keep the two replacement classes on one shared baseline: the connector then
+// reads as a relationship, rather than making Invoice look subordinate.
 const INV = {
   x: 330,
-  y: 120,
+  y: 74,
   w: 200,
   h: diagramCardHeight(invoice.sections)
 };
@@ -41,37 +43,22 @@ export default function SolidSrp() {
     y: 40,
     textAnchor: "middle",
     style: {
-      fill: "var(--mm-muted)",
-      fontSize: 11,
-      fontWeight: 700
+      fill: "var(--mm-hl)",
+      fontSize: 15,
+      fontWeight: 800
     }
-  }, "two responsibilities, one class"), /*#__PURE__*/React.createElement(DiagramCard, {
+  }, "BEFORE \u2014 two jobs, one class"), /*#__PURE__*/React.createElement(DiagramCard, {
     x: BAD.x,
     y: BAD.y,
     w: BAD.w,
     title: bad.title,
     sections: bad.sections,
     sub: 3
-  }), /*#__PURE__*/React.createElement("line", {
-    x1: BAD.x - 8,
-    y1: BAD.y - 8,
-    x2: BAD.x + BAD.w + 8,
-    y2: BAD.y + BAD.h + 8,
-    style: {
-      stroke: "var(--mm-hl)",
-      strokeWidth: 3,
-      opacity: 0.75
-    }
-  }), /*#__PURE__*/React.createElement("line", {
-    x1: BAD.x + BAD.w + 8,
-    y1: BAD.y - 8,
-    x2: BAD.x - 8,
-    y2: BAD.y + BAD.h + 8,
-    style: {
-      stroke: "var(--mm-hl)",
-      strokeWidth: 3,
-      opacity: 0.75
-    }
+  }), /*#__PURE__*/React.createElement(CrossOut, {
+    x: BAD.x,
+    y: BAD.y,
+    w: BAD.w,
+    h: BAD.h
   }), /*#__PURE__*/React.createElement("text", {
     x: 287,
     y: cy + 6,
@@ -82,15 +69,15 @@ export default function SolidSrp() {
       fontWeight: 800
     }
   }, "\u21D2"), /*#__PURE__*/React.createElement("text", {
-    x: 585,
+    x: 575,
     y: 40,
     textAnchor: "middle",
     style: {
-      fill: "var(--mm-muted)",
-      fontSize: 11,
-      fontWeight: 700
+      fill: "var(--mm-cell-fg)",
+      fontSize: 15,
+      fontWeight: 800
     }
-  }, "data here, bookkeeping there"), /*#__PURE__*/React.createElement(UmlLink, {
+  }, "AFTER \u2014 data here, bookkeeping there"), /*#__PURE__*/React.createElement(UmlLink, {
     from: {
       x: REG.x,
       y: 160

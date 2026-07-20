@@ -216,6 +216,11 @@ The interpreter and the JIT compiler work together. Every method starts interpre
 ```artifact src=demos/interp-jit-tiers.jsx static
 ```
 
+Concretely, the *same* method looks different depending on how hot it is: interpreted while cold, running as native code once the JIT has compiled it.
+
+```artifact src=demos/practice-11-compare.jsx static
+```
+
 The garbage collector keeps whatever is reachable from a GC root and reclaims the rest. Reachability, not the presence of a reference, is the criterion: a self-referential island of garbage is still garbage.
 
 Reclamation has two phases. A mark phase walks outward from the GC roots and
@@ -266,9 +271,6 @@ For exam-style questions, the most important distinctions are:
 (`NEW` in the object-creation row is the workshop's simplified opcode; real `javac` output would use `new` / `dup` / `invokespecial`.)
 
 ## Practice
-
-```artifact src=demos/practice-11-compare.jsx
-```
 
 ```artifact src=demos/practice-11-predict.jsx
 ```

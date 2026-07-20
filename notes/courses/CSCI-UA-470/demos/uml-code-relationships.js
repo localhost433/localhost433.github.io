@@ -18,7 +18,7 @@ const steps = [{
   top: cls("Person", [], []),
   bottom: cls("Employee", [], []),
   code: "class Person {\n    ...\n}\nclass Employee extends Person {\n    ...\n}",
-  caption: "An is-a between two classes: solid line, hollow triangle at the parent. In code it is exactly `extends` — the child inherits the parent's whole interface."
+  caption: "An is-a between two classes: solid line, hollow triangle at the parent. It's the triangle — not where the boxes sit — that names the parent, so the layout is free: stacked here, side-by-side below, the meaning is identical. In code it is exactly `extends` — the child inherits the parent's whole interface."
 }, {
   key: "realization",
   label: "realization",

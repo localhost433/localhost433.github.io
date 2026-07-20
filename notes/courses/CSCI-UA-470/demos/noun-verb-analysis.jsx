@@ -25,13 +25,15 @@ const SENTENCE = [
   { w: "graded", tag: "operation" }, { w: "by" }, { w: "Alice.", tag: "instance" },
 ];
 
-const TAG_STYLE = {
-  class: "mm-cap-tag--java",
-  instance: "mm-cap-tag--int",
-  inheritance: "mm-cap-tag--cpp",
-  aggregation: "mm-cap-tag--asm",
-  operation: "mm-cap-tag--java",
-  constraint: "mm-cap-tag--asm",
+// one distinct hue per role (the readable text variant of each theme colour),
+// used for both the word's underline and the small label above it.
+const TAG_COLOR = {
+  class:       "var(--seg-stack-tx)",   // blue
+  instance:    "var(--seg-global-tx)",  // amber
+  inheritance: "var(--seg-code-tx)",    // purple
+  aggregation: "var(--seg-heap-tx)",    // green
+  operation:   "var(--lang-java-fg)",   // brown
+  constraint:  "var(--lang-jvm-fg)",    // teal
 };
 
 export default function NounVerbAnalysis() {
@@ -39,21 +41,19 @@ export default function NounVerbAnalysis() {
     <div className="mm-scene">
       <div className="mm-scene__title" data-artifact-title>Natural-language analysis — nouns become classes, verbs become operations</div>
 
-      <p style={{ margin: "10px 2px 4px", fontSize: 14, lineHeight: 2.1, maxWidth: 700, whiteSpace: "normal" }}>
-        {SENTENCE.map((t, i) => (
-          <React.Fragment key={i}>
-            <span style={{ whiteSpace: "nowrap" }}>
-              {t.tag ? (
-                <span>
-                  <strong>{t.w}</strong>
-                  <span className={"mm-cap-tag " + (TAG_STYLE[t.tag] || "mm-cap-tag--java")}
-                    style={{ marginLeft: 3, fontSize: 8.5, verticalAlign: "super" }}>{t.tag}</span>
-                </span>
-              ) : t.w}
-            </span>
-            {" "}
-          </React.Fragment>
-        ))}
+      <p className="nv-sentence">
+        {SENTENCE.map((t, i) => {
+          if (!t.tag) return <React.Fragment key={i}>{t.w}{" "}</React.Fragment>;
+          const c = TAG_COLOR[t.tag] || "var(--mm-cell-fg)";
+          return (
+            <React.Fragment key={i}>
+              <span className="nv-gloss">
+                <span className="nv-gloss__tag" style={{ color: c }}>{t.tag}</span>
+                <span className="nv-gloss__word" style={{ borderColor: c }}>{t.w}</span>
+              </span>{" "}
+            </React.Fragment>
+          );
+        })}
       </p>
 
       <div style={{ overflowX: "auto" }}>

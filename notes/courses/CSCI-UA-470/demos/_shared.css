@@ -68,6 +68,18 @@ html.dark-mode {
 .mm-cap-tag--java { background: var(--lang-java-bg);  color: var(--lang-java-fg); }
 .mm-cap-tag--jvm  { background: var(--lang-jvm-bg);   color: var(--lang-jvm-fg); }
 .mm-cap-txt { flex: 1; min-width: 0; }
+
+/* ---- noun/verb interlinear gloss (note 15) — a tagged word carries a small
+   role label directly above it and a matching coloured underline below, so the
+   sentence reads as annotation rather than inline clutter. The label sits ABOVE
+   the word so the word keeps the running text's baseline. ---- */
+.nv-sentence { margin: 0.7rem 0.1rem 0.5rem; font-size: 0.98rem; line-height: 2.8;
+  max-width: 46rem; color: hsl(var(--foreground)); }
+.nv-gloss { display: inline-block; text-align: center; vertical-align: baseline; }
+.nv-gloss__tag { display: block; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.07em;
+  text-transform: uppercase; line-height: 1.1; margin-bottom: 1px; white-space: nowrap; }
+.nv-gloss__word { display: block; font-weight: 700; line-height: 1.35;
+  border-bottom: 2px solid; padding-bottom: 1px; }
 .mm-scene__nav { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; }
 
 /* collapsible sections — a clear, full-width clickable bar */
@@ -590,7 +602,18 @@ html.dark-mode {
 /* ---- class-box builder (bex-cbx-) ---- */
 .bex-palette, .bex-typebank { display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap; margin: 0.35rem 0; }
 .bex-palette__label, .bex-typebank__label { font-size: 0.75rem; color: var(--mm-muted); }
-.bex-cbx-wrap { display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: flex-start; margin-top: 0.5rem; }
+.bex-cbx-wrap { display: flex; gap: 1.25rem; flex-wrap: wrap; align-items: stretch; margin-top: 0.5rem; }
+/* left column: the card + the relationship picker (everything the student sets) */
+.bex-cbx-build { flex: 1 1 300px; min-width: 260px; display: flex; flex-direction: column; gap: 0.8rem; }
+.bex-cbx-build > .bex-cbx { align-self: flex-start; }
+/* right column: the live assembled diagram, set apart as a "result" panel */
+.bex-cbx-preview { flex: 1 1 280px; min-width: 240px; display: flex; flex-direction: column;
+  gap: 0.4rem; justify-content: center; background: var(--mm-panel-bg);
+  border: 1px solid var(--mm-panel-bd); border-radius: 8px; padding: 0.65rem 0.7rem; }
+.bex-cbx-preview .dia-svg, .bex-cbx-preview svg { align-self: center; }
+.bex-cbx-preview__hint { font-size: 0.72rem; color: var(--mm-muted); text-align: center; font-style: italic; }
+.bex-zone-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--mm-muted); }
 .bex-cbx { display: inline-block; min-width: 220px; background: var(--mm-cell-bg);
   border: 1.5px solid var(--mm-cell-bd); border-radius: 8px; overflow: hidden;
   font-family: ui-monospace, "JetBrains Mono", Menlo, monospace; }
@@ -603,12 +626,36 @@ html.dark-mode {
 .bex-cbx__row { display: flex; align-items: center; gap: 0.35rem; flex-wrap: wrap; font-size: 0.85rem; }
 .bex-cbx__colon { opacity: 0.7; }
 .bex-cbx__ph { color: var(--mm-muted); font-size: 0.7rem; font-style: italic; }
-.bex-cbx-rel { flex: 1; min-width: 240px; }
+.bex-cbx-rel { min-width: 0; }
 .bex-rel-title { font-size: 0.85rem; margin-bottom: 0.4rem; }
 .bex-rel { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
 .bex-rel__glyph { font-weight: 700; }
 
 /* ---- use-case builder (bex-uc-) ---- */
+/* Interactive diagram elements draw their own themed focus/pick ring (var(--mm-ptr)),
+   so suppress the browser's default rectangular outline to avoid a doubled indicator. */
+.uc-pickable { outline: none; }
+
+/* Identify stage — every word is clickable; tag colour/label appear ONLY once the
+   reader tags it (none -> actor -> use case). Space above each word is reserved so
+   the line never reflows when a label appears. */
+.uc-id { margin: 0.3rem 0 0.5rem; }
+.uc-id__sentence { margin: 0.5rem 0.1rem; font-size: 1.02rem; line-height: 2.7; max-width: 46rem;
+  color: var(--mm-cell-fg); }
+.uc-id__w { display: inline-block; text-align: center; vertical-align: baseline; cursor: pointer;
+  border-radius: 5px; padding: 0 2px; }
+.uc-id__w:focus-visible { outline: 2px solid var(--mm-ptr); outline-offset: 2px; }
+.uc-id__tag { display: block; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.07em;
+  text-transform: uppercase; line-height: 1.1; min-height: 0.85em; margin-bottom: 1px;
+  white-space: nowrap; color: transparent; }
+.uc-id__word { display: block; font-weight: 450; line-height: 1.35; padding-bottom: 1px;
+  border-bottom: 2px solid transparent; }
+.uc-id__w--actor .uc-id__tag { color: var(--mm-ptr); }
+.uc-id__w--actor .uc-id__word { border-bottom-color: var(--mm-ptr); font-weight: 700; }
+.uc-id__w--case .uc-id__tag { color: var(--seg-heap-tx); }
+.uc-id__w--case .uc-id__word { border-bottom-color: var(--seg-heap-tx); font-weight: 700; }
+.uc-id__w--wrong .uc-id__word { border-bottom-color: var(--mm-dangling, #e0574a); border-bottom-style: dashed; }
+.uc-id__w--wrong .uc-id__tag { color: var(--mm-dangling, #e0574a); }
 .bex-uc-stages { display: flex; gap: 0.4rem; margin: 0.25rem 0 0.6rem; }
 .bex-uc-bank { display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap; margin: 0.35rem 0; }
 .bex-uc-zones { display: grid; grid-template-columns: minmax(120px, 1fr) 2fr; gap: 0.75rem; align-items: stretch; margin: 0.5rem 0; }
