@@ -80,7 +80,7 @@ An `opt` is this shape with a single branch and no divider; a `loop` is the same
 
 ## Worked example: "Make order" at the coffee shop
 
-The `Make order` oval from the coffee-shop use-case diagram becomes a conversation between four objects. The customer pays the cashier, the cashier hands the job to the barista, the barista passes the finished drink to the receptionist, who checks its quality with a self-call and returns the order.
+Take a coffee shop's `Make order` use case — one oval, in [note 12](note.html?course=CSCI-UA-470&note=12-uml-use-case-diagrams)'s notation — and write out the conversation it stands for between four objects. The customer pays the cashier, the cashier hands the job to the barista, the barista passes the finished drink to the receptionist, who checks its quality with a self-call and returns the order.
 
 ```artifact src=demos/sequence-coffee-order.jsx static
 ```

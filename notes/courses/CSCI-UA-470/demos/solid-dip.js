@@ -15,14 +15,14 @@ import { DiagramSvg, DiagramCard, UmlLink, CrossOut, diagramCardHeight, ab, cls 
    what's wrong is the DEPENDENCY, so the red X strikes the arrow itself — the
    two boxes stay clean and the crossed-out relationship reads in the middle. */
 
-const svc = cls("NotificationService", [], ["+ notify(msg : String) : void"]);
-const email = cls("EmailSender", [], ["+ send(msg : String) : void"]);
-const sms = cls("SmsSender", [], ["+ send(msg : String) : void"]);
+const svc = cls("NotificationService", [], ["+ notify(msg : String)"]);
+const email = cls("EmailSender", [], ["+ send(msg : String)"]);
+const sms = cls("SmsSender", [], ["+ send(msg : String)"]);
 const ifc = {
   title: "«interface» MessageSender",
   abstract: true,
   sections: [{
-    rows: [ab("+ send(msg : String) : void")]
+    rows: [ab("+ send(msg : String)")]
   }]
 };
 const W = 214,

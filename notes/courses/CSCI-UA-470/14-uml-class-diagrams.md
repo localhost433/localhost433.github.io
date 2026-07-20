@@ -94,10 +94,19 @@ Now read the surviving participants off as a class diagram, the Structural bluep
 | Compartment | Holds | Example |
 |---|---|---|
 | Name | the class name | `Converter` |
-| Attributes | `visibility name : Type` | `- b1 : JButton` |
-| Operations | `visibility name(params) : ReturnType` | `+ show() : void` |
+| Attributes | `visibility name : type [count] = default` | `- b1 : JButton` |
+| Operations | `visibility name(params) : ReturnType` | `+ convert(amount : float) : float` |
 
-Visibility markers sit in front of every member: `+` public, `−` private, `#` protected, `~` package. Types come after a colon, the reverse of Java/C++ declaration order, and a method with no return writes `: void`.
+Visibility markers sit in front of every member: `+` public, `−` private, `#` protected, `~` package — plus `/` for a **derived** attribute, one that is not stored but computed from the others (an `age` derived from a stored `birthDate`). Types come after a colon, the reverse of Java/C++ declaration order, and parameters are written the same way, `(name : type)`. An attribute can also carry a multiplicity in brackets (`- b : JButton [3]`) and a default after `=`.
+
+Two omissions are part of the notation, not sloppiness:
+
+- **Omit the return type when it is `void`, and on constructors.** A method that returns nothing is written `+ show()`, not `+ show() : void` — the colon-type only appears when there is a real type to name.
+- **Trivial get/set methods may be left out** of a class box — with one exception: never omit methods from an interface, because the methods are the whole content of an interface.
+
+The name compartment carries information too: an **italic** class name marks an **abstract** class (an italic operation marks an abstract method), interfaces write `<<interface>>` above the name, and **underlining** a member marks it **static** — the same class-level slot `static` has meant since the C++ notes. Anything else you want to say is a **comment**: a folded-corner note box, attached to the class or member it annotates by a dashed line.
+
+Just as important is what a class diagram does *not* show: how the classes interact (that is the sequence diagram's job) and how any behavior is implemented — no algorithm ever appears in a class box.
 
 ```artifact src=demos/converter-class-diagram.jsx static
 ```
@@ -106,9 +115,9 @@ The four classes fall straight out of the interaction:
 
 | Class | Key attributes | Key operations |
 |---|---|---|
-| `MainGUI` | `- b1, b2, b3 : JButton` | `+ whenKgLbClicked() : void`, `+ whenCmInchClicked() : void` |
-| `KgLbGUI` | the input/result fields, `- c : Converter` | `+ show() : void`, `+ whenConvertClicked() : void` |
-| `CmInchGUI` | the input/result fields, `- c : Converter` | `+ show() : void`, `+ whenConvertClicked() : void` |
+| `MainGUI` | `- b1, b2, b3 : JButton` | `+ whenKgLbClicked()`, `+ whenCmInchClicked()` |
+| `KgLbGUI` | the input/result fields, `- c : Converter` | `+ show()`, `+ whenConvertClicked()` |
+| `CmInchGUI` | the input/result fields, `- c : Converter` | `+ show()`, `+ whenConvertClicked()` |
 | `Converter` | — | `+ convert(amount : float, unit : String) : float` |
 
 The lines between the boxes are **associations**, a structural "knows-about" link drawn as a plain line, optionally arrowed toward the class that is used, with multiplicity like `1` or `*` at the ends. `MainGUI` is associated with each dialog it opens; each dialog is associated with the one `Converter` it delegates to.
@@ -119,7 +128,7 @@ Other structural relationships you may meet on a class diagram, from loosest to 
 - **Association** — plain line.
 - **Aggregation** — hollow diamond, a "has-a" that can outlive the whole.
 - **Composition** — filled diamond, "owns" and dies with the whole.
-- **Generalization** — hollow triangle, the same arrow as class inheritance and as the use-case generalization above.
+- **Generalization** — hollow triangle, the same arrow as class inheritance and as the use-case generalization above. Hierarchies are drawn top-down, the triangle pointing **up at the parent** — and the line style names the parent: **solid** to a class or abstract class, **dashed** to an interface (implementation rather than inheritance).
 
 After the refactor, `KgLbGUI` and `CmInchGUI` are the obvious candidates to generalize under a shared `ConverterGUI` parent.
 
@@ -157,11 +166,15 @@ The design loop reads left to right, and each arrow removes something. A use cas
 | Topic | Key test point |
 |---|---|
 | Class diagram | a class is a three-compartment box: name / attributes / operations |
-| Member notation | `visibility name : Type`; operations add `(params) : ReturnType`; type comes after the colon |
-| Visibility | `+` public, `−` private, `#` protected, `~` package |
+| Member notation | `visibility name : type [count] = default`; operations add `(params) : ReturnType`; type comes after the colon |
+| The void rule | the return type is **omitted** when it is `void`, and on constructors — `+ show()`, never `+ show() : void` |
+| Visibility | `+` public, `−` private, `#` protected, `~` package, `/` derived (computed, not stored) |
+| Name/member marks | *italics* = abstract (class or operation), <u>underline</u> = static, `<<interface>>` above an interface's name |
+| What may be omitted | trivial get/set methods — but never any method of an interface |
 | Deriving classes | the participants on a sequence diagram's top row become the classes |
 | Associations | plain lines mean "knows-about"; add multiplicity/arrows for detail |
 | Structural relationships | dependency ⟶ association ⟶ aggregation ⟶ composition ⟶ generalization, loosest to tightest |
+| Generalization line style | solid line to a class/abstract parent, dashed line to an interface; triangle points up at the parent |
 | Object diagram | instances at one instant, boxes drawn as underlined `name : Class` with attribute values |
 | Class vs object | class = design-time blueprint; object = run-time snapshot |
 | Generalization | folds repeated use cases / classes under a parent (hollow triangle); the design's tool for deleting duplication |
@@ -189,7 +202,7 @@ Boxes are only half the skill; the other half is knowing where they come from. E
 ```artifact src=demos/practice-14-derive.jsx
 ```
 
-Next, the mechanical marks that slip under exam pressure — the visibility symbols, the type after the colon, what italics mean, and how many compartments a class box has:
+Next, the mechanical marks that slip under exam pressure — the visibility symbols, the type after the colon (and the one you leave off entirely), what italics and underlines mean, and how many compartments a class box has:
 
 ```artifact src=demos/practice-14-notation.jsx
 ```

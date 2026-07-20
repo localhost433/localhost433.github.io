@@ -15,13 +15,13 @@ const iface = (title, methods) => ({
     rows: methods.map(ab)
   }]
 });
-const fat = iface("«interface» Movable", ["+ move() : void", "+ jump() : void"]);
-const movable = iface("«interface» Movable", ["+ move() : void"]);
-const jumpable = iface("«interface» Jump-able", ["+ jump() : void"]);
-const veh = cls("Vehicle", [], ["+ move() : void", "+ jump() { }  ?!"]);
-const per = cls("Person", [], ["+ move() : void", "+ jump() : void"]);
-const brd = cls("Bird", [], ["+ move() : void", "+ jump() : void"]);
-const vehOk = cls("Vehicle", [], ["+ move() : void"]);
+const fat = iface("«interface» Movable", ["+ move()", "+ jump()"]);
+const movable = iface("«interface» Movable", ["+ move()"]);
+const jumpable = iface("«interface» Jump-able", ["+ jump()"]);
+const veh = cls("Vehicle", [], ["+ move()", "+ jump() { }  ?!"]);
+const per = cls("Person", [], ["+ move()", "+ jump()"]);
+const brd = cls("Bird", [], ["+ move()", "+ jump()"]);
+const vehOk = cls("Vehicle", [], ["+ move()"]);
 const IW = 176,
   CW = 132;
 const FAT = {

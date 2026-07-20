@@ -10,11 +10,11 @@ import { DiagramSvg, DiagramCard, UmlLink, diagramCardHeight } from "@course";
 
 const mainSections = [
   { rows: ["- b1 : JButton", "- b2 : JButton", "- b3 : JButton"] },
-  { rows: ["+ whenKgLbClicked() : void", "+ whenCmInchClicked() : void"] },
+  { rows: ["+ whenKgLbClicked()", "+ whenCmInchClicked()"] },
 ];
 const dialogSections = [
   { rows: ["- in : JTextField", "- out : JTextField", "- c : Converter"] },
-  { rows: ["+ show() : void", "+ whenConvertClicked() : void"] },
+  { rows: ["+ show()", "+ whenConvertClicked()"] },
 ];
 const convSections = [
   { rows: ["(no attributes)"] },

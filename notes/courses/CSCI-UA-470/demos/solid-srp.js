@@ -8,9 +8,9 @@ import { DiagramSvg, DiagramCard, UmlLink, CrossOut, diagramCardHeight, cls } fr
    sorting invoices — a different responsibility, a different reason to
    change). The hollow diamond says the register aggregates invoices. */
 
-const bad = cls("Invoice", ["- no : int", "- date : String", "- details : String"], ["+ addInvoice() : void", "+ deleteInvoice() : void", "+ sortInvoices() : void"]);
+const bad = cls("Invoice", ["- no : int", "- date : String", "- details : String"], ["+ addInvoice()", "+ deleteInvoice()", "+ sortInvoices()"]);
 const invoice = cls("Invoice", ["- no : int", "- date : String", "- details : String"], []);
-const register = cls("InvoiceRegister", ["- invoices : List<Invoice>"], ["+ addInvoice() : void", "+ deleteInvoice() : void", "+ sortInvoices() : void"]);
+const register = cls("InvoiceRegister", ["- invoices : List<Invoice>"], ["+ addInvoice()", "+ deleteInvoice()", "+ sortInvoices()"]);
 const BAD = {
   x: 30,
   y: 60,

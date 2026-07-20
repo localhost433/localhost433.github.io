@@ -30,15 +30,13 @@ export default classBuild({
   operations: [{
     vis: "+",
     name: "show()",
-    ret: "void",
-    whyVis: "`show()` is part of the interface callers use → `+` public.",
-    whyType: "A method that returns nothing writes `: void` — not omitted, not moved to the front."
+    ret: null,
+    whyVis: "`show()` is part of the interface callers use → `+` public."
   }, {
     vis: "+",
     name: "close()",
-    ret: "void",
-    whyVis: "`close()` is a public operation → `+`.",
-    whyType: "`close() : void` — the return type follows the colon, even when it is `void`."
+    ret: null,
+    whyVis: "`close()` is a public operation → `+`."
   }],
   typeDistractors: ["double", "String", "boolean"],
   relationship: {
@@ -49,7 +47,7 @@ export default classBuild({
       rows: []
     }, {
       rows: [{
-        text: "+ setText() : void"
+        text: "+ setText(t : String)"
       }]
     }],
     why: "A Window OWNS its TitleBar and the bar dies with the window, so this is COMPOSITION — a FILLED diamond (◆), sitting at the WHOLE end (Window), never on the part. Aggregation (the HOLLOW diamond ◇) is the looser has-a where the part can outlive the whole, e.g. a Team and its Players. Generalization (the hollow triangle) would be wrong — a TitleBar is not a kind of Window."

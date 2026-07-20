@@ -14,7 +14,7 @@ import { DiagramSvg, DiagramCard, UmlLink, diagramCardHeight } from "@course";
 const guiSections = [{
   rows: ["- lblL : JLabel", "- lblR : JLabel", "- txtL : JTextField", "- txtR : JTextField", "- lblAnswer : JLabel", "- btnAdd : JButton", "- btnSub : JButton", "- btnM : JButton"]
 }, {
-  rows: ["+ add(n1 : int, n2 : int) : void", "+ sub(n1 : int, n2 : int) : void", "+ multiply(n1 : int, n2 : int) : void", "- show_result(result : int) : void"]
+  rows: ["+ add(n1 : int, n2 : int)", "+ sub(n1 : int, n2 : int)", "+ multiply(n1 : int, n2 : int)", "- show_result(result : int)"]
 }];
 const mathSections = [{
   rows: ["(no attributes)"]
