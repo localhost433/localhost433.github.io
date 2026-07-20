@@ -9,7 +9,7 @@ import { DiagramSvg, treeLayout, ClassTree, cls, CodeBlock, CompareCaption } fro
 
 const vehicle = cls("Vehicle",
   ["- color", "- model", "- year"],
-  ["+ move() : void", "+ stop() : void", "+ turnAcOn() : void", "+ turnAcOff() : void"]);
+  ["+ move()", "+ stop()", "+ turnAcOn()", "+ turnAcOff()"]);
 const LV = treeLayout({
   cx: 250, topY: 16,
   parent: vehicle,
@@ -17,7 +17,7 @@ const LV = treeLayout({
   cardW: 118, gap: 18,
 });
 
-const bird = cls("Bird", ["- color"], ["+ fly() : void", "+ eat() : void", "+ move() : void"]);
+const bird = cls("Bird", ["- color"], ["+ fly()", "+ eat()", "+ move()"]);
 const LB = treeLayout({
   cx: 760, topY: 16,
   parent: bird,

@@ -20,9 +20,8 @@ export default classBuild({
       whyType: "The type goes after the colon: `roster : List`. Holding the players in a list is the has-a made concrete." },
   ],
   operations: [
-    { vis: "+", name: "addPlayer()", ret: "void",
-      whyVis: "`addPlayer()` is part of the interface callers use → `+` public.",
-      whyType: "A method that returns nothing writes `: void` — not omitted, not moved to the front." },
+    { vis: "+", name: "addPlayer()", ret: null,
+      whyVis: "`addPlayer()` is part of the interface callers use → `+` public." },
     { vis: "+", name: "size()", ret: "int",
       whyVis: "`size()` is a public query → `+`.",
       whyType: "The return type follows the colon: `size() : int`." },

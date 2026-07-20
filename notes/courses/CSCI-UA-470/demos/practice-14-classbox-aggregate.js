@@ -28,9 +28,8 @@ export default classBuild({
   operations: [{
     vis: "+",
     name: "addPlayer()",
-    ret: "void",
-    whyVis: "`addPlayer()` is part of the interface callers use → `+` public.",
-    whyType: "A method that returns nothing writes `: void` — not omitted, not moved to the front."
+    ret: null,
+    whyVis: "`addPlayer()` is part of the interface callers use → `+` public."
   }, {
     vis: "+",
     name: "size()",

@@ -3,16 +3,16 @@
 import { classBuild } from "@course";
 
 /* note 14 practice — build the class box the note's notation section describes.
-   The three marks exams lose are all here: the visibility symbol on the left, the
-   type AFTER the colon (the reverse of the Java/C++ order the course drilled for
-   thirteen notes), and which of the five lines joins Circle to Shape. `radius` is
-   private data; `area()` and `describe()` are the public interface; a Circle IS-A
-   Shape, so the line is generalization (the hollow triangle pointing at the
-   parent), not aggregation or association. The names are given — you supply the
-   visibility, the types, and the relationship. */
+   The marks exams lose are all here: the visibility symbol on the left, the type
+   AFTER the colon (the reverse of the Java/C++ order the course drilled for
+   thirteen notes), the void rule (`describe()` returns nothing, so it carries NO
+   return type — UML omits `: void`), and which of the five lines joins Circle to
+   Shape. `radius` is private data; `area()` and `describe()` are the public
+   interface; a Circle IS-A Shape, so the line is generalization (the hollow
+   triangle pointing at the parent), not aggregation or association. */
 
 export default classBuild({
-  prompt: "Build the UML class box for Circle: stamp each member's visibility, drop its type after the colon, then pick the line to Shape.",
+  prompt: "Build the UML class box for Circle: stamp each member's visibility and drop each type after its colon — note that describe() returns nothing, so it takes no return type at all — then pick the line to Shape.",
   className: "Circle",
   abstract: false,
   attributes: [{
@@ -31,9 +31,8 @@ export default classBuild({
   }, {
     vis: "+",
     name: "describe()",
-    ret: "void",
-    whyVis: "`describe()` is a public operation → `+`.",
-    whyType: "A method that returns nothing writes `: void` — it is not omitted and does not move to the front."
+    ret: null,
+    whyVis: "`describe()` is a public operation → `+`."
   }],
   typeDistractors: ["int", "String", "boolean"],
   relationship: {

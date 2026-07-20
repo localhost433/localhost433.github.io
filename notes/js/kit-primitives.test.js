@@ -121,6 +121,14 @@ test("ClassBoxBuilder grades visibility, type, and relationship", () => {
   assert.ok(/whyVis/.test(src) && /whyType/.test(src), "must surface per-part why on vis/type");
   assert.ok(/relationship/.test(src), "must grade the relationship kind");
 });
+test("ClassBoxBuilder omits the type slot for void operations (UML omits ': void')", () => {
+  // ret == null models the lecture rule: no return type on constructors/void — so a
+  // void operation must contribute no type slot, no bank token, and no colon in its row.
+  assert.ok(/if \(m\.ret != null\) out\.push\(\{ id: `o\$\{i\}t`/.test(src),
+    "a null-ret operation must not create a type slot");
+  assert.ok(/operations\.filter\(\(o\) => o\.ret != null\)\.map\(\(o\) => o\.ret\)/.test(src),
+    "a null-ret operation must not add a token to the type bank");
+});
 
 // UseCaseBuilder: the note-12 build exercise — drop elements inside/outside the
 // system boundary, then connect actors to cases and cases to cases.

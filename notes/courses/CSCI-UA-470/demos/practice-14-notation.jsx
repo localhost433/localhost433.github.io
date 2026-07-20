@@ -20,15 +20,25 @@ export default mcq({
     {
       stem: "Which is the correct UML operation notation for a public method `show` that takes nothing and returns nothing?",
       choices: [
-        { text: "`+ show() : void`", correct: true },
+        { text: "`+ show()`", correct: true },
+        { text: "`+ show() : void`" },
         { text: "`+ void show()`" },
         { text: "`public void show()`" },
-        { text: "`- show() : void`" },
       ],
-      why: "Operations read `visibility name(params) : ReturnType`. The return type follows the colon, so a method that returns nothing writes `: void` — it is **not** omitted, and it does **not** move to the front the way Java writes it. `+` is public; `-` would make it private.",
+      why: "Operations read `visibility name(params) : ReturnType` — but the return type is **omitted** when it is `void` (and on constructors). So a method that returns nothing is just `+ show()`; writing `: void` adds a type UML says to leave off, and `void show()` puts the type in front the way Java writes it, the reverse of UML's order.",
     },
     {
-      stem: "A class box shows `# tick() : void` and the class name is written in *italics*. What does that tell you?",
+      stem: "In a class box's attribute compartment, what does an **underlined** member mean?",
+      choices: [
+        { text: "It is `static` — one per class, not per object", correct: true },
+        { text: "It is abstract" },
+        { text: "It is deprecated" },
+        { text: "It is `final` / read-only" },
+      ],
+      why: "Underlining marks a **static** member (attribute or operation) — the class-level slot the course met as `static` in C++/Java. *Italics* mark abstract; UML has no underline for deprecated or final. Full attribute syntax: `visibility name : type [count] = default` — multiplicity and a default value can ride along, and a `/` in the visibility position marks a **derived** attribute (computed, not stored).",
+    },
+    {
+      stem: "A class box shows `# tick()` and the class name is written in *italics*. What does that tell you?",
       choices: [
         { text: "A protected operation on an abstract class", correct: true },
         { text: "A private operation on a concrete class" },

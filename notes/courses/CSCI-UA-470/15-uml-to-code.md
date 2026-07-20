@@ -11,7 +11,7 @@ Notation basics are not repeated here; for the class box anatomy, visibility sym
 
 ## Three kinds of objects: boundary, control, entity
 
-Before nouns and verbs pick the *domain* classes, a design already knows the *roles* its objects will play. L15 opened with the coffee shop from [note 13](note.html?course=CSCI-UA-470&note=13-uml-sequence-diagrams), re-read as a staffing chart: the cashier and receptionist face the customer (they take input and hand back output), the barista does the coordinating work in the middle, and the order records are the data everyone works on. Software gets the same three stereotypes:
+Before nouns and verbs pick the *domain* classes, a design already knows the *roles* its objects will play. A concrete way in — before L15's abstract boxes — is to re-read the coffee shop from [note 13](note.html?course=CSCI-UA-470&note=13-uml-sequence-diagrams) as a staffing chart: the cashier and receptionist face the customer (they take input and hand back output), the barista does the coordinating work in the middle, and the order records are the data everyone works on. Software gets the same three stereotypes:
 
 - **Boundary objects** sit at every edge where the system touches the outside — the input forms and output views on the user side, *and* the connection object on the database side. Boundary is not a synonym for UI: anything the system talks to that isn't itself gets a boundary object at the wall.
 - **Control objects** orchestrate. A handler receives what the boundary collected, decides what to do, fans out to the data, and routes the result back. There is often exactly one per use case.

@@ -9,12 +9,12 @@ import { DiagramSvg, DiagramCard, UmlLink, CrossOut, diagramCardHeight, cls } fr
 
 const bad = cls("Invoice",
   ["- no : int", "- date : String", "- details : String"],
-  ["+ addInvoice() : void", "+ deleteInvoice() : void", "+ sortInvoices() : void"]);
+  ["+ addInvoice()", "+ deleteInvoice()", "+ sortInvoices()"]);
 
 const invoice = cls("Invoice", ["- no : int", "- date : String", "- details : String"], []);
 const register = cls("InvoiceRegister",
   ["- invoices : List<Invoice>"],
-  ["+ addInvoice() : void", "+ deleteInvoice() : void", "+ sortInvoices() : void"]);
+  ["+ addInvoice()", "+ deleteInvoice()", "+ sortInvoices()"]);
 
 const BAD = { x: 30, y: 60, w: 200, h: diagramCardHeight(bad.sections) };
 // Keep the two replacement classes on one shared baseline: the connector then

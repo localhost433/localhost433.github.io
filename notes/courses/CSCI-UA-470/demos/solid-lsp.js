@@ -8,7 +8,7 @@ import { DiagramSvg, treeLayout, ClassTree, cls, CodeBlock, CompareCaption } fro
    compiler accepts both — which is the point: substitutability is a semantic
    contract, not a syntactic one. The code pane shows where it detonates. */
 
-const vehicle = cls("Vehicle", ["- color", "- model", "- year"], ["+ move() : void", "+ stop() : void", "+ turnAcOn() : void", "+ turnAcOff() : void"]);
+const vehicle = cls("Vehicle", ["- color", "- model", "- year"], ["+ move()", "+ stop()", "+ turnAcOn()", "+ turnAcOff()"]);
 const LV = treeLayout({
   cx: 250,
   topY: 16,
@@ -20,7 +20,7 @@ const LV = treeLayout({
   cardW: 118,
   gap: 18
 });
-const bird = cls("Bird", ["- color"], ["+ fly() : void", "+ eat() : void", "+ move() : void"]);
+const bird = cls("Bird", ["- color"], ["+ fly()", "+ eat()", "+ move()"]);
 const LB = treeLayout({
   cx: 760,
   topY: 16,
