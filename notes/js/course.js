@@ -23,6 +23,15 @@ fetch(`/notes/courses/${slug}/index.json`)
     }
 
     notes.forEach(n => {
+      // A section header, not a note: { "group": "C++" }.
+      if (n.group) {
+        const h = document.createElement("h2");
+        h.className = "note-group";
+        h.textContent = n.group;
+        listEl.appendChild(h);
+        return;
+      }
+
       const div = document.createElement("div");
       div.className = "note-entry";
 

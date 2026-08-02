@@ -1,4 +1,5 @@
 [
+    { "group": "Sorting & Analysis" },
     {
         "slug": "01-insertion",
         "title": "1 - Insertion Sort & Correctness",
@@ -34,6 +35,7 @@
         "title": "7 - Radix Sort & Integer Multiplication",
         "date": "2026-02-11"
     },
+    { "group": "Search Structures" },
     {
         "slug": "08-09-hashing",
         "title": "08/09 - Hashing",
@@ -49,6 +51,7 @@
         "title": "11 - Red-Black Trees",
         "date": "2026-02-25"
     },
+    { "group": "Design Paradigms" },
     {
         "slug": "12-13-14-dynamic-programming",
         "title": "12/13/14 - Dynamic Programming",
@@ -59,6 +62,7 @@
         "title": "15/16 - Greedy Algorithms",
         "date": "2026-03-23/25"
     },
+    { "group": "Graphs" },
     {
         "slug": "17-graphs",
         "title": "17 - Graph Representations & Properties",
@@ -84,11 +88,13 @@
         "title": "23 - All-Pairs Shortest Paths (Floyd-Warshall)",
         "date": "2026-04-20"
     },
+    { "group": "Complexity" },
     {
         "slug": "25-26-27-complexity",
         "title": "25/26/27 - Complexity & NP-Completeness",
         "date": "2026-04-27/29/05-04"
     },
+    { "group": "Recitations" },
     {
         "slug": "R-1",
         "title": "Recitation 1 - Mathematical Background",
