@@ -9,7 +9,7 @@ export default mcq({
   questions: [{
     stem: "How is the number `3.4567` stored in a **text** file?",
     choices: [{
-      text: "As the characters `3`, `.`, `4`, `5`, `6`, `7` — the ASCII codes of the string \"3.4567\", not floating-point bits",
+      text: "ASCII codes of string \"3.4567\", not float bits",
       correct: true
     }, {
       text: "As 8 bytes of IEEE-754 floating-point"
@@ -22,14 +22,14 @@ export default mcq({
   }, {
     stem: "Likewise, how is the integer `2` stored in a text file versus a binary file?",
     choices: [{
-      text: "Text: the ASCII code for the character `'2'`. Binary: the numeric value `2` (e.g. fixed-width two's-complement bits)",
+      text: "Text: ASCII `'2'`; Binary: numeric `2` bits",
       correct: true
     }, {
       text: "Both store the two's-complement bits of `2`"
     }, {
       text: "Both store the ASCII code of `'2'`"
     }, {
-      text: "Text stores nothing; only binary files can hold numbers"
+      text: "Only binary files can hold numbers"
     }],
     why: "A text file stores `2` as the **character** `'2'` (its ASCII code), *not* the integer value. A binary file stores the **numeric** representation of `2` directly. This is the core text-vs-binary distinction the note flags."
   }, {
@@ -39,7 +39,7 @@ export default mcq({
       lang: "java"
     },
     choices: [{
-      text: "Implement `Serializable` — a **marker interface** (no methods) that flags the class as allowed to be serialized",
+      text: "Implement `Serializable`, a marker interface that allows serialization",
       correct: true
     }, {
       text: "Extend `ObjectOutputStream` and override `writeObject`"
@@ -56,27 +56,27 @@ export default mcq({
       lang: "java"
     },
     choices: [{
-      text: "Read in the **same order** and **cast** each: `Integer i = (Integer) is.readObject(); Circle cir = (Circle) is.readObject();`",
+      text: "Read in same order and cast each to its type",
       correct: true
     }, {
-      text: "Read in any order; the stream tags each object by type"
+      text: "Read in any order; stream tags each object by type"
     }, {
       text: "Read once into a single array of all objects"
     }, {
-      text: "No cast is needed — `readObject()` returns the exact type written"
+      text: "No cast needed — `readObject()` returns the exact type"
     }],
     why: "Serialization is **positional**: the first `readObject()` must match the first `writeObject`, and so on. And `readObject()` is declared to return `Object`, so each result needs an **explicit cast** to the type you wrote. The stream does record each object's class — that's how a wrong cast is detected — but reads are still strictly positional."
   }, {
     stem: "What do the three uses of `final` restrict?",
     choices: [{
-      text: "`final` variable = cannot be reassigned; `final` method = cannot be overridden; `final` class = cannot be extended",
+      text: "Variable: no reassignment; method: no override; class: no subclass",
       correct: true
     }, {
       text: "All three mean the same: the value is a compile-time constant"
     }, {
-      text: "`final` variable = cannot be read; `final` method = cannot be called; `final` class = cannot be instantiated"
+      text: "Variable: no read; method: no call; class: not instantiable"
     }, {
-      text: "`final` only applies to variables; on methods and classes it is ignored"
+      text: "`final` only applies to variables; methods and classes ignore it"
     }],
     why: "`final` restricts change, and the restriction depends on position: a **variable** cannot be reassigned after initialization; a **method** cannot be overridden by subclasses (though it is still inherited); a **class** cannot be subclassed."
   }, {
@@ -86,14 +86,14 @@ export default mcq({
       lang: "java"
     },
     choices: [{
-      text: "(1) is illegal — `c` cannot be **rebound** — but (2) is fine; `final` freezes the reference, not the object's mutability",
+      text: "(1) illegal, (2) fine — `final` freezes reference only",
       correct: true
     }, {
-      text: "Both are illegal — `final` makes the object fully immutable"
+      text: "Both illegal — `final` makes the object fully immutable"
     }, {
-      text: "Both are legal — `final` only documents intent"
+      text: "Both legal — `final` only documents intent"
     }, {
-      text: "(2) is illegal but (1) is fine"
+      text: "(2) illegal but (1) is fine"
     }],
     why: "For a reference, `final` freezes the **binding**: `c` cannot be reassigned to a different `Circle` (line 1 is an error). The **object itself stays mutable** — `c.radius = 5` is fine — unless the class's own fields/methods prevent it. `final` alone does **not** make an object immutable."
   }]

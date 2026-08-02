@@ -32,29 +32,29 @@ export default mcq({
     {
       stem: "*Phone Order* and *Internet Order* are two specialized kinds of *Place Order*, each inheriting its meaning. Which relationship and notation?",
       choices: [
-        { text: "Generalization — a **hollow-triangle** arrow from each child up to *Place Order*", correct: true },
-        { text: "`<<include>>` — a dashed arrow from *Place Order* to each child" },
-        { text: "`<<extend>>` — a dashed arrow from each child to *Place Order*" },
-        { text: "Association — a plain line between the three ovals" },
+        { text: "Generalization — hollow-triangle arrow from each child to *Place Order*", correct: true },
+        { text: "`<<include>>` — dashed arrow from *Place Order* to each child" },
+        { text: "`<<extend>>` — dashed arrow from each child to *Place Order*" },
+        { text: "Association — plain line between the three ovals" },
       ],
       why: "\"A specialized kind of, inheriting the parent's behavior\" is **generalization** — the very same **hollow-triangle** arrow used for class inheritance, pointing from each child (*Phone Order*, *Internet Order*) up to the parent (*Place Order*). Both include and extend use *dashed* arrows and describe steps, not is-a specializations.",
     },
     {
       stem: "In one line, what distinguishes `<<include>>` from `<<extend>>`?",
       choices: [
-        { text: "Include is **mandatory** shared behavior that always runs; extend is **optional** behavior that runs only under certain conditions", correct: true },
+        { text: "Include is mandatory; extend is optional and conditional", correct: true },
         { text: "Include is optional; extend is mandatory" },
         { text: "Include connects actors to cases; extend connects cases to cases" },
-        { text: "They are interchangeable — the choice is only stylistic" },
+        { text: "They are interchangeable — stylistic choice only" },
       ],
       why: "**Include = always runs** (factored-out common behavior every execution of the base performs). **Extend = runs only sometimes** (conditional behavior added to a base that is already complete on its own). This one distinction — and the opposite arrow directions that follow from it — is what the exam tests.",
     },
     {
       stem: "You are drawing a use-case diagram. Where do the **actors** go, and what does the boundary box contain?",
       choices: [
-        { text: "Actors sit **outside** the boundary; the boundary box holds the **use-case ovals**", correct: true },
+        { text: "Actors sit outside the boundary; box holds use-case ovals", correct: true },
         { text: "Actors sit inside the boundary alongside the use cases" },
-        { text: "Actors go inside; only the system name goes in the boundary box" },
+        { text: "Actors go inside; only the system name goes in box" },
         { text: "There is no boundary — actors and use cases float freely" },
       ],
       why: "An actor is **external** to the system — a person or other system that pursues a goal — so it is drawn as a stick figure **outside** the rectangular boundary. The boundary contains the **use cases** (ovals), the goals the system offers. A plain **association** line then joins each actor to the use cases it participates in.",
@@ -62,10 +62,10 @@ export default mcq({
     {
       stem: "A use-case diagram is meant to capture which view of the system?",
       choices: [
-        { text: "**What** the system does for its actors — behavior/requirements, not implementation", correct: true },
+        { text: "**What** the system does for its actors — behavior and requirements", correct: true },
         { text: "**How** the system is implemented internally, method by method" },
         { text: "The static class structure and its associations" },
-        { text: "The order of messages exchanged between objects over time" },
+        { text: "The order of messages between objects over time" },
       ],
       why: "\"A UML diagram describes **what** a system does, not how.\" The use case diagram is the **Behavioral** view: external actors and the goals they pursue. *How* those goals are met object-by-object is the **sequence** diagram (note 13); the static structure is the **class** diagram (note 14).",
     },

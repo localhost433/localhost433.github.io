@@ -13,27 +13,27 @@ export default mcq({
       lang: "cpp"
     },
     choices: [{
-      text: "\"student\" — `virtual` moves the choice to run time, so the object's actual type wins",
+      text: "\"student\" — `virtual` dispatches to actual type",
       correct: true
     }, {
-      text: "\"person\" — the pointer's static type still decides"
+      text: "\"person\" — pointer's static type decides"
     }, {
-      text: "A compile error — you cannot override a virtual"
+      text: "Compile error — cannot override virtual"
     }, {
-      text: "\"personstudent\" — both bodies run"
+      text: "\"personstudent\" — both run sequentially"
     }],
     why: "Marking the method `virtual` switches from early to **late (dynamic) binding**: the call is resolved at **run time** from the object the pointer actually references. `ptr` points at a `Student`, so `Student::intro` runs. This is the one change that makes polymorphism work."
   }, {
     stem: "Mechanically, how does a `virtual` call find the right function, and what does it cost per object?",
     choices: [{
-      text: "object → **vptr** → **vtable** → function; the first virtual adds one hidden 8-byte `vptr` to **every object**, while the vtable is shared **one per class**",
+      text: "vptr → vtable → function; 8-byte per object",
       correct: true
     }, {
-      text: "Each object stores a full copy of the vtable; no per-object pointer is added"
+      text: "Each object stores a full copy of the vtable"
     }, {
-      text: "The compiler inlines the correct function, so there is no runtime cost or extra storage"
+      text: "Compiler inlines it; no runtime cost or storage"
     }, {
-      text: "Each call does a linear search of the class hierarchy by method name"
+      text: "Each call searches the hierarchy by method name"
     }],
     why: "A class with virtuals has one **vtable** (an array of function pointers, indexed by a fixed compile-time offset). Each **object** stores a hidden **vptr** to its class's vtable. A virtual call dereferences the vptr, indexes the slot, and jumps. Cost: **8 bytes per object** for the vptr; the vtable itself is shared per class."
   }, {
@@ -43,27 +43,27 @@ export default mcq({
       lang: "cpp"
     },
     choices: [{
-      text: "At least one **pure virtual** (`= 0`) method makes it abstract: you can declare **pointers/references** to it but cannot create **objects**",
+      text: "Pure virtual method; can use pointers/references, not objects",
       correct: true
     }, {
-      text: "The keyword `abstract` on the class; objects are still allowed"
+      text: "The keyword `abstract` on class; objects still allowed"
     }, {
-      text: "Any class with a virtual method; objects are forbidden"
+      text: "Any class with virtual; objects forbidden always"
     }, {
-      text: "A class with no constructor; only the compiler can instantiate it"
+      text: "No constructor; only compiler can instantiate"
     }],
     why: "A **pure virtual** method — `virtual void intro() = 0;` — has no body and makes its class **abstract**. `Person p;` is an error, but `Person* p;` and `Person& r = ...;` are fine. Abstraction: the base defines the interface, subclasses supply the bodies."
   }, {
     stem: "`Student` inherits a pure virtual `intro() = 0` from `Person` but never gives it a body. Can you write `Student s;`?",
     choices: [{
-      text: "No — an inherited pure virtual left unimplemented keeps `Student` **abstract** too; only a subclass that implements *every* pure virtual becomes instantiable",
+      text: "No — `Student` abstract; must implement pure virtuals",
       correct: true
     }, {
-      text: "Yes — any subclass of an abstract class is automatically concrete"
+      text: "Yes — any subclass of abstract becomes concrete"
     }, {
-      text: "Yes — `Student` inherits `Person`'s (empty) implementation"
+      text: "Yes — `Student` inherits empty implementation"
     }, {
-      text: "No — subclasses of abstract classes can never be instantiated"
+      text: "No — no subclass of abstract can be instantiated"
     }],
     why: "A subclass is concrete only once it **implements every** inherited pure virtual. `Student`, having left `intro()` unimplemented, is **still abstract** — `Student s;` is an error, though `Student* t;` is fine. A subclass can also *re-declare* the method `= 0` to stay abstract on purpose."
   }, {
@@ -73,20 +73,20 @@ export default mcq({
       lang: "cpp"
     },
     choices: [{
-      text: "`TA` contains **two** separate `Person` subobjects, so `name` is **ambiguous** — which copy? (`Person* p = &t;` is ambiguous too)",
+      text: "Two `Person` copies → `name` ambiguous",
       correct: true
     }, {
       text: "`name` is private in `Person`"
     }, {
       text: "`TA` forgot to declare `name`"
     }, {
-      text: "It compiles fine and reads Teacher's copy"
+      text: "It compiles; reads the Teacher copy"
     }],
     why: "Plain multiple inheritance gives each branch its **own** `Person`, so a `TA` holds **two** `Person` subobjects — two `name`s, two `age`s. An unqualified `t.name` cannot say which, so it is **ambiguous**. Even upcasting `Person* p = &t;` is ambiguous. Qualifying (`t.Teacher::name`) silences the error but keeps two copies — usually a bug."
   }, {
     stem: "Which repair actually gives the `TA` a **single, shared** `Person` subobject?",
     choices: [{
-      text: "**Virtual inheritance** — `Teacher`/`Student` derive `virtual public Person`; the one `Person` is shared, reached through a hidden `vbptr` with a run-time offset",
+      text: "`Teacher`/`Student`: `virtual public Person`",
       correct: true
     }, {
       text: "Qualifying every access as `t.Teacher::name`"

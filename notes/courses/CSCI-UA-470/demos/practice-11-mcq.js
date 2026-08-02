@@ -19,7 +19,7 @@ export default mcq({
   }, {
     stem: "In what order does class loading proceed for a class on first active use?",
     choices: [{
-      text: "load → link (verify · prepare · resolve) → initialize",
+      text: "load → link (verify, prepare, resolve) → initialize",
       correct: true
     }, {
       text: "initialize → load → link"
@@ -45,7 +45,7 @@ export default mcq({
       lang: "java"
     },
     choices: [{
-      text: "`3`",
+      text: "The value `3`",
       correct: true
     }, {
       text: "`2`, with `1` below it"

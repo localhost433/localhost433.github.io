@@ -17,10 +17,10 @@ export default mcq({
       stem: "Given `Drawable d = new Circle();`, what must be true for this to compile?",
       figure: { code: "interface Drawable { void draw(); }\nclass Circle implements Drawable { public void draw() {} }", lang: "java" },
       choices: [
-        { text: "`Circle` must `implements Drawable`", correct: true },
-        { text: "`Circle` just needs a `draw()` method with the right signature" },
-        { text: "`Drawable` must be an abstract class, not an interface" },
-        { text: "`Circle` must extend `Drawable`" },
+        { text: "`Circle` must explicitly `implements Drawable`", correct: true },
+        { text: "`Circle` just needs a `draw()` method with matching signature" },
+        { text: "`Drawable` must be an abstract class, not interface" },
+        { text: "`Circle` must extend `Drawable` instead" },
       ],
       why: "Java is **nominally** typed: a handle of interface type accepts an object only if its class actually **`implements`** that interface — having a matching method by coincidence is not enough.",
     },
@@ -35,10 +35,10 @@ export default mcq({
     {
       stem: "What does the `@Override` annotation do?",
       choices: [
-        { text: "Makes the compiler check the method actually overrides a supertype method", correct: true },
+        { text: "Tells the compiler to check if the method really overrides a supertype method", correct: true },
         { text: "Forces the method to be dispatched dynamically (otherwise it wouldn't be)" },
         { text: "Marks the method `final` so it can't be overridden further" },
-        { text: "Nothing — it's required syntax for every override" },
+        { text: "Required syntax — nothing would compile without it" },
       ],
       why: "`@Override` is a **compile-time check**: if the method doesn't match a supertype method (e.g. a typo'd signature), compilation fails. It doesn't change dispatch — Java methods are already virtual by default.",
     },

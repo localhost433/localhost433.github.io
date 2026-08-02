@@ -9,22 +9,22 @@ export default mcq({
       text: "Destructor, copy constructor, copy assignment operator",
       correct: true
     }, {
-      text: "Constructor, destructor, `main`"
+      text: "Constructor, destructor, and `main`"
     }, {
-      text: "Copy constructor, move constructor, destructor"
+      text: "Copy constructor, move constructor, and destructor"
     }, {
-      text: "Getter, setter, constructor"
+      text: "Getter, setter, and constructor"
     }],
     why: "A class that manages a resource (owns a heap allocation) needs a **destructor** to free it, a **copy constructor** and **copy assignment operator** to copy it deeply — otherwise the compiler's shallow defaults cause double-frees."
   }, {
     stem: "If you write no special members, which does the compiler generate for you?",
     choices: [{
-      text: "A default constructor, copy constructor, copy assignment, and destructor",
+      text: "Default ctor, copy ctor, copy-assign, dtor",
       correct: true
     }, {
       text: "Only a default constructor"
     }, {
-      text: "Nothing — you must write all of them"
+      text: "Nothing — you must write them all"
     }, {
       text: "Only a destructor"
     }],
@@ -36,14 +36,14 @@ export default mcq({
       lang: "cpp"
     },
     choices: [{
-      text: "(1) constructs a new object from `a`; (2) replaces an already-constructed `c`",
+      text: "(1) constructs from `a`; (2) replaces existing",
       correct: true
     }, {
-      text: "They are the same thing with different syntax"
+      text: "They are identical with different syntax"
     }, {
       text: "(1) is shallow, (2) is always deep"
     }, {
-      text: "(2) constructs a new object; (1) replaces an existing one"
+      text: "(2) constructs new; (1) replaces existing"
     }],
     why: "Line (1) **initializes** a brand-new object → the **copy constructor**. Line (2) **assigns** to an already-existing `c` → the **copy assignment operator**, which must also release `c`'s old resource first."
   }, {
