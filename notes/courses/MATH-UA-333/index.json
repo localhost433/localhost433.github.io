@@ -1,52 +1,47 @@
 [
+    { "group": "Foundations" },
     {
         "slug": "01-combinatorics",
         "title": "1 - Basic combinatorics",
         "date": "2025-09-04"
-    }
-    ,
+    },
     {
         "slug": "02-axioms",
         "title": "2 - Axioms of probability",
         "date": "2025-09-06"
-    }
-    ,
+    },
     {
         "slug": "03-cond-indep",
         "title": "3 - Conditional Probability and Independence",
         "date": "2025-09-11"
-    }
-    ,
+    },
+    { "group": "Random Variables" },
     {
         "slug": "04-05-drv",
         "title": "4/5 - Discrete random variables",
         "date": "2025-09-16/18/23/25"
-    }
-    ,
+    },
     {
         "slug": "06-07-crv",
         "title": "6/7 - Continuous random variables",
         "date": "2025-09-29|10-07/09/14"
-    }
-    ,
+    },
     {
         "slug": "08-joint-dist",
         "title": "8 - Joint distributions and independence",
         "date": "2025-10-16/21"
-    }
-    ,
+    },
+    { "group": "Moments & Dependence" },
     {
         "slug": "09-sum-indep-rv",
         "title": "9 - Sum of Independent Random Variables",
         "date": "2025-10-23"
-    }
-    ,
+    },
     {
         "slug": "10-cond-dist-exp",
         "title": "10 - Conditional Distribution and Conditional Expectation",
         "date": "2025-10-28/30"
-    }
-    ,
+    },
     {
         "slug": "11-cov-corr",
         "title": "11 - Covariance and Correlation",
@@ -57,6 +52,7 @@
         "title": "12 - Moment Generating Functions",
         "date": "2025-11-11/13"
     },
+    { "group": "Limit Theorems" },
     {
         "slug": "13-inequalities-exp",
         "title": "13 - Inequalities about Expectation",
@@ -72,6 +68,7 @@
         "title": "15 - Central Limit Theorem",
         "date": "2025-11-19/25"
     },
+    { "group": "Stochastic Processes & Applications" },
     {
         "slug": "16-markov-chains",
         "title": "16 - Introduction to Markov Chains",

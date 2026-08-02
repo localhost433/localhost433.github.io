@@ -1,64 +1,58 @@
 [
+    { "group": "Foundations" },
     {
         "slug": "01-intro",
         "title": "01 - What is Language",
         "date": "2025-05-19"
-    }
-    ,
+    },
+    { "group": "Structure of Language" },
     {
         "slug": "02-03-phonetics",
         "title": "02/03 - Phonetics",
         "date": "2025-05-20/21"
-    }
-    ,
+    },
     {
         "slug": "04-05-phonology",
         "title": "04/05 - Phonology",
         "date": "2025-05-22/27"
-    }
-    ,
+    },
     {
         "slug": "06-07-morphology",
         "title": "06/07 - Morphology",
         "date": "2025-05-28/29"
-    }
-    ,
+    },
     {
         "slug": "08-09-10-syntax",
         "title": "08/09/10 - Syntax",
         "date": "2025-06-02/03/04"
-    }
-    ,
+    },
     {
         "slug": "11-12-semantics",
         "title": "11/12 - Semantics",
         "date": "2025-06-10/11"
-    }
-    ,
+    },
+    { "group": "Language in the Mind" },
     {
         "slug": "13-acquisition",
         "title": "13 - Acquisition",
         "date": "2025-06-12"
-    }
-    ,
+    },
     {
         "slug": "14-psycholinguistics",
         "title": "14 - Psycholinguistics",
         "date": "2025-06-16"
-    }
-    ,
+    },
     {
         "slug": "15-neurolinguistics",
         "title": "15 - Neurolinguistics",
         "date": "2025-06-17"
-    }
-    ,
+    },
+    { "group": "Language in Society" },
     {
         "slug": "16-bilingualism",
         "title": "16 - Bilingualism",
         "date": "2025-06-18"
-    }
-    ,
+    },
     {
         "slug": "17-18-19-sociolinguistics",
         "title": "17/18/19 - Sociolinguistics",

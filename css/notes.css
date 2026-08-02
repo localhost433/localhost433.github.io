@@ -53,6 +53,22 @@
     color: #aaaaaa;
   }
 
+  /* Topic-group headers in the notes index (index.json { "group": ... }). */
+  .note-group {
+    margin: 1.8rem 0 0.2rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 2px solid var(--link-color, #0055aa);
+    font-size: 1.25rem;
+  }
+
+  .note-group:first-child {
+    margin-top: 0.4rem;
+  }
+
+  .dark-mode .note-group {
+    border-bottom-color: #88aaff;
+  }
+
 /* ==========================================================================
   NOTE CONTENT
   ========================================================================== */

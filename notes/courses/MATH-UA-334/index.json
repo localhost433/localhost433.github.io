@@ -1,4 +1,5 @@
 [
+    { "group": "Probability Review" },
     {
         "slug": "01-sample-probability",
         "title": "1 - Sample space and probability",
@@ -29,6 +30,7 @@
         "title": "6 - Limit Theorems",
         "date": "2026-02-09"
     },
+    { "group": "Estimation" },
     {
         "slug": "07-t-distributions",
         "title": "7 - t Distributions",
@@ -54,6 +56,7 @@
         "title": "12 - Bayesian Perspective",
         "date": "2026-03-02"
     },
+    { "group": "Hypothesis Testing" },
     {
         "slug": "13-14-15-hypothesis-testing",
         "title": "13/14/15 - Hypothesis Testing",
@@ -74,6 +77,7 @@
         "title": "19 - Categorical Data",
         "date": "2026-04-06"
     },
+    { "group": "Regression" },
     {
         "slug": "20-21-simple-linear-reg",
         "title": "20/21 - Simple Linear Regression",

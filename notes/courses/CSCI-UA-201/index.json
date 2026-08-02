@@ -1,4 +1,5 @@
 [
+    { "group": "Data Representation" },
     {
         "slug": "01-num-mem",
         "title": "01 - Number Systems & Memory Organization",
@@ -9,6 +10,7 @@
         "title": "02 - Data Representation",
         "date": "2025-09-04"
     },
+    { "group": "C Programming" },
     {
         "slug": "03-c-fund",
         "title": "03 - C Programming Fundamentals",
@@ -29,6 +31,7 @@
         "title": "06 - Command-Line Arguments and File I/O",
         "date": "2025-10-02/07"
     },
+    { "group": "Assembly & Caching" },
     {
         "slug": "07-asm-intro",
         "title": "07 - Introduction to Assembly Language",
@@ -49,6 +52,7 @@
         "title": "10 - Cache Organization and Performance",
         "date": "2025-11-11/18"
     },
+    { "group": "Digital Logic & Architecture" },
     {
         "slug": "11-logic-circuits",
         "title": "11 - Digital Logic Transistors to Arithmetic Circuits",
