@@ -432,6 +432,18 @@ html.dark-mode {
   .mm-compare__col + .mm-compare__col { padding-left: 0; border-left: 0; }
 }
 
+/* ---- PatternFigure (patternFigure(), notes 19–21) — the shape every design-pattern
+   slide repeats: a bracketed intent line, a rejected half, the pattern half, and the
+   client code. Each half is tagged with the shared caption chip so "rejected" vs
+   "the pattern" vs "client code" reads without touching the diagram itself. ---- */
+.mm-pat__intent { margin: 0 0 .1rem; font-size: .84rem; line-height: 1.5; font-style: italic;
+  color: hsl(var(--foreground)); background: var(--mm-panel-bg);
+  border: 1px solid var(--mm-panel-bd); border-left: 3px solid var(--mm-ptr);
+  border-radius: var(--radius); padding: .45rem .7rem; }
+.mm-pat__half { display: flex; flex-direction: column; gap: .35rem; min-width: 0; }
+.mm-pat__tag { flex: none; align-self: flex-start; width: fit-content; }
+.mm-pat__note { margin: 0; font-size: .78rem; line-height: 1.45; color: var(--mm-muted); }
+
 /* ---- MemoryCompare (compare()) — side-by-side stage columns. Each column pairs a
    one-line declaration with a stack-only MemoryModel, a byte-cost chip and a reading;
    the highlight ring marks the storage introduced at that stage. ---- */
