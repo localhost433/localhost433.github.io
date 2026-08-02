@@ -1,6 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+/* Match the site's theme convention: a manual toggle stored in localStorage
+   wins over the OS preference. Runs before styles parse, so no flash. */
+(function () {
+  try {
+    var stored = localStorage.getItem('theme');
+    var prefers = window.matchMedia('(prefers-color-scheme:dark)').matches;
+    if (stored === 'dark' || (!stored && prefers)) {
+      document.documentElement.classList.add('dark-mode');
+    } else {
+      document.documentElement.classList.remove('dark-mode');
+    }
+  } catch (e) {}
+})();
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sample Exam</title>
@@ -21,9 +36,10 @@
   --code-bg:#f3f6fa; --code-border:#e1e7ef; --code-text:#28303d;
   --code-com:#79859a; --code-str:#b15a16; --code-kw:#6d28d9; --code-ty:#0e7490; --code-num:#b45309; --code-fn:#1d4ed8;
   --shadow:0 1px 2px rgba(20,30,50,.04), 0 4px 16px rgba(20,30,50,.06);
+  color-scheme:light;
 }
-@media (prefers-color-scheme: dark){
-  :root{
+html.dark-mode{
+    color-scheme:dark;
     --bg:#0f1620; --surface:#161f2c; --surface-2:#1c2634; --border:#28323f; --border-strong:#3a4658;
     --text:#e7ebf1; --muted:#9aa5b3; --faint:#6c7686;
     --accent:#818cf8; --accent-hover:#a5b0ff; --accent-fg:#0f1620; --accent-soft:#1f2640;
@@ -36,7 +52,6 @@
     --code-bg:#0c121b; --code-border:#232d3b; --code-text:#d7dfeb;
     --code-com:#6c7686; --code-str:#e0a35e; --code-kw:#c4b5fd; --code-ty:#67e8f9; --code-num:#f0b46b; --code-fn:#93c5fd;
     --shadow:0 1px 2px rgba(0,0,0,.3), 0 6px 24px rgba(0,0,0,.28);
-  }
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
