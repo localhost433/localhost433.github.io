@@ -1,92 +1,132 @@
 [
+    { "group": "C++" },
     {
         "slug": "01-foundations",
-        "title": "01 - C++ Foundations",
+        "title": "L01 - Introduction to C++",
         "date": "2026-05-18"
     },
     {
         "slug": "02-pointers-memory",
-        "title": "02 - Pointers, References & Memory",
+        "title": "L01–L02 - Strings & Pointers in C++",
         "date": "2026-05-18/20"
     },
     {
         "slug": "03-classes-objects",
-        "title": "03 - Classes & Objects",
+        "title": "L02–L03 - Classes & Objects in C++",
         "date": "2026-05-20/27"
     },
     {
-        "slug": "04-resource-management",
-        "title": "04 - Copy, Operators & Resource Management",
+        "slug": "statics-cpp",
+        "title": "L03–L04 - Statics in C++",
+        "date": "2026-05-27"
+    },
+    {
+        "slug": "dynamic-attributes",
+        "title": "L04 - Copy, Operators & Dynamic Attributes",
         "date": "2026-05-27/06-01"
     },
     {
+        "slug": "access-and-friendship",
+        "title": "L04–L05 - Access Specifiers & Friendship",
+        "date": "2026-06-01"
+    },
+    {
         "slug": "05-inheritance",
-        "title": "05 - Inheritance",
+        "title": "L05 - Inheritance in C++",
         "date": "2026-06-03"
     },
     {
         "slug": "06-polymorphism",
-        "title": "06 - Polymorphism & Virtual Functions",
+        "title": "L06 - Polymorphism, Virtual Functions & the Diamond Problem",
         "date": "2026-06-03/08"
     },
     {
         "slug": "07-templates",
-        "title": "07 - Templates",
+        "title": "L07 - Templates & Generics",
         "date": "2026-06-10"
     },
+    { "group": "Java" },
     {
         "slug": "08-cpp-vs-java",
-        "title": "08 - C++ vs. Java",
+        "title": "L07–L08 - Introduction to Java",
         "date": "2026-06-10/15"
     },
     {
         "slug": "09-polymorphism-design-java",
-        "title": "09 - Polymorphism & Abstract Classes",
+        "title": "L09 - Objects in Java: Abstract Classes vs. Interfaces",
         "date": "2026-06-17"
     },
     {
         "slug": "10-java-files-final",
-        "title": "10 - Java Files, Serialization & final",
+        "title": "L10 - Files in Java & the final Keyword",
         "date": "2026-06-22"
     },
     {
         "slug": "11-jvm-runtime",
-        "title": "11 - JVM, Bytecode & Runtime Architecture",
+        "title": "L10–L11 - The Java Virtual Machine",
         "date": "2026-06-22/24"
     },
     {
+        "slug": "17-java-cpp-systematic-comparison",
+        "title": "L11 - Java vs. C++, Systematically",
+        "date": "2026-06-24"
+    },
+    { "group": "Systems Modeling" },
+    {
+        "slug": "systems-modeling-intro",
+        "title": "L12 - Introduction to Systems Modeling",
+        "date": "2026-07-01"
+    },
+    {
         "slug": "12-uml-use-case-diagrams",
-        "title": "12 - UML & Use Case Diagrams",
+        "title": "L12 - Use Case Diagrams",
         "date": "2026-07-01"
     },
     {
         "slug": "13-uml-sequence-diagrams",
-        "title": "13 - UML Sequence Diagrams",
+        "title": "L13 - Sequence Diagrams",
         "date": "2026-07-08"
     },
     {
         "slug": "14-uml-class-diagrams",
-        "title": "14 - UML Class Diagrams & Iterative Design",
+        "title": "L14 - Class Diagrams",
         "date": "2026-07-09"
     },
     {
         "slug": "15-uml-to-code",
-        "title": "15 - From Class Diagram to Code",
+        "title": "L15 - From Class Diagram to Code",
         "date": "2026-07-13"
     },
     {
         "slug": "16-solid",
-        "title": "16 - SOLID Principles",
+        "title": "L16 - SOLID Principles",
         "date": "2026-07-15"
     },
     {
-        "slug": "17-java-cpp-systematic-comparison",
-        "title": "17 - Java vs. C++: Systematic Comparison",
-        "date": "2026-06-24"
+        "slug": "password-keeper",
+        "title": "L17 - Capstone: The Password Keeper (Design → Code)",
+        "date": "2026-07-20"
+    },
+    { "group": "Design Patterns" },
+    {
+        "slug": "19-creational-patterns",
+        "title": "L18 - Creational Design Patterns",
+        "date": "2026-07-22"
     },
     {
+        "slug": "20-structural-patterns",
+        "title": "L19 - Structural Design Patterns",
+        "date": "2026-07-27"
+    },
+    {
+        "slug": "21-behavioral-patterns",
+        "title": "L20 - Behavioral Design Patterns",
+        "date": "2026-07-29"
+    },
+    { "group": "Synthesis & Review" },
+    {
         "slug": "18-oop-pillars-roadmap",
-        "title": "18 - OOP Pillars & Course Roadmap",
+        "title": "OOP Pillars & Course Roadmap",
         "date": "2026-05-18/07-01"
     }
 ]

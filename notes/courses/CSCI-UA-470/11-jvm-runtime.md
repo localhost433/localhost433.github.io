@@ -5,7 +5,7 @@ date: "2026-06-22/24"
 
 ## Purpose of this note
 
-This note isolates the runtime model behind Java. [Note 08](note.html?course=CSCI-UA-470&note=08-cpp-vs-java) gives the high-level C++ versus Java compilation contrast; this note explains what sits behind the Java side of that contrast: bytecode, the JVM, class loading, runtime areas, interpretation, JIT compilation, garbage collection, and native-library access.
+This note isolates the runtime model behind Java. [The C++→Java note (L07–L08)](note.html?course=CSCI-UA-470&note=08-cpp-vs-java) gives the high-level C++ versus Java compilation contrast; this note explains what sits behind the Java side of that contrast: bytecode, the JVM, class loading, runtime areas, interpretation, JIT compilation, garbage collection, and native-library access.
 
 Use [note 10](note.html?course=CSCI-UA-470&note=10-java-files-final) for files, serialization, and `final`; use this note for the execution platform.
 
