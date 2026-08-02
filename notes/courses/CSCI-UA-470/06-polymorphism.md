@@ -1,7 +1,9 @@
 ---
-title: Polymorphism & Virtual Functions
+title: "Polymorphism, Virtual Functions & the Diamond Problem"
 date: "2026-06-03/08"
 ---
+
+[Inheritance (L05)](note.html?course=CSCI-UA-470&note=05-inheritance) ended on early binding: the compiler resolving every call from declared types alone. This note is about what happens when that default is wrong — why a `Person*` pointing at a `Student` still runs `Person::intro()`, what `virtual` changes under the hood, and what multiple inheritance does to the object when two bases share an ancestor.
 
 ## Early (static) binding
 
@@ -147,7 +149,15 @@ The name comes from the shape: `Teacher` and `Student` both derive from `Person`
 
 Each box is a class; arrows mean "inherits from." Node colours match the plain-diamond byte-layout demo below -- Person (blue), Teacher (green), Student (amber), TA (purple). (The virtual-diamond demo assigns its own colours.)
 
-Building a `TA` makes it "a Teacher" and "a Student", so it ends up with two copies of everything in `Person`. The demo shows the two separate `Person` subobjects in the object, and why `t.name` then won't compile:
+Building a `TA` makes it "a Teacher" and "a Student", so it ends up with two copies of everything in `Person`. The consequence is ambiguity — there are two `name`s and the compiler cannot pick:
+
+```cpp
+TA t;
+t.name;           // ERROR: ambiguous -- which Person's name?
+Person* p = &t;   // ERROR: ambiguous -- which Person subobject?
+```
+
+The demo shows the two separate `Person` subobjects in the object, and why `t.name` then won't compile:
 
 ```artifact src=demos/mem-diamond-plain.jsx
 ```
@@ -190,6 +200,20 @@ The L06 program (`code/lectures/L06/main.cpp`) prints from every constructor and
 ```artifact src=demos/trace-l06-diamond.jsx
 ```
 
+## Why Java simply forbids it
+
+Java does not allow a class to extend more than one class -- **precisely to dodge the diamond**. There is no multiple class inheritance, so no duplicated base subobject, so no ambiguity to resolve. What Java gives back is **interfaces**: a class may implement many of them, recovering most of multiple inheritance's usefulness without the state-duplication trap (an interface historically carried no fields to duplicate). The C++/Java inheritance table is in [C++ vs. Java](note.html?course=CSCI-UA-470&note=08-cpp-vs-java), and where interfaces sit among the pillars is in [the pillars roadmap](note.html?course=CSCI-UA-470&note=18-oop-pillars-roadmap).
+
+## What to retain from L06
+
+- **Early binding** is the default: the call target is fixed at compile time from the *declared* type, so a `Person*` at a `Student` still runs `Person::intro()`.
+- **`virtual` moves the choice to run time** (late binding): the call follows object → vptr → vtable → function. The first virtual function adds one hidden vptr per object; the vtable is shared, one per class.
+- A **pure virtual** method (`= 0`) makes the class **abstract**: no objects, only pointers/references. A subclass that leaves it unimplemented is abstract too.
+- The **diamond** appears when two bases of a class share a **common ancestor** -- plain multiple inheritance gives the most-derived class **two copies** of that ancestor, so `t.name` and any upcast to it are ambiguous and won't compile.
+- Qualifying (`t.Teacher::name`) or redefining treats the *symptom*; two subobjects remain.
+- **`virtual` inheritance** is the cure: the shared base is stored **once**, reached via a `vbptr` holding a run-time offset.
+- **Java forbids multiple class inheritance** to avoid all of this; **interfaces** recover most of the benefit without duplicated state.
+
 ## Practice
 
 First predict the dispatch itself. Step to the `ptr->intro()` call and, before revealing it, decide which body runs when a `person*` points at a `student`:
@@ -201,3 +225,7 @@ Then the conceptual round — virtual dispatch, abstract classes, and the diamon
 
 ```artifact src=demos/practice-06-mcq.jsx
 ```
+
+---
+
+> Where this sits in the course: the payoff and the price of [inheritance (L05)](note.html?course=CSCI-UA-470&note=05-inheritance), on one page -- late binding is the mechanism every later design leans on, and the diamond is the sharpest single reason [Java's object model](note.html?course=CSCI-UA-470&note=08-cpp-vs-java) diverges from C++'s. The interface answer connects forward to [the pillars roadmap](note.html?course=CSCI-UA-470&note=18-oop-pillars-roadmap).
