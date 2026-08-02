@@ -9,14 +9,14 @@ export default mcq({
   questions: [{
     stem: "What is the headline difference in the **compilation model**?",
     choices: [{
-      text: "C++ compiles to **native machine code per platform** (recompile for each target); Java compiles once to **bytecode** that a JVM runs on each OS",
+      text: "C++ → native code per platform; Java → bytecode for a JVM",
       correct: true
     }, {
-      text: "Both compile to bytecode; only the run step differs"
+      text: "Both compile to bytecode; only the runtime differs"
     }, {
       text: "C++ is interpreted; Java is compiled to native code"
     }, {
-      text: "Both produce a platform-independent binary"
+      text: "Both produce platform-independent binaries"
     }],
     why: "C++ compiles **all the way to machine code** for one platform, so you must recompile to get a different binary per target (`a.out` vs `.exe`). Java compiles once to **bytecode** (`.class`), and a **JVM** on each machine runs it — write once, run anywhere."
   }, {
@@ -26,12 +26,12 @@ export default mcq({
       lang: "java"
     },
     choices: [{
-      text: "Nothing — Java passes references **by value**, so this only rebinds the local copies; the caller's objects are unchanged",
+      text: "Nothing — refs by value; local rebinding doesn't apply",
       correct: true
     }, {
       text: "The two objects are swapped correctly"
     }, {
-      text: "A compile error — you cannot reassign parameters"
+      text: "A compile error — cannot reassign parameters"
     }, {
       text: "The two references become `null`"
     }],
@@ -43,46 +43,46 @@ export default mcq({
       lang: "java"
     },
     choices: [{
-      text: "`p1.age` is 30 and `p1.name` is \"Maya\" — both names alias the one object; the `\"James\"` object is now unreferenced garbage",
+      text: "`p1.age`=30, `p1.name`=\"Maya\" — same object; \"James\" garbage",
       correct: true
     }, {
       text: "`p1` still holds \"James\", 20 — assignment copies the object"
     }, {
-      text: "`p1.age` is 18 — `p1` sees a snapshot taken at assignment time"
+      text: "`p1.age` is 18 — `p1` sees a snapshot from assignment time"
     }, {
-      text: "A compile error — you cannot assign one object to another"
+      text: "A compile error — cannot assign one object to another"
     }],
     why: "Assignment copies the **reference**, not the object. After `p1 = p2`, both point at the **same** `\"Maya\"` object, so `p2.age = 30` is visible through `p1`. The original `\"James\"` object now has no reference and becomes eligible for **garbage collection**."
   }, {
     stem: "How are objects created and destroyed in Java, compared with C++?",
     choices: [{
-      text: "Java objects are **always on the heap** via `new` (no stack objects) and reclaimed by the **garbage collector** — there is no `delete` and no destructor",
+      text: "Java objects always use `new` on the heap; garbage collector reclaims them",
       correct: true
     }, {
       text: "Java has stack and heap objects just like C++, freed with `delete`"
     }, {
-      text: "Java objects are freed by an explicit destructor `~Class()`"
+      text: "Java objects freed by explicit destructors `~Class()`"
     }, {
-      text: "Java allocates on the stack; C++ only on the heap"
+      text: "Java allocates on stack; C++ only on heap"
     }],
     why: "In Java **every** object is created with `new` on the **heap**, reached through a reference — there is no `Person p1;` stack object and no `delete`. The **garbage collector** reclaims unreferenced objects, so Java has **no destructor** (its finalizer is not a C++-style destructor)."
   }, {
     stem: "Which inheritance/binding statement about Java (vs C++) is correct?",
     choices: [{
-      text: "Java methods are **virtual by default**, inheritance is **`public` only**, and **multiple** class inheritance is **not allowed** (interfaces instead)",
+      text: "Methods virtual; `public` inheritance; no multiple class inheritance",
       correct: true
     }, {
-      text: "Java requires `virtual` like C++ and allows multiple class inheritance"
+      text: "Requires `virtual` like C++ and allows multiple class inheritance"
     }, {
-      text: "Java supports `private`/`protected`/`public` inheritance modes like C++"
+      text: "Supports `private`/`protected`/`public` inheritance modes like C++"
     }, {
-      text: "Java forbids overriding; you must use interfaces for everything"
+      text: "Forbids overriding; must use interfaces for everything"
     }],
     why: "Every non-`static`/`final`/`private` Java method is **virtual by default** (late binding, no keyword). Java has a single **`public`** inheritance mode, and forbids **multiple class inheritance** — precisely to avoid the diamond problem — offering multiple **interfaces** instead."
   }, {
     stem: "The note's one-line C++→Java mapping for abstraction: a C++ class with **one** pure virtual, vs one where **all** methods are pure virtual?",
     choices: [{
-      text: "One pure virtual ↔ a Java `abstract` class; **all** pure virtual ↔ a Java `interface`",
+      text: "One pure virtual ↔ `abstract` class; all pure virtual ↔ `interface`",
       correct: true
     }, {
       text: "Both map to a Java `interface`"

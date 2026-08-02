@@ -16,7 +16,7 @@ export default mcq({
     {
       stem: "In what order does class loading proceed for a class on first active use?",
       choices: [
-        { text: "load → link (verify · prepare · resolve) → initialize", correct: true },
+        { text: "load → link (verify, prepare, resolve) → initialize", correct: true },
         { text: "initialize → load → link" },
         { text: "verify → load → initialize → resolve" },
         { text: "load → initialize → link" },
@@ -35,7 +35,7 @@ export default mcq({
       stem: "After `iconst_1`, `iconst_2`, `iadd`, what is on top of the operand stack?",
       figure: { code: "iconst_1   // push 1\niconst_2   // push 2\niadd", lang: "java" },
       choices: [
-        { text: "`3`", correct: true },
+        { text: "The value `3`", correct: true },
         { text: "`2`, with `1` below it" },
         { text: "`1`, with `2` below it" },
         { text: "nothing — the stack is empty" },

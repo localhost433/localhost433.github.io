@@ -10,10 +10,10 @@ export default mcq({
   questions: [{
     stem: "What is in the middle compartment of a box on an **object** diagram, as opposed to a class diagram?",
     choices: [{
-      text: "Attribute **values** — a class diagram shows attribute **declarations**",
+      text: "Attribute **values** (not declarations)",
       correct: true
     }, {
-      text: "Attribute declarations — the same as a class diagram"
+      text: "Attribute declarations"
     }, {
       text: "The object's operations"
     }, {
@@ -23,12 +23,12 @@ export default mcq({
   }, {
     stem: "A `Window` owns its `TitleBar`: destroy the window and the title bar goes with it. Which relationship, and which notation?",
     choices: [{
-      text: "Composition — a **filled** diamond at the `Window` end",
+      text: "Composition — **filled** diamond at `Window` end",
       correct: true
     }, {
-      text: "Aggregation — a **hollow** diamond at the `Window` end"
+      text: "Aggregation — **hollow** diamond at `Window` end"
     }, {
-      text: "Composition — a **filled** diamond at the `TitleBar` end"
+      text: "Composition — **filled** diamond at `TitleBar` end"
     }, {
       text: "Association — a plain line"
     }],
@@ -49,14 +49,14 @@ export default mcq({
   }, {
     stem: "In the iterative design loop, what does applying **generalization** to two same-shaped use cases actually buy you?",
     choices: [{
-      text: "It deletes a use case, then a sequence diagram, then a method, then duplicated code",
+      text: "Eliminates redundant use cases, diagrams, methods, and code",
       correct: true
     }, {
-      text: "It makes the class diagram larger but more explicit"
+      text: "Makes the class diagram larger but clearer"
     }, {
-      text: "It is a drawing convention with no effect on the design"
+      text: "Is a drawing convention with no real design impact"
     }, {
-      text: "It replaces the need for a sequence diagram"
+      text: "Eliminates the need for sequence diagrams"
     }],
     why: "This is the whole point of refactoring **in the model**. Two use cases of the same shape become one parameterized parent; the two identical sequence diagrams collapse into one; the two unit-specific methods become one `convert(amount, targetUnit)`; and the duplicated code is never written. Modeling duplication is cheaper to delete than coded duplication."
   }]
