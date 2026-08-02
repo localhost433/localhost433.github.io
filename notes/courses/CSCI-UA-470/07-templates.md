@@ -1,5 +1,5 @@
 ---
-title: Templates
+title: "Templates & Generics"
 date: "2026-06-10"
 ---
 
@@ -84,6 +84,14 @@ The same pattern works for whole **classes**, not just functions. A class templa
 
 ```artifact src=demos/templates-class.jsx
 ```
+
+## What to retain from L07
+
+- A **template** is a recipe, not code: `template <typename T>` lets the compiler generate a version of the function (or class) per type used. `typename` and `class` are interchangeable here.
+- **Monomorphization**: each distinct type argument stamps out a separate concrete function/class at **compile time** -- `max<int>` and `max<double>` are independent Code-segment functions; `Box<int>` and `Box<double>` are unrelated types with different sizes.
+- The compiler needs the template's full **definition** at the call site -- that is why templates live in **header files** (defining one in a `.cpp` breaks at link time).
+- One type parameter forces **all** its arguments to the same type; `max(3, 7.5)` is ambiguous. Fix it with an explicit `max<double>(3, 7.5)` or a second parameter (`template <class T1, class T2>`).
+- No runtime cost and full type-checking -- templates are C++'s compile-time answer to generics.
 
 ## Practice
 
