@@ -165,7 +165,7 @@ This is **early binding** (a.k.a. *static binding*): method-to-call is resolved 
 
 Two classes can relate in two broad ways:
 
-- **Friendship** -- function-class or class-class (`friend`, see [Resource Management](note.html?course=CSCI-UA-470&note=04-resource-management)).
+- **Friendship** -- function-class or class-class (`friend`, see [Access Specifiers & Friendship](note.html?course=CSCI-UA-470&note=access-and-friendship)).
 - **Inheritance**:
   - **Single** -- one base. *Single-level* (A -> B) or *multi-level* (A -> B -> C).
   - **Multiple** -- several bases. Also single- or multi-level.

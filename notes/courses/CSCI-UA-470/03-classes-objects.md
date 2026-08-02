@@ -185,9 +185,23 @@ A **destructor** runs automatically when an object is destroyed -- when it goes 
 }
 ```
 
-For objects whose attributes are plain values there's nothing to clean up. Destructors become essential once an object owns **heap memory** (see **Resource Management**).
+For objects whose attributes are plain values there's nothing to clean up. Destructors become essential once an object owns **heap memory** (see [Dynamically-Allocated Attributes](note.html?course=CSCI-UA-470&note=dynamic-attributes)).
 
-> **Static members** (a per-class field or method shared by every object) and the stack/heap/static **storage model** for attributes are covered in [Copy, Operators & Resource Management](note.html?course=CSCI-UA-470&note=04-resource-management), alongside where objects live in memory.
+## Where objects live
+
+An object can be created on the stack, on the heap, or as a global, and a reference can alias any of them. Where it lives decides who destroys it: the stack object dies at the closing brace, the heap object only at `delete`.
+
+```cpp
+class Circle { public: string color; double radius; };
+
+Circle  c1;                 // stack
+Circle& c2 = c1;            // reference (alias for c1)
+Circle* c3 = new Circle();  // heap
+delete c3;                  // free the heap object
+c3 = nullptr;
+```
+
+> **Static members** (a per-class field or method shared by every object) get their own page: [Statics in C++](note.html?course=CSCI-UA-470&note=statics-cpp).
 
 ## Practice
 
