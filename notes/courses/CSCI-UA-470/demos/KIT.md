@@ -94,7 +94,11 @@ Shared SVG building blocks; every concept diagram sits on these.
 - `diagramCardHeight(sections, opts)` — height of such a card before you place it.
 - `diagramPalette(i)` — the 4-role theme-token palette (reuses the segment hues).
 - `CrossOut({ x, y, w, h, size, strokeWidth, opacity })` — the shared "this is wrong" X.
-- `Pipeline({ steps, maxWidth, ariaLabel })` — a linear box-and-arrow chain.
+- `Pipeline({ steps, maxWidth, ariaLabel })` — a vertical zone-band flow (the C++ build
+  pipeline, note 23's SDLC). A step is `{ zone, label, note, sub, via, accent, feed }`.
+  The viewBox is fixed at 440 wide, so text is **hard-capped**: a `feed.via` label rides
+  a ~58px edge (≈9 characters) and the feed box is 120px (label ≈11 chars, `note`
+  ≈16). Anything longer is silently clipped by the boxes at either end.
 
 ## UML — class & object diagrams
 
@@ -105,10 +109,10 @@ Shared SVG building blocks; every concept diagram sits on these.
 - `ClassTree({ layout, relation })` — renders a `treeLayout` result plus its fork connector.
 - `InheritFork({ parentCx, parentBottomY, childCxs, childTopY, busY, relation })` — one inheritance fork: hollow-triangle arrow, horizontal bus, drop to each child.
 
-## Design-pattern figures (notes 19–21)
+## Design-pattern figures (notes 19–22)
 
-The three pattern decks draw every pattern the same way, so that shape is a factory
-rather than eighteen hand-placed SVGs.
+The four pattern decks draw every pattern the same way, so that shape is a factory
+rather than twenty hand-placed SVGs.
 
 - `PatternFigure({ title, intent, bad, badTag, good, goodTag, client, caption, maxWidth })` — the
   chrome: intent line, the rejected half, the pattern half, the client code, and a
@@ -123,7 +127,13 @@ rather than eighteen hand-placed SVGs.
   `PatternFigure`'s `good`, or into your own `DiagramSvg` with extra elements appended.
 
 Figures the decks draw only once — Facade's subsystem, Bridge's two hierarchies,
-Adapter's out-of-hierarchy adaptee — skip `patternTree` and pass their own `{ node, viewBox }`.
+Adapter's out-of-hierarchy adaptee, Memento's three-card row, Visitor's two hierarchies —
+skip `patternTree` and pass their own `{ node, viewBox }`.
+
+One-off components that live in their own demo file rather than here, because they have
+a single caller: `visitor-double-dispatch.jsx` (the shape × visitor lookup grid, built on
+`DiagramSvg` + `DiagramCard` + `CodeBlock` + `KnobBar`, with the `mm-scene__nav` stepper
+markup copied from `MemoryScene`). Promote to this file if a second caller appears.
 
 ## UML — use case diagrams
 
