@@ -8,6 +8,7 @@
     
     { "src": "js/**/*.js",                "use": "@vercel/static"  },
     { "src": "notes/js/**/*.js",          "use": "@vercel/static"  },
+    { "src": "notes/js/**/*.mjs",         "use": "@vercel/static"  },
     { "src": "posts/js/**/*.js",          "use": "@vercel/static"  },
     { "src": "projects/js/**/*.js",       "use": "@vercel/static"  },
     
