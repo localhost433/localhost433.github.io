@@ -1,14 +1,14 @@
 /* AUTO-GENERATED from practice-21-behavioral-match.jsx by `npm run build:artifacts` — do not edit. */
 import { matchBuild } from "@course";
 
-/* note 21 practice — eight scenarios, eight names, each used exactly once. None uses
+/* note 21 practice — six scenarios, six names, each used exactly once. None uses
    the deck's cast. The trio is represented but only once each, since
-   practice-21-trio drills that split on its own; the work here is the other five,
-   and especially Mediator vs Observer (#4 vs #7), which the deck draws almost
-   identically. */
+   practice-21-trio drills that split on its own; the work here is Template Method,
+   and especially Mediator vs Observer (#2 vs #5), which the deck draws almost
+   identically. Chain and Iterator moved to practice-22-* with their sections. */
 
 export default matchBuild({
-  prompt: "Eight designs, eight behavioral patterns — each name used exactly once. Two of them are hub-and-spoke and look alike on paper; read the direction of the messages to separate them.",
+  prompt: "Six designs, six behavioral patterns — each name used exactly once. Two of them are hub-and-spoke and look alike on paper; read the direction of the messages to separate them.",
   paletteLabel: "Patterns",
   slotLabel: "is a",
   slotPlaceholder: "pattern",
@@ -30,25 +30,11 @@ export default matchBuild({
   }, {
     value: "observer",
     label: "Observer"
-  }, {
-    value: "chain",
-    label: "Chain of Resp."
-  }, {
-    value: "iterator",
-    label: "Iterator"
   }],
   items: [{
     text: "An abstract `Importer` defines `run()` as `open(); parse(); validate(); save();` and is never overridden. `CsvImporter` overrides `parse()` only; `XmlImporter` overrides `parse()` and `validate()`.",
     answer: "template",
-    why: "The **sequence is inherited and fixed**; only individual steps are replaceable, and they are replaced by *subclassing*. That inheritance-based variation is what marks Template Method out from the other seven, which all vary behaviour by holding an object."
-  }, {
-    text: "An HTTP request passes through authentication, then rate-limiting, then logging, then the handler. Each stage either responds itself or calls the next one, and the list of stages is read from a config file at start-up.",
-    answer: "chain",
-    why: "Servlet filters and middleware are Chain of Responsibility in production. The tells: each stage holds only its **successor**, any stage may end the journey, and the order is **data** — so it can come from a config file rather than from code."
-  }, {
-    text: "A `Playlist` can be walked in insertion order, shuffled, or by rating. Each walk is its own class holding a cursor, and `Playlist` itself gained no methods when the third one was added.",
-    answer: "iterator",
-    why: "Traversal extracted into its own hierarchy, each with its own cursor — which also means two walks can run over the same playlist at once. The clincher is what did *not* happen: `Playlist` was not reopened."
+    why: "The **sequence is inherited and fixed**; only individual steps are replaceable, and they are replaced by *subclassing*. That inheritance-based variation is what marks Template Method out from its neighbours here, which all vary behaviour by holding an object."
   }, {
     text: "In a chat room, a member sends one message to the room object, which delivers it to everyone present except the sender. Members hold no references to each other.",
     answer: "mediator",

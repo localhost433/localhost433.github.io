@@ -1,8 +1,8 @@
-/* AUTO-GENERATED from practice-21-chain-order.jsx by `npm run build:artifacts` — do not edit. */
-// notes/courses/CSCI-UA-470/demos/practice-21-chain-order.jsx
+/* AUTO-GENERATED from practice-22-chain-order.jsx by `npm run build:artifacts` — do not edit. */
+// notes/courses/CSCI-UA-470/demos/practice-22-chain-order.jsx
 import { sequenceOrder } from "@course";
 
-/* note 21 practice — one wiring of L20's request chain, as a sequence diagram. The
+/* note 22 practice — one wiring of L20's request chain, as a sequence diagram. The
    ordering is forced by the escalation rule (`if I cannot, pass it on`), so there is
    exactly one right answer, and building it makes two things concrete:
 

@@ -1,10 +1,13 @@
 /* AUTO-GENERATED from practice-21-mcq.jsx by `npm run build:artifacts` — do not edit. */
 import { mcq } from "@course";
 
-/* note 21 practice — the graded pass. Weighted toward the two collisions the deck
-   creates by drawing patterns identically (the trio, and Mediator vs Observer), plus
-   the through-line the lecture teaches four times without naming: a String mode plus
-   an if-chain becomes a field of an abstract type plus one polymorphic call. */
+/* note 21 practice — the graded pass over the six patterns that vary behaviour by
+   HOLDING an object. Weighted toward the two collisions the deck creates by drawing
+   patterns identically (the trio, and Mediator vs Observer), plus the through-line
+   the lecture teaches three times without naming: a String mode plus an if-chain
+   becomes a field of an abstract type plus one polymorphic call.
+
+   Chain and Iterator questions live in practice-22-mcq with their sections. */
 
 export default mcq({
   questions: [{
@@ -43,7 +46,7 @@ export default mcq({
     }, {
       text: "State — the list records the sequence of states"
     }, {
-      text: "Chain of Responsibility — the list is the chain"
+      text: "Template Method — the list holds the fixed steps"
     }],
     why: "Strategy and State objects are held **one at a time** by a context; nobody collects them. Commands are collected on purpose — reifying the request is what makes queues, logs, macros, and undo possible. If a design stores its behaviour objects rather than swapping them, it is Command."
   }, {
@@ -60,38 +63,12 @@ export default mcq({
     }],
     why: "Read the **direction**. Mediator collapses a many-to-many mesh: colleagues would otherwise talk to each other, so the hub relays — and skips the sender, because it was the one talking. Observer is one-to-many: a subject announces and the listeners, who opted in with `subscribe`, hear it. That opt-in is the other visible difference."
   }, {
-    stem: "`if (canHandle(a)) approve(a); else nextHandler.handle(a);` — what makes this a chain rather than plain delegation?",
-    choices: [{
-      text: "`nextHandler` is typed as the abstract parent itself",
-      correct: true
-    }, {
-      text: "`handle` is declared abstract on the parent"
-    }, {
-      text: "There are four concrete handler subclasses"
-    }, {
-      text: "The sender holds a reference to only one handler"
-    }],
-    why: "A field whose type is the class's own abstract parent is what lets the structure extend to any length and be rewired at run time — the same self-reference that makes a Composite recurse. Plain delegation forwards to a *different* type and stops there; abstract methods and subclass counts are true of half the catalog."
-  }, {
-    stem: "L20's Iterator crosses out a `Collection` with `getNextItemBasedOnIndex()`, `getNextItemBasedOnSize()`, and more. What is the objection?",
-    choices: [{
-      text: "The collection has taken on a second job — traversal",
-      correct: true
-    }, {
-      text: "The method names are too long to be readable"
-    }, {
-      text: "Those methods should have been made static"
-    }, {
-      text: "A collection should expose its list directly instead"
-    }],
-    why: "Holding items and walking them are separate responsibilities that change for separate reasons, so the class grows forever on one axis — note 16's SRP, reached from the traversal side. Extracting `Iterator` also buys something the methods could not: each iterator carries its **own cursor**, so two walks can run over one collection at once."
-  }, {
-    stem: "Which is the odd one out among L20's eight, and why?",
+    stem: "Which is the odd one out among the six patterns in this note, and why?",
     choices: [{
       text: "Template Method — it varies behaviour by inheritance",
       correct: true
     }, {
-      text: "Iterator — it is the only one in the Java standard library"
+      text: "Observer — it is the only one with an opt-in registry"
     }, {
       text: "Mediator — it is the only one with a central object"
     }, {
@@ -99,7 +76,7 @@ export default mcq({
     }],
     why: "Every other pattern here puts a field of an abstract type on a context and delegates; Template Method fixes the algorithm in a parent and lets **subclasses** fill the holes. The practical consequence: a Strategy can be swapped at run time, while a Template Method subclass is decided the moment the object is constructed."
   }, {
-    stem: "Four of L20's eight begin from a rejected design with a `String` field and an if-chain over it. What is the general move that fixes all four?",
+    stem: "Three of these six begin from a rejected design with a `String` field and an if-chain over it. What is the general move that fixes all three?",
     choices: [{
       text: "Replace the field with an abstract type and delegate",
       correct: true
