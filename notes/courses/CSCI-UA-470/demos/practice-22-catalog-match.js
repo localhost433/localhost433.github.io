@@ -1,16 +1,18 @@
-/* AUTO-GENERATED from practice-21-catalog-match.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from practice-22-catalog-match.jsx by `npm run build:artifacts` — do not edit. */
 import { matchBuild } from "@course";
 
-/* notes 19–21 closer — the whole catalog on one board. Eighteen labels, ten
+/* notes 19–22 closer — the whole catalog on one board. Twenty labels, twelve
    scenarios, no guarantee any label is used, so elimination is worthless and the
    only route is recognition. That is what a final actually asks.
 
    Item choice spans all three categories and puts one pair from each collision the
-   three notes flag: Factory vs Abstract Factory, Proxy vs Decorator, State vs
-   Strategy. Every scenario is real code someone has written, not a lecture cast. */
+   four notes flag: Factory vs Abstract Factory, Proxy vs Decorator, State vs
+   Strategy, and Memento vs Command (#11 vs #12, adjacent on purpose — both keep an
+   undo stack, and only what is IN the stack separates them).
+   Every scenario is real code someone has written, not a lecture cast. */
 
 export default matchBuild({
-  prompt: "Ten designs from across all three lectures. Stamp the pattern each one is. Labels may be used once, more than once, or not at all — so recognise rather than eliminate.",
+  prompt: "Twelve designs from across all four pattern lectures. Stamp the pattern each one is. Labels may be used once, more than once, or not at all — so recognise rather than eliminate.",
   paletteLabel: "Patterns",
   slotLabel: "is a",
   slotPlaceholder: "pattern",
@@ -68,6 +70,12 @@ export default matchBuild({
   }, {
     value: "iterator",
     label: "Iterator"
+  }, {
+    value: "memento",
+    label: "Memento"
+  }, {
+    value: "visitor",
+    label: "Visitor"
   }],
   items: [{
     text: "`Runtime.getRuntime()` returns the same object every time it is called, and `Runtime`'s constructor is private.",
@@ -109,5 +117,17 @@ export default matchBuild({
     text: "A logging framework's `Logger` may write to a file, a socket, or the console. `Logger` itself is subclassed for *application* and *audit* loggers, and either kind may use any destination, chosen at start-up.",
     answer: "bridge",
     why: "Two axes — kind of logger and destination — kept in separate hierarchies and joined by a field, instead of `AuditSocketLogger` and its five siblings. The test is whether both axes vary for their own reasons; here they do, and either can gain a member without touching the other."
+  }, {
+    text: "A compiler's syntax tree gives every node kind an `accept(v)` method whose whole body is `v.visit(this)`. `TypeChecker`, `CodeGenerator` and `PrettyPrinter` each implement a `visit` for every node kind, and adding a fourth pass touches no node class.",
+    answer: "visitor",
+    why: "The one-line `accept` body forwarding to `v.visit(this)` is the pattern's fingerprint — a second dispatch bought by hand. A new *operation* is a new class and the tree is never reopened; the price is that a new *node kind* reopens all three passes."
+  }, {
+    text: "A drawing app's undo stack holds objects that each record the canvas as it was before one edit. Undo pops the top one and writes its contents back into the canvas; the objects have no behaviour of their own.",
+    answer: "memento",
+    why: "What is stacked is a **snapshot of state**, and the entries do nothing — restoring is the canvas reading its own fields back. The next item stacks something that *acts* instead; that difference, not the stack, is what names each one."
+  }, {
+    text: "A drawing app's undo stack holds objects that each know how to perform one edit and how to reverse it. Undo pops the top one and calls `undo()` on it, and the same objects can be replayed to redo the work.",
+    answer: "command",
+    why: "Same stack, opposite contents. Here the entry is the **request reified** — it carries `run()` and `undo()`, so it can be replayed as well as reversed. A Memento cannot be replayed: it is a photograph, not an instruction."
   }]
 });

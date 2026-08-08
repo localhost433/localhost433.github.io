@@ -1,11 +1,13 @@
 ---
-title: "Behavioral Design Patterns"
+title: "Behavioral Patterns I — Behaviour as an Object"
 date: "2026-07-29"
 ---
 
 ## How objects talk
 
-The catalog's third column, and the last one. [The creational note (L18)](note.html?course=CSCI-UA-470&note=19-creational-patterns) was about *how objects get made*; [the structural note (L19)](note.html?course=CSCI-UA-470&note=20-structural-patterns) about *how they are composed*; L20 is about **who calls whom, and when** — the responsibilities each object holds and the messages that pass between them.
+The catalog's third column, and its largest: ten patterns across two lectures. [The creational note (L18)](note.html?course=CSCI-UA-470&note=19-creational-patterns) was about *how objects get made*; [the structural note (L19)](note.html?course=CSCI-UA-470&note=20-structural-patterns) about *how they are composed*; L20 and L21 are about **who calls whom, and when** — the responsibilities each object holds and the messages that pass between them.
+
+Ten is too many to hold at once, and they do not form one flat list. Six of them vary behaviour by **holding an object** and swapping which one; the other four work by **taking something out of the object** altogether — the route, the cursor, the state, the operation. This note is the first six. [Note 22](note.html?course=CSCI-UA-470&note=22-behavioral-patterns-ii) is the other four, and carries the closing exercise over the whole catalog.
 
 | Pattern | The deck's intent |
 |---|---|
@@ -15,10 +17,8 @@ The catalog's third column, and the last one. [The creational note (L18)](note.h
 | **Command** | *Decouple object that invokes the operation from execution* |
 | **Mediator** | *Reduce chaotic dependencies between objects* |
 | **Observer** | *Many objects need to receive an update* |
-| **Chain of Responsibilities** | *Avoid coupling between request & receiver; enables adding and removing receivers freely* |
-| **Iterator** | *Get the next Item of a collection* |
 
-Two warnings before the detail, because this lecture's structure is unusually deceptive. Three of these eight are drawn with the **same class diagram** and even the same method name, and two more are near-twins. Recognising the picture will not get you to the answer here; recognising the *intent* will.
+Two warnings before the detail, because this lecture's structure is unusually deceptive. Three of these six are drawn with the **same class diagram** and even the same method name, and two more are near-twins. Recognising the picture will not get you to the answer here; recognising the *intent* will.
 
 ## 1 · Template Method
 
@@ -27,7 +27,7 @@ Several sorters share the same four-step sequence and differ in one step each. C
 ```artifact src=demos/pattern-template-method.jsx
 ```
 
-Start here because it is the odd one out. Every other pattern in this lecture varies behaviour by **holding an object**; Template Method varies it by **being a subclass**. The consequence is practical: a `Sorter` subclass is decided the moment the object is constructed and cannot change afterwards, while all seven of its neighbours can be handed something different at run time.
+Start here because it is the odd one out. Every other pattern in this note varies behaviour by **holding an object**; Template Method varies it by **being a subclass**. The consequence is practical: a `Sorter` subclass is decided the moment the object is constructed and cannot change afterwards, while all five of its neighbours here can be handed something different at run time.
 
 The protected thing is the *order*. `run()` lives in the parent and is never overridden, so a subclass can fill a hole but cannot reorder, skip, or add a step — which is exactly what you want when the sequence is the part that must not vary.
 
@@ -50,7 +50,7 @@ Since structure decides nothing, the questions have to be about intent. Two of t
 | **State** | the object's **own lifecycle** | the same call behaving differently **over time** | one `receiveSMS()`, three answers — the `Phone` rings in `Normal`, stays quiet in `Silent`, buzzes in `Vibrate` |
 | **Command** | whoever **issues** the request | making the request an **object**, so invoker and receiver never meet | the request travels: `s1.setCommand(new Drive())` hands the soldier an object, not a string |
 
-Two follow-ups that settle most disputed cases. *Reassignability proves nothing:* a strategy picked from a dropdown is reassigned too, so the question is whether the change comes from **outside** as a preference or from **inside** as a lifecycle event. And *collection is decisive:* Strategy and State objects are held one at a time by a context; nobody keeps a list of them. If a design collects its behaviour objects, it is Command.
+Two follow-ups that settle most disputed cases. *Reassignability proves nothing:* a strategy picked from a dropdown is reassigned too, so the question is whether the change comes from **outside** as a preference or from **inside** as a lifecycle event. And *collection is decisive:* Strategy and State objects are held one at a time by a context; nobody keeps a list of them. If a design collects its behaviour objects, it is Command — with one qualification that arrives in [note 22](note.html?course=CSCI-UA-470&note=22-behavioral-patterns-ii), where Memento collects too, but collects *state* rather than requests.
 
 > **Beyond the slide —** the shared `run()` is the lecture's own choice, not the catalog's. GoF names them for what they do: `Strategy.execute()` (or `doAlgorithm`), `Command.execute()` (usually paired with `undo()`), and a State whose methods are named after the events it handles — `insertCoin()`, `selectItem()` — precisely because a state reacts to events rather than performing one job. Two more provenance notes: the slide's own client sets the state from *outside* (`p.setState(new Vibrate())`) — states that **transition themselves** are the catalog's tell, not the deck's; and the deck never actually *stores* a command — queued, logged, replayed, undone is what the catalog buys with the same shape. The naming difference is a symptom of the intent difference the UML cannot show.
 
@@ -83,31 +83,9 @@ A quick test on an unfamiliar design: ask whether the participants would be talk
 
 You have met the Observer shape before, from the interaction side: [note 13](note.html?course=CSCI-UA-470&note=13-uml-sequence-diagrams)'s MVC drill has a Model pushing an asynchronous `notify()` to its View. That async arrow is the same idea drawn as a message rather than as classes.
 
-## 7 · Chain of Responsibilities
-
-A student's request has to climb the department's ladder — Secretary, Chair, Dean, Assistant — until it reaches someone authorised to settle it, and the deck's point is that the ladder is different for different kinds of request. Hard-coding one ladder per scenario means the sender knows every possible handler, and the order they come in.
-
-```artifact src=demos/pattern-chain.jsx
-```
-
-The payoff is the client half, and the deck spends three whole panels on it: **three different chains built from the same four classes**, by reassigning `nextHandler` fields — the last one even wires the Secretary in as the *final* rung. The chain is *data*, so it can come from a config file, differ per request type, or be rebuilt while the program runs — which is what the second bullet of the intent is promising.
-
-What makes this a chain rather than ordinary delegation is a field whose type is the class's own abstract parent. That self-reference is the same trick [L19's Composition](note.html?course=CSCI-UA-470&note=20-structural-patterns) uses to recurse; here it makes the structure extensible to any length instead of any depth.
-
-## 8 · Iterator
-
-A collection can be walked in more than one order, and each new order somebody asks for arrives as another method on the collection — with another cursor field to go with it.
-
-```artifact src=demos/pattern-iterator.jsx
-```
-
-The rejected design is **interface bloat** rather than an if-chain: a collection that grew one method per question anyone ever asked of it, and one cursor field per method. Holding items and walking them change for different reasons, so [note 16](note.html?course=CSCI-UA-470&note=16-solid)'s Single Responsibility says split them — and the split buys something the methods could never manage: each iterator owns **its own cursor**, so two walks can run over one collection at the same time.
-
-This is also the pattern you have already been using. `java.util.Iterator` declares exactly `hasNext()` and `next()`, and a for-each loop is sugar that asks a collection for one and drives it.
-
 ## The one move behind almost all of them
 
-Four of these eight begin from the same rejected design — a `String` field naming a mode, and a method that switches on it:
+Three of these six begin from the same rejected design — a `String` field naming a mode, and a method that switches on it:
 
 ```java
 if      (x.equals("A")) { … }
@@ -115,9 +93,11 @@ else if (x.equals("B")) { … }
 else                    { … }
 ```
 
-and all four fix it the same way: replace the `String` with a field of an **abstract type**, and replace the conditional with **one polymorphic call**. That is [note 09](note.html?course=CSCI-UA-470&note=09-polymorphism-design-java)'s v2→v3 step and [note 16](note.html?course=CSCI-UA-470&note=16-solid)'s Open–Closed fix, arriving for the fourth, fifth, sixth, and seventh time.
+and all three fix it the same way: replace the `String` with a field of an **abstract type**, and replace the conditional with **one polymorphic call**. That is [note 09](note.html?course=CSCI-UA-470&note=09-polymorphism-design-java)'s v2→v3 step and [note 16](note.html?course=CSCI-UA-470&note=16-solid)'s Open–Closed fix, arriving for the fourth, fifth, and sixth time.
 
-Which is worth stating plainly, because it is the exam's favourite question in disguise: **spotting** the smell is easy once you have seen it four times. **Naming** which of the four patterns it is requires the intent questions above, and nothing else will do it.
+A fourth instance is waiting in [note 22](note.html?course=CSCI-UA-470&note=22-behavioral-patterns-ii): Chain of Responsibility rejects an if-chain too, but over *handlers* rather than over a `String` mode — same conditional, different thing being switched on, and a different fix.
+
+Which is worth stating plainly, because it is the exam's favourite question in disguise: **spotting** the smell is easy once you have seen it three times. **Naming** which of the three patterns it is requires the intent questions above, and nothing else will do it.
 
 ## What to retain from L20
 
@@ -134,11 +114,8 @@ Which is worth stating plainly, because it is the exam's favourite question in d
 | Mediator | many-to-many → hub-and-spoke; `broadcast` **skips the sender** |
 | Observer | one-to-many; listeners opt in and out themselves with `subscribe` / `unsubscribe` |
 | Mediator vs Observer | would the participants be talking *to each other* without the hub? Yes → Mediator, no → Observer |
-| Chain of Responsibility | `nextHandler` is typed as the abstract **parent**; each handler knows only its successor |
-| Chain payoff | the same handler classes rewire into different chains **at run time** — the chain is data |
-| Iterator | traversal extracted into its own hierarchy; each iterator owns its **cursor**, so walks can run concurrently |
-| Iterator in Java | `java.util.Iterator` is `hasNext()` / `next()`; for-each is sugar over it |
 | The through-line | a `String` mode + an if-chain becomes a field of an abstract type + one polymorphic call |
+| The other four | Chain, Iterator, Memento and Visitor are in [note 22](note.html?course=CSCI-UA-470&note=22-behavioral-patterns-ii) — they extract rather than swap |
 
 ## Practice
 
@@ -147,14 +124,9 @@ Begin with the collision this note is built around. Every scenario below would d
 ```artifact src=demos/practice-21-trio.jsx
 ```
 
-Then the full naming pass over L20 — eight designs, eight names, each used exactly once, with Mediator and Observer sitting next to each other so the direction question has to be asked.
+Then the naming pass over these six — six designs, six names, each used exactly once, with Mediator and Observer sitting next to each other so the direction question has to be asked.
 
 ```artifact src=demos/practice-21-behavioral-match.jsx
-```
-
-Next, build one chain as a sequence diagram. The ordering is forced by the escalation rule, and assembling it makes visible what a description glosses over: the request climbs four rungs and the answer walks all the way back down.
-
-```artifact src=demos/practice-21-chain-order.jsx
 ```
 
 The graded pass, weighted toward the two collisions and the through-line:
@@ -162,11 +134,8 @@ The graded pass, weighted toward the two collisions and the through-line:
 ```artifact src=demos/practice-21-mcq.jsx
 ```
 
-And the closer — the whole catalog on one board. Eighteen labels, ten designs from all three lectures, and no promise that any label is used, so elimination is worthless. This is the shape a final actually takes.
-
-```artifact src=demos/practice-21-catalog-match.jsx
-```
+[Note 22](note.html?course=CSCI-UA-470&note=22-behavioral-patterns-ii) carries the closer for the whole catalog — twenty labels over twelve designs from all three lectures — once the last four patterns are in hand.
 
 ---
 
-> Where this sits in the course: the end of the catalog and of the design arc. The pillars ([the roadmap](note.html?course=CSCI-UA-470&note=18-oop-pillars-roadmap)) gave the machinery, the UML unit ([L12](note.html?course=CSCI-UA-470&note=12-uml-use-case-diagrams)–[L15](note.html?course=CSCI-UA-470&note=15-uml-to-code)) the notation, [SOLID](note.html?course=CSCI-UA-470&note=16-solid) the judgment, and the three pattern notes ([L18](note.html?course=CSCI-UA-470&note=19-creational-patterns), [L19](note.html?course=CSCI-UA-470&note=20-structural-patterns), this one) the named solutions those principles keep arriving at. For final review, the language rules are consolidated in [the Java/C++ comparison (L11)](note.html?course=CSCI-UA-470&note=17-java-cpp-systematic-comparison) and the whole design chain runs end to end on one program in the [Password Keeper](note.html?course=CSCI-UA-470&note=password-keeper).
+> Where this sits in the course: the catalog's last column, opened. The pillars ([the roadmap](note.html?course=CSCI-UA-470&note=18-oop-pillars-roadmap)) gave the machinery, the UML unit ([L12](note.html?course=CSCI-UA-470&note=12-uml-use-case-diagrams)–[L15](note.html?course=CSCI-UA-470&note=15-uml-to-code)) the notation, and [SOLID](note.html?course=CSCI-UA-470&note=16-solid) the judgment; the pattern notes ([L18](note.html?course=CSCI-UA-470&note=19-creational-patterns), [L19](note.html?course=CSCI-UA-470&note=20-structural-patterns), this one, and [note 22](note.html?course=CSCI-UA-470&note=22-behavioral-patterns-ii)) are the named solutions those principles keep arriving at. Next: the four patterns that answer the same pressure by **removing** a job from the object rather than swapping it out. For final review, the language rules are consolidated in [the Java/C++ comparison (L11)](note.html?course=CSCI-UA-470&note=17-java-cpp-systematic-comparison) and the whole design chain runs end to end on one program in the [Password Keeper](note.html?course=CSCI-UA-470&note=password-keeper).
