@@ -120,10 +120,20 @@
     },
     {
         "slug": "21-behavioral-patterns",
-        "title": "L20 - Behavioral Design Patterns",
+        "title": "L20 - Behavioral Patterns I: Behaviour as an Object",
         "date": "2026-07-29"
     },
+    {
+        "slug": "22-behavioral-patterns-ii",
+        "title": "L20–L21 - Behavioral Patterns II: Taking It Out of the Object",
+        "date": "2026-07-29/08-03"
+    },
     { "group": "Synthesis & Review" },
+    {
+        "slug": "23-design-in-the-ai-era",
+        "title": "L22 - The SDLC, the Roles & Design in the AI Era",
+        "date": "2026-08-05"
+    },
     {
         "slug": "18-oop-pillars-roadmap",
         "title": "OOP Pillars & Course Roadmap",
