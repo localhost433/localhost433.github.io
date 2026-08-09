@@ -7,7 +7,7 @@ date: "2026-07-29"
 
 The catalog's third column, and its largest: ten patterns across two lectures. [The creational note (L18)](note.html?course=CSCI-UA-470&note=19-creational-patterns) was about *how objects get made*; [the structural note (L19)](note.html?course=CSCI-UA-470&note=20-structural-patterns) about *how they are composed*; L20 and L21 are about **who calls whom, and when** — the responsibilities each object holds and the messages that pass between them.
 
-Ten is too many to hold at once, and they do not form one flat list. Six of them vary behaviour by **holding an object** and swapping which one; the other four work by **taking something out of the object** altogether — the route, the cursor, the state, the operation. This note is the first six. [Note 22](note.html?course=CSCI-UA-470&note=22-behavioral-patterns-ii) is the other four, and carries the closing exercise over the whole catalog.
+Ten is too many to hold at once, and they do not form one flat list. The first four vary behaviour by **holding an object** and choosing which one; Mediator and Observer coordinate participants through a hub or a registration list. The other four work by **taking something out of the object** altogether — the route, the cursor, the state, the operation. This note is the first six. [Note 22](note.html?course=CSCI-UA-470&note=22-behavioral-patterns-ii) is the other four, and carries the closing exercise over the whole catalog.
 
 | Pattern | The deck's intent |
 |---|---|
@@ -27,7 +27,7 @@ Several sorters share the same four-step sequence and differ in one step each. C
 ```artifact src=demos/pattern-template-method.jsx
 ```
 
-Start here because it is the odd one out. Every other pattern in this note varies behaviour by **holding an object**; Template Method varies it by **being a subclass**. The consequence is practical: a `Sorter` subclass is decided the moment the object is constructed and cannot change afterwards, while all five of its neighbours here can be handed something different at run time.
+Start here because it is the odd one out. Every other pattern in this note varies behaviour or coordination through **held references**; Template Method varies it by **being a subclass**. The consequence is practical: a `Sorter` subclass is decided the moment the object is constructed and cannot change afterwards. Strategy, State, and Command can replace their held behavior object; Mediator and Observer change their participants through registration or configuration.
 
 The protected thing is the *order*. `run()` lives in the parent and is never overridden, so a subclass can fill a hole but cannot reorder, skip, or add a step — which is exactly what you want when the sequence is the part that must not vary.
 
@@ -50,7 +50,7 @@ Since structure decides nothing, the questions have to be about intent. Two of t
 | **State** | the object's **own lifecycle** | the same call behaving differently **over time** | one `receiveSMS()`, three answers — the `Phone` rings in `Normal`, stays quiet in `Silent`, buzzes in `Vibrate` |
 | **Command** | whoever **issues** the request | making the request an **object**, so invoker and receiver never meet | the request travels: `s1.setCommand(new Drive())` hands the soldier an object, not a string |
 
-Two follow-ups that settle most disputed cases. *Reassignability proves nothing:* a strategy picked from a dropdown is reassigned too, so the question is whether the change comes from **outside** as a preference or from **inside** as a lifecycle event. And *collection is decisive:* Strategy and State objects are held one at a time by a context; nobody keeps a list of them. If a design collects its behaviour objects, it is Command — with one qualification that arrives in [note 22](note.html?course=CSCI-UA-470&note=22-behavioral-patterns-ii), where Memento collects too, but collects *state* rather than requests.
+Two follow-ups settle most disputed cases. *Reassignability proves nothing:* a strategy picked from a dropdown is reassigned too, so the question is whether the change comes from **outside** as a preference or from **inside** as a lifecycle event. Strategy and State usually hold one active behavior object at a time. Command is the better diagnosis when the **request itself** has become an object that can be handed to an invoker, stored, queued, or replayed; a collection alone is not sufficient. [Note 22](note.html?course=CSCI-UA-470&note=22-behavioral-patterns-ii) supplies the close cousin: Memento stores *state* rather than requests.
 
 > **Beyond the slide —** the shared `run()` is the lecture's own choice, not the catalog's. GoF names them for what they do: `Strategy.execute()` (or `doAlgorithm`), `Command.execute()` (usually paired with `undo()`), and a State whose methods are named after the events it handles — `insertCoin()`, `selectItem()` — precisely because a state reacts to events rather than performing one job. Two more provenance notes: the slide's own client sets the state from *outside* (`p.setState(new Vibrate())`) — states that **transition themselves** are the catalog's tell, not the deck's; and the deck never actually *stores* a command — queued, logged, replayed, undone is what the catalog buys with the same shape. The naming difference is a symptom of the intent difference the UML cannot show.
 
@@ -77,7 +77,7 @@ The two UML pictures are nearly the same — a hub holding a list of a role type
 | | Shape | Who registers | The loop |
 |---|---|---|---|
 | **Mediator** | many-to-many collapsed to a hub — peers who would otherwise talk to *each other* | whoever builds the room | skips the **sender**: a colleague does not receive its own message |
-| **Observer** | one-to-many — one source announcing to listeners | the **listener**, via `subscribe` / `unsubscribe`, at run time | notifies everyone; there is no sender to exclude |
+| **Observer** | one-to-many — one source announcing to listeners | observers register through the **subject's** `subscribe` / `unsubscribe` operations at run time | notifies everyone; there is no sender to exclude |
 
 A quick test on an unfamiliar design: ask whether the participants would be talking *to each other* if the hub were removed. Chat members would; spreadsheet cells watching a value would not — they would just stop hearing about it.
 
@@ -95,7 +95,7 @@ else                    { … }
 
 and all three fix it the same way: replace the `String` with a field of an **abstract type**, and replace the conditional with **one polymorphic call**. That is [note 09](note.html?course=CSCI-UA-470&note=09-polymorphism-design-java)'s v2→v3 step and [note 16](note.html?course=CSCI-UA-470&note=16-solid)'s Open–Closed fix, arriving for the fourth, fifth, and sixth time.
 
-A fourth instance is waiting in [note 22](note.html?course=CSCI-UA-470&note=22-behavioral-patterns-ii): Chain of Responsibility rejects an if-chain too, but over *handlers* rather than over a `String` mode — same conditional, different thing being switched on, and a different fix.
+A related case is waiting in [note 22](note.html?course=CSCI-UA-470&note=22-behavioral-patterns-ii): Chain of Responsibility replaces a sender's knowledge of every possible handler with a successor link and a conditional delegation step. It is not the same String-mode if-chain: the conditional asks whether to pass the request to the next handler.
 
 Which is worth stating plainly, because it is the exam's favourite question in disguise: **spotting** the smell is easy once you have seen it three times. **Naming** which of the three patterns it is requires the intent questions above, and nothing else will do it.
 

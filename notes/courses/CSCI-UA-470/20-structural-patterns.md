@@ -28,7 +28,7 @@ You own a hierarchy that works. Then a class arrives that does the same job with
 
 The adapter is the only child in the hierarchy with two loyalties: it **is** a `DBCNN` (so the client can hold it) and it **has** a `SQLite` (so it can actually do the work). Both halves are required, and spotting both is how you recognise one in code you have never seen.
 
-> **Beyond the slide —** the intent line oversells. An adapter adds no ability at all; the wrapped class could always read and write. What changes is the *shape* of the ability, so a class written against one interface becomes usable through another. The catalog also distinguishes an **object adapter** (holds the adaptee, as here) from a **class adapter** (inherits from both) — only the first is available in Java, which has no multiple inheritance of classes (the reason is [the diamond problem](note.html?course=CSCI-UA-470&note=06-polymorphism)).
+> **Beyond the slide —** the intent line oversells. An adapter adds no ability at all; the wrapped class could always read and write. What changes is the *shape* of the ability, so a class written against one interface becomes usable through another. The catalog also distinguishes an **object adapter** (holds the adaptee, as here) from a **class adapter** (inherits from the adaptee and implements the target interface). Java cannot inherit from two classes, but it can use that class-adapter form when the target is an interface; the object form is the more general choice (the inheritance issue is [the diamond problem](note.html?course=CSCI-UA-470&note=06-polymorphism)).
 
 ## 2 · Composition
 

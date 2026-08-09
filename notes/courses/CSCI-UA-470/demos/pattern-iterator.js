@@ -87,6 +87,6 @@ while (i.hasNext()) process(i.getNext());`,
         className: "mm-ic"
       }, "Collection"), " could never manage.")
     }],
-    punch: "This is the pattern you have already been using: java.util.Iterator declares exactly hasNext() and next(), and a for-each loop is sugar that asks a collection for one and drives it. Everything the deck rejects is what the Java Collections API deliberately does not do."
+    punch: "This is the pattern you have already been using: the course's simplified java.util.Iterator view centers on hasNext() and next(), and a for-each loop is sugar that asks a collection for one and drives it. Everything the deck rejects is what the Java Collections API deliberately does not do."
   }
 });

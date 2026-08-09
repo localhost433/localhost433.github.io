@@ -29,7 +29,7 @@ The payoff is the client half, and the deck spends three whole panels on it: **t
 
 What makes this a chain rather than ordinary delegation is a field whose type is the class's own abstract parent. That self-reference is the same trick [L19's Composition](note.html?course=CSCI-UA-470&note=20-structural-patterns) uses to recurse; here it makes the structure extensible to any length instead of any depth.
 
-This is also the fourth if-chain the behavioral lectures reject, and the odd one out among them. The [trio](note.html?course=CSCI-UA-470&note=21-behavioral-patterns) switched on a `String` naming a mode; this one switches on *which handler to try next*, so the fix is not a field of an abstract type on one context but a field of the abstract type on **every** handler.
+This is also the fourth branching case the behavioral lectures use to motivate polymorphism, and the odd one out among them. The [trio](note.html?course=CSCI-UA-470&note=21-behavioral-patterns) switched on a `String` naming a mode; this one switches on *which handler to try next*, so the fix is not a field of an abstract type on one context but a field of the abstract type on **every** handler.
 
 ## 8 · Iterator
 
@@ -40,7 +40,7 @@ A collection can be walked in more than one order, and each new order somebody a
 
 The rejected design is **interface bloat** rather than an if-chain: a collection that grew one method per question anyone ever asked of it, and one cursor field per method. Holding items and walking them change for different reasons, so [note 16](note.html?course=CSCI-UA-470&note=16-solid)'s Single Responsibility says split them — and the split buys something the methods could never manage: each iterator owns **its own cursor**, so two walks can run over one collection at the same time.
 
-This is also the pattern you have already been using. `java.util.Iterator` declares exactly `hasNext()` and `next()`, and a for-each loop is sugar that asks a collection for one and drives it.
+This is also the pattern you have already been using. The course's simplified `java.util.Iterator` view centers on `hasNext()` and `next()`, and a for-each loop is sugar that asks a collection for one and drives it.
 
 ## 9 · Memento
 
@@ -69,7 +69,7 @@ The three roles have names worth learning, because the exam question is usually 
 
 | | What is in the stack | What undo does |
 |---|---|---|
-| **Command** | the **request**, reified — an object with `run()` and `undo()` | asks the top entry to reverse itself |
+| **Command** | the **request**, reified — in the deck, an object with `run()`; an undo method is a common extension | executes the request; reversal requires an explicit undo protocol |
 | **Memento** | the **state the request changed** — fields, no methods | writes the top entry's fields back into the originator |
 
 Two consequences follow, and either settles a disputed case. A Command stack can be **replayed** — run the list forward and you have redo, or a macro — while a memento stack cannot, because a photograph does not describe how the picture was taken. And a Command has to be written once per kind of edit, while one `Memento` class covers every edit there will ever be, at the cost of copying the whole state each time.
@@ -119,8 +119,8 @@ The deck's second cast makes the same point sideways: a hospital's `Patient` is 
 | Chain of Responsibility | `nextHandler` is typed as the abstract **parent**; each handler knows only its successor |
 | Chain payoff | the same handler classes rewire into different chains **at run time** — the chain is data |
 | Iterator | traversal extracted into its own hierarchy; each iterator owns its **cursor**, so walks can run concurrently |
-| Iterator in Java | `java.util.Iterator` is `hasNext()` / `next()`; for-each is sugar over it |
-| Memento, the roles | Originator (`Document`) makes and accepts snapshots · Memento is data · CareTaker stores and never looks inside |
+| Iterator in Java | the simplified course view centers on `hasNext()` / `next()`; for-each is sugar over it |
+| Memento, the roles | Originator (`Document`) makes and accepts snapshots · Memento is data · the canonical Caretaker stores and never looks inside (the deck's simplified version reads its public fields directly) |
 | Memento, the stack | `save` pushes a copy, `undo` pops the last one back — undo depth lives in the caretaker's list |
 | Memento vs Command | both are a stack you pop; Command stores the **request** (and can replay), Memento the **state** (and cannot) |
 | Visitor, the problem | a new operation reopens the abstract class **and** every subclass — Open–Closed, broken |

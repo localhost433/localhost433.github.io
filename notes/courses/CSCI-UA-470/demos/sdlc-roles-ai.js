@@ -86,7 +86,7 @@ const AI = feed(PHASES, [{
   sub: 3,
   via: "AI drafts"
 }, {
-  label: "AI owns it",
+  label: "AI drafts",
   note: "your contract",
   sub: 0,
   via: "AI drafts"
@@ -117,7 +117,7 @@ const VIEWS = {
   },
   ai: {
     steps: AI,
-    aria: "The same seven phases with the division of labour under AI codegen: AI drafts at every phase, but you own requirements, analysis, design and maintenance, AI owns implementation inside a contract you set, and testing and deployment are shared."
+    aria: "The same seven phases with the division of labour under AI code generation: AI can draft at every phase, but people decide requirements, analysis, design and maintenance, define the implementation contract, and judge whether the output is correct; testing and deployment remain shared responsibilities."
   }
 };
 const KNOBS = [{
@@ -137,7 +137,7 @@ const KNOBS = [{
 const CAPTION = {
   phases: "Everything this course taught sits in one band. Use cases are the output of Analysis; UML, SOLID and the pattern catalog are the output of Design. Code arrives one phase later — which is why the course spent six lectures on drawings before it wrote a line of the capstone.",
   roles: "The chain explains the syllabus. An analyst hands the designer use cases, the designer hands the programmer a model, the programmer hands the tester a build — and each handoff is a document in a notation both sides can read. That is what UML is for, and why a diagram nobody else can read has failed at its only job.",
-  ai: "The deck's claim in one column: AI can draft in every band, but the bands you own are the ones where somebody has to decide what should exist and whether what came back is right. Note where Design sits — it is the phase AI helps with most and can settle least."
+  ai: "The deck's claim in one column: AI can draft in every band, but people still decide what should exist, set the implementation contract, and judge whether what came back is right. Note where Design sits — it is the phase AI helps with most and can settle least."
 };
 export default function SdlcRolesAi() {
   const [view, setView] = React.useState("phases");

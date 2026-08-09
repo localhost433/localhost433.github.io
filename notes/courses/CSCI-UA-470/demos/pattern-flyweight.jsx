@@ -12,12 +12,13 @@ import { patternFigure, patternTree, SvgCode, svgCodeSize } from "@course";
 
 const BODY = [
   "vehicle v;",
-  "if (type in repo)",
-  "    v = repo.get(type, color);",
+  "VehicleKey key = new VehicleKey(type, color);",
+  "if (repo.containsKey(key))",
+  "    v = repo.get(key);",
   "else {",
   "    v = (type == car) ? new Car(color)",
   "                      : new Bike(color);",
-  "    repo.add(v, type, color);",
+  "    repo.put(key, v);",
   "}",
   "return v;",
 ];
@@ -25,7 +26,7 @@ const BODY = [
 const T = patternTree({
   contextW: 268, gapX: 46, edge: "depend",
   context: { title: "VehicleFactory",
-    sections: [{ rows: ["- repo : List<vehicle>"] },
+    sections: [{ rows: ["- repo : Map<VehicleKey, vehicle>"] },
       { rows: ["+ getVehicle(type, color) : vehicle"] }] },
   parent: { title: "vehicle", abstract: true,
     sections: [{ rows: ["- color"] }, { rows: ["+ show()"] }] },
@@ -58,7 +59,7 @@ while (true) {
   },
   good: {
     width: W, height: H, viewBox: `0 0 ${W} ${H}`, maxWidth: 780,
-    ariaLabel: "VehicleFactory now holds repo, a List of vehicle, and depends on an abstract vehicle class with subclasses CAR and Bike. Its getVehicle body checks repo first, returns the cached vehicle if the type and colour are present, and only constructs and caches a new one otherwise.",
+    ariaLabel: "VehicleFactory now holds a map keyed by the type and colour pair and depends on an abstract vehicle class with subclasses CAR and Bike. Its getVehicle body checks the pair first, returns the cached vehicle if that exact key is present, and only constructs and caches a new one otherwise.",
     node: (
       <g>
         {T.node}

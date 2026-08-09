@@ -13,7 +13,7 @@ const code = `v = VehicleFactory.getVehicle(car,  red);    // miss
 v = VehicleFactory.getVehicle(car,  red);    // hit
 v = VehicleFactory.getVehicle(bike, blue);   // miss
 v = VehicleFactory.getVehicle(car,  red);    // hit`;
-const REPO = (entries, hl) => glob("repo", "List<vehicle>", "", {
+const REPO = (entries, hl) => glob("repo", "Map<VehicleKey, vehicle>", "", {
   id: "repo",
   hl,
   fields: entries

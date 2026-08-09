@@ -127,7 +127,7 @@ c.undo();               // d.title is "draft" again
   caption: {
     cols: [
       { tag: "originator", kind: "cpp", children: <>The <code className="mm-ic">Document</code> holds the state and only that. It never learns that it is being snapshotted, so undo depth is not its problem.</> },
-      { tag: "caretaker", kind: "int", children: <>The <code className="mm-ic">CareTaker</code> holds the stack and only that. It stores mementos in order and hands the last one back — it never interprets what is inside one.</> },
+      { tag: "caretaker", kind: "int", children: <>The canonical <code className="mm-ic">CareTaker</code> stores the stack and does not interpret it. This deck's simplified version exposes the snapshot fields and copies them directly in <code className="mm-ic">undo()</code>.</> },
     ],
     punch: "The stack is LIFO, and that is the whole of ctrl+Z: save pushes, undo pops. Because depth is a property of the caretaker's list rather than of the document, a hundred levels of undo costs a hundred mementos and not one line of Document.",
   },

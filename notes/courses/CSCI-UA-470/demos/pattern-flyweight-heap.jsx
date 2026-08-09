@@ -14,7 +14,7 @@ v = VehicleFactory.getVehicle(car,  red);    // hit
 v = VehicleFactory.getVehicle(bike, blue);   // miss
 v = VehicleFactory.getVehicle(car,  red);    // hit`;
 
-const REPO = (entries, hl) => glob("repo", "List<vehicle>", "", { id: "repo", hl, fields: entries });
+const REPO = (entries, hl) => glob("repo", "Map<VehicleKey, vehicle>", "", { id: "repo", hl, fields: entries });
 const CAR_ENTRY = { name: "car·red", size: 8, to: "car1", value: "→" };
 const BIKE_ENTRY = { name: "bike·blue", size: 8, to: "bike1", value: "→" };
 
