@@ -11,7 +11,7 @@ import { patternFigure, patternTree, SvgCode, svgCodeSize } from "@course";
    The heap companion (pattern-flyweight-heap) shows the consequence: a thousand
    requests, a handful of objects. */
 
-const BODY = ["vehicle v;", "if (type in repo)", "    v = repo.get(type, color);", "else {", "    v = (type == car) ? new Car(color)", "                      : new Bike(color);", "    repo.add(v, type, color);", "}", "return v;"];
+const BODY = ["vehicle v;", "VehicleKey key = new VehicleKey(type, color);", "if (repo.containsKey(key))", "    v = repo.get(key);", "else {", "    v = (type == car) ? new Car(color)", "                      : new Bike(color);", "    repo.put(key, v);", "}", "return v;"];
 const T = patternTree({
   contextW: 268,
   gapX: 46,
@@ -19,7 +19,7 @@ const T = patternTree({
   context: {
     title: "VehicleFactory",
     sections: [{
-      rows: ["- repo : List<vehicle>"]
+      rows: ["- repo : Map<VehicleKey, vehicle>"]
     }, {
       rows: ["+ getVehicle(type, color) : vehicle"]
     }]
@@ -71,7 +71,7 @@ while (true) {
     height: H,
     viewBox: `0 0 ${W} ${H}`,
     maxWidth: 780,
-    ariaLabel: "VehicleFactory now holds repo, a List of vehicle, and depends on an abstract vehicle class with subclasses CAR and Bike. Its getVehicle body checks repo first, returns the cached vehicle if the type and colour are present, and only constructs and caches a new one otherwise.",
+    ariaLabel: "VehicleFactory now holds a map keyed by the type and colour pair and depends on an abstract vehicle class with subclasses CAR and Bike. Its getVehicle body checks the pair first, returns the cached vehicle if that exact key is present, and only constructs and caches a new one otherwise.",
     node: /*#__PURE__*/React.createElement("g", null, T.node, /*#__PURE__*/React.createElement(SvgCode, {
       x: 14,
       y: T.height - 6,

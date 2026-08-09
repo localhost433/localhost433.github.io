@@ -1650,6 +1650,23 @@ export function ClassTree({ layout, relation = "extends" }) {
 
 const PAT_PAD = 14;
 
+function wrapSvgNote(text, maxChars) {
+  const words = String(text || "").split(/\s+/).filter(Boolean);
+  const lines = [];
+  let line = "";
+  words.forEach(word => {
+    const candidate = line ? line + " " + word : word;
+    if (line && candidate.length > maxChars) {
+      lines.push(line);
+      line = word;
+    } else {
+      line = candidate;
+    }
+  });
+  if (line) lines.push(line);
+  return lines;
+}
+
 export function patternTree({
   context, edge = "assoc", edgeLabel, contextW = 200, gapX = 54, gapY = 40,
   place = "left",   // where the context card sits relative to the abstract parent
@@ -1672,8 +1689,11 @@ export function patternTree({
   const L = treeLayout({ cx: treeLeft - probe.left, topY: treeTop, parent, children, cardW, gap, forkGap });
   const ctxX = above ? L.parent.cx - contextW / 2 : PAT_PAD;
 
-  const noteH = note ? 20 : 0;
   const width = Math.round(Math.max(L.right, ctxX + contextW) + PAT_PAD);
+  // SVG text does not wrap by itself. Keep the note inside the viewBox instead
+  // of letting a long centered sentence clip at either edge on narrow frames.
+  const noteLines = note ? wrapSvgNote(note, Math.max(38, Math.floor((width - 2 * PAT_PAD) / 6.8))) : [];
+  const noteH = noteLines.length ? noteLines.length * 15 : 0;
   const height = Math.round(Math.max(L.bottom, ctxY + ctxH) + PAT_PAD + noteH);
 
   const node = (
@@ -1688,9 +1708,11 @@ export function patternTree({
         </>
       ) : null}
       <ClassTree layout={L} relation={relation} />
-      {note ? (
-        <text x={width / 2} y={height - 8} textAnchor="middle"
-          style={{ fill: "var(--mm-muted)", fontSize: 11 }}>{note}</text>
+      {noteLines.length ? (
+        <text x={width / 2} y={height - 8 - (noteLines.length - 1) * 15} textAnchor="middle"
+          style={{ fill: "var(--mm-muted)", fontSize: 11 }}>
+          {noteLines.map((line, i) => <tspan key={i} x={width / 2} dy={i ? 15 : 0}>{line}</tspan>)}
+        </text>
       ) : null}
     </g>
   );

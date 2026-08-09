@@ -65,6 +65,6 @@ while (i.hasNext()) process(i.getNext());`,
       { tag: "collection", kind: "cpp", children: <>Goes back to one job: <strong>holding</strong> the items. Note 16's Single Responsibility, arrived at from the traversal side.</> },
       { tag: "iterator", kind: "int", children: <>Holds the <strong>cursor</strong> — which is why two iterators can walk the same collection at once, something a method on <code className="mm-ic">Collection</code> could never manage.</> },
     ],
-    punch: "This is the pattern you have already been using: java.util.Iterator declares exactly hasNext() and next(), and a for-each loop is sugar that asks a collection for one and drives it. Everything the deck rejects is what the Java Collections API deliberately does not do.",
+    punch: "This is the pattern you have already been using: the course's simplified java.util.Iterator view centers on hasNext() and next(), and a for-each loop is sugar that asks a collection for one and drives it. Everything the deck rejects is what the Java Collections API deliberately does not do.",
   },
 });
