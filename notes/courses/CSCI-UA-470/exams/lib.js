@@ -15,6 +15,12 @@ function validateExam(data) {
       throw new Error(`question ${i}: needs >=2 options`);
     const correct = q.options.filter((o) => o.correct === true).length;
     if (correct !== 1) throw new Error(`question ${i}: exactly one correct option required (found ${correct})`);
+    if (q.diagram) {
+      if (typeof q.diagram !== "string" || !q.diagram.includes("<svg"))
+        throw new Error(`question ${i}: diagram must contain inline SVG`);
+      if (typeof q.diagramAlt !== "string" || q.diagramAlt.trim().length === 0)
+        throw new Error(`question ${i}: diagramAlt is required for diagram questions`);
+    }
     q.options.forEach((o, j) => {
       if (typeof o.text !== "string") throw new Error(`question ${i} option ${j}: text required`);
     });
