@@ -122,12 +122,18 @@ docs/
 # out of the published site; not listed in any index.json.
 /notes/courses/CSCI-UA-470/midterm/
 /notes/courses/CSCI-UA-470/quiz/
+/notes/courses/CSCI-UA-470/final/
 
 # Exam-shell SOURCE must stay tracked. The "*Exam*" rule above ignores "exams"
 # (core.ignorecase makes it case-insensitive), so re-include the dir and its
-# contents. Built exams still land in the ignored midterm/ and quiz/ dirs above.
+# contents. Built exams still land in the ignored study dirs above.
 !/notes/courses/CSCI-UA-470/exams/
 !/notes/courses/CSCI-UA-470/exams/**
+
+# Practice question banks are personal study material too. Keep their source
+# local even though the reusable exam-shell source above stays tracked.
+/notes/courses/CSCI-UA-470/exams/data/
+/notes/courses/CSCI-UA-470/exams/final.test.js
 
 # Hidden courses
 /notes/courses/FYSEM*

@@ -113,12 +113,28 @@ button{font-family:inherit; cursor:pointer; border:none; background:none; color:
 .badge.t-concept{color:var(--accent); background:var(--accent-soft)}
 .badge.t-output{color:var(--t-output-fg); background:var(--t-output-bg)}
 .badge.t-debug{color:var(--t-debug-fg); background:var(--t-debug-bg)}
+.badge.t-diagram{color:#7c3aed; background:#f3e8ff}
 .qnum{font-family:"JetBrains Mono",monospace; font-size:13px; color:var(--faint); font-weight:600}
 .qcard{background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:26px 28px; box-shadow:var(--shadow); animation:fade .25s ease}
 @keyframes fade{from{opacity:0; transform:translateY(4px)}to{opacity:1; transform:none}}
 .qprompt{font-size:18.5px; font-weight:600; letter-spacing:-.01em; line-height:1.4; margin:0 0 4px}
 .qsub{color:var(--muted); font-size:15px; margin:8px 0 0}
 pre.code{font-family:"JetBrains Mono",monospace; font-size:13.5px; line-height:1.6; background:var(--code-bg); border:1px solid var(--code-border); border-radius:11px; padding:16px 18px; margin:18px 0 6px; overflow-x:auto; color:var(--code-text); tab-size:2}
+.diagram-card{
+  --seg-stack-bg:#e6f1fb; --seg-stack-bd:#b9d4ee; --seg-stack-fg:#0c447c;
+  --seg-heap-bg:#e1f5ee; --seg-heap-bd:#b3dfd0; --seg-heap-fg:#085041;
+  --seg-global-bg:#faeeda; --seg-global-bd:#ecd6ad; --seg-global-fg:#633806;
+  --seg-code-bg:#eeedfe; --seg-code-bd:#cfcbf3; --seg-code-fg:#3c3489;
+  --mm-muted:#5a6270; --mm-cell-bg:#fff; --mm-cell-bd:#d4dbe4; --mm-cell-fg:#1f2733;
+  --mm-panel-bg:#f5f7fa; --mm-ptr:#5b53d6; --mm-ref:#0e8aa0; --mm-hl:#d9870a;
+  margin:18px 0 6px; padding:14px; overflow-x:auto; border:1px solid var(--border);
+  border-radius:12px; background:var(--mm-panel-bg)
+}
+.exam-artifact-svg{display:block; height:auto; margin:0 auto; max-width:none; font-family:ui-monospace,"JetBrains Mono",Menlo,monospace}
+.exam-artifact-svg--use-case{width:820px}
+.exam-artifact-svg--class{width:800px}
+.exam-artifact-svg--sequence{width:855px}
+.exam-artifact-svg--object{width:800px}
 .c-com{color:var(--code-com); font-style:italic} .c-str{color:var(--code-str)} .c-kw{color:var(--code-kw); font-weight:600} .c-ty{color:var(--code-ty)} .c-num{color:var(--code-num)} .c-fn{color:var(--code-fn)}
 .opts{display:grid; gap:11px; margin-top:20px}
 .opt{display:flex; align-items:flex-start; gap:13px; width:100%; text-align:left; padding:14px 16px; border:1.5px solid var(--border); background:var(--surface); border-radius:12px; transition:border-color .12s, background .12s; font-size:15.5px; line-height:1.45}
@@ -235,6 +251,7 @@ details.rev[open] .sm-chev{transform:rotate(90deg)}
   .qhead{margin-bottom:12px}
   .qprompt{font-size:16.5px}
   pre.code{font-size:12px; padding:13px 13px; margin:14px 0 4px}
+  .diagram-card{padding:9px; margin:14px 0 4px}
   .opts{margin-top:16px; gap:9px}
   .opt{padding:12px 13px; font-size:15px}
   .opt .txt{font-size:13px}
@@ -347,6 +364,7 @@ details.rev[open] .sm-chev{transform:rotate(90deg)}
       <button class="fbtn" data-f="wrong" onclick="setFilter('wrong')">Incorrect</button>
       <button class="fbtn" data-f="output" onclick="setFilter('output')">Output</button>
       <button class="fbtn" data-f="debug" onclick="setFilter('debug')">Debug</button>
+      <button class="fbtn" data-f="diagram" onclick="setFilter('diagram')">Diagram</button>
       <button class="fbtn" data-f="concept" onclick="setFilter('concept')">Concept</button>
     </div>
   </div>
@@ -368,7 +386,8 @@ window.QUESTIONS = [ { type:"concept", prose:true, prompt:"Sample question — i
 const TYPE_META = {
   concept:{label:"Concept", cls:"t-concept"},
   output:{label:"Predict Output", cls:"t-output"},
-  debug:{label:"Debug", cls:"t-debug"}
+  debug:{label:"Code Analysis", cls:"t-debug"},
+  diagram:{label:"Diagram", cls:"t-diagram"}
 };
 
 const QUESTIONS = window.QUESTIONS || [];
@@ -482,6 +501,7 @@ function render(){
 
   let html=`<p class="qprompt">${q.prompt}</p>`;
   if(q.sub) html+=`<p class="qsub">${q.sub}</p>`;
+  if(q.diagram) html+=`<div class="diagram-card">${q.diagram}</div>`;
   if(q.code) html+=`<pre class="code">${highlight(q.code)}</pre>`;
   html+=`<div class="opts">`;
   opts.forEach((opt,i)=>{
@@ -550,7 +570,7 @@ function submit(auto){
 function renderResults(auto){
   const total=work.length;
   let correct=0;
-  const byType={concept:{c:0,t:0},output:{c:0,t:0},debug:{c:0,t:0}};
+  const byType={concept:{c:0,t:0},diagram:{c:0,t:0},output:{c:0,t:0},debug:{c:0,t:0}};
   work.forEach(it=>{
     byType[qOf(it).type].t++;
     const isC = it.answer!==null && optsOf(it)[it.answer].correct;
@@ -582,7 +602,7 @@ function renderResults(auto){
   }
 
   // type bars
-  const order=[["output","Predict output","var(--t-output-fg)"],["debug","Debug","var(--t-debug-fg)"],["concept","Concept","var(--accent)"]];
+  const order=[["output","Predict output","var(--t-output-fg)"],["debug","Code analysis","var(--t-debug-fg)"],["diagram","Diagram","#7c3aed"],["concept","Concept","var(--accent)"]];
   let bh="";
   order.forEach(([k,nm,col])=>{
     const d=byType[k]; const p=d.t?Math.round(d.c/d.t*100):0;
@@ -643,6 +663,7 @@ function buildWrongMarkdown(){
     const opts=optsOf(it);
     out+=`\n---\n\n## ${n+1}. ${stripHtml(q.prompt)}\n`;
     if(q.sub) out+=`\n_${stripHtml(q.sub)}_\n`;
+    if(q.diagramAlt) out+=`\n[Diagram: ${stripHtml(q.diagramAlt)}]\n`;
     if(q.code) out+="\n```cpp\n"+q.code+"\n```\n";
     out+="\nOptions:\n";
     opts.forEach((opt,i)=>{ out+=`- ${LETTERS[i]}. ${stripHtml(opt.text)}\n`; });
@@ -747,6 +768,7 @@ function buildReview(){
         <span class="sm-chev">›</span>
       </summary>
       <div class="rev-body">
+        ${q.diagram?`<div class="diagram-card">${q.diagram}</div>`:""}
         ${q.code?`<pre class="code">${highlight(q.code)}</pre>`:""}
         ${q.sub?`<p class="qsub" style="margin-top:12px">${q.sub}</p>`:""}
         <p class="ans-line">Your answer: <b>${yourTxt}</b> &nbsp;·&nbsp; Correct: <b>${LETTERS[corrIdx]}</b></p>
