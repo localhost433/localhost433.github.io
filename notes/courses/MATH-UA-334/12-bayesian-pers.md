@@ -184,7 +184,7 @@ $$
 >     \theta | X \approx \mathcal{N}\left( \hat{\theta}\_\text{MLE}, \frac{1}{n I(\hat{\theta}\_\text{MLE})} \right)
 > $$
 
-This remarkable theoretical result (often strongly linked to the Bernstein-von Mises theorem) is philosophically profound: given enough raw data, Frequentists and Bayesians will ultimately arrive at the exact same objective conclusions, regardless of what the Bayesian's initial subjective prior beliefs might have been.
+Under the regularity conditions of the Bernstein-von Mises theorem, the posterior is asymptotically normal around an efficient estimator. The prior's influence then decreases as the sample grows. This agreement is asymptotic and depends on the model and regularity conditions; it is not a claim that Bayesian and frequentist methods always give the same answer.
 
 ---
 

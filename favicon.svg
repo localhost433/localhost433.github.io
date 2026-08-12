@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Robin's Site">
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="#101b2d"/>
+  <rect x="3.5" y="3.5" width="57" height="57" rx="12.5" fill="none" stroke="#2f86d6" stroke-width="3"/>
+  <path d="M11 34c4-7 8-7 12 0s8 7 12 0" fill="none" stroke="#f5f7fa" stroke-width="7" stroke-linecap="round"/>
+  <path d="M51 18 40 47" fill="none" stroke="#72b7ff" stroke-width="7" stroke-linecap="round"/>
+</svg>

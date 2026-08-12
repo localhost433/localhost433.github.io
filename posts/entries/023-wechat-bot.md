@@ -1,137 +1,49 @@
 ---
-title: Scheduling a WeChat message (Or, why I ended up hitting send)
+title: Trying to schedule a WeChat message
 date: 2025-11-25
 tags: [life, cs]
 author: R
 location: Manhattan, NYC
 ---
 
-This all started with a very ordinary situation.
+Tonight I noticed that I had never replied to someone I met at a networking event. It was already late, and sending the message the next morning seemed slightly more appropriate. Email has “send later,” so I wondered whether WeChat had an equivalent.
 
-I was going through my WeChat chats tonight and realized I'd never replied to someone I met at a networking event. I told myself I'd follow up "later." Later became "oops, it's already late (at night) and I still haven't replied."
+It turns out it doesn't have one. WeCom has APIs for workplace use, but ordinary WeChat accounts do not have a built-in scheduling feature. The practical options are to set a reminder or to automate the desktop client.
 
-Now, I had a different problem:
+## The desktop-automation version
 
-- If I reply **right now**, it's kind of a weird timing - like sending email to someone after work hours.
-- If I wait until **tomorrow morning**, that feels like a nicer follow-up window: awake, thoughtful, polite, etc. Same reason someone would schedule an email to go out at 9am.
+The simplest program would use the WeChat Mac app and a tool such as `pyautogui`:
 
-So an obvious question pops into my head:
+1. Open WeChat.
+2. Search for the contact.
+3. Paste the drafted message.
+4. Press Enter.
 
-> Could I just schedule a message for tomorrow morning???
+`cron` could start the script at 9:15 the next morning. That sounds easy until the assumptions are written down. The Mac has to be awake, logged in, and running WeChat. The correct window must have focus. A notification or interface change can redirect the keystrokes. A script based on screen coordinates could easily paste the message into the wrong place.
 
-You can probably guess how this ends.
+For one follow-up, keeping a laptop awake overnight and trusting simulated clicks is not a good trade.
 
----
+## The bot version
 
-## The initial idea: treat WeChat like email
+I also looked through existing WeChat bot projects. Some automate the desktop client; others imitate a web, iPad, or Mac client through reverse-engineered protocols. The latter are much closer to complete messaging systems than to small scheduling scripts.
 
-Email clients have had "Send later" since forever. You write the thing, pick a time, and forget about it. The client on the server does the boring waiting part.
+Most of them contain the same layers:
 
-I wanted exactly that but for WeChat:
+### Transport
 
-1. Draft the message at night.
-2. Choose a time like 9:15am tomorrow.
-3. Forget about it.
+The transport maintains the connection, handles heartbeats and reconnections, and converts WeChat's internal messages into data the rest of the program can use. For personal accounts this is unofficial and may stop working when WeChat changes its protocol.
 
-Except WeChat doesn't do that. There's no such button, no built-in delay feature. (WeCom does have that API but it's more of a workspace app.) If I want the effect of a scheduled message, there are two realistic options:
+### Login and sessions
 
-- Remember to open the chat myself and hit send at 9:15am, or  
-- Use some external thing as a reminder (Reminders app, calendar, etc.)
+A typical bot requests a QR code, waits for the user to scan it, and stores the resulting session tokens until they expire. Official accounts and WeCom use different credentials, but they still need a layer that manages authentication and token renewal.
 
-At this point, a normal person would just move on. Apparently I'm not so normal, too autistic I guess.
+### Messages and contacts
 
----
+Higher-level code works with objects such as `Message`, `Contact`, and `Room` instead of raw protocol frames. A message records its sender, recipient, room, and content type; those objects usually provide methods for replying or sending a new message.
 
-## "Why can't I just write a program?"
+### Events and handlers
 
-My brain starts to produce these incredibly annoying thoughts like:
-
-> Surely I can write a (couple) script(s) to do all this.
-
-The idea I had in mind:
-
-- Use my Mac, with the WeChat desktop client open.
-- Use Python plus something like `pyautogui` to:
-  - Select the right chat,
-  - Paste the message into input box,
-  - Hit Enter at exactly the time I want.
-- Use **cron** so the script runs at the right moment without me sitting there.
-
-On paper, this is totally doable:
-
-1. Cron wakes up at 9:15am and runs `python3 send_wechat.py ...`.
-2. The script:
-   - `open -a WeChat`
-   - Presses the right button to search.
-   - Type name, press Enter.
-   - Paste message.
-   - Presses Enter.
-3. Script ends, cron goes back to sleep, life goes on.
-
-Unfortunately, reality is never that simple.
-
----
-
-## Sleep, brittleness
-
-The first obvious problem is sleep. If I close my MacBook, the machine sleeps -> `cron` doesn't run -> nothing happens. So for this to work, I'd have to:
-
-1. Keep the Mac awake and logged in at the scheduled time.
-2. Either leave the lid open, or use some setup with power + external display.
-3. Possibly run `caffeinate` so macOS doesn't decide to nap anyway.
-
-Then there's the brittleness. If some random notification pops-up, the script happily types my heartfelt networking follow-up into the wrong window. Pixel-based click logic goes off with UI change.
-
----
-
-## WeChat bots
-
-I searched GitHub and, unsurprisingly, there are already **a bunch of WeChat bots** people have written over the years, in multiple languages. Some highlights:
-
-- Bots that use desktop automation (similar in spirit to my idea).
-- Frameworks using reverse-engineered protocols:
-  - Fake a Web / iPad / Mac client.
-  - Do QR-code login
-  - Maintain sessions
-  - Send and receive messages, handle reconnections, etc.
-
----
-
-## The architecture pattern: a typical WeChat bot
-
-Same big pieces appear over and over. Roughly:
-
-### 1. Transport / protocol
-
-This "talks" to WeChat; manages the connection to WeChat's servers (HTTP, WebSocket, or some custom thing); Handles heartbeats, reconnects when needed; Knows how to send/parse the raw frames/XML/JSON used internally.
-
-For personal-account bots, this is all unofficial and reverse-engineered.It's like "we stared at traffic long enough to figure out the pattern."
-
-### 2. Login & session management
-
-Most personal WeChat bots use QR code to login, The process goes like:
-
-1. The bot asks WeChat for a QR code.
-2. Scan it with phone
-3. WeChat allowed this weird client to act as you
-4. The bot gets session tokens/cookies.
-5. The bot saves these tokens somewhere (file, DB) for reconnecting until expiration.
-
-Official-accounts / enterprise stuff looks different (app IDs, secrets, access tokens), but the idea of some token layer is the same.
-
-### 3. Data models: `Message`, `Contact`, `Room`
-
-`Message` is with, `from`, `to`, (and optional `room`), type (text, image, etc.), convenience methods like `.text` and `.say(...)`. There's also `Contact` / `ContactSelf` for people (including the bot), `Room` for group chats, with methods to send messages to the whole group.
-
-These code never needs to deal with low-level protocol junk directly; it just works with these objects.
-
-### 4. Event Core
-
-At the center is an event loop that listens for new messages(events) from the transport. For each one, it constructs a `Message` / `Room` / `Contact` object. It emits events like `on_message(message)`, `on_room_join(...)`, `on_friendship(...)`, `on_login(...)`.
-
-### 5. Handlers
-
-On top of all that it comes actual "behaviors" which I'm too lazy to list out fully. In the "nice" repos these show up as plugins:
+An event loop receives data from the transport and emits events such as `on_message`, `on_login`, or `on_room_join`. Plugins or handlers implement the actual behavior:
 
 ```text
 handlers/
@@ -141,26 +53,12 @@ handlers/
     send_daily_summary.py
 ```
 
-If I did wrote a scheduled follow-up bot, this is probably where the logic would go.
+A scheduled-message feature would sit on top of this, along with configuration, persistent state, and a scheduler such as APScheduler, cron, or Celery.
 
-### 6. Important stuff
+That is reasonable architecture for a bot that continuously receives and sends messages. It is a lot of machinery for sending one follow-up nine hours later. It also comes with reliability and account-risk questions that a reminder does not have.
 
-Usually, config files (for tokens, IDs, etc.), database or key-value store to remember state, some kind of scheduler...(internal ones like APScheduler, external (cron + HTTP callbacks), sth. part of a bigger task system (Celery, etc.))
+## What I did instead
 
-That original "schedule one message" look tiny compared to this large pile.
+I sent the message that night. The timing was not ideal, but it was less awkward than leaving the message unanswered while building an unreliable bot. If the timing had mattered more, a morning reminder and a manual send would have been enough.
 
----
-
-## So what was the point of all this?
-
-All of that just so I can avoid sending a message at 10pm and instead have it go out at 9:15am. At some point, after thinking through all that, I had the correct realization:
-
-> If I'm willing to invest this much effort, I could have just... sent the message.
-
-So I replied right away. It felt slightly suboptimal, but infinitely better than actually starting this mini-bot project. For things like this, a reminder app + manual send is good enough. As an afterthought, a public API for "`send_message`" would be a spammer's dream, ngl. Social media messaging apps are designed this way for a reason.
-
-If I name one biggest takeaway, it's not the technical stuff:
-
-> **Overengineering is a very specific kind of temptation**  
-> 
-> Once you know you *could* automate something, it's weirdly hard to accept you should move on. But sometimes that's just better.
+The useful part of the detour was seeing where a tiny automation request stops being tiny. Scheduling one message sounds like a timer problem; on a closed messaging platform, it quickly becomes a problem involving authentication, sessions, protocol maintenance, and account policy. Sometimes that investigation is worthwhile. This time it answered the question before I wrote any code.

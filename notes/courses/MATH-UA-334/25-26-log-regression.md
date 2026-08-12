@@ -105,7 +105,7 @@ The geometric **decision boundary** is therefore the exact mathematical hyperpla
 
 ### 4.1 Linear Separability
 
-A profound theoretical failure occurs if the training data is **linearly separable**. Data is defined as linearly separable if there exists *any* vector $v \in \mathbb{R}^p$ such that a perfect hyperplane divides the classes:
+If the training data is **linearly separable**, the unregularized logistic-regression MLE need not exist as a finite vector. The data is linearly separable if there is a vector $v \in \mathbb{R}^p$ whose hyperplane divides the classes:
 
 - $y\_i = 1 \implies x\_i^T v > 0$
 - $y\_i = 0 \implies x\_i^T v < 0$
@@ -187,7 +187,7 @@ $$
     L(\beta) = \prod\_{i=1}^n \prod\_{j=0}^{K-1} p\_j(x\_i)^{1(y\_i = j)}
 $$
 
-Taking the natural logarithm seamlessly transforms this massive product into a tractable sum, yielding the definitive **multinomial log-likelihood** objective function:
+Taking the natural logarithm turns the product into the **multinomial log-likelihood** sum:
 $$
     \ell(\beta) = \sum\_{i=1}^n \sum\_{j=0}^{K-1} 1(y\_i = j) \log p\_j(x\_i)
 $$

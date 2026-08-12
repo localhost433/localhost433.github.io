@@ -25,7 +25,7 @@ The null hypothesis $H\_0$ asserts that there is absolutely no statistical effec
 
 ## 2. Fisher's Exact Test
 
-Fisher's Exact Test provides a highly elegant framework for evaluating $2 \times 2$ tables, particularly when sample sizes are heavily restricted.
+Fisher's exact test evaluates $2 \times 2$ tables and is useful when sample sizes are small.
 
 Let the observed counts be denoted as $n\_{ij}$. We define the fixed marginal totals:
 
@@ -66,7 +66,7 @@ $$
     H\_0: p\_1 = p\_2 = \dots = p\_I = \pi
 $$
 
-Under the homogeneity assumption, the optimal Maximum Likelihood Estimate for the shared categorical probability $\pi\_j$ is seamlessly derived from the aggregate column totals:
+Under the homogeneity assumption, the maximum-likelihood estimate of the shared category probability $\pi\_j$ comes from the column totals:
 $$
     \hat{\pi}\_j = \frac{n\_{\cdot j}}{n\_{\cdot \cdot}}
 $$
@@ -104,7 +104,7 @@ $$
 
 ### 4.1 Equivalence of the Test Statistic
 
-In a profound demonstration of algebraic unity, deriving the Generalized LR test for independence yields the **exact same formula** as the test for homogeneity.
+The generalized likelihood-ratio test for independence yields the same statistic as the test for homogeneity.
 
 We estimate the marginal probabilities as $\hat{\Pi}\_{i\cdot} = \frac{n\_{i\cdot}}{n}$ and $\hat{\Pi}\_{\cdot j} = \frac{n\_{\cdot j}}{n}$.
 The expected count is therefore $E\_{ij} = n \hat{\Pi}\_{i\cdot} \hat{\Pi}\_{\cdot j} = \frac{n\_{i\cdot} n\_{\cdot j}}{n\_{\cdot \cdot}}$.
@@ -119,7 +119,7 @@ For the highly common $2 \times 2$ scenario ($I=2, J=2$), the degrees of freedom
 $$
     \chi^2 = \frac{(n\_{11} n\_{22} - n\_{12} n\_{21})^2 n\_{\cdot \cdot}}{n\_{1\cdot} n\_{2\cdot} n\_{\cdot 1} n\_{\cdot 2}}
 $$
-This compact representation directly leverages the cross-product difference $(n\_{11} n\_{22} - n\_{12} n\_{21})$, which perfectly measures the determinant of the contingency table matrix, seamlessly capturing the full magnitude of the statistical dependency.
+The numerator contains the squared cross-product difference $(n\_{11} n\_{22} - n\_{12} n\_{21})^2$, the square of the table's determinant.
 
 ---
 

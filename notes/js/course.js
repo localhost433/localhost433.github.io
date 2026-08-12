@@ -12,6 +12,18 @@ fetch(`/notes/metadata/courses.json`)
   .then(all => {
     const course = all.find(c => c.slug === slug);
     heading.textContent = course ? course.title : slug;
+    const title = course ? course.title : slug;
+    const pageMeta = {
+      title: `${title} - Robin's Notes`,
+      description: course
+        ? `${course.semester} course notes for ${course.title}, taught by ${course.instructor}.`
+        : `Course notes for ${title}.`
+    };
+    if (window.updatePageMeta) {
+      window.updatePageMeta(pageMeta);
+    } else {
+      window.pendingPageMeta = pageMeta;
+    }
   });
 
 fetch(`/notes/courses/${slug}/index.json`)

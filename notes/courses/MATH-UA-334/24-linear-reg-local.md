@@ -5,9 +5,9 @@ date: 2026-04-22
 
 ## 1. Introduction to Nonparametric Regression
 
-In traditional simple linear regression, we impose a highly rigid global assumption: the true relationship between the predictor $x$ and the response $y$ is exactly a straight line across the entire infinite domain.
+Simple linear regression assumes one linear relationship between the predictor $x$ and response $y$ across the modeled domain.
 
-However, in many complex real-world datasets, the relationship is fundamentally non-linear globally, yet it may appear approximately linear within very small, highly localized neighborhoods.
+A relationship may be nonlinear globally while remaining approximately linear near a given point.
 
 We formulate the **Nonparametric Regression** model as:
 $$
@@ -104,7 +104,7 @@ To strictly isolate the prediction $\\hat{f}(x\_0) = \\hat{\\beta}\_0$, we multi
 $$
     \\hat{f}(x\_0) = [1, 0] (X^T W X)^{-1} X^T W Y
 $$
-This incredible mathematical formulation proves that local linear regression is strictly a linear estimator—it can be written perfectly in the form $\\sum\\_{i=1}^n w(x\_0, x\_i) y\_i$, where the highly complex equivalent weights intrinsically adjust for the local density and geometry of the $x$ observations.
+This shows that local linear regression is a linear smoother: it can be written as $\\sum\\_{i=1}^n w(x\_0, x\_i)y\_i$, with weights determined by the design points and kernel.
 
 ---
 

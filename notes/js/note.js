@@ -83,7 +83,16 @@ fetch(`/notes/courses/${course}/${noteSlug}.md`)
     })
     .then(md => {
         const { meta, body } = parseFrontMatter(md);
-        document.title = meta.title || noteSlug;
+        const noteTitle = meta.title || noteSlug;
+        const pageMeta = {
+            title: `${noteTitle} - Robin's Notes`,
+            description: `Course notes for ${noteTitle} in ${course}.`
+        };
+        if (window.updatePageMeta) {
+            window.updatePageMeta(pageMeta);
+        } else {
+            window.pendingPageMeta = pageMeta;
+        }
 
         const footnotes = [];
 
@@ -130,6 +139,13 @@ fetch(`/notes/courses/${course}/${noteSlug}.md`)
         });
 
         contentDiv.querySelectorAll('img').forEach(img => {
+            if (!img.alt.trim()) {
+                const nearbyText = img.parentElement?.textContent?.trim();
+                const filename = decodeURIComponent(img.src.split('/').pop() || "illustration")
+                    .replace(/\.[^.]+$/, '')
+                    .replace(/[-_]+/g, ' ');
+                img.alt = nearbyText || `${noteTitle}: ${filename}`;
+            }
             img.style.display = 'block';
             img.style.maxWidth = '100%';
             img.style.height = 'auto';
