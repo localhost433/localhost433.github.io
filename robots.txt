@@ -1,5 +1,6 @@
 User-agent: *
 Disallow: /api/
+Sitemap: https://localhost433.github.io/sitemap.xml
 
 # AI / crawler specific blocks
 User-agent: GPTBot

@@ -98,13 +98,13 @@ To formally test the null hypothesis $H\_0: X\_1, \dots, X\_n \sim F$, we calcul
 $$
     \sqrt{n} d\_{KS}(F\_n, F) > K(\alpha)
 $$
-This establishes a highly powerful, completely nonparametric one-sample goodness-of-fit test.
+This gives a nonparametric one-sample goodness-of-fit test.
 
 ---
 
 ## 2. Bootstrap
 
-The Bootstrap is a computationally intensive resampling method designed to quantify the statistical uncertainty of an arbitrary estimator $\hat{\theta}\_n$. In broad practice, it is widely utilized to approximate standard errors, formally estimate structural biases, and reliably construct robust confidence intervals whenever classical mathematical derivations fail.
+The bootstrap is a resampling method for estimating the uncertainty of an estimator $\hat{\theta}\_n$. It can approximate standard errors, estimate bias, and construct confidence intervals when a direct derivation is unavailable or inconvenient.
 
 ### 2.1 Motivation
 
@@ -114,7 +114,7 @@ $$
 $$
 where $I(\theta)$ represents the Fisher Information.
 
-However, mathematical statisticians encounter two massive practical hurdles:
+This approach has two practical problems:
 
 1. The true parameter $\theta$ is completely unknown (a partial plug-in fix involves awkwardly replacing $\theta$ with $\hat{\theta}\_n$).
 2. Even if $\theta$ were perfectly known, analytically deriving the variance function $V(\theta)$ or $I(\theta)$ can be mathematically impossible or computationally intractable for complex estimators (like the sample median, or deep machine learning models).
@@ -187,7 +187,7 @@ There are several standard techniques to construct valid bootstrap confidence in
 
 ### 2.6 Final Comments
 
-The bootstrap serves as a tremendously powerful, highly general statistical "plug-in" procedure. Whenever classical theoretical calculations involving the Fisher Information $I(\theta)$ or complex analytic derivatives fail or become mathematically tedious, the bootstrap seamlessly substitutes massive computational power to reliably evaluate statistical uncertainty.
+The bootstrap is a general plug-in procedure: it substitutes resampling from an estimated distribution for a direct calculation under the unknown population distribution.
 
 ---
 

@@ -55,7 +55,21 @@ fetch(`./posts/entries/${slug}.md`)
     const sanitize = window.DOMPurify?.sanitize || (str => str.replace(/<[^>]+>/g, ""));
 
     const cleanTitle = sanitize(meta.title || "Untitled");
-    document.title = `${cleanTitle} - Robin's Blog`;
+    const plainBody = body
+      .replace(/```[\s\S]*?```/g, " ")
+      .replace(/[#>*_`\[\]()]/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+    const description = plainBody.slice(0, 157).replace(/\s+\S*$/, "") + (plainBody.length > 157 ? "…" : "");
+    const pageMeta = {
+      title: `${cleanTitle} - Robin's Blog`,
+      description: description || `A blog post by Robin Chen titled ${cleanTitle}.`
+    };
+    if (window.updatePageMeta) {
+      window.updatePageMeta(pageMeta);
+    } else {
+      window.pendingPageMeta = pageMeta;
+    }
 
     const h1 = document.createElement("h1");
     h1.id          = "post-title";

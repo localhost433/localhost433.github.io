@@ -13,6 +13,8 @@
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Robin's projects, writing, and course notes." />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <title>Robin's Site</title>
     <template id="meta-include" data-src="components/meta-tags.html"></template>
     <link rel="stylesheet" href="css/shared.css" />
@@ -32,25 +34,23 @@
         <article>
             <h1>Hello, I'm Robin.</h1>
             <p>
-                A little bit of self intro, I'm a <del>freshman</del> sophomore at the NYU studying Mathematics and
-                Computer Science. (Planning on getting a minor in linguistics) This site serves as a platform for me
-                to document my thoughts, projects, and anything else I find worth sharing. I share random ideas and
-                stuff I created about school, life, etc. (Not any type of category that I want to fall into, journal,
-                diary, because it would feel kind of restrictive on 'how'/'what' should I write about anything.)
-                <br><br>
-                If you are viewing this using a text based browser, unfortunately, you won't be able to see most of
-                the content here as I heavily rely on JavaScript to render the content dynamically, and I'm too lazy
-                to add a static fallback. (I found out this problem when I was trying to use Lynx to view my site 
-                yesterday. Why did I try to do that? Good question.)
+                I'm a junior at NYU, majoring in Mathematics and Computer Science, and I'm also interested in linguistics. I use this
+                site to keep track of things I have made, questions I have followed, and notes I want to find again.
+                It is deliberately broader than a portfolio or journal: schoolwork, technical experiments, and
+                personal writing can all live here.
+            </p>
+            <p>
+                Posts and course notes are written in Markdown and rendered in the browser. The site therefore still
+                has limited support for text-only browsers and for browsing with JavaScript disabled.
             </p>
 
             <h2>What You Might Find Here</h2>
-            <p>
-                - Posts about random topics I find interesting.<br>
-                - Small projects, experiments, and creations.<br>
-                - Thoughts on academic topics, especially from school work.<br>
-                - Personal reflections or ideas that I simply want to document.
-            </p>
+            <ul>
+                <li>Posts about technical questions, school, and random everyday observations.</li>
+                <li>Small projects and experiments, including unfinished ones.</li>
+                <li>Course notes and study materials.</li>
+                <li>Personal reflections that I want to keep somewhere.</li>
+            </ul>
 
             <h2>Features</h2>
             <ul>
@@ -62,7 +62,7 @@
                 <li>Markdown Parsing: Blog posts are written in Markdown and rendered dynamically.</li>
                 <li>Notes: Course notes rendered from Markdown (with front-matter), featuring MathJax support and an
                     auto-generated table of contents.</li>
-                <li>Pagination & Filtering: Browse blog posts by tag or search with pagination.</li>
+                <li>Pagination &amp; Filtering: Browse blog posts by tag or search with pagination.</li>
             </ul>
 
             <h2>Connect with Me</h2>
@@ -70,11 +70,11 @@
                 You can find me here:
             </p>
             <ul>
-                <li><a href="https://github.com/localhost433" target="_blank">GitHub</a></li>
-                <li><a href="https://www.linkedin.com/in/robin-chen-a494542b7/" target="_blank">LinkedIn</a></li>
+                <li><a href="https://github.com/localhost433" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                <li><a href="https://www.linkedin.com/in/robin-chen-a494542b7/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
             </ul>
             <p>
-                Or you can email me at <a href="mailto: robinchen@nyu.edu">robinchen@nyu.edu</a>
+                Or you can email me at <a href="mailto:robinchen@nyu.edu">robinchen@nyu.edu</a>.
             </p>
 
             <h2>Tech Stack</h2>
@@ -93,25 +93,21 @@
                 <li><code>pg</code> - Neon serverless PostgreSQL driver</li>
             </ul>
 
-            <h2>Future Plans</h2>
+            <h2>What I'm Working On</h2>
             <p>
-                I plan to add more features and improve the design over time. Email me if you have suggestions!
-                Currently, some ideas include:
+                The site changes as I use it. The current maintenance list is short:
             </p>
             <ul>
-                <li><del>Improving the comment system</del> (Done)</li>
-                <li><u>Converting all my course notes into markdown</u> (Done partial, in progress)</li>
-                <li><u>Organizing stuff I wrote during the summer into blog posts</u> (In progress)</li>
-                <li>Adding a search feature for easier navigation</li>
-                <li><del>Enhance the overall design and responsiveness</del> (Done)</li>
-                <li><u>Supporting more Markdown features</u> (In progress for parsing in general)</li>
-                <li>Notifying users of new posts or updates</li>
+                <li>Move older course notes into the browsable notes archive.</li>
+                <li>Add site-wide search across posts, projects, and notes.</li>
+                <li>Improve the non-JavaScript and text-browser experience.</li>
+                <li>Keep older links, metadata, and project descriptions current.</li>
+            </ul>
         </article>
     </main>
 
     <footer id="footer-placeholder"></footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script type="module" src="js/header-footer.js"></script>
     <script defer src="/_vercel/insights/script.js"></script>
 </body>

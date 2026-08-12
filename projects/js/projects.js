@@ -79,9 +79,12 @@ fetch("projects/metadata.json")
       const entry = document.createElement("div");
       entry.className = "post-entry";
 
-      const title = document.createElement("a");
-      title.href = project.link || "#";
-      title.target = "_blank";
+      const title = document.createElement(project.link ? "a" : "span");
+      if (project.link) {
+        title.href = project.link;
+        title.target = "_blank";
+        title.rel = "noopener noreferrer";
+      }
       title.textContent = project.title || "Untitled Project";
       title.className = "post-title";
 

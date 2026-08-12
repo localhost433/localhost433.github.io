@@ -2,6 +2,61 @@
 
 import { initializeThemeToggle } from './theme.js'; 
 
+const PAGE_META = {
+  "": ["Robin's Site", "Robin's projects, writing, and course notes."],
+  "index.html": ["Robin's Site", "Robin's projects, writing, and course notes."],
+  "projects.html": ["Projects - Robin's Site", "Software projects and experiments by Robin."],
+  "notes.html": ["Notes - Robin's Site", "Robin's course notes."],
+  "blog.html": ["Blog - Robin's Site", "Posts by Robin about everything."],
+  "course.html": ["Course Notes - Robin's Site", "Lecture notes and study materials."],
+  "note.html": ["Course Note - Robin's Site", "A course note by Robin."],
+  "post.html": ["Post - Robin's Site", "A blog post by Robin."]
+};
+
+function upsertMeta(selector, attributes) {
+  let element = document.head.querySelector(selector);
+  if (!element) {
+    element = document.createElement("meta");
+    document.head.appendChild(element);
+  }
+  Object.entries(attributes).forEach(([name, value]) => element.setAttribute(name, value));
+}
+
+let dynamicPageMetaApplied = false;
+
+function updatePageMeta({ title, description } = {}) {
+  if (title || description) dynamicPageMetaApplied = true;
+  const page = (location.pathname.split("/").pop() || "").toLowerCase();
+  const fallback = PAGE_META[page] || PAGE_META[""];
+  const finalTitle = title || document.title || fallback[0];
+  const finalDescription = description || fallback[1];
+  const canonicalUrl = new URL(location.pathname + location.search, "https://localhost433.github.io").href;
+
+  document.title = finalTitle;
+  upsertMeta('meta[name="description"]', { name: "description", content: finalDescription });
+  upsertMeta('meta[property="og:title"]', { property: "og:title", content: finalTitle });
+  upsertMeta('meta[property="og:description"]', { property: "og:description", content: finalDescription });
+  upsertMeta('meta[property="og:type"]', { property: "og:type", content: page === "post.html" ? "article" : "website" });
+  upsertMeta('meta[property="og:url"]', { property: "og:url", content: canonicalUrl });
+  upsertMeta('meta[name="twitter:card"]', { name: "twitter:card", content: "summary" });
+  upsertMeta('meta[name="twitter:title"]', { name: "twitter:title", content: finalTitle });
+  upsertMeta('meta[name="twitter:description"]', { name: "twitter:description", content: finalDescription });
+
+  let canonical = document.head.querySelector('link[rel="canonical"]');
+  if (!canonical) {
+    canonical = document.createElement("link");
+    canonical.rel = "canonical";
+    document.head.appendChild(canonical);
+  }
+  canonical.href = canonicalUrl;
+}
+
+window.updatePageMeta = updatePageMeta;
+if (window.pendingPageMeta) {
+  updatePageMeta(window.pendingPageMeta);
+  delete window.pendingPageMeta;
+}
+
 function loadHeaderFooter() {
   return Promise.all([
     fetch("components/header.html")
@@ -14,6 +69,7 @@ function loadHeaderFooter() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  if (!dynamicPageMetaApplied) updatePageMeta();
   // Inject centralized meta tags if template present
   const metaTpl = document.getElementById('meta-include');
   if (metaTpl && metaTpl.dataset.src) {
