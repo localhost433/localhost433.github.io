@@ -65,6 +65,12 @@
   align-items: flex-start;
   gap: 1rem;
   margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #dddddd;
+}
+
+#projects-list .post-entry:last-child {
+  border-bottom: none;
 }
 
 #projects-list .post-meta-inline {
@@ -76,7 +82,37 @@
 
 /* Project Info */
 .project-info {
-  max-width: 500px;
+  flex: 1;
+  min-width: 0;
+  max-width: 560px;
+}
+
+.project-meta {
+  color: #777777;
+  font-size: 0.82rem;
+  margin-top: 0.1rem;
+}
+
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.6rem;
+}
+
+.project-tech-tag {
+  display: inline-block;
+  padding: 0.12rem 0.45rem;
+  border: 1px solid #ccddee;
+  border-radius: 999px;
+  color: #46627a;
+  font-size: 0.76rem;
+  line-height: 1.5;
+}
+
+.project-links {
+  margin-top: 0.65rem;
+  font-size: 0.85rem;
 }
 
 .project-description {
@@ -87,6 +123,19 @@
 
 .dark-mode .project-description {
   color: #dddddd;
+}
+
+.dark-mode #projects-list .post-entry {
+  border-bottom-color: #333333;
+}
+
+.dark-mode .project-meta {
+  color: #aaaaaa;
+}
+
+.dark-mode .project-tech-tag {
+  border-color: #4c6075;
+  color: #c5d8eb;
 }
 
 /* Tech Stack Column */
@@ -158,4 +207,28 @@
 
 .dark-mode .linguist-langs div {
   color: #dddddd;
+}
+
+@media (max-width: 640px) {
+  #projects-list .post-entry {
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .languages {
+    width: 100%;
+    margin-left: 0;
+    align-items: flex-start;
+  }
+
+  .linguist-wrapper {
+    width: min(100%, 300px);
+    margin-left: 0;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .linguist-langs {
+    align-items: flex-start;
+  }
 }

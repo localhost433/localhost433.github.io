@@ -34,6 +34,21 @@ This repository contains the source code for my personal website. The site serve
 
 This site is deployed on [Vercel](https://vercel.com/) with automatic GitHub-triggered builds.  
 
+### Comment abuse controls
+
+The comments endpoint sanitizes input, limits request and field sizes, rate-limits
+posts per IP and post slug through Upstash Redis, rejects duplicate comments for a
+short cooldown window, and uses a hidden honeypot field. Turnstile is optional and
+is requested only for suspicious submissions or bursts of activity.
+
+To enable the optional challenge in production:
+
+1. Set `TURNSTILE_SECRET_KEY` and `TURNSTILE_SITE_KEY` as Vercel environment variables.
+2. Put the public site key in the `data-site-key` attribute of `#comment-turnstile` in `post.html`.
+
+The GitHub language proxy is restricted to repositories featured on the Projects
+page and caches successful responses.
+
 ## Terms / AI Usage
 
 Use of this content for training machine learning or AI models is expressly prohibited without prior written consent. See `TERMS.md` for full details.
