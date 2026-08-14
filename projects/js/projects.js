@@ -50,7 +50,10 @@ async function fetchLanguages(project) {
 
   if (langCache.has(repo)) return langCache.get(repo);
 
-  const ghurl = `https://api.github.com/repos/${repo}/languages`;
+  const isLocal = ["localhost", "127.0.0.1"].includes(window.location.hostname);
+  const ghurl = isLocal
+    ? `https://api.github.com/repos/${repo}/languages`
+    : `/api/github-languages?repo=${encodeURIComponent(repo)}`;
   try {
     const resp = await fetch(ghurl);
     if (!resp.ok) throw new Error(`GitHub API error: ${resp.status}`);
@@ -61,6 +64,81 @@ async function fetchLanguages(project) {
     console.warn(`Could not load languages for ${repo} from GitHub.`, err);
     return {};
   }
+}
+
+function createExternalLink(href, label) {
+  const link = document.createElement("a");
+  link.href = href;
+  link.target = "_blank";
+  link.rel = "noopener noreferrer";
+  link.textContent = label;
+  return link;
+}
+
+function addProjectLinks(info, project) {
+  const links = [];
+  if (project.link) {
+    links.push({
+      href: project.link,
+      label: project.linkLabel || (project.link.includes("github.com") ? "Source" : "Open project"),
+    });
+  }
+
+  const source = project.source || (project.repo ? `https://github.com/${project.repo}` : null);
+  if (source && source !== project.link) links.push({ href: source, label: "Source" });
+  if (project.demo && project.demo !== project.link) links.push({ href: project.demo, label: "Live demo" });
+  if (!links.length) return;
+
+  const linkRow = document.createElement("div");
+  linkRow.className = "project-links";
+  links.forEach(({ href, label }, index) => {
+    if (index > 0) {
+      const separator = document.createElement("span");
+      separator.textContent = " · ";
+      separator.setAttribute("aria-hidden", "true");
+      linkRow.appendChild(separator);
+    }
+    linkRow.appendChild(createExternalLink(href, label));
+  });
+  info.appendChild(linkRow);
+}
+
+function addProjectMeta(info, project) {
+  if (!project.period && !project.category) return;
+
+  const meta = document.createElement("div");
+  meta.className = "project-meta";
+  if (project.period) {
+    const period = document.createElement("span");
+    period.textContent = project.period;
+    meta.appendChild(period);
+  }
+  if (project.period && project.category) {
+    const separator = document.createElement("span");
+    separator.textContent = " · ";
+    separator.setAttribute("aria-hidden", "true");
+    meta.appendChild(separator);
+  }
+  if (project.category) {
+    const category = document.createElement("span");
+    category.textContent = project.category;
+    meta.appendChild(category);
+  }
+  info.appendChild(meta);
+}
+
+function addTechnologyTags(info, project) {
+  if (!project.tech) return;
+
+  const stack = document.createElement("div");
+  stack.className = "project-tech";
+  project.tech.split(",").map(tech => tech.trim()).filter(Boolean).forEach(tech => {
+    const tag = document.createElement("span");
+    tag.className = "project-tech-tag";
+    tag.textContent = tech;
+    stack.appendChild(tag);
+  });
+  info.appendChild(stack);
 }
 
 fetch("projects/metadata.json")
@@ -88,33 +166,31 @@ fetch("projects/metadata.json")
       title.textContent = project.title || "Untitled Project";
       title.className = "post-title";
 
-      // div for the title and description
+      // Title, metadata, description, stack, and project links.
       const info = document.createElement("div");
       info.className = "project-info";
-
-      // title
       info.appendChild(title);
+      addProjectMeta(info, project);
 
-      // short description under the title
       if (project.description) {
         const desc = document.createElement("p");
         desc.className = "project-description";
         desc.textContent = project.description;
         info.appendChild(desc);
       }
+      addTechnologyTags(info, project);
+      addProjectLinks(info, project);
       entry.appendChild(info);
 
-      // languages
+      // Repository language composition is secondary to the human-readable stack.
       const techContainer = document.createElement("div");
       techContainer.className = "languages";
 
-      //header
       const techLabel = document.createElement("div");
       techLabel.className = "languages-label";
-      techLabel.textContent = "languages";
+      techLabel.textContent = "repository languages";
       techContainer.appendChild(techLabel);
 
-      // wrapper for bar + per‑lang list
       const wrapper = document.createElement("div");
       wrapper.className = "linguist-wrapper";
       techContainer.appendChild(wrapper);

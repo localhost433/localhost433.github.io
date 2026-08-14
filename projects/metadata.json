@@ -1,66 +1,82 @@
 [
     {
+        "title": "Jump Trading Probability Cup",
+        "link": "https://github.com/localhost433/probability-cup",
+        "linkLabel": "Source",
+        "repo": "localhost433/probability-cup",
+        "period": "Jun–Jul 2026",
+        "category": "Forecasting & calibration",
+        "tech": "Python, typed pipelines, probability calibration, walk-forward testing",
+        "description": "Finalist in the 2026 Jump Trading Probability Cup: 131st of 4,013 entrants (top 3.3%). Built a typed forecasting stack that classifies free-text markets, prices coherent scoreline and prop distributions, and gates model changes with walk-forward tests."
+    },
+    {
         "title": "LeetHub: Revived & Enhanced",
         "link": "https://github.com/localhost433/LeetHub",
+        "linkLabel": "Source",
         "repo": "localhost433/LeetHub",
+        "period": "2026–present",
+        "category": "Developer tools",
         "tech": "JavaScript, Chrome Extension API (MV3), GitHub API",
-        "description": "Revived and refactored a popular unmaintained open-source extension to automate LeetCode-to-GitHub syncing. Fixed critical authentication bugs, migrated to Manifest V3 for modern browser support, and implemented new features for personal workflow optimization.",
-        "languages": {"JavaScript": 88.1, "HTML": 6.8, "CSS": 5.1}
+        "description": "Revived and refactored an unmaintained open-source extension for LeetCode-to-GitHub syncing. Fixed authentication bugs, migrated to Manifest V3, and added repository-linking, backfill, and workflow features."
     },
     {
         "title": "Vibe Semantic Search",
         "link": "https://github.com/localhost433/Vibe-Search-Engine",
+        "linkLabel": "Source",
         "repo": "localhost433/Vibe-Search-Engine",
-        "tech": "Python, FAISS, Sentence Transformers, Flask",
-        "description": "Winner of the 2025 Corner-DSC-BAC Datathon. Developed a high-performance semantic search engine that utilizes FAISS for vector indexing and Sentence Transformers for contextual query understanding.",
-        "languages": {"Python": 67.1, "JavaScript": 14.9, "HTML": 7.6, "CSS": 7.3, "Shell": 3.1}
+        "period": "2025",
+        "category": "Search & retrieval",
+        "tech": "Python, FastAPI, React, FAISS, Sentence Transformers, Docker",
+        "description": "Winner of the 2025 Corner-DSC-BAC Datathon. Built a semantic search engine in 24 hours with FAISS indexing and Sentence Transformer embeddings, served through FastAPI and a responsive frontend."
+    },
+    {
+        "title": "Pennsylvania Toponym Atlas",
+        "link": "https://localhost433.github.io/pa-toponyms/",
+        "linkLabel": "Live atlas",
+        "repo": "localhost433/pa-toponyms",
+        "period": "Oct 2025–present",
+        "category": "Interactive research",
+        "tech": "Python, JavaScript, Leaflet, Census ACS, GeoJSON",
+        "description": "Built a source-linked interactive atlas from a 2,500-municipality gazetteer, with 68 reviewed map records and evidence beside each claim. Added terrain, coal, urban-area, and demographic context layers while keeping uncertainty visible."
+    },
+    {
+        "title": "NYC Mayoral Forecast",
+        "link": "https://localhost433.github.io/nyc-mayor-prediction/showcase/",
+        "linkLabel": "Live showcase",
+        "repo": "localhost433/nyc-mayor-prediction",
+        "period": "2025–2026",
+        "category": "Applied modeling",
+        "tech": "Python, scikit-learn, census data, geospatial analysis, JavaScript",
+        "description": "Built an out-of-sample forecast of the 2025 NYC Democratic mayoral primary across 4,036 election districts. Trained on earlier election transitions, compared predictions with certified results, and documented baseline performance and limits."
     },
     {
         "title": "iCloud MCP Server",
         "link": "https://github.com/localhost433/icloud-mcp",
+        "linkLabel": "Source",
         "repo": "localhost433/icloud-mcp",
-        "tech": "Python, FastAPI, Docker, CalDAV",
-        "description": "An HTTP Model Context Protocol (MCP) server that bridges LLM-aware clients (ChatGPT, IDEs) with iCloud Calendar. Enables AI agents to autonomously manage schedule data via secure CalDAV integrations.",
-        "languages": {"Python": 97.7, "Dockerfile": 2.3}
+        "period": "2025",
+        "category": "Systems & integrations",
+        "tech": "Python, FastAPI, Docker, CalDAV, MCP",
+        "description": "Built an HTTP Model Context Protocol server that exposes iCloud Calendar through CalDAV, including typed read/write tools, recurring events, and a read-only research profile. Documented the private deployment and credential boundaries."
     },
     {
-        "title": "NYC Mayor Prediction Model",
-        "link": "https://localhost433.github.io/nyc-mayor-prediction/showcase/",
-        "repo": "localhost433/nyc-mayor-prediction",
-        "tech": "Python, PyMC, JAX, RAG, NLP",
-        "description": "A sophisticated Bayesian precinct-level model forecasting the 2025 NYC mayoral election. Combines ranked-choice voting simulations with RAG-based issue-salience embeddings and ACS covariate analysis.",
-        "languages": {"Python": 75.8, "HTML": 24.2}
+        "title": "Exonym Usage in the New York Times",
+        "link": "https://github.com/localhost433/Peking-NYT",
+        "linkLabel": "Source",
+        "repo": "localhost433/Peking-NYT",
+        "period": "Dec 2025",
+        "category": "Corpus & visualization",
+        "tech": "Python, web scraping, corpus analysis, time-series visualization",
+        "description": "Scraped and de-duplicated 15,000+ New York Times search records from 1900–2025 to trace Peking, Peiping, and Beijing usage, with Kiev/Kyiv as a control. Plotted monthly shares around official renamings and the 1979 NYT style notice."
     },
     {
         "title": "Prime Factorization Game",
         "link": "https://localhost433.github.io/Prime-Factorization-Game/",
+        "linkLabel": "Play",
         "repo": "localhost433/Prime-Factorization-Game",
-        "tech": "JS (ES6+), CSS3, Supabase",
-        "description": "An interactive web game focused on prime factorization. Features a global leaderboard and real-time data persistence powered by Supabase.",
-        "languages": {"JavaScript": 61.9, "CSS": 21.6, "HTML": 16.5}
-    },
-    {
-        "title": "Robin's Portfolio Site",
-        "link": "https://github.com/localhost433/localhost433.github.io",
-        "repo": "localhost433/localhost433.github.io",
-        "tech": "HTML5, CSS3, JavaScript",
-        "description": "This site is my personal site and project showcase, built with a focus on clean UI and responsive design.",
-        "languages": {"JavaScript": 47.1, "CSS": 28.4, "HTML": 24.5}
-    },
-    {
-        "title": "Test Me Please",
-        "link": "https://github.com/marcussleongg/test-me-please",
-        "repo": "marcussleongg/test-me-please",
-        "tech": "Python, FastAPI, Streamlit, Weaviate, RAG",
-        "description": "HackNYU Fall 2025 project. An adaptive learning platform that generates and grades practice exams using RAG and local embeddings to provide course-grounded feedback.",
-        "languages": {"Python": 77.0, "JavaScript": 14.3, "PowerShell": 3.7, "Shell": 2.2, "Makefile": 1.4, "CSS": 1.2, "HTML": 0.2}
-    },
-    {
-        "title": "Authorship Stylometry Pipeline",
-        "link": "https://github.com/localhost433/authorship_project",
-        "repo": "localhost433/authorship_project",
-        "tech": "Python, scikit-learn, NLP",
-        "description": "An end-to-end stylometric analysis pipeline used to predict authorship and gender in 19th-century literature using character n-grams, function word frequency, and linear classifiers.",
-        "languages": {"Python": 100.0}
+        "period": "2024–present",
+        "category": "Interactive web",
+        "tech": "JavaScript, CSS, Supabase",
+        "description": "Built a timed factorization game with dynamic difficulty, real-time validation, streaks, and a persistent global leaderboard."
     }
 ]
