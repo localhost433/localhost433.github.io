@@ -8,12 +8,31 @@ const LINGUIST_COLORS = {
   PowerShell: "#012456",
   Shell: "#89e051",
   Dockerfile: "#384d54",
-  JSON: "#292929",
-  Markdown: "#083fa1",
   // Add more colors as needed
   // Source: https://github.com/github/linguist/blob/master/lib/linguist/languages.yml
 };
+// GitHub Linguist also reports data, configuration, and documentation formats.
+// They are useful repository metadata, but not project implementation languages.
+const NON_CODE_LANGUAGES = new Set([
+  "CSV",
+  "JSON",
+  "Markdown",
+  "TOML",
+  "XML",
+  "YAML",
+]);
 const langCache = new Map();
+
+function filterLanguages(languages) {
+  return Object.fromEntries(
+    Object.entries(languages).filter(([language, bytes]) => (
+      !NON_CODE_LANGUAGES.has(language)
+      && typeof bytes === "number"
+      && Number.isFinite(bytes)
+      && bytes > 0
+    ))
+  );
+}
 
 function createLanguageBar(languages) {
   const total = Object.values(languages).reduce((acc, val) => acc + val, 0);
@@ -42,7 +61,7 @@ function createLanguageBar(languages) {
 
 async function fetchLanguages(project) {
   if (project.languages && Object.keys(project.languages).length > 0) {
-    return project.languages;
+    return filterLanguages(project.languages);
   }
 
   const repo = project.repo;
@@ -50,20 +69,36 @@ async function fetchLanguages(project) {
 
   if (langCache.has(repo)) return langCache.get(repo);
 
-  const isLocal = ["localhost", "127.0.0.1"].includes(window.location.hostname);
-  const ghurl = isLocal
-    ? `https://api.github.com/repos/${repo}/languages`
-    : `/api/github-languages?repo=${encodeURIComponent(repo)}`;
-  try {
-    const resp = await fetch(ghurl);
-    if (!resp.ok) throw new Error(`GitHub API error: ${resp.status}`);
-    const data = await resp.json();
-    langCache.set(repo, data);
-    return data;
-  } catch (err) {
-    console.warn(`Could not load languages for ${repo} from GitHub.`, err);
-    return {};
+  const githubUrl = `https://api.github.com/repos/${repo}/languages`;
+  const proxyUrl = `/api/github-languages?repo=${encodeURIComponent(repo)}`;
+  const repoName = repo.includes("/") ? repo.split("/").pop() : repo;
+  const fallbackUrl = `/projects/languages/${encodeURIComponent(repoName)}.json`;
+  const hostname = window.location.hostname;
+  const isLocal = ["localhost", "127.0.0.1"].includes(hostname);
+  const isGitHubPages = hostname.endsWith(".github.io");
+  const urls = isLocal || isGitHubPages
+    ? [githubUrl, fallbackUrl]
+    : [proxyUrl, githubUrl, fallbackUrl];
+
+  let lastError;
+  for (const url of urls) {
+    try {
+      const resp = await fetch(url);
+      if (!resp.ok) throw new Error(`GitHub API error: ${resp.status}`);
+      const data = await resp.json();
+      if (!data || Array.isArray(data) || typeof data !== "object") {
+        throw new Error("GitHub API returned an invalid languages payload");
+      }
+      const filtered = filterLanguages(data);
+      langCache.set(repo, filtered);
+      return filtered;
+    } catch (err) {
+      lastError = err;
+    }
   }
+
+  console.warn(`Could not load languages for ${repo} from GitHub or the local fallback.`, lastError);
+  return {};
 }
 
 function createExternalLink(href, label) {

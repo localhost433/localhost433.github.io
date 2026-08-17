@@ -12,6 +12,25 @@ const ALLOWED_REPOS = new Set([
 ]);
 const CACHE_TTL_MS = 15 * 60 * 1000;
 const languageCache = new Map();
+const NON_CODE_LANGUAGES = new Set([
+  "CSV",
+  "JSON",
+  "Markdown",
+  "TOML",
+  "XML",
+  "YAML",
+]);
+
+function filterLanguages(languages) {
+  return Object.fromEntries(
+    Object.entries(languages).filter(([language, bytes]) => (
+      !NON_CODE_LANGUAGES.has(language)
+      && typeof bytes === "number"
+      && Number.isFinite(bytes)
+      && bytes > 0
+    ))
+  );
+}
 
 export default async function handler(req, res) {
   if (req.method && req.method !== "GET") {
@@ -43,7 +62,7 @@ export default async function handler(req, res) {
     if (!gh.ok) {
       return res.status(gh.status).json({ error: "GitHub API error" });
     }
-    const data = await gh.json();
+    const data = filterLanguages(await gh.json());
     languageCache.set(repo, { data, expiresAt: Date.now() + CACHE_TTL_MS });
     res.setHeader("Cache-Control", "public, max-age=300, s-maxage=900, stale-while-revalidate=3600");
     return res.status(200).json(data);
