@@ -4,7 +4,7 @@ import {
   UmlLink, SvgCode, svgCodeSize, diagramCardHeight, ab,
 } from "@course";
 
-/* note 22 — Visitor, with a knob for the deck's two casts.
+/* note 22; Visitor, with a knob for the deck's two casts.
 
    Like Bridge, this is TWO hierarchies with one link between them, so it skips
    patternTree and places both trees itself. The rejected half is a DIAGRAM, which is
@@ -157,7 +157,7 @@ function goodHalf(c) {
   const acceptTitle = `${c.elementType}.accept(v : Visitor)`;
   const aSize = svgCodeSize(ACCEPT, acceptTitle);
 
-  // the callout belongs under the ELEMENT side, whose accept() body it is — not under
+  // the callout belongs under the ELEMENT side, whose accept() body it is, not under
   // whichever of the two trees happens to be taller.
   const elementBottom = hasTree ? B.bottom + bDy : PAD + bDy + bH;
   const codeY = elementBottom + 20;

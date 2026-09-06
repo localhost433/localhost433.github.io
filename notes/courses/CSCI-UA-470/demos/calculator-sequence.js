@@ -1,7 +1,7 @@
-/* AUTO-GENERATED from calculator-sequence.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from calculator-sequence.jsx by `npm run build:artifacts`. Do not edit. */
 import { sequenceDiagram } from "@course";
 
-/* note 15 — the Add flow of the calculator, the middle diagram of the L15
+/* note 15, the Add flow of the calculator, the middle diagram of the L15
    traceability chain. The interesting move is the CREATE: MainGUI constructs
    its Mathematician mid-scene (`new()`), so the participant's header floats at
    the creation row (bornAt) instead of the top line. The lecture drew Sub and
@@ -34,7 +34,7 @@ export default sequenceDiagram({
     label: "new()",
     kind: "sync"
   },
-  // 1 — creation
+  // 1: creation
   {
     from: "gui",
     to: "math",

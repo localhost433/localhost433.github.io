@@ -1,4 +1,4 @@
-/* AUTO-GENERATED from mem-diamond.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from mem-diamond.jsx by `npm run build:artifacts`. Do not edit. */
 import { scene } from "@course";
 
 /* The VIRTUAL diamond (code/lectures/L06): teacher & student inherit `person`

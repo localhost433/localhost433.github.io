@@ -1,4 +1,4 @@
-/* AUTO-GENERATED from jvm-object-lifecycle.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from jvm-object-lifecycle.jsx by `npm run build:artifacts`. Do not edit. */
 import { scene, obj, methodArea, opstack, pcreg } from "@course";
 
 /* L11 - JVM object lifecycle (workshop Program A).

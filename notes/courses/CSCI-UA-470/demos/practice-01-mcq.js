@@ -1,7 +1,7 @@
-/* AUTO-GENERATED from practice-01-mcq.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from practice-01-mcq.jsx by `npm run build:artifacts`. Do not edit. */
 import { mcq } from "@course";
 
-/* note 01 practice — the C++ foundations gotchas that read as exam traps: the two
+/* note 01 practice, the C++ foundations gotchas that read as exam traps: the two
    condition mistakes Java would reject, main's special fall-off rule, the
    platform-dependent width of `long`, and the C-string vs string-class split. */
 

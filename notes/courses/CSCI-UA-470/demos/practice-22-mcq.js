@@ -1,7 +1,7 @@
-/* AUTO-GENERATED from practice-22-mcq.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from practice-22-mcq.jsx by `npm run build:artifacts`. Do not edit. */
 import { mcq } from "@course";
 
-/* note 22 practice — the graded pass over the four patterns that EXTRACT rather than
+/* note 22 practice, the graded pass over the four patterns that EXTRACT rather than
    swap. The first two questions come over from practice-21-mcq with their sections
    (Chain and Iterator); the rest are new.
 

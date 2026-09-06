@@ -1,4 +1,4 @@
-/* AUTO-GENERATED from jvm-operand-stack.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from jvm-operand-stack.jsx by `npm run build:artifacts`. Do not edit. */
 import { scene, stack, text } from "@course";
 
 /* L11 - JVM operand stack trace.

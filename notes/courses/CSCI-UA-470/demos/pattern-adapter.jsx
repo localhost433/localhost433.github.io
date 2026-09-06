@@ -1,7 +1,7 @@
 import React from "react";
 import { patternFigure, DiagramSvg, DiagramCard, diagramCardHeight, treeLayout, ClassTree, UmlLink, SvgCode, svgCodeSize } from "@course";
 
-/* note 20 — Adapter, on L19's own DB-connection cast. The tell is drawn rather than
+/* note 20; Adapter, on L19's own DB-connection cast. The tell is drawn rather than
    said: three of the four children are ordinary subclasses, and the fourth carries
    an extra field (`- s : SQLite`) pointing at a class that is NOT in the hierarchy
    and never will be. The adapter's methods are not implementations; they are
@@ -24,7 +24,7 @@ const L = treeLayout({
   ],
 });
 const SHIFT = PAD - L.left;
-const A = L.children[3];                       // the adapter — everything below hangs off it
+const A = L.children[3];                       // the adapter, everything below hangs off it
 const adapterCx = A.cx + SHIFT, adapterBottom = A.top + A.h;
 
 const SQLITE = { title: "SQLite",

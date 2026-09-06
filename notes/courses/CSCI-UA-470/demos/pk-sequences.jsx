@@ -1,7 +1,7 @@
 import React from "react";
 import { SequenceDiagram, KnobBar } from "@course";
 
-/* password-keeper — L17's three sequence diagrams behind one knob, in the slide's
+/* password-keeper; L17's three sequence diagrams behind one knob, in the slide's
    own vocabulary: addNew / add_to_list / new(FN) / save(list_of_passwords),
    load_passwords / read() with its dashed List_of_passwords return, and
    delete / remove_from_list. One artifact instead of three because the three flows
@@ -19,9 +19,9 @@ const FLOWS = {
     ],
     messages: [
       { from: "user", to: "mgr", label: "addNew(title, passcode)", kind: "sync" },      // 0
-      { from: "mgr", to: "p", label: "new(title, passcode)", kind: "sync" },            // 1 — creation
+      { from: "mgr", to: "p", label: "new(title, passcode)", kind: "sync" },            // 1: creation
       { from: "mgr", to: "mgr", label: "add_to_list(p)", kind: "sync", self: true },    // 2
-      { from: "mgr", to: "f", label: "new(FN)", kind: "sync" },                         // 3 — creation
+      { from: "mgr", to: "f", label: "new(FN)", kind: "sync" },                         // 3: creation
       { from: "mgr", to: "f", label: "save(list_of_passwords)", kind: "sync" },         // 4
     ],
     activations: [
@@ -39,9 +39,9 @@ const FLOWS = {
       { id: "f", label: "f : FileManager", bornAt: 2 },
     ],
     messages: [
-      { from: "user", to: "mgr", label: "new()", kind: "sync" },                        // 0 — creation
+      { from: "user", to: "mgr", label: "new()", kind: "sync" },                        // 0: creation
       { from: "mgr", to: "mgr", label: "load_passwords()", kind: "sync", self: true },  // 1
-      { from: "mgr", to: "f", label: "new(FN)", kind: "sync" },                         // 2 — creation
+      { from: "mgr", to: "f", label: "new(FN)", kind: "sync" },                         // 2: creation
       { from: "mgr", to: "f", label: "read()", kind: "sync" },                          // 3
       { from: "f", to: "mgr", label: "List_of_passwords", kind: "return" },             // 4
     ],
@@ -62,7 +62,7 @@ const FLOWS = {
     messages: [
       { from: "user", to: "mgr", label: "delete(pid)", kind: "sync" },                     // 0
       { from: "mgr", to: "mgr", label: "remove_from_list(pid)", kind: "sync", self: true },// 1
-      { from: "mgr", to: "f", label: "new(FN)", kind: "sync" },                            // 2 — creation
+      { from: "mgr", to: "f", label: "new(FN)", kind: "sync" },                            // 2: creation
       { from: "mgr", to: "f", label: "save(list_of_passwords)", kind: "sync" },            // 3
     ],
     activations: [

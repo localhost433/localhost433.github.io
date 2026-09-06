@@ -1,7 +1,7 @@
-/* AUTO-GENERATED from converter-use-case-generalize.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from converter-use-case-generalize.jsx by `npm run build:artifacts`. Do not edit. */
 import { useCaseWalkthrough, converterUseCase, converterUseCaseSteps } from "@course";
 
-/* note 14 — the first move of the iterative design loop. The unit converter's two
+/* note 14, the first move of the iterative design loop. The unit converter's two
    goals are drawn honestly as two use cases, the repeated shape is named, and then
    generalization folds them under one parameterized `Convert(amount, targetUnit)`.
    Deleting a use case here is what deletes a sequence diagram, then a method, then

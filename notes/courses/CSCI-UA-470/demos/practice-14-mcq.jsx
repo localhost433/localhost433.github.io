@@ -1,6 +1,6 @@
 import { mcq } from "@course";
 
-/* note 14 practice — the conceptual traps: class vs object diagram, and the
+/* note 14 practice, the conceptual traps: class vs object diagram, and the
    structural relationship ladder (dependency → association → aggregation →
    composition → generalization). The aggregation/composition split is the one that
    costs marks, since both are diamonds and only the FILL distinguishes them. */

@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 /**
- * Badge — from kit@1.0.0.
+ * Badge, from kit@1.0.0.
  */
 export interface BadgeProps {
   /** Visual style variant. */

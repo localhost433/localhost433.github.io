@@ -1,6 +1,6 @@
 import { mcq } from "@course";
 
-/* note 15 practice — the reverse drill: given the Java, name the relationship.
+/* note 15 practice, the reverse drill: given the Java, name the relationship.
    The forward direction (diagram → code) is what the stepper teaches; the exam
    also asks it backwards. The deliberate trap pair is dependency-as-parameter
    vs association-as-field — same class name in the source, different UML edge,

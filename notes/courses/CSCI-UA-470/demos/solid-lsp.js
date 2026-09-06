@@ -1,8 +1,8 @@
-/* AUTO-GENERATED from solid-lsp.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from solid-lsp.jsx by `npm run build:artifacts`. Do not edit. */
 import React from "react";
 import { DiagramSvg, treeLayout, ClassTree, cls, CodeBlock, CompareCaption } from "@course";
 
-/* note 16 — LSP, via the lecture's two broken hierarchies. Vehicle promises
+/* note 16; LSP, via the lecture's two broken hierarchies. Vehicle promises
    turnAcOn()/turnAcOff() to every child, and Bike cannot keep the promise;
    Bird promises fly(), and Ostrich cannot. The diagrams LOOK legal — the
    compiler accepts both — which is the point: substitutability is a semantic

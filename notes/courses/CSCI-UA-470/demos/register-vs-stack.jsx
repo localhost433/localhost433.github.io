@@ -1,7 +1,7 @@
 import React from "react";
 import { DiagramSvg, DiagramBox, CompareCaption } from "@course";
 
-/* L11 — the SAME computation, two machine models, so "register-based vs
+/* L11: the SAME computation, two machine models, so "register-based vs
    stack-based" is SHOWN rather than asserted. Both sides compute a + b with
    a = 5, b = 7 → 12.
      LEFT  = the physical CPU (x86-64): every instruction NAMES the register(s)

@@ -1,6 +1,6 @@
 import { mcq } from "@course";
 
-/* note 12 practice — the include/extend/generalization "exam trap" the note flags
+/* note 12 practice, the include/extend/generalization "exam trap" the note flags
    in its own words. Each question pins one axis of the trap: which relationship a
    scenario calls for, which way the dashed arrow points, and where the actor sits.
    The two that cost marks are (a) include vs extend — mandatory-shared vs

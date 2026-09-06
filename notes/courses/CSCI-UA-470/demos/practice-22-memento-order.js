@@ -1,8 +1,8 @@
-/* AUTO-GENERATED from practice-22-memento-order.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from practice-22-memento-order.jsx by `npm run build:artifacts`. Do not edit. */
 // notes/courses/CSCI-UA-470/demos/practice-22-memento-order.jsx
 import { sequenceOrder } from "@course";
 
-/* note 22 practice — one ctrl+Z as a sequence diagram, mirroring practice-22-chain-order.
+/* note 22 practice, one ctrl+Z as a sequence diagram, mirroring practice-22-chain-order.
    The order is forced by data flow (you cannot write values you have not read yet), so
    there is exactly one right answer, and building it exposes the thing a description
    glosses over:

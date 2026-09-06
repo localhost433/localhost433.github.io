@@ -1,8 +1,8 @@
-/* AUTO-GENERATED from practice-14-classbox-aggregate.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from practice-14-classbox-aggregate.jsx by `npm run build:artifacts`. Do not edit. */
 // notes/courses/CSCI-UA-470/demos/practice-14-classbox-aggregate.jsx
 import { classBuild } from "@course";
 
-/* note 14 practice — the OTHER half of the diamond trap. The composition box
+/* note 14 practice, the OTHER half of the diamond trap. The composition box
    (Window/TitleBar) drew a FILLED diamond because the part died with the whole.
    Here a Team HAS Players, but a player can be traded and outlive the team — the
    looser has-a — so it is AGGREGATION: a HOLLOW diamond, again at the WHOLE (Team)

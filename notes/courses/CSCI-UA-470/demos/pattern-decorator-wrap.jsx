@@ -1,6 +1,6 @@
 import { scene, stack, obj } from "@course";
 
-/* note 20 — the Decorator onion, watched in memory. The line students misread is
+/* note 20, the Decorator onion, watched in memory. The line students misread is
    `b1 = new Flower(b1, …)`: it looks like reassignment losing the old object, and it
    is the opposite — the old object survives, held by the new one, and only the
    NAME moves outward.

@@ -1,4 +1,4 @@
-/* AUTO-GENERATED from practice-04-mcq.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from practice-04-mcq.jsx by `npm run build:artifacts`. Do not edit. */
 import { mcq } from "@course";
 
 /* Discrete-fact MCQ on C++ resource management. No score. */

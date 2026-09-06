@@ -1,7 +1,7 @@
-/* AUTO-GENERATED from practice-21-behavioral-match.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from practice-21-behavioral-match.jsx by `npm run build:artifacts`. Do not edit. */
 import { matchBuild } from "@course";
 
-/* note 21 practice — six scenarios, six names, each used exactly once. None uses
+/* note 21 practice; six scenarios, six names, each used exactly once. None uses
    the deck's cast. The trio is represented but only once each, since
    practice-21-trio drills that split on its own; the work here is Template Method,
    and especially Mediator vs Observer (#2 vs #5), which the deck draws almost

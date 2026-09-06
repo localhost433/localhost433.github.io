@@ -1,7 +1,7 @@
 import React from "react";
 import { patternFigure, patternTree } from "@course";
 
-/* note 20 — Decorator, drawn as L19 draws it: Booking on top, a Decorator holding
+/* note 20; Decorator, drawn as L19 draws it: Booking on top, a Decorator holding
    `b : booking` below it, and the three add-ons inheriting from Decorator. The
    rejected half is the deck's own top row — a Booking that grows one field per
    add-on, which is the combinatorial trap Bridge just warned about, arriving from a
@@ -42,7 +42,7 @@ class Booking { String date;  double cost;  String flower; }
 
 class Booking { String date;  double cost;  String flower;  String food; }
 
-// …and every combination the customer might NOT want is now a field
+// …and every combination the customer might not want is now a field
 // that every booking carries, plus a flag saying whether it counts.`,
     note: "The deck crosses out each of these in turn. Adding features by widening the class means one class that knows about every add-on, and every booking paying for all of them — while *combinations* still have to be assembled by hand.",
   },

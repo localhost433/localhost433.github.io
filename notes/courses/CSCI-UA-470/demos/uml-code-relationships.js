@@ -1,9 +1,9 @@
-/* AUTO-GENERATED from uml-code-relationships.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from uml-code-relationships.jsx by `npm run build:artifacts`. Do not edit. */
 import React from "react";
 import { DiagramSvg, DiagramCard, UmlLink, CodeBlock, diagramCardHeight, cls } from "@course";
 import { Button } from "@kit";
 
-/* note 15 — the heart of L15: each class-diagram relationship IS a line of Java.
+/* note 15, the heart of L15: each class-diagram relationship IS a line of Java.
    One step per relationship, the UML edge on the left and the code it compiles
    to on the right. The two ends of every step use the lecture's own examples
    (Person/Employee, Drawable/Shape, Person/Address, Manager/Worker, Person/Hand,

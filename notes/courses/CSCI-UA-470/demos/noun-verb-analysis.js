@@ -1,8 +1,8 @@
-/* AUTO-GENERATED from noun-verb-analysis.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from noun-verb-analysis.jsx by `npm run build:artifacts`. Do not edit. */
 import React from "react";
 import { CompareCaption } from "@course";
 
-/* note 15 — finding the classes by reading the requirements as GRAMMAR. The
+/* note 15; finding the classes by reading the requirements as GRAMMAR. The
    part-of-speech table from L15, plus a live sentence with each word tagged the
    way the analysis would tag it. Rendered as HTML (not SVG) because it IS a
    table; the sentence above it shows the rules firing on real text. */

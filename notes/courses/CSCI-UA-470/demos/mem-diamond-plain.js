@@ -1,4 +1,4 @@
-/* AUTO-GENERATED from mem-diamond-plain.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from mem-diamond-plain.jsx by `npm run build:artifacts`. Do not edit. */
 import { scene } from "@course";
 
 /* The NON-virtual diamond (code/lectures/L06 without `virtual`): teacher and

@@ -1,7 +1,7 @@
-/* AUTO-GENERATED from practice-pk-mcq.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from practice-pk-mcq.jsx by `npm run build:artifacts`. Do not edit. */
 import { mcq } from "@course";
 
-/* password-keeper practice — the round-trip drill from sections 4 and 5: given a
+/* password-keeper practice, the round-trip drill from sections 4 and 5: given a
    code shape, name the diagram element, and vice versa. Every question is decided by
    one of the note's two discriminators: where does the reference live, and what is
    the line style. */

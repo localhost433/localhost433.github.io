@@ -1,6 +1,6 @@
 import { scene, stack, heap, glob, text } from "@course";
 
-/* L02 has no standalone source file in code/lectures — this mirrors the
+/* L02 has no standalone source file in code/lectures, this mirrors the
    L02-01 lecture slide: a pointer is just a variable holding an address, and
    that address can live in ANY of the four memory segments. All four pointers
    are shown in parallel (one program), each fanning into a different segment;

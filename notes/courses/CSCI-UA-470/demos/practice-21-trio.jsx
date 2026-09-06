@@ -1,6 +1,6 @@
 import { matchBuild } from "@course";
 
-/* note 21 practice — the drill the whole note is built toward. Every scenario here
+/* note 21 practice, the drill the whole note is built toward. Every scenario here
    would produce the SAME class diagram: a context with a field of an abstract type,
    three concrete subclasses, one delegating call. Structure decides nothing, so the
    student has to reason from intent.

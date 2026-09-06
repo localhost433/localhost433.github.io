@@ -1,6 +1,6 @@
 import { scene, l02HeapScene } from "@course";
 
-/* note 02 practice — the dynamic-memory walkthrough (shared with the mem-heap demo
+/* note 02 practice, the dynamic-memory walkthrough (shared with the mem-heap demo
    via l02HeapScene) turned into active recall: the student predicts what `delete p;`
    does to `p` and to the heap block, before the dangling state is revealed. Reuses
    the demo's exact cell layout and code, adding only the question. */

@@ -1,8 +1,8 @@
-/* AUTO-GENERATED from solid-srp.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from solid-srp.jsx by `npm run build:artifacts`. Do not edit. */
 import React from "react";
 import { DiagramSvg, DiagramCard, UmlLink, CrossOut, diagramCardHeight, cls } from "@course";
 
-/* note 16 — SRP, drawn as the lecture drew it: the Invoice god-class crossed
+/* note 16; SRP, drawn as the lecture drew it: the Invoice god-class crossed
    out on the left, the split on the right. Invoice keeps the DATA (its one
    responsibility); the register keeps the BOOKKEEPING (adding, deleting,
    sorting invoices — a different responsibility, a different reason to

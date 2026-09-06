@@ -1,7 +1,7 @@
 // notes/courses/CSCI-UA-470/demos/practice-12-usecase.jsx
 import { useCaseBuild } from "@course";
 
-/* note 12 practice — assemble a small Library System use-case diagram. A trimmed
+/* note 12 practice; assemble a small Library System use-case diagram. A trimmed
    cut of the worked example (two actors, three use cases) so the moves stand out:
    actors go OUTSIDE the boundary, use cases INSIDE it; the Member takes part in
    borrowing and searching, the Librarian adds books; and Borrow Book is an optional

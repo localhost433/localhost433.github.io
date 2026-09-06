@@ -1,4 +1,4 @@
-/* AUTO-GENERATED from size-vptr.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from size-vptr.jsx by `npm run build:artifacts`. Do not edit. */
 import { sizes } from "@course";
 
 /* The cost of going polymorphic: a single virtual function adds a hidden

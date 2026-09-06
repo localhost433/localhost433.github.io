@@ -1,7 +1,7 @@
-/* AUTO-GENERATED from practice-20-mcq.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from practice-20-mcq.jsx by `npm run build:artifacts`. Do not edit. */
 import { mcq } from "@course";
 
-/* note 20 practice — weighted toward the four wrappers, because that is where the
+/* note 20 practice; weighted toward the four wrappers, because that is where the
    marks go. The rest guard the three facts the deck states but does not dwell on:
    Flyweight's shared state must be the state that identifies the object, Composite's
    self-reference is the pattern (not the inheritance), and Bridge is triggered by

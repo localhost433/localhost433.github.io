@@ -1,8 +1,8 @@
-/* AUTO-GENERATED from pattern-bridge.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from pattern-bridge.jsx by `npm run build:artifacts`. Do not edit. */
 import React from "react";
 import { patternFigure, treeLayout, ClassTree, UmlLink } from "@course";
 
-/* note 20 — Bridge. The rejected half is the one place in this note where the code
+/* note 20; Bridge. The rejected half is the one place in this note where the code
    block is a LIST OF CLASS NAMES, because that is exactly the damage: three device
    kinds crossed with three operating systems is nine classes, and a fourth OS makes
    it twelve. The pattern half puts the two hierarchies side by side with one line

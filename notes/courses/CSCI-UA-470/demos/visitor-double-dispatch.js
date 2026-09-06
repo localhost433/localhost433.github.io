@@ -1,10 +1,10 @@
-/* AUTO-GENERATED from visitor-double-dispatch.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from visitor-double-dispatch.jsx by `npm run build:artifacts`. Do not edit. */
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 import React from "react";
 import { DiagramSvg, DiagramCard, CodeBlock, KnobBar, diagramPalette } from "@course";
 import { Button } from "@kit";
 
-/* note 22 — the double-dispatch tracer. The one thing in L21 a static diagram cannot
+/* note 22, the double-dispatch tracer. The one thing in L21 a static diagram cannot
    carry: `s.accept(v)` reaches one of NINE method bodies, and it takes three separate
    language rules to get there — a virtual call, then an OVERLOAD chosen at compile
    time, then a second virtual call.

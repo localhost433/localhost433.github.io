@@ -1,7 +1,7 @@
 import React from "react";
 import { DiagramSvg, treeLayout, ClassTree, ab, cls } from "@course";
 
-/* v4 (note 09) — Shape is now ABSTRACT. Its title is italic (UML abstract class)
+/* v4 (note 09); Shape is now ABSTRACT. Its title is italic (UML abstract class)
    and draw() is an italic row (UML abstract method), so `new Shape()` is illegal
    and every concrete subclass MUST implement draw(). Cylinder is the newly added
    concrete shape; the dashed card is the open extension point. Five children make

@@ -1,7 +1,7 @@
 import React from "react";
 import { patternFigure, patternTree, SvgCode, svgCodeSize, ab } from "@course";
 
-/* note 21 — Observer, drawn as the deliberate near-twin of pattern-mediator. The
+/* note 21; Observer, drawn as the deliberate near-twin of pattern-mediator. The
    two structural differences worth pointing at, and both are visible in this figure:
    `subscribe` / `unsubscribe` (observers opt in and out at run time; colleagues are
    registered by whoever builds the room) and a notify loop with NO sender check.

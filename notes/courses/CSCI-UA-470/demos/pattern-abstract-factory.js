@@ -1,8 +1,8 @@
-/* AUTO-GENERATED from pattern-abstract-factory.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from pattern-abstract-factory.jsx by `npm run build:artifacts`. Do not edit. */
 import React from "react";
 import { patternFigure, patternTree } from "@course";
 
-/* note 19 — Abstract Factory, drawn the way L18 draws it: the Factory picture from
+/* note 19; Abstract Factory, drawn the way L18 draws it: the Factory picture from
    the previous slide, repeated once per FAMILY. Shapes, Vehicles, Animals. The
    members are stripped off every card on purpose — the slide's whole argument is
    that the three rows are the SAME SHAPE, and members would only distract from the

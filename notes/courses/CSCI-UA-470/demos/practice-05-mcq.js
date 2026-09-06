@@ -1,7 +1,7 @@
-/* AUTO-GENERATED from practice-05-mcq.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from practice-05-mcq.jsx by `npm run build:artifacts`. Do not edit. */
 import { mcq } from "@course";
 
-/* note 05 practice — inheritance mechanics, with the EARLY-BINDING trap as the
+/* note 05 practice; inheritance mechanics, with the EARLY-BINDING trap as the
    headline (a base pointer to a derived object calls the BASE method without
    `virtual`), plus layout (upcast is free), construction order, multiple-
    inheritance pointer adjustment, shadowing, and using-vs-redefine. */

@@ -1,7 +1,7 @@
 // notes/courses/CSCI-UA-470/demos/practice-14-classbox-compose.jsx
 import { classBuild } from "@course";
 
-/* note 14 practice, second class box — this time the relationship is the
+/* note 14 practice, second class box, this time the relationship is the
    aggregation/composition trap the note flags as the mark-loser: both are diamonds,
    and only the FILL tells them apart. A Window OWNS its TitleBar — destroy the
    window and the bar goes with it — so it is COMPOSITION: a FILLED diamond, and the

@@ -1,4 +1,4 @@
-/* AUTO-GENERATED from templates-class.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from templates-class.jsx by `npm run build:artifacts`. Do not edit. */
 import { scene, obj } from "@course";
 const code = `template <class T>
 class Box {

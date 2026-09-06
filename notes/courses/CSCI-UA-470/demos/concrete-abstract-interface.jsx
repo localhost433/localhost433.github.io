@@ -1,7 +1,7 @@
 import React from "react";
 import { DiagramSvg, CompareCaption } from "@course";
 
-/* L13 - concrete vs abstract vs interface, drawn as ONE spectrum.
+/* L13 - concrete vs abstract vs interface, drawn as one spectrum.
    The single axis is "how much is left unimplemented", shown as a row of method
    slots: a filled slot has a body, a dashed slot is abstract. A concrete class
    fills every slot (so `new` works); an abstract class leaves >= 1 slot empty

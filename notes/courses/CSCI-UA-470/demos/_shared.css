@@ -1,4 +1,4 @@
-/* CSCI-UA-470 — shared styling for the interactive memory-model demos.
+/* CSCI-UA-470; shared styling for the interactive memory-model demos.
    Palette mirrors the textbook C++ process-layout diagram:
    Stack (blue) · Heap (green) · Global/Static (amber) · Code (purple),
    on a high->low address axis. Adapts to the host's light / dark mode. */
@@ -7,7 +7,7 @@
   --seg-heap-bg:#e1f5ee;   --seg-heap-bd:#b3dfd0;   --seg-heap-fg:#085041;   --seg-heap-tx:#0f6e56;
   --seg-global-bg:#faeeda; --seg-global-bd:#ecd6ad; --seg-global-fg:#633806; --seg-global-tx:#854f0b;
   --seg-code-bg:#eeedfe;   --seg-code-bd:#cfcbf3;   --seg-code-fg:#3c3489;   --seg-code-tx:#534ab7;
-  /* Java / JVM are a language and its runtime, not memory segments — their own
+  /* Java / JVM are a language and its runtime, not memory segments: their own
      hues (brown, teal) so neither tag reads as one of the four segment colours
      (blue/green/amber/purple). */
   --lang-java-bg:#ead9c6;  --lang-java-fg:#6a3f1c;
@@ -21,7 +21,7 @@
   --mm-hl:#d9870a;    --mm-dangling:#dc2626;  --mm-ok:#16a34a;  --mm-reclaimed-bg:#efeee8;
 
   --mm-code-bg:#f1f4f8; --mm-code-fg:#26303d; --mm-code-ln:#9aa3b2; --mm-code-hl:#ece9fb;
-  /* syntax tokens — GitHub hljs theme (light) so demo code matches the note's code blocks */
+  /* syntax tokens; GitHub hljs theme (light) so demo code matches the note's code blocks */
   --tok-kw:#d73a49; --tok-ty:#6f42c1; --tok-fn:#e36209; --tok-str:#032f62; --tok-num:#005cc5; --tok-com:#6a737d; --tok-pre:#d73a49;
   --mm-con-bar:#e6ebf2; --mm-con-rule:#0000000f; --mm-con-expr:#0e7490;
   --mm-panel-bg:#f5f7fa; --mm-panel-bd:#e2e7ee;
@@ -43,7 +43,7 @@ html.dark-mode {
   --mm-hl:#f59e0b;    --mm-dangling:#f87171;  --mm-ok:#4ade80;  --mm-reclaimed-bg:#2b2b29;
 
   --mm-code-bg:#0c121b; --mm-code-fg:#d7dfeb; --mm-code-ln:#6c7686; --mm-code-hl:#2a2450;
-  /* syntax tokens — GitHub hljs theme (dark) */
+  /* syntax tokens, GitHub hljs theme (dark) */
   --tok-kw:#ff7b72; --tok-ty:#d2a8ff; --tok-fn:#ffa657; --tok-str:#a5d6ff; --tok-num:#79c0ff; --tok-com:#8b949e; --tok-pre:#ff7b72;
   --mm-con-bar:#0000003f; --mm-con-rule:#ffffff10; --mm-con-expr:#7fdce8;
   --mm-panel-bg:#131b26; --mm-panel-bd:#26303d;
@@ -69,7 +69,7 @@ html.dark-mode {
 .mm-cap-tag--jvm  { background: var(--lang-jvm-bg);   color: var(--lang-jvm-fg); }
 .mm-cap-txt { flex: 1; min-width: 0; }
 
-/* ---- noun/verb interlinear gloss (note 15) — a tagged word carries a small
+/* ---- noun/verb interlinear gloss (note 15): a tagged word carries a small
    role label directly above it and a matching coloured underline below, so the
    sentence reads as annotation rather than inline clutter. The label sits ABOVE
    the word so the word keeps the running text's baseline. ---- */
@@ -82,7 +82,7 @@ html.dark-mode {
   border-bottom: 2px solid; padding-bottom: 1px; }
 .mm-scene__nav { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; }
 
-/* collapsible sections — a clear, full-width clickable bar */
+/* collapsible sections, a clear, full-width clickable bar */
 .mm-sec__head { display: flex; align-items: center; gap: .5rem; width: 100%; padding: .4rem .6rem; margin: 0;
   background: var(--mm-panel-bg); border: 1px solid var(--mm-panel-bd); border-radius: 7px; cursor: pointer;
   color: var(--mm-muted); font-family: inherit; font-size: .72rem; font-weight: 700;
@@ -204,7 +204,7 @@ html.dark-mode {
 .mm-seg--code   { background: var(--seg-code-bg);   border-color: var(--seg-code-bd);   }
 .mm-seg--code   .mm-seg__label { color: var(--seg-code-fg);   } .mm-seg--code   .mm-seg__hint { color: var(--seg-code-tx);   }
 
-/* JVM runtime regions (note 11 mini-VM) — reuse the four base palettes. */
+/* JVM runtime regions (note 11 mini-VM), reuse the four base palettes. */
 .mm-seg--method  { background: var(--seg-global-bg); border-color: var(--seg-global-bd); }
 .mm-seg--method  .mm-seg__label { color: var(--seg-global-fg); } .mm-seg--method  .mm-seg__hint { color: var(--seg-global-tx); }
 .mm-seg--opstack { background: var(--seg-stack-bg);  border-color: var(--seg-stack-bd);  }
@@ -290,7 +290,7 @@ html.dark-mode {
 .mm-cell--ptr .mm-cell__table .mm-layout__val { color: var(--mm-ptr); }
 .mm-cell--ref .mm-cell__table .mm-layout__val { color: var(--mm-ref); }
 
-/* hover tooltip — reveals a cell's full identity when a row is ellipsized
+/* hover tooltip; reveals a cell's full identity when a row is ellipsized
    (a long class name in a narrow, byte-sized cell). Lives in the canvas, which
    doesn't clip, so it escapes the cell's overflow:hidden. Inverts the cell
    palette for contrast and adapts to light / dark mode automatically. */
@@ -414,7 +414,7 @@ html.dark-mode {
 .pf-hit { fill: transparent; pointer-events: all; cursor: pointer; }
 @media (prefers-reduced-motion: reduce) { .pf-route, .pf-btn { transition: none; } }
 
-/* ---- comparison captions (CompareTitles / CompareCaption) — shared tagged "A vs B"
+/* ---- comparison captions (CompareTitles / CompareCaption), shared tagged "A vs B"
    labels for any compare figure; tags reuse mm-cap-tag, columns scale via --cols. ---- */
 .mm-compare-titles { display: flex; flex-wrap: wrap; justify-content: space-around; gap: .2rem 1rem;
   font-weight: 700; font-size: .8rem; letter-spacing: .02em; color: var(--mm-muted); margin: 0 0 .35rem; padding: 0 1rem; }
@@ -432,7 +432,7 @@ html.dark-mode {
   .mm-compare__col + .mm-compare__col { padding-left: 0; border-left: 0; }
 }
 
-/* ---- PatternFigure (patternFigure(), notes 19–21) — the shape every design-pattern
+/* ---- PatternFigure (patternFigure(), notes 19–21): the shape every design-pattern
    slide repeats: a bracketed intent line, a rejected half, the pattern half, and the
    client code. Each half is tagged with the shared caption chip so "rejected" vs
    "the pattern" vs "client code" reads without touching the diagram itself. ---- */
@@ -444,7 +444,7 @@ html.dark-mode {
 .mm-pat__tag { flex: none; align-self: flex-start; width: fit-content; }
 .mm-pat__note { margin: 0; font-size: .78rem; line-height: 1.45; color: var(--mm-muted); }
 
-/* ---- MemoryCompare (compare()) — side-by-side stage columns. Each column pairs a
+/* ---- MemoryCompare (compare()); side-by-side stage columns. Each column pairs a
    one-line declaration with a stack-only MemoryModel, a byte-cost chip and a reading;
    the highlight ring marks the storage introduced at that stage. ---- */
 .mm-cmp { display: grid; grid-template-columns: repeat(var(--cols, 3), 1fr);
@@ -473,7 +473,7 @@ html.dark-mode {
   .mm-cmp__col + .mm-cmp__col { border-left: 0; border-top: 1px solid var(--mm-panel-bd); }
 }
 
-/* ---- MemoryDualScene (dualScene()) — two MemoryScene-style columns sharing one
+/* ---- MemoryDualScene (dualScene()): two MemoryScene-style columns sharing one
    stepper. Each column stacks memory + C++ + asm vertically (forced one-column so
    the narrow column fits), with a divider between the two columns. ---- */
 .mm-dual { display: grid; grid-template-columns: 1fr 1fr; gap: 0 1.1rem; align-items: start; }
@@ -529,7 +529,7 @@ html.dark-mode {
 .mm-verdict__mark--ok { color: var(--mm-ok); }
 .mm-verdict__mark--no { color: var(--mm-dangling); }
 
-/* Why — annotated callouts (SVG markers + caption panel). Reuses pointer tokens. */
+/* Why; annotated callouts (SVG markers + caption panel). Reuses pointer tokens. */
 .mm-why { margin-top: .5rem; min-height: 1.6rem; }
 .mm-why__hint { margin: 0; font-size: .8rem; font-style: italic; color: var(--mm-muted); }
 .mm-why__note { margin: 0; display: flex; align-items: flex-start; gap: .5rem;
@@ -547,7 +547,7 @@ html.dark-mode {
 .mm-why__dot:focus-visible { outline: none; }
 .mm-why__dot:focus-visible circle { stroke-width: 2.6; }
 
-/* Quiz nav shell — shared Prev/Next chrome, reused by Mcq. */
+/* Quiz nav shell, shared Prev/Next chrome, reused by Mcq. */
 .mm-quiz { display: flex; flex-direction: column; gap: .6rem; }
 .mm-quiz__nav { display: flex; align-items: center; justify-content: space-between; gap: .6rem; }
 .mm-quiz__pos { font-size: .72rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
@@ -558,7 +558,7 @@ html.dark-mode {
 .mm-quiz__btn:hover:not(:disabled) { border-color: var(--mm-ptr); color: var(--mm-ptr); }
 .mm-quiz__btn:disabled { opacity: .45; cursor: default; }
 
-/* MCQ — paged multiple-choice quiz (reuses .mm-quiz nav). No score. */
+/* MCQ; paged multiple-choice quiz (reuses .mm-quiz nav). No score. */
 .mm-mcq { display: flex; flex-direction: column; gap: .6rem; }
 .mm-mcq__stem { margin: 0; font-size: .9rem; line-height: 1.5; color: hsl(var(--foreground)); }
 .mm-mcq__fig { margin: .1rem 0; }
@@ -648,7 +648,7 @@ html.dark-mode {
    so suppress the browser's default rectangular outline to avoid a doubled indicator. */
 .uc-pickable { outline: none; }
 
-/* Identify stage — every word is clickable; tag colour/label appear ONLY once the
+/* Identify stage: every word is clickable; tag colour/label appear only once the
    reader tags it (none -> actor -> use case). Space above each word is reserved so
    the line never reflows when a label appears. */
 .uc-id { margin: 0.3rem 0 0.5rem; }

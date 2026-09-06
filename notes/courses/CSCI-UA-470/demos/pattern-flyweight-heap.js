@@ -1,7 +1,7 @@
-/* AUTO-GENERATED from pattern-flyweight-heap.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from pattern-flyweight-heap.jsx by `npm run build:artifacts`. Do not edit. */
 import { scene, stack, glob, obj } from "@course";
 
-/* note 20 — Flyweight's payoff, in the heap. Four requests, two objects: the two
+/* note 20; Flyweight's payoff, in the heap. Four requests, two objects: the two
    "hit" steps allocate nothing at all, and the repo's arrows show why — the second
    red car request lands on the cell the first one created.
 

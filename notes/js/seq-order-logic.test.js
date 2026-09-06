@@ -6,7 +6,7 @@ const path = require("node:path");
 
 // The module under test is ESM (.mjs); this test file is CJS, so load it via
 // dynamic import() in a `before` hook. (`before` is the standalone node:test
-// hook — NOT `test.before`, which is not part of the API.)
+// hook, not `test.before`, which is not part of the API.)
 const MOD = pathToFileURL(path.join(__dirname, "seq-order-logic.mjs")).href;
 let L;
 before(async () => { L = await import(MOD); });

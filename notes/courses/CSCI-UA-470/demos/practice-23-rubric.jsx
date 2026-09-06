@@ -1,6 +1,6 @@
 import { matchBuild } from "@course";
 
-/* note 23 practice — L22's review rubric, used the way the deck says to use it. Six
+/* note 23 practice; L22's review rubric, used the way the deck says to use it. Six
    units that a model returned, six rubric lines, each used exactly once.
 
    The framing matters and is not decoration: every snippet here COMPILES, PASSES ITS

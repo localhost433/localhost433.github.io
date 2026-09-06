@@ -1,7 +1,7 @@
 // notes/courses/CSCI-UA-470/demos/practice-19-singleton-classbox.jsx
 import { classBuild } from "@course";
 
-/* note 19 practice — build the Singleton box. Two drills at once: note 14's member
+/* note 19 practice; build the Singleton box. Two drills at once: note 14's member
    notation (visibility left, type after the colon, and the VOID RULE that strips the
    return type from a constructor) and the pattern itself, whose whole enforcement
    lives in two visibility marks. The `-` on the constructor is the one students

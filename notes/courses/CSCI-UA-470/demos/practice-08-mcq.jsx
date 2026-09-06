@@ -1,6 +1,6 @@
 import { mcq } from "@course";
 
-/* note 08 practice — the C++/Java contrasts most likely to be tested: the
+/* note 08 practice, the C++/Java contrasts most likely to be tested: the
    compilation model, Java's heap-only objects and reference-by-value semantics
    (the swap no-op), and the inheritance/binding differences. */
 

@@ -1,6 +1,6 @@
 import { sequenceDiagram } from "@course";
 
-/* note 13 — the signature worked example (coffee shop, "Make order", the V4 form
+/* note 13, the signature worked example (coffee shop, "Make order", the V4 form
    from L13). The single use-case oval `Make order` explodes into the objects that
    collaborate to fulfil it and the messages they pass over time: the customer
    pays the cashier, the cashier hands the job to the barista, the barista passes

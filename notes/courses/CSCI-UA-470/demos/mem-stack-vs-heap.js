@@ -1,8 +1,8 @@
-/* AUTO-GENERATED from mem-stack-vs-heap.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from mem-stack-vs-heap.jsx by `npm run build:artifacts`. Do not edit. */
 import React from "react";
 import { MemoryModel, CodeBlock, stack, heap } from "@course";
 
-/* L08 — object placement: where does an object actually live?
+/* L08; object placement: where does an object actually live?
    C++ gives a choice: `Person p1(...)` builds the whole object ON THE STACK (its
    fields inline in the frame); `new Person(...)` builds one on the HEAP, reached
    through a pointer you must later `delete`. Java removes the choice — there are

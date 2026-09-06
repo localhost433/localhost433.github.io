@@ -1,4 +1,4 @@
-/* AUTO-GENERATED from mem-copy.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from mem-copy.jsx by `npm run build:artifacts`. Do not edit. */
 import { scene, stack, heap } from "@course";
 
 /* Shallow vs deep copy of a class that OWNS heap memory (note 04's Circle with

@@ -7,7 +7,7 @@ const path = require("node:path");
  *
  * vercel.json uses `builds`, so a file is only deployed when its path matches one of
  * the `src` globs. `notes/js/**` was listed as `*.js` only, which silently dropped
- * `seq-order-logic.mjs` — the module the artifact host injects as `@course/seq-order`.
+ * `seq-order-logic.mjs`, the module the artifact host injects as `@course/seq-order`.
  * Every artifact on the site then died with "Failed to resolve module specifier", while
  * local `npm run dev` (which serves straight off disk) worked perfectly and the page's
  * own `.artifact-error` hook never fired, because the failure happens INSIDE the

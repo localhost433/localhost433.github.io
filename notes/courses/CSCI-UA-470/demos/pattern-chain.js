@@ -1,8 +1,8 @@
-/* AUTO-GENERATED from pattern-chain.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from pattern-chain.jsx by `npm run build:artifacts`. Do not edit. */
 import React from "react";
 import { patternFigure, patternTree, SvgCode, svgCodeSize, ab } from "@course";
 
-/* note 21 — Chain of Responsibilities. The deck's payoff is three DIFFERENT
+/* note 21; Chain of Responsibilities. The deck's payoff is three DIFFERENT
    escalation orders built from the SAME four handler classes (Secretary, Chair,
    Dean, Assistant — a student request climbing the ladder), so the figure's job is
    to make `nextHandler` conspicuous: it is a Handler field on Handler, which is the
@@ -51,13 +51,13 @@ export default patternFigure({
   intent: "[Avoid coupling between request & receiver · enables adding and removing receivers freely]",
   bad: {
     lang: "java",
-    code: `// routine form — settled at the front desk
+    code: `// routine form, settled at the front desk
 if (!secretary.handle(a)) if (!chair.handle(a)) dean.handle(a);
 
-// grade appeal — different people, different order
+// grade appeal, different people, different order
 if (!chair.handle(a)) if (!dean.handle(a)) assistant.handle(a);
 
-// urgent case — skips two rungs
+// urgent case, skips two rungs
 if (!dean.handle(a)) assistant.handle(a);`,
     note: "Three hard-coded ladders for three kinds of student request, and a fourth kind means a fourth ladder. The sender has to know every possible receiver **and** the order they come in — which is precisely the coupling the pattern exists to remove."
   },
@@ -84,7 +84,7 @@ s.nextHandler = c;  c.nextHandler = d;  d.nextHandler = A;
 s.handle(a);           // the routine route: starts at the secretary
 
 s.nextHandler = d;  d.nextHandler = c;  c.nextHandler = A;
-s.handle(a);           // same classes, new order — nothing recompiled
+s.handle(a);           // same classes, new order, nothing recompiled
 
 c.nextHandler = d;  d.nextHandler = A;  A.nextHandler = s;
 c.handle(a);           // starts mid-ladder; the secretary is last resort`,

@@ -1,4 +1,4 @@
-/* AUTO-GENERATED from swap-by-ref.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from swap-by-ref.jsx by `npm run build:artifacts`. Do not edit. */
 import { scene, stack, obj } from "@course";
 
 /* Java passes references BY VALUE. The `pass` knob toggles two swap strategies:

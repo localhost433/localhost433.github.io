@@ -1,4 +1,4 @@
-/* AUTO-GENERATED from trace-l04.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from trace-l04.jsx by `npm run build:artifacts`. Do not edit. */
 import { scene, obj } from "@course";
 
 /* Traces code/lectures/L04/main.cpp: friend operator>> and operator<<.

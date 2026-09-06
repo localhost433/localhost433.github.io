@@ -1,4 +1,4 @@
-/* AUTO-GENERATED from mem-reference-compare.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from mem-reference-compare.jsx by `npm run build:artifacts`. Do not edit. */
 import { compare, stack } from "@course";
 
 /* The three declarations, read side by side. The point lives in the HIGHLIGHT:

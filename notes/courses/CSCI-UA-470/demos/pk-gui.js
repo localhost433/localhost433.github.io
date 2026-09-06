@@ -1,8 +1,8 @@
-/* AUTO-GENERATED from pk-gui.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from pk-gui.jsx by `npm run build:artifacts`. Do not edit. */
 import React from "react";
 import { DiagramSvg, DiagramCard, diagramCardHeight } from "@course";
 
-/* password-keeper — the finished Swing window from the L17 slide, so every later
+/* password-keeper, the finished Swing window from the L17 slide, so every later
    diagram has a referent. Drawn in the converter-gui-walkthrough idiom (a DiagramCard
    whose rows imitate the widgets), with each widget annotated by the MainGUI field it
    will become in the class diagram — the traceability spine of the whole note. */

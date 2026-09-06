@@ -1,14 +1,14 @@
-/* AUTO-GENERATED from solid-ocp.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from solid-ocp.jsx by `npm run build:artifacts`. Do not edit. */
 import React from "react";
 import { DiagramSvg, treeLayout, ClassTree, ab, cls, CodeBlock, CompareCaption } from "@course";
 
-/* note 16 — OCP. The bad half is CODE, not a diagram: the type-switch getArea()
+/* note 16; OCP. The bad half is CODE, not a diagram: the type-switch getArea()
    that must be EDITED for every new shape. The good half is the uml-v4 tree
    from note 09, redrawn in its L16 role: abstract Shape, one override per
    subclass, and Cylinder added purely by extension. Same figure, new argument —
    v4 said "polymorphism dispatches"; L16 says "closed for modification". */
 
-const BAD = `// inside class Shape — one method, every shape's formula
+const BAD = `// inside class Shape, one method, every shape's formula
 double getArea() {
     if (type == "circle")
         return 3.14 * radius * radius;

@@ -1,4 +1,4 @@
-/* AUTO-GENERATED from trace-l06-diamond.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from trace-l06-diamond.jsx by `npm run build:artifacts`. Do not edit. */
 import { scene, part, ladder } from "@course";
 
 /* Traces code/lectures/L06/main.cpp: the diamond with VIRTUAL inheritance

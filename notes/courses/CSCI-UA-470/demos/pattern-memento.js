@@ -1,8 +1,8 @@
-/* AUTO-GENERATED from pattern-memento.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from pattern-memento.jsx by `npm run build:artifacts`. Do not edit. */
 import React from "react";
 import { patternFigure, DiagramCard, UmlLink, SvgCode, svgCodeSize } from "@course";
 
-/* note 22 — Memento. Three cards in a ROW, not a fork, so this skips patternTree and
+/* note 22; Memento. Three cards in a ROW, not a fork, so this skips patternTree and
    places its own cards the way Facade and Bridge do.
 
    The deck's own drawing is the source: Document (title/name/content) on the left, a
@@ -67,7 +67,7 @@ export default patternFigure({
         Edit e = history.pop();
         if      (e.field.equals("title"))   { title   = e.old; }
         else if (e.field.equals("content")) { content = e.old; }
-        // a fourth field means a fourth branch — and a setter you must remember to edit
+        // a fourth field means a fourth branch, and a setter you must remember to edit
     }
 }`,
     note: "Two failures in one class. `Document` is now the text **and** the bookkeeping of every past version of the text, which change for different reasons. And `undo()` has become an if-chain over *which field moved* — so undo has to be taught every edit the document will ever support."

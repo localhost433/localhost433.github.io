@@ -1,7 +1,7 @@
-/* AUTO-GENERATED from calculator-use-case.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from calculator-use-case.jsx by `npm run build:artifacts`. Do not edit. */
 import { useCaseDiagram } from "@course";
 
-/* note 15 — the calculator's requirements view, the first diagram of the L15
+/* note 15, the calculator's requirements view, the first diagram of the L15
    worked example. One actor, three goals. Deliberately the same shape as the
    unit converter of note 14 before its refactor: three same-shaped ovals whose
    only difference is the operation — the duplication the sequence diagrams

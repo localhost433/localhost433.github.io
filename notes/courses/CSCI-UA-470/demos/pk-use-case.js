@@ -1,7 +1,7 @@
-/* AUTO-GENERATED from pk-use-case.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from pk-use-case.jsx by `npm run build:artifacts`. Do not edit. */
 import { useCaseDiagram } from "@course";
 
-/* password-keeper — the L17 use case diagram, exactly as the slide draws it: one
+/* password-keeper, the L17 use case diagram, exactly as the slide draws it: one
    actor, three goals, and ONE case-to-case relation. The user associates with Add
    and View only; Delete hangs off View by a dashed «extend» arrow pointing from the
    extension to the base — deleting is optional behaviour reachable only while

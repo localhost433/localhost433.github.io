@@ -2,7 +2,7 @@ import React from "react";
 import { DiagramSvg, DiagramCard, CodeBlock, KnobBar, diagramPalette } from "@course";
 import { Button } from "@kit";
 
-/* note 22 — the double-dispatch tracer. The one thing in L21 a static diagram cannot
+/* note 22, the double-dispatch tracer. The one thing in L21 a static diagram cannot
    carry: `s.accept(v)` reaches one of NINE method bodies, and it takes three separate
    language rules to get there — a virtual call, then an OVERLOAD chosen at compile
    time, then a second virtual call.

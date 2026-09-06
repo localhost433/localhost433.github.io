@@ -1,8 +1,8 @@
-/* AUTO-GENERATED from pattern-trio.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from pattern-trio.jsx by `npm run build:artifacts`. Do not edit. */
 import React from "react";
 import { PatternFigure, patternTree, KnobBar, ab } from "@course";
 
-/* note 21 — Strategy, State and Command drawn ONCE, with a knob for the cast.
+/* note 21; Strategy, State and Command drawn ONCE, with a knob for the cast.
    L20 gives all three the same picture and even the same method name (`run()`),
    which is not sloppiness — it is the lesson. Three different problems collapse to
    one structure: replace a String field plus an if-chain with a field of an abstract

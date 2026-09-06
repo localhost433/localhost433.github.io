@@ -1,8 +1,8 @@
-/* AUTO-GENERATED from practice-12-usecase-generalize.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from practice-12-usecase-generalize.jsx by `npm run build:artifacts`. Do not edit. */
 // notes/courses/CSCI-UA-470/demos/practice-12-usecase-generalize.jsx
 import { useCaseBuild } from "@course";
 
-/* note 12 practice — the third case-to-case relation, straight from the note's own
+/* note 12 practice, the third case-to-case relation, straight from the note's own
    example: Phone Order and Internet Order are two specialized kinds of Place Order,
    so each GENERALIZES to it — the hollow-triangle arrow, child → parent, the same
    notation as class inheritance. The library build drilled «extend» and the store

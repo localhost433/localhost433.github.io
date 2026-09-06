@@ -1,6 +1,6 @@
 import { scene, stack, text } from "@course";
 
-/* L07 — monomorphization. A function template is a PATTERN, not code: the
+/* L07; monomorphization. A function template is a PATTERN, not code: the
    compiler emits nothing until a call fixes T. Each distinct type argument
    stamps out a separate concrete function in the Code segment (max<int>,
    max<double>, max<string> — one copy each), all from one source. Re-calling
@@ -23,7 +23,7 @@ int main() {
 }`;
 
 // one concrete function per distinct type, living once in the Code segment.
-// The body string is identical across all three — same source pattern, stamped
+// The body string is identical across all three, same source pattern, stamped
 // per type; the type badge shows which T it was instantiated with.
 const MI = (hl) => text("max<int>",    "T = int",    "a > b ? a : b", { id: "mi", hl });
 const MD = (hl) => text("max<double>", "T = double", "a > b ? a : b", { id: "md", hl });

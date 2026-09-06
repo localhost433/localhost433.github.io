@@ -1,6 +1,6 @@
 import { sequenceDiagram } from "@course";
 
-/* note 13 — the second worked example from L13 ("Make a Complaint"), in the
+/* note 13, the second worked example from L13 ("Make a Complaint"), in the
    fuller of the lecture's two versions: the receptionist records the complaint
    and notifies the manager, the manager resolves it (a self-call) and explicitly
    notifies the receptionist of the result, and the receptionist returns it to

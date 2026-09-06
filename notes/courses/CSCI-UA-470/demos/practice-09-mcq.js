@@ -1,7 +1,7 @@
-/* AUTO-GENERATED from practice-09-mcq.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from practice-09-mcq.jsx by `npm run build:artifacts`. Do not edit. */
 import { mcq } from "@course";
 
-/* Discrete-fact MCQ on Java polymorphism & design. No score — pick shows ✓/✗ + why. */
+/* Discrete-fact MCQ on Java polymorphism & design. No score, pick shows ✓/✗ + why. */
 export default mcq({
   questions: [{
     stem: "Overriding vs overloading: which is resolved at **run time**?",

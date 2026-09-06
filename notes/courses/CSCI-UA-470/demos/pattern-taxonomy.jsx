@@ -1,7 +1,7 @@
 import React from "react";
 import { DiagramSvg, DiagramBox, DiagramCard, DiagramEdge, diagramCardHeight } from "@course";
 
-/* notes 19–21, the opener — L18's roadmap slide turned into the map the three
+/* notes 19–21, the opener; L18's roadmap slide turned into the map the three
    pattern notes share. The deck draws OOP → SOLID → Design patterns and then splits
    the last one three ways; the useful addition is the QUESTION each category
    answers, because that is what actually tells them apart on an exam. The card for

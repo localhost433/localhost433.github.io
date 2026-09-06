@@ -1,4 +1,4 @@
-/* AUTO-GENERATED from mem-vtable.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from mem-vtable.jsx by `npm run build:artifacts`. Do not edit. */
 import { scene, l06VtableScene } from "@course";
 
 /* Traces code/lectures/L06/p1.cpp: virtual dispatch via vptr + vtable.

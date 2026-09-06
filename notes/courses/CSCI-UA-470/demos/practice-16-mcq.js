@@ -1,7 +1,7 @@
-/* AUTO-GENERATED from practice-16-mcq.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from practice-16-mcq.jsx by `npm run build:artifacts`. Do not edit. */
 import { mcq } from "@course";
 
-/* note 16 practice — spot the violated principle and pick the canonical fix.
+/* note 16 practice; spot the violated principle and pick the canonical fix.
    The stems are small designs, not definitions, because that is how SOLID is
    examined: recognize the smell in a class you have never seen. The SRP
    question guards the instructor's own margin note (single responsibility ≠

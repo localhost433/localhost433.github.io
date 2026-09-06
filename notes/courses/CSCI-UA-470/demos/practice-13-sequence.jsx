@@ -1,7 +1,7 @@
 // notes/courses/CSCI-UA-470/demos/practice-13-sequence.jsx
 import { sequenceOrder } from "@course";
 
-/* note 13 practice — the flip side of the worked example: instead of reading a
+/* note 13 practice, the flip side of the worked example: instead of reading a
    finished sequence diagram, BUILD one. Same coffee-shop "Make order" cast; the
    student orders the messages and watches the real diagram assemble itself. The
    `why` on each message names what forces it into that slot (a call before its

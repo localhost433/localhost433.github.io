@@ -1,9 +1,9 @@
-/* AUTO-GENERATED from converter-sequence-merge.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from converter-sequence-merge.jsx by `npm run build:artifacts`. Do not edit. */
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 import React from "react";
 import { SequenceDiagram, CompareCaption, converterSeqKgLb, converterSeqCmInch } from "@course";
 
-/* note 14 — the duplication, one level in. Realizing each use case as a sequence
+/* note 14, the duplication, one level in. Realizing each use case as a sequence
    diagram gives two diagrams of the SAME shape, and the only honest way to show that
    is to have BOTH on screen at once: stepping between them hides the very sameness
    the reader is meant to notice. They are stacked (not columned) so each renders at

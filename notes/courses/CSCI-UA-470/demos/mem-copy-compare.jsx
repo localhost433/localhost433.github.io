@@ -1,6 +1,6 @@
 import { dualScene, stack, heap } from "@course";
 
-/* Shallow vs deep copy, side by side: the SAME operation stepped through twice —
+/* Shallow vs deep copy, side by side: the SAME operation stepped through twice
    shallow (default copy) on the left, deep (user copy ctor) on the right — so the
    one-block-shared vs two-blocks-owned difference is visible at a glance. Both
    sides reuse note 04's Circle, a class that OWNS a heap int (`int* radius`).

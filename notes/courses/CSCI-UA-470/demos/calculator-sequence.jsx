@@ -1,6 +1,6 @@
 import { sequenceDiagram } from "@course";
 
-/* note 15 — the Add flow of the calculator, the middle diagram of the L15
+/* note 15, the Add flow of the calculator, the middle diagram of the L15
    traceability chain. The interesting move is the CREATE: MainGUI constructs
    its Mathematician mid-scene (`new()`), so the participant's header floats at
    the creation row (bornAt) instead of the top line. The lecture drew Sub and
@@ -15,7 +15,7 @@ export default sequenceDiagram({
   ],
   messages: [
     { from: "user", to: "gui", label: "add(n1, n2)", kind: "sync" },        // 0
-    { from: "gui", to: "math", label: "new()", kind: "sync" },              // 1 — creation
+    { from: "gui", to: "math", label: "new()", kind: "sync" },              // 1: creation
     { from: "gui", to: "math", label: "do_addition(n1, n2)", kind: "sync" },// 2
     { from: "math", to: "gui", label: "result", kind: "return" },           // 3
     { from: "gui", to: "gui", label: "show_result(result)", kind: "sync", self: true }, // 4

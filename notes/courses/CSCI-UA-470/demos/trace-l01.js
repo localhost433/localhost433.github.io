@@ -1,4 +1,4 @@
-/* AUTO-GENERATED from trace-l01.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from trace-l01.jsx by `npm run build:artifacts`. Do not edit. */
 import { scene, glob, text, spotlight } from "@course";
 
 /* Traces code/lectures/L01 (main.cpp + mylib.h): namespaces, macros, I/O.

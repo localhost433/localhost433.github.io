@@ -1,7 +1,7 @@
-/* AUTO-GENERATED from converter-sequence-one.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from converter-sequence-one.jsx by `npm run build:artifacts`. Do not edit. */
 import { sequenceDiagram, converterSeqMerged } from "@course";
 
-/* note 14 — the merged interaction on its own, for reference. What began as two
+/* note 14, the merged interaction on its own, for reference. What began as two
    parallel sequences is one. The four participants on the top row (`User`,
    `MainGUI`, `ConverterGUI`, `Converter`) are exactly the types the class diagram
    is about to declare: the interaction discovers the structure. */

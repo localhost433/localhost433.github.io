@@ -1,8 +1,8 @@
-/* AUTO-GENERATED from practice-13-sequence-admit.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from practice-13-sequence-admit.jsx by `npm run build:artifacts`. Do not edit. */
 // notes/courses/CSCI-UA-470/demos/practice-13-sequence-admit.jsx
 import { sequenceOrder } from "@course";
 
-/* note 13 practice (2 of 3) — a second, shorter interaction to order: admitting a
+/* note 13 practice (2 of 3), a second, shorter interaction to order: admitting a
    patient. The message `Admit(patientID, roomType)` is the one named in the note's
    Messages table; here the student sees where it sits in a whole conversation. The
    twist versus the coffee-shop drill is the SELF-CALL: admissions validates the

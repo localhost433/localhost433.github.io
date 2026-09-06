@@ -1,7 +1,7 @@
-/* AUTO-GENERATED from practice-06-mcq.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from practice-06-mcq.jsx by `npm run build:artifacts`. Do not edit. */
 import { mcq } from "@course";
 
-/* note 06 practice — the heart of the C++ OOP material: virtual → late binding,
+/* note 06 practice, the heart of the C++ OOP material: virtual → late binding,
    the vtable/vptr mechanism and its cost, abstract classes and pure virtuals, and
    the diamond problem with virtual inheritance as its only real fix. */
 

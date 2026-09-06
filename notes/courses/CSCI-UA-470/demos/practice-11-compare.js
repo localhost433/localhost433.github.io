@@ -1,4 +1,4 @@
-/* AUTO-GENERATED from practice-11-compare.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from practice-11-compare.jsx by `npm run build:artifacts`. Do not edit. */
 import { compare, stack } from "@course";
 
 /* Static side-by-side: the same method interpreted (cold) vs JIT-compiled (hot). */

@@ -1,8 +1,8 @@
-/* AUTO-GENERATED from compile-pipeline.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from compile-pipeline.jsx by `npm run build:artifacts`. Do not edit. */
 import React from "react";
 import { Pipeline, cppBuildPipeline } from "@course";
 
-/* The C++ build pipeline (note 01), drawn as a VERTICAL flow so it stays legible:
+/* The C++ build pipeline (note 01), drawn as a vertical flow so it stays legible:
      main.cpp (+ mylib.h) --preprocess--> --compile--> main.s (assembly)
        --assemble--> main.o (object · unlinked)
        --link (with precompiled libraries)--> a.out (executable) --load/run--> CPU.

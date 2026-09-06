@@ -1,8 +1,8 @@
-/* AUTO-GENERATED from solid-isp.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from solid-isp.jsx by `npm run build:artifacts`. Do not edit. */
 import React from "react";
 import { DiagramSvg, DiagramCard, UmlLink, CrossOut, diagramCardHeight, ab, cls } from "@course";
 
-/* note 16 — ISP. Left, crossed out: one fat Movable interface with move() AND
+/* note 16; ISP. Left, crossed out: one fat Movable interface with move() AND
    jump(), realized by Vehicle, Person, and Bird — forcing Vehicle to stub
    jump() with an empty body (the lecture's `{}` margin note). Right: the
    interface split in two; every class now implements exactly the methods it

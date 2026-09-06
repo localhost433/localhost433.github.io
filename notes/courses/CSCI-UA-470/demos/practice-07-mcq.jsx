@@ -1,6 +1,6 @@
 import { mcq } from "@course";
 
-/* note 07 practice — templates as compile-time monomorphization: a template emits
+/* note 07 practice; templates as compile-time monomorphization: a template emits
    no code by itself, each type argument stamps out a separate concrete function or
    class, resolved entirely at compile time with no runtime cost — and the
    one-type-parameter constraint that forces every argument to the same type. */

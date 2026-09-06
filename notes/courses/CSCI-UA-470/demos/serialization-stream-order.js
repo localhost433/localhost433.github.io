@@ -1,4 +1,4 @@
-/* AUTO-GENERATED from serialization-stream-order.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from serialization-stream-order.jsx by `npm run build:artifacts`. Do not edit. */
 import { scene, stack, heap, glob } from "@course";
 
 /* L10 - ObjectOutputStream/ObjectInputStream order.
@@ -15,7 +15,7 @@ os.writeObject(c);
 Integer i = (Integer) is.readObject();
 Circle cir = (Circle) is.readObject();
 
-// COUNTERFACTUAL — if the FIRST read were: Circle wrong = (Circle) is.readObject(); → ✗ ClassCastException`;
+// COUNTERFACTUAL; if the FIRST read were: Circle wrong = (Circle) is.readObject(); → ✗ ClassCastException`;
 const X = hl => stack("x", "Integer ref", "-> Integer(10)", {
   id: "x",
   to: "xobj",

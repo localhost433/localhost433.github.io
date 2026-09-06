@@ -1,7 +1,7 @@
-/* AUTO-GENERATED from mem-static.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from mem-static.jsx by `npm run build:artifacts`. Do not edit. */
 import { scene, obj, glob, text } from "@course";
 
-/* Where `static` actually lives. A static data member is ONE shared copy in
+/* Where `static` actually lives. A static data member is one shared copy in
    Global/Static — absent from every object's bytes; a static method is a plain
    Code-segment function with no `this`; a static local persists in Global/Static
    (constant-initialized before main even runs); a file-scope `static` has internal
@@ -30,7 +30,7 @@ int main() {
     nextId(); nextId();
 }`;
 
-// one Circle shape: per-object color + radius. The static counter is NOT a member.
+// one Circle shape: per-object color + radius. The static counter is not a member.
 const circle = obj("Circle", [{
   name: "color",
   type: "string",

@@ -1,7 +1,7 @@
-/* AUTO-GENERATED from practice-03-mcq.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from practice-03-mcq.jsx by `npm run build:artifacts`. Do not edit. */
 import { mcq } from "@course";
 
-/* note 03 practice — classes & objects: struct-vs-class (implicit `this`), the
+/* note 03 practice; classes & objects: struct-vs-class (implicit `this`), the
    C++ default of PRIVATE access, blueprint-vs-instance, constructor rules, and the
    missing-`else` validation gotcha the note flags in both setter and constructor. */
 

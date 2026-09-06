@@ -1,7 +1,7 @@
 // notes/courses/CSCI-UA-470/demos/practice-12-usecase-store.jsx
 import { useCaseBuild } from "@course";
 
-/* note 12 practice — a second, richer use-case build that forces the include-vs-
+/* note 12 practice, a second, richer use-case build that forces the include-vs-
    extend decision in ONE diagram (the first Library build only used «extend»). An
    online store: the Customer checks out and browses; an Admin adds products.
    - Checkout «include» Verify Payment — verifying payment ALWAYS happens as part of

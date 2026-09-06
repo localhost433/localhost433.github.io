@@ -1,4 +1,4 @@
-/* AUTO-GENERATED from const-final-immutable.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from const-final-immutable.jsx by `npm run build:artifacts`. Do not edit. */
 import React from "react";
 import { DiagramSvg, CompareCaption } from "@course";
 

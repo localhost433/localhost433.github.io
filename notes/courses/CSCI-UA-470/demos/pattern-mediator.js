@@ -1,8 +1,8 @@
-/* AUTO-GENERATED from pattern-mediator.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from pattern-mediator.jsx by `npm run build:artifacts`. Do not edit. */
 import React from "react";
 import { patternFigure, patternTree, SvgCode, svgCodeSize, ab } from "@course";
 
-/* note 21 — Mediator. The deck draws the rejected half as a scribble of arrows
+/* note 21; Mediator. The deck draws the rejected half as a scribble of arrows
    between four boxes; the honest translation into code is a class holding a list of
    its peers and looping over it, which is what a "mesh" actually is once you type it.
 

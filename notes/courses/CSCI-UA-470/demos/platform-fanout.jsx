@@ -1,7 +1,7 @@
 import React from "react";
 import { DiagramSvg, DiagramBox, CompareTitles, CompareCaption } from "@course";
 
-/* L08 — C++ vs Java compilation, compared STAGE BY STAGE (preprocessor and all) with
+/* L08; C++ vs Java compilation, compared STAGE BY STAGE (preprocessor and all) with
    the per-platform fan-out drawn INSIDE each column as a clean FORK (trunk -> bus ->
    drops), not diagonal rays.
 
@@ -118,7 +118,7 @@ const StepChip = ({ cx, cy, label, note }) => (
   </g>
 );
 
-// stacked backing cards: signals "one of these PER TARGET" — C++ compiles/assembles
+// stacked backing cards: signals "one of these PER TARGET", C++ compiles/assembles
 // the source separately for each platform, so main.s and main.o are not shared artifacts.
 const StackBacking = ({ cx, cy, w, h }) => (
   <g>

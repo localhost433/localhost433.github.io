@@ -1,8 +1,8 @@
-/* AUTO-GENERATED from uml-v2.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from uml-v2.jsx by `npm run build:artifacts`. Do not edit. */
 import React from "react";
 import { DiagramSvg, DiagramEdge, treeLayout, ClassTree } from "@course";
 
-/* v2 (note 09) — a Shape hierarchy with a `type` tag, as a vertical UML tree
+/* v2 (note 09), a Shape hierarchy with a `type` tag, as a vertical UML tree
    (note 03 cards + note 08 fork). Shape carries an `int type` field and one
    generic draw(); the subclasses are DATA ONLY (empty method compartments). An
    external if/else switch comparing `type` against named constants chooses how

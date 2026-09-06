@@ -1,4 +1,4 @@
-/* AUTO-GENERATED from mem-inheritance.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from mem-inheritance.jsx by `npm run build:artifacts`. Do not edit. */
 import { scene, derived, stack } from "@course";
 
 /* Based on code/lectures/L06 (person -> student): what inheritance looks like

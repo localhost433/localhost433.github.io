@@ -1,7 +1,7 @@
 // notes/courses/CSCI-UA-470/demos/practice-13-sequence-observer.jsx
 import { sequenceOrder } from "@course";
 
-/* note 13 practice — the first ordering drill with an ASYNCHRONOUS message, so the
+/* note 13 practice, the first ordering drill with an ASYNCHRONOUS message, so the
    assembled diagram shows both arrowheads: the FILLED head of a blocking sync call
    and the OPEN head of `notify()`, the fire-and-forget observer push (a Model
    telling its View it changed, without waiting). A classic MVC-style click→update→notify→

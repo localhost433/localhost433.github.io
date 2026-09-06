@@ -1,7 +1,7 @@
-/* AUTO-GENERATED from practice-22-dispatch.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from practice-22-dispatch.jsx by `npm run build:artifacts`. Do not edit. */
 import { mcq } from "@course";
 
-/* note 22 practice — Visitor's dispatch rules, drilled on their own before the pattern
+/* note 22 practice; Visitor's dispatch rules, drilled on their own before the pattern
    naming pass. Every question here is decided by ONE fact: overload resolution is a
    compile-time rule that uses the DECLARED type of the argument, while virtual dispatch
    is a run-time rule that uses the actual type of the receiver. Java gives you late

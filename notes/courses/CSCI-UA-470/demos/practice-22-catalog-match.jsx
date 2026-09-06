@@ -1,6 +1,6 @@
 import { matchBuild } from "@course";
 
-/* notes 19–22 closer — the whole catalog on one board. Twenty labels, twelve
+/* notes 19–22 closer, the whole catalog on one board. Twenty labels, twelve
    scenarios, no guarantee any label is used, so elimination is worthless and the
    only route is recognition. That is what a final actually asks.
 

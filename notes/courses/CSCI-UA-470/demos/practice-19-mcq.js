@@ -1,7 +1,7 @@
-/* AUTO-GENERATED from practice-19-mcq.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from practice-19-mcq.jsx by `npm run build:artifacts`. Do not edit. */
 import { mcq } from "@course";
 
-/* note 19 practice — the graded pass over L18. Two things the lecture makes
+/* note 19 practice, the graded pass over L18. Two things the lecture makes
    examinable that a "name the pattern" question misses: the exact reason each
    access mark is there (private constructor, static accessor), and the counting
    rule that separates Factory from Abstract Factory. The last question guards the

@@ -1,7 +1,7 @@
 import React from "react";
 import { DiagramSvg, DiagramBox, DiagramEdge, Actor } from "@course";
 
-/* note 15 — the Boundary/Control/Entity picture from L15, drawn as the lecture
+/* note 15, the Boundary/Control/Entity picture from L15, drawn as the lecture
    drew it: the system box between the user and the DBMS, sliced into three
    layers. Boundary objects sit wherever the system touches the outside — the
    input/output forms on the user edge AND the DB connection on the database

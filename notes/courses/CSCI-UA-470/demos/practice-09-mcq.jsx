@@ -1,6 +1,6 @@
 import { mcq } from "@course";
 
-/* Discrete-fact MCQ on Java polymorphism & design. No score — pick shows ✓/✗ + why. */
+/* Discrete-fact MCQ on Java polymorphism & design. No score, pick shows ✓/✗ + why. */
 export default mcq({
   questions: [
     {

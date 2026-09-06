@@ -1,7 +1,7 @@
 import React from "react";
 import { DiagramSvg, treeLayout, ClassTree } from "@course";
 
-/* v3 (note 09) — the type-switch is gone. Shape is still concrete, but draw()
+/* v3 (note 09), the type-switch is gone. Shape is still concrete, but draw()
    is now POLYMORPHIC: every subclass OVERRIDES it (own + draw() row), so the
    external if/else dispatch disappears. A 4th DASHED placeholder hangs off the
    same extends fork as a real extension point — a new shape drops in by adding

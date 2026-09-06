@@ -1,6 +1,6 @@
 import { mcq } from "@course";
 
-/* note 14 practice — the central habit: read the classes off the sequence diagram.
+/* note 14 practice, the central habit: read the classes off the sequence diagram.
    Every question here starts from an interaction and asks what structure falls out
    of it, which is the direction the note insists on (the interaction DISCOVERS the
    structure; the class diagram is not drawn from thin air). */

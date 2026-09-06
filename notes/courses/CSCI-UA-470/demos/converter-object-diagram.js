@@ -1,8 +1,8 @@
-/* AUTO-GENERATED from converter-object-diagram.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from converter-object-diagram.jsx by `npm run build:artifacts`. Do not edit. */
 import React from "react";
 import { DiagramSvg, DiagramCard, UmlLink, diagramCardHeight } from "@course";
 
-/* note 14 — the same system as a run-time SNAPSHOT rather than a blueprint. Every
+/* note 14, the same system as a run-time SNAPSHOT rather than a blueprint. Every
    box titles itself with an UNDERLINED `name : Class` (the object convention, and
    the same notation a sequence-diagram participant uses), and the compartment holds
    attribute VALUES, not declarations. What the class diagram cannot tell you but

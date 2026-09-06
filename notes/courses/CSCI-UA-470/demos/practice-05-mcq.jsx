@@ -1,6 +1,6 @@
 import { mcq } from "@course";
 
-/* note 05 practice — inheritance mechanics, with the EARLY-BINDING trap as the
+/* note 05 practice; inheritance mechanics, with the EARLY-BINDING trap as the
    headline (a base pointer to a derived object calls the BASE method without
    `virtual`), plus layout (upcast is free), construction order, multiple-
    inheritance pointer adjustment, shadowing, and using-vs-redefine. */

@@ -1,7 +1,7 @@
 // notes/courses/CSCI-UA-470/demos/practice-20-decorator-order.jsx
 import { sequenceOrder } from "@course";
 
-/* note 20 practice — the decorator chain as a sequence diagram, which is where the
+/* note 20 practice, the decorator chain as a sequence diagram, which is where the
    two directions become impossible to confuse: the CALLS run outside-in (Music
    first, because b1 points at the outermost wrapper) and the RETURNS come back
    inside-out (Booking's 400 first, each layer adding on the way up).

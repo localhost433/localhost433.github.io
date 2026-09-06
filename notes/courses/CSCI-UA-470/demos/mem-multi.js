@@ -1,4 +1,4 @@
-/* AUTO-GENERATED from mem-multi.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from mem-multi.jsx by `npm run build:artifacts`. Do not edit. */
 import { scene } from "@course";
 
 /* Multiple inheritance and the "this-pointer adjustment" surprise.
@@ -106,8 +106,8 @@ const asmMap = {
   9: [4, 5],
   // A* pa = &obj;  lea [obj], mov [pa]
   10: [6, 7],
-  // B* pb = &obj;  lea [obj+8], mov [pb]  — the adjustment
-  11: [8, 9] // C* pc = &obj;  lea [obj], mov [pc]  — most-derived, offset +0
+  // B* pb = &obj;  lea [obj+8], mov [pb] , the adjustment
+  11: [8, 9] // C* pc = &obj;  lea [obj], mov [pc] , most-derived, offset +0
 };
 const asmLabel = "x86-64 · Intel (idealized)";
 export default scene({

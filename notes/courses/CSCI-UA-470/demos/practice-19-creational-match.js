@@ -1,7 +1,7 @@
-/* AUTO-GENERATED from practice-19-creational-match.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from practice-19-creational-match.jsx by `npm run build:artifacts`. Do not edit. */
 import { matchBuild } from "@course";
 
-/* note 19 practice — pick the creational pattern. Only three labels, so the drill
+/* note 19 practice; pick the creational pattern. Only three labels, so the drill
    cannot be "recognise the name"; it has to be "tell the neighbours apart". The
    pairs built to confuse: #2 vs #5 (one hierarchy vs several related families) and
    #4 vs #1 (a class with a static accessor is not automatically a Singleton — the

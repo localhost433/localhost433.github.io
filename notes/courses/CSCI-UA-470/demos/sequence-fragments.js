@@ -1,7 +1,7 @@
-/* AUTO-GENERATED from sequence-fragments.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from sequence-fragments.jsx by `npm run build:artifacts`. Do not edit. */
 import { sequenceDiagram } from "@course";
 
-/* note 13 — a COMBINED FRAGMENT: the bank-check `alt` (from the IBM slides). The
+/* note 13, a COMBINED FRAGMENT: the bank-check `alt` (from the IBM slides). The
    bank reads the amount and the balance, then branches: if the balance covers the
    amount it records the debit and stores the photo; otherwise (`else`) it charges
    a fee and marks the check returned. `alt` = mutually-exclusive branches split by

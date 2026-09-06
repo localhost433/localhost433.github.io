@@ -1,7 +1,7 @@
 import React from "react";
 import { patternFigure, DiagramCard, ClassTree, treeLayout, SvgCode, svgCodeSize, ab } from "@course";
 
-/* note 20 — "Composition" as L19 names it (Composite in the catalog; the note's
+/* note 20; "Composition" as L19 names it (Composite in the catalog; the note's
    prose carries that aside, and the collision with note 14's composition EDGE).
 
    Two things have to be visible at once for the pattern to land: `Folder` holds a

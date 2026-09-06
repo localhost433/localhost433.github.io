@@ -1,7 +1,7 @@
-/* AUTO-GENERATED from practice-14-notation.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from practice-14-notation.jsx by `npm run build:artifacts`. Do not edit. */
 import { mcq } from "@course";
 
-/* note 14 practice — the mechanical half: member notation and visibility. These are
+/* note 14 practice, the mechanical half: member notation and visibility. These are
    the marks that get lost under exam pressure, above all that the TYPE comes AFTER
    the colon (the reverse of the Java/C++ declaration order the course has drilled
    for thirteen notes) and that `-` is private, not "minus" or "protected". */

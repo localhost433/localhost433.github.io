@@ -1,4 +1,4 @@
-/* notes/artifacts/theme.css — shadcn-inspired tokens + component styles for artifacts. */
+/* notes/artifacts/theme.css; shadcn-inspired tokens + component styles for artifacts. */
 :root {
   --background: 0 0% 100%;            --foreground: 222.2 84% 4.9%;
   --card: 0 0% 100%;                  --card-foreground: 222.2 84% 4.9%;
@@ -55,7 +55,7 @@ html.dark-mode {
 .ui-btn--size-sm { height: 2rem; padding: 0 .75rem; font-size: .8125rem; }
 .ui-btn--size-lg { height: 2.5rem; padding: 0 2rem; }
 .ui-btn--size-icon { height: 2.25rem; width: 2.25rem; padding: 0; }
-/* size "default" needs no rule — base .ui-btn height applies */
+/* size "default" needs no rule, base .ui-btn height applies */
 
 /* Card */
 .ui-card { background: hsl(var(--card)); color: hsl(var(--card-foreground));

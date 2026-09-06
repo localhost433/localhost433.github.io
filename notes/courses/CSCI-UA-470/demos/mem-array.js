@@ -1,4 +1,4 @@
-/* AUTO-GENERATED from mem-array.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from mem-array.jsx by `npm run build:artifacts`. Do not edit. */
 import { scene, stack, heap } from "@course";
 
 /* Stack array vs dynamic array, and array-to-pointer decay. `int a[4]` is four

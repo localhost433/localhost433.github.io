@@ -1,4 +1,4 @@
-/* AUTO-GENERATED from practice-04-predict.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from practice-04-predict.jsx by `npm run build:artifacts`. Do not edit. */
 import { scene, stack, heap } from "@course";
 
 /* Standalone predict: default (memberwise) copy of a pointer-owning object shares

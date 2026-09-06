@@ -1,4 +1,4 @@
-/* AUTO-GENERATED from mem-heap.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from mem-heap.jsx by `npm run build:artifacts`. Do not edit. */
 import { scene, l02HeapScene } from "@course";
 
 /* L02 dynamic memory (from the L02-02 slide): new / delete / dangling.

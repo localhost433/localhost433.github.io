@@ -4,10 +4,10 @@
  *
  * Serves the repository ROOT, so absolute paths used throughout the site
  * (/notes/..., /js/..., /css/..., /notes/artifact-host.html, ...) resolve
- * exactly as they do in production — and there is no `builds` allowlist to
+ * exactly as they do in production, and there is no `builds` allowlist to
  * trip over (that is a vercel.json concern, see README).
  *
- * It does NOT execute the serverless functions in api/. For comments and
+ * It does not execute the serverless functions in api/. For comments and
  * the GitHub-languages endpoint, use `npm run dev:vercel` instead.
  *
  * Usage:  node scripts/dev-server.js [port]   (default 3000, or $PORT)

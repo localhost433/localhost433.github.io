@@ -1,8 +1,8 @@
-/* AUTO-GENERATED from uml-v6.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from uml-v6.jsx by `npm run build:artifacts`. Do not edit. */
 import React from "react";
 import { DiagramSvg, DiagramCard, treeLayout, ClassTree, UmlLink, diagramCardHeight, ab, cls } from "@course";
 
-/* v6 (note 09) — interface polymorphism. THREE trees (Shape / Vehicle / Animal,
+/* v6 (note 09); interface polymorphism. THREE trees (Shape / Vehicle / Animal,
    per the v6 code) plus the Drawable and Movable interface cards (italic titles,
    italic abstract method rows). Solid indigo forks are `extends` (is-a); dashed
    teal edges into the interfaces are `implements` (can-do) — the same colour
@@ -21,7 +21,7 @@ const iface = (title, method) => ({
 const drawable = iface("Drawable", "+ draw()");
 const movable = iface("Movable", "+ move()");
 
-// Tree 1 — Shape (abstract) with a CONCRETE default draw() (non-italic row).
+// Tree 1; Shape (abstract) with a CONCRETE default draw() (non-italic row).
 const shape = {
   title: "Shape",
   abstract: true,
@@ -40,7 +40,7 @@ const T1 = treeLayout({
   gap: 12
 });
 
-// Tree 2 — Vehicle (abstract) declares move() only; Car/Bike opt in to Drawable.
+// Tree 2; Vehicle (abstract) declares move() only; Car/Bike opt in to Drawable.
 const vehicle = {
   title: "Vehicle",
   abstract: true,
@@ -59,7 +59,7 @@ const T2 = treeLayout({
   gap: 12
 });
 
-// Tree 3 — Animal has draw()/move() BODIES but implements nothing.
+// Tree 3; Animal has draw()/move() BODIES but implements nothing.
 const animal = {
   title: "Animal",
   abstract: true,

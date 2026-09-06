@@ -1,8 +1,8 @@
-/* AUTO-GENERATED from pattern-proxy.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from pattern-proxy.jsx by `npm run build:artifacts`. Do not edit. */
 import React from "react";
 import { patternFigure, DiagramCard, diagramCardHeight, UmlLink, SvgCode, svgCodeSize } from "@course";
 
-/* note 20 — Proxy. Two cards and one edge; the whole pattern is that the LEFT card
+/* note 20; Proxy. Two cards and one edge; the whole pattern is that the LEFT card
    keeps the name and the interface of the right one. The deck's punch is the
    crossed-out `delete` in the client half: three query kinds go in, two come out,
    and the client's code never said anything about it.

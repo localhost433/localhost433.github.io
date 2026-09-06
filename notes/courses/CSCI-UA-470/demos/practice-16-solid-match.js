@@ -1,7 +1,7 @@
-/* AUTO-GENERATED from practice-16-solid-match.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from practice-16-solid-match.jsx by `npm run build:artifacts`. Do not edit. */
 import { matchBuild } from "@course";
 
-/* note 16 practice — classify the violation. Five fresh mini-designs (none copied
+/* note 16 practice; classify the violation. Five fresh mini-designs (none copied
    from the note's figures): stamp the principle each one breaks. The pair built to
    confuse is I vs L — both smell of unkept promises — and the whys draw the line
    the note draws: stubs forced by a fat interface vs a subclass breaking an

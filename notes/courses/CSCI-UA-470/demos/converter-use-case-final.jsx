@@ -1,6 +1,6 @@
 import { useCaseDiagram, converterUseCase } from "@course";
 
-/* note 14 — the generalized use-case diagram, for reference: the two conversions
+/* note 14, the generalized use-case diagram, for reference: the two conversions
    are children of one parameterized `Convert(amount, targetUnit)` under the
    hollow-triangle generalization arrow, the same relation note 12 used for
    `Phone Order` / `Internet Order` → `Place Order`. Sibling of the stepped

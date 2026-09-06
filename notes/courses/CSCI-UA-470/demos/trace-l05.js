@@ -1,4 +1,4 @@
-/* AUTO-GENERATED from trace-l05.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from trace-l05.jsx by `npm run build:artifacts`. Do not edit. */
 import { scene, part, ladder } from "@course";
 
 /* Traces code/lectures/L05/main.cpp: multi-level inheritance

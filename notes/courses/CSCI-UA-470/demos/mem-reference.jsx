@@ -1,6 +1,6 @@
 import { scene, stack } from "@course";
 
-/* A reference is an ALIAS — another name for the same storage, with no object of
+/* A reference is an ALIAS; another name for the same storage, with no object of
    its own. A *local* reference compiles to no storage (`&r == &x`); we draw it as
    the SAME cell relabelled `x · r`. A pointer, by contrast, is a separate object
    that stores an address. (A reference that must persist — e.g. a reference data

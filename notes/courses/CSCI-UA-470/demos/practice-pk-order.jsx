@@ -1,7 +1,7 @@
 // notes/courses/CSCI-UA-470/demos/practice-pk-order.jsx
 import { sequenceOrder } from "@course";
 
-/* password-keeper practice — rebuild the Add flow from L17. The ordering is pinned
+/* password-keeper practice; rebuild the Add flow from L17. The ordering is pinned
    by two rules the note teaches: an object must be created (new) before it is used,
    and persistence happens after the model changes. The trap is putting save before
    new(FN) — you cannot ask a FileManager to save before one exists. */

@@ -1,7 +1,7 @@
-/* AUTO-GENERATED from sequence-anatomy.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from sequence-anatomy.jsx by `npm run build:artifacts`. Do not edit. */
 import { sequenceDiagram } from "@course";
 
-/* note 13 — the vocabulary of a sequence diagram on the smallest possible scene:
+/* note 13, the vocabulary of a sequence diagram on the smallest possible scene:
    one ACTOR and one OBJECT, a single synchronous call and its return. The
    annotations tag the five parts a reader must recognise: the participant header,
    the dashed lifeline, the activation bar (a method on the stack), the message,
@@ -33,9 +33,9 @@ export default sequenceDiagram({
     from: 0,
     to: 1
   }],
-  // leaders point at clear anchors — the cashier lifeline/activation to the RIGHT
+  // leaders point at clear anchors, the cashier lifeline/activation to the RIGHT
   // (past the message label), the message/return arrows just off the customer
-  // lifeline to the LEFT — so no leader crosses the place_order label.
+  // lifeline to the LEFT, so no leader crosses the place_order label.
   annotations: [{
     t: "participant",
     x: 166,

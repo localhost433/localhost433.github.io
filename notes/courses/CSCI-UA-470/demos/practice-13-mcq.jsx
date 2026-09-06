@@ -1,6 +1,6 @@
 import { mcq } from "@course";
 
-/* note 13 practice — the notation that costs marks when you READ a sequence diagram:
+/* note 13 practice, the notation that costs marks when you READ a sequence diagram:
    the sync-vs-async arrowhead, what an activation bar actually means, the dashed
    return, the self-call, and the opt/alt/loop fragment operators. The ordering
    builders on this page drill time-ordering; this drills the symbols themselves. */

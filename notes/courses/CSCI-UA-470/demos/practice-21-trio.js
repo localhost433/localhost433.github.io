@@ -1,7 +1,7 @@
-/* AUTO-GENERATED from practice-21-trio.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from practice-21-trio.jsx by `npm run build:artifacts`. Do not edit. */
 import { matchBuild } from "@course";
 
-/* note 21 practice — the drill the whole note is built toward. Every scenario here
+/* note 21 practice, the drill the whole note is built toward. Every scenario here
    would produce the SAME class diagram: a context with a field of an abstract type,
    three concrete subclasses, one delegating call. Structure decides nothing, so the
    student has to reason from intent.

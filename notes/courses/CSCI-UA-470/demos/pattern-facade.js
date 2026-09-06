@@ -1,8 +1,8 @@
-/* AUTO-GENERATED from pattern-facade.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from pattern-facade.jsx by `npm run build:artifacts`. Do not edit. */
 import React from "react";
 import { patternFigure, DiagramCard, diagramCardHeight, UmlLink } from "@course";
 
-/* note 20 — Facade, on L19's restaurant. The figure has to make one thing obvious:
+/* note 20; Facade, on L19's restaurant. The figure has to make one thing obvious:
    the subsystem does NOT shrink. waiter, kitchen and Food are all still there, all
    still doing the same work — the pattern adds ONE more class on top of them. That
    is why the facade card sits below with three dashed dependencies climbing into

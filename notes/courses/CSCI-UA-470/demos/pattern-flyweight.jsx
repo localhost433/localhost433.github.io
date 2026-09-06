@@ -1,7 +1,7 @@
 import React from "react";
 import { patternFigure, patternTree, SvgCode, svgCodeSize } from "@course";
 
-/* note 20 — Flyweight. The deck's teaching device is that the client loop is
+/* note 20; Flyweight. The deck's teaching device is that the client loop is
    character-for-character IDENTICAL before and after; the only change is inside
    `getVehicle`, where a `repo` is consulted before anything is allocated. So the
    figure spends its space on that method body rather than on the class picture,

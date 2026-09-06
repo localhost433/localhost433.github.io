@@ -1,6 +1,6 @@
 import { mcq } from "@course";
 
-/* note 21 practice — the graded pass over the six patterns that vary behaviour by
+/* note 21 practice, the graded pass over the six patterns that vary behaviour by
    HOLDING an object. Weighted toward the two collisions the deck creates by drawing
    patterns identically (the trio, and Mediator vs Observer), plus the through-line
    the lecture teaches three times without naming: a String mode plus an if-chain

@@ -1,6 +1,6 @@
 import { mcq } from "@course";
 
-/* note 23 practice — the graded pass over L22. Two strands:
+/* note 23 practice, the graded pass over L22. Two strands:
 
    the PROCESS half (phases, roles, which artifact crosses which handoff), which is
    ordinary examinable material and the reason the course was ordered the way it was;

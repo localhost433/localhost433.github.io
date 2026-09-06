@@ -1,8 +1,8 @@
-/* AUTO-GENERATED from pattern-iterator.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from pattern-iterator.jsx by `npm run build:artifacts`. Do not edit. */
 import React from "react";
 import { patternFigure, patternTree, ab } from "@course";
 
-/* note 21 — Iterator, and the deck's rejected half is INTERFACE BLOAT rather than an
+/* note 21; Iterator, and the deck's rejected half is INTERFACE BLOAT rather than an
    if-chain: a Collection that grew one traversal method per question anyone ever
    asked of it. The fix moves the traversal out into its own hierarchy, so a new
    order is a new class and `Collection` never reopens.

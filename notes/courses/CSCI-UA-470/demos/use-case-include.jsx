@@ -1,6 +1,6 @@
 import { useCaseRelation } from "@course";
 
-/* note 12 — «include»: the included use case ALWAYS runs as part of the base; it
+/* note 12; «include»: the included use case always runs as part of the base; it
    factors out common behaviour several bases share. Slide example: both Update
    grades and Generate output «include» Verify student ID. */
 

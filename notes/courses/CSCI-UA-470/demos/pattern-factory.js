@@ -1,8 +1,8 @@
-/* AUTO-GENERATED from pattern-factory.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from pattern-factory.jsx by `npm run build:artifacts`. Do not edit. */
 import React from "react";
 import { patternFigure, patternTree, ab } from "@course";
 
-/* note 19 — Factory. The deck crosses out TWO designs, not one: the client that
+/* note 19; Factory. The deck crosses out TWO designs, not one: the client that
    hardcodes its own creation ladder, and the bare Shape hierarchy handed to the
    client with no creation abstraction at all. The rejected half below is the first
    (it is the one you can show as code); the second is the point of the caption —
@@ -69,11 +69,11 @@ else                              s = null;`,
   client: {
     lang: "java",
     label: "client code",
-    code: `// programmer-a — knows what it wants
+    code: `// programmer-a: knows what it wants
 Shape s;
 s = ShapeFactory.getShape(criteria);
 
-// programmer-b — doesn't care which
+// programmer-b, doesn't care which
 Shape s;
 s = ShapeFactory.getRandomShape();`,
     note: "Neither programmer names `Circle`, `Rect`, or `Triangle`. Both hold the **abstract** type and let the factory decide — which is the only way a decision made *at runtime* can stay out of the client's source."

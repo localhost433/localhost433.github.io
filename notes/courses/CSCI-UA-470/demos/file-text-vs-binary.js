@@ -1,4 +1,4 @@
-/* AUTO-GENERATED from file-text-vs-binary.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from file-text-vs-binary.jsx by `npm run build:artifacts`. Do not edit. */
 import React from "react";
 import { DiagramSvg, CompareCaption } from "@course";
 

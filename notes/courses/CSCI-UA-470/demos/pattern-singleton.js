@@ -1,8 +1,8 @@
-/* AUTO-GENERATED from pattern-singleton.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from pattern-singleton.jsx by `npm run build:artifacts`. Do not edit. */
 import React from "react";
 import { patternFigure, DiagramCard, diagramCardHeight, UmlLink, SvgCode, svgCodeSize, st } from "@course";
 
-/* note 19 — Singleton, L18's first creational pattern. The deck teaches it with no
+/* note 19; Singleton, L18's first creational pattern. The deck teaches it with no
    domain dressing at all: the class is literally named `Singleton`, the clients are
    s1/s2/s3, and the whole lesson is the two access marks plus one static door. Kept
    faithful to that, because the exam will use exactly these names.
@@ -73,7 +73,7 @@ export default patternFigure({
 
 Singleton s1 = new Singleton();   // one object
 Singleton s2 = new Singleton();   // a second
-Singleton s3 = new Singleton();   // a third — the rule is already broken`,
+Singleton s3 = new Singleton();   // a third, the rule is already broken`,
     note: "Nothing here is *wrong* Java. That is the problem: an ordinary public constructor is an open invitation, and \"there should only ever be one\" is a comment nobody has to obey."
   },
   good: GOOD,
@@ -81,7 +81,7 @@ Singleton s3 = new Singleton();   // a third — the rule is already broken`,
     lang: "java",
     label: "client code",
     code: `Singleton s1;
-s1 = new Singleton();             // KO — the constructor is private
+s1 = new Singleton();             // KO: the constructor is private
 s1 = Singleton.getInstance();
 
 Singleton s2;

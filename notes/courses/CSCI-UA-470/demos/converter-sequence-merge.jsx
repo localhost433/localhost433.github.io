@@ -1,7 +1,7 @@
 import React from "react";
 import { SequenceDiagram, CompareCaption, converterSeqKgLb, converterSeqCmInch } from "@course";
 
-/* note 14 — the duplication, one level in. Realizing each use case as a sequence
+/* note 14, the duplication, one level in. Realizing each use case as a sequence
    diagram gives two diagrams of the SAME shape, and the only honest way to show that
    is to have BOTH on screen at once: stepping between them hides the very sameness
    the reader is meant to notice. They are stacked (not columned) so each renders at

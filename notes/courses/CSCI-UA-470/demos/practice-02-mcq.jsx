@@ -1,6 +1,6 @@
 import { mcq } from "@course";
 
-/* note 02 practice — the pointer/reference model: which parameter mode can change
+/* note 02 practice, the pointer/reference model: which parameter mode can change
    the caller's variable, why &r == &x, that a pointer holds an ADDRESS not an int,
    and the manual heap-cleanup bugs (double free, dangling) C++ has and Java does not. */
 

@@ -1,6 +1,6 @@
 import { matchBuild } from "@course";
 
-/* note 21 practice — six scenarios, six names, each used exactly once. None uses
+/* note 21 practice; six scenarios, six names, each used exactly once. None uses
    the deck's cast. The trio is represented but only once each, since
    practice-21-trio drills that split on its own; the work here is Template Method,
    and especially Mediator vs Observer (#2 vs #5), which the deck draws almost

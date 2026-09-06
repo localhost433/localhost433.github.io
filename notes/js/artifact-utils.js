@@ -1,4 +1,4 @@
-/* artifact-utils.js — pure helpers for the note artifact pipeline.
+/* artifact-utils.js, pure helpers for the note artifact pipeline.
    UMD: browser sets window.ArtifactUtils; Node sets module.exports (for tests). */
 (function (root, factory) {
   const api = factory();

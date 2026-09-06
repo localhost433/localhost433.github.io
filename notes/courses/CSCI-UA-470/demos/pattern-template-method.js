@@ -1,8 +1,8 @@
-/* AUTO-GENERATED from pattern-template-method.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from pattern-template-method.jsx by `npm run build:artifacts`. Do not edit. */
 import React from "react";
 import { patternFigure, patternTree, SvgCode, svgCodeSize, ab } from "@course";
 
-/* note 21 — Template Method, and the odd one out of the eight. Every other
+/* note 21; Template Method, and the odd one out of the eight. Every other
    behavioral pattern in L20 varies behaviour by HOLDING an object; this one varies
    it by BEING a subclass. The figure keeps `run()` non-italic and the steps italic,
    because that is the whole design: the skeleton is fixed and inherited, the steps
@@ -53,7 +53,7 @@ class MergeSorter {
 }
 
 // readInput and writeOutput are copied. Change the output format
-// and you edit both — and the third sorter somebody adds next month.`,
+// and you edit both, and the third sorter somebody adds next month.`,
     note: "The *sequence* is the same in every sorter; only a step or two differs. Copying the sequence into each subclass duplicates the part that never varies in order to vary the part that does."
   },
   good: {

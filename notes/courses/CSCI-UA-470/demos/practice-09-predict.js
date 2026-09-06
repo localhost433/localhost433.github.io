@@ -1,4 +1,4 @@
-/* AUTO-GENERATED from practice-09-predict.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from practice-09-predict.jsx by `npm run build:artifacts`. Do not edit. */
 import { scene, stack, obj } from "@course";
 
 /* Standalone predict: Java dispatches on the object's runtime class. The reveal

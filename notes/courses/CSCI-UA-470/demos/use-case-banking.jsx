@@ -1,6 +1,6 @@
 import { useCaseDiagram } from "@course";
 
-/* note 12 — a complete (if small) use-case diagram: the Online Banking worked
+/* note 12, a complete (if small) use-case diagram: the Online Banking worked
    example. One actor, Customer, outside the boundary; four goals inside it, each
    joined by a plain association. The everyday shape of a use-case diagram. */
 

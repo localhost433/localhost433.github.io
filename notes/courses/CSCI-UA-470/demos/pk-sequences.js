@@ -1,8 +1,8 @@
-/* AUTO-GENERATED from pk-sequences.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from pk-sequences.jsx by `npm run build:artifacts`. Do not edit. */
 import React from "react";
 import { SequenceDiagram, KnobBar } from "@course";
 
-/* password-keeper — L17's three sequence diagrams behind one knob, in the slide's
+/* password-keeper; L17's three sequence diagrams behind one knob, in the slide's
    own vocabulary: addNew / add_to_list / new(FN) / save(list_of_passwords),
    load_passwords / read() with its dashed List_of_passwords return, and
    delete / remove_from_list. One artifact instead of three because the three flows
@@ -41,7 +41,7 @@ const FLOWS = {
       label: "new(title, passcode)",
       kind: "sync"
     },
-    // 1 — creation
+    // 1: creation
     {
       from: "mgr",
       to: "mgr",
@@ -56,7 +56,7 @@ const FLOWS = {
       label: "new(FN)",
       kind: "sync"
     },
-    // 3 — creation
+    // 3: creation
     {
       from: "mgr",
       to: "f",
@@ -104,7 +104,7 @@ const FLOWS = {
       label: "new()",
       kind: "sync"
     },
-    // 0 — creation
+    // 0: creation
     {
       from: "mgr",
       to: "mgr",
@@ -119,7 +119,7 @@ const FLOWS = {
       label: "new(FN)",
       kind: "sync"
     },
-    // 2 — creation
+    // 2: creation
     {
       from: "mgr",
       to: "f",
@@ -188,7 +188,7 @@ const FLOWS = {
       label: "new(FN)",
       kind: "sync"
     },
-    // 2 — creation
+    // 2: creation
     {
       from: "mgr",
       to: "f",

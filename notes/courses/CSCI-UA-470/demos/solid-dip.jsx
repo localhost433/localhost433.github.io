@@ -1,7 +1,7 @@
 import React from "react";
 import { DiagramSvg, DiagramCard, UmlLink, CrossOut, diagramCardHeight, ab, cls } from "@course";
 
-/* note 16 — DIP. The L16 slide stops at the one-liner, so this figure supplies
+/* note 16; DIP. The L16 slide stops at the one-liner, so this figure supplies
    the standard example the note flags as "beyond the slide". Bad: the
    high-level NotificationService names the concrete EmailSender — swap email
    for SMS and the high-level policy class gets edited. Good: both depend on a
@@ -24,7 +24,7 @@ const W = 214, WI = 300, WS = 220;
 const svcH = diagramCardHeight(svc.sections);   // 86
 const ifcH = diagramCardHeight(ifc.sections);   // 56
 
-// ---- bad block (left) — a real gap between the boxes so the dependency arrow
+// ---- bad block (left): a real gap between the boxes so the dependency arrow
 //      it crosses out is legible ----
 const ROW = 120;
 const B_SVC = { x: 18, y: ROW, right: 18 + W };

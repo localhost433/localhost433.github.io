@@ -1,7 +1,7 @@
-/* AUTO-GENERATED from use-case-clinic.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from use-case-clinic.jsx by `npm run build:artifacts`. Do not edit. */
 import { useCaseDiagram } from "@course";
 
-/* note 12 — the canonical use-case diagram, built in the lecture's three steps:
+/* note 12, the canonical use-case diagram, built in the lecture's three steps:
    an ACTOR (Receptionist) outside the system, a USE CASE (Make Appointment) oval
    inside the boundary, and the ASSOCIATION line saying the two communicate.
    `showRoles` tags each of the three parts. */

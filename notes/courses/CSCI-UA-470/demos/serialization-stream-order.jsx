@@ -15,7 +15,7 @@ os.writeObject(c);
 Integer i = (Integer) is.readObject();
 Circle cir = (Circle) is.readObject();
 
-// COUNTERFACTUAL — if the FIRST read were: Circle wrong = (Circle) is.readObject(); → ✗ ClassCastException`;
+// COUNTERFACTUAL; if the FIRST read were: Circle wrong = (Circle) is.readObject(); → ✗ ClassCastException`;
 
 const X = (hl) => stack("x", "Integer ref", "-> Integer(10)", { id: "x", to: "xobj", hl });
 const C = (hl) => stack("c", "Circle ref", "-> Circle", { id: "c", to: "cobj", hl });

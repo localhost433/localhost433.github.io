@@ -109,7 +109,7 @@ test("_kit.jsx exports the shared gradedChipState helper", () => {
   assert.ok(src.includes("export function gradedChipState"), "missing gradedChipState");
 });
 
-// ClassBoxBuilder: the note-14 build exercise — fill visibility + type slots in a
+// ClassBoxBuilder: the note-14 build exercise, fill visibility + type slots in a
 // three-compartment UML box and pick the relationship, on the real DiagramCard.
 test("_kit.jsx exports the class-box builder", () => {
   assert.ok(src.includes("export function ClassBoxBuilder"), "missing ClassBoxBuilder");
@@ -122,7 +122,7 @@ test("ClassBoxBuilder grades visibility, type, and relationship", () => {
   assert.ok(/relationship/.test(src), "must grade the relationship kind");
 });
 test("ClassBoxBuilder omits the type slot for void operations (UML omits ': void')", () => {
-  // ret == null models the lecture rule: no return type on constructors/void — so a
+  // ret == null models the lecture rule: no return type on constructors/void, so a
   // void operation must contribute no type slot, no bank token, and no colon in its row.
   assert.ok(/if \(m\.ret != null\) out\.push\(\{ id: `o\$\{i\}t`/.test(src),
     "a null-ret operation must not create a type slot");
@@ -130,7 +130,7 @@ test("ClassBoxBuilder omits the type slot for void operations (UML omits ': void
     "a null-ret operation must not add a token to the type bank");
 });
 
-// MatchBuilder: the note-16 classify exercise — stamp a label chip on each scenario.
+// MatchBuilder: the note-16 classify exercise, stamp a label chip on each scenario.
 test("_kit.jsx exports the match builder", () => {
   assert.ok(src.includes("export function MatchBuilder"), "missing MatchBuilder");
   assert.ok(src.includes("export function matchBuild"), "missing matchBuild factory");
@@ -145,7 +145,7 @@ test("MatchBuilder is one-shot: Check locks the board", () => {
     "edit handlers must not clear the checked state");
 });
 
-// UseCaseBuilder: the note-12 build exercise — drop elements inside/outside the
+// UseCaseBuilder: the note-12 build exercise, drop elements inside/outside the
 // system boundary, then connect actors to cases and cases to cases.
 test("_kit.jsx exports the use-case builder", () => {
   assert.ok(src.includes("export function UseCaseBuilder"), "missing UseCaseBuilder");

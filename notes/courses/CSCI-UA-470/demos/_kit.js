@@ -1,4 +1,4 @@
-/* AUTO-GENERATED from _kit.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from _kit.jsx by `npm run build:artifacts`. Do not edit. */
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 import React from "react";
 import { Button, useTheme } from "@kit";
@@ -77,8 +77,8 @@ function highlightAsm(line) {
 const BYTECODE_OPS = new Set(["aload", "astore", "iload", "istore", "lload", "dload", "fload", "aconst", "iconst", "bipush", "sipush", "ldc", "dup", "pop", "pop2", "swap", "iadd", "isub", "imul", "idiv", "irem", "ineg", "ladd", "dadd", "dsub", "dmul", "iinc", "i2d", "i2l", "d2i", "new", "newarray", "anewarray", "getfield", "putfield", "getstatic", "putstatic", "invokevirtual", "invokespecial", "invokestatic", "invokeinterface", "invokedynamic", "checkcast", "instanceof", "athrow", "ireturn", "lreturn", "dreturn", "areturn", "return", "goto", "if_icmpge", "if_icmpgt", "if_icmple", "if_icmplt", "if_icmpeq", "if_icmpne", "ifeq", "ifne", "iflt", "ifge", "ifgt", "ifle", "ifnull", "ifnonnull"]);
 
 // An instruction line: "  9: invokevirtual #10   // Method Shape.draw:()V"
-// Every alternative below must cover SOME token, including bare operands
-// (`bipush 7`, `goto 12`): tokenize() silently DROPS text no alternative matches.
+// Every alternative below must cover some token, including bare operands
+// (`bipush 7`, `goto 12`): tokenize() silently drops text no alternative matches.
 const BC_INSTR = /^\s*\d+:\s/;
 const BC_RE = /(\/\/[^\n]*)|(^\s*\d+:)|(#\d+)|(\b\d+\b)|([A-Za-z_][\w$]*)|(\s+)|([^\sA-Za-z0-9_])/g;
 
@@ -117,7 +117,7 @@ function expandCodes(str, codes, kp) {
   }, p));
 }
 // Render a caption with composable inline markdown: `code`, **bold**, *italic*.
-// Code spans are masked out before emphasis parsing, so the two COMPOSE — e.g.
+// Code spans are masked out before emphasis parsing, so the two compose, e.g.
 // **`x`** renders as bold code, and **a `b` c** bolds the whole run incl. code.
 function renderCaption(text) {
   const codes = [];
@@ -214,7 +214,7 @@ export function obj(type, fields, base = {}) {
 
 // A single object laid out as its inheritance chain. Each layer's fields are
 // tagged with the declaring class, so the byte strip is colour-grouped by
-// subobject (base first, derived appended) — the actual in-memory layout.
+// subobject (base first, derived appended), matching the in-memory layout.
 //   const studentObj = derived([
 //     { cls: "person",  vptr: true, fields: [{ name: "name", type: "string", size: 32 }] },
 //     { cls: "student", fields: [{ name: "age", type: "int" }] },
@@ -401,7 +401,7 @@ export function sizeLayout(fields, opts = {}) {
   };
 }
 
-// The proportional field strip (fields + vptr/header + padding) — shared by the
+// The proportional field strip (fields + vptr/header + padding), shared by the
 // standalone SizeLayout and the in-cell "physical mapping" row.
 function LayoutBar({
   fields = [],
@@ -477,7 +477,7 @@ export function SizeLayout({
   }, "aligned to ", align)));
 }
 
-// Stack several SizeLayout cards — the common "compare these structs" block.
+// Stack several SizeLayout cards: the common "compare these structs" block.
 //   <SizeCompare items={[{ title, fields }, { title, fields, vptr }]} />
 export function SizeCompare({
   items = [],
@@ -654,7 +654,7 @@ export function MemoryModel({
       };
       const next = [];
       const reclaimedIds = new Set(cells.filter(c => c.reclaimed).map(c => c.id));
-      // collect link requests first; geometry is computed AFTER grouping by target
+      // collect link requests first; geometry is computed after grouping by target
       // so we know how many arrows share a target and can fan them apart.
       const reqs = [];
       const add = (id, srcEl, tgtId, link) => {
@@ -727,7 +727,7 @@ export function MemoryModel({
   // "name = value" (or the scalar value for a basic cell). The tooltip mirrors
   // the diagram's deletion semantics: a reclaimed/destroyed cell gets a status
   // note and its now-stale values struck through, and a pointer into freed
-  // memory is flagged dangling — so hovering never implies dead memory is live.
+  // memory is flagged dangling, so hovering never implies dead memory is live.
   const tipLines = cell => {
     const out = [];
     if (cell.name) out.push(["id", cell.name]);
@@ -749,7 +749,7 @@ export function MemoryModel({
     }
     return out;
   };
-  // Reveal the cell's full identity on hover — always, even when the text isn't
+  // Reveal the cell's full identity on hover, always, even when the text isn't
   // clipped, so the inspect-on-hover affordance is consistent across every cell.
   const showTip = (cell, e) => {
     const wrap = wrapRef.current;
@@ -947,7 +947,7 @@ export function MemoryModel({
   }), " destroyed (lifetime ended)") : null) : null);
 }
 
-/* ObjectLayout — a full-width object map for inheritance/offset stories.
+/* ObjectLayout: a full-width object map for inheritance/offset stories.
    A horizontal byte strip with an *aligned* offset ruler and class brackets
    beneath it (every row is byte-proportional via flex-grow + flex-basis:0, so
    columns line up with no measurement). Pointer markers sit above the strip,
@@ -1234,7 +1234,7 @@ function Section({
 // keys, which renders as labelled rows (C++ / Java / ASM / JVM / Intuition).
 const CAPTION_ROWS = [["cpp", "C++", "cpp"], ["java", "Java", "java"], ["asm", "ASM", "asm"], ["jvm", "JVM", "jvm"], ["intuition", "Intuition", "int"]];
 
-/* Reusable interaction primitives (shared across scene types) — see _shared.css.
+/* Reusable interaction primitives (shared across scene types). See _shared.css.
    KnobBar: manipulate-and-observe segmented controls. PredictGate + Verdict:
    predict-then-reveal (neutral, no scoring). */
 export function KnobBar({
@@ -1488,8 +1488,8 @@ export function MemoryScene({
     code: true,
     out: true
   });
-  // manipulate-and-observe: knob state drives a `steps` function (backward-compatible
-  // — `steps` may still be a plain array). Changing a knob re-derives the scene.
+  // manipulate-and-observe: knob state drives a `steps` function (backward-compatible;
+  // `steps` may still be a plain array). Changing a knob re-derives the scene.
   const [knob, setKnob] = React.useState(() => Object.fromEntries((knobs || []).map(k => [k.id, k.default != null ? k.default : k.options[0].value])));
   // predict-then-reveal: per-step pick. value >=0 is a chosen choice, -1 = "just show me".
   const [picks, setPicks] = React.useState({});
@@ -1502,7 +1502,7 @@ export function MemoryScene({
   const step = resolved[i2];
   // the state to keep visible as context while a predict is unanswered: the
   // previously-confirmed step. The learner reasons about the NEXT state from the
-  // CURRENT one, so we never blank the memory view behind the question.
+  // current one, so we never blank the memory view behind the question.
   const prevStep = i2 > 0 ? resolved[i2 - 1] : null;
 
   // clicking a code (or asm) line jumps to the first step that highlights it
@@ -1547,7 +1547,7 @@ export function MemoryScene({
   };
 
   // predict gate: while an unanswered `step.predict` exists, hide the reveal
-  // (memory + output + caption) behind a guess. Non-blocking — Next still works.
+  // (memory + output + caption) behind a guess. Non-blocking, Next still works.
   const pred = step.predict;
   const answered = !pred || picks[i2] != null;
   const answer = k => setPicks(p => ({
@@ -1673,7 +1673,7 @@ export function MemoryScene({
 }
 
 // One side of a MemoryDualScene: a column heading, that side's memory pane, its
-// code/asm pane, and its per-step caption — rendered exactly as MemoryScene does
+// code/asm pane, and its per-step caption, rendered exactly as MemoryScene does
 // (structured caption -> CAPTION_ROWS rows; string -> one paragraph). `step` is
 // the clamped step for this side; `idx` is the shared (max-count) step index.
 function DualColumn({
@@ -1713,7 +1713,7 @@ function DualColumn({
   }, renderCaption(step.caption)));
 }
 
-/* MemoryDualScene — two MemoryScene-style columns sharing ONE stepper, so step n
+/* MemoryDualScene: two MemoryScene-style columns sharing one stepper, so step n
    on the left lines up with step n on the right. Each side stacks memory + C++ +
    asm VERTICALLY (the narrow column forces the code/asm pane to one column via
    CSS). The shorter side holds on its last step. One Reset/Back/Next/dots row
@@ -2000,7 +2000,7 @@ export function DiagramSvg({
   }))), children);
 }
 
-/* ---- Pipeline (shared) — a VERTICAL flow through labelled ZONE BANDS. Each step
+/* ---- Pipeline (shared): a vertical flow through labelled zone bands. Each step
    is one zone band (stacked top -> bottom): { zone, label, note, sub, via, feed,
    accent }. A band with `label` holds an artifact box; a box-less band (e.g.
    "Preprocessor") is a pass-through the flow arrow crosses. `via` labels the action
@@ -2159,7 +2159,7 @@ export const cppBuildPipeline = [{
   accent: true
 }];
 
-/* ---- DiagramCard (shared) — a titled, UML-style class/instance card ----
+/* ---- DiagramCard (shared): a titled, UML-style class/instance card ----
    A rounded card anchored at its TOP-LEFT (x,y) with width w, built in the
    exact style of DiagramBox (rx 7, theme vars, palette via diagramPalette(sub)).
    Body = one or more horizontal SECTIONS, each a list of left-aligned monospace
@@ -2189,7 +2189,7 @@ export function diagramCardHeight(sections = [], opts = {}) {
 }
 
 // UML class-spec shorthands shared by the uml-v* diagrams: ab("+ draw()") is an
-// italic abstract-method row; st("- instance : Singleton") is an underlined STATIC
+// italic abstract-method row; st("- instance : Singleton") is an underlined static
 // row; cls(title, attrs, methods) is the standard two-compartment card spec
 // (attrs + methods) for DiagramCard / treeLayout.
 export const ab = text => ({
@@ -2211,8 +2211,8 @@ export const cls = (title, attrs, methods) => ({
 
 // `neutral` = a colourless card (--mm-cell-*). `abstract` = UML italic title.
 // `dashed` = a dashed border (e.g. a placeholder "shape to be added"). A row may
-// be a string OR { text, italic, underline } — italic marks a UML abstract method,
-// underline marks a STATIC member (note 14's notation; first drawn by Singleton's
+// be a string OR { text, italic, underline }; italic marks a UML abstract method,
+// underline marks a static member (note 14's notation; first drawn by Singleton's
 // `instance` field and `getInstance()` in note 19).
 // `underline` = the UML OBJECT convention: an instance box titles itself with an
 // underlined `name : Class`, which is what separates an object diagram from a class one.
@@ -2308,7 +2308,7 @@ export function DiagramCard({
   }));
 }
 
-/* A "this design is wrong" mark — the refined red X on the BEFORE half of the
+/* A "this design is wrong" mark: the refined red X on the before half of the
    SOLID before/after figures (note 16). Draw it OVER the region it rejects:
    the whole bad block (SRP god-class, ISP fat interface) or a single bad
    relationship (DIP's concrete dependency, centred on the arrow). The two
@@ -2351,7 +2351,7 @@ export function CrossOut({
   }));
 }
 
-/* ---- UML class-hierarchy primitives (note 09) — note 03's DiagramCards wired
+/* ---- UML class-hierarchy primitives (note 09). Note 03's DiagramCards wired
    with note 08's trunk -> bus -> drops fork and a hollow "extends" triangle.
    treeLayout computes card positions from their heights; ClassTree renders the
    cards + fork from a layout; InheritFork is the bare connector. ---- */
@@ -2540,7 +2540,7 @@ export function patternTree({
   const above = !!context && place === "above";
 
   // "left": centre the context on the PARENT card so their joining edge is horizontal.
-  // "above": stack it over the parent — the inheritance fork enters the parent's
+  // "above": stack it over the parent, the inheritance fork enters the parent's
   // BOTTOM edge, so its top is free for the incoming edge. Cheaper in width, which
   // is what a five-subclass hierarchy needs.
   const axis = context && !above ? PAT_PAD + Math.max(ctxH, parentH) / 2 : 0;
@@ -2769,7 +2769,7 @@ export function SvgCode({
   }, l)));
 }
 
-/* ---- UML use-case primitives (note 12) — the vocabulary of a use-case diagram:
+/* ---- UML use-case primitives (note 12). The vocabulary of a use-case diagram:
    an Actor (stick figure), a UseCaseOval (an ellipse behaviour), a SystemBoundary
    (the box around what the system offers), and UmlLink (the four relation kinds).
    COLOUR names the relation, exactly as the class-diagram primitives do:
@@ -2779,7 +2779,7 @@ export function SvgCode({
      «extend»     amber dashed, open arrow       (optional step → complete base)
    Shapes stay neutral so the relation reads at a glance. ---- */
 
-// Point on an ellipse's edge in the direction of (tx,ty) — so links touch the
+// Point on an ellipse's edge in the direction of (tx,ty), so links touch the
 // oval's rim cleanly instead of its centre.
 export function ovalEdge(cx, cy, rx, ry, tx, ty) {
   const dx = tx - cx,
@@ -2990,7 +2990,7 @@ const UML_LINK = {
   }
 };
 // `orth` routes an ELBOW (only horizontal + vertical segments) when the endpoints
-// aren't already axis-aligned — so every arrow reads as H or V, never diagonal.
+// aren't already axis-aligned, so every arrow reads as H or V, never diagonal.
 // `elbow`: "hvh" exits horizontally (default), "vhv" exits vertically.
 export function UmlLink({
   from,
@@ -3156,7 +3156,7 @@ const onEnterOrSpace = fn => e => {
   }
 };
 
-/* UseCaseDiagram — the everyday shape: one or more actors outside a system
+/* UseCaseDiagram builds the everyday shape: one or more actors outside a system
    boundary, a column of use-case ovals inside it, associations between them.
    Driven by data:
      useCaseDiagram({
@@ -3236,14 +3236,14 @@ export function UseCaseDiagram({
   const acts = actors.map((a, i) => {
     // No `associations` prop at all → legacy shorthand: each actor ↔ every case.
     // When the prop IS provided, an actor absent from it links to NOTHING (only an
-    // explicit ["*"] links to all) — so a live preview with no connections yet, or a
+    // explicit ["*"] links to all), so a live preview with no connections yet, or a
     // partial set, draws exactly the associations that were actually authored.
     const linkAll = associations == null;
     const spec = linkAll ? null : (associations.find(l => l.actor === a.id) || {}).cases;
     const ids = linkAll || spec && spec.includes("*") ? cs.map(c => c.id) : spec || [];
     const linked = ids.map(id => byId[id]).filter(Boolean);
     const ax = a.x != null ? a.x : (a.side || "left") === "left" ? bx - 60 : bx + bw + 60;
-    const midY = a.y != null ? a.y : linked.length ? linked.reduce((s, c) => s + c.cy, 0) / linked.length : stackTop + i * rowGap; // no linked cases yet — stack down the gutter (live preview)
+    const midY = a.y != null ? a.y : linked.length ? linked.reduce((s, c) => s + c.cy, 0) / linked.length : stackTop + i * rowGap; // no linked cases yet, stack down the gutter (live preview)
     return {
       ...a,
       ax,
@@ -3252,7 +3252,7 @@ export function UseCaseDiagram({
     };
   });
   // De-overlap actors that resolved to the SAME vertical point. This only bites in
-  // a live preview before associations are drawn — every actor links to every case,
+  // a live preview before associations are drawn, every actor links to every case,
   // so all midYs collapse to the same mean. Authored diagrams give actors distinct
   // rows, so their (rounded-distinct) midYs form singleton groups and never move.
   const tieGroups = {};
@@ -3279,11 +3279,11 @@ export function UseCaseDiagram({
   // Associations BRANCH from each actor: a horizontal main arm runs from the actor
   // to a PERPENDICULAR distribution line (a vertical spine); each use case then
   // branches off it at a right angle, a plain line to the case's rim. The spine
-  // sits a FIXED gap in from the nearest oval rim — the same gap for every actor in
+  // sits a fixed gap in from the nearest oval rim, the same gap for every actor in
   // every diagram, so the split point is consistent (a visible line just inside the
   // frame, never straddling the boundary nor staggered per-actor). A shared case is
   // entered above centre by actors sitting above it, below centre by actors below
-  // it — so the two lines reach distinct points on the rim.
+  // it, so the two lines reach distinct points on the rim.
   const SPINE_GAP = 20;
   const branchSets = acts.map(a => {
     const left = a.ax < boundCX;
@@ -3466,7 +3466,7 @@ export function UseCaseDiagram({
       strokeWidth: 1.5
     };
     const ys = [bs.midY, ...vis.map(br => br.enterY)];
-    // A case on the actor's OWN row is reached by the arm itself — one clean
+    // A case on the actor's own row is reached by the arm itself: one clean
     // association straight into the oval, so no branch-origin lands on top of
     // the arm. The rest branch off the distribution line as usual.
     const onRow = vis.find(br => Math.abs(br.enterY - bs.midY) < 0.5);
@@ -3568,7 +3568,7 @@ export function UseCaseDiagram({
   }) : null);
 }
 
-/* UseCaseRelation — the three use-case-to-use-case relationships as one data
+/* UseCaseRelation: the three use-case-to-use-case relationships as one data
    shape: a `focal` case and its `satellites`, wired by `kind`. The focal sits on
    the LEFT; the satellites stack on the RIGHT, each joined to the focal by a
    STRAIGHT line running right → left (child→parent, base→included, extension→base).
@@ -3657,7 +3657,7 @@ export function UseCaseRelation({
   }) : null);
 }
 
-/* UseCaseWalkthrough — a stepped reveal of a UseCaseDiagram spec. Each step names
+/* UseCaseWalkthrough: a stepped reveal of a UseCaseDiagram spec. Each step names
    which actors / cases / relations are visible; the frame is fixed (bounds come
    from the FULL spec) so nothing jumps as pieces appear. Caption + Reset/Back/Next
    chrome mirror MemoryScene. */
@@ -3713,7 +3713,7 @@ export function UseCaseWalkthrough({
   }, i2 + 1, " / ", steps.length)));
 }
 
-/* The Library System worked example (note 12) — the richest use-case diagram in
+/* The Library System worked example (note 12): the richest use-case diagram in
    the course: two actors flanking the boundary, columns of use cases, a shared
    case reached by both, and «extend» relations between cases. ONE spec drives
    both the stepped walkthrough and the static reference figure. */
@@ -3734,7 +3734,7 @@ export const librarySystem = {
     y: 340
   }],
   cases: [
-  // base cases — the middle column, reached by the actors
+  // base cases, the middle column, reached by the actors
   {
     id: "search",
     label: "Search for book",
@@ -3767,7 +3767,7 @@ export const librarySystem = {
     x: 430,
     y: 460
   },
-  // optional refinements — their own column on the right, row-aligned with the
+  // optional refinements, their own column on the right, row-aligned with the
   // base they «extend», so every extend arrow is a clean horizontal.
   {
     id: "borrow",
@@ -3841,7 +3841,7 @@ export const librarySteps = [{
   }
 }];
 
-/* ---- The unit converter (note 14) — the spec that drives the whole iterative
+/* ---- The unit converter (note 14): the spec that drives the whole iterative
    design story. The actor has two goals that differ ONLY in a unit, so the first
    cut states the same shape twice; generalizing them under one parameterized
    `Convert` deletes that duplication, and the sequence + class diagrams downstream
@@ -4008,7 +4008,7 @@ export const soundRecorder = {
     y: 210
   }],
   cases: [
-  // left column — the User's cases, View Recordings the shared hub
+  // left column, the User's cases, View Recordings the shared hub
   {
     id: "record",
     label: "Record a file",
@@ -4026,7 +4026,7 @@ export const soundRecorder = {
     x: 180,
     y: 350
   },
-  // right column — the three optional refinements
+  // right column, the three optional refinements
   {
     id: "play",
     label: "Play a Recording",
@@ -4072,7 +4072,7 @@ export const soundRecorder = {
   }
 };
 
-// entry points — a demo exports one of these with a pure data spec.
+// entry points, a demo exports one of these with a pure data spec.
 export function useCaseDiagram(cfg) {
   return function App() {
     return /*#__PURE__*/React.createElement(UseCaseDiagram, cfg);
@@ -4089,7 +4089,7 @@ export function useCaseWalkthrough(cfg) {
   };
 }
 
-/* ---- UML SEQUENCE DIAGRAM (note 13) — the Interaction-family diagram note 12
+/* ---- UML SEQUENCE DIAGRAM (note 13): the Interaction-family diagram note 12
    deferred. Participants (an Actor stick figure or an object :Class box) sit
    across the TOP, each dropping a dashed LIFELINE; time flows DOWN, so every
    message is a row. Message kinds:
@@ -4167,7 +4167,7 @@ export function SequenceDiagram({
   const halfW = p => p.kind === "actor" ? Math.max(22, String(p.label).length * MONO_CH / 2) : Math.max(34, (String(p.label).length * MONO_CH + 22) / 2);
   // lay participants left→right. Each gap is the LARGER of (a) a base gap that keeps
   // neighbouring headers apart and (b) the widest message label riding between that
-  // adjacent pair — so a long call like place_order(order_details) is not clipped by
+  // adjacent pair, so a long call like place_order(order_details) is not clipped by
   // the two lifelines it sits between, while columns whose labels are short stay
   // narrow. (Labels spanning more than one column already have ample room.)
   const idxOf = Object.fromEntries(ps.map((p, i) => [p.id, i]));
@@ -4179,7 +4179,7 @@ export function SequenceDiagram({
     if (a == null || bi == null || Math.abs(a - bi) !== 1) return; // adjacent pairs only
     const g = Math.min(a, bi);
     // a creation message shares its row with the target's floating header, which
-    // reaches halfW(target) back toward the sender — reserve that too, or a long
+    // reaches halfW(target) back toward the sender, reserve that too, or a long
     // label like new(title, passcode) is clipped by the header it created.
     const extra = ps[bi].bornAt === mi ? halfW(ps[bi]) : 0;
     gapNeed[g] = Math.max(gapNeed[g], String(m.label).length * MONO_CH + SEQ.LABELPAD + extra);
@@ -4397,7 +4397,7 @@ export function SequenceDiagram({
     const kind = m.kind || "sync",
       right = B.cx > A.cx;
     // a CREATE message (its row is the target's bornAt) points at the edge of
-    // the floating header box, per UML — not at the lifeline underneath it.
+    // the floating header box, per UML, not at the lifeline underneath it.
     const sx = edge(A, i, right ? 1 : -1);
     const tx = B.bornAt === i ? B.cx + (right ? -1 : 1) * (halfW(B) + 2) : edge(B, i, right ? -1 : 1);
     return /*#__PURE__*/React.createElement("g", {
@@ -4531,7 +4531,7 @@ export function SequenceOrderBuilder({
   const correctIds = messages.map(m => m.id);
   const byId = React.useMemo(() => Object.fromEntries(messages.map(m => [m.id, m])), [messages]);
   // chips name endpoints by the participant's LABEL (its class part for an
-  // `name : Class` object), never the internal id — "Model", not "m" or "model".
+  // `name : Class` object), never the internal id, "Model", not "m" or "model".
   const pName = React.useMemo(() => Object.fromEntries(participants.map(p => {
     const l = Array.isArray(p.label) ? p.label.join(" ") : String(p.label);
     return [p.id, l.includes(":") ? l.split(":").pop().trim() : l];
@@ -4547,7 +4547,7 @@ export function SequenceOrderBuilder({
   const complete = placed.length === messages.length;
 
   // Check locks the board: once checked (or revealed) the order is fixed and the
-  // only way forward is Reset — a post-check edit would invalidate the grade.
+  // only way forward is Reset, a post-check edit would invalidate the grade.
   const move = (id, index) => {
     if (revealed || checked) return;
     setPlaced(cur => {
@@ -4802,7 +4802,7 @@ export function ClassBoxBuilder({
   };
   const slotOk = s => fills[s.id] && fills[s.id].value === s.correct;
   // `relationship` is optional: a class that joins nothing (note 19's Singleton) has
-  // no edge to pick, so the whole stage — palette, grading slot, preview target —
+  // no edge to pick, so the whole stage (palette, grading slot, preview target)
   // drops out rather than showing an empty target card.
   const hasRel = !!relationship.to;
   const relOk = hasRel && rel != null && rel === relationship.kind;
@@ -5072,7 +5072,7 @@ export function classBuild(cfg) {
   };
 }
 
-/* Interactive (note 16): match each scenario to the label it calls for — built for
+/* Interactive (note 16): match each scenario to the label it calls for, built for
    "which SOLID principle does this design violate?", but generic: options are stamp
    chips (reusable, not consumed), items carry a code snippet and/or a caption.
    The three wording slots default to note 16's ("Principles" / "violates" /
@@ -5435,7 +5435,7 @@ export function UseCaseBuilder({
       setPicked(null);
     } else {
       setPicked(id);
-    } // two actors, etc. — just move the selection
+    } // two actors, etc., just move the selection
   };
   const toggleAssoc = (actor, c) => {
     dirty();
@@ -5466,7 +5466,7 @@ export function UseCaseBuilder({
     label: byId[id].label,
     side: "left"
   }));
-  // Order the case column so RELATED cases sit adjacent — a vertical relation then
+  // Order the case column so related cases sit adjacent: a vertical relation then
   // spans one gap (short arrow, label in the clear) instead of crossing unrelated
   // ovals. Cluster by the authored relations (stable) and keep placement order
   // within each cluster; unrelated cases keep their placement order.
@@ -5501,7 +5501,7 @@ export function UseCaseBuilder({
   const relsOk = setEqual(userRels, authoredRels);
   const zonesRight = elements.filter(zoneRight).length;
   const spanRight = s => (tags[s.i] || "none") === s.role; // an identify span matches its authored role
-  // Check and Reveal act on the CURRENT stage only, so a finished stage grades
+  // Check and Reveal act on the current stage only, so a finished stage grades
   // green without waiting on the later ones.
   const stageInfo = stage === "identify" ? (() => {
     const right = spans.filter(spanRight).length;
@@ -5534,7 +5534,7 @@ export function UseCaseBuilder({
   };
   const status = revealed ? "Revealed — reset to try again." : !checked ? stage === "identify" ? "Identify stage: click each word that names an actor or a use case; click again to change or clear it." : stage === "place" ? "Place stage: pick an element, then click the gutter (actors) or the system box (use cases)." : "Connect stage: click an actor then a case (association), or two cases (then pick the relation)." : stageInfo.ok ? stageInfo.okMsg : stageInfo.partMsg;
 
-  // Reset the CURRENT stage only, staying put — the sibling stages keep their work,
+  // Reset the current stage only, staying put: the sibling stages keep their work,
   // mirroring how Check and Reveal already act per-stage. Connect's reveal fills the
   // placement as a side-effect (placeViaConnect); resetting Connect rolls that back
   // too so an auto-completed Place doesn't linger.
@@ -5561,7 +5561,7 @@ export function UseCaseBuilder({
       }
     }
   };
-  // Reveal the CURRENT stage's answer only. Connect also completes placement, since
+  // Reveal the current stage's answer only. Connect also completes placement, since
   // the connections can't be drawn without the elements sitting in their zones.
   const reveal = () => {
     if (stage === "identify") {
@@ -5622,7 +5622,7 @@ export function UseCaseBuilder({
   const extraAssoc = checked ? [...userAssoc].filter(k => !authoredAssoc.has(k)) : [];
   const missingRels = checked ? relations.filter(r => !userRels.has(ucKey(ucKey(r.from, r.to), r.kind))) : [];
   // extra relations the diagram doesn't call for. Pairs already covered by a
-  // missing line (same endpoints, wrong kind) are skipped — that line explains
+  // missing line (same endpoints, wrong kind) are skipped, that line explains
   // what the pair SHOULD be; these catch reversed arrows and stray links.
   const missingPairs = new Set(missingRels.map(r => ucKey(r.from, r.to)));
   const extraRels = checked ? rels.filter(r => !authoredRels.has(ucKey(ucKey(r.from, r.to), r.kind)) && !missingPairs.has(ucKey(r.from, r.to))) : [];
@@ -5786,7 +5786,7 @@ export function useCaseBuild(cfg) {
    the very sameness the reader is supposed to notice. See converter-sequence-merge,
    which lays them out as columns with a compare caption.) */
 
-/* ---- comparison captions (shared) — tagged "A vs B" labels for any compare figure.
+/* ---- comparison captions (shared); tagged "A vs B" labels for any compare figure.
    Tags reuse the mm-cap-tag palette; pass any `kind` ("cpp" | "java" | "asm" | "int").
    Content is JSX so it can carry `<strong>`/`<em>`/`<code className="mm-ic">`. Nothing
    is hardcoded — reused across compare demos (L08, L09, …).
@@ -5830,7 +5830,7 @@ export function CompareCaption({
   }, punch) : null);
 }
 
-/* ---- MemoryCompare — a static, side-by-side reading of a few related stages.
+/* ---- MemoryCompare: a static, side-by-side reading of a few related stages.
    Where MemoryScene gives ONE model you step through, this lays the stages out as
    columns so the DELTA between them is visible at a glance: each column shows a
    declaration, the stack after it runs, a byte-cost chip, and a one-line reading.
@@ -5892,7 +5892,7 @@ export function MemoryCompare({
    Steps drive the memory view: give a step `cells` (MemoryModel) or `layout`
    (ObjectLayout); optional `code`/`line`, `outputs`, `caption`. For a sizeof
    comparison instead, use `sizes({ items: [{ title, fields }, …] })`. */
-/* MCQ: a paged multiple-choice quiz (4 choices, or 2 for true/false). No score —
+/* MCQ: a paged multiple-choice quiz (4 choices, or 2 for true/false). No score
    picking marks the choice ✓/✗, reveals the correct one, and shows a "why".
    Reuses the .mm-quiz nav shell. `figure` is an optional { code, lang } snippet
    or { image, alt } picture above the choices. */
@@ -5917,7 +5917,7 @@ export function Mcq({
   questions: rawQuestions
 }) {
   // Shuffle each question's choices (seeded by index + stem, so the order is
-  // stable per question but varies across questions) — authored configs list the
+  // stable per question but varies across questions), authored configs list the
   // correct choice first for readability, which must never survive into the UI.
   const questions = React.useMemo(() => rawQuestions.map((q, i) => ({
     ...q,

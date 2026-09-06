@@ -1,7 +1,7 @@
 import React from "react";
 import { DiagramSvg, DiagramCard, treeLayout, ClassTree, UmlLink, diagramCardHeight, ab, cls } from "@course";
 
-/* v6 (note 09) — interface polymorphism. THREE trees (Shape / Vehicle / Animal,
+/* v6 (note 09); interface polymorphism. THREE trees (Shape / Vehicle / Animal,
    per the v6 code) plus the Drawable and Movable interface cards (italic titles,
    italic abstract method rows). Solid indigo forks are `extends` (is-a); dashed
    teal edges into the interfaces are `implements` (can-do) — the same colour
@@ -17,17 +17,17 @@ const iface = (title, method) => ({
 const drawable = iface("Drawable", "+ draw()");
 const movable  = iface("Movable",  "+ move()");
 
-// Tree 1 — Shape (abstract) with a CONCRETE default draw() (non-italic row).
+// Tree 1; Shape (abstract) with a CONCRETE default draw() (non-italic row).
 const shape = { title: "Shape", abstract: true, sections: [{ rows: [] }, { rows: ["+ draw()"] }] };
 const T1 = treeLayout({ cx: 170, topY: 112, parent: shape,
   children: [cls("Circle", [], []), cls("Rectangle", [], []), cls("Triangle", [], [])], cardW: 92, gap: 12 });
 
-// Tree 2 — Vehicle (abstract) declares move() only; Car/Bike opt in to Drawable.
+// Tree 2; Vehicle (abstract) declares move() only; Car/Bike opt in to Drawable.
 const vehicle = { title: "Vehicle", abstract: true, sections: [{ rows: [] }, { rows: ["+ move()"] }] };
 const T2 = treeLayout({ cx: 540, topY: 112, parent: vehicle,
   children: [cls("Car", [], ["+ draw()"]), cls("Bike", [], ["+ draw()"]), cls("Flight", [], ["+ fly()"])], cardW: 92, gap: 12 });
 
-// Tree 3 — Animal has draw()/move() BODIES but implements nothing.
+// Tree 3; Animal has draw()/move() BODIES but implements nothing.
 const animal = { title: "Animal", abstract: true, sections: [{ rows: [] }, { rows: ["+ draw()", "+ move()"] }] };
 const T3 = treeLayout({ cx: 350, topY: T1.bottom + 36, parent: animal,
   children: [cls("Bird", [], ["+ fly()"]), cls("Crawler", [], [])], cardW: 92, gap: 26 });

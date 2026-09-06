@@ -1,8 +1,8 @@
-/* AUTO-GENERATED from practice-14-classbox.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from practice-14-classbox.jsx by `npm run build:artifacts`. Do not edit. */
 // notes/courses/CSCI-UA-470/demos/practice-14-classbox.jsx
 import { classBuild } from "@course";
 
-/* note 14 practice — build the class box the note's notation section describes.
+/* note 14 practice; build the class box the note's notation section describes.
    The marks exams lose are all here: the visibility symbol on the left, the type
    AFTER the colon (the reverse of the Java/C++ order the course drilled for
    thirteen notes), the void rule (`describe()` returns nothing, so it carries NO

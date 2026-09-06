@@ -1,8 +1,8 @@
-/* AUTO-GENERATED from converter-class-diagram.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from converter-class-diagram.jsx by `npm run build:artifacts`. Do not edit. */
 import React from "react";
 import { DiagramSvg, DiagramCard, UmlLink, diagramCardHeight } from "@course";
 
-/* note 14 — the Structural payoff: the participants left standing on the merged
+/* note 14, the Structural payoff: the participants left standing on the merged
    sequence diagram's top row, read off as classes. Each box is the three-compartment
    UML form (name / attributes / operations) with real member notation — visibility
    marker, then `name : Type`, the type AFTER the colon. The plain lines are

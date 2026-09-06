@@ -1,8 +1,8 @@
-/* AUTO-GENERATED from calculator-class-diagram.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from calculator-class-diagram.jsx by `npm run build:artifacts`. Do not edit. */
 import React from "react";
 import { DiagramSvg, DiagramCard, UmlLink, diagramCardHeight } from "@course";
 
-/* note 15 — the structural end of the calculator chain: the participants of the
+/* note 15, the structural end of the calculator chain: the participants of the
    three sequence diagrams read off as classes. MainGUI carries the widgets
    (every label, field, and button from the sketch) plus one handler per use
    case; Mathematician carries one do_* operation per use case. The edge between

@@ -1,8 +1,8 @@
-/* AUTO-GENERATED from sdlc-roles-ai.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from sdlc-roles-ai.jsx by `npm run build:artifacts`. Do not edit. */
 import React from "react";
 import { Pipeline, KnobBar } from "@course";
 
-/* note 23 — the L22 whiteboard's spine, as one figure with three readings of the same
+/* note 23, the L22 whiteboard's spine, as one figure with three readings of the same
    seven bands. Reuses the vertical `Pipeline` the C++ build flow is drawn with, because
    the shape is identical: ordered phases, one artifact per phase, an optional side feed.
 

@@ -44,7 +44,7 @@ for (const src of sources) {
   });
   const dst = src.replace(/\.jsx$/, ".js");
   const banner = "/* AUTO-GENERATED from " + path.basename(src) +
-    " by `npm run build:artifacts` — do not edit. */\n";
+    " by `npm run build:artifacts`. Do not edit. */\n";
   fs.writeFileSync(dst, banner + out);
   console.log("  " + path.relative(ROOT, src) + "  ->  " + path.relative(ROOT, dst));
   n++;

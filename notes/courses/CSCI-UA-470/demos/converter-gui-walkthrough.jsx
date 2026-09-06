@@ -1,7 +1,7 @@
 import React from "react";
 import { DiagramSvg, DiagramCard, DiagramEdge, diagramCardHeight } from "@course";
 
-/* note 14 — the application the whole note designs, drawn as its three windows.
+/* note 14, the application the whole note designs, drawn as its three windows.
    The main window offers two conversions and a quit; either button opens a dialog
    that reads a number, converts it, and shows the result. The two dialogs are the
    point: they differ in ONE label and ONE formula and are otherwise the same

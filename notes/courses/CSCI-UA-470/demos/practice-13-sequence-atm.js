@@ -1,8 +1,8 @@
-/* AUTO-GENERATED from practice-13-sequence-atm.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from practice-13-sequence-atm.jsx by `npm run build:artifacts`. Do not edit. */
 // notes/courses/CSCI-UA-470/demos/practice-13-sequence-atm.jsx
 import { sequenceOrder } from "@course";
 
-/* note 13 practice (3 of 3) — the step up: withdrawing cash at an ATM. No self-call
+/* note 13 practice (3 of 3), the step up: withdrawing cash at an ATM. No self-call
    this time, but TWO round-trips to the bank (authorize, then debit), so the order
    is forced by data dependencies — you cannot withdraw before you are authorized,
    and cash is only dispensed after the account is actually debited. The bank's

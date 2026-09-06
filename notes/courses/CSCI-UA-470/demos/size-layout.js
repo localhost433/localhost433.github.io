@@ -1,4 +1,4 @@
-/* AUTO-GENERATED from size-layout.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from size-layout.jsx by `npm run build:artifacts`. Do not edit. */
 import { sizes } from "@course";
 
 /* Builds on the L01 data-type sizes (char 1, int 4, double 8): how those

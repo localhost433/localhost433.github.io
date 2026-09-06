@@ -1,6 +1,6 @@
 import { matchBuild } from "@course";
 
-/* note 20 practice — seven scenarios, seven names, each used exactly once, so a
+/* note 20 practice; seven scenarios, seven names, each used exactly once, so a
    confident answer anywhere constrains the rest. None is the note's own cast.
 
    The scenarios are chosen so the four wrappers land next to each other and have to

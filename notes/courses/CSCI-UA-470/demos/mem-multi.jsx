@@ -74,8 +74,8 @@ const asm =
 const asmMap = {
   8:  [3],        // C obj  ->  no-code note row
   9:  [4, 5],     // A* pa = &obj;  lea [obj], mov [pa]
-  10: [6, 7],     // B* pb = &obj;  lea [obj+8], mov [pb]  — the adjustment
-  11: [8, 9],     // C* pc = &obj;  lea [obj], mov [pc]  — most-derived, offset +0
+  10: [6, 7],     // B* pb = &obj;  lea [obj+8], mov [pb] , the adjustment
+  11: [8, 9],     // C* pc = &obj;  lea [obj], mov [pc] , most-derived, offset +0
 };
 
 const asmLabel = "x86-64 · Intel (idealized)";

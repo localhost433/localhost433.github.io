@@ -1,7 +1,7 @@
 import React from "react";
 import { DiagramSvg, DiagramCard, UmlLink, CrossOut, diagramCardHeight, cls } from "@course";
 
-/* note 16 — SRP, drawn as the lecture drew it: the Invoice god-class crossed
+/* note 16; SRP, drawn as the lecture drew it: the Invoice god-class crossed
    out on the left, the split on the right. Invoice keeps the DATA (its one
    responsibility); the register keeps the BOOKKEEPING (adding, deleting,
    sorting invoices — a different responsibility, a different reason to

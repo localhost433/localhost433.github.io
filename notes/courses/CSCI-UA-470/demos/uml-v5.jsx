@@ -1,14 +1,14 @@
 import React from "react";
 import { DiagramSvg, treeLayout, ClassTree, ab, cls } from "@course";
 
-/* v5 (note 09) — designing the hierarchy. THREE separate trees, each with its
+/* v5 (note 09); designing the hierarchy. THREE separate trees, each with its
    own abstract base (italic title) and an indigo `extends` fork. Grouping is by
    genuine is-a: a Car is not a Shape, so Vehicle gets its own tree; a Student is
    a Person, not a Shape, so Person gets its own. Shared behaviour (draw / move /
    speak) is declared abstract on each base; the leaves implement it. Boxes are
    neutral; colour is reserved for the relation. */
 
-// Tree 1 — Shape (abstract) with real attributes.
+// Tree 1, Shape (abstract) with real attributes.
 const shape = {
   title: "Shape", abstract: true,
   sections: [
@@ -20,8 +20,8 @@ const circle    = cls("Circle",    ["- radius : int"],                  ["+ draw
 const rectangle = cls("Rectangle", ["- width : int", "- length : int"], ["+ draw()"]);
 const triangle  = cls("Triangle",  ["- base : int", "- height : int"],  ["+ draw()"]);
 
-// Tree 2 — Vehicle (abstract), methods-only classes (empty attr compartment).
-// Vehicle declares move() only — aligning with v6, where the leaves' draw()
+// Tree 2; Vehicle (abstract), methods-only classes (empty attr compartment).
+// Vehicle declares move() only, aligning with v6, where the leaves' draw()
 // arrives via the Drawable interface instead of the base class.
 const vehicle = {
   title: "Vehicle", abstract: true,
@@ -30,7 +30,7 @@ const vehicle = {
 const car  = cls("Car",  [], ["+ draw()", "+ move()"]);
 const bike = cls("Bike", [], ["+ draw()", "+ move()"]);
 
-// Tree 3 — Person (abstract), methods-only classes (empty attr compartment).
+// Tree 3; Person (abstract), methods-only classes (empty attr compartment).
 const person = {
   title: "Person", abstract: true,
   sections: [{ rows: [] }, { rows: [ab("+ draw()"), ab("+ move()"), ab("+ speak()")] }],

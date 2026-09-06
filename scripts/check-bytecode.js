@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /*
- * The bytecode columns in the Java demos claim to be REAL `javap -c` output.
+ * The bytecode columns in the Java demos claim to be real `javap -c` output.
  * This proves it: compile demos/bytecode/*.java, run javap -c, and assert every
  * opcode line embedded in the demo .jsx still matches, in order.
  *
@@ -34,7 +34,7 @@ if (!have("javac") || !have("javap")) {
 const INSTR = /^\s*\d+:\s/;
 const norm = (s) => s.trim().replace(/\s+/g, " ");
 
-// The instruction lines of ONE method's Code block in `javap -c` output.
+// The instruction lines of one method's Code block in `javap -c` output.
 function realInstructions(out, method) {
   const lines = out.split("\n");
   const start = lines.findIndex((l) => norm(l) === norm(method));
@@ -59,7 +59,7 @@ function embeddedInstructions(jsx) {
   return rawAsm(jsx).split("\n").filter((l) => INSTR.test(l)).map(norm);
 }
 
-// The embedded method-declaration line — by construction the non-blank line
+// The embedded method-declaration line, by construction the non-blank line
 // directly above the "Code:" marker (see the demos' `asm` literals: a `class`
 // line, an elided-constructor row, the method declaration, then "Code:").
 function embeddedMethodDecl(jsx) {
@@ -69,7 +69,7 @@ function embeddedMethodDecl(jsx) {
   return norm(lines[codeIdx - 1]);
 }
 
-// Parse `const asmMap = { ... };` out of the .jsx source WITHOUT executing it —
+// Parse `const asmMap = { ... };` out of the .jsx source WITHOUT executing it
 // a regex over the object-literal text is enough: keys are line numbers, values
 // are `[n, n, ...]` arrays of asm line numbers.
 function parseAsmMap(jsx) {
@@ -102,7 +102,7 @@ function parseStepAsmLines(jsx) {
 // The asmMap CONTRACT: every target line it (or a step's asmLine) points at must
 // be a real instruction line in the demo's `asm` literal, and a step's own
 // asmLine must agree with what asmMap says for that step's source line. Content
-// equality (checked above) says nothing about this — it's what actually decides
+// equality (checked above) says nothing about this, it's what actually decides
 // which rows the pane highlights. Returns a list of human-readable problems.
 function checkAsmMapContract(jsx, jsxName) {
   const problems = [];
@@ -110,10 +110,10 @@ function checkAsmMapContract(jsx, jsxName) {
   const N = lines.length;
   const isRealInstr = (n) => n >= 1 && n <= N && INSTR.test(lines[n - 1]);
   // One deliberate exception: a demo may map its Java method-signature source
-  // line to the bytecode's OWN method-declaration row (e.g. jvm-operand-stack.jsx
+  // line to the bytecode's own method-declaration row (e.g. jvm-operand-stack.jsx
   // maps "int add(int a, int b) {" -> "int add(int, int);"), pairing the two
-  // signatures. That row isn't an instruction, but it's a real, addressable line
-  // — unlike a blank line, an elision row, or the "class"/"Code:" structural rows.
+  // signatures. That row isn't an instruction, but it's a real, addressable line,
+  // unlike a blank line, an elision row, or the "class"/"Code:" structural rows.
   const codeIdx = lines.findIndex((l) => /^\s*Code:\s*$/.test(l));
   const declLine = codeIdx >= 1 ? codeIdx : -1; // 1-based index of the line just above "Code:"
   const isValidTarget = (n) => isRealInstr(n) || n === declLine;
@@ -187,7 +187,7 @@ try {
       }
 
       // The method declaration itself (e.g. "int add(int, int);") is not an
-      // instruction line, so the opcode comparison above never sees it — check
+      // instruction line, so the opcode comparison above never sees it, check
       // it separately against the real javap header for this case.
       const embeddedDecl = embeddedMethodDecl(jsxSrc);
       if (embeddedDecl !== norm(c.method)) {

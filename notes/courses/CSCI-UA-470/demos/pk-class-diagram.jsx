@@ -1,7 +1,7 @@
 import React from "react";
 import { DiagramSvg, DiagramCard, UmlLink, diagramCardHeight } from "@course";
 
-/* password-keeper — L17's class diagram, read off the sequence diagrams. Notation
+/* password-keeper; L17's class diagram, read off the sequence diagrams. Notation
    follows the slide itself, which writes `: void` out in full (note 14's convention
    omits it; the note's prose flags the discrepancy). The two edges are the lesson:
    a hollow diamond from MainGUI to Password (the list field), a dashed dependency

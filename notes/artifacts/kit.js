@@ -1,4 +1,4 @@
-/* AUTO-GENERATED from kit.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from kit.jsx by `npm run build:artifacts`. Do not edit. */
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 import React from "react";
 function cn(...a) {

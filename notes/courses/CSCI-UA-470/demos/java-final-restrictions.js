@@ -1,4 +1,4 @@
-/* AUTO-GENERATED from java-final-restrictions.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from java-final-restrictions.jsx by `npm run build:artifacts`. Do not edit. */
 import React from "react";
 import { DiagramSvg, CodeBlock, CompareCaption } from "@course";
 import { Button } from "@kit";

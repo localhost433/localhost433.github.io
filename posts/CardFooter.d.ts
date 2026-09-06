@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 /**
- * CardFooter — from kit@1.0.0.
+ * CardFooter, from kit@1.0.0.
  */
 export interface CardFooterProps {
   className?: string;

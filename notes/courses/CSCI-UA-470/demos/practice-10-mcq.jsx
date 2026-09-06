@@ -1,6 +1,6 @@
 import { mcq } from "@course";
 
-/* note 10 practice — the three exam distinctions the note names itself: text vs
+/* note 10 practice, the three exam distinctions the note names itself: text vs
    binary representation, the serialization read/write contract, and what `final`
    freezes at each of its three positions (variable / method / class). */
 

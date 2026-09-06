@@ -1,7 +1,7 @@
-/* AUTO-GENERATED from pattern-decorator-wrap.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from pattern-decorator-wrap.jsx by `npm run build:artifacts`. Do not edit. */
 import { scene, stack, obj } from "@course";
 
-/* note 20 — the Decorator onion, watched in memory. The line students misread is
+/* note 20, the Decorator onion, watched in memory. The line students misread is
    `b1 = new Flower(b1, …)`: it looks like reassignment losing the old object, and it
    is the opposite — the old object survives, held by the new one, and only the
    NAME moves outward.

@@ -1,7 +1,7 @@
-/* AUTO-GENERATED from practice-06-predict.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from practice-06-predict.jsx by `npm run build:artifacts`. Do not edit. */
 import { scene, l06VtableScene } from "@course";
 
-/* note 06 practice — the vtable-dispatch walkthrough (shared with the mem-vtable
+/* note 06 practice, the vtable-dispatch walkthrough (shared with the mem-vtable
    demo via l06VtableScene) turned into active recall: the student predicts which
    `intro()` runs at the final `ptr->intro()` step, before the dispatch is revealed.
    Reuses the demo's exact cell layout and code, adding only the question. */

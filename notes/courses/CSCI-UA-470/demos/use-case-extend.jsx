@@ -1,6 +1,6 @@
 import { useCaseRelation } from "@course";
 
-/* note 12 — «extend»: the base use case is COMPLETE on its own; under certain
+/* note 12; «extend»: the base use case is COMPLETE on its own; under certain
    conditions an extending use case adds to it. Slide example: on a shopping site,
    View product details is extended by Add to shopping cart and Write a review. */
 

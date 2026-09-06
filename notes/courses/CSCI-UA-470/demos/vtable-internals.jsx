@@ -24,13 +24,13 @@ int main() {
     p->intro();
 }`;
 
-// three function bodies in Code — one copy each, shared by all objects.
+// three function bodies in Code, one copy each, shared by all objects.
 const PIN  = (hl) => text("Person::intro",  "fn", "cout << \"person\"",  { id: "p_intro", hl });
 const PEAT = (hl) => text("Person::eat",    "fn", "cout << \"nom\"",     { id: "p_eat",   hl });
 const SIN  = (hl) => text("Student::intro", "fn", "cout << \"student\"", { id: "s_intro", hl });
 
 // vtables as arrays of pointer slots in read-only data (Global/Static). Use glob
-// + fields (NOT obj) so the cell name is the vtable label and the type badge is
+// + fields (not obj) so the cell name is the vtable label and the type badge is
 // "vtable", matching mem-vtable's cell.
 const PVT = (hl) => glob("Person::vtable", "vtable", "", { id: "pvt", hl, fields: [
   { name: "#0 intro", size: 8, to: "p_intro", value: "&Person::intro" },

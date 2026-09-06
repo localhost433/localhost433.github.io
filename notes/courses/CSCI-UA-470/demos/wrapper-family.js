@@ -1,8 +1,8 @@
-/* AUTO-GENERATED from wrapper-family.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from wrapper-family.jsx by `npm run build:artifacts`. Do not edit. */
 import React from "react";
 import { DiagramSvg, DiagramBox, DiagramEdge } from "@course";
 
-/* note 20 — the section that earns the note. Four of L19's seven patterns put an
+/* note 20, the section that earns the note. Four of L19's seven patterns put an
    object in front of another object, which is why they are the ones that get
    confused. Two questions separate all four, and this is that decision tree.
 

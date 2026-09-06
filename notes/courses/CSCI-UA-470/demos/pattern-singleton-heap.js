@@ -1,7 +1,7 @@
-/* AUTO-GENERATED from pattern-singleton-heap.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from pattern-singleton-heap.jsx by `npm run build:artifacts`. Do not edit. */
 import { scene, stack, glob, obj } from "@course";
 
-/* note 19 — what the Singleton actually costs in memory, and why "the same object"
+/* note 19; what the Singleton actually costs in memory, and why "the same object"
    is a claim about ADDRESSES, not about equal field values. Three getInstance()
    calls, one allocation: the static field holds the only reference that ever
    points at a fresh object, and s1/s2/s3 are three stack slots holding three
@@ -15,7 +15,7 @@ const code = `Singleton s1 = Singleton.getInstance();
 Singleton s2 = Singleton.getInstance();
 Singleton s3 = Singleton.getInstance();`;
 
-// the class's own static slot — it lives with the class, not with any object.
+// the class's own static slot, it lives with the class, not with any object.
 const FIELD = (linked, hl) => glob("instance", "Singleton", linked ? "ref" : "null", {
   id: "field",
   to: linked ? "sing" : undefined,

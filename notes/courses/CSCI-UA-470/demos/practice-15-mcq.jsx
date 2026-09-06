@@ -1,6 +1,6 @@
 import { mcq } from "@course";
 
-/* note 15 practice — the concepts around the code translation: the BCE
+/* note 15 practice, the concepts around the code translation: the BCE
    stereotypes (who counts as boundary — including the DB connection, the
    lecture's favourite curveball), the grammar table, CRC cards, and what the
    traceability chain buys. */

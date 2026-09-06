@@ -1,8 +1,8 @@
-/* AUTO-GENERATED from use-case-roles.jsx by `npm run build:artifacts` — do not edit. */
+/* AUTO-GENERATED from use-case-roles.jsx by `npm run build:artifacts`. Do not edit. */
 import React from "react";
 import { DiagramSvg, DiagramBox, DiagramEdge } from "@course";
 
-/* note 12 — the chain of roles a project passes through before code exists.
+/* note 12, the chain of roles a project passes through before code exists.
    UML is the shared notation the two middle roles (Analyst, Designer) author and
    hand downstream, so those two are tinted (amber) and bracketed; the rest stay
    neutral. A left-to-right flow of boxes, an arrow between each. */

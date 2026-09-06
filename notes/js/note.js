@@ -54,8 +54,8 @@ marked.use({
       const parsed = ArtifactUtils.parseArtifactInfo("artifact " + token.info);
       const idx = artifactStore.length;
       artifactStore.push({ src: parsed.src, code: parsed.src ? null : token.code });
-      // A `static` artifact (a non-interactive diagram) renders bare — no
-      // collapsible bar, no "Interactive demo" title — just the mount.
+      // A `static` artifact (a non-interactive diagram) renders bare, no
+      // collapsible bar, no "Interactive demo" title, just the mount.
       if (parsed.static) {
         return `<div class="artifact-block artifact-block--static" data-artifact-index="${idx}">` +
           `<div class="artifact-mount" data-artifact-index="${idx}"></div>` +
@@ -283,7 +283,7 @@ async function gatherSharedLayers(course) {
   let compiled = true;
   if (globalKit) { modules["@kit"] = globalKit.code; compiled = compiled && globalKit.compiled; }
   if (courseKit) { modules["@course"] = courseKit.code; compiled = compiled && courseKit.compiled; }
-  // plain-JS shared logic — already "compiled" (no JSX), so it never forces Babel.
+  // plain-JS shared logic; already "compiled" (no JSX), so it never forces Babel.
   if (seqOrder) { modules["@course/seq-order"] = seqOrder; }
   return { css, modules, compiled };
 }
