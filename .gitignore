@@ -19,6 +19,14 @@
 *.mp3
 *.heic
 
+# Archives too.
+*.zip
+*.tar
+*.tgz
+*.gz
+*.rar
+*.7z
+
 # ============================================================
 #  Dependencies & build
 # ============================================================
@@ -60,14 +68,14 @@ Thumbs.db
 # ============================================================
 #  Tooling
 # ============================================================
-# design-sync (claude.ai/design): staged scripts, generated bundle, machine state.
-# The durable inputs under .design-sync/ (config.json, NOTES.md, conventions.md,
-# previews/, overrides/) stay tracked.
+# design-sync: staged scripts, generated bundle, machine state and inputs.
+# All of it is local tooling, not site source.
 .ds-sync/
 ds-bundle/
-.design-sync/.cache/
-.design-sync/learnings/
-.design-sync/node_modules
+.design-sync/
+
+# Component spec files are tooling input, not site content.
+*.prompt.md
 
 # Working docs (handoffs, plans, specs)
 docs/
@@ -123,6 +131,11 @@ docs/
 /notes/courses/CSCI-UA-470/midterm/
 /notes/courses/CSCI-UA-470/quiz/
 /notes/courses/CSCI-UA-470/final/
+
+# Final project (CSCI-UA-470) is co-authored group work. The graded report
+# carries both partners' NetIDs and the canonical copy is the partner's repo,
+# so the source, reports and zips stay local. Only a write-up gets published.
+/notes/courses/CSCI-UA-470/Final project/
 
 # Exam-shell SOURCE must stay tracked. The "*Exam*" rule above ignores "exams"
 # (core.ignorecase makes it case-insensitive), so re-include the dir and its
