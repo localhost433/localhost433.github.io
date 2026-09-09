@@ -130,10 +130,9 @@ docs/
 /notes/courses/*/**/*.html
 
 # Local study material (practice exams/quizzes + personal review sheets) — kept
-# out of the published site; not listed in any index.json.
-/notes/courses/CSCI-UA-470/midterm/
-/notes/courses/CSCI-UA-470/quizzes/
-/notes/courses/CSCI-UA-470/final/
+# out of the published site; not listed in any index.json. Built by exams/ into
+# exam-prep/{quizzes,midterm,final}/ via the data files' meta.out paths.
+/notes/courses/CSCI-UA-470/exam-prep/
 
 # Final project (CSCI-UA-470) is co-authored group work. The graded report
 # carries both partners' NetIDs and the canonical copy is the partner's repo,
