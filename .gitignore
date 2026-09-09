@@ -99,11 +99,14 @@ docs/
 # ============================================================
 #  Course notes (notes/courses/)
 # ============================================================
-# Forbidden course materials
-/notes/courses/*/*HW*
-/notes/courses/*/*Book*
-/notes/courses/*/*Exam*
-/notes/courses/*/*Note*
+# Forbidden course materials. Course subfolders use one lowercase-plural name
+# per category (books/ lectures/ exams/ quizzes/ hw/ recitations/ readings/
+# notes/ code/), so these patterns are lowercase and match on Linux too, not
+# just via macOS core.ignorecase.
+/notes/courses/*/*hw*
+/notes/courses/*/*book*
+/notes/courses/*/*exam*
+/notes/courses/*/*note*
 /notes/courses/*/*code*/
 /notes/courses/*/*lecture*
 /notes/courses/*/*reading*
@@ -129,7 +132,7 @@ docs/
 # Local study material (practice exams/quizzes + personal review sheets) — kept
 # out of the published site; not listed in any index.json.
 /notes/courses/CSCI-UA-470/midterm/
-/notes/courses/CSCI-UA-470/quiz/
+/notes/courses/CSCI-UA-470/quizzes/
 /notes/courses/CSCI-UA-470/final/
 
 # Final project (CSCI-UA-470) is co-authored group work. The graded report
@@ -137,9 +140,9 @@ docs/
 # so the source, reports and zips stay local. Only a write-up gets published.
 /notes/courses/CSCI-UA-470/Final project/
 
-# Exam-shell SOURCE must stay tracked. The "*Exam*" rule above ignores "exams"
-# (core.ignorecase makes it case-insensitive), so re-include the dir and its
-# contents. Built exams still land in the ignored study dirs above.
+# Exam-shell SOURCE must stay tracked. The "*exam*" rule above ignores "exams",
+# so re-include the dir and its contents. Built exams still land in the ignored
+# study dirs above.
 !/notes/courses/CSCI-UA-470/exams/
 !/notes/courses/CSCI-UA-470/exams/**
 
