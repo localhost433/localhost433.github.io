@@ -3,24 +3,7 @@ title: "1 - Introduction & What Machine Learning Is"
 date: "2026-09-03"
 ---
 
-## How the course is assessed
-
-Worth internalizing early, because it shapes how to study: 70% of the grade is open-book,
-pen-and-paper, and roughly 90% multiple-choice or true/false.
-
-| Component | Weight | Format |
-|---|---|---|
-| Homework 0 | 5% | theory, LaTeX, one-week turnaround (calibration only) |
-| 4 in-class quizzes | 40% | pen/paper, open-book, ~90% MCQ + T/F, every ~3rd week |
-| 4 programming assignments | 20% | code, two weeks each |
-| Final exam | 30% | pen/paper, open-book, theory only, no coding |
-| Recitation exercises | 5% | submitted **during** the Friday lab, timestamped |
-
-Three grace days total across all programming assignments; after that 75% / 50% / 0% for
-one / two / more days late, rounded up to the nearest 24 hours. No recordings after the
-add/drop deadline. Labs require a laptop or you are turned away.
-
-## Prerequisites, references and expectations
+## Prerequisites and references
 
 *Slides 16-17.* Assumed going in: linear algebra and vector calculus, probability theory,
 and proficiency in Python 3 and PyTorch.
@@ -45,20 +28,6 @@ Deisenroth also supplies one of the four definitions quoted below.
 Alongside the book list, Resources carries Cho's 65-page lecture note - see
 [note 00](note.html?course=CSCI-UA-473&note=00) for what it covers and how its notation
 differs.
-
-Four expectations, stated on slide 17:
-
-- **Attendance.** Fast-paced course; participate, don't merely show up.
-- **Theory is important.** ML is practical but requires thorough understanding of the
-  underlying theory to develop and apply models well.
-- **Get your hands dirty.** Actively participate in labs, play with the code, try to break
-  it - "likely the only way you'll learn."
-- **Read.** Many topics will be left out, and details omitted even from topics covered.
-  Read the materials pointed to in class.
-
-On homework, discussing and brainstorming with peers is encouraged, but the writing is
-your own, and **naming the peers you discussed it with in your submission is a
-requirement**, not a courtesy.
 
 ## What machine learning is
 
@@ -192,4 +161,3 @@ Plus self-supervised learning and reinforcement learning as their own headings.
 | The caution | spectacular failures exist; care is needed in development *and* deployment |
 | Course map | supervised (parametric / non-parametric / ensemble) vs. unsupervised (dim. reduction, clustering, autoencoders), plus self-supervised and RL |
 | References | six books, no official text; *Learning from Data* supplies the slides' $f$/$g$/$\mathbb H$ notation; Cho's note is the free, printable one |
-| Homework rule | naming the peers you discussed with is a stated requirement |
