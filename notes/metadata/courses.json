@@ -54,4 +54,11 @@
     "semester": "Fall 2026",
     "instructor": "Prof. Chopra"
   }
+  ,
+  {
+    "slug": "CSCI-UA-480-parallel",
+    "title": "Parallel Computing (CSCI-UA 480)",
+    "semester": "Fall 2026",
+    "instructor": "Prof. Zahran"
+  }
 ]
