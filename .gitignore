@@ -104,6 +104,7 @@ docs/
 # notes/ code/), so these patterns are lowercase and match on Linux too, not
 # just via macOS core.ignorecase.
 /notes/courses/*/*hw*
+/notes/courses/*/*lab*
 /notes/courses/*/*book*
 /notes/courses/*/*exam*
 /notes/courses/*/*note*
@@ -163,6 +164,5 @@ docs/
 /notes/courses/MATH-UA-148
 
 # Haven't taken yet
-/notes/courses/CSCI-UA-473
 /notes/courses/CSCI-UA-474
 /notes/courses/CSCI-UA-469

@@ -47,4 +47,11 @@
     "semester": "Summer 2026",
     "instructor": "Prof. Aljabbouli"
   }
+  ,
+  {
+    "slug": "CSCI-UA-473",
+    "title": "Fundamentals of Machine Learning (CSCI-UA 473)",
+    "semester": "Fall 2026",
+    "instructor": "Prof. Chopra"
+  }
 ]
