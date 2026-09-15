@@ -148,7 +148,7 @@ function Stat({ label, value, C }) {
 const rowStyle = { display: "flex", flexWrap: "wrap", gap: "8px", alignItems: "center", margin: "0 0 2px" };
 
 function buttonStyle(C, active) {
-  return { background: active ? C.bg : C.bg, border: `1px solid ${active ? C.fg : C.border}`,
+  return { background: active ? C.border : C.bg, border: `1px solid ${active ? C.fg : C.border}`,
     borderRadius: "6px", color: C.fg, padding: "6px 10px", cursor: "pointer", font: "inherit",
     fontWeight: active ? 500 : 400 };
 }

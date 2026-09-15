@@ -298,7 +298,7 @@ const rowStyle = {
 };
 function buttonStyle(C, active) {
   return {
-    background: active ? C.bg : C.bg,
+    background: active ? C.border : C.bg,
     border: `1px solid ${active ? C.fg : C.border}`,
     borderRadius: "6px",
     color: C.fg,
