@@ -200,3 +200,12 @@ test("_kit.jsx registers its own asm and bytecode languages", () => {
   assert.ok(/registerLang\(\s*["']asm["']/.test(src), "470 must register asm");
   assert.ok(/registerLang\(\s*["']bytecode["']/.test(src), "470 must register bytecode");
 });
+
+const NOTEJS = fs.readFileSync(path.join(__dirname, "note.js"), "utf8");
+
+test("note.js registers a per-course @course/logic module", () => {
+  assert.ok(/demos\/_logic\.mjs/.test(NOTEJS),
+    "note.js must fetch the per-course logic module");
+  assert.ok(/modules\[["']@course\/logic["']\]/.test(NOTEJS),
+    "note.js must register it as @course/logic");
+});

@@ -271,12 +271,13 @@ function fetchModuleCached(jsxPath) {
   return p;
 }
 async function gatherSharedLayers(course) {
-  const [globalCss, courseCss, globalKit, courseKit, seqOrder] = await Promise.all([
+  const [globalCss, courseCss, globalKit, courseKit, seqOrder, courseLogic] = await Promise.all([
     fetchTextCached("/notes/artifacts/theme.css"),
     fetchTextCached(`/notes/courses/${course}/demos/_shared.css`),
     fetchModuleCached("/notes/artifacts/kit.jsx"),
     fetchModuleCached(`/notes/courses/${course}/demos/_kit.jsx`),
-    fetchTextCached("/notes/js/seq-order-logic.mjs")
+    fetchTextCached("/notes/js/seq-order-logic.mjs"),
+    fetchTextCached(`/notes/courses/${course}/demos/_logic.mjs`)
   ]);
   const css = [globalCss, courseCss].filter(Boolean);
   const modules = {};
@@ -285,6 +286,8 @@ async function gatherSharedLayers(course) {
   if (courseKit) { modules["@course"] = courseKit.code; compiled = compiled && courseKit.compiled; }
   // plain-JS shared logic; already "compiled" (no JSX), so it never forces Babel.
   if (seqOrder) { modules["@course/seq-order"] = seqOrder; }
+  // Per-course pure logic, same contract: plain ESM, node-testable, no JSX.
+  if (courseLogic) { modules["@course/logic"] = courseLogic; }
   return { css, modules, compiled };
 }
 
