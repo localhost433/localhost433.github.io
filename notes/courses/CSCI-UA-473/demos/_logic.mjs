@@ -59,3 +59,50 @@ export function generate(kind, rand) {
   }
   return pts;
 }
+
+/* ---- No Free Lunch on the Boolean cube ---- */
+
+// The 8 vertices of {0,1}^3, in the nesting order the figure draws them.
+export const VERTICES = (() => {
+  const V = [];
+  for (let a = 0; a < 2; a++) for (let b = 0; b < 2; b++) for (let c = 0; c < 2; c++) V.push([a, b, c]);
+  return V;
+})();
+
+// A hypothesis is a mask in [0, 256): bit i is the label at VERTICES[i].
+export const labelOf = (mask, i) => ((mask >> i) & 1) ? 1 : -1;
+
+// The linear threshold functions, derived rather than tabulated. Sweeping
+// half-integer weights and thresholds over [-3, 3] finds all 104; the count is
+// the known number of threshold functions of three variables.
+let THR = null;
+export function thresholdFns() {
+  if (THR) return THR;
+  THR = new Set();
+  const R = []; for (let i = -6; i <= 6; i++) R.push(i / 2);
+  for (const w0 of R) for (const w1 of R) for (const w2 of R) for (const t of R) {
+    let mask = 0, ok = true;
+    for (let i = 0; i < 8; i++) {
+      const v = VERTICES[i], s = w0 * v[0] + w1 * v[1] + w2 * v[2] - t;
+      if (s === 0) { ok = false; break; }   // a vertex on the plane is undefined
+      if (s > 0) mask |= 1 << i;
+    }
+    if (ok) THR.add(mask);
+  }
+  return THR;
+}
+
+// D maps vertex index -> observed label. Returns the hypothesis set, the subset
+// consistent with D, and for each unseen vertex the fraction of consistent
+// hypotheses voting +1 (null when nothing is consistent).
+export function analyzeNFL(D, linearOnly) {
+  const thr = linearOnly ? thresholdFns() : null;
+  const H = [];
+  for (let m = 0; m < 256; m++) if (!thr || thr.has(m)) H.push(m);
+  const seen = Object.keys(D).map(Number);
+  const C = H.filter((m) => seen.every((i) => labelOf(m, i) === D[i]));
+  const vote = {};
+  for (let i = 0; i < 8; i++)
+    if (!(i in D)) vote[i] = C.length ? C.filter((m) => labelOf(m, i) === 1).length / C.length : null;
+  return { H, C, vote };
+}
