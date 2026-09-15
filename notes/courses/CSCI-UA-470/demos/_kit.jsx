@@ -4,8 +4,9 @@ import { seededShuffle, gradeOrder, hashSeed } from "@course/seq-order";
 
 // Promoted to the global kit so CSCI-UA-473 can share them. Re-exported here so
 // this course's ~168 demos keep importing them from "@course" unchanged.
-export { DiagramSvg, diagramPalette, KnobBar, CompareCaption } from "@kit";
-import { DiagramSvg, diagramPalette, KnobBar, CompareCaption } from "@kit";
+export { DiagramSvg, diagramPalette, KnobBar, CompareCaption, CodeBlock } from "@kit";
+import { DiagramSvg, diagramPalette, KnobBar, CompareCaption, CodeBlock,
+         tokenize, registerLang, highlightCode } from "@kit";
 
 /* ============================================================
    Shared textbook memory model for CSCI-UA-470.
@@ -14,56 +15,6 @@ import { DiagramSvg, diagramPalette, KnobBar, CompareCaption } from "@kit";
    - MemoryScene: a stepper that pairs a code panel with the model.
    Reused across lecture notes; each note feeds it its own steps.
    ============================================================ */
-
-const LANGS = {
-  cpp: {
-    kw: new Set(["return", "using", "namespace", "new", "delete", "class", "struct",
-      "public", "private", "protected", "friend", "static", "const", "virtual",
-      "operator", "template", "typename", "this", "if", "else", "for", "while",
-      "include", "define", "ifdef", "ifndef", "endif", "undef", "override", "final",
-      "nullptr", "NULL", "true", "false"]),
-    ty: new Set(["int", "char", "double", "float", "bool", "void", "unsigned",
-      "long", "short", "auto", "string", "ostream", "istream"]),
-    bi: new Set(["cout", "cin", "endl", "std", "main"]),
-  },
-  java: {
-    kw: new Set(["package", "import", "public", "private", "protected", "class",
-      "interface", "enum", "extends", "implements", "abstract", "final", "static",
-      "native", "synchronized", "return", "new", "this", "super", "void",
-      "if", "else", "for", "while", "do", "switch", "case", "break", "continue",
-      "try", "catch", "finally", "throw", "throws", "instanceof",
-      "null", "true", "false"]),
-    ty: new Set(["int", "long", "short", "byte", "char", "boolean", "float", "double", "var"]),
-    bi: new Set(["out", "err", "println", "print", "args", "length", "main"]),
-  },
-};
-
-function classifyWord(w, L) {
-  if (L.kw.has(w)) return "mm-tok-kw";
-  if (L.ty.has(w)) return "mm-tok-ty";
-  if (L.bi.has(w)) return "mm-tok-fn";
-  if (/^[A-Z]/.test(w)) return "mm-tok-ty";   // user-defined types: Circle, Person, String, …
-  return undefined;
-}
-
-// Drive a tokenizer: scan `line` with a global regex and wrap each match in a
-// <span> whose class comes from classify(match). Shared by code + asm below.
-function tokenize(line, re, classify) {
-  const out = [];
-  let m, k = 0;
-  while ((m = re.exec(line)) !== null) out.push(<span key={k++} className={classify(m)}>{m[0]}</span>);
-  return out;
-}
-
-const CODE_RE = /(\/\/[^\n]*)|("(?:[^"\\]|\\.)*")|('(?:[^'\\]|\\.)*')|(#[A-Za-z]+)|(\b\d+\.?\d*[fFlLdD]?\b)|([A-Za-z_]\w*)|(\s+)|([^\sA-Za-z0-9_"'])/g;
-
-// Tokenize one line of C++/Java into highlighted <span>s.
-function highlightCode(line, lang = "cpp") {
-  const L = LANGS[lang] || LANGS.cpp;
-  return tokenize(line, CODE_RE, (m) =>
-    m[1] ? "mm-tok-com" : (m[2] || m[3]) ? "mm-tok-str" : m[4] ? "mm-tok-pre"
-      : m[5] ? "mm-tok-num" : m[6] ? classifyWord(m[6], L) : undefined);
-}
 
 // x86-64 (Intel-syntax) mnemonics and registers we tokenize in curated asm.
 const ASM_MNEMONICS = new Set(["mov", "movabs", "lea", "push", "pop", "call",
@@ -129,11 +80,9 @@ function highlightBytecode(line) {
   });
 }
 
-// Pick the tokenizer for a language; "asm" gets the x86 highlighter, else C-family.
-const highlight = (line, lang) =>
-  lang === "asm" ? highlightAsm(line)
-    : lang === "bytecode" ? highlightBytecode(line)
-    : highlightCode(line, lang);
+// Register 470-specific languages (asm and bytecode) with the global kit registry.
+registerLang("asm", highlightAsm);
+registerLang("bytecode", highlightBytecode);
 
 // A curated-asm line beginning with "…" is an elision row (muted, non-mappable).
 const isElision = (ln) => /^\s*…/.test(ln);
@@ -799,45 +748,6 @@ export function ObjectLayout({ title, slots = [], pointers = [], note }) {
   );
 }
 
-// One line-numbered, syntax-highlighted block for C++ OR assembly. `activeLine`
-// is the highlighted 1-based line, or an array/Set of lines (an asm group). A line
-// starting with "…" renders as a muted "⋯" elision row (used by curated asm).
-// Optional onHoverLine(n) reports the hovered line (null on leave) to a parent.
-// Optional onPickLine(n) makes lines in `pickable` (a Set) clickable -> jump to step.
-export function CodeBlock({ code, activeLine, lang = "cpp", onHoverLine, onPickLine, pickable }) {
-  const lines = (code || "").split("\n");
-  const isActive = activeLine instanceof Set ? (n) => activeLine.has(n)
-    : Array.isArray(activeLine) ? (n) => activeLine.includes(n)
-    : (n) => n === activeLine;
-  return (
-    <pre className="mm-code">
-      {lines.map((ln, n) => {
-        if (isElision(ln)) return (
-          <div key={n} className="mm-code__line mm-code__line--elide">
-            <span className="mm-code__ln" aria-hidden="true">⋯</span>
-            <span className="mm-code__txt">{ln.replace(/^\s*…\s?/, "")}</span>
-          </div>
-        );
-        const no = n + 1;
-        const canPick = onPickLine && (!pickable || pickable.has(no));
-        const h = {};
-        if (onHoverLine) { h.onMouseEnter = () => onHoverLine(no); h.onMouseLeave = () => onHoverLine(null); }
-        if (canPick) {
-          h.onClick = () => onPickLine(no);
-          h.role = "button"; h.tabIndex = 0;
-          h.onKeyDown = (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onPickLine(no); } };
-        }
-        const cls = "mm-code__line" + (isActive(no) ? " mm-code__line--active" : "") + (canPick ? " mm-code__line--pick" : "");
-        return (
-          <div key={n} className={cls} {...h}>
-            <span className="mm-code__ln">{no}</span>
-            <span className="mm-code__txt">{ln ? highlight(ln, lang) : " "}</span>
-          </div>
-        );
-      })}
-    </pre>
-  );
-}
 
 // Dev-time guard: warn (never throw) if an asmMap entry points at a missing or
 // elided asm line, so maps stay honest as the asm is edited.

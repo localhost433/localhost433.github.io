@@ -416,3 +416,117 @@ export function CompareCaption({
     className: "mm-compare__punch"
   }, punch) : null);
 }
+
+// Language-specific keyword/type/builtin classification for syntax highlighting.
+// Course kits extend this registry with their own languages (470: asm + bytecode;
+// 473: python).
+const LANGS = {
+  cpp: {
+    kw: new Set(["return", "using", "namespace", "new", "delete", "class", "struct", "public", "private", "protected", "friend", "static", "const", "virtual", "operator", "template", "typename", "this", "if", "else", "for", "while", "include", "define", "ifdef", "ifndef", "endif", "undef", "override", "final", "nullptr", "NULL", "true", "false"]),
+    ty: new Set(["int", "char", "double", "float", "bool", "void", "unsigned", "long", "short", "auto", "string", "ostream", "istream"]),
+    bi: new Set(["cout", "cin", "endl", "std", "main"])
+  },
+  java: {
+    kw: new Set(["package", "import", "public", "private", "protected", "class", "interface", "enum", "extends", "implements", "abstract", "final", "static", "native", "synchronized", "return", "new", "this", "super", "void", "if", "else", "for", "while", "do", "switch", "case", "break", "continue", "try", "catch", "finally", "throw", "throws", "instanceof", "null", "true", "false"]),
+    ty: new Set(["int", "long", "short", "byte", "char", "boolean", "float", "double", "var"]),
+    bi: new Set(["out", "err", "println", "print", "args", "length", "main"])
+  }
+};
+function classifyWord(w, L) {
+  if (L.kw.has(w)) return "mm-tok-kw";
+  if (L.ty.has(w)) return "mm-tok-ty";
+  if (L.bi.has(w)) return "mm-tok-fn";
+  if (/^[A-Z]/.test(w)) return "mm-tok-ty"; // user-defined types: Circle, Person, String, …
+  return undefined;
+}
+
+// Drive a tokenizer: scan `line` with a global regex and wrap each match in a
+// <span> whose class comes from classify(match). Shared by code + asm below.
+export function tokenize(line, re, classify) {
+  const out = [];
+  let m,
+    k = 0;
+  while ((m = re.exec(line)) !== null) out.push(/*#__PURE__*/React.createElement("span", {
+    key: k++,
+    className: classify(m)
+  }, m[0]));
+  return out;
+}
+const CODE_RE = /(\/\/[^\n]*)|("(?:[^"\\]|\\.)*")|('(?:[^'\\]|\\.)*')|(#[A-Za-z]+)|(\b\d+\.?\d*[fFlLdD]?\b)|([A-Za-z_]\w*)|(\s+)|([^\sA-Za-z0-9_"'])/g;
+
+// Tokenize one line of C++/Java into highlighted <span>s.
+export function highlightCode(line, lang = "cpp") {
+  const L = LANGS[lang] || LANGS.cpp;
+  return tokenize(line, CODE_RE, m => m[1] ? "mm-tok-com" : m[2] || m[3] ? "mm-tok-str" : m[4] ? "mm-tok-pre" : m[5] ? "mm-tok-num" : m[6] ? classifyWord(m[6], L) : undefined);
+}
+
+// Open language registry. Course kits call registerLang for vocabulary that is
+// theirs alone (470: asm and JVM bytecode; 473: python), so the global kit
+// stays free of course specifics.
+const LANG_REGISTRY = Object.create(null);
+
+// Register a tokenizer for a language name. `fn(line)` returns React nodes.
+export function registerLang(name, fn) {
+  LANG_REGISTRY[name] = fn;
+}
+const highlight = (line, lang) => LANG_REGISTRY[lang] ? LANG_REGISTRY[lang](line) : highlightCode(line, lang);
+
+// A curated-asm line beginning with "…" is an elision row (muted, non-mappable).
+const isElision = ln => /^\s*…/.test(ln);
+
+// One line-numbered, syntax-highlighted block for C++ OR assembly. `activeLine`
+// is the highlighted 1-based line, or an array/Set of lines (an asm group). A line
+// starting with "…" renders as a muted "⋯" elision row (used by curated asm).
+// Optional onHoverLine(n) reports the hovered line (null on leave) to a parent.
+// Optional onPickLine(n) makes lines in `pickable` (a Set) clickable -> jump to step.
+export function CodeBlock({
+  code,
+  activeLine,
+  lang = "cpp",
+  onHoverLine,
+  onPickLine,
+  pickable
+}) {
+  const lines = (code || "").split("\n");
+  const isActive = activeLine instanceof Set ? n => activeLine.has(n) : Array.isArray(activeLine) ? n => activeLine.includes(n) : n => n === activeLine;
+  return /*#__PURE__*/React.createElement("pre", {
+    className: "mm-code"
+  }, lines.map((ln, n) => {
+    if (isElision(ln)) return /*#__PURE__*/React.createElement("div", {
+      key: n,
+      className: "mm-code__line mm-code__line--elide"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "mm-code__ln",
+      "aria-hidden": "true"
+    }, "\u22EF"), /*#__PURE__*/React.createElement("span", {
+      className: "mm-code__txt"
+    }, ln.replace(/^\s*…\s?/, "")));
+    const no = n + 1;
+    const canPick = onPickLine && (!pickable || pickable.has(no));
+    const h = {};
+    if (onHoverLine) {
+      h.onMouseEnter = () => onHoverLine(no);
+      h.onMouseLeave = () => onHoverLine(null);
+    }
+    if (canPick) {
+      h.onClick = () => onPickLine(no);
+      h.role = "button";
+      h.tabIndex = 0;
+      h.onKeyDown = e => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onPickLine(no);
+        }
+      };
+    }
+    const cls = "mm-code__line" + (isActive(no) ? " mm-code__line--active" : "") + (canPick ? " mm-code__line--pick" : "");
+    return /*#__PURE__*/React.createElement("div", _extends({
+      key: n,
+      className: cls
+    }, h), /*#__PURE__*/React.createElement("span", {
+      className: "mm-code__ln"
+    }, no), /*#__PURE__*/React.createElement("span", {
+      className: "mm-code__txt"
+    }, ln ? highlight(ln, lang) : " "));
+  }));
+}

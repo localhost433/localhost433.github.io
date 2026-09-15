@@ -75,8 +75,8 @@ test("_kit.jsx defines a bytecode tokenizer", () => {
     "missing highlightBytecode tokenizer");
   assert.ok(src.includes("BYTECODE_OPS"),
     "highlightBytecode must classify opcodes from a mnemonic set");
-  assert.ok(src.includes('lang === "bytecode"'),
-    "highlight() must route lang=bytecode to highlightBytecode");
+  assert.ok(/registerLang\(\s*["']bytecode["']/.test(src),
+    "470 kit must register bytecode tokenizer with the global registry");
 });
 
 test("CodeAsmPane accepts a target language + a per-step target-line override", () => {
@@ -185,4 +185,18 @@ test("UseCaseBuilder Reset clears only the current stage", () => {
   assert.ok(!/setRevealedSet\(new Set\(\)\)/.test(body), "reset must not wipe every stage's revealed flag");
   assert.ok(!/setStage\(/.test(body), "reset must stay on the current stage, not jump back");
   assert.ok(/placeViaConnect/.test(body), "resetting Connect must roll back an auto-completed Place");
+});
+
+test("kit.jsx exposes an open language registry", () => {
+  assert.ok(gsrc.includes("export function registerLang"),
+    "global kit must export registerLang");
+  assert.ok(gsrc.includes("export function CodeBlock"),
+    "global kit must export CodeBlock");
+  assert.ok(!/lang\s*===\s*["']asm["']/.test(gsrc),
+    "global kit must not hardcode course-specific languages");
+});
+
+test("_kit.jsx registers its own asm and bytecode languages", () => {
+  assert.ok(/registerLang\(\s*["']asm["']/.test(src), "470 must register asm");
+  assert.ok(/registerLang\(\s*["']bytecode["']/.test(src), "470 must register bytecode");
 });
