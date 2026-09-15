@@ -7,7 +7,7 @@ import { seededShuffle, gradeOrder, hashSeed } from "@course/seq-order";
 // Promoted to the global kit so CSCI-UA-473 can share them. Re-exported here so
 // this course's ~168 demos keep importing them from "@course" unchanged.
 export { DiagramSvg, diagramPalette, KnobBar, CompareCaption, CodeBlock } from "@kit";
-import { DiagramSvg, diagramPalette, KnobBar, CompareCaption, CodeBlock, tokenize, registerLang, highlightCode } from "@kit";
+import { DiagramSvg, diagramPalette, KnobBar, CompareCaption, CodeBlock, tokenize, registerLang, highlightCode, highlight } from "@kit";
 
 /* ============================================================
    Shared textbook memory model for CSCI-UA-470.

@@ -276,7 +276,7 @@ const LANG_REGISTRY = Object.create(null);
 // Register a tokenizer for a language name. `fn(line)` returns React nodes.
 export function registerLang(name, fn) { LANG_REGISTRY[name] = fn; }
 
-const highlight = (line, lang) =>
+export const highlight = (line, lang) =>
   LANG_REGISTRY[lang] ? LANG_REGISTRY[lang](line) : highlightCode(line, lang);
 
 // A curated-asm line beginning with "…" is an elision row (muted, non-mappable).

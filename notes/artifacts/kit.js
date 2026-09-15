@@ -469,7 +469,7 @@ const LANG_REGISTRY = Object.create(null);
 export function registerLang(name, fn) {
   LANG_REGISTRY[name] = fn;
 }
-const highlight = (line, lang) => LANG_REGISTRY[lang] ? LANG_REGISTRY[lang](line) : highlightCode(line, lang);
+export const highlight = (line, lang) => LANG_REGISTRY[lang] ? LANG_REGISTRY[lang](line) : highlightCode(line, lang);
 
 // A curated-asm line beginning with "…" is an elision row (muted, non-mappable).
 const isElision = ln => /^\s*…/.test(ln);
