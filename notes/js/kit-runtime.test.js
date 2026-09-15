@@ -179,3 +179,32 @@ test("Python tokenizer correctly tokenizes Python code", async () => {
   assert.notStrictEqual(firstToken.props.className, "mm-tok-com",
     "// must NOT be treated as a comment in Python");
 });
+
+test("Python tokenizer preserves every source character", async () => {
+  const { highlight } = await import(pathToFileURL(kitPath));
+
+  // Every emitted token must preserve exactly the source text it represents.
+  const losslessSamples = [
+    '    """',
+    '"""one line doc"""',
+    "def foo(x):",
+    "# a comment",
+    "// not a comment in python",
+    's = "has a # inside"',
+    'f"hi {name}"',
+    "x = 7 // 2",
+    "@property",
+    "s = 'single'",
+    "it's unbalanced",
+  ];
+  for (const line of losslessSamples) {
+    const tokens = highlight(line, "python");
+    assert.ok(Array.isArray(tokens), "highlight must return an array of tokens");
+    const rendered = tokens.map((token) => {
+      assert.strictEqual(token.type, "span", "tokens must be span elements");
+      assert.strictEqual(token.children.length, 1, "each token must have one text child");
+      return token.children[0];
+    }).join("");
+    assert.strictEqual(rendered, line, `Python highlighting must preserve ${JSON.stringify(line)}`);
+  }
+});
