@@ -2,6 +2,11 @@ import React from "react";
 import { Button, useTheme } from "@kit";
 import { seededShuffle, gradeOrder, hashSeed } from "@course/seq-order";
 
+// Promoted to the global kit so CSCI-UA-473 can share them. Re-exported here so
+// this course's ~168 demos keep importing them from "@course" unchanged.
+export { DiagramSvg, diagramPalette, KnobBar, CompareCaption } from "@kit";
+import { DiagramSvg, diagramPalette, KnobBar, CompareCaption } from "@kit";
+
 /* ============================================================
    Shared textbook memory model for CSCI-UA-470.
    - MemoryModel: the canonical 4-segment diagram (Stack / Heap /
@@ -923,31 +928,6 @@ const CAPTION_ROWS = [
   ["intuition", "Intuition", "int"],
 ];
 
-/* Reusable interaction primitives (shared across scene types). See _shared.css.
-   KnobBar: manipulate-and-observe segmented controls. PredictGate + Verdict:
-   predict-then-reveal (neutral, no scoring). */
-export function KnobBar({ knobs, value, onChange }) {
-  return (
-    <div className="mm-knobs">
-      {knobs.map((k) => (
-        <div className="mm-knob" key={k.id}>
-          <span className="mm-knob__label">{k.label}</span>
-          <div className="mm-knob__opts" role="group" aria-label={k.label}>
-            {k.options.map((o) => {
-              const on = value[k.id] === o.value;
-              return (
-                <button key={String(o.value)} type="button" aria-pressed={on}
-                  className={"mm-knob__opt" + (on ? " mm-knob__opt--on" : "")}
-                  onClick={() => onChange(k.id, o.value)}>{o.label}</button>
-              );
-            })}
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
 export function PredictGate({ predict, onAnswer }) {
   return (
     <div className="mm-predict">
@@ -1283,16 +1263,6 @@ export function MemoryDualScene({ title, left, right }) {
   );
 }
 
-/* ---- concept-diagram primitives (shared SVG building blocks) ----
-   Extracted from diamond-chart so every concept diagram (pipeline, class
-   relations, the diamond) shares one box/edge/arrow/palette styling. */
-export const diagramPalette = (i) => ([
-  { bg: "--seg-stack-bg",  bd: "--seg-stack-bd",  fg: "--seg-stack-fg"  },
-  { bg: "--seg-heap-bg",   bd: "--seg-heap-bd",   fg: "--seg-heap-fg"   },
-  { bg: "--seg-global-bg", bd: "--seg-global-bd", fg: "--seg-global-fg" },
-  { bg: "--seg-code-bg",   bd: "--seg-code-bd",   fg: "--seg-code-fg"   },
-])[((i % 4) + 4) % 4];
-
 // a rounded, theme-coloured box centred at (cx,cy); `sub` picks the palette role,
 // optional `note` is a small second line.
 export function DiagramBox({ cx, cy, w = 96, h = 36, label, note, sub = 0, neutral }) {
@@ -1325,62 +1295,6 @@ export function DiagramEdge({ from, to, label, dashed }) {
           style={{ fill: "var(--mm-muted)", fontSize: 10, fontStyle: "italic" }}>{label}</text>
       ) : null}
     </g>
-  );
-}
-
-// the <svg> wrapper that defines the shared arrowhead marker once.
-export function DiagramSvg({ viewBox, ariaLabel, maxWidth = 640, children }) {
-  return (
-    <svg viewBox={viewBox} role="img" aria-label={ariaLabel}
-      style={{ width: "100%", height: "auto", maxWidth, display: "block", margin: "0 auto",
-        fontFamily: 'ui-monospace, "JetBrains Mono", Menlo, monospace' }}>
-      <defs>
-        <marker id="dia-arrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5"
-          orient="auto" markerUnits="userSpaceOnUse">
-          <path d="M1,1 L8,4.5 L1,8 Z" style={{ fill: "var(--mm-muted)" }} />
-        </marker>
-        {/* UML relations: a hollow triangle (filled with the card bg so the line
-            stops at its base) pointing at the supertype. COLOUR encodes the
-            relation — extends (inheritance, indigo) vs implements (interface, teal);
-            the boxes themselves stay neutral. */}
-        <marker id="dia-extends" markerWidth="15" markerHeight="13" refX="12.5" refY="6.5"
-          orient="auto" markerUnits="userSpaceOnUse">
-          <path d="M1,1 L12.5,6.5 L1,12 Z"
-            style={{ fill: "var(--mm-cell-bg)", stroke: "var(--mm-ptr)", strokeWidth: 1.4 }} />
-        </marker>
-        <marker id="dia-implements" markerWidth="15" markerHeight="13" refX="12.5" refY="6.5"
-          orient="auto" markerUnits="userSpaceOnUse">
-          <path d="M1,1 L12.5,6.5 L1,12 Z"
-            style={{ fill: "var(--mm-cell-bg)", stroke: "var(--mm-ref)", strokeWidth: 1.4 }} />
-        </marker>
-        {/* Use-case dependency arrowheads: an OPEN V (not filled) at the target,
-            coloured to name the relation — «include» (teal) vs «extend» (amber).
-            The dashed dependency line meeting it is drawn in the same colour. */}
-        <marker id="dia-open-inc" markerWidth="13" markerHeight="12" refX="9.5" refY="5.5"
-          orient="auto" markerUnits="userSpaceOnUse">
-          <path d="M1.5,1 L9.5,5.5 L1.5,10" style={{ fill: "none", stroke: "var(--mm-ref)", strokeWidth: 1.5 }} />
-        </marker>
-        <marker id="dia-open-ext" markerWidth="13" markerHeight="12" refX="9.5" refY="5.5"
-          orient="auto" markerUnits="userSpaceOnUse">
-          <path d="M1.5,1 L9.5,5.5 L1.5,10" style={{ fill: "none", stroke: "var(--mm-hl)", strokeWidth: 1.5 }} />
-        </marker>
-        {/* Class-diagram whole/part diamonds. These sit at the SOURCE end (the
-            "whole"), not the target — hollow for aggregation (the part can outlive
-            the whole), filled for composition (the part dies with it). refX=0 so
-            the diamond's tip lands on the line's start point. */}
-        <marker id="dia-diamond-hollow" markerWidth="16" markerHeight="11" refX="0" refY="5.5"
-          orient="auto" markerUnits="userSpaceOnUse">
-          <path d="M0,5.5 L7.5,1 L15,5.5 L7.5,10 Z"
-            style={{ fill: "var(--mm-cell-bg)", stroke: "var(--mm-muted)", strokeWidth: 1.4 }} />
-        </marker>
-        <marker id="dia-diamond-filled" markerWidth="16" markerHeight="11" refX="0" refY="5.5"
-          orient="auto" markerUnits="userSpaceOnUse">
-          <path d="M0,5.5 L7.5,1 L15,5.5 L7.5,10 Z"
-            style={{ fill: "var(--mm-muted)", stroke: "var(--mm-muted)", strokeWidth: 1.4 }} />
-        </marker>
-      </defs>
-      {children}
-    </svg>
   );
 }
 
@@ -3549,20 +3463,6 @@ export function CompareTitles({ cols = [] }) {
           <span className={"mm-cap-tag mm-cap-tag--" + (c.kind || "cpp")}>{c.tag}</span> {c.text}
         </span>
       ))}
-    </div>
-  );
-}
-
-export function CompareCaption({ cols = [], punch }) {
-  return (
-    <div className="mm-compare" style={{ "--cols": cols.length }}>
-      {cols.map((c, i) => (
-        <div className="mm-compare__col" key={i}>
-          <span className={"mm-compare__tag mm-cap-tag mm-cap-tag--" + (c.kind || "cpp")}>{c.tag}</span>
-          {c.children}
-        </div>
-      ))}
-      {punch ? <p className="mm-compare__punch">{punch}</p> : null}
     </div>
   );
 }

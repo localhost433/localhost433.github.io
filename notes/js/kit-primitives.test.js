@@ -6,12 +6,34 @@ const path = require("node:path");
 
 const KIT = path.join(__dirname, "..", "courses", "CSCI-UA-470", "demos", "_kit.jsx");
 const src = fs.readFileSync(KIT, "utf8");
+const GKIT = path.join(__dirname, "..", "artifacts", "kit.jsx");
+const gsrc = fs.readFileSync(GKIT, "utf8");
+
+// Promoted to the global kit; 470 re-exports them. Every promoted component is
+// guarded on both sides: it must exist in kit.jsx AND be re-exported by 470.
+// diagramPalette is an `export const`, so the list carries full signature
+// prefixes rather than assuming the `function` keyword.
+const GLOBAL_EXPECTED = [
+  "export function KnobBar",
+  "export function DiagramSvg",
+  "export function CompareCaption",
+  "export const diagramPalette",
+];
+for (const sig of GLOBAL_EXPECTED) {
+  const name = sig.replace(/^export (function|const) /, "");
+  test(`kit.jsx exports: ${sig}`, () => {
+    assert.ok(gsrc.includes(sig), `missing promoted export: ${sig}`);
+  });
+  test(`_kit.jsx re-exports: ${name}`, () => {
+    assert.ok(new RegExp(`export\\s*\\{[^}]*\\b${name}\\b[^}]*\\}\\s*from\\s*["']@kit["']`).test(src),
+      `470 kit must re-export ${name} from @kit`);
+  });
+}
 
 // The four-primitive foundation must stay exported from the kit. This guards
 // against accidental deletion/rename during refactors. (Knob = KnobBar,
 // Predict = PredictGate + Verdict, Why = WhyDot + WhyNotes. Fade is deferred.)
 const EXPECTED = [
-  "export function KnobBar",
   "export function PredictGate",
   "export function Verdict",
   "export function WhyDot",

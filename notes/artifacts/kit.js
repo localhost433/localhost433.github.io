@@ -221,3 +221,198 @@ export function Stepper({
     onClick: () => onChange(clamp(value + step))
   }, "+"));
 }
+
+/* Reusable interaction primitives (shared across scene types). See _shared.css.
+   KnobBar: manipulate-and-observe segmented controls. PredictGate + Verdict:
+   predict-then-reveal (neutral, no scoring). */
+export function KnobBar({
+  knobs,
+  value,
+  onChange
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "mm-knobs"
+  }, knobs.map(k => /*#__PURE__*/React.createElement("div", {
+    className: "mm-knob",
+    key: k.id
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "mm-knob__label"
+  }, k.label), /*#__PURE__*/React.createElement("div", {
+    className: "mm-knob__opts",
+    role: "group",
+    "aria-label": k.label
+  }, k.options.map(o => {
+    const on = value[k.id] === o.value;
+    return /*#__PURE__*/React.createElement("button", {
+      key: String(o.value),
+      type: "button",
+      "aria-pressed": on,
+      className: "mm-knob__opt" + (on ? " mm-knob__opt--on" : ""),
+      onClick: () => onChange(k.id, o.value)
+    }, o.label);
+  })))));
+}
+
+/* ---- concept-diagram primitives (shared SVG building blocks) ----
+   Extracted from diamond-chart so every concept diagram (pipeline, class
+   relations, the diamond) shares one box/edge/arrow/palette styling. */
+export const diagramPalette = i => [{
+  bg: "--seg-stack-bg",
+  bd: "--seg-stack-bd",
+  fg: "--seg-stack-fg"
+}, {
+  bg: "--seg-heap-bg",
+  bd: "--seg-heap-bd",
+  fg: "--seg-heap-fg"
+}, {
+  bg: "--seg-global-bg",
+  bd: "--seg-global-bd",
+  fg: "--seg-global-fg"
+}, {
+  bg: "--seg-code-bg",
+  bd: "--seg-code-bd",
+  fg: "--seg-code-fg"
+}][(i % 4 + 4) % 4];
+
+// the <svg> wrapper that defines the shared arrowhead marker once.
+export function DiagramSvg({
+  viewBox,
+  ariaLabel,
+  maxWidth = 640,
+  children
+}) {
+  return /*#__PURE__*/React.createElement("svg", {
+    viewBox: viewBox,
+    role: "img",
+    "aria-label": ariaLabel,
+    style: {
+      width: "100%",
+      height: "auto",
+      maxWidth,
+      display: "block",
+      margin: "0 auto",
+      fontFamily: 'ui-monospace, "JetBrains Mono", Menlo, monospace'
+    }
+  }, /*#__PURE__*/React.createElement("defs", null, /*#__PURE__*/React.createElement("marker", {
+    id: "dia-arrow",
+    markerWidth: "9",
+    markerHeight: "9",
+    refX: "7",
+    refY: "4.5",
+    orient: "auto",
+    markerUnits: "userSpaceOnUse"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M1,1 L8,4.5 L1,8 Z",
+    style: {
+      fill: "var(--mm-muted)"
+    }
+  })), /*#__PURE__*/React.createElement("marker", {
+    id: "dia-extends",
+    markerWidth: "15",
+    markerHeight: "13",
+    refX: "12.5",
+    refY: "6.5",
+    orient: "auto",
+    markerUnits: "userSpaceOnUse"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M1,1 L12.5,6.5 L1,12 Z",
+    style: {
+      fill: "var(--mm-cell-bg)",
+      stroke: "var(--mm-ptr)",
+      strokeWidth: 1.4
+    }
+  })), /*#__PURE__*/React.createElement("marker", {
+    id: "dia-implements",
+    markerWidth: "15",
+    markerHeight: "13",
+    refX: "12.5",
+    refY: "6.5",
+    orient: "auto",
+    markerUnits: "userSpaceOnUse"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M1,1 L12.5,6.5 L1,12 Z",
+    style: {
+      fill: "var(--mm-cell-bg)",
+      stroke: "var(--mm-ref)",
+      strokeWidth: 1.4
+    }
+  })), /*#__PURE__*/React.createElement("marker", {
+    id: "dia-open-inc",
+    markerWidth: "13",
+    markerHeight: "12",
+    refX: "9.5",
+    refY: "5.5",
+    orient: "auto",
+    markerUnits: "userSpaceOnUse"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M1.5,1 L9.5,5.5 L1.5,10",
+    style: {
+      fill: "none",
+      stroke: "var(--mm-ref)",
+      strokeWidth: 1.5
+    }
+  })), /*#__PURE__*/React.createElement("marker", {
+    id: "dia-open-ext",
+    markerWidth: "13",
+    markerHeight: "12",
+    refX: "9.5",
+    refY: "5.5",
+    orient: "auto",
+    markerUnits: "userSpaceOnUse"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M1.5,1 L9.5,5.5 L1.5,10",
+    style: {
+      fill: "none",
+      stroke: "var(--mm-hl)",
+      strokeWidth: 1.5
+    }
+  })), /*#__PURE__*/React.createElement("marker", {
+    id: "dia-diamond-hollow",
+    markerWidth: "16",
+    markerHeight: "11",
+    refX: "0",
+    refY: "5.5",
+    orient: "auto",
+    markerUnits: "userSpaceOnUse"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M0,5.5 L7.5,1 L15,5.5 L7.5,10 Z",
+    style: {
+      fill: "var(--mm-cell-bg)",
+      stroke: "var(--mm-muted)",
+      strokeWidth: 1.4
+    }
+  })), /*#__PURE__*/React.createElement("marker", {
+    id: "dia-diamond-filled",
+    markerWidth: "16",
+    markerHeight: "11",
+    refX: "0",
+    refY: "5.5",
+    orient: "auto",
+    markerUnits: "userSpaceOnUse"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M0,5.5 L7.5,1 L15,5.5 L7.5,10 Z",
+    style: {
+      fill: "var(--mm-muted)",
+      stroke: "var(--mm-muted)",
+      strokeWidth: 1.4
+    }
+  }))), children);
+}
+export function CompareCaption({
+  cols = [],
+  punch
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "mm-compare",
+    style: {
+      "--cols": cols.length
+    }
+  }, cols.map((c, i) => /*#__PURE__*/React.createElement("div", {
+    className: "mm-compare__col",
+    key: i
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "mm-compare__tag mm-cap-tag mm-cap-tag--" + (c.kind || "cpp")
+  }, c.tag), c.children)), punch ? /*#__PURE__*/React.createElement("p", {
+    className: "mm-compare__punch"
+  }, punch) : null);
+}
