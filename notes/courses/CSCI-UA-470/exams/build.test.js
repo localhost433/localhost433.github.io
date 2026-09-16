@@ -1,6 +1,6 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const { buildOne, engineLibSource } = require("./build.js");
+const { buildOne, engineLibSource } = require("../../../../scripts/exams/build.js");
 
 // A minimal, self-contained exam so this test does NOT depend on data/*.js
 // (those are created in Task 6). buildOne reads the real shell + engine files.

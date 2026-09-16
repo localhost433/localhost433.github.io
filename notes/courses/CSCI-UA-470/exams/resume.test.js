@@ -1,6 +1,6 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const R = require("./engine/resume.js");
+const R = require("../../../../scripts/exams/engine/resume.js");
 
 const state = { current: 3, remaining: 1800, work: [
   { qi: 5, optOrder: [1,0,2,3], answer: 2, flagged: true },

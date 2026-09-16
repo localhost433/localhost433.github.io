@@ -1,7 +1,7 @@
 // notes/courses/CSCI-UA-470/exams/lib.test.js
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const { validateExam, inlineExam } = require("./lib.js");
+const { validateExam, inlineExam } = require("../../../../scripts/exams/lib.js");
 
 const goodQ = { type: "concept", prose: true, prompt: "P?", options: [
   { text: "a", correct: true, why: "y" }, { text: "b", correct: false, why: "n" } ] };

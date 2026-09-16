@@ -7,7 +7,7 @@
     "dev:vercel": "vercel dev",
     "build": "echo \"No build step required for a static site\"",
     "build:artifacts": "node scripts/build-artifacts.js",
-    "build:exams": "node notes/courses/CSCI-UA-470/exams/build.js",
+    "build:exams": "node scripts/exams/build.js",
     "build:sitemap": "node scripts/build-sitemap.js",
     "check:bytecode": "node scripts/check-bytecode.js",
     "test": "node scripts/check-bytecode.js && node --test notes/js/*.test.js notes/courses/CSCI-UA-470/exams/*.test.js notes/courses/*/demos/*.test.js"

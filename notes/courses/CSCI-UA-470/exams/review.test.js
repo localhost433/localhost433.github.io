@@ -1,6 +1,6 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const V = require("./engine/review.js");
+const V = require("../../../../scripts/exams/engine/review.js");
 
 const QUESTIONS = [
   { options:[{text:"a",correct:true},{text:"b",correct:false}] },   // qi 0, correct display-idx depends on optOrder
