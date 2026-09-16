@@ -185,6 +185,8 @@ for $b$ - the bias is learned by the same line of code as every weight. The cost
 the input space is now $d+1$ dimensional, and the separating surface in that space passes
 through the origin.
 
+Use the figure to see what bias absorption does geometrically.
+
 ```artifact src=demos/bias-absorption-3d.jsx
 ```
 
@@ -202,6 +204,8 @@ The two cases collapse into one line (slide 42):
 $$
 \boxed{\,w(t+1) \leftarrow w(t) + y(t)\,x(t)\,}
 $$
+
+Use the figure to step through the update and watch what changes.
 
 ```artifact src=demos/perceptron-2d.jsx
 ```
@@ -270,6 +274,8 @@ the course is a different bet about which structure the world has.
 
 ```artifact src=demos/nfl-boolean-cube.jsx
 ```
+
+Use the figure to see how the hypothesis set changes the votes.
 
 ## Learning paradigms
 
@@ -350,37 +356,38 @@ of these are answered in this course:
 |---|---|
 | $f$ | the unknown target function $\mathcal X \to \mathcal Y$; never observed, only sampled |
 | $D$ | $\{(x^i,y^i)\}_{i=1}^N$, assumed i.i.d.; the only window onto $f$ |
-| $\mathbb H$ | the hypothesis set - candidate functions, chosen *before* seeing data |
+| $\mathbb H$ | the hypothesis set of candidate functions, chosen *before* seeing data |
 | $\mathcal A$ | the learning algorithm; sees $D$ and $\mathbb H$, never $f$ |
 | $g$ | the final hypothesis, $g \approx f$ |
-| Parametric vs. non-parametric | whether the parameter count depends on $N$ - *not* whether parameters exist |
-| "Linear model" | linear in the **parameters**, not in the inputs |
-| One-hot | avoids imposing a false ordering and false spacing on categorical levels |
+| Parametric vs. non-parametric | whether parameter count depends on $N$, not whether parameters exist |
+| "Linear model" | linear in the **parameters**, not the inputs |
+| One-hot | avoids false ordering and spacing on categorical levels |
 | Perceptron | $h(x) = \operatorname{sign}(w^{\mathsf T}x + b)$; $w^{\mathsf T}x + b = 0$ is a hyperplane with normal $w$ |
-| Bias absorption | prepend 1 to $x$, prepend $b$ to $w$; one update rule covers the bias |
+| Bias absorption | prepend 1 to $x$ and $b$ to $w$; one update rule covers the bias |
 | PLA update | $w(t+1) \leftarrow w(t) + y(t)x(t)$, applied to a **misclassified** example |
-| PLA guarantee | terminates **iff** the data is linearly separable; says nothing about *which* separator |
+| PLA guarantee | terminates **iff** data is linearly separable; says nothing about *which* separator |
 | Why the update works | $y w^{\mathsf T}x$ increases by $\|x\|^2$ on that example - locally, not globally |
 | Inductive bias | structure posited to hold in both seen and unseen data |
-| No Free Lunch | an inductive bias that works well on one set of targets works badly on the complement |
+| No Free Lunch | an inductive bias that works well on one target set works badly on its complement |
 | The slogan | there is no machine learning without assumptions |
 | Paradigms | separated by *where supervision comes from*: annotator / nowhere / the data itself / another task / the environment |
 
 ## Practice
 
-On paper, cold, before quiz 1:
+Six questions on the figures above and on the two gaps the note flags as quiz-shaped.
 
-1. Reproduce the components figure from memory, all five boxes labeled, and say in one line
-   what $\mathcal A$ can and cannot see.
-2. Re-derive bias absorption: start from $\operatorname{sign}(\sum w_i x_i + b)$ and reach
-   $\operatorname{sign}(w^{\mathsf T}x)$, stating what changed about $\mathcal X$.
-3. Re-derive the one-step PLA improvement above without looking, and then state precisely
-   what it does *not* prove.
-4. Take a 2D dataset of four points, two per class, initialize $w = [0,0,0]$, and run PLA
-   by hand until it converges. Then perturb one label to make the set non-separable and
-   confirm the loop cannot terminate.
-5. Classify five described scenarios by paradigm, forcing yourself to name the supervision
-   source rather than pattern-matching on the application domain.
+```artifact src=demos/practice-03.jsx
+```
+
+Then two things to try in the figures themselves, each under a minute:
+
+- **Perceptron, "Empty · click to add points".** Place four points, two per class, and
+  step until it converges. Watch $y\,w^{\mathsf T}x$ climb by $\|x\|^2$ on each update,
+  and watch the misclassified count go *up* on some steps - that is convergence failing
+  to be monotone, which is the thing the four-line argument does not promise.
+- **Cube, "Linear threshold (104)".** Label a few vertices, then switch the hypothesis
+  set. Watch $|\mathcal H|$ drop and the votes at unseen vertices move off $0.50$. The
+  bias is doing the work; nothing about the data changed.
 
 ---
 
