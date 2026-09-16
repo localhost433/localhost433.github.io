@@ -110,9 +110,8 @@ export function Stepper({ value, onChange, step = 1, min, max, className, ...pro
   );
 }
 
-/* Reusable interaction primitives (shared across scene types). See _shared.css.
-   KnobBar: manipulate-and-observe segmented controls. PredictGate + Verdict:
-   predict-then-reveal (neutral, no scoring). */
+/* Reusable interaction primitives (shared across scene types). KnobBar's .mm-*
+   rules live in notes/courses/CSCI-UA-470/demos/_shared.css. */
 export function KnobBar({ knobs, value, onChange }) {
   return (
     <div className="mm-knobs">

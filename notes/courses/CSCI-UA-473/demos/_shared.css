@@ -1,2 +1,2 @@
-/* CSCI-UA-473 artifact styles. The shared component styles come from
-   notes/artifacts/theme.css; put only 473-specific rules here. */
+/* Non-470 courses may use only the .ui-* tier from notes/artifacts/theme.css;
+   .mm-* components have no styles outside CSCI-UA-470/demos/_shared.css. */

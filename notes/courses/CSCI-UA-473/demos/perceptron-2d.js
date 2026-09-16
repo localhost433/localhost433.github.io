@@ -1,45 +1,10 @@
 /* AUTO-GENERATED from perceptron-2d.jsx by `npm run build:artifacts`. Do not edit. */
 import React from "react";
 import { useClassColors } from "@course";
-import { KnobBar } from "@kit";
-import { dot, misclassified, perceptronStep, generate } from "@course/logic";
+import { misclassified, perceptronStep, generate } from "@course/logic";
 const L = 5,
   S = 340,
   CAP = 1500;
-const KNOBS = [{
-  id: "kind",
-  label: "data",
-  options: [{
-    value: "sep",
-    label: "Separable · 20 points"
-  }, {
-    value: "non",
-    label: "Non-separable · planted contradiction"
-  }, {
-    value: "empty",
-    label: "Empty · click to add points"
-  }]
-}, {
-  id: "addCls",
-  label: "click adds",
-  options: [{
-    value: 1,
-    label: "+1"
-  }, {
-    value: -1,
-    label: "−1"
-  }]
-}, {
-  id: "pickMode",
-  label: "pick",
-  options: [{
-    value: "rand",
-    label: "Random misclassified"
-  }, {
-    value: "first",
-    label: "Lowest index"
-  }]
-}];
 const X = a => (a + L) / (2 * L) * S;
 const Y = b => S - (b + L) / (2 * L) * S;
 function draw(cv, hc, state) {
@@ -238,12 +203,6 @@ export default function PerceptronDemo() {
     setLast(null);
     setCapHit(false);
   };
-  const onKnob = (id, value) => {
-    if (id === "kind") {
-      setKind(value);
-      resetData(value);
-    } else if (id === "addCls") setAddCls(value);else if (id === "pickMode") setPickMode(value);
-  };
   const onCanvasClick = e => {
     const r = cv.current.getBoundingClientRect();
     const a = Math.round((e.clientX - r.left) / r.width * 2 * L - L);
@@ -274,15 +233,76 @@ export default function PerceptronDemo() {
       gap: "8px",
       color: C.fg
     }
-  }, /*#__PURE__*/React.createElement(KnobBar, {
-    knobs: KNOBS,
-    value: {
-      kind,
-      addCls,
-      pickMode
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      flexWrap: "wrap",
+      gap: "16px",
+      alignItems: "flex-start"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    role: "group",
+    "aria-label": "data",
+    style: rowStyle
+  }, /*#__PURE__*/React.createElement("span", {
+    style: labelStyle(C)
+  }, "data"), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    "aria-pressed": kind === "sep",
+    onClick: () => {
+      setKind("sep");
+      resetData("sep");
     },
-    onChange: onKnob
-  }), /*#__PURE__*/React.createElement("div", {
+    style: buttonStyle(C, kind === "sep")
+  }, "Separable \xB7 20 points"), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    "aria-pressed": kind === "non",
+    onClick: () => {
+      setKind("non");
+      resetData("non");
+    },
+    style: buttonStyle(C, kind === "non")
+  }, "Non-separable \xB7 planted contradiction"), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    "aria-pressed": kind === "empty",
+    onClick: () => {
+      setKind("empty");
+      resetData("empty");
+    },
+    style: buttonStyle(C, kind === "empty")
+  }, "Empty \xB7 click to add points")), /*#__PURE__*/React.createElement("div", {
+    role: "group",
+    "aria-label": "click adds",
+    style: rowStyle
+  }, /*#__PURE__*/React.createElement("span", {
+    style: labelStyle(C)
+  }, "click adds"), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    "aria-pressed": addCls === 1,
+    onClick: () => setAddCls(1),
+    style: buttonStyle(C, addCls === 1)
+  }, "+1"), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    "aria-pressed": addCls === -1,
+    onClick: () => setAddCls(-1),
+    style: buttonStyle(C, addCls === -1)
+  }, "\u22121")), /*#__PURE__*/React.createElement("div", {
+    role: "group",
+    "aria-label": "pick",
+    style: rowStyle
+  }, /*#__PURE__*/React.createElement("span", {
+    style: labelStyle(C)
+  }, "pick"), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    "aria-pressed": pickMode === "rand",
+    onClick: () => setPickMode("rand"),
+    style: buttonStyle(C, pickMode === "rand")
+  }, "Random misclassified"), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    "aria-pressed": pickMode === "first",
+    onClick: () => setPickMode("first"),
+    style: buttonStyle(C, pickMode === "first")
+  }, "Lowest index"))), /*#__PURE__*/React.createElement("div", {
     style: {
       display: "flex",
       flexWrap: "wrap",
@@ -374,15 +394,23 @@ export default function PerceptronDemo() {
     }
   }, note)))));
 }
-function buttonStyle(C) {
+const rowStyle = {
+  display: "flex",
+  flexWrap: "wrap",
+  gap: "8px",
+  alignItems: "center",
+  margin: "0 0 2px"
+};
+function buttonStyle(C, active) {
   return {
-    border: `1px solid ${C.border}`,
-    background: C.bg,
-    color: C.fg,
+    background: active ? C.border : C.bg,
+    border: `1px solid ${active ? C.fg : C.border}`,
     borderRadius: "6px",
+    color: C.fg,
     padding: "6px 10px",
     cursor: "pointer",
-    font: "inherit"
+    font: "inherit",
+    fontWeight: active ? 500 : 400
   };
 }
 function readoutStyle(C) {
