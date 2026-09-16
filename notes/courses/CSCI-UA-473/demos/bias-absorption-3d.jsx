@@ -1,16 +1,9 @@
 import React from "react";
 import { useClassColors } from "@course";
-import { KnobBar } from "@kit";
+import { Slider } from "@kit";
 import { LIFT_POINTS, clipHalfPlane } from "@course/logic";
 
 const H = 380, SQ = 2;
-const WEIGHT_VALUES = [-3, -2, -1, 0, 0.8, 0.9, 1, 2, 3];
-const WEIGHT_OPTIONS = WEIGHT_VALUES.map((v) => ({ value: v, label: v.toFixed(1) }));
-const KNOBS = [
-  { id: "b", label: "b", options: WEIGHT_OPTIONS },
-  { id: "w1", label: "w₁", options: WEIGHT_OPTIONS },
-  { id: "w2", label: "w₂", options: WEIGHT_OPTIONS },
-];
 
 // Rotate about the vertical, then tilt. Returns screen coordinates.
 // `cam` is the camera {cx, cy, s}; do NOT name it `C`, which is the colour
@@ -108,17 +101,14 @@ function draw(canvas, w, view, C) {
     g.fillStyle = C.fg; g.fillText("w", q[0] + 6, q[1] - 4);
   }
 
-  let m = 0;
   LIFT_POINTS.forEach((p) => {
     const s = p.y * f([p.a, p.b]), bad = s <= 0;
-    if (bad) m++;
     const point = proj(p.a, p.b, 1, cam, yaw, pitch), x = point[0], y = point[1];
     g.fillStyle = p.y > 0 ? C.pos : C.neg;
     if (p.y > 0) { g.beginPath(); g.arc(x, y, 5.5, 0, 2 * Math.PI); g.fill(); }
     else g.fillRect(x - 5, y - 5, 10, 10);
     if (bad) { g.strokeStyle = C.fg; g.lineWidth = 1.5; g.beginPath(); g.arc(x, y, 9, 0, 2 * Math.PI); g.stroke(); }
   });
-  return m;
 }
 
 const sg = (v) => (v < 0 ? " − " : " + ") + Math.abs(v).toFixed(1);
@@ -149,9 +139,9 @@ export default function BiasAbsorption() {
     return () => observer.disconnect();
   }, [w, view, C]);
 
-  const onKnob = (id, value) => {
-    const k = id === "b" ? 0 : id === "w1" ? 1 : 2;
-    setW((old) => old.map((v, i) => i === k ? value : v));
+  const onSlider = (index, e) => {
+    const value = Number(e.target.value);
+    setW((old) => old.map((v, i) => i === index ? value : v));
   };
   const resetView = () => setView({ yaw: -0.7, pitch: 0.42 });
   const topView = () => setView({ yaw: 0, pitch: Math.PI / 2 });
@@ -175,9 +165,24 @@ export default function BiasAbsorption() {
     <>
       <h2 className="sr-only">3D view of bias absorption: 2D inputs lifted onto the plane x0 = 1 and separated by a plane through the origin whose normal is w = [b, w1, w2].</h2>
       <div style={{ display: "flex", flexDirection: "column", gap: "8px", color: C.fg }}>
-        <KnobBar knobs={KNOBS} value={{ b: w[0], w1: w[1], w2: w[2] }} onChange={onKnob} />
         <div style={{ display: "flex", flexWrap: "wrap", gap: "16px", alignItems: "flex-start", marginBottom: "8px" }}>
-          <div style={{ flex: "1", minWidth: "240px" }} />
+          <div style={{ flex: "1", minWidth: "240px" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "28px minmax(0, 1fr) 44px", gap: "8px", alignItems: "center", marginBottom: "6px", fontSize: "13px", color: C.muted }}>
+              <label htmlFor="bias-absorption-b">b</label>
+              <Slider id="bias-absorption-b" min={-3} max={3} step={0.1} value={w[0]} onChange={(e) => onSlider(0, e)} />
+              <span style={{ color: C.fg, fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace", textAlign: "right" }}>{w[0].toFixed(1)}</span>
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "28px minmax(0, 1fr) 44px", gap: "8px", alignItems: "center", marginBottom: "6px", fontSize: "13px", color: C.muted }}>
+              <label htmlFor="bias-absorption-w1">w₁</label>
+              <Slider id="bias-absorption-w1" min={-3} max={3} step={0.1} value={w[1]} onChange={(e) => onSlider(1, e)} />
+              <span style={{ color: C.fg, fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace", textAlign: "right" }}>{w[1].toFixed(1)}</span>
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "28px minmax(0, 1fr) 44px", gap: "8px", alignItems: "center", marginBottom: "6px", fontSize: "13px", color: C.muted }}>
+              <label htmlFor="bias-absorption-w2">w₂</label>
+              <Slider id="bias-absorption-w2" min={-3} max={3} step={0.1} value={w[2]} onChange={(e) => onSlider(2, e)} />
+              <span style={{ color: C.fg, fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace", textAlign: "right" }}>{w[2].toFixed(1)}</span>
+            </div>
+          </div>
           <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
             <button type="button" onClick={resetView} style={buttonStyle(C)}>↻ Reset view</button>
             <button type="button" onClick={topView} style={buttonStyle(C)}>View from above</button>

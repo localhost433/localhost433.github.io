@@ -1,28 +1,10 @@
 /* AUTO-GENERATED from bias-absorption-3d.jsx by `npm run build:artifacts`. Do not edit. */
 import React from "react";
 import { useClassColors } from "@course";
-import { KnobBar } from "@kit";
+import { Slider } from "@kit";
 import { LIFT_POINTS, clipHalfPlane } from "@course/logic";
 const H = 380,
   SQ = 2;
-const WEIGHT_VALUES = [-3, -2, -1, 0, 0.8, 0.9, 1, 2, 3];
-const WEIGHT_OPTIONS = WEIGHT_VALUES.map(v => ({
-  value: v,
-  label: v.toFixed(1)
-}));
-const KNOBS = [{
-  id: "b",
-  label: "b",
-  options: WEIGHT_OPTIONS
-}, {
-  id: "w1",
-  label: "w₁",
-  options: WEIGHT_OPTIONS
-}, {
-  id: "w2",
-  label: "w₂",
-  options: WEIGHT_OPTIONS
-}];
 
 // Rotate about the vertical, then tilt. Returns screen coordinates.
 // `cam` is the camera {cx, cy, s}; do NOT name it `C`, which is the colour
@@ -152,11 +134,9 @@ function draw(canvas, w, view, C) {
     g.fillStyle = C.fg;
     g.fillText("w", q[0] + 6, q[1] - 4);
   }
-  let m = 0;
   LIFT_POINTS.forEach(p => {
     const s = p.y * f([p.a, p.b]),
       bad = s <= 0;
-    if (bad) m++;
     const point = proj(p.a, p.b, 1, cam, yaw, pitch),
       x = point[0],
       y = point[1];
@@ -174,7 +154,6 @@ function draw(canvas, w, view, C) {
       g.stroke();
     }
   });
-  return m;
 }
 const sg = v => (v < 0 ? " − " : " + ") + Math.abs(v).toFixed(1);
 function buttonStyle(C) {
@@ -214,9 +193,9 @@ export default function BiasAbsorption() {
     observer.observe(canvas);
     return () => observer.disconnect();
   }, [w, view, C]);
-  const onKnob = (id, value) => {
-    const k = id === "b" ? 0 : id === "w1" ? 1 : 2;
-    setW(old => old.map((v, i) => i === k ? value : v));
+  const onSlider = (index, e) => {
+    const value = Number(e.target.value);
+    setW(old => old.map((v, i) => i === index ? value : v));
   };
   const resetView = () => setView({
     yaw: -0.7,
@@ -253,15 +232,7 @@ export default function BiasAbsorption() {
       gap: "8px",
       color: C.fg
     }
-  }, /*#__PURE__*/React.createElement(KnobBar, {
-    knobs: KNOBS,
-    value: {
-      b: w[0],
-      w1: w[1],
-      w2: w[2]
-    },
-    onChange: onKnob
-  }), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       display: "flex",
       flexWrap: "wrap",
@@ -274,7 +245,82 @@ export default function BiasAbsorption() {
       flex: "1",
       minWidth: "240px"
     }
-  }), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "grid",
+      gridTemplateColumns: "28px minmax(0, 1fr) 44px",
+      gap: "8px",
+      alignItems: "center",
+      marginBottom: "6px",
+      fontSize: "13px",
+      color: C.muted
+    }
+  }, /*#__PURE__*/React.createElement("label", {
+    htmlFor: "bias-absorption-b"
+  }, "b"), /*#__PURE__*/React.createElement(Slider, {
+    id: "bias-absorption-b",
+    min: -3,
+    max: 3,
+    step: 0.1,
+    value: w[0],
+    onChange: e => onSlider(0, e)
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: C.fg,
+      fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace",
+      textAlign: "right"
+    }
+  }, w[0].toFixed(1))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "grid",
+      gridTemplateColumns: "28px minmax(0, 1fr) 44px",
+      gap: "8px",
+      alignItems: "center",
+      marginBottom: "6px",
+      fontSize: "13px",
+      color: C.muted
+    }
+  }, /*#__PURE__*/React.createElement("label", {
+    htmlFor: "bias-absorption-w1"
+  }, "w\u2081"), /*#__PURE__*/React.createElement(Slider, {
+    id: "bias-absorption-w1",
+    min: -3,
+    max: 3,
+    step: 0.1,
+    value: w[1],
+    onChange: e => onSlider(1, e)
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: C.fg,
+      fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace",
+      textAlign: "right"
+    }
+  }, w[1].toFixed(1))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "grid",
+      gridTemplateColumns: "28px minmax(0, 1fr) 44px",
+      gap: "8px",
+      alignItems: "center",
+      marginBottom: "6px",
+      fontSize: "13px",
+      color: C.muted
+    }
+  }, /*#__PURE__*/React.createElement("label", {
+    htmlFor: "bias-absorption-w2"
+  }, "w\u2082"), /*#__PURE__*/React.createElement(Slider, {
+    id: "bias-absorption-w2",
+    min: -3,
+    max: 3,
+    step: 0.1,
+    value: w[2],
+    onChange: e => onSlider(2, e)
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: C.fg,
+      fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace",
+      textAlign: "right"
+    }
+  }, w[2].toFixed(1)))), /*#__PURE__*/React.createElement("div", {
     style: {
       display: "flex",
       flexDirection: "column",
