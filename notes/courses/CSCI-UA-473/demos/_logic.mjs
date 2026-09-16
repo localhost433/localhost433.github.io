@@ -106,3 +106,26 @@ export function analyzeNFL(D, linearOnly) {
     if (!(i in D)) vote[i] = C.length ? C.filter((m) => labelOf(m, i) === 1).length / C.length : null;
   return { H, C, vote };
 }
+
+/* ---- Bias absorption: lifting 2D inputs onto the x0 = 1 shelf ---- */
+
+// The fixed demo cloud, labelled by the plane 0.8*a - b + 0.9 = 0.
+export const LIFT_POINTS = [
+  [-1.5, 1.2], [-0.5, 1.5], [0.5, 1.8], [1.2, 1.5], [-1.7, 0.2], [-1.0, 0.6],
+  [0.0, -0.5], [1.0, -1.2], [-0.8, -1.5], [1.6, 0.3], [0.3, 0.4], [-1.8, -1.2],
+].map(([a, b]) => ({ a, b, y: 0.8 * a - b + 0.9 > 0 ? 1 : -1 }));
+
+// Sutherland-Hodgman: clip a convex polygon to the half-space f(p) >= 0, adding
+// the crossing points where an edge changes sign.
+export function clipHalfPlane(poly, f) {
+  const out = [];
+  for (let i = 0; i < poly.length; i++) {
+    const p = poly[i], q = poly[(i + 1) % poly.length], fp = f(p), fq = f(q);
+    if (fp >= 0) out.push(p);
+    if (fp * fq < 0) {
+      const t = fp / (fp - fq);
+      out.push(p.map((v, k) => v + t * (q[k] - v)));
+    }
+  }
+  return out;
+}

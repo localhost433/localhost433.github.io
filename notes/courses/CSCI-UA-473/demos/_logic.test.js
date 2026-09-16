@@ -128,3 +128,31 @@ test("parity is not a threshold function, so a linear H cannot fit it", () => {
   assert.strictEqual(L.analyzeNFL(D, true).C.length, 0);
   assert.strictEqual(L.analyzeNFL(D, false).C.length, 1);
 });
+
+test("clipping a square to a half-plane through its middle halves it", () => {
+  const sq = [[-1, -1, 1], [1, -1, 1], [1, 1, 1], [-1, 1, 1]];
+  const out = L.clipHalfPlane(sq, (p) => p[0]);   // keep x >= 0
+  assert.ok(out.every((p) => p[0] >= -1e-12), "no vertex may survive on the wrong side");
+  assert.strictEqual(out.length, 4, "a straight cut across a square yields a quad");
+});
+
+test("clipping keeps a fully-inside polygon whole and drops a fully-outside one", () => {
+  const sq = [[-1, -1, 1], [1, -1, 1], [1, 1, 1], [-1, 1, 1]];
+  assert.strictEqual(L.clipHalfPlane(sq, () => 1).length, 4);
+  assert.strictEqual(L.clipHalfPlane(sq, () => -1).length, 0);
+});
+
+test("the lift demo's fixed points are labelled by the plane that defines them", () => {
+  assert.strictEqual(L.LIFT_POINTS.length, 12);
+  for (const p of L.LIFT_POINTS)
+    assert.strictEqual(p.y, 0.8 * p.a - p.b + 0.9 > 0 ? 1 : -1);
+});
+
+test("bias absorption: the generating plane separates the lifted cloud perfectly", () => {
+  // w is the plane through the origin in lifted space whose trace on the x0 = 1
+  // shelf is the 2D line 0.8a - b + 0.9 = 0 that defined the labels. If bias
+  // absorption holds, that plane misclassifies nothing.
+  const w = [0.9, 0.8, -1];   // [b, w1, w2]
+  const wrong = L.LIFT_POINTS.filter((p) => p.y * (w[0] + w[1] * p.a + w[2] * p.b) <= 0);
+  assert.deepStrictEqual(wrong, [], "the generating plane must separate its own labels");
+});
