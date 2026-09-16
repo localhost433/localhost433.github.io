@@ -185,6 +185,9 @@ for $b$ - the bias is learned by the same line of code as every weight. The cost
 the input space is now $d+1$ dimensional, and the separating surface in that space passes
 through the origin.
 
+```artifact src=demos/bias-absorption-3d.jsx
+```
+
 ## The Perceptron Learning Algorithm
 
 *Slides 26-43,* built one line at a time. The complete algorithm:
@@ -199,6 +202,9 @@ The two cases collapse into one line (slide 42):
 $$
 \boxed{\,w(t+1) \leftarrow w(t) + y(t)\,x(t)\,}
 $$
+
+```artifact src=demos/perceptron-2d.jsx
+```
 
 The final hypothesis $h$ at convergence is the $g$ that best approximates $f$. Slide 43
 states the guarantee: **so long as the data is linearly separable, the algorithm will find
@@ -261,6 +267,9 @@ makes learning possible at all: restricting $\mathbb H$ is what lets finite data
 anything about unseen inputs, and no restriction is universally correct. So the hypothesis
 set is not a shortcut around the problem, it *is* the assumption, and every method later in
 the course is a different bet about which structure the world has.
+
+```artifact src=demos/nfl-boolean-cube.jsx
+```
 
 ## Learning paradigms
 
