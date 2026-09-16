@@ -1,5 +1,5 @@
 import React from "react";
-import { useClassColors } from "@course";
+import { useClassColors, buttonStyle, readoutStyle, labelStyle } from "@course";
 import { misclassified, perceptronStep, generate } from "@course/logic";
 
 const L = 5, S = 340, CAP = 1500;
@@ -219,18 +219,3 @@ export default function PerceptronDemo() {
 }
 
 const rowStyle = { display: "flex", flexWrap: "wrap", gap: "8px", alignItems: "center", margin: "0 0 2px" };
-
-function buttonStyle(C, active) {
-  return { background: active ? C.border : C.bg, border: `1px solid ${active ? C.fg : C.border}`,
-    borderRadius: "6px", color: C.fg, padding: "6px 10px", cursor: "pointer", font: "inherit",
-    fontWeight: active ? 500 : 400 };
-}
-
-function readoutStyle(C) {
-  return { margin: "0 0 6px", color: C.muted, fontSize: "13px", lineHeight: 1.5,
-    fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace" };
-}
-
-function labelStyle(C) {
-  return { color: C.muted, fontSize: "13px" };
-}

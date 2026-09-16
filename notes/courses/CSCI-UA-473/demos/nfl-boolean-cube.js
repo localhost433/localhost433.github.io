@@ -1,6 +1,6 @@
 /* AUTO-GENERATED from nfl-boolean-cube.jsx by `npm run build:artifacts`. Do not edit. */
 import React from "react";
-import { useClassColors } from "@course";
+import { useClassColors, buttonStyle, labelStyle } from "@course";
 import { VERTICES, analyzeNFL } from "@course/logic";
 const SX = v => 70 + 170 * v[0] + 80 * v[1];
 const SY = v => 270 - 170 * v[2] - 60 * v[1];
@@ -296,18 +296,6 @@ const rowStyle = {
   alignItems: "center",
   margin: "0 0 2px"
 };
-function buttonStyle(C, active) {
-  return {
-    background: active ? C.border : C.bg,
-    border: `1px solid ${active ? C.fg : C.border}`,
-    borderRadius: "6px",
-    color: C.fg,
-    padding: "6px 10px",
-    cursor: "pointer",
-    font: "inherit",
-    fontWeight: active ? 500 : 400
-  };
-}
 function selectStyle(C) {
   return {
     background: C.bg,
@@ -316,11 +304,5 @@ function selectStyle(C) {
     color: C.fg,
     padding: "6px 10px",
     font: "inherit"
-  };
-}
-function labelStyle(C) {
-  return {
-    color: C.muted,
-    fontSize: "13px"
   };
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { useClassColors } from "@course";
+import { useClassColors, buttonStyle, readoutStyle } from "@course";
 import { Slider } from "@kit";
 import { LIFT_POINTS, clipHalfPlane } from "@course/logic";
 
@@ -112,16 +112,6 @@ function draw(canvas, w, view, C) {
 }
 
 const sg = (v) => (v < 0 ? " − " : " + ") + Math.abs(v).toFixed(1);
-
-function buttonStyle(C) {
-  return { border: `1px solid ${C.border}`, background: C.bg, color: C.fg,
-    borderRadius: "6px", padding: "6px 10px", cursor: "pointer", font: "inherit" };
-}
-
-function readoutStyle(C) {
-  return { color: C.muted, fontSize: "13px", lineHeight: 1.6,
-    fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace", margin: "8px 0 0" };
-}
 
 export default function BiasAbsorption() {
   const C = useClassColors();
