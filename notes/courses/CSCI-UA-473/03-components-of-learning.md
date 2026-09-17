@@ -272,10 +272,10 @@ anything about unseen inputs, and no restriction is universally correct. So the 
 set is not a shortcut around the problem, it *is* the assumption, and every method later in
 the course is a different bet about which structure the world has.
 
+Use the figure to see how the hypothesis set changes the votes.
+
 ```artifact src=demos/nfl-boolean-cube.jsx
 ```
-
-Use the figure to see how the hypothesis set changes the votes.
 
 ## Learning paradigms
 
