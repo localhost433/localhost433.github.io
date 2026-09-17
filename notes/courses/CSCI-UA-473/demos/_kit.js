@@ -210,7 +210,9 @@ export function Mcq({
     disabled: cur === n - 1,
     "aria-label": "Next question",
     style: navButton(cur === n - 1)
-  }, "Next \u203A")), /*#__PURE__*/React.createElement("p", {
+  }, "Next \u203A")), /*#__PURE__*/React.createElement("div", {
+    key: `${cur}-${answered}`
+  }, /*#__PURE__*/React.createElement("p", {
     style: {
       margin: "8px 0 4px",
       fontSize: "15px"
@@ -230,7 +232,7 @@ export function Mcq({
       margin: "0",
       lineHeight: 1.5
     }
-  }, renderInline(q.why, C)) : null);
+  }, renderInline(q.why, C)) : null));
 }
 export function mcq(config) {
   return function App() {

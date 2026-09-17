@@ -137,21 +137,33 @@ export function Mcq({ questions: rawQuestions = [] }) {
         <button type="button" onClick={() => go(1)} disabled={cur === n - 1}
           aria-label="Next question" style={navButton(cur === n - 1)}>Next ›</button>
       </div>
-      <p style={{ margin: "8px 0 4px", fontSize: "15px" }}>{renderInline(q.stem, C)}</p>
-      <div role="group" aria-label={`Choices for question ${cur + 1}`}>
-        {q.choices.map((choice, i) => (
-          <button type="button" key={i} disabled={answered} onClick={() => choose(i)} style={choiceButton(choice, i)}>
-            {answered && choice.correct ? "✓ Correct: " : null}
-            {answered && i === pick && !choice.correct ? "✗ Your choice: " : null}
-            {renderInline(choice.text, C)}
-          </button>
-        ))}
+      {/* Keyed on both the question index and the answered flag: MathJax
+          mutates this subtree's DOM in place (splitting text nodes into
+          <mjx-container> elements), and React's virtual DOM never learns
+          about that. Reconciling against those mutated nodes — whether by
+          paging to a new question or by revealing the answer, which changes
+          the choice buttons' text/style in place — patches the wrong nodes
+          and splices content across questions. Changing the key on either
+          transition forces React to discard the mutated subtree and mount
+          fresh nodes instead, which the typesetMath effect below then
+          retypesets from scratch. */}
+      <div key={`${cur}-${answered}`}>
+        <p style={{ margin: "8px 0 4px", fontSize: "15px" }}>{renderInline(q.stem, C)}</p>
+        <div role="group" aria-label={`Choices for question ${cur + 1}`}>
+          {q.choices.map((choice, i) => (
+            <button type="button" key={i} disabled={answered} onClick={() => choose(i)} style={choiceButton(choice, i)}>
+              {answered && choice.correct ? "✓ Correct: " : null}
+              {answered && i === pick && !choice.correct ? "✗ Your choice: " : null}
+              {renderInline(choice.text, C)}
+            </button>
+          ))}
+        </div>
+        {answered ? (
+          <p style={{ ...labelStyle(C), margin: "0", lineHeight: 1.5 }}>
+            {renderInline(q.why, C)}
+          </p>
+        ) : null}
       </div>
-      {answered ? (
-        <p style={{ ...labelStyle(C), margin: "0", lineHeight: 1.5 }}>
-          {renderInline(q.why, C)}
-        </p>
-      ) : null}
     </div>
   );
 }
