@@ -112,6 +112,17 @@
         s.textContent = JSON.stringify(map); document.head.appendChild(s);
       }
 
+      function runAfterPaint(fn) {
+        // requestAnimationFrame only fires for frames the browser is actually painting. An
+        // off-screen iframe may never paint, so rAF never fires, deadlocking height reporting.
+        // This scheduler runs fn once, whichever happens first: the next animation frame
+        // (correct timing when visible) or a short setTimeout (fallback for off-screen frames).
+        var done = false;
+        function once() { if (done) return; done = true; fn(); }
+        requestAnimationFrame(once);
+        setTimeout(once, 100);
+      }
+
       async function mount(payload) {
         if (started) return; started = true;
         try {
@@ -119,6 +130,16 @@
           injectStyles(payload.css);
           if (!payload.precompiled) await loadBabel();   // raw JSX needs Babel; precompiled skips it
           if (payload.math) await loadMathJax(payload.mathConfig);   // opt-in only; flagless artifacts never hit this
+          // Define window.typesetMath here (after MathJax loads, before React renders) so that
+          // React effects can call it reliably. The initial typeset still happens after paint
+          // for correct timing. Flagless artifacts never set this global.
+          if (payload.math) {
+            window.typesetMath = function () {
+              if (window.MathJax && window.MathJax.typesetPromise) {
+                window.MathJax.typesetPromise().catch(function () {});
+              }
+            };
+          }
           injectImportMap(buildImportMap(payload));   // must precede any module import
 
           var ReactNS = await import("react");
@@ -131,19 +152,12 @@
 
           clientNS.createRoot(document.getElementById("root")).render(window.React.createElement(Comp));
 
-          requestAnimationFrame(function () {
+          runAfterPaint(function () {
             // hand the note the artifact's own title so its collapsible bar can show it
             var tEl = document.querySelector("[data-artifact-title]");
             var title = tEl ? (tEl.textContent || "").trim() : "";
             if (payload.math) {
-              // Exposed only for math artifacts — a flagless demo has no global
-              // to call. Safe no-op if MathJax failed to load or isn't ready yet.
-              window.typesetMath = function () {
-                if (window.MathJax && window.MathJax.typesetPromise) {
-                  window.MathJax.typesetPromise().catch(function () {});
-                }
-              };
-              window.typesetMath();   // typeset the initial render
+              window.typesetMath();   // typeset the initial render after paint
             }
             post({ type: "artifact:ready", title: title });
             reportHeight();
