@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' blob: https://cdn.jsdelivr.net https://esm.sh; style-src 'unsafe-inline' https://cdn.jsdelivr.net https://esm.sh; img-src * data: blob:; font-src https: data:; connect-src 'self' https://esm.sh https://cdn.jsdelivr.net;" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' blob: https://cdn.jsdelivr.net https://esm.sh; style-src 'unsafe-inline' https://cdn.jsdelivr.net https://esm.sh; img-src * data: blob:; font-src https: data:; connect-src https://esm.sh https://cdn.jsdelivr.net;" />
   <style>
     html, body { margin: 0; padding: 0; background: transparent; }
     #root { padding: 12px; box-sizing: border-box; font-family: system-ui, -apple-system, sans-serif; }
@@ -67,31 +67,35 @@
       function blobUrl(code) { return URL.createObjectURL(new Blob([code], { type: "text/javascript" })); }
 
       // MathJax is opt-in per artifact (payload.math), never loaded otherwise:
-      // 173 artifacts share this host and only one needs a math engine. We fetch
-      // and eval the repo's own config (js/mathjax.js — same file note.js's page
-      // uses) so the macros/delimiters can't drift out of sync with a copy, then
-      // load the same CDN bundle version the note page uses. The config MUST run
-      // before the CDN script, since MathJax reads window.MathJax at load time.
-      var MATHJAX_CONFIG_URL = "/js/mathjax.js";
+      // 173 artifacts share this host and only one needs a math engine. The config
+      // comes from the parent page (note.js fetched /js/mathjax.js with the same
+      // macros/delimiters as the note page), so they stay in sync. We eval the
+      // config first, then load the CDN bundle — MathJax reads window.MathJax at
+      // load time. If the config is missing or eval throws, or the CDN fails to
+      // load, the artifact still mounts and renders with raw math notation. This
+      // makes failure non-fatal: a broken math setup does not break the whole demo.
       var MATHJAX_CDN_URL = "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js";
       var mathJaxReady = null;
-      function loadMathJax() {
+      function loadMathJax(mathConfig) {
         if (mathJaxReady) return mathJaxReady;
-        mathJaxReady = fetch(MATHJAX_CONFIG_URL)
-          .then(function (res) {
-            if (!res.ok) throw new Error("failed to fetch MathJax config");
-            return res.text();
-          })
-          .then(function (code) {
-            (0, eval)(code);   // sets window.MathJax; must run before the CDN bundle loads
-            return new Promise(function (resolve, reject) {
-              var s = document.createElement("script");
-              s.src = MATHJAX_CDN_URL;
-              s.onload = resolve;
-              s.onerror = function () { reject(new Error("failed to load MathJax")); };
-              document.head.appendChild(s);
-            });
-          });
+        mathJaxReady = new Promise(function (resolve) {
+          try {
+            if (!mathConfig) { resolve(); return; }
+            (0, eval)(mathConfig);   // sets window.MathJax; must run before the CDN bundle loads
+          } catch (err) {
+            console.error("MathJax config eval failed:", err);
+            resolve();   // non-fatal: continue without typeset math
+            return;
+          }
+          var s = document.createElement("script");
+          s.src = MATHJAX_CDN_URL;
+          s.onload = resolve;
+          s.onerror = function (err) {
+            console.error("MathJax CDN failed:", err);
+            resolve();   // non-fatal: continue without typeset math
+          };
+          document.head.appendChild(s);
+        });
         return mathJaxReady;
       }
 
@@ -114,7 +118,7 @@
           applyTheme(payload.theme);
           injectStyles(payload.css);
           if (!payload.precompiled) await loadBabel();   // raw JSX needs Babel; precompiled skips it
-          if (payload.math) await loadMathJax();   // opt-in only; flagless artifacts never hit this
+          if (payload.math) await loadMathJax(payload.mathConfig);   // opt-in only; flagless artifacts never hit this
           injectImportMap(buildImportMap(payload));   // must precede any module import
 
           var ReactNS = await import("react");

@@ -330,7 +330,12 @@ async function setupArtifact(mount, course) {
   iframe.setAttribute("scrolling", "no");
   iframe.src = "/notes/artifact-host.html";
 
-  const payload = { source: "note", type: "artifact:init", id, code, css, modules, libImports, theme: currentArtifactTheme(), precompiled, math: entry.math };
+  let mathConfig;
+  if (entry.math) {
+    mathConfig = await fetchTextCached("/js/mathjax.js");
+  }
+
+  const payload = { source: "note", type: "artifact:init", id, code, css, modules, libImports, theme: currentArtifactTheme(), precompiled, math: entry.math, mathConfig };
 
   window.addEventListener("message", e => {
     const d = e.data || {};
