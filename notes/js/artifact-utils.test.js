@@ -3,14 +3,14 @@ const assert = require("node:assert/strict");
 const U = require("./artifact-utils.js");
 
 test("parseArtifactInfo: bare", () => {
-  assert.deepEqual(U.parseArtifactInfo("artifact"), { isArtifact: true, src: null, static: false });
+  assert.deepEqual(U.parseArtifactInfo("artifact"), { isArtifact: true, src: null, static: false, math: false });
 });
 test("parseArtifactInfo: leading/trailing space stays artifact", () => {
   assert.equal(U.parseArtifactInfo("artifact ").isArtifact, true);
 });
 test("parseArtifactInfo: unquoted src", () => {
   assert.deepEqual(U.parseArtifactInfo("artifact src=demos/quicksort.jsx"),
-    { isArtifact: true, src: "demos/quicksort.jsx", static: false });
+    { isArtifact: true, src: "demos/quicksort.jsx", static: false, math: false });
 });
 test("parseArtifactInfo: static flag", () => {
   const r = U.parseArtifactInfo("artifact src=demos/compile-pipeline.jsx static");
@@ -19,6 +19,25 @@ test("parseArtifactInfo: static flag", () => {
 });
 test("parseArtifactInfo: 'static' inside a filename is not the flag", () => {
   assert.equal(U.parseArtifactInfo("artifact src=demos/static-layout.jsx").static, false);
+});
+test("parseArtifactInfo: math flag", () => {
+  const r = U.parseArtifactInfo("artifact src=demos/x.jsx math");
+  assert.equal(r.math, true);
+  assert.equal(r.static, false);
+});
+test("parseArtifactInfo: static and math together, order-independent", () => {
+  const r1 = U.parseArtifactInfo("artifact src=demos/x.jsx static math");
+  assert.equal(r1.static, true);
+  assert.equal(r1.math, true);
+  const r2 = U.parseArtifactInfo("artifact src=demos/x.jsx math static");
+  assert.equal(r2.static, true);
+  assert.equal(r2.math, true);
+});
+test("parseArtifactInfo: no flags means math is false", () => {
+  assert.equal(U.parseArtifactInfo("artifact src=demos/x.jsx").math, false);
+});
+test("parseArtifactInfo: 'math' inside a filename is not the flag", () => {
+  assert.equal(U.parseArtifactInfo("artifact src=demos/mathlib.jsx").math, false);
 });
 test("parseArtifactInfo: quoted src with space", () => {
   assert.equal(U.parseArtifactInfo('artifact src="demos/a b.jsx"').src, "demos/a b.jsx");

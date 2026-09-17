@@ -53,7 +53,7 @@ marked.use({
     renderer(token) {
       const parsed = ArtifactUtils.parseArtifactInfo("artifact " + token.info);
       const idx = artifactStore.length;
-      artifactStore.push({ src: parsed.src, code: parsed.src ? null : token.code });
+      artifactStore.push({ src: parsed.src, code: parsed.src ? null : token.code, math: parsed.math });
       // A `static` artifact (a non-interactive diagram) renders bare, no
       // collapsible bar, no "Interactive demo" title, just the mount.
       if (parsed.static) {
@@ -330,7 +330,7 @@ async function setupArtifact(mount, course) {
   iframe.setAttribute("scrolling", "no");
   iframe.src = "/notes/artifact-host.html";
 
-  const payload = { source: "note", type: "artifact:init", id, code, css, modules, libImports, theme: currentArtifactTheme(), precompiled };
+  const payload = { source: "note", type: "artifact:init", id, code, css, modules, libImports, theme: currentArtifactTheme(), precompiled, math: entry.math };
 
   window.addEventListener("message", e => {
     const d = e.data || {};

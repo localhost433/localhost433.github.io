@@ -376,7 +376,7 @@ of these are answered in this course:
 
 Six questions on the figures above and on the two gaps the note flags as quiz-shaped.
 
-```artifact src=demos/practice-03.jsx
+```artifact src=demos/practice-03.jsx math
 ```
 
 Then two things to try in the figures themselves, each under a minute:

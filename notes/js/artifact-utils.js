@@ -9,17 +9,24 @@
 
   // "artifact" | "artifact src=demos/x.jsx" | 'artifact src="a b.jsx"' |
   // "artifact src=demos/x.jsx static"  (the `static` flag = a non-interactive
-  // diagram: the host renders it bare, with no collapsible "Interactive demo" bar)
+  // diagram: the host renders it bare, with no collapsible "Interactive demo" bar) |
+  // "artifact src=demos/x.jsx math"  (the `math` flag = the host loads MathJax
+  // for this artifact's iframe; opt-in only, never sniffed from the source)
   function parseArtifactInfo(info) {
     const t = String(info || "").trim();
     if (t !== "artifact" && !t.startsWith("artifact ")) return { isArtifact: false, src: null };
     const m = /\bsrc\s*=\s*(?:"([^"]+)"|'([^']+)'|([^\s]+))/.exec(t);
     // flags = whatever's left after dropping `artifact` and any `src=...` value,
-    // so a filename containing "static" can't be mistaken for the flag.
+    // so a filename containing "static"/"math" can't be mistaken for the flag.
     const flags = t.replace(/^artifact\b/, "")
       .replace(/\bsrc\s*=\s*(?:"[^"]+"|'[^']+'|[^\s]+)/, " ")
       .trim().split(/\s+/).filter(Boolean);
-    return { isArtifact: true, src: m ? (m[1] || m[2] || m[3]) : null, static: flags.includes("static") };
+    return {
+      isArtifact: true,
+      src: m ? (m[1] || m[2] || m[3]) : null,
+      static: flags.includes("static"),
+      math: flags.includes("math"),
+    };
   }
 
   function resolveArtifactSrc(course, src) {

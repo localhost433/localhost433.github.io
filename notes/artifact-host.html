@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' blob: https://cdn.jsdelivr.net https://esm.sh; style-src 'unsafe-inline' https://cdn.jsdelivr.net https://esm.sh; img-src * data: blob:; font-src https: data:; connect-src https://esm.sh https://cdn.jsdelivr.net;" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' blob: https://cdn.jsdelivr.net https://esm.sh; style-src 'unsafe-inline' https://cdn.jsdelivr.net https://esm.sh; img-src * data: blob:; font-src https: data:; connect-src 'self' https://esm.sh https://cdn.jsdelivr.net;" />
   <style>
     html, body { margin: 0; padding: 0; background: transparent; }
     #root { padding: 12px; box-sizing: border-box; font-family: system-ui, -apple-system, sans-serif; }
@@ -66,6 +66,35 @@
       function maybeTransform(src, precompiled) { return precompiled ? src : transform(src); }
       function blobUrl(code) { return URL.createObjectURL(new Blob([code], { type: "text/javascript" })); }
 
+      // MathJax is opt-in per artifact (payload.math), never loaded otherwise:
+      // 173 artifacts share this host and only one needs a math engine. We fetch
+      // and eval the repo's own config (js/mathjax.js — same file note.js's page
+      // uses) so the macros/delimiters can't drift out of sync with a copy, then
+      // load the same CDN bundle version the note page uses. The config MUST run
+      // before the CDN script, since MathJax reads window.MathJax at load time.
+      var MATHJAX_CONFIG_URL = "/js/mathjax.js";
+      var MATHJAX_CDN_URL = "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js";
+      var mathJaxReady = null;
+      function loadMathJax() {
+        if (mathJaxReady) return mathJaxReady;
+        mathJaxReady = fetch(MATHJAX_CONFIG_URL)
+          .then(function (res) {
+            if (!res.ok) throw new Error("failed to fetch MathJax config");
+            return res.text();
+          })
+          .then(function (code) {
+            (0, eval)(code);   // sets window.MathJax; must run before the CDN bundle loads
+            return new Promise(function (resolve, reject) {
+              var s = document.createElement("script");
+              s.src = MATHJAX_CDN_URL;
+              s.onload = resolve;
+              s.onerror = function () { reject(new Error("failed to load MathJax")); };
+              document.head.appendChild(s);
+            });
+          });
+        return mathJaxReady;
+      }
+
       function buildImportMap(payload) {
         var imports = { "react": REACT, "react-dom": REACTDOM, "react-dom/client": REACTDOM_CLIENT };
         var modules = payload.modules || {};
@@ -85,6 +114,7 @@
           applyTheme(payload.theme);
           injectStyles(payload.css);
           if (!payload.precompiled) await loadBabel();   // raw JSX needs Babel; precompiled skips it
+          if (payload.math) await loadMathJax();   // opt-in only; flagless artifacts never hit this
           injectImportMap(buildImportMap(payload));   // must precede any module import
 
           var ReactNS = await import("react");
@@ -101,6 +131,16 @@
             // hand the note the artifact's own title so its collapsible bar can show it
             var tEl = document.querySelector("[data-artifact-title]");
             var title = tEl ? (tEl.textContent || "").trim() : "";
+            if (payload.math) {
+              // Exposed only for math artifacts — a flagless demo has no global
+              // to call. Safe no-op if MathJax failed to load or isn't ready yet.
+              window.typesetMath = function () {
+                if (window.MathJax && window.MathJax.typesetPromise) {
+                  window.MathJax.typesetPromise().catch(function () {});
+                }
+              };
+              window.typesetMath();   // typeset the initial render
+            }
             post({ type: "artifact:ready", title: title });
             reportHeight();
             if (window.ResizeObserver) new ResizeObserver(reportHeight).observe(document.documentElement);

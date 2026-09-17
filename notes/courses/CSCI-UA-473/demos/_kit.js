@@ -145,10 +145,17 @@ export function Mcq({
   const [picks, setPicks] = React.useState({});
   const C = useClassColors();
   const n = questions.length;
-  if (!n) return null;
-  const q = questions[cur];
   const pick = picks[cur];
   const answered = pick != null;
+  // MathJax doesn't re-typeset on its own when React repaints the stem/choices
+  // for a new question or an answer reveal. `window.typesetMath` only exists
+  // when this artifact opted into the `math` fence flag; `?.()` is a no-op
+  // otherwise, so this is harmless for any Mcq instance without TeX in it.
+  React.useEffect(() => {
+    window.typesetMath?.();
+  }, [cur, answered]);
+  if (!n) return null;
+  const q = questions[cur];
   const go = d => setCur(c => Math.max(0, Math.min(n - 1, c + d)));
   const choose = k => setPicks(p => p[cur] != null ? p : {
     ...p,
