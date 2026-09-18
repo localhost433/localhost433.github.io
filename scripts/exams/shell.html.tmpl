@@ -128,7 +128,7 @@ pre.code{font-family:"JetBrains Mono",monospace; font-size:13.5px; line-height:1
   --mm-muted:#5a6270; --mm-cell-bg:#fff; --mm-cell-bd:#d4dbe4; --mm-cell-fg:#1f2733;
   --mm-panel-bg:#f5f7fa; --mm-ptr:#5b53d6; --mm-ref:#0e8aa0; --mm-hl:#d9870a;
   margin:18px 0 6px; padding:14px; overflow-x:auto; border:1px solid var(--border);
-  border-radius:12px; background:var(--mm-panel-bg)
+  border-radius:12px; background:var(--mm-panel-bg); color:#1f2733
 }
 .exam-artifact-svg{display:block; height:auto; margin:0 auto; max-width:none; font-family:ui-monospace,"JetBrains Mono",Menlo,monospace}
 .exam-artifact-svg--use-case{width:820px}
@@ -362,16 +362,12 @@ details.rev[open] .sm-chev{transform:rotate(90deg)}
     <div class="filterbtns" id="filters">
       <button class="fbtn active" data-f="all" onclick="setFilter('all')">All</button>
       <button class="fbtn" data-f="wrong" onclick="setFilter('wrong')">Incorrect</button>
-      <button class="fbtn" data-f="output" onclick="setFilter('output')">Output</button>
-      <button class="fbtn" data-f="debug" onclick="setFilter('debug')">Debug</button>
-      <button class="fbtn" data-f="diagram" onclick="setFilter('diagram')">Diagram</button>
-      <button class="fbtn" data-f="concept" onclick="setFilter('concept')">Concept</button>
     </div>
   </div>
   <div class="review" id="review"></div>
 
   <button class="retake" onclick="retake()">&#8635; Retake with a fresh shuffle</button>
-  <p class="foot">Review pattern: first identify language, then access level, storage/lifetime, static type versus runtime type, construction/destruction context, and whether the code is testing a C++ rule or a Java rule.</p>
+  <p class="foot" id="revFoot"></p>
 </div></section>
 
 <script>
@@ -389,6 +385,8 @@ const TYPE_META = {
   debug:{label:"Code Analysis", cls:"t-debug"},
   diagram:{label:"Diagram", cls:"t-diagram"}
 };
+
+for (const k in (window.EXAM.typeLabels||{})) if (TYPE_META[k]) TYPE_META[k].label = window.EXAM.typeLabels[k];
 
 const QUESTIONS = window.QUESTIONS || [];
 
@@ -602,10 +600,11 @@ function renderResults(auto){
   }
 
   // type bars
-  const order=[["output","Predict output","var(--t-output-fg)"],["debug","Code analysis","var(--t-debug-fg)"],["diagram","Diagram","#7c3aed"],["concept","Concept","var(--accent)"]];
+  const order=[["output","var(--t-output-fg)"],["debug","var(--t-debug-fg)"],["diagram","#7c3aed"],["concept","var(--accent)"]];
   let bh="";
-  order.forEach(([k,nm,col])=>{
-    const d=byType[k]; const p=d.t?Math.round(d.c/d.t*100):0;
+  order.forEach(([k,col])=>{
+    const d=byType[k]; if(!d.t) return;
+    const nm=TYPE_META[k].label; const p=Math.round(d.c/d.t*100);
     bh+=`<div class="barrow">
       <span class="nm">${nm}</span>
       <div class="track"><div class="fill" style="width:${p}%; background:${col}"></div></div>
@@ -613,10 +612,23 @@ function renderResults(auto){
     </div>`;
   });
   document.getElementById("bars").innerHTML=bh;
+  renderFilterButtons(byType);
 
   setupExport();
   buildReview();
   renderResultsActions();
+}
+
+function renderFilterButtons(byType){
+  const host=document.getElementById("filters");
+  if(!host || host.dataset.built) return;
+  let h="";
+  for(const k of ["output","debug","diagram","concept"]){
+    if(!byType[k] || !byType[k].t) continue;
+    h+=`<button class="fbtn" data-f="${k}" onclick="setFilter('${k}')">${TYPE_META[k].label}</button>`;
+  }
+  host.insertAdjacentHTML("beforeend", h);
+  host.dataset.built="1";
 }
 
 function renderResultsActions(){
@@ -664,7 +676,7 @@ function buildWrongMarkdown(){
     out+=`\n---\n\n## ${n+1}. ${stripHtml(q.prompt)}\n`;
     if(q.sub) out+=`\n_${stripHtml(q.sub)}_\n`;
     if(q.diagramAlt) out+=`\n[Diagram: ${stripHtml(q.diagramAlt)}]\n`;
-    if(q.code) out+="\n```cpp\n"+q.code+"\n```\n";
+    if(q.code) out+="\n```"+(window.EXAM.codeLang||"cpp")+"\n"+q.code+"\n```\n";
     out+="\nOptions:\n";
     opts.forEach((opt,i)=>{ out+=`- ${LETTERS[i]}. ${stripHtml(opt.text)}\n`; });
     const your = it.answer===null ? "(not answered)" : `${LETTERS[it.answer]}. ${stripHtml(opts[it.answer].text)}`;
@@ -810,6 +822,8 @@ document.addEventListener("keydown",e=>{
   else if(e.key.toLowerCase()==="f"){toggleFlag(); e.preventDefault();}
 });
 
+document.getElementById("revFoot").innerHTML = window.EXAM.reviewFootHtml ||
+  "Review pattern: first identify language, then access level, storage/lifetime, static type versus runtime type, construction/destruction context, and whether the code is testing a C++ rule or a Java rule.";
 document.getElementById("exam-intro").innerHTML = window.EXAM.introHtml +
   '<div style="margin-top:22px"><button class="btn-primary" onclick="begin()">Begin' +
   (TOTAL_TIME ? ' <span class="t">[ ' + fmt(TOTAL_TIME) + ' ]</span>' : '') + '</button></div>';
