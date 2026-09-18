@@ -9,15 +9,18 @@ const TARGETS = {
   par: (v) => ((v[0] + v[1] + v[2]) % 2 ? 1 : -1),
 };
 
-function mix(p, neg, pos) {
+function mix(p, neg, pos, mid) {
   const rgb = (color) => {
     const hex = color.match(/^#([0-9a-f]{6})$/i);
     if (hex) return [0, 2, 4].map((i) => parseInt(hex[1].slice(i, i + 2), 16));
     const channels = color.match(/^rgb\(\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)\s*\)$/i);
     return channels ? channels.slice(1).map(Number) : [0, 0, 0];
   };
-  const c1 = rgb(neg), c2 = rgb(pos);
-  return "rgb(" + c1.map((x, k) => Math.round(x + (c2[k] - x) * p)).join(",") + ")";
+  const c1 = rgb(neg), c2 = rgb(pos), cm = rgb(mid);
+  // Two segments through the neutral, so a 0.50 vote reads as "undecided" rather
+  // than as an olive third colour half way between the two classes.
+  const [from, to, u] = p < 0.5 ? [c1, cm, p * 2] : [cm, c2, (p - 0.5) * 2];
+  return "rgb(" + from.map((x, k) => Math.round(x + (to[k] - x) * u)).join(",") + ")";
 }
 
 function drawGrid(cv, H, consistent, C) {
@@ -61,7 +64,7 @@ export default function NflCube() {
     if (i in D) { fill = D[i] > 0 ? C.pos : C.neg; text = D[i] > 0 ? "+1" : "−1"; }
     else if (vote[i] === null) { fill = C.bg; text = "?"; }
     else {
-      fill = mix(vote[i], C.neg, C.pos); text = vote[i].toFixed(2);
+      fill = mix(vote[i], C.neg, C.pos, C.mid); text = vote[i].toFixed(2);
       if (T) {
         cnt++;
         const tr = T(v), e = vote[i] === 0.5 ? 0.5 : ((vote[i] > 0.5) !== (tr === 1) ? 1 : 0);
@@ -109,7 +112,7 @@ export default function NflCube() {
           <svg width="360" height="300" viewBox="0 0 360 300" role="img" aria-label="Boolean cube with labels and hypothesis votes"
             style={{ maxWidth: "100%" }}>
             {edges.map(([i, j]) => <line key={`e-${i}-${j}`} x1={SX(VERTICES[i])} y1={SY(VERTICES[i])}
-              x2={SX(VERTICES[j])} y2={SY(VERTICES[j])} stroke={C.border} strokeWidth="1" />)}
+              x2={SX(VERTICES[j])} y2={SY(VERTICES[j])} stroke={C.muted} strokeWidth="1.25" strokeOpacity="0.55" />)}
             {vertices.map(({ x, y, code, fill, text, ring, i }) => (
               <g key={i} style={{ cursor: "pointer" }} onClick={() => clickVertex(i)}>
                 {ring && <circle cx={x} cy={y} r="25" fill="none" stroke={ring} strokeWidth="3" />}

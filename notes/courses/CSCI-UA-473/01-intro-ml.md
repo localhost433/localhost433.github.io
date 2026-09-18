@@ -147,17 +147,3 @@ training / validation / testing data.
 | **Ensemble models**: random forests, boosting and bagging | auto-encoders |
 
 Plus self-supervised learning and reinforcement learning as their own headings.
-
-## What to retain from L1
-
-| Topic | Key point |
-|---|---|
-| Mitchell's definition | performance on a task improves after data is taken into account - the only definition of the four that names a task and a performance measure |
-| The contrast | explicitly programmed rules vs. rules fit from examples; the human still chooses the *family* either way |
-| Fruit sorter | same problem solved twice, once by description and once by 200k training images |
-| The seven examples | structurally identical; only the training data differs |
-| Dataset choice | picking what data to collect is the designer's job, not a preliminary to the real work |
-| Supervision, implicitly | annotations (spam labels) vs. repurposed behavior (clicks, purchases) - the seed of the self-supervised paradigm |
-| The caution | spectacular failures exist; care is needed in development *and* deployment |
-| Course map | supervised (parametric / non-parametric / ensemble) vs. unsupervised (dim. reduction, clustering, autoencoders), plus self-supervised and RL |
-| References | six books, no official text; *Learning from Data* supplies the slides' $f$/$g$/$\mathbb H$ notation; Cho's note is the free, printable one |

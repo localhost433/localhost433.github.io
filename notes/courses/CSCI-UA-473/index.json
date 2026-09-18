@@ -15,6 +15,16 @@
         "title": "3 - Components of Learning & the Perceptron",
         "date": "2026-09-10"
     },
+    {
+        "slug": "04-feasibility-of-learning",
+        "title": "4 - Feasibility of Learning: Hoeffding & Error Measures",
+        "date": "2026-09-15"
+    },
+    {
+        "slug": "05-linear-regression",
+        "title": "5 - Linear Models for Regression",
+        "date": "2026-09-17"
+    },
     { "group": "Supplements" },
     {
         "slug": "00",

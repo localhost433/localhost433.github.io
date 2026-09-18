@@ -129,3 +129,202 @@ export function clipHalfPlane(poly, f) {
   }
   return out;
 }
+
+/* ---- Ridge vs. lasso constraint regions (note 05) ----
+
+   The closing slide of FML05 draws the same elliptical error contours against two
+   feasible regions, an L1 diamond and an L2 circle, and asserts that the diamond's
+   corners are what produce exact zeros. These solve the constrained problem for real
+   so the claim can be checked rather than asserted.
+
+   Loss is the quadratic bowl around the unconstrained least-squares solution,
+       loss(w) = (w - what)' A (w - what),
+   with A symmetric positive definite. That IS the RSS up to an additive constant:
+   expanding (y - Xw)'(y - Xw) around what = (X'X)^-1 X'y gives A = X'X. So the
+   picture is not a cartoon of regression, it is regression in two parameters. */
+
+// loss(w) for the quadratic form A centred at what. A is [a11, a12, a22].
+export function ellipseLoss(A, what, w) {
+  const dx = w[0] - what[0], dy = w[1] - what[1];
+  return A[0] * dx * dx + 2 * A[1] * dx * dy + A[2] * dy * dy;
+}
+
+// Minimize loss along the segment p -> q, in closed form.
+// g(s) = loss(p + s(q-p)) is a parabola in s; g'(s) = 0 gives s*, clamped to [0,1].
+// Clamping to an endpoint is what puts the lasso solution exactly on a corner.
+function minOnSegment(A, what, p, q) {
+  const dx = q[0] - p[0], dy = q[1] - p[1];
+  const ex = p[0] - what[0], ey = p[1] - what[1];
+  // g(s) = A0(ex+s dx)^2 + 2A1(ex+s dx)(ey+s dy) + A2(ey+s dy)^2
+  const quad = A[0] * dx * dx + 2 * A[1] * dx * dy + A[2] * dy * dy;
+  const lin = 2 * (A[0] * ex * dx + A[1] * (ex * dy + ey * dx) + A[2] * ey * dy);
+  let s = quad <= 0 ? 0 : -lin / (2 * quad);
+  s = Math.max(0, Math.min(1, s));
+  const w = [p[0] + s * dx, p[1] + s * dy];
+  return { w, loss: ellipseLoss(A, what, w) };
+}
+
+export const l1norm = (w) => Math.abs(w[0]) + Math.abs(w[1]);
+export const l2norm = (w) => Math.hypot(w[0], w[1]);
+
+/* Lasso: minimize loss subject to |w1| + |w2| <= t.
+   Inside the diamond the unconstrained solution wins; otherwise the minimum is on the
+   boundary, which is four segments, each solved exactly above. Returns the point and
+   whether a coordinate came out exactly zero. */
+export function lassoFit(A, what, t) {
+  if (l1norm(what) <= t) return { w: what.slice(), active: false, zeros: 0 };
+  const V = [[t, 0], [0, t], [-t, 0], [0, -t]];
+  let best = null;
+  for (let i = 0; i < 4; i++) {
+    const r = minOnSegment(A, what, V[i], V[(i + 1) % 4]);
+    if (!best || r.loss < best.loss) best = r;
+  }
+  const zeros = (best.w[0] === 0 ? 1 : 0) + (best.w[1] === 0 ? 1 : 0);
+  return { w: best.w, active: true, zeros };
+}
+
+/* Ridge: minimize loss subject to ||w||_2 <= t.
+   On the circle there is no corner to land on, so the boundary is scanned by angle and
+   then refined by golden section. The scan is deliberate: it makes the "never exactly
+   zero" property an observed outcome of the geometry rather than a special case. */
+export function ridgeFit(A, what, t, steps = 1440) {
+  if (l2norm(what) <= t) return { w: what.slice(), active: false, zeros: 0 };
+  const at = (th) => ellipseLoss(A, what, [t * Math.cos(th), t * Math.sin(th)]);
+  let bi = 0, bv = Infinity;
+  for (let i = 0; i < steps; i++) {
+    const v = at((i / steps) * 2 * Math.PI);
+    if (v < bv) { bv = v; bi = i; }
+  }
+  const step = (2 * Math.PI) / steps;
+  let lo = (bi - 1) * step, hi = (bi + 1) * step;
+  const phi = (Math.sqrt(5) - 1) / 2;
+  let c = hi - phi * (hi - lo), d = lo + phi * (hi - lo);
+  for (let k = 0; k < 60; k++) {
+    if (at(c) < at(d)) { hi = d; d = c; c = hi - phi * (hi - lo); }
+    else { lo = c; c = d; d = lo + phi * (hi - lo); }
+  }
+  const th = (lo + hi) / 2;
+  const w = [t * Math.cos(th), t * Math.sin(th)];
+  const zeros = (w[0] === 0 ? 1 : 0) + (w[1] === 0 ? 1 : 0);
+  return { w, active: true, zeros };
+}
+
+/* ---- Seeded randomness (notes 04) ----
+   Figures that sample must be reproducible: the prose cites what you see, and a
+   screenshot has to come back the same. Every draw runs through an injected
+   generator, never Math.random. */
+
+export function rng(seed) {
+  let s = (seed >>> 0) || 1;
+  return () => {
+    s ^= s << 13; s >>>= 0;
+    s ^= s >> 17;
+    s ^= s << 5; s >>>= 0;
+    return s / 4294967296;
+  };
+}
+
+// Box-Muller, so the noisy-sine figure gets real Gaussian noise rather than a
+// uniform that only looks like noise.
+export function gauss(rand) {
+  let u = 0, v = 0;
+  while (u === 0) u = rand();
+  while (v === 0) v = rand();
+  return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+}
+
+/* ---- Hoeffding (note 04) ---- */
+
+// The bound itself. Note it never reads mu: that independence is the whole point
+// of the figure, and stating it as code makes it checkable.
+export const hoeffding = (eps, N) => Math.min(1, 2 * Math.exp(-2 * eps * eps * N));
+
+// Draw `trials` samples of N Bernoulli(mu) draws; return each sample's nu.
+export function sampleNus(mu, N, trials, rand) {
+  const out = new Array(trials);
+  for (let t = 0; t < trials; t++) {
+    let red = 0;
+    for (let i = 0; i < N; i++) if (rand() < mu) red++;
+    out[t] = red / N;
+  }
+  return out;
+}
+
+// Fraction of samples that missed by more than eps: the quantity the bound bounds.
+export const missRate = (nus, mu, eps) =>
+  nus.reduce((n, v) => n + (Math.abs(v - mu) > eps ? 1 : 0), 0) / nus.length;
+
+// The union bound over M hypotheses, and the smallest M at which it says nothing.
+export const unionBound = (eps, N, M) => Math.min(1, M * hoeffding(eps, N));
+export const vacuousAt = (eps, N) => Math.ceil(1 / hoeffding(eps, N));
+
+/* ---- Polynomial least squares (notes 04, 05) ---- */
+
+// Vandermonde row for degree M.
+const vand = (x, M) => Array.from({ length: M + 1 }, (_, j) => Math.pow(x, j));
+
+// Solve the normal equations by Gaussian elimination with partial pivoting.
+// Ridge-style lambda on the diagonal keeps M = 9 on 10 points from blowing up
+// numerically; at lambda = 0 it is plain least squares.
+export function polyFit(xs, ys, M, lambda = 0) {
+  const n = M + 1;
+  const A = Array.from({ length: n }, () => new Array(n).fill(0));
+  const b = new Array(n).fill(0);
+  for (let i = 0; i < xs.length; i++) {
+    const p = vand(xs[i], M);
+    for (let r = 0; r < n; r++) {
+      b[r] += p[r] * ys[i];
+      for (let c = 0; c < n; c++) A[r][c] += p[r] * p[c];
+    }
+  }
+  for (let r = 0; r < n; r++) A[r][r] += lambda;
+  for (let col = 0; col < n; col++) {
+    let piv = col;
+    for (let r = col + 1; r < n; r++) if (Math.abs(A[r][col]) > Math.abs(A[piv][col])) piv = r;
+    if (Math.abs(A[piv][col]) < 1e-12) continue;
+    [A[col], A[piv]] = [A[piv], A[col]];
+    [b[col], b[piv]] = [b[piv], b[col]];
+    for (let r = 0; r < n; r++) {
+      if (r === col) continue;
+      const f = A[r][col] / A[col][col];
+      for (let c = col; c < n; c++) A[r][c] -= f * A[col][c];
+      b[r] -= f * b[col];
+    }
+  }
+  return A.map((row, r) => (Math.abs(row[r]) < 1e-12 ? 0 : b[r] / row[r]));
+}
+
+export const polyEval = (w, x) => w.reduce((s, c, j) => s + c * Math.pow(x, j), 0);
+
+export const rmse = (w, xs, ys) =>
+  Math.sqrt(xs.reduce((s, x, i) => s + Math.pow(polyEval(w, x) - ys[i], 2), 0) / xs.length);
+
+/* The deck's example: ten points from a sine with Gaussian noise. `target` is the
+   noise-free curve, so E_out can be measured against the thing that generated the
+   data rather than against a second noisy sample. */
+export const TARGET = (x) => Math.sin(2 * Math.PI * x);
+
+export function sineSample(N, sigma, rand) {
+  const xs = Array.from({ length: N }, (_, i) => (N === 1 ? 0.5 : i / (N - 1)));
+  return { xs, ys: xs.map((x) => TARGET(x) + sigma * gauss(rand)) };
+}
+
+// E_out approximated on a dense grid against the noise-free target.
+export function outOfSample(w, grid = 200) {
+  let s = 0;
+  for (let i = 0; i <= grid; i++) {
+    const x = i / grid;
+    s += Math.pow(polyEval(w, x) - TARGET(x), 2);
+  }
+  return Math.sqrt(s / (grid + 1));
+}
+
+/* E_out as note 04 defines it: error against the distribution, which still contains
+   the noise. With y = TARGET(x) + eps and eps independent of x,
+     E[(h - y)^2] = E[(h - TARGET)^2] + sigma^2,
+   so the irreducible noise floor has to be added back. Without it E_out can come out
+   BELOW E_in - the fit beats the noisy sample it was trained on - and the U-curve's
+   generalization gap goes negative, which is an artefact of measuring against the
+   clean curve rather than a real effect. */
+export const eoutNoisy = (w, sigma, grid = 200) =>
+  Math.sqrt(Math.pow(outOfSample(w, grid), 2) + sigma * sigma);

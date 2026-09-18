@@ -51,13 +51,19 @@ $\|x\| = \sqrt{x_1^2 + x_2^2}$, equivalently $\|x\|^2 = x \cdot x$. This is the 
 Euclidean norm, and it is the default meaning of unadorned $|x|$ in this deck.
 
 Generally, for positive integer $p$,
+
 $$
-\|x\|_p = \left( \sum_{i=1}^{n} |x_i|^p \right)^{1/p}.
+\lVert x \rVert_p = \left( \sum_{i=1}^{n} |x_i|^p \right)^{1/p}.
 $$
 
 So $\|x\|_1 = \sum |x_i|$ is the sum of absolute values, $\|x\|_2 = \sqrt{\sum |x_i|^2}$,
 and so on. The $L_1$ / $L_2$ distinction returns as the two standard regularizers, so the
 shape of each is worth having in your head rather than looked up.
+
+The unit balls are worth looking at rather than deriving, because it is their *shape* that later arguments use. Sweep p and watch the corners appear.
+
+```artifact src=demos/norm-balls.jsx
+```
 
 ## Dot product and angle
 
@@ -110,6 +116,11 @@ The derivation is three lines and generalizes verbatim from a line (1D) to a pla
 a hyperplane ($>2$D). It is also the geometric content of least squares, so it will be
 back.
 
+Drag either vector. The readout that never moves is the point: the residual stays orthogonal to $a$ whatever you do, and that is the entire definition.
+
+```artifact src=demos/projection-2d.jsx
+```
+
 ## Vector spaces and subspaces
 
 *Slides 9-10.* A vector space is a set with addition $+ : V \otimes V \to V$ and scalar
@@ -140,18 +151,16 @@ rotates the vector, with the entries governing how much of each. Dimensions must
 $A \in \mathbb R^{n \times m}$ requires $x \in \mathbb R^{m \times 1}$.
 
 The deck's concrete example (slide 12) is worth keeping because it makes the *units*
-argument: $A$ has one row per company, column 1 the number of desktops procured and column
-2 the number of laptops; $x = [1000, 3000]$ is the unit price of a desktop and of a laptop.
-Then $y = Ax$ is total IT spending per company - the space has been transformed from "unit
-price of equipment" to "total spending by company."
+argument, and slide 14's **column view** - $Ax$ is a linear combination of the columns of
+$A$, with the entries of $x$ as coefficients - is the reading note 05 needs later. Both, on
+the deck's own numbers:
 
-Two more readings of the same operation:
+```artifact src=demos/matvec-column-view.jsx static math
+```
 
-- **Orthogonal matrices** (slide 13) only rotate: they leave magnitudes and the angles
-  between vectors unchanged. Example, the 2D rotation
-  $A = \begin{bmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{bmatrix}$.
-- **Column view** (slide 14) - $Ax$ is a linear combination of the columns of $A$, with
-  the entries of $x$ as coefficients.
+One more reading: **orthogonal matrices** (slide 13) only rotate, leaving magnitudes and
+the angles between vectors unchanged. Example, the 2D rotation
+$A = \begin{bmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{bmatrix}$.
 
 ## Linear independence and rank
 
@@ -279,21 +288,10 @@ $P(X = x) = 0$ exactly.
 
 And $\mathbb E[g(X,Y)] = \sum\sum g(x,y)\,p_{XY}(x,y)$ (slide 26).
 
-## What to retain from L2
+Joint, marginal and conditional are three operations on one table:
 
-The mathematics is review; the notation is what to check. Left column the object, middle
-this course, right the convention you already have.
-
-| Object | This course | Notes |
-|---|---|---|
-| Vector orientation | column by default, $x^{\mathsf T}$ for row | data points $x_i$ are columns; the superscript in $x^i$ indexes the *example*, subscript $x_j$ the *feature* |
-| Norm, unadorned | $|x|$ and $\|x\|$ both mean $L_2$ | $\|x\|_p$ only when $p$ is written |
-| Random variable | uppercase $X$, **not bold** | bold is the feature vector; this is the collision to watch |
-| Distribution | $p_X(x)$ pmf, $f_X(x)$ pdf, $F_X(x)$ CDF | the deck does distinguish pmf from pdf by letter, unlike the loose $p(x)$ used in note 00 |
-| Data matrix | not fixed in this deck | resolve it the first time a matrix of examples appears; $N \times d$ vs. $d \times N$ is the transposition that costs you in gradient derivations |
-| $\mathbb E[g(X)]$ | expectation of a *function* of the RV | the form empirical risk uses, not $\mathbb E[X]$ |
-| Projection | $\operatorname{proj}_a(x) = \frac{a^{\mathsf T}x}{a^{\mathsf T}a}a$ | derived from orthogonality of the residual; reappears as least squares |
-| Rank | column rank $=$ row rank | |
+```artifact src=demos/joint-marginal-grid.jsx static math
+```
 
 ## Deferred
 

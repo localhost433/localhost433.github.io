@@ -25,7 +25,7 @@ function draw(cv, hc, state) {
   const nz = Math.abs(w[1]) + Math.abs(w[2]) > 1e-12;
   if (nz || Math.abs(w[0]) > 1e-12) {
     const cs = 8;
-    g.globalAlpha = 0.13;
+    g.globalAlpha = 0.09;
     for (let px = 0; px < S; px += cs) for (let py = 0; py < S; py += cs) {
       const a = (px + cs / 2) / S * 2 * L - L;
       const b = (S - py - cs / 2) / S * 2 * L - L;
@@ -36,8 +36,10 @@ function draw(cv, hc, state) {
     }
     g.globalAlpha = 1;
   }
+  // Grid is scaffolding and axes are information, so they must not share a weight.
   g.strokeStyle = C.border;
-  g.lineWidth = 0.5;
+  g.lineWidth = 1;
+  g.globalAlpha = 0.5;
   for (let k = -L; k <= L; k++) {
     g.beginPath();
     g.moveTo(X(k), 0);
@@ -46,7 +48,9 @@ function draw(cv, hc, state) {
     g.lineTo(S, Y(k));
     g.stroke();
   }
-  g.lineWidth = 1;
+  g.globalAlpha = 1;
+  g.strokeStyle = C.muted;
+  g.lineWidth = 1.25;
   g.beginPath();
   g.moveTo(X(0), 0);
   g.lineTo(X(0), S);
@@ -101,10 +105,12 @@ function draw(cv, hc, state) {
     } else g.fillRect(px - 5.5, py - 5.5, 11, 11);
     if (M.has(i)) {
       g.strokeStyle = C.fg;
-      g.lineWidth = 1.5;
+      g.lineWidth = 1.25;
+      g.globalAlpha = 0.3;
       g.beginPath();
       g.arc(px, py, 10, 0, 2 * Math.PI);
       g.stroke();
+      g.globalAlpha = 1;
     }
     if (last && last.i === i) {
       g.strokeStyle = C.acc;
@@ -113,6 +119,12 @@ function draw(cv, hc, state) {
       g.arc(px, py, 14, 0, 2 * Math.PI);
       g.stroke();
     }
+    // Points cluster, so their index labels overlap. A background-coloured stroke
+    // under each keeps both readable instead of letting them merge into one glyph.
+    g.lineWidth = 3;
+    g.strokeStyle = C.bg;
+    g.lineJoin = "round";
+    g.strokeText(String(i + 1), px + 8, py - 8);
     g.fillStyle = C.muted;
     g.fillText(String(i + 1), px + 8, py - 8);
   });
@@ -375,7 +387,8 @@ export default function PerceptronDemo() {
   }, last ? /*#__PURE__*/React.createElement(React.Fragment, null, "Last update used point ", last.i + 1, " (y = ", last.y > 0 ? "+1" : "−1", ").", /*#__PURE__*/React.createElement("br", null), "y w\u1D40x: ", last.before.toFixed(2), " \u2192 ", last.after.toFixed(2), /*#__PURE__*/React.createElement("br", null), "increase ", (last.after - last.before).toFixed(2), " = \u2016x\u2016\xB2 = ", last.n2.toFixed(2)) : "No update yet."), /*#__PURE__*/React.createElement("p", {
     style: {
       ...labelStyle(C),
-      margin: "6px 0 4px"
+      margin: "6px 0 4px",
+      visibility: hist.length ? "visible" : "hidden"
     }
   }, "Misclassified count after each update"), /*#__PURE__*/React.createElement("canvas", {
     ref: hc,
@@ -383,8 +396,9 @@ export default function PerceptronDemo() {
     style: {
       width: "100%",
       height: 110,
-      border: `0.5px solid ${C.border}`,
-      borderRadius: "6px"
+      borderRadius: "6px",
+      border: `1px solid ${C.border}`,
+      visibility: hist.length ? "visible" : "hidden"
     }
   }), /*#__PURE__*/React.createElement("p", {
     style: {

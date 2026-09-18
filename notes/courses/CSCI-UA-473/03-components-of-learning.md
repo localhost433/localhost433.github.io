@@ -61,18 +61,13 @@ problem, and slides 44-54 come back to it.
 ## Components of a learning system
 
 *Slides 7-17,* built up incrementally - the same figure (adapted from *Learning from Data:
-A Short Course*) is redrawn with one more box each pass. The final state:
+A Short Course*) is redrawn with one more box each pass. The figure below replays that
+build, with one addition the deck does not draw: the boundary around what the algorithm
+can actually see. The i.i.d. annotation arrives alongside the training data from slide 10
+onward and stays.
 
-| Component | Symbol | In the credit problem |
-|---|---|---|
-| Unknown target function | $f : \mathcal X \to \mathcal Y$ | the ideal credit approval formula - the true relation between a customer's characteristics and the money the bank can make from them |
-| Training data | $D = \{(x^1,y^1),\dots,(x^N,y^N)\}$ | historical records of current customers: the **only window** onto the ideal formula |
-| Hypothesis set | $\mathbb H$ | the family of functions believed to best approximate $f$; the set of candidate predictive functions |
-| Learning algorithm | $\mathcal A$ | the procedure that picks one member of $\mathbb H$ |
-| Final hypothesis | $g \approx f$ | the learned credit approval function |
-
-The annotation carried alongside the figure from slide 10 onward: **data points are
-typically assumed to be independent and identically distributed (i.i.d.).**
+```artifact src=demos/components-diagram.jsx static math
+```
 
 The structural point is what $\mathcal A$ does and does not see. It sees $D$ and
 $\mathbb H$. It never sees $f$. Everything it can possibly know about $f$ arrives through
@@ -281,14 +276,8 @@ Use the figure to see how the hypothesis set changes the votes.
 
 *Slides 55-67.*
 
-| Paradigm | Training data | Supervision |
-|---|---|---|
-| **Supervised** | input examples with annotations (labels) | explicit labels |
-| **Unsupervised** | inputs only | none |
-| **Semi-supervised** | small labeled subset + large unlabeled remainder | partial |
-| **Self-supervised** | unlabeled data with indirect labels inferred from its own structure | derived from the data |
-| **Transfer** | large auxiliary-task data + small final-task data | labels on the auxiliary task |
-| **Reinforcement** | no input-output pairs; trial and error against an environment | scalar reward |
+```artifact src=demos/paradigms-tree.jsx static
+```
 
 **Supervised** (slides 56-57). Examples: bank customers with their creditworthiness; images
 of apples and oranges each marked with what it contains; natural scenes with every pixel
@@ -349,28 +338,6 @@ of these are answered in this course:
 - How to measure the usefulness of the trained function?
 - What's the guarantee that a trained function that does well on the training data actually
   works on unseen data when deployed?
-
-## What to retain from L3
-
-| Topic | Key point |
-|---|---|
-| $f$ | the unknown target function $\mathcal X \to \mathcal Y$; never observed, only sampled |
-| $D$ | $\{(x^i,y^i)\}_{i=1}^N$, assumed i.i.d.; the only window onto $f$ |
-| $\mathbb H$ | the hypothesis set of candidate functions, chosen *before* seeing data |
-| $\mathcal A$ | the learning algorithm; sees $D$ and $\mathbb H$, never $f$ |
-| $g$ | the final hypothesis, $g \approx f$ |
-| Parametric vs. non-parametric | whether parameter count depends on $N$, not whether parameters exist |
-| "Linear model" | linear in the **parameters**, not the inputs |
-| One-hot | avoids false ordering and spacing on categorical levels |
-| Perceptron | $h(x) = \operatorname{sign}(w^{\mathsf T}x + b)$; $w^{\mathsf T}x + b = 0$ is a hyperplane with normal $w$ |
-| Bias absorption | prepend 1 to $x$ and $b$ to $w$; one update rule covers the bias |
-| PLA update | $w(t+1) \leftarrow w(t) + y(t)x(t)$, applied to a **misclassified** example |
-| PLA guarantee | terminates **iff** data is linearly separable; says nothing about *which* separator |
-| Why the update works | $y w^{\mathsf T}x$ increases by $\|x\|^2$ on that example - locally, not globally |
-| Inductive bias | structure posited to hold in both seen and unseen data |
-| No Free Lunch | an inductive bias that works well on one target set works badly on its complement |
-| The slogan | there is no machine learning without assumptions |
-| Paradigms | separated by *where supervision comes from*: annotator / nowhere / the data itself / another task / the environment |
 
 ## Practice
 
