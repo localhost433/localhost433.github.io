@@ -81,8 +81,8 @@ c.os = new Mac();            // and changed later, which nine classes could not 
   },
   caption: {
     cols: [
-      { tag: "abstraction", kind: "cpp", children: <>The side the client holds and calls — <code className="mm-ic">computer</code> and its kinds. It varies for its own reasons: form factor, price, ports.</> },
-      { tag: "implementation", kind: "int", children: <>The side that does the platform work — <code className="mm-ic">OS</code> and its kinds. It varies for entirely different reasons, on its own schedule.</> },
+      { tag: "abstraction", kind: "cpp", children: <>The side the client holds and calls — <code className="ui-ic">computer</code> and its kinds. It varies for its own reasons: form factor, price, ports.</> },
+      { tag: "implementation", kind: "int", children: <>The side that does the platform work — <code className="ui-ic">OS</code> and its kinds. It varies for entirely different reasons, on its own schedule.</> },
     ],
     punch: "The trigger for Bridge is two dimensions that change independently. Ask whether the two axes would ever be released, tested, or owned separately — if yes, do not multiply them into one hierarchy.",
   },

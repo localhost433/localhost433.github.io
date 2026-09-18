@@ -85,8 +85,8 @@ export default function RegisterVsStack() {
 
       <CompareCaption
         cols={[
-          { tag: "register", kind: "asm", children: <>Each instruction <strong>names</strong> the registers it reads and writes (<code className="mm-ic">add %rbx, %rax</code>). The CPU has a fixed set of named registers; the result lives in <code className="mm-ic">rax</code>.</> },
-          { tag: "stack", kind: "java", children: <>Each opcode carries <strong>no operands</strong>: <code className="mm-ic">iadd</code> just pops the top two values and pushes their sum. Values flow through <strong>one operand stack</strong>, never named.</> },
+          { tag: "register", kind: "asm", children: <>Each instruction <strong>names</strong> the registers it reads and writes (<code className="ui-ic">add %rbx, %rax</code>). The CPU has a fixed set of named registers; the result lives in <code className="ui-ic">rax</code>.</> },
+          { tag: "stack", kind: "java", children: <>Each opcode carries <strong>no operands</strong>: <code className="ui-ic">iadd</code> just pops the top two values and pushes their sum. Values flow through <strong>one operand stack</strong>, never named.</> },
           { tag: "why it matters", kind: "cpp", children: <>Naming no registers is what makes bytecode <strong>portable</strong> — it needn't know how many registers a CPU has. The JVM maps the stack onto real registers when it runs.</> },
         ]}
         punch={<>A <em>register</em> machine spells out <em>where</em> every operand lives; a <em>stack</em> machine leaves that implicit on the operand stack. Java compiles to the stack model, then the JVM lowers it to the register model underneath.</>}

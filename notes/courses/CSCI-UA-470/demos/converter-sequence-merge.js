@@ -71,23 +71,23 @@ export default function ConverterSequenceMerge() {
       tag: "difference 1",
       kind: "cpp",
       children: /*#__PURE__*/React.createElement(React.Fragment, null, "The dialog class: ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "k : KgLbGUI"), " against ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "k : CmInchGUI"), ".")
     }, {
       tag: "difference 2",
       kind: "java",
       children: /*#__PURE__*/React.createElement(React.Fragment, null, "The worker's method: ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "convertKgToLb(amount)"), " against ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "convertCmToInch(amount)"), ".")
     }],
     punch: /*#__PURE__*/React.createElement(React.Fragment, null, "Two diagrams, one shape. The unit is doing the work of an ", /*#__PURE__*/React.createElement("em", null, "identity"), " when it should be doing the work of a ", /*#__PURE__*/React.createElement("em", null, "parameter"), " \u2014 so give ", /*#__PURE__*/React.createElement("code", {
-      className: "mm-ic"
+      className: "ui-ic"
     }, "Converter"), " a single ", /*#__PURE__*/React.createElement("code", {
-      className: "mm-ic"
+      className: "ui-ic"
     }, "convert(amount, targetUnit)"), " and the two collapse into one.")
   }));
 }

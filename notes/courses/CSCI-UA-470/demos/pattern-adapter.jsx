@@ -90,8 +90,8 @@ dbc = new SQLiteCNN();     dbc.write(q);  results = dbc.read(q);`,
   },
   caption: {
     cols: [
-      { tag: "inherits", kind: "cpp", children: <><code className="mm-ic">SQLiteCNN</code> extends <code className="mm-ic">DBCNN</code>, so it fits everywhere a <code className="mm-ic">DBCNN</code> fits. That is the half that faces the <strong>client</strong>.</> },
-      { tag: "holds", kind: "int", children: <>It also holds a <code className="mm-ic">SQLite</code> and calls <em>its</em> methods. That is the half that faces the <strong>stranger</strong>. An adapter always has both.</> },
+      { tag: "inherits", kind: "cpp", children: <><code className="ui-ic">SQLiteCNN</code> extends <code className="ui-ic">DBCNN</code>, so it fits everywhere a <code className="ui-ic">DBCNN</code> fits. That is the half that faces the <strong>client</strong>.</> },
+      { tag: "holds", kind: "int", children: <>It also holds a <code className="ui-ic">SQLite</code> and calls <em>its</em> methods. That is the half that faces the <strong>stranger</strong>. An adapter always has both.</> },
     ],
     punch: "The deck's intent line reads \"extend the ability of existing class\", which undersells it: an adapter adds no ability. It changes the shape of an ability that already existed, so an incompatible class can be used through an interface it was never written for.",
   },

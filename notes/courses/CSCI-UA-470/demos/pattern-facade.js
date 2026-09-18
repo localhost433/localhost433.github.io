@@ -139,17 +139,17 @@ o.prepare();`,
       tag: "still there",
       kind: "cpp",
       children: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "waiter"), ", ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "kitchen"), " and ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "Food"), " are untouched and still directly usable. A facade ", /*#__PURE__*/React.createElement("strong", null, "adds"), " an entrance; it does not seal the building.")
     }, {
       tag: "new & smaller",
       kind: "int",
       children: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "Order"), " offers an interface that did not exist before \u2014 one method where there were four objects and a required call order.")
     }],
     punch: "This is the wrapper that invents a new interface rather than preserving one. Adapter reshapes one class's interface; Proxy and Decorator keep an interface identical; Facade introduces a smaller one over several objects at once."

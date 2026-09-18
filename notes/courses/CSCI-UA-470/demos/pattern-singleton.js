@@ -95,13 +95,13 @@ s3 = Singleton.getInstance();     // still the same object`
       tag: "private",
       kind: "cpp",
       children: /*#__PURE__*/React.createElement(React.Fragment, null, "Both the field and the ", /*#__PURE__*/React.createElement("strong", null, "constructor"), " are private. That single mark is what makes the pattern enforceable rather than advisory \u2014 ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "new Singleton()"), " stops compiling outside the class.")
     }, {
       tag: "static",
       kind: "java",
       children: /*#__PURE__*/React.createElement(React.Fragment, null, "The field and ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "getInstance()"), " are ", /*#__PURE__*/React.createElement("strong", null, "static"), ", so they belong to the class, not to an object \u2014 which they must, since there is no object to call the first one on.")
     }],
     punch: "s1, s2, and s3 are three names for one object. The pattern does not make copying hard; it makes a second object impossible."

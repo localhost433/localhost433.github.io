@@ -83,15 +83,15 @@ s = ShapeFactory.getRandomShape();`,
       tag: "one door",
       kind: "cpp",
       children: /*#__PURE__*/React.createElement(React.Fragment, null, "The ladder does not disappear \u2014 it ", /*#__PURE__*/React.createElement("strong", null, "moves"), ", into ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "ShapeFactory"), ". The win is that it now exists ", /*#__PURE__*/React.createElement("em", null, "once"), " instead of once per client.")
     }, {
       tag: "one type",
       kind: "int",
       children: /*#__PURE__*/React.createElement(React.Fragment, null, "Every method returns ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "Shape"), ", the abstract parent. A client that only ever holds ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "Shape"), " cannot break when a subclass is added.")
     }],
     punch: "The deck also crosses out the bare hierarchy on its own: Shape / Circle / Rect / Triangle without a factory is not the pattern. The hierarchy makes the objects interchangeable; the factory is what keeps the client from having to choose between them by name."

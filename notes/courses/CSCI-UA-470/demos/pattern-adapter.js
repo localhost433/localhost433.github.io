@@ -132,17 +132,17 @@ dbc = new SQLiteCNN();     dbc.write(q);  results = dbc.read(q);`,
       tag: "inherits",
       kind: "cpp",
       children: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "SQLiteCNN"), " extends ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "DBCNN"), ", so it fits everywhere a ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "DBCNN"), " fits. That is the half that faces the ", /*#__PURE__*/React.createElement("strong", null, "client"), ".")
     }, {
       tag: "holds",
       kind: "int",
       children: /*#__PURE__*/React.createElement(React.Fragment, null, "It also holds a ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "SQLite"), " and calls ", /*#__PURE__*/React.createElement("em", null, "its"), " methods. That is the half that faces the ", /*#__PURE__*/React.createElement("strong", null, "stranger"), ". An adapter always has both.")
     }],
     punch: "The deck's intent line reads \"extend the ability of existing class\", which undersells it: an adapter adds no ability. It changes the shape of an ability that already existed, so an incompatible class can be used through an interface it was never written for."

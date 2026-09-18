@@ -79,7 +79,7 @@ function renderInline(text) {
   return parts.map((p, i) => {
     if (p.startsWith("`") && p.endsWith("`")) return /*#__PURE__*/React.createElement("code", {
       key: i,
-      className: "mm-ic"
+      className: "ui-ic"
     }, p.slice(1, -1));
     if (p.startsWith("**") && p.endsWith("**")) return /*#__PURE__*/React.createElement("strong", {
       key: i

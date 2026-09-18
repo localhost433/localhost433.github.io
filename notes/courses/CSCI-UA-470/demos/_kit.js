@@ -6,8 +6,8 @@ import { seededShuffle, gradeOrder, hashSeed } from "@course/seq-order";
 
 // Promoted to the global kit so CSCI-UA-473 can share them. Re-exported here so
 // this course's ~168 demos keep importing them from "@course" unchanged.
-export { DiagramSvg, diagramPalette, KnobBar, CompareCaption, CodeBlock } from "@kit";
-import { DiagramSvg, diagramPalette, KnobBar, CompareCaption, CodeBlock, tokenize, registerLang, highlightCode, highlight } from "@kit";
+export { DiagramSvg, diagramPalette, KnobBar, CompareCaption, CodeBlock, Mcq, McqFigure, mcq, renderCaption } from "@kit";
+import { DiagramSvg, diagramPalette, KnobBar, CompareCaption, CodeBlock, Mcq, McqFigure, mcq, renderCaption, tokenize, registerLang, highlightCode, highlight } from "@kit";
 
 /* ============================================================
    Shared textbook memory model for CSCI-UA-470.
@@ -71,48 +71,6 @@ registerLang("bytecode", highlightBytecode);
 
 // A curated-asm line beginning with "…" is an elision row (muted, non-mappable).
 const isElision = ln => /^\s*…/.test(ln);
-
-// Expand code sentinels (\0 N \0) in an already-emphasis-parsed string back
-// into <code> elements, leaving the surrounding text as-is.
-function expandCodes(str, codes, kp) {
-  return String(str).split(/\u0000(\d+)\u0000/).map((p, i) => i % 2 === 1 ? /*#__PURE__*/React.createElement("code", {
-    key: kp + "c" + i,
-    className: "mm-ic"
-  }, codes[+p]) : /*#__PURE__*/React.createElement(React.Fragment, {
-    key: kp + "t" + i
-  }, p));
-}
-// Render a caption with composable inline markdown: `code`, **bold**, *italic*.
-// Code spans are masked out before emphasis parsing, so the two compose, e.g.
-// **`x`** renders as bold code, and **a `b` c** bolds the whole run incl. code.
-function renderCaption(text) {
-  const codes = [];
-  const masked = String(text).replace(/`([^`]+)`/g, (_, c) => {
-    codes.push(c);
-    return "\u0000" + (codes.length - 1) + "\u0000";
-  });
-  const out = [];
-  const re = /\*\*([^*]+)\*\*|\*([^*]+)\*/g;
-  let last = 0,
-    m,
-    k = 0;
-  while ((m = re.exec(masked)) !== null) {
-    if (m.index > last) out.push(/*#__PURE__*/React.createElement(React.Fragment, {
-      key: "t" + k
-    }, expandCodes(masked.slice(last, m.index), codes, "t" + k)));
-    if (m[1] != null) out.push(/*#__PURE__*/React.createElement("strong", {
-      key: "b" + k
-    }, expandCodes(m[1], codes, "b" + k)));else out.push(/*#__PURE__*/React.createElement("em", {
-      key: "i" + k
-    }, expandCodes(m[2], codes, "i" + k)));
-    last = re.lastIndex;
-    k++;
-  }
-  if (last < masked.length) out.push(/*#__PURE__*/React.createElement(React.Fragment, {
-    key: "t" + k
-  }, expandCodes(masked.slice(last), codes, "t" + k)));
-  return out;
-}
 
 /* ---- cell factories (terser demo authoring) ----
    stack("x", "int", 5, { hl: true })           a stack variable
@@ -5520,7 +5478,7 @@ export function useCaseBuild(cfg) {
 
 /* ---- comparison captions (shared); tagged "A vs B" labels for any compare figure.
    Tags reuse the mm-cap-tag palette; pass any `kind` ("cpp" | "java" | "asm" | "int").
-   Content is JSX so it can carry `<strong>`/`<em>`/`<code className="mm-ic">`. Nothing
+   Content is JSX so it can carry `<strong>`/`<em>`/`<code className="ui-ic">`. Nothing
    is hardcoded — reused across compare demos (L08, L09, …).
 
    CompareTitles — a compact header row of tagged one-liners, sits ABOVE a figure:
@@ -5606,105 +5564,10 @@ export function MemoryCompare({
    Steps drive the memory view: give a step `cells` (MemoryModel) or `layout`
    (ObjectLayout); optional `code`/`line`, `outputs`, `caption`. For a sizeof
    comparison instead, use `sizes({ items: [{ title, fields }, …] })`. */
-/* MCQ: a paged multiple-choice quiz (4 choices, or 2 for true/false). No score
-   picking marks the choice ✓/✗, reveals the correct one, and shows a "why".
-   Reuses the .mm-quiz nav shell. `figure` is an optional { code, lang } snippet
-   or { image, alt } picture above the choices. */
-export function McqFigure({
-  figure
-}) {
-  if (!figure) return null;
-  if (figure.code) return /*#__PURE__*/React.createElement("div", {
-    className: "mm-mcq__fig"
-  }, /*#__PURE__*/React.createElement(CodeBlock, {
-    code: figure.code,
-    lang: figure.lang || "cpp"
-  }));
-  if (figure.image) return /*#__PURE__*/React.createElement("img", {
-    className: "mm-mcq__img",
-    src: figure.image,
-    alt: figure.alt || ""
-  });
-  return null; // { artifact: src } embed is deferred
-}
-export function Mcq({
-  questions: rawQuestions
-}) {
-  // Shuffle each question's choices (seeded by index + stem, so the order is
-  // stable per question but varies across questions), authored configs list the
-  // correct choice first for readability, which must never survive into the UI.
-  const questions = React.useMemo(() => rawQuestions.map((q, i) => ({
-    ...q,
-    choices: seededShuffle(q.choices, hashSeed(i + "#" + q.stem))
-  })), [rawQuestions]);
-  const [cur, setCur] = React.useState(0);
-  const [picks, setPicks] = React.useState({}); // qIndex -> choiceIndex, or -1 for "show answer"
-  const n = questions.length;
-  const go = d => setCur(c => Math.max(0, Math.min(n - 1, c + d)));
-  const q = questions[cur];
-  const pick = picks[cur];
-  const answered = pick != null;
-  const choose = k => setPicks(p => p[cur] != null ? p : {
-    ...p,
-    [cur]: k
-  });
-  return /*#__PURE__*/React.createElement("div", {
-    className: "mm-mcq"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "mm-quiz__nav"
-  }, /*#__PURE__*/React.createElement("button", {
-    type: "button",
-    className: "mm-quiz__btn",
-    onClick: () => go(-1),
-    disabled: cur === 0,
-    "aria-label": "Previous question"
-  }, "\u2039 Prev"), /*#__PURE__*/React.createElement("span", {
-    className: "mm-quiz__pos",
-    "aria-live": "polite"
-  }, "Question ", cur + 1, " of ", n), /*#__PURE__*/React.createElement("button", {
-    type: "button",
-    className: "mm-quiz__btn",
-    onClick: () => go(1),
-    disabled: cur === n - 1,
-    "aria-label": "Next question"
-  }, "Next \u203A")), /*#__PURE__*/React.createElement("p", {
-    className: "mm-mcq__stem"
-  }, renderCaption(q.stem)), /*#__PURE__*/React.createElement(McqFigure, {
-    figure: q.figure
-  }), /*#__PURE__*/React.createElement("div", {
-    className: "mm-mcq__choices",
-    role: "group"
-  }, q.choices.map((c, k) => {
-    const cls = !answered ? "" : c.correct ? " mm-mcq__choice--correct" : k === pick ? " mm-mcq__choice--wrong" : "";
-    return /*#__PURE__*/React.createElement("button", {
-      type: "button",
-      key: k,
-      className: "mm-mcq__choice" + cls,
-      disabled: answered,
-      onClick: () => choose(k)
-    }, answered && c.correct ? /*#__PURE__*/React.createElement("span", {
-      className: "mm-mcq__mark"
-    }, "\u2713 ") : null, answered && k === pick && !c.correct ? /*#__PURE__*/React.createElement("span", {
-      className: "mm-mcq__mark mm-mcq__mark--no"
-    }, "\u2717 ") : null, renderCaption(c.text));
-  })), !answered ? /*#__PURE__*/React.createElement("button", {
-    type: "button",
-    className: "mm-mcq__show",
-    onClick: () => choose(-1)
-  }, "Show answer") : /*#__PURE__*/React.createElement("p", {
-    className: "mm-mcq__why"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "mm-cap-txt"
-  }, renderCaption(q.why))));
-}
+
 export function scene(config) {
   return function App() {
     return /*#__PURE__*/React.createElement(MemoryScene, config);
-  };
-}
-export function mcq(config) {
-  return function App() {
-    return /*#__PURE__*/React.createElement(Mcq, config);
   };
 }
 export function sizes(config) {

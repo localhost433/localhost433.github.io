@@ -83,15 +83,15 @@ s1.run();`,
       tag: "fixed",
       kind: "cpp",
       children: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "run()"), " lives in the parent and is ", /*#__PURE__*/React.createElement("strong", null, "not"), " overridden. The order of the steps is the thing being protected \u2014 a subclass cannot reorder or skip them.")
     }, {
       tag: "variable",
       kind: "int",
       children: /*#__PURE__*/React.createElement(React.Fragment, null, "Each step is a hole. A subclass fills the ones it cares about and inherits the rest, so ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "Approach-1"), " and ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "Approach-2"), " differ by exactly one method each.")
     }],
     punch: "This is the only behavioral pattern in L20 that varies behaviour through inheritance. Every other one holds an object instead — which is why Strategy, its closest neighbour, can change its algorithm at run time and Template Method cannot."

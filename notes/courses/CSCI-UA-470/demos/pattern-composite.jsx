@@ -93,8 +93,8 @@ fldr1.browse();   // prints [ f1's content, f2's content ]`,
   },
   caption: {
     cols: [
-      { tag: "granularity", kind: "cpp", children: <>The deck's word. A <code className="mm-ic">File</code> is one thing and a <code className="mm-ic">Folder</code> is many, but both are an <code className="mm-ic">item</code>, so the client stops caring which it holds.</> },
-      { tag: "recursion", kind: "int", children: <><code className="mm-ic">Folder</code> holds <code className="mm-ic">List&lt;item&gt;</code> — the <strong>parent</strong> type, not <code className="mm-ic">List&lt;File&gt;</code>. That one choice is what lets folders nest, and what makes <code className="mm-ic">browse()</code> recurse.</> },
+      { tag: "granularity", kind: "cpp", children: <>The deck's word. A <code className="ui-ic">File</code> is one thing and a <code className="ui-ic">Folder</code> is many, but both are an <code className="ui-ic">item</code>, so the client stops caring which it holds.</> },
+      { tag: "recursion", kind: "int", children: <><code className="ui-ic">Folder</code> holds <code className="ui-ic">List&lt;item&gt;</code> — the <strong>parent</strong> type, not <code className="ui-ic">List&lt;File&gt;</code>. That one choice is what lets folders nest, and what makes <code className="ui-ic">browse()</code> recurse.</> },
     ],
     punch: "The test for this pattern is the self-reference: the composite holds a collection of the abstraction it itself implements. Take that away and you have an ordinary has-a, not a Composite.",
   },

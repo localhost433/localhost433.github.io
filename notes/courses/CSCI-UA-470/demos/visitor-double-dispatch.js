@@ -104,15 +104,15 @@ const acceptSteps = (shape, vis, si) => [{
   },
   title: "① a virtual call on the shape",
   body: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("code", {
-    className: "mm-ic"
+    className: "ui-ic"
   }, "s.accept(v)"), " is an ordinary polymorphic call.", " ", /*#__PURE__*/React.createElement("code", {
-    className: "mm-ic"
+    className: "ui-ic"
   }, "s"), " is declared ", /*#__PURE__*/React.createElement("code", {
-    className: "mm-ic"
+    className: "ui-ic"
   }, "Shape"), ",", " ", "but it ", /*#__PURE__*/React.createElement("em", null, "is"), " a ", /*#__PURE__*/React.createElement("code", {
-    className: "mm-ic"
+    className: "ui-ic"
   }, shape), " at run time, so", " ", /*#__PURE__*/React.createElement("code", {
-    className: "mm-ic"
+    className: "ui-ic"
   }, shape, ".accept"), " runs. Nothing about the visitor", " ", "has been decided yet.")
 }, {
   lines: [5, 9 + si],
@@ -122,19 +122,19 @@ const acceptSteps = (shape, vis, si) => [{
   },
   title: "② an overload chosen at compile time",
   body: /*#__PURE__*/React.createElement(React.Fragment, null, "Inside ", /*#__PURE__*/React.createElement("code", {
-    className: "mm-ic"
+    className: "ui-ic"
   }, shape, ".accept"), ", ", /*#__PURE__*/React.createElement("code", {
-    className: "mm-ic"
+    className: "ui-ic"
   }, "this"), " ", "is statically a ", /*#__PURE__*/React.createElement("code", {
-    className: "mm-ic"
+    className: "ui-ic"
   }, shape), " \u2014 so the compiler picked", " ", /*#__PURE__*/React.createElement("code", {
-    className: "mm-ic"
+    className: "ui-ic"
   }, "visit(", shape, ")"), " when it compiled this line, and no", " ", "other overload can ever run from here. That fixes the ", /*#__PURE__*/React.createElement("strong", null, "column"), ",", " ", "and it is why every element class needs its own one-line", " ", /*#__PURE__*/React.createElement("code", {
-    className: "mm-ic"
+    className: "ui-ic"
   }, "accept"), ": a shared one in ", /*#__PURE__*/React.createElement("code", {
-    className: "mm-ic"
+    className: "ui-ic"
   }, "Shape"), " ", "would bind ", /*#__PURE__*/React.createElement("code", {
-    className: "mm-ic"
+    className: "ui-ic"
   }, "visit(Shape)"), " and lose the type.")
 }, {
   lines: [13, 14 + si],
@@ -146,11 +146,11 @@ const acceptSteps = (shape, vis, si) => [{
   },
   title: "③ a virtual call on the visitor",
   body: /*#__PURE__*/React.createElement(React.Fragment, null, "That chosen overload is still a virtual call, now on", " ", /*#__PURE__*/React.createElement("code", {
-    className: "mm-ic"
+    className: "ui-ic"
   }, "visitor"), " \u2014 whose run-time type is", " ", /*#__PURE__*/React.createElement("code", {
-    className: "mm-ic"
+    className: "ui-ic"
   }, vis), ". That fixes the ", /*#__PURE__*/React.createElement("strong", null, "row"), ". Two runtime types, consulted one at a time, land on one of nine bodies:", " ", /*#__PURE__*/React.createElement("code", {
-    className: "mm-ic"
+    className: "ui-ic"
   }, vis, ".visit(", shape, ")"), ".")
 }];
 const directSteps = (shape, vis) => [{
@@ -160,15 +160,15 @@ const directSteps = (shape, vis) => [{
   },
   title: "① the argument's type is lost at compile time",
   body: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("code", {
-    className: "mm-ic"
+    className: "ui-ic"
   }, "s"), " is ", /*#__PURE__*/React.createElement("em", null, "declared"), " ", /*#__PURE__*/React.createElement("code", {
-    className: "mm-ic"
+    className: "ui-ic"
   }, "Shape"), ". Overload resolution is a compile-time rule, so it can only use that declared type \u2014 it binds ", /*#__PURE__*/React.createElement("code", {
-    className: "mm-ic"
+    className: "ui-ic"
   }, "visit(Shape)"), ".", " ", "That ", /*#__PURE__*/React.createElement("code", {
-    className: "mm-ic"
+    className: "ui-ic"
   }, "s"), " happens to hold a", " ", /*#__PURE__*/React.createElement("code", {
-    className: "mm-ic"
+    className: "ui-ic"
   }, shape), " is invisible here; only ", /*#__PURE__*/React.createElement("em", null, "receivers"), " get", " ", "late binding in Java, never arguments.")
 }, {
   lines: [8, 9],
@@ -179,11 +179,11 @@ const directSteps = (shape, vis) => [{
   },
   title: "② one dispatch, then a hand-written type test",
   body: /*#__PURE__*/React.createElement(React.Fragment, null, "The single call dispatches on ", /*#__PURE__*/React.createElement("code", {
-    className: "mm-ic"
+    className: "ui-ic"
   }, "visitor"), " to", " ", /*#__PURE__*/React.createElement("code", {
-    className: "mm-ic"
+    className: "ui-ic"
   }, vis, ".visit(Shape)"), " \u2014 and now the method has to recover by hand what the compiler discarded. Nine bodies have collapsed into three, each holding the ", /*#__PURE__*/React.createElement("code", {
-    className: "mm-ic"
+    className: "ui-ic"
   }, "instanceof"), " chain that Open\u2013Closed exists", " ", "to delete. This is the design Visitor is bought to avoid.")
 }];
 

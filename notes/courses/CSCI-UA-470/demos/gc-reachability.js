@@ -327,9 +327,9 @@ export default function GcReachability() {
       tag: "vs C++",
       kind: "cpp",
       children: /*#__PURE__*/React.createElement(React.Fragment, null, "C++ has no tracing GC: you ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "delete"), " manually, and naive reference counting (e.g. ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "shared_ptr"), " cycles) ", /*#__PURE__*/React.createElement("em", null, "leaks"), " exactly this island. The JVM does not.")
     }],
     punch: "\"No longer reachable\" — not \"no longer referenced\" — is what makes an object collectible."

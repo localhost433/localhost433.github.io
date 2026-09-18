@@ -163,13 +163,13 @@ export default function MemStackVsHeap() {
   }, "C++"), /*#__PURE__*/React.createElement("span", {
     className: "mm-cap-txt"
   }, "An object lives ", /*#__PURE__*/React.createElement("strong", null, "on the stack"), " (", /*#__PURE__*/React.createElement("code", {
-    className: "mm-ic"
+    className: "ui-ic"
   }, "Person p1"), " \u2014 fields inline in the frame) or ", /*#__PURE__*/React.createElement("strong", null, "on the heap"), " (", /*#__PURE__*/React.createElement("code", {
-    className: "mm-ic"
+    className: "ui-ic"
   }, "new Person"), ", via a", " ", /*#__PURE__*/React.createElement("code", {
-    className: "mm-ic"
+    className: "ui-ic"
   }, "Person*"), " you must ", /*#__PURE__*/React.createElement("code", {
-    className: "mm-ic"
+    className: "ui-ic"
   }, "delete"), ").")), /*#__PURE__*/React.createElement("p", {
     className: "mm-cap-row"
   }, /*#__PURE__*/React.createElement("span", {
@@ -177,10 +177,10 @@ export default function MemStackVsHeap() {
   }, "Java"), /*#__PURE__*/React.createElement("span", {
     className: "mm-cap-txt"
   }, /*#__PURE__*/React.createElement("strong", null, "No stack objects."), " Every ", /*#__PURE__*/React.createElement("code", {
-    className: "mm-ic"
+    className: "ui-ic"
   }, "new"), " allocates ", /*#__PURE__*/React.createElement("strong", null, "on the heap"), "; the variable holds only a ", /*#__PURE__*/React.createElement("strong", null, "reference"), ". Even ", /*#__PURE__*/React.createElement("code", {
-    className: "mm-ic"
+    className: "ui-ic"
   }, "String name"), " is its own heap object, reclaimed by the ", /*#__PURE__*/React.createElement("strong", null, "garbage collector"), ", not ", /*#__PURE__*/React.createElement("code", {
-    className: "mm-ic"
+    className: "ui-ic"
   }, "delete"), "."))));
 }

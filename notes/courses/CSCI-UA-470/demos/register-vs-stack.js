@@ -192,15 +192,15 @@ export default function RegisterVsStack() {
       tag: "register",
       kind: "asm",
       children: /*#__PURE__*/React.createElement(React.Fragment, null, "Each instruction ", /*#__PURE__*/React.createElement("strong", null, "names"), " the registers it reads and writes (", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "add %rbx, %rax"), "). The CPU has a fixed set of named registers; the result lives in ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "rax"), ".")
     }, {
       tag: "stack",
       kind: "java",
       children: /*#__PURE__*/React.createElement(React.Fragment, null, "Each opcode carries ", /*#__PURE__*/React.createElement("strong", null, "no operands"), ": ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "iadd"), " just pops the top two values and pushes their sum. Values flow through ", /*#__PURE__*/React.createElement("strong", null, "one operand stack"), ", never named.")
     }, {
       tag: "why it matters",

@@ -194,7 +194,7 @@ Every caption string that goes through `renderCaption` — `MemoryScene` step ca
 put cross-note links in the note's own markdown, not in a figure caption.
 
 `CompareCaption`'s `punch` is rendered raw, so it takes plain text or JSX — not even
-backticks. Its `cols[].children` is JSX, so use `<code className="mm-ic">…</code>` there.
+backticks. Its `cols[].children` is JSX, so use `<code className="ui-ic">…</code>` there.
 
 ## Styles
 

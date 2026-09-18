@@ -85,7 +85,7 @@ function StepDiagram({ step }) {
 function renderInline(text) {
   const parts = String(text).split(/(`[^`]+`|\*\*[^*]+\*\*)/g);
   return parts.map((p, i) => {
-    if (p.startsWith("`") && p.endsWith("`")) return <code key={i} className="mm-ic">{p.slice(1, -1)}</code>;
+    if (p.startsWith("`") && p.endsWith("`")) return <code key={i} className="ui-ic">{p.slice(1, -1)}</code>;
     if (p.startsWith("**") && p.endsWith("**")) return <strong key={i}>{p.slice(2, -2)}</strong>;
     return <React.Fragment key={i}>{p}</React.Fragment>;
   });

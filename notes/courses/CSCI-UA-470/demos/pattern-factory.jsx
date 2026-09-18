@@ -64,8 +64,8 @@ s = ShapeFactory.getRandomShape();`,
   },
   caption: {
     cols: [
-      { tag: "one door", kind: "cpp", children: <>The ladder does not disappear — it <strong>moves</strong>, into <code className="mm-ic">ShapeFactory</code>. The win is that it now exists <em>once</em> instead of once per client.</> },
-      { tag: "one type", kind: "int", children: <>Every method returns <code className="mm-ic">Shape</code>, the abstract parent. A client that only ever holds <code className="mm-ic">Shape</code> cannot break when a subclass is added.</> },
+      { tag: "one door", kind: "cpp", children: <>The ladder does not disappear — it <strong>moves</strong>, into <code className="ui-ic">ShapeFactory</code>. The win is that it now exists <em>once</em> instead of once per client.</> },
+      { tag: "one type", kind: "int", children: <>Every method returns <code className="ui-ic">Shape</code>, the abstract parent. A client that only ever holds <code className="ui-ic">Shape</code> cannot break when a subclass is added.</> },
     ],
     punch: "The deck also crosses out the bare hierarchy on its own: Shape / Circle / Rect / Triangle without a factory is not the pattern. The hierarchy makes the objects interchangeable; the factory is what keeps the client from having to choose between them by name.",
   },

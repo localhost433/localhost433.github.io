@@ -340,29 +340,29 @@ export default function ConstFinalImmutable() {
       tag: "C++ const",
       kind: "cpp",
       children: /*#__PURE__*/React.createElement(React.Fragment, null, "Fine-grained: you choose ", /*#__PURE__*/React.createElement("em", null, "what"), " is constant -- the value, the pointee viewed through a handle (", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "const T*"), "), the pointer itself (", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "T* const"), "), or ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "*this"), " in a ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "const"), " member.")
     }, {
       tag: "Java final",
       kind: "java",
       children: /*#__PURE__*/React.createElement(React.Fragment, null, "Coarse: the lock sits on a ", /*#__PURE__*/React.createElement("strong", null, "name or edge"), " -- a binding (", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "final T x"), "), an override (", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "final m()"), "), a subclass (", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "final class"), "). It ", /*#__PURE__*/React.createElement("strong", null, "never"), " freezes the object reached through a reference.")
     }, {
       tag: "immutable",
       kind: "asm",
       children: /*#__PURE__*/React.createElement(React.Fragment, null, "A ", /*#__PURE__*/React.createElement("strong", null, "design property"), ", not a keyword: all-final fields + no setters + defensive copies freeze the ", /*#__PURE__*/React.createElement("strong", null, "whole observable state"), " (e.g. ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "String"), ").")
     }],
     punch: "const/final lock a binding or a handle; immutability locks the object itself. A final reference to a mutable object is not immutable -- final Circle c still allows c.radius = 10."

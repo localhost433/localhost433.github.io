@@ -38,10 +38,10 @@ export default function ConverterSequenceMerge() {
       <CompareCaption
         cols={[
           { tag: "identical", kind: "int", children: <>Same participants, same messages, same order, same activation bars, same returns. Read the two figures row by row and every row matches. (The lifelines sit at slightly different widths only because the labels are different lengths.)</> },
-          { tag: "difference 1", kind: "cpp", children: <>The dialog class: <code className="mm-ic">k : KgLbGUI</code> against <code className="mm-ic">k : CmInchGUI</code>.</> },
-          { tag: "difference 2", kind: "java", children: <>The worker's method: <code className="mm-ic">convertKgToLb(amount)</code> against <code className="mm-ic">convertCmToInch(amount)</code>.</> },
+          { tag: "difference 1", kind: "cpp", children: <>The dialog class: <code className="ui-ic">k : KgLbGUI</code> against <code className="ui-ic">k : CmInchGUI</code>.</> },
+          { tag: "difference 2", kind: "java", children: <>The worker's method: <code className="ui-ic">convertKgToLb(amount)</code> against <code className="ui-ic">convertCmToInch(amount)</code>.</> },
         ]}
-        punch={<>Two diagrams, one shape. The unit is doing the work of an <em>identity</em> when it should be doing the work of a <em>parameter</em> — so give <code className="mm-ic">Converter</code> a single <code className="mm-ic">convert(amount, targetUnit)</code> and the two collapse into one.</>}
+        punch={<>Two diagrams, one shape. The unit is doing the work of an <em>identity</em> when it should be doing the work of a <em>parameter</em> — so give <code className="ui-ic">Converter</code> a single <code className="ui-ic">convert(amount, targetUnit)</code> and the two collapse into one.</>}
       />
     </div>
   );

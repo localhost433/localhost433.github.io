@@ -18,6 +18,10 @@ const GLOBAL_EXPECTED = [
   "export function DiagramSvg",
   "export function CompareCaption",
   "export const diagramPalette",
+  "export function Mcq",
+  "export function McqFigure",
+  "export function mcq",
+  "export function renderCaption",
 ];
 for (const sig of GLOBAL_EXPECTED) {
   const name = sig.replace(/^export (function|const) /, "");
@@ -38,8 +42,6 @@ const EXPECTED = [
   "export function Verdict",
   "export function WhyDot",
   "export function WhyNotes",
-  "export function Mcq",
-  "export function mcq",
 ];
 
 for (const sig of EXPECTED) {

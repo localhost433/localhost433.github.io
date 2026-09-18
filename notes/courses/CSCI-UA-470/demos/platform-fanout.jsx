@@ -307,7 +307,7 @@ export default function PlatformFanout() {
           ) },
           { tag: "Java", kind: "java", children: (
             <>No preprocessor, assembler or linker. Forks at <strong>run</strong> time (the JVM): <strong>one</strong>{" "}
-            <code className="mm-ic">Main.class</code>, and a <strong>JVM per OS</strong> runs that same file.</>
+            <code className="ui-ic">Main.class</code>, and a <strong>JVM per OS</strong> runs that same file.</>
           ) },
         ]}
         punch={

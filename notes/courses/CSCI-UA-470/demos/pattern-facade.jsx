@@ -77,8 +77,8 @@ o.prepare();`,
   },
   caption: {
     cols: [
-      { tag: "still there", kind: "cpp", children: <><code className="mm-ic">waiter</code>, <code className="mm-ic">kitchen</code> and <code className="mm-ic">Food</code> are untouched and still directly usable. A facade <strong>adds</strong> an entrance; it does not seal the building.</> },
-      { tag: "new & smaller", kind: "int", children: <><code className="mm-ic">Order</code> offers an interface that did not exist before — one method where there were four objects and a required call order.</> },
+      { tag: "still there", kind: "cpp", children: <><code className="ui-ic">waiter</code>, <code className="ui-ic">kitchen</code> and <code className="ui-ic">Food</code> are untouched and still directly usable. A facade <strong>adds</strong> an entrance; it does not seal the building.</> },
+      { tag: "new & smaller", kind: "int", children: <><code className="ui-ic">Order</code> offers an interface that did not exist before — one method where there were four objects and a required call order.</> },
     ],
     punch: "This is the wrapper that invents a new interface rather than preserving one. Adapter reshapes one class's interface; Proxy and Decorator keep an interface identical; Facade introduces a smaller one over several objects at once.",
   },

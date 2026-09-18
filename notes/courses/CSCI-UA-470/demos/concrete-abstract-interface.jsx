@@ -152,9 +152,9 @@ export default function ConcreteAbstractInterface() {
 
       <CompareCaption
         cols={[
-          { tag: "concrete", kind: "cpp", children: <>Every method has a body, so <code className="mm-ic">new T()</code> is allowed. In C++, an ordinary class; add <code className="mm-ic">virtual</code> only where you need runtime dispatch. Extends one class.</> },
-          { tag: "abstract", kind: "java", children: <>One <code className="mm-ic">abstract</code> method is enough to block <code className="mm-ic">new</code>. The C++ analogue is a class with a pure virtual method (<code className="mm-ic">= 0</code>). Extends one class.</> },
-          { tag: "interface", kind: "asm", children: <>Abstract by default; a class can implement <strong>many</strong> -- Java's controlled substitute for multiple inheritance. Modern Java adds <code className="mm-ic">default</code>/<code className="mm-ic">static</code>/<code className="mm-ic">private</code> bodies.</> },
+          { tag: "concrete", kind: "cpp", children: <>Every method has a body, so <code className="ui-ic">new T()</code> is allowed. In C++, an ordinary class; add <code className="ui-ic">virtual</code> only where you need runtime dispatch. Extends one class.</> },
+          { tag: "abstract", kind: "java", children: <>One <code className="ui-ic">abstract</code> method is enough to block <code className="ui-ic">new</code>. The C++ analogue is a class with a pure virtual method (<code className="ui-ic">= 0</code>). Extends one class.</> },
+          { tag: "interface", kind: "asm", children: <>Abstract by default; a class can implement <strong>many</strong> -- Java's controlled substitute for multiple inheritance. Modern Java adds <code className="ui-ic">default</code>/<code className="ui-ic">static</code>/<code className="ui-ic">private</code> bodies.</> },
         ]}
         punch="The single axis is how much is left unimplemented; that one difference drives instantiability and every other rule."
       />

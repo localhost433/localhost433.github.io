@@ -160,15 +160,15 @@ c.undo();               // d.title is "draft" again
       tag: "originator",
       kind: "cpp",
       children: /*#__PURE__*/React.createElement(React.Fragment, null, "The ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "Document"), " holds the state and only that. It never learns that it is being snapshotted, so undo depth is not its problem.")
     }, {
       tag: "caretaker",
       kind: "int",
       children: /*#__PURE__*/React.createElement(React.Fragment, null, "The canonical ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "CareTaker"), " stores the stack and does not interpret it. This deck's simplified version exposes the snapshot fields and copies them directly in ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "undo()"), ".")
     }],
     punch: "The stack is LIFO, and that is the whole of ctrl+Z: save pushes, undo pops. Because depth is a property of the caretaker's list rather than of the document, a hundred levels of undo costs a hundred mementos and not one line of Document."

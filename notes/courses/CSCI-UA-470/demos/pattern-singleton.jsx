@@ -76,8 +76,8 @@ s3 = Singleton.getInstance();     // still the same object`,
   },
   caption: {
     cols: [
-      { tag: "private", kind: "cpp", children: <>Both the field and the <strong>constructor</strong> are private. That single mark is what makes the pattern enforceable rather than advisory — <code className="mm-ic">new Singleton()</code> stops compiling outside the class.</> },
-      { tag: "static", kind: "java", children: <>The field and <code className="mm-ic">getInstance()</code> are <strong>static</strong>, so they belong to the class, not to an object — which they must, since there is no object to call the first one on.</> },
+      { tag: "private", kind: "cpp", children: <>Both the field and the <strong>constructor</strong> are private. That single mark is what makes the pattern enforceable rather than advisory — <code className="ui-ic">new Singleton()</code> stops compiling outside the class.</> },
+      { tag: "static", kind: "java", children: <>The field and <code className="ui-ic">getInstance()</code> are <strong>static</strong>, so they belong to the class, not to an object — which they must, since there is no object to call the first one on.</> },
     ],
     punch: "s1, s2, and s3 are three names for one object. The pattern does not make copying hard; it makes a second object impossible.",
   },

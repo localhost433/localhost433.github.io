@@ -124,11 +124,19 @@ test("useClassColors returns the right structure and light-theme values", async 
   assert.strictEqual(colors.neg, "#D85A30", "neg must have the correct light-theme value");
   assert.strictEqual(colors.acc, "#7F77DD", "acc must have the correct light-theme value");
 
-  // Verify that the shadcn theme tokens are present (as CSS var references)
-  assert.ok(colors.fg.includes("var(--foreground)"), "fg must reference --foreground");
-  assert.ok(colors.muted.includes("var(--muted-foreground)"), "muted must reference --muted-foreground");
-  assert.ok(colors.border.includes("var(--border)"), "border must reference --border");
-  assert.ok(colors.bg.includes("var(--background)"), "bg must reference --background");
+  /* These four used to be returned as `hsl(var(--token))`, and this test required it.
+     Canvas cannot parse that form: assigning it to fillStyle/strokeStyle is silently
+     ignored and the context keeps its previous colour, so every canvas figure in the
+     course drew its chrome in whatever colour happened to be current. They are now
+     resolved to literals, and under `node --test` there is no document, so the theme.css
+     fallbacks are what comes back. The requirement is that they are USABLE colours. */
+  const CANVAS_SAFE = /^(#[0-9a-f]{3,8}|rgba?\(|hsla?\()/i;
+  for (const key of ["fg", "muted", "border", "bg"]) {
+    assert.ok(!colors[key].includes("var("),
+      `${key} must not be a CSS var reference; canvas cannot parse one`);
+    assert.ok(CANVAS_SAFE.test(colors[key]),
+      `${key} must be a literal colour canvas can parse, got ${colors[key]}`);
+  }
 });
 
 test("Python tokenizer correctly tokenizes Python code", async () => {

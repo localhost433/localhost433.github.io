@@ -60,8 +60,8 @@ export default function SolidLsp() {
 
       <CompareCaption
         cols={[
-          { tag: "syntax", kind: "cpp", children: <>The compiler is satisfied: <code className="mm-ic">Bike</code> is-a <code className="mm-ic">Vehicle</code>, <code className="mm-ic">Ostrich</code> is-a <code className="mm-ic">Bird</code>, and upcasting is always legal.</> },
-          { tag: "semantics", kind: "java", children: <>LSP asks more: anywhere a <code className="mm-ic">Bird</code> works, <em>any</em> subclass must work. If a child must stub, throw, or do nothing for an inherited method, the parent promised too much.</> },
+          { tag: "syntax", kind: "cpp", children: <>The compiler is satisfied: <code className="ui-ic">Bike</code> is-a <code className="ui-ic">Vehicle</code>, <code className="ui-ic">Ostrich</code> is-a <code className="ui-ic">Bird</code>, and upcasting is always legal.</> },
+          { tag: "semantics", kind: "java", children: <>LSP asks more: anywhere a <code className="ui-ic">Bird</code> works, <em>any</em> subclass must work. If a child must stub, throw, or do nothing for an inherited method, the parent promised too much.</> },
         ]}
         punch="If you have to ask which subclass you got, substitution has already failed."
       />

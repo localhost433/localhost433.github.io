@@ -68,7 +68,7 @@ dbc.runQuery(q);        //  insert  ✓    select  ✓    delete  ✗`,
   },
   caption: {
     cols: [
-      { tag: "same shape", kind: "cpp", children: <>The proxy keeps the <strong>interface</strong>: same class name from the caller's side, same <code className="mm-ic">runQuery</code>. Nothing about the call site changes.</> },
+      { tag: "same shape", kind: "cpp", children: <>The proxy keeps the <strong>interface</strong>: same class name from the caller's side, same <code className="ui-ic">runQuery</code>. Nothing about the call site changes.</> },
       { tag: "new rule", kind: "int", children: <>Between the call and the real object it inserts a decision. Here it is a permission check; the same slot holds lazy loading, caching, logging, or a remote call.</> },
     ],
     punch: "Adapter changes the interface so an incompatible class fits. Proxy keeps the interface identical and changes what happens on the way through. Both wrap; only one of them is visible to the caller.",

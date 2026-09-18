@@ -141,23 +141,23 @@ fldr1.browse();   // prints [ f1's content, f2's content ]`,
       tag: "granularity",
       kind: "cpp",
       children: /*#__PURE__*/React.createElement(React.Fragment, null, "The deck's word. A ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "File"), " is one thing and a ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "Folder"), " is many, but both are an ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "item"), ", so the client stops caring which it holds.")
     }, {
       tag: "recursion",
       kind: "int",
       children: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "Folder"), " holds ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "List<item>"), " \u2014 the ", /*#__PURE__*/React.createElement("strong", null, "parent"), " type, not ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "List<File>"), ". That one choice is what lets folders nest, and what makes ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "browse()"), " recurse.")
     }],
     punch: "The test for this pattern is the self-reference: the composite holds a collection of the abstraction it itself implements. Take that away and you have an ordinary has-a, not a Composite."

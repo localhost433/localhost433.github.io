@@ -129,13 +129,13 @@ c.os = new Mac();            // and changed later, which nine classes could not 
       tag: "abstraction",
       kind: "cpp",
       children: /*#__PURE__*/React.createElement(React.Fragment, null, "The side the client holds and calls \u2014 ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "computer"), " and its kinds. It varies for its own reasons: form factor, price, ports.")
     }, {
       tag: "implementation",
       kind: "int",
       children: /*#__PURE__*/React.createElement(React.Fragment, null, "The side that does the platform work \u2014 ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "OS"), " and its kinds. It varies for entirely different reasons, on its own schedule.")
     }],
     punch: "The trigger for Bridge is two dimensions that change independently. Ask whether the two axes would ever be released, tested, or owned separately — if yes, do not multiply them into one hierarchy."

@@ -82,19 +82,19 @@ export default function SolidLsp() {
       tag: "syntax",
       kind: "cpp",
       children: /*#__PURE__*/React.createElement(React.Fragment, null, "The compiler is satisfied: ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "Bike"), " is-a ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "Vehicle"), ", ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "Ostrich"), " is-a ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "Bird"), ", and upcasting is always legal.")
     }, {
       tag: "semantics",
       kind: "java",
       children: /*#__PURE__*/React.createElement(React.Fragment, null, "LSP asks more: anywhere a ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "Bird"), " works, ", /*#__PURE__*/React.createElement("em", null, "any"), " subclass must work. If a child must stub, throw, or do nothing for an inherited method, the parent promised too much.")
     }],
     punch: "If you have to ask which subclass you got, substitution has already failed."

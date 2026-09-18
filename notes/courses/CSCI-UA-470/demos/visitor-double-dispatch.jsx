@@ -85,10 +85,10 @@ const acceptSteps = (shape, vis, si) => ([
     title: "① a virtual call on the shape",
     body: (
       <>
-        <code className="mm-ic">s.accept(v)</code> is an ordinary polymorphic call.
-        {" "}<code className="mm-ic">s</code> is declared <code className="mm-ic">Shape</code>,
-        {" "}but it <em>is</em> a <code className="mm-ic">{shape}</code> at run time, so
-        {" "}<code className="mm-ic">{shape}.accept</code> runs. Nothing about the visitor
+        <code className="ui-ic">s.accept(v)</code> is an ordinary polymorphic call.
+        {" "}<code className="ui-ic">s</code> is declared <code className="ui-ic">Shape</code>,
+        {" "}but it <em>is</em> a <code className="ui-ic">{shape}</code> at run time, so
+        {" "}<code className="ui-ic">{shape}.accept</code> runs. Nothing about the visitor
         {" "}has been decided yet.
       </>
     ),
@@ -99,13 +99,13 @@ const acceptSteps = (shape, vis, si) => ([
     title: "② an overload chosen at compile time",
     body: (
       <>
-        Inside <code className="mm-ic">{shape}.accept</code>, <code className="mm-ic">this</code>
-        {" "}is statically a <code className="mm-ic">{shape}</code> — so the compiler picked
-        {" "}<code className="mm-ic">visit({shape})</code> when it compiled this line, and no
+        Inside <code className="ui-ic">{shape}.accept</code>, <code className="ui-ic">this</code>
+        {" "}is statically a <code className="ui-ic">{shape}</code> — so the compiler picked
+        {" "}<code className="ui-ic">visit({shape})</code> when it compiled this line, and no
         {" "}other overload can ever run from here. That fixes the <strong>column</strong>,
         {" "}and it is why every element class needs its own one-line{" "}
-        <code className="mm-ic">accept</code>: a shared one in <code className="mm-ic">Shape</code>
-        {" "}would bind <code className="mm-ic">visit(Shape)</code> and lose the type.
+        <code className="ui-ic">accept</code>: a shared one in <code className="ui-ic">Shape</code>
+        {" "}would bind <code className="ui-ic">visit(Shape)</code> and lose the type.
       </>
     ),
   },
@@ -116,10 +116,10 @@ const acceptSteps = (shape, vis, si) => ([
     body: (
       <>
         That chosen overload is still a virtual call, now on{" "}
-        <code className="mm-ic">visitor</code> — whose run-time type is{" "}
-        <code className="mm-ic">{vis}</code>. That fixes the <strong>row</strong>. Two runtime
+        <code className="ui-ic">visitor</code> — whose run-time type is{" "}
+        <code className="ui-ic">{vis}</code>. That fixes the <strong>row</strong>. Two runtime
         types, consulted one at a time, land on one of nine bodies:{" "}
-        <code className="mm-ic">{vis}.visit({shape})</code>.
+        <code className="ui-ic">{vis}.visit({shape})</code>.
       </>
     ),
   },
@@ -132,11 +132,11 @@ const directSteps = (shape, vis) => ([
     title: "① the argument's type is lost at compile time",
     body: (
       <>
-        <code className="mm-ic">s</code> is <em>declared</em>{" "}
-        <code className="mm-ic">Shape</code>. Overload resolution is a compile-time rule, so it
-        can only use that declared type — it binds <code className="mm-ic">visit(Shape)</code>.
-        {" "}That <code className="mm-ic">s</code> happens to hold a{" "}
-        <code className="mm-ic">{shape}</code> is invisible here; only <em>receivers</em> get
+        <code className="ui-ic">s</code> is <em>declared</em>{" "}
+        <code className="ui-ic">Shape</code>. Overload resolution is a compile-time rule, so it
+        can only use that declared type — it binds <code className="ui-ic">visit(Shape)</code>.
+        {" "}That <code className="ui-ic">s</code> happens to hold a{" "}
+        <code className="ui-ic">{shape}</code> is invisible here; only <em>receivers</em> get
         {" "}late binding in Java, never arguments.
       </>
     ),
@@ -147,10 +147,10 @@ const directSteps = (shape, vis) => ([
     title: "② one dispatch, then a hand-written type test",
     body: (
       <>
-        The single call dispatches on <code className="mm-ic">visitor</code> to{" "}
-        <code className="mm-ic">{vis}.visit(Shape)</code> — and now the method has to recover
+        The single call dispatches on <code className="ui-ic">visitor</code> to{" "}
+        <code className="ui-ic">{vis}.visit(Shape)</code> — and now the method has to recover
         by hand what the compiler discarded. Nine bodies have collapsed into three, each
-        holding the <code className="mm-ic">instanceof</code> chain that Open–Closed exists
+        holding the <code className="ui-ic">instanceof</code> chain that Open–Closed exists
         {" "}to delete. This is the design Visitor is bought to avoid.
       </>
     ),

@@ -66,8 +66,8 @@ s1.run();`,
   },
   caption: {
     cols: [
-      { tag: "fixed", kind: "cpp", children: <><code className="mm-ic">run()</code> lives in the parent and is <strong>not</strong> overridden. The order of the steps is the thing being protected — a subclass cannot reorder or skip them.</> },
-      { tag: "variable", kind: "int", children: <>Each step is a hole. A subclass fills the ones it cares about and inherits the rest, so <code className="mm-ic">Approach-1</code> and <code className="mm-ic">Approach-2</code> differ by exactly one method each.</> },
+      { tag: "fixed", kind: "cpp", children: <><code className="ui-ic">run()</code> lives in the parent and is <strong>not</strong> overridden. The order of the steps is the thing being protected — a subclass cannot reorder or skip them.</> },
+      { tag: "variable", kind: "int", children: <>Each step is a hole. A subclass fills the ones it cares about and inherits the rest, so <code className="ui-ic">Approach-1</code> and <code className="ui-ic">Approach-2</code> differ by exactly one method each.</> },
     ],
     punch: "This is the only behavioral pattern in L20 that varies behaviour through inheritance. Every other one holds an object instead — which is why Strategy, its closest neighbour, can change its algorithm at run time and Template Method cannot.",
   },

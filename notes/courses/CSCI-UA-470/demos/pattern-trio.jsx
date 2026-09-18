@@ -42,7 +42,7 @@ t.strategy = new Attack();     // not the string "Attack"
 t.play();`,
     cols: [
       { tag: "who picks", kind: "cpp", children: <>The <strong>client</strong> chooses, up front, and usually leaves it. A team does not decide mid-match to become man-to-man on its own.</> },
-      { tag: "what varies", kind: "int", children: <>Interchangeable <strong>ways of doing one job</strong>. Any strategy is a complete, valid answer to <code className="mm-ic">play()</code>.</> },
+      { tag: "what varies", kind: "int", children: <>Interchangeable <strong>ways of doing one job</strong>. Any strategy is a complete, valid answer to <code className="ui-ic">play()</code>.</> },
     ],
   },
   state: {
@@ -70,7 +70,7 @@ p1.setState(new Vibrate());    // and it will change again later
 p1.receiveSMS();`,
     cols: [
       { tag: "who picks", kind: "cpp", children: <>The <strong>object's own history</strong> does. A phone moves between modes over its lifetime, and the state can drive the next transition itself.</> },
-      { tag: "what varies", kind: "int", children: <>What <strong>the same call</strong> does at different moments. <code className="mm-ic">receiveSMS()</code> rings now and buzzes later, with no change at the call site.</> },
+      { tag: "what varies", kind: "int", children: <>What <strong>the same call</strong> does at different moments. <code className="ui-ic">receiveSMS()</code> rings now and buzzes later, with no change at the call site.</> },
     ],
   },
   command: {

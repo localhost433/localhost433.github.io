@@ -330,29 +330,29 @@ export default function ConcreteAbstractInterface() {
       tag: "concrete",
       kind: "cpp",
       children: /*#__PURE__*/React.createElement(React.Fragment, null, "Every method has a body, so ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "new T()"), " is allowed. In C++, an ordinary class; add ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "virtual"), " only where you need runtime dispatch. Extends one class.")
     }, {
       tag: "abstract",
       kind: "java",
       children: /*#__PURE__*/React.createElement(React.Fragment, null, "One ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "abstract"), " method is enough to block ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "new"), ". The C++ analogue is a class with a pure virtual method (", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "= 0"), "). Extends one class.")
     }, {
       tag: "interface",
       kind: "asm",
       children: /*#__PURE__*/React.createElement(React.Fragment, null, "Abstract by default; a class can implement ", /*#__PURE__*/React.createElement("strong", null, "many"), " -- Java's controlled substitute for multiple inheritance. Modern Java adds ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "default"), "/", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "static"), "/", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "private"), " bodies.")
     }],
     punch: "The single axis is how much is left unimplemented; that one difference drives instantiability and every other rule."

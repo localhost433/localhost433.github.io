@@ -193,9 +193,9 @@ export default function JvmArchitectureMap() {
       tag: "loader",
       kind: "java",
       children: /*#__PURE__*/React.createElement(React.Fragment, null, "A class runs a lifecycle: ", /*#__PURE__*/React.createElement("strong", null, "load"), " (", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, ".class"), " \u2192 ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "Class"), ") \u2192 ", /*#__PURE__*/React.createElement("strong", null, "link"), " (verify \xB7 prepare \xB7 resolve) \u2192 ", /*#__PURE__*/React.createElement("strong", null, "initialize"), " (static init, on first active use).")
     }, {
       tag: "runtime",

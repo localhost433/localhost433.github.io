@@ -80,13 +80,13 @@ s.accept(v);           // same shape, a different operation
       tag: "elements",
       kind: "cpp",
       children: /*#__PURE__*/React.createElement(React.Fragment, null, "The hierarchy you already had. It is closed: adding ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "Flipper"), " does not reopen ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "Circle"), ", ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "Rectangle"), " or ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "Triangle"), ".")
     }, {
       tag: "visitors",
@@ -138,7 +138,7 @@ p.accept(v);           // same patient, a different professional
       tag: "element",
       kind: "cpp",
       children: /*#__PURE__*/React.createElement(React.Fragment, null, "The ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "Patient"), " record. Stable, and deliberately ignorant of who will be treating it.")
     }, {
       tag: "visitors",

@@ -124,7 +124,7 @@ dbc.runQuery(q);        //  insert  ✓    select  ✓    delete  ✗`,
       tag: "same shape",
       kind: "cpp",
       children: /*#__PURE__*/React.createElement(React.Fragment, null, "The proxy keeps the ", /*#__PURE__*/React.createElement("strong", null, "interface"), ": same class name from the caller's side, same ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "runQuery"), ". Nothing about the call site changes.")
     }, {
       tag: "new rule",

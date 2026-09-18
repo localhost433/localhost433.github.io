@@ -84,7 +84,7 @@ while (i.hasNext()) process(i.getNext());`,
       tag: "iterator",
       kind: "int",
       children: /*#__PURE__*/React.createElement(React.Fragment, null, "Holds the ", /*#__PURE__*/React.createElement("strong", null, "cursor"), " \u2014 which is why two iterators can walk the same collection at once, something a method on ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "Collection"), " could never manage.")
     }],
     punch: "This is the pattern you have already been using: the course's simplified java.util.Iterator view centers on hasNext() and next(), and a for-each loop is sugar that asks a collection for one and drives it. Everything the deck rejects is what the Java Collections API deliberately does not do."

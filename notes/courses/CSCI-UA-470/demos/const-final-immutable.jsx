@@ -135,9 +135,9 @@ export default function ConstFinalImmutable() {
 
       <CompareCaption
         cols={[
-          { tag: "C++ const", kind: "cpp", children: <>Fine-grained: you choose <em>what</em> is constant -- the value, the pointee viewed through a handle (<code className="mm-ic">const T*</code>), the pointer itself (<code className="mm-ic">T* const</code>), or <code className="mm-ic">*this</code> in a <code className="mm-ic">const</code> member.</> },
-          { tag: "Java final", kind: "java", children: <>Coarse: the lock sits on a <strong>name or edge</strong> -- a binding (<code className="mm-ic">final T x</code>), an override (<code className="mm-ic">final m()</code>), a subclass (<code className="mm-ic">final class</code>). It <strong>never</strong> freezes the object reached through a reference.</> },
-          { tag: "immutable", kind: "asm", children: <>A <strong>design property</strong>, not a keyword: all-final fields + no setters + defensive copies freeze the <strong>whole observable state</strong> (e.g. <code className="mm-ic">String</code>).</> },
+          { tag: "C++ const", kind: "cpp", children: <>Fine-grained: you choose <em>what</em> is constant -- the value, the pointee viewed through a handle (<code className="ui-ic">const T*</code>), the pointer itself (<code className="ui-ic">T* const</code>), or <code className="ui-ic">*this</code> in a <code className="ui-ic">const</code> member.</> },
+          { tag: "Java final", kind: "java", children: <>Coarse: the lock sits on a <strong>name or edge</strong> -- a binding (<code className="ui-ic">final T x</code>), an override (<code className="ui-ic">final m()</code>), a subclass (<code className="ui-ic">final class</code>). It <strong>never</strong> freezes the object reached through a reference.</> },
+          { tag: "immutable", kind: "asm", children: <>A <strong>design property</strong>, not a keyword: all-final fields + no setters + defensive copies freeze the <strong>whole observable state</strong> (e.g. <code className="ui-ic">String</code>).</> },
         ]}
         punch="const/final lock a binding or a handle; immutability locks the object itself. A final reference to a mutable object is not immutable -- final Circle c still allows c.radius = 10."
       />

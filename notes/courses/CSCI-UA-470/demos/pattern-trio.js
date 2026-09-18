@@ -63,7 +63,7 @@ t.play();`,
       tag: "what varies",
       kind: "int",
       children: /*#__PURE__*/React.createElement(React.Fragment, null, "Interchangeable ", /*#__PURE__*/React.createElement("strong", null, "ways of doing one job"), ". Any strategy is a complete, valid answer to ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "play()"), ".")
     }]
   },
@@ -102,7 +102,7 @@ p1.receiveSMS();`,
       tag: "what varies",
       kind: "int",
       children: /*#__PURE__*/React.createElement(React.Fragment, null, "What ", /*#__PURE__*/React.createElement("strong", null, "the same call"), " does at different moments. ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "receiveSMS()"), " rings now and buzzes later, with no change at the call site.")
     }]
   },

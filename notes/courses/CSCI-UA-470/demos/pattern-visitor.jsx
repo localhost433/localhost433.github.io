@@ -59,7 +59,7 @@ s.accept(v);           // same shape, a different operation
 // adding a Flipper touches no Shape class at all`,
     clientNote: "`Shape` never gains a method. `accept` is the only thing it ever needs, and its body is one line long, forever.",
     cols: [
-      { tag: "elements", kind: "cpp", children: <>The hierarchy you already had. It is closed: adding <code className="mm-ic">Flipper</code> does not reopen <code className="mm-ic">Circle</code>, <code className="mm-ic">Rectangle</code> or <code className="mm-ic">Triangle</code>.</> },
+      { tag: "elements", kind: "cpp", children: <>The hierarchy you already had. It is closed: adding <code className="ui-ic">Flipper</code> does not reopen <code className="ui-ic">Circle</code>, <code className="ui-ic">Rectangle</code> or <code className="ui-ic">Triangle</code>.</> },
       { tag: "visitors", kind: "int", children: <>The new axis. One visitor is one operation across the <em>whole</em> hierarchy, so all the code for rotating lives in one class instead of scattered across three.</> },
     ],
   },
@@ -86,7 +86,7 @@ p.accept(v);           // same patient, a different professional
 // hiring a physiotherapist touches no Patient code`,
     clientNote: "The staff list can grow all week. `Patient` keeps exactly the one method it started with — which is the deck's point in choosing a hospital: the *people who visit* change constantly, the *thing they visit* does not.",
     cols: [
-      { tag: "element", kind: "cpp", children: <>The <code className="mm-ic">Patient</code> record. Stable, and deliberately ignorant of who will be treating it.</> },
+      { tag: "element", kind: "cpp", children: <>The <code className="ui-ic">Patient</code> record. Stable, and deliberately ignorant of who will be treating it.</> },
       { tag: "visitors", kind: "int", children: <>The staff. Each profession is one class holding everything that profession does — and a new profession is a new class, not an edit.</> },
     ],
   },

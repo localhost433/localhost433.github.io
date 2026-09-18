@@ -645,7 +645,7 @@ export default function PlatformFanout() {
       tag: "Java",
       kind: "java",
       children: /*#__PURE__*/React.createElement(React.Fragment, null, "No preprocessor, assembler or linker. Forks at ", /*#__PURE__*/React.createElement("strong", null, "run"), " time (the JVM): ", /*#__PURE__*/React.createElement("strong", null, "one"), " ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "Main.class"), ", and a ", /*#__PURE__*/React.createElement("strong", null, "JVM per OS"), " runs that same file.")
     }],
     punch: /*#__PURE__*/React.createElement(React.Fragment, null, "The per-platform ", /*#__PURE__*/React.createElement("em", null, "\xD73"), " happens at ", /*#__PURE__*/React.createElement("strong", null, "build"), " time for C++ but ", /*#__PURE__*/React.createElement("strong", null, "run"), " time for Java \u2014", /*#__PURE__*/React.createElement("em", null, " recompile everywhere"), " vs. ", /*#__PURE__*/React.createElement("em", null, "write once, run anywhere"), ".")

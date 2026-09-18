@@ -55,8 +55,8 @@ export default function SolidOcp() {
 
       <CompareCaption
         cols={[
-          { tag: "closed", kind: "java", children: <>Existing classes are <strong>closed for modification</strong>: no one edits <code className="mm-ic">Shape</code> or its if-chain again, because there is no if-chain — each shape owns its formula.</> },
-          { tag: "open", kind: "int", children: <>The hierarchy is <strong>open for extension</strong>: a new shape is a new subclass with one override. The dispatch that the if-chain hand-rolled is what <code className="mm-ic">virtual</code>/overriding already does.</> },
+          { tag: "closed", kind: "java", children: <>Existing classes are <strong>closed for modification</strong>: no one edits <code className="ui-ic">Shape</code> or its if-chain again, because there is no if-chain — each shape owns its formula.</> },
+          { tag: "open", kind: "int", children: <>The hierarchy is <strong>open for extension</strong>: a new shape is a new subclass with one override. The dispatch that the if-chain hand-rolled is what <code className="ui-ic">virtual</code>/overriding already does.</> },
         ]}
         punch="If adding a case means editing a method, the design is open in the wrong place."
       />

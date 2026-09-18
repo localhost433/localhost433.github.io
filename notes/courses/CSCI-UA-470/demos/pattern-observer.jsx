@@ -71,8 +71,8 @@ stock.unsubscribe(alerts);        // and now only the chart does`,
   },
   caption: {
     cols: [
-      { tag: "one-to-many", kind: "cpp", children: <>One <code className="mm-ic">Subject</code> pushes <strong>outward</strong> to whoever registered. The observers do not talk back through it and do not know about each other.</> },
-      { tag: "opt-in", kind: "int", children: <><code className="mm-ic">subscribe</code> / <code className="mm-ic">unsubscribe</code> put the membership decision in the <strong>listener's</strong> hands, at run time.</> },
+      { tag: "one-to-many", kind: "cpp", children: <>One <code className="ui-ic">Subject</code> pushes <strong>outward</strong> to whoever registered. The observers do not talk back through it and do not know about each other.</> },
+      { tag: "opt-in", kind: "int", children: <><code className="ui-ic">subscribe</code> / <code className="ui-ic">unsubscribe</code> put the membership decision in the <strong>listener's</strong> hands, at run time.</> },
     ],
     punch: "The deck draws Mediator and Observer with almost the same UML. Read the direction: Mediator relays between peers who would otherwise talk to each other; Observer announces from one source to listeners who asked to hear it.",
   },

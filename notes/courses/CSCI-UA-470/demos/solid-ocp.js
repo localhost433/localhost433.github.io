@@ -74,13 +74,13 @@ export default function SolidOcp() {
       tag: "closed",
       kind: "java",
       children: /*#__PURE__*/React.createElement(React.Fragment, null, "Existing classes are ", /*#__PURE__*/React.createElement("strong", null, "closed for modification"), ": no one edits ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "Shape"), " or its if-chain again, because there is no if-chain \u2014 each shape owns its formula.")
     }, {
       tag: "open",
       kind: "int",
       children: /*#__PURE__*/React.createElement(React.Fragment, null, "The hierarchy is ", /*#__PURE__*/React.createElement("strong", null, "open for extension"), ": a new shape is a new subclass with one override. The dispatch that the if-chain hand-rolled is what ", /*#__PURE__*/React.createElement("code", {
-        className: "mm-ic"
+        className: "ui-ic"
       }, "virtual"), "/overriding already does.")
     }],
     punch: "If adding a case means editing a method, the design is open in the wrong place."

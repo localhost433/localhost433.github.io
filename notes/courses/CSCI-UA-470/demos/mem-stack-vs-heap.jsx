@@ -78,17 +78,17 @@ export default function MemStackVsHeap() {
         <p className="mm-cap-row">
           <span className="mm-cap-tag mm-cap-tag--cpp">C++</span>
           <span className="mm-cap-txt">
-            An object lives <strong>on the stack</strong> (<code className="mm-ic">Person p1</code> — fields inline in the
-            frame) or <strong>on the heap</strong> (<code className="mm-ic">new Person</code>, via a
-            {" "}<code className="mm-ic">Person*</code> you must <code className="mm-ic">delete</code>).
+            An object lives <strong>on the stack</strong> (<code className="ui-ic">Person p1</code> — fields inline in the
+            frame) or <strong>on the heap</strong> (<code className="ui-ic">new Person</code>, via a
+            {" "}<code className="ui-ic">Person*</code> you must <code className="ui-ic">delete</code>).
           </span>
         </p>
         <p className="mm-cap-row">
           <span className="mm-cap-tag mm-cap-tag--java">Java</span>
           <span className="mm-cap-txt">
-            <strong>No stack objects.</strong> Every <code className="mm-ic">new</code> allocates <strong>on the heap</strong>;
-            the variable holds only a <strong>reference</strong>. Even <code className="mm-ic">String name</code> is its own
-            heap object, reclaimed by the <strong>garbage collector</strong>, not <code className="mm-ic">delete</code>.
+            <strong>No stack objects.</strong> Every <code className="ui-ic">new</code> allocates <strong>on the heap</strong>;
+            the variable holds only a <strong>reference</strong>. Even <code className="ui-ic">String name</code> is its own
+            heap object, reclaimed by the <strong>garbage collector</strong>, not <code className="ui-ic">delete</code>.
           </span>
         </p>
       </div>

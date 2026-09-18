@@ -152,7 +152,7 @@ export default function GcReachability() {
         cols={[
           { tag: "reachable", kind: "java", children: <>An object is <strong>live</strong> while a chain of references reaches it from a <strong>GC root</strong> -- a live stack frame's locals or a static field. A, B and C qualify.</> },
           { tag: "garbage", kind: "asm", children: <>D, E and F are <strong>unreachable</strong> from every root, so the collector reclaims them -- even though D and E point at each other. <strong>Reachability</strong>, not reference counting, is the rule.</> },
-          { tag: "vs C++", kind: "cpp", children: <>C++ has no tracing GC: you <code className="mm-ic">delete</code> manually, and naive reference counting (e.g. <code className="mm-ic">shared_ptr</code> cycles) <em>leaks</em> exactly this island. The JVM does not.</> },
+          { tag: "vs C++", kind: "cpp", children: <>C++ has no tracing GC: you <code className="ui-ic">delete</code> manually, and naive reference counting (e.g. <code className="ui-ic">shared_ptr</code> cycles) <em>leaks</em> exactly this island. The JVM does not.</> },
         ]}
         punch={"\"No longer reachable\" — not \"no longer referenced\" — is what makes an object collectible."}
       />

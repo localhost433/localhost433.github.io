@@ -106,7 +106,7 @@ export default function JvmArchitectureMap() {
 
       <CompareCaption
         cols={[
-          { tag: "loader", kind: "java", children: <>A class runs a lifecycle: <strong>load</strong> (<code className="mm-ic">.class</code> → <code className="mm-ic">Class</code>) → <strong>link</strong> (verify · prepare · resolve) → <strong>initialize</strong> (static init, on first active use).</> },
+          { tag: "loader", kind: "java", children: <>A class runs a lifecycle: <strong>load</strong> (<code className="ui-ic">.class</code> → <code className="ui-ic">Class</code>) → <strong>link</strong> (verify · prepare · resolve) → <strong>initialize</strong> (static init, on first active use).</> },
           { tag: "runtime", kind: "cpp", children: <>Method area and heap are shared; JVM stacks, PC registers, and native method stacks are per-thread runtime data areas.</> },
           { tag: "native", kind: "asm", children: <>JNI crosses from Java execution to platform-specific native libraries and then to the host OS/CPU.</> },
         ]}
