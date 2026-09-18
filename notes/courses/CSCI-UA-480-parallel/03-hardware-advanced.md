@@ -191,27 +191,3 @@ The trend: more cores per chip, more heterogeneity, non-bus interconnect, and **
 
 > Communication and memory access are the two most expensive operations, **NOT**
 > computations.
-
-## What to retain from L3
-
-| Topic | Key point |
-|---|---|
-| The programmer's line | every ILP technique except hyperthreading is free to the programmer |
-| Memory wall | CPU 60%/yr vs. DRAM 7%/yr; the gap grows 50%/yr |
-| Where performance is lost | the memory system, not the arithmetic |
-| Flynn | SISD / SIMD / MISD / MIMD, classified by instruction and data streams |
-| SIMD | data parallelism; same instruction, many data; GPUs and vector processors |
-| SIMD cost | all EUs run the same instruction or idle; classically synchronous |
-| Vector pros | bandwidth utilization and full cache lines, as much as raw speed |
-| Vector cons | irregular data structures; finite EUs and registers cap scalability |
-| MIMD split | by memory use: shared (implicit communication) vs. distributed (cluster of nodes) |
-| SMP | all nodes the same |
-| Bus vs. switched | contention/noise/falling performance vs. simultaneous communication at higher cost |
-| Direct vs. indirect | switch attached to a node (ring, toroidal mesh) vs. not (crossbar) |
-| Latency vs. bandwidth | time to *first* byte vs. rate *after* the first byte |
-| Transmission time | $l + n/b$; small messages are latency-bound, large ones bandwidth-bound |
-| Coherence mechanisms | snooping (broadcast, $O(p)$) vs. directory (notify sharers only) |
-| Coherence policies | write-invalidate vs. write-update; MESI / MSI / MOESI |
-| Which scales | directory-based, and that is why it is what gets used |
-| Excluded | bisection width in §2.3 - explicitly dropped from the reading |
-| The thesis | communication and memory access cost, computation does not |

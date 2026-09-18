@@ -15,5 +15,11 @@
         "slug": "03-hardware-advanced",
         "title": "3 - Parallel Hardware: Advanced",
         "date": "2026-09-10"
+    },
+    { "group": "Parallel Software" },
+    {
+        "slug": "04-software-basics",
+        "title": "4 - Parallel Software: Basics",
+        "date": "2026-09-17"
     }
 ]
