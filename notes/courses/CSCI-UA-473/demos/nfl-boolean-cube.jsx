@@ -2,12 +2,40 @@ import React from "react";
 import { useClassColors, buttonStyle, labelStyle } from "@course";
 import { VERTICES, analyzeNFL } from "@course/logic";
 
+/* No free lunch on the Boolean cube (note 03, L3 slides 50-54).
+
+   The first version of this figure opened empty: no labels, so every unseen vertex
+   voted 0.50, "off-training error" read n/a, and both hypothesis sets reported the
+   same consistent count. Everything on screen was true and none of it was the point.
+   It now opens mid-experiment, on the four corners below and the majority target,
+   because the theorem is a comparison and a comparison needs two numbers.
+
+   The sample is {000, 010, 100, 111} — the all-zeros corner, two of its neighbours
+   and the all-ones corner — chosen because it is the arrangement that makes all
+   three readings come out cleanly at once:
+
+     all 256 functions, either target   every unseen vertex votes 0.50, error 0.50
+     linear threshold, majority         all four decided, error 0.25
+     linear threshold, parity           all four decided, error 1.00
+
+   That last row is the theorem, not an illustration of it: the same bias that beat
+   chance on one target is beaten BY chance on another, and nothing in the training
+   data could have told you which one you were in. */
+
+const SEED = [0, 2, 4, 7];              // 000, 010, 100, 111
+
 const SX = (v) => 70 + 170 * v[0] + 80 * v[1];
 const SY = (v) => 270 - 170 * v[2] - 60 * v[1];
 const TARGETS = {
   maj: (v) => (v[0] + v[1] + v[2] >= 2 ? 1 : -1),
   par: (v) => ((v[0] + v[1] + v[2]) % 2 ? 1 : -1),
 };
+
+// The four seeded corners, labelled by whichever target is selected. With no target
+// there is nothing to label them by, so the board starts empty and is clicked in.
+const seedFor = (t) => (TARGETS[t]
+  ? Object.fromEntries(SEED.map((i) => [i, TARGETS[t](VERTICES[i])]))
+  : {});
 
 function mix(p, neg, pos, mid) {
   const rgb = (color) => {
@@ -41,9 +69,9 @@ function drawGrid(cv, H, consistent, C) {
 
 export default function NflCube() {
   const C = useClassColors();
-  const [D, setD] = React.useState({});
-  const [linearOnly, setLinearOnly] = React.useState(false);
-  const [target, setTarget] = React.useState("man");
+  const [target, setTarget] = React.useState("maj");
+  const [D, setD] = React.useState(() => seedFor("maj"));
+  const [linearOnly, setLinearOnly] = React.useState(true);
   const grid = React.useRef(null);
   const { H, C: consistent, vote } = React.useMemo(
     () => analyzeNFL(D, linearOnly), [D, linearOnly]);
@@ -76,8 +104,24 @@ export default function NflCube() {
 
   let note = "Purple cells: consistent with D. Mid gray: in H but ruled out by D. Faint: outside H. Unseen vertices show the fraction of consistent hypotheses voting +1.";
   if (!consistent.length) note = "No hypothesis in H fits these labels: the inductive bias excludes this target. " + note;
-  if (T) note = "Ring color scores the majority vote at each unseen vertex against the target: green right, red wrong, gray tie (counted 0.5). " + note;
+  if (T) note = "Ring color scores the majority vote at each unseen vertex against the target: green right, orange wrong, gray tie (counted 0.5). " + note;
   const offTraining = T && cnt && consistent.length ? (err / cnt).toFixed(2) : "n/a";
+
+  /* How many unseen vertices the surviving hypotheses actually agree about. This is
+     the quantity the theorem is about: an unrestricted H leaves it at zero however
+     much data you show it, because for every hypothesis that votes +1 somewhere
+     unseen there is another, equally consistent, that votes \u22121. */
+  const unseen = VERTICES.map((_, i) => i).filter((i) => !(i in D));
+  const decided = unseen.filter((i) => vote[i] !== null && vote[i] !== 0.5).length;
+
+  const verdict = !unseen.length
+    ? "Every vertex is labelled, so there is nothing left to generalize to."
+    : !consistent.length
+      ? "Nothing in H fits this sample: the bias has ruled the target out entirely."
+      : decided === 0
+        ? `All ${consistent.length} surviving hypotheses disagree about every one of the ${unseen.length} unseen vertices \u2014 each one votes exactly 0.50. The sample has told you nothing about them, and a bigger sample would not change that.`
+        : `The surviving hypotheses agree about ${decided} of the ${unseen.length} unseen vertices.` +
+          (T ? ` Off-training error against the target: ${offTraining}, versus 0.50 for a coin.` : "");
 
   const clickVertex = (i) => {
     setD((old) => {
@@ -101,12 +145,12 @@ export default function NflCube() {
         </div>
         <div style={rowStyle}>
           <span style={labelStyle(C)}>Target</span>
-          <select value={target} onChange={(e) => { setTarget(e.target.value); setD({}); }} style={selectStyle(C)}>
-            <option value="man">None: click cycles unseen, +1, −1</option>
+          <select value={target} onChange={(e) => { setTarget(e.target.value); setD(seedFor(e.target.value)); }} style={selectStyle(C)}>
             <option value="maj">Majority of bits (a threshold function)</option>
             <option value="par">Parity of bits (not a threshold function)</option>
+            <option value="man">None: click cycles unseen, +1, −1</option>
           </select>
-          <button type="button" onClick={() => setD({})} style={buttonStyle(C, false)}>↻ Clear labels</button>
+          <button type="button" onClick={() => setD(seedFor(target))} style={buttonStyle(C, false)}>↻ Reset sample</button>
         </div>
         <div style={{ display: "flex", flexWrap: "wrap", gap: "16px", alignItems: "flex-start" }}>
           <svg width="360" height="300" viewBox="0 0 360 300" role="img" aria-label="Boolean cube with labels and hypothesis votes"
@@ -128,8 +172,11 @@ export default function NflCube() {
             <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginBottom: "10px" }}>
               <Stat label="|H|" value={H.length} C={C} />
               <Stat label="Consistent with D" value={consistent.length} C={C} />
+              <Stat label="Unseen vertices decided" value={`${decided} / ${unseen.length}`} C={C} />
               <Stat label="Off-training error" value={offTraining} C={C} />
             </div>
+            <p style={{ ...labelStyle(C), margin: "0 0 10px", lineHeight: 1.5,
+              color: decided === 0 ? C.neg : C.fg }}>{verdict}</p>
             <p style={{ ...labelStyle(C), margin: "0 0 4px" }}>All 256 functions f: {'{0,1}'}³ → {'{±1}'}, one cell each</p>
             <canvas ref={grid} aria-label="Hypothesis consistency grid"
               style={{ width: 224, height: 224, border: `0.5px solid ${C.border}`, borderRadius: "6px" }} />

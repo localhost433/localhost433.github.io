@@ -1,21 +1,23 @@
 /* AUTO-GENERATED from perceptron-2d.jsx by `npm run build:artifacts`. Do not edit. */
 import React from "react";
 import { useClassColors, buttonStyle, readoutStyle, labelStyle } from "@course";
-import { misclassified, perceptronStep, generate } from "@course/logic";
-const L = 5,
+import { misclassified, perceptronStep, generateSplit, scalePoints, errorRate } from "@course/logic";
+const BASE_L = 5,
   S = 340,
   CAP = 1500;
-const X = a => (a + L) / (2 * L) * S;
-const Y = b => S - (b + L) / (2 * L) * S;
 function draw(cv, hc, state) {
   if (!cv || !hc) return;
   const {
     pts,
+    test,
     w,
     last,
     hist,
-    C
+    C,
+    L
   } = state;
+  const X = a => (a + L) / (2 * L) * S;
+  const Y = b => S - (b + L) / (2 * L) * S;
   const dpr = window.devicePixelRatio || 1;
   cv.width = S * dpr;
   cv.height = S * dpr;
@@ -37,15 +39,17 @@ function draw(cv, hc, state) {
     g.globalAlpha = 1;
   }
   // Grid is scaffolding and axes are information, so they must not share a weight.
+  // The grid spacing follows the scale, so a doubled cloud sits on a doubled grid.
+  const unit = L / BASE_L;
   g.strokeStyle = C.border;
   g.lineWidth = 1;
   g.globalAlpha = 0.5;
-  for (let k = -L; k <= L; k++) {
+  for (let k = -BASE_L; k <= BASE_L; k++) {
     g.beginPath();
-    g.moveTo(X(k), 0);
-    g.lineTo(X(k), S);
-    g.moveTo(0, Y(k));
-    g.lineTo(S, Y(k));
+    g.moveTo(X(k * unit), 0);
+    g.lineTo(X(k * unit), S);
+    g.moveTo(0, Y(k * unit));
+    g.lineTo(S, Y(k * unit));
     g.stroke();
   }
   g.globalAlpha = 1;
@@ -73,8 +77,8 @@ function draw(cv, hc, state) {
       n = Math.sqrt(n2);
     const fa = -w[0] * w[1] / n2,
       fb = -w[0] * w[2] / n2;
-    const ta = fa + 1.2 * w[1] / n,
-      tb = fb + 1.2 * w[2] / n;
+    const ta = fa + 1.2 * unit * w[1] / n,
+      tb = fb + 1.2 * unit * w[2] / n;
     g.strokeStyle = C.acc;
     g.fillStyle = C.acc;
     g.lineWidth = 2.5;
@@ -91,6 +95,32 @@ function draw(cv, hc, state) {
     g.font = "13px sans-serif";
     g.fillStyle = C.fg;
     g.fillText("w", X(ta) + 6, Y(tb) - 4);
+  }
+  // Held-out points are drawn small and hollow: they are never touched by the
+  // algorithm, and the picture should make that visible rather than say it.
+  if (test.length) {
+    const T = new Set(misclassified(test, w));
+    test.forEach((p, i) => {
+      const px = X(p.a),
+        py = Y(p.b);
+      g.strokeStyle = p.y > 0 ? C.pos : C.neg;
+      g.lineWidth = 1.25;
+      g.globalAlpha = 0.55;
+      g.beginPath();
+      if (p.y > 0) g.arc(px, py, 3.2, 0, 2 * Math.PI);else g.rect(px - 3, py - 3, 6, 6);
+      g.stroke();
+      if (T.has(i) && nz) {
+        g.strokeStyle = C.fg;
+        g.globalAlpha = 0.5;
+        g.beginPath();
+        g.moveTo(px - 5, py - 5);
+        g.lineTo(px + 5, py + 5);
+        g.moveTo(px + 5, py - 5);
+        g.lineTo(px - 5, py + 5);
+        g.stroke();
+      }
+      g.globalAlpha = 1;
+    });
   }
   const M = new Set(misclassified(pts, w));
   g.font = "11px sans-serif";
@@ -163,10 +193,15 @@ function draw(cv, hc, state) {
     h.stroke();
   }
 }
+const randomW = () => [0, 1, 2].map(() => (Math.random() * 2 - 1) * 2);
+const fmtW = w => "[" + w.map(v => v.toFixed(2)).join(", ") + "]";
 export default function PerceptronDemo() {
   const C = useClassColors();
-  const [pts, setPts] = React.useState(() => generate("sep", Math.random));
+  const [init] = React.useState(() => generateSplit("sep", Math.random));
+  const [pts, setPts] = React.useState(init.pts);
+  const [test, setTest] = React.useState(init.test);
   const [w, setW] = React.useState([0, 0, 0]);
+  const [w0, setW0] = React.useState([0, 0, 0]); // where this run started
   const [t, setT] = React.useState(0);
   const [hist, setHist] = React.useState([]);
   const [last, setLast] = React.useState(null);
@@ -175,8 +210,11 @@ export default function PerceptronDemo() {
   const [addCls, setAddCls] = React.useState(1);
   const [pickMode, setPickMode] = React.useState("rand");
   const [kind, setKind] = React.useState("sep");
+  const [scale, setScale] = React.useState(1);
+  const [runs, setRuns] = React.useState([]); // finished runs on this data
   const cv = React.useRef(null),
     hc = React.useRef(null);
+  const L = BASE_L * scale;
   const pick = React.useCallback(M => pickMode === "first" ? 0 : Math.floor(Math.random() * M.length), [pickMode]);
   const step = React.useCallback(() => {
     const r = perceptronStep(pts, w, pick);
@@ -200,45 +238,77 @@ export default function PerceptronDemo() {
   React.useEffect(() => {
     draw(cv.current, hc.current, {
       pts,
+      test,
       w,
       last,
       hist,
-      C
+      C,
+      L
     });
-  }, [pts, w, last, hist, C]);
-  const resetData = nextKind => {
+  }, [pts, test, w, last, hist, C, L]);
+
+  // A run is logged the moment it converges, so two runs from different starts can
+  // be read against each other: same training error by construction, and whatever
+  // the held-out set says.
+  const M = misclassified(pts, w);
+  React.useEffect(() => {
+    if (t > 0 && pts.length && !M.length) setRuns(rs => rs.some(r => r.t === t && r.w0 === fmtW(w0)) ? rs : rs.concat({
+      w0: fmtW(w0),
+      t,
+      test: errorRate(test, w),
+      scale
+    }));
+  }, [t, M.length, pts.length]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const resetRun = (start = [0, 0, 0]) => {
     setRunning(false);
-    setPts(generate(nextKind, Math.random));
-    setW([0, 0, 0]);
+    setW(start);
+    setW0(start);
     setT(0);
     setHist([]);
     setLast(null);
     setCapHit(false);
   };
+  const resetData = nextKind => {
+    const s = generateSplit(nextKind, Math.random);
+    setPts(s.pts);
+    setTest(s.test);
+    setScale(1);
+    setRuns([]);
+    resetRun();
+  };
+  const toggleScale = () => {
+    const k = scale === 1 ? 2 : 0.5;
+    setPts(scalePoints(pts, k));
+    setTest(scalePoints(test, k));
+    setScale(scale === 1 ? 2 : 1);
+    resetRun();
+  };
   const onCanvasClick = e => {
     const r = cv.current.getBoundingClientRect();
     const a = Math.round((e.clientX - r.left) / r.width * 2 * L - L);
     const b = Math.round(L - (e.clientY - r.top) / r.height * 2 * L);
-    const k = pts.findIndex(p => Math.hypot(p.a - a, p.b - b) < 0.45);
+    const k = pts.findIndex(p => Math.hypot(p.a - a, p.b - b) < 0.45 * scale);
     setRunning(false);
     setPts(old => k >= 0 ? old.filter((_, i) => i !== k) : old.concat({
       a,
       b,
       y: addCls
     }));
+    setTest([]);
+    setRuns([]);
     setHist([]);
     setLast(null);
     setCapHit(false);
     setT(0);
   };
-  const M = misclassified(pts, w);
-  let note = "Circles are y = +1, squares are y = −1. Ringed points satisfy y wᵀx ≤ 0 (counted as misclassified). Click an existing point to delete it.";
-  if (pts.length && !M.length) note = "Converged: every point has y wᵀx > 0. " + note;else if (pts.length && !Math.abs(w[1]) && !Math.abs(w[2]) && !Math.abs(w[0])) note = "w = 0, so y wᵀx = 0 for every point: all count as misclassified under the ≤ 0 convention. " + note;
+  let note = "Circles are y = +1, squares are y = −1. Ringed points satisfy y wᵀx ≤ 0 (counted as misclassified). Small hollow markers are the held-out set, labelled by the same hidden rule and never shown to the algorithm; a cross marks one the current line gets wrong. Click an existing point to delete it.";
+  if (pts.length && !M.length) note = "Converged: every training point has y wᵀx > 0. " + note;else if (pts.length && !Math.abs(w[1]) && !Math.abs(w[2]) && !Math.abs(w[0])) note = "w = 0, so y wᵀx = 0 for every point: all count as misclassified under the ≤ 0 convention. " + note;
   if (capHit) note = "Stopped at " + CAP + " updates without converging. " + note;
   if (pts.some(p => p.planted)) note = "The planted point is the midpoint of two same-class points with the opposite label, so no line can separate the data. " + note;
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h2", {
     className: "sr-only"
-  }, "Interactive perceptron learning algorithm on 2D data: step through updates and watch the separating line, its normal vector, and the misclassification count."), /*#__PURE__*/React.createElement("div", {
+  }, "Interactive perceptron learning algorithm on 2D data: step through updates and watch the separating line, its normal vector, the misclassification count, and the error on a held-out set."), /*#__PURE__*/React.createElement("div", {
     style: {
       display: "flex",
       flexDirection: "column",
@@ -343,16 +413,19 @@ export default function PerceptronDemo() {
     style: buttonStyle(C)
   }, running ? "Ⅱ Pause" : "▶ Run"), /*#__PURE__*/React.createElement("button", {
     type: "button",
-    onClick: () => {
-      setRunning(false);
-      setW([0, 0, 0]);
-      setT(0);
-      setHist([]);
-      setLast(null);
-      setCapHit(false);
-    },
+    onClick: () => resetRun(),
     style: buttonStyle(C)
-  }, "Reset w to 0")), /*#__PURE__*/React.createElement("div", {
+  }, "Reset w to 0"), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    onClick: () => resetRun(randomW()),
+    style: buttonStyle(C)
+  }, "Random start w"), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    "aria-pressed": scale === 2,
+    onClick: toggleScale,
+    disabled: !pts.length,
+    style: buttonStyle(C, scale === 2)
+  }, "Inputs \xD72")), /*#__PURE__*/React.createElement("div", {
     style: {
       display: "flex",
       flexWrap: "wrap",
@@ -377,14 +450,26 @@ export default function PerceptronDemo() {
     }
   }, /*#__PURE__*/React.createElement("p", {
     style: readoutStyle(C)
-  }, "w = [b, w\u2081, w\u2082] = ", /*#__PURE__*/React.createElement("b", null, "[" + w.map(v => v.toFixed(2)).join(", ") + "]")), /*#__PURE__*/React.createElement("p", {
+  }, "w = [b, w\u2081, w\u2082] = ", /*#__PURE__*/React.createElement("b", null, fmtW(w)), scale === 2 ? "   (inputs ×2)" : ""), /*#__PURE__*/React.createElement("p", {
     style: readoutStyle(C)
-  }, "updates t = ", /*#__PURE__*/React.createElement("b", null, t), ", misclassified = ", /*#__PURE__*/React.createElement("b", null, M.length)), /*#__PURE__*/React.createElement("p", {
+  }, "updates t = ", /*#__PURE__*/React.createElement("b", null, t), ", misclassified = ", /*#__PURE__*/React.createElement("b", null, M.length), " / ", pts.length, test.length ? /*#__PURE__*/React.createElement(React.Fragment, null, ", held-out error = ", /*#__PURE__*/React.createElement("b", null, w.every(v => v === 0) ? "—" : (errorRate(test, w) * 100).toFixed(0) + "%"), " of ", test.length) : null), /*#__PURE__*/React.createElement("p", {
     style: {
       ...readoutStyle(C),
       minHeight: "58px"
     }
-  }, last ? /*#__PURE__*/React.createElement(React.Fragment, null, "Last update used point ", last.i + 1, " (y = ", last.y > 0 ? "+1" : "−1", ").", /*#__PURE__*/React.createElement("br", null), "y w\u1D40x: ", last.before.toFixed(2), " \u2192 ", last.after.toFixed(2), /*#__PURE__*/React.createElement("br", null), "increase ", (last.after - last.before).toFixed(2), " = \u2016x\u2016\xB2 = ", last.n2.toFixed(2)) : "No update yet."), /*#__PURE__*/React.createElement("p", {
+  }, last ? /*#__PURE__*/React.createElement(React.Fragment, null, "Last update used point ", last.i + 1, " (y = ", last.y > 0 ? "+1" : "−1", ").", /*#__PURE__*/React.createElement("br", null), "y w\u1D40x: ", last.before.toFixed(2), " \u2192 ", last.after.toFixed(2), /*#__PURE__*/React.createElement("br", null), "increase ", (last.after - last.before).toFixed(2), " = \u2016x\u2016\xB2 = ", last.n2.toFixed(2)) : "No update yet."), runs.length > 0 && /*#__PURE__*/React.createElement("div", {
+    style: {
+      ...readoutStyle(C),
+      margin: "0 0 6px"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      ...labelStyle(C),
+      margin: "0 0 3px"
+    }
+  }, "Converged runs on this data"), runs.map((r, i) => /*#__PURE__*/React.createElement("div", {
+    key: i
+  }, "start ", r.w0, r.scale === 2 ? " ×2" : "", ": ", r.t, " updates, train error 0, held-out ", test.length ? (r.test * 100).toFixed(0) + "%" : "—"))), /*#__PURE__*/React.createElement("p", {
     style: {
       ...labelStyle(C),
       margin: "6px 0 4px",

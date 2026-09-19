@@ -11,7 +11,7 @@ const W = 620, H = 240;
 
 class BinPlot extends HistogramPlot {
   constructor(canvas, colors) {
-    super(canvas, { width: W, height: H, pad: 30, padTop: 14, padRight: 12,
+    super(canvas, { width: W, height: H, pad: 30, padTop: 26, padRight: 12,
       xDomain: [0, 1], yDomain: [0, 1], colors });
   }
 
@@ -23,7 +23,8 @@ class BinPlot extends HistogramPlot {
     this.axes({ y: false });
     // mu is fixed and unknown; the randomness lives in the sample, so mu gets a hard rule
     this.vline(mu, { color: C.fg, width: 2 });
-    this.label("μ", this.x(mu), this.top + 2, { color: C.fg, align: "center" });
+    // the label sits in the top pad, clear of the tallest bar
+    this.label("μ", this.x(mu), this.top - 7, { color: C.fg, align: "center" });
     this.label("ν = 0", this.left, this.bottom + 15);
     this.label("ν = 1", this.right, this.bottom + 15, { align: "right" });
     return this;
@@ -69,14 +70,14 @@ export default function App() {
         <button type="button" style={buttonStyle(C)} onClick={() => { setEps(0.1); setN(250); }}>&#949; = 0.10, N = 250</button>
         <button type="button" style={buttonStyle(C)} onClick={() => { setEps(0.05); setN(1000); }}>half &#949;, 4&#215; N</button>
       </div>
-      <canvas ref={ref} style={{ width: "100%", maxWidth: W, aspectRatio: `${W} / ${H}` }}
+      <canvas ref={ref} style={{ width: "100%", maxWidth: W, aspectRatio: `${W} / ${H}`, alignSelf: "center" }}
         aria-label={`Histogram of nu over ${TRIALS} samples; ${(miss * 100).toFixed(1)} percent missed by more than epsilon, against a bound of ${(bound * 100).toFixed(1)} percent`} />
       <p style={{ ...readoutStyle(C), margin: 0 }}>
         bound 2e^(−2ε²N) = {bound.toFixed(4)}    observed miss rate = {miss.toFixed(4)}
       </p>
       <p style={{ ...labelStyle(C), margin: 0, lineHeight: 1.5 }}>
         Each bar counts samples landing at that ν; shaded bars are within ε of
-        μ, red bars missed. Two things to try. Drag μ: the histogram slides along
+        μ, orange bars missed. Two things to try. Drag μ: the histogram slides along
         but the bound does not change at all, because the bound never mentions μ.
         Then press the two presets in turn: halving ε while quadrupling N leaves the
         bound where it was, which is the ε²N exponent showing up as a price.

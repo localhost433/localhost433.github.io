@@ -343,3 +343,131 @@ test("the generalization gap stays non-negative where the fit is sane", () => {
       "gap went negative at M = " + M);
   }
 });
+
+/* ---- perceptron: held-out split, scaling ---- */
+
+test("generateSplit labels the test set by the same rule as the training set", () => {
+  const { pts, test } = L.generateSplit("sep", L.rng(9), 30);
+  assert.strictEqual(pts.length, 20);
+  assert.strictEqual(test.length, 30);
+  // a separator that fits the training set with margin exists; run PLA and check it
+  // also classifies a large majority of the held-out points, which only happens if
+  // both were labelled by one rule
+  let w = [0, 0, 0];
+  for (let t = 0; t < 5000; t++) { const r = L.perceptronStep(pts, w, () => 0); if (!r) break; w = r.w; }
+  assert.strictEqual(L.misclassified(pts, w).length, 0);
+  assert.ok(L.errorRate(test, w) < 0.35, "held-out error " + L.errorRate(test, w));
+});
+
+test("generate is unchanged by the split refactor: still 20 separable points, 21 with the plant", () => {
+  assert.strictEqual(L.generate("sep", L.rng(3)).length, 20);
+  const non = L.generate("non", L.rng(3));
+  assert.strictEqual(non.length, 21);
+  assert.ok(non[20].planted);
+  assert.deepStrictEqual(L.generate("empty", L.rng(1)), []);
+});
+
+test("scalePoints scales inputs and keeps labels; errorRate is a fraction", () => {
+  const pts = [{ a: 1, b: -2, y: 1 }, { a: 0.5, b: 0.5, y: -1 }];
+  const s = L.scalePoints(pts, 2);
+  assert.deepStrictEqual(s, [{ a: 2, b: -4, y: 1 }, { a: 1, b: 1, y: -1 }]);
+  assert.deepStrictEqual(pts[0], { a: 1, b: -2, y: 1 }, "input untouched");
+  assert.strictEqual(L.errorRate(pts, [0, 0, 0]), 1);
+  assert.strictEqual(L.errorRate([], [0, 0, 0]), 0);
+});
+
+test("a perceptron through the origin makes the same number of updates on doubled inputs", () => {
+  // no bias coordinate: w = [0, w1, w2] and the update leaves w[0] at 0
+  const run = (pts) => {
+    let w = [0, 0, 0], t = 0;
+    for (;;) {
+      const M = L.misclassified(pts, w); if (!M.length) return t;
+      const p = pts[M[0]]; w = [0, w[1] + p.y * p.a, w[2] + p.y * p.b]; t++;
+      if (t > 5000) return -1;
+    }
+  };
+  for (let s = 1; s <= 20; s++) {
+    // label through the origin so the no-bias perceptron can converge
+    const th = L.rng(s)() * Math.PI * 2, ws = [0, Math.cos(th), Math.sin(th)];
+    const r = L.rng(100 + s), pts = [];
+    while (pts.length < 15) {
+      const p = { a: (r() * 2 - 1) * 4, b: (r() * 2 - 1) * 4 }; const v = L.dot(ws, p);
+      if (Math.abs(v) < 0.3) continue; p.y = v > 0 ? 1 : -1; pts.push(p);
+    }
+    const a = run(pts), b = run(L.scalePoints(pts, 2));
+    assert.ok(a > 0 && a === b, `seed ${s}: ${a} vs ${b}`);
+  }
+});
+
+/* ---- validation and bias-variance ---- */
+
+test("sineSampleRandom draws x in [0,1) and argmin finds the first minimum", () => {
+  const { xs, ys } = L.sineSampleRandom(50, 0.1, L.rng(2));
+  assert.strictEqual(xs.length, 50);
+  assert.ok(xs.every((x) => x >= 0 && x < 1));
+  assert.ok(ys.every(Number.isFinite));
+  assert.strictEqual(L.argmin([3, 1, 2, 1]), 1);
+});
+
+test("biasVariance: bias falls with degree, variance rises, both are averages over x", () => {
+  const r = (M) => L.biasVariance(M, { K: 30, N: 10, sigma: 0.2, grid: 50 }, L.rng(5 + M));
+  const b0 = r(0), b3 = r(3), b9 = r(9);
+  assert.strictEqual(b0.fits.length, 30);
+  assert.strictEqual(b0.gbar.length, 51);
+  assert.ok(b0.bias2 > b3.bias2, "degree 0 has more bias than degree 3");
+  assert.ok(b9.variance > b3.variance, "degree 9 has more variance than degree 3");
+  assert.ok(b3.bias2 < 0.05 && b3.variance < 0.1);
+});
+
+/* ---- ridge and lasso paths ---- */
+
+test("solve inverts a small system and leaves a singular coordinate at 0", () => {
+  const x = L.solve([[2, 1], [1, 3]], [3, 5]);
+  assert.ok(Math.abs(x[0] - 0.8) < 1e-12 && Math.abs(x[1] - 1.4) < 1e-12);
+  assert.deepStrictEqual(L.solve([[1, 0], [0, 0]], [2, 3]), [2, 0]);
+});
+
+test("regressionSample standardizes columns, centres y and correlates the first pair", () => {
+  const { X, y, trueW } = L.regressionSample({ N: 200 }, L.rng(3));
+  const N = X.length, d = X[0].length;
+  assert.strictEqual(d, trueW.length);
+  for (let j = 0; j < d; j++) {
+    const m = X.reduce((s, r) => s + r[j], 0) / N;
+    const v = X.reduce((s, r) => s + (r[j] - m) ** 2, 0) / N;
+    assert.ok(Math.abs(m) < 1e-9 && Math.abs(v - 1) < 1e-9, `column ${j}`);
+  }
+  assert.ok(Math.abs(y.reduce((s, v) => s + v, 0)) < 1e-9);
+  const c01 = X.reduce((s, r) => s + r[0] * r[1], 0) / N;
+  assert.ok(c01 > 0.8, "correlation of the pair " + c01);
+});
+
+test("ridge at lambda 0 is least squares, and lasso at lambda 0 agrees with it", () => {
+  const { X, y } = L.regressionSample({}, L.rng(11));
+  const ols = L.ridgeSolve(X, y, 0), lasso = L.lassoSolve(X, y, 0, { iters: 2000 });
+  ols.forEach((v, j) => assert.ok(Math.abs(v - lasso[j]) < 1e-3, `coef ${j}: ${v} vs ${lasso[j]}`));
+  // the normal equations hold: X'(y - Xw) = 0
+  const resid = y.map((v, i) => v - X[i].reduce((s, x, j) => s + x * ols[j], 0));
+  X[0].forEach((_, j) => assert.ok(Math.abs(X.reduce((s, r, i) => s + r[j] * resid[i], 0)) < 1e-8));
+});
+
+test("ridge shrinks without zeros; lasso reaches exact zeros and drops the null features first", () => {
+  const { X, y, trueW } = L.regressionSample({}, L.rng(11));
+  const lams = L.logSpace(-1, 3, 25);
+  const ridge = L.regPath(X, y, lams, "ridge"), lasso = L.regPath(X, y, lams, "lasso");
+  const n2 = (w) => Math.sqrt(w.reduce((s, v) => s + v * v, 0));
+  for (let i = 1; i < lams.length; i++) {
+    assert.ok(n2(ridge[i]) <= n2(ridge[i - 1]) + 1e-9, "ridge norm is non-increasing in lambda");
+    assert.ok(ridge[i].every((v) => v !== 0), "ridge never produces an exact zero");
+  }
+  const last = lasso[lams.length - 1];
+  assert.ok(last.every((v) => v === 0), "lasso at lambda 1000 is all zeros");
+  // somewhere along the path the lasso keeps exactly the true support
+  const support = (w) => w.map((v) => (v !== 0 ? 1 : 0)).join("");
+  const truth = support(trueW);
+  assert.ok(lasso.some((w) => support(w) === truth), "lasso path passes through the true support");
+});
+
+test("logSpace is log-spaced with the given endpoints", () => {
+  const l = L.logSpace(-1, 2, 4);
+  assert.deepStrictEqual(l.map((v) => +v.toFixed(9)), [0.1, 1, 10, 100]);
+});

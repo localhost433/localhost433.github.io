@@ -37,7 +37,7 @@ function classification(p, C) {
   p.curve(xent, { color: C.acc, width: 2.5 });
   p.labelAt("cross-entropy", -2.85, 2.35, { color: C.acc, size: 11.5 });
   p.labelAt("0-1 loss", -2.85, 1.28, { color: C.fg, size: 11.5 });
-  p.labelAt("flat: zero gradient", 2.92, 0.06, { color: C.muted, size: 11, align: "right" });
+  p.labelAt("flat: zero gradient", 2.92, 0.72, { color: C.muted, size: 11, align: "right" });
   p.labelAt("flat: zero gradient", -2.4, 0.62, { color: C.muted, size: 11 });
   p.labelAt("0", 0, 0, { dx: 4, dy: 13, color: C.muted, size: 10.5 });
   p.labelAt("wrong", -2.9, 0, { dy: 26, color: C.neg, size: 10.5 });
@@ -58,7 +58,7 @@ export default function LossShapes() {
             plotOpts={{ xDomain: [-2, 2], yDomain: [0, 4], pad: 30, padTop: 14, padRight: 16 }}
             labels={[
               { at: [0.42, 2.92], tex: "\\big(h(x) - f(x)\\big)^2", size: 12, color: C.acc },
-              { at: [1.95, 0.62], anchor: "end", tex: "|h(x) - f(x)|", size: 11.5, color: C.muted },
+              { at: [-1.95, 0.2], tex: "|h(x) - f(x)|", size: 11.5, color: C.muted },
               { at: [0, 0], dy: 38, anchor: "middle", tex: "h(x) - f(x)", size: 11.5, color: C.muted },
             ]}
             ariaLabel="Squared loss, a parabola with its minimum at zero residual, above the V-shaped absolute loss." />

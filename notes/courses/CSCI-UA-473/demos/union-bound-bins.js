@@ -153,7 +153,8 @@ export default function App() {
     style: {
       width: "100%",
       maxWidth: W,
-      aspectRatio: `${W} / ${H}`
+      aspectRatio: `${W} / ${H}`,
+      alignSelf: "center"
     },
     "aria-label": `${M} bins each with true fraction ${MU}; the best-looking bin reports ${best.toFixed(3)}`
   }), /*#__PURE__*/React.createElement("p", {

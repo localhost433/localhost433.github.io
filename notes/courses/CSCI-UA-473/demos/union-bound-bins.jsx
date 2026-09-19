@@ -82,7 +82,7 @@ export default function App() {
         <span style={{ ...readoutStyle(C), margin: 0, minWidth: "4.5em" }}>M = {M}</span>
         <button type="button" style={buttonStyle(C)} onClick={() => setSeed((s) => s + 1)}>Resample</button>
       </div>
-      <canvas ref={ref} style={{ width: "100%", maxWidth: W, aspectRatio: `${W} / ${H}` }}
+      <canvas ref={ref} style={{ width: "100%", maxWidth: W, aspectRatio: `${W} / ${H}`, alignSelf: "center" }}
         aria-label={`${M} bins each with true fraction ${MU}; the best-looking bin reports ${best.toFixed(3)}`} />
       <p style={{ ...readoutStyle(C), margin: 0, lineHeight: 1.7 }}>
         every bin has μ = {MU}, yet the best-looking one reports ν = {best.toFixed(3)}<br />

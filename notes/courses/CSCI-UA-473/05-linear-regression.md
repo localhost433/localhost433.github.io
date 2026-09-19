@@ -322,6 +322,24 @@ set of points and reporting **RMSE**. The text layer of that slide is thin, so c
 recording for which degrees were shown and where the error turns around; the shape is the
 one L4 already drew with its ten-point sine and $M = 9$.
 
+*Preview of 09/22.* The syllabus puts bias, variance and the tradeoff between them in the
+next lecture, and quiz 1 comes two days after it. The figure below uses the standard
+vocabulary; if the deck names things differently, the deck wins. The mechanism behind
+the U: draw forty samples instead of one, fit degree $M$ to every one, and look at the
+forty fits together.
+
+```artifact src=demos/bias-variance.jsx
+```
+
+**Bias** is how far the *average* fit $\bar g$ sits from the target - what the hypothesis
+set cannot express however much data it sees. **Variance** is how far the individual fits
+scatter around $\bar g$ - how much the answer depends on which sample you drew. Low $M$ is
+all bias: the fits agree with each other and are wrong together. High $M$ is all variance:
+their average is nearly right and no single one of them is. $E_{\text{out}}$ is the sum
+of the two plus the noise floor $\sigma^2$ from the noisy-targets section, and its minimum
+sits where the falling curve crosses the rising one, not where either is small. Ridge and
+lasso, above, are variance reducers: they buy a smaller scatter at the price of some bias.
+
 ## Subset selection
 
 Linear models with many variables, fitted by least squares, have **two flaws**:
@@ -438,6 +456,20 @@ $$
 with $q = 1$ and $q = 2$ the two cases taught. The corners are the whole story: sparsity is
 a property of the *shape* of the constraint set, not of the size of the penalty.
 
+What that does to a real coefficient vector, as $\lambda$ grows. Six standardized features
+on sixty rows, the same data under both penalties, and a truth of $[4, 0, -3, 0, 2, 0]$ with
+$x_2$ a near-copy of $x_1$:
+
+```artifact src=demos/regularization-path.jsx
+```
+
+Two things to read off it. Ridge shrinks every coefficient toward zero and never lands on
+it, so at any $\lambda$ all six are nonzero - which is why "you want a sparse solution, so
+use $L_2$" is false. And on the correlated pair the two penalties fail differently: ridge
+splits the shared signal between $x_1$ and $x_2$, lasso keeps one and zeroes the other. The
+data cannot tell the pair apart, so neither answer is *right*; the point is that the penalty
+decides, not the data.
+
 ## What changed from the pre-lecture draft
 
 This note replaces a stub written on 16 September against the syllabus bullets, before the
@@ -461,25 +493,75 @@ is silent about the setup a lecture needs before it can state them.
 
 ## Practice
 
-On paper, cold:
+On paper, cold. Each one has a check attached, so you can tell whether you got it rather
+than whether it felt familiar.
 
-1. Write $P(x,y) = P(x)P(y\mid x)$ and say in one sentence each what the two factors are
-   called and what each is for. Then state where the noise in a noisy target lives, and why
-   no choice of $\mathbb H$ removes it.
-2. Derive $\hat w = (X^{\mathsf T}X)^{-1}X^{\mathsf T}y$ from
-   $(y-Xw)^{\mathsf T}(y-Xw)$, stating the shape of every matrix as you go.
-3. Take four points in $\mathbb R^1$. Fit a degree-1 and a degree-3 polynomial by hand via
-   the normal equations and confirm the degree-3 fit interpolates all four. Add
-   $\lambda\lVert w\rVert_2^2$ with $\lambda = 1$, recompute, and confirm it no longer does.
-4. State the orthogonality condition at the optimum, and explain in two sentences why it is
-   the same statement as "$\hat y$ is the projection of $y$ onto the column space of $X$."
-5. Two features have the same fitted coefficient $\hat w_j$ but different $v_j$. Which is
-   the more important feature by Z-score, and why is that the right answer rather than a
-   quirk of the formula?
-6. $N = 50$, $d = 9$. Write $\hat\sigma^2$ with the correct denominator. Then set up the
-   $F$-statistic comparing this model to a nested one with 4 features.
-7. Sketch the $L_1$ diamond and the $L_2$ circle with an elliptical contour approaching
-   each. Mark the touch point in both, and use the sketch - not the formula - to say which
-   gives exact zeros.
-8. Say which of ridge and lasso has a closed form, write it, and state what the penalty term
-   does to invertibility when $N < d$.
+**Shapes and setup.**
+
+1. Write out $X$, $w$ and $y$ for $N = 4$ examples and $d = 2$ features, with the bias
+   absorbed, and give the dimensions of $X^{\mathsf T}X$, $X^{\mathsf T}y$ and $\hat w$.
+   *Check:* $X^{\mathsf T}X$ is $3 \times 3$, not $4 \times 4$. If you got $N \times N$
+   you have $X$ transposed, and every formula below will come out the wrong shape.
+2. State which of these are linear models and why: $w_0 + w_1x_1 + w_2x_2^3$;
+   $w_0 + w_1 x_1^{w_2}$; $w_0 + w_1\log x_1$. *Check:* the test is linearity in $w$, and
+   exactly one of the three fails it.
+3. Write $P(x,y) = P(x)\,P(y \mid x)$, name both factors, and say where the noise in a
+   noisy target lives. Then explain why enlarging $\mathbb H$ cannot remove it.
+   *Check:* your answer should mention that $x$ does not determine $y$, so no function of
+   $x$ alone - however complicated - can reproduce $y$.
+
+**Training and its geometry.**
+
+4. Derive $\hat w = (X^{\mathsf T}X)^{-1}X^{\mathsf T}y$ from
+   $\operatorname{RSS} = (y - Xw)^{\mathsf T}(y - Xw)$, stating the shape of every object
+   as you go. *Check:* the gradient is $-2X^{\mathsf T}(y - Xw)$, and it is a
+   $(d+1)$-vector, not a scalar.
+5. State the orthogonality condition at the optimum, then argue in two sentences that it
+   is the *same statement* as "$\hat y$ is the projection of $y$ onto the column space of
+   $X$". *Check:* both are $X^{\mathsf T}(y - \hat y) = 0$; the geometric reading is that
+   the residual is orthogonal to every column, and the columns span the space.
+6. Give two distinct circumstances in which $X^{\mathsf T}X$ is not invertible, one about
+   $N$ versus $d$ and one that can happen at any $N$. Say what $\lambda I$ does to each.
+   *Check:* $N < d+1$ is the first; an exactly duplicated or collinear feature is the
+   second, and ridge repairs both because $X^{\mathsf T}X + \lambda I$ is positive
+   definite for $\lambda > 0$.
+
+**Interpretation.**
+
+7. Two features have the same fitted $\hat w_j$ but different $v_j$. Which is the more
+   important feature by Z-score, and why is that the right answer rather than an artifact
+   of the formula? *Check:* the one with smaller $v_j$; a coefficient estimated from a
+   nearly-collinear direction is large and meaningless, and $v_j$ is what detects that.
+8. $N = 50$, $d = 9$. Write $\hat\sigma^2$ with the correct denominator, then set up the
+   $F$-statistic comparing this model to a nested one using 4 of the features. State what
+   breaks if the two models are not nested. *Check:* the denominator is $50 - 9 - 1 = 40$;
+   $d_1 - d_0 = 5$; and without nesting $\operatorname{RSS}_0 - \operatorname{RSS}_1$ is
+   not guaranteed non-negative, so the ratio is not an $F$ at all.
+9. You have a categorical feature with 5 levels. Say how many columns it becomes, and what
+   goes wrong if you use one column of integers $1..5$ instead. *Check:* the integer
+   encoding asserts an ordering and equal spacing that the categories do not have.
+
+**Capacity.**
+
+10. Take four points in $\mathbb R^1$. Fit a degree-1 and a degree-3 polynomial by hand via
+    the normal equations, and confirm the degree-3 fit interpolates all four. Add
+    $\lambda\lVert w\rVert_2^2$ with $\lambda = 1$, recompute, and confirm it no longer
+    does. *Check:* at degree 3 the design matrix is square and invertible, so
+    $\operatorname{RSS} = 0$ exactly; the penalty makes zero training error no longer
+    optimal.
+11. Sketch the $L_1$ diamond and the $L_2$ circle with an elliptical RSS contour coming in
+    to touch each. Mark the touch point in both and read off which gives exact zeros -
+    from the sketch, not the formula. *Check:* the argument is that the diamond's corners
+    lie *on the axes* and a contour is overwhelmingly likely to meet a corner first; the
+    circle has no corners at all. Note that the $p = \infty$ ball also has corners and
+    gives no sparsity, which is the test of whether you have the argument or the slogan.
+12. Say which of ridge and lasso has a closed form and write it. Then state what the
+    penalty does to invertibility when $N < d$, and why best-subset selection is not simply
+    the better option. *Check:* ridge, $(X^{\mathsf T}X + \lambda I)^{-1}X^{\mathsf T}y$;
+    and best-subset runs out at $d \approx 30$-$40$ because it searches $2^d$ subsets.
+
+---
+
+> Next up: cross-validation, which the syllabus puts on 09/22 and which this deck does not
+> cover. It is the gap questions 10 and 12 above run into: nothing in this lecture says how
+> to *choose* $\lambda$, $M$, or a subset, only what each of them does once chosen.

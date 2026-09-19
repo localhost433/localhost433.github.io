@@ -74,6 +74,31 @@ $\mathbb H$. It never sees $f$. Everything it can possibly know about $f$ arrive
 $N$ samples, which is why the i.i.d. assumption is doing real work rather than being
 bookkeeping - it is the bridge that lets finite $D$ say anything about unseen $\mathcal X$.
 
+That chart is accurate and every box on it is a *name*. It says $\mathbb H$ is the
+hypothesis set without saying what kind of object a hypothesis is, and the answer turns
+out to be two different pictures that the rest of the course switches between without
+announcing the switch. The figure below draws one example in both.
+
+```artifact src=demos/hypothesis-space-two-views.jsx static math
+```
+
+Read left to right, a hypothesis is a **boundary drawn on the input space** and
+$\mathbb H$ is a family of such boundaries. That is the reading behind every sentence of
+the form "we use a linear model", and it is the one the perceptron section below needs,
+because the update moves a line.
+
+Read right to left, a hypothesis is a **single point**, $\mathbb H$ is the region those
+points fill, and choosing $g$ means choosing a coordinate. This is the reading that every
+later optimization argument silently assumes: "search $\mathbb H$ for the $h$ minimizing
+$E_{\text{in}}$" is not a meaningful instruction until $\mathbb H$ has a geometry to
+search. The parametric/non-parametric split in the next section is a statement about that
+geometry - parametric means the region has a fixed, finite number of coordinates.
+
+Both pictures place $f$ *outside* $\mathbb H$, and that is not a drafting choice. Nothing
+in the setup promises $f \in \mathbb H$, and when it is not, there is a floor on
+$E_{\text{out}}$ that no amount of data touches. Slides 44-54 come at that floor from the
+No Free Lunch side; the next lecture's bias-variance decomposition measures it.
+
 ## Hypothesis space
 
 *Slide 13.* The examples of $\mathbb H$, split on whether the parameter count depends on
@@ -200,10 +225,27 @@ $$
 \boxed{\,w(t+1) \leftarrow w(t) + y(t)\,x(t)\,}
 $$
 
-Use the figure to step through the update and watch what changes.
+Use the figure to step through the update and watch what changes. The small hollow
+markers are a held-out set drawn from the same hidden rule; the algorithm never sees them.
 
 ```artifact src=demos/perceptron-2d.jsx
 ```
+
+Three experiments the controls are there for, each one a quiz question in disguise:
+
+- **Random start w**, then run to convergence, twice. Both runs end at zero training
+  error - the stopping condition guarantees it - but the two lines are different lines,
+  and the held-out error tells them apart. Same performance on $D$ does not mean same
+  performance off it.
+- **Inputs ×2**, with *Lowest index* picking so the run is deterministic, and compare the
+  update count against the unscaled run from the same start. For a perceptron through the
+  origin the count is identical: $w$ after $t$ updates is exactly doubled, so every
+  $\operatorname{sign}(w^{\mathsf T}x)$ is unchanged and the same mistakes are made in the
+  same order. With the bias absorbed as an unscaled $x_0 = 1$ that argument breaks, and the
+  count usually shifts - the geometry is the same, the arithmetic is not.
+- **Non-separable**, then run. The count never reaches zero and the misclassification
+  curve does not trend anywhere; an infinite run is the *only* symptom PLA gives you of
+  non-separability.
 
 The final hypothesis $h$ at convergence is the $g$ that best approximates $f$. Slide 43
 states the guarantee: **so long as the data is linearly separable, the algorithm will find
@@ -212,18 +254,21 @@ a separating hyperplane.**
 ### Why the update helps
 
 The four-line argument the update is designed around. Take a misclassified
-$(x(t), y(t))$ and apply one step:
+$(x(t), y(t))$, apply one step, and read the signed margin $y\,w^{\mathsf T}x$ line by
+line:
 
 $$
+\begin{aligned}
 y(t)\,w(t+1)^{\mathsf T}x(t)
-= y(t)\big(w(t) + y(t)x(t)\big)^{\mathsf T}x(t)
-= y(t)\,w(t)^{\mathsf T}x(t) + y(t)^2\,x(t)^{\mathsf T}x(t).
-$$
-
-Since $y(t) \in \{+1,-1\}$ we have $y(t)^2 = 1$, and
-$x(t)^{\mathsf T}x(t) = \|x(t)\|^2 > 0$ for any nonzero input. So
-$$
-y(t)\,w(t+1)^{\mathsf T}x(t) = y(t)\,w(t)^{\mathsf T}x(t) + \|x(t)\|^2 > y(t)\,w(t)^{\mathsf T}x(t).
+  &= y(t)\big(w(t) + y(t)x(t)\big)^{\mathsf T}x(t)
+     && \text{substitute the update} \\[2pt]
+  &= y(t)\,w(t)^{\mathsf T}x(t) \;+\; y(t)^2\,x(t)^{\mathsf T}x(t)
+     && \text{expand} \\[2pt]
+  &= y(t)\,w(t)^{\mathsf T}x(t) \;+\; \lVert x(t)\rVert^2
+     && y(t)^2 = 1 \text{ since } y(t) \in \{+1,-1\} \\[2pt]
+  &> y(t)\,w(t)^{\mathsf T}x(t)
+     && \lVert x(t)\rVert^2 > 0 \text{ for any nonzero input.}
+\end{aligned}
 $$
 
 The quantity $y\,w^{\mathsf T}x$ is positive exactly when the example is classified
@@ -267,7 +312,30 @@ anything about unseen inputs, and no restriction is universally correct. So the 
 set is not a shortcut around the problem, it *is* the assumption, and every method later in
 the course is a different bet about which structure the world has.
 
-Use the figure to see how the hypothesis set changes the votes.
+The figure makes that concrete on the smallest interesting input space, $\{0,1\}^3$: eight
+possible inputs, so $2^8 = 256$ possible targets, and a training set is a subset of the
+eight corners you have been told the answer for. It opens with four corners labelled and
+the hypothesis set restricted to linear thresholds, which is a bias that suits the target
+it is aimed at - three of the four unseen corners come out right, an off-training error of
+$0.25$ against $0.50$ for a coin.
+
+Two switches are worth throwing, in this order:
+
+1. **Hypothesis set → All 256 functions.** Every unseen corner drops to a vote of exactly
+   $0.50$ and the off-training error becomes exactly $0.50$. This is not a quirk of the
+   sample: for every surviving hypothesis that says $+1$ at an unlabelled corner there is
+   another, fitting the labelled corners equally well, that says $-1$. **Labelling more
+   corners does not help**, because it only ever removes hypotheses in matched pairs. An
+   unrestricted $\mathbb H$ has nothing to say about anything it was not shown.
+2. **Target → Parity of bits,** with linear thresholds still selected. Now the bias is
+   decisive and *wrong*: all four unseen corners are predicted, and all four are wrong -
+   an off-training error of $1.00$, worse than the coin.
+
+Read together, those two states are the theorem. A hypothesis set has to be restricted
+before it can generalize at all, and any restriction that beats chance on one set of
+targets is beaten by chance on the complement. The training data cannot tell you which of
+the two situations you are in, which is why "there is no machine learning without
+assumptions" is a statement about your assumptions rather than about your data.
 
 ```artifact src=demos/nfl-boolean-cube.jsx
 ```
@@ -279,50 +347,33 @@ Use the figure to see how the hypothesis set changes the votes.
 ```artifact src=demos/paradigms-tree.jsx static
 ```
 
-**Supervised** (slides 56-57). Examples: bank customers with their creditworthiness; images
-of apples and oranges each marked with what it contains; natural scenes with every pixel
-marked with a category (segmentation); audio waveforms each with the text of the audio
-(speech-to-text). Two variants get their own slide:
+The six cards are the section. What the figure cannot carry, and what the deck spends its
+thirteen slides on, is the following:
 
-- *Online learning* - the algorithm does not have all the data upfront; examples arrive one
-  at a time in a stream. Streaming news, streaming stock prices.
-- *Active learning* - labels are expensive and there is a budget, so the algorithm queries
-  for the examples that give the biggest bang for the buck.
+- **Supervised** has two named variants of its own (slides 56-57), and they are about
+  *when* the labels arrive rather than where they come from. *Online learning*: the
+  examples arrive one at a time in a stream rather than all upfront - streaming news,
+  streaming stock prices. *Active learning*: labels are expensive and there is a budget,
+  so the algorithm chooses which examples to ask about.
+- **Unsupervised** (slides 58-62) gets five slides because the deck wants the three
+  distinct uses on the record: clustering, embedding (images *and* words - thousands of
+  pixels down to a coordinate, with similar inputs landing near each other), and topic
+  modelling. The purpose is stated as understanding the data and building concise
+  representations of it, not prediction.
+- **Self-supervised** (slide 64) turns on the word *indirect*: the labels are not absent,
+  they are inferred from a property of the data the collector never annotated. The
+  example is temporal correlation - frames near each other in a video are of the same
+  thing, so the video supervises itself.
+- **Transfer** (slide 65) is the one with an asymmetry worth remembering: the *final*
+  task is the small one (Swedish Vallhunds) and the *auxiliary* task is the large one
+  (cats versus dogs). Getting that backwards is the easy mistake.
+- **Reinforcement** (slides 66-67) is the only one with no input-output pairs at all.
+  Environment, observation, action, $+/-$ reward, repeat. The toddler and the hot cup:
+  touching is a large negative reward, not touching a small one, and a few trials settle
+  it.
 
-**Unsupervised** (slides 58-62). Only inputs, no labels. Used primarily to understand the
-underlying data and build concise representations of it. The deck's three illustrations:
-clustering images by content; embedding images so that similar images get nearby
-coordinates (from thousands or millions of pixels down to a coordinate); embedding words;
-and topic modeling.
-
-**Semi-supervised** (slide 63). Labels for a subset, none for the typically much larger
-remainder; both are used in training. For scenarios with lots of data where labeling is
-expensive - speech recognition, healthcare, text document classification.
-
-**Self-supervised** (slide 64). Infer *indirect* labels from a large unlabeled collection
-by exploiting other properties of the dataset. The example: exploit the temporal
-correlation of video frames to deduce that images from nearby frames are similar to each
-other.
-
-**Transfer learning** (slide 65). Train on one or more auxiliary tasks and use the
-knowledge to solve the final task. The example: a large dataset of cat and dog images
-trains a model to distinguish cats from dogs; that knowledge transfers to a small dataset
-of Swedish Vallhund images to build a Vallhund identifier. Task 1 (the final task) has
-little data; task 2 (the auxiliary task) has a lot.
-
-**Reinforcement learning** (slides 66-67). Training data does not come as input-output
-pairs; the algorithm learns by trial and error. There is an environment (the world the
-robot exists in), the agent observes it, takes an action based on that observation, and
-receives $+/-$ feedback (reward), which it uses to improve. The illustration: a toddler
-learning not to touch a hot cup - touching yields a large negative reward (burnt fingers),
-not touching a small negative one (unsatisfied curiosity), and after a few trials the
-toddler learns it is better off not touching.
-
-The axis that actually separates these is *where the supervision signal comes from*, not
-how much data there is: a human annotator (supervised), nowhere (unsupervised), the data's
-own structure (self-supervised), a different task (transfer), or the environment's response
-to your own actions (reinforcement). Sorting a described scenario onto that axis is the
-standard MCQ.
+The axis is the answer, not the list: sorting a described scenario by *who or what is
+doing the supervising* is the standard MCQ, and it is the only question you need to ask.
 
 ## Important questions in machine learning
 
@@ -352,9 +403,12 @@ Then two things to try in the figures themselves, each under a minute:
   step until it converges. Watch $y\,w^{\mathsf T}x$ climb by $\|x\|^2$ on each update,
   and watch the misclassified count go *up* on some steps - that is convergence failing
   to be monotone, which is the thing the four-line argument does not promise.
-- **Cube, "Linear threshold (104)".** Label a few vertices, then switch the hypothesis
-  set. Watch $|\mathcal H|$ drop and the votes at unseen vertices move off $0.50$. The
-  bias is doing the work; nothing about the data changed.
+- **Cube, target "None".** Clear the seeded sample and label corners yourself, one at a
+  time, under **All 256 functions**. Watch "consistent with D" halve on every label while
+  "unseen vertices decided" stays at zero - the sample is doing real work on $\mathbb H$
+  and none at all on generalization. Switch to **Linear threshold (104)** without touching
+  a label and the votes move off $0.50$ immediately. The bias is doing the work; nothing
+  about the data changed.
 
 ---
 

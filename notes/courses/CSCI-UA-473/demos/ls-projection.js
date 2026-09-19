@@ -12,6 +12,12 @@ import { useClassColors, Figure, Canvas3D } from "@course";
    which vector is in front of the plane stops being a guess. Reduced motion pins
    it at the canonical pose, which is the slide's pose.
 
+   It is also draggable, which the sway alone cannot replace. Parallax of a few
+   degrees tells you the residual is in front of the plane; only turning the scene
+   until you are looking along the plane tells you that ŷ is *in* it and that the
+   angle at the foot of the residual is a real right angle rather than a drawn one.
+   That is the one fact the figure exists to establish, and it should be checkable.
+
    Scene coordinates: the column space is the z = 0 plane, so "leaves the plane"
    is literally "has a z component". */
 
@@ -29,11 +35,14 @@ function draw(s, C) {
     stroke: C.acc,
     width: 1
   });
-  // Prose stays on the canvas in the UI face; every symbol is a TeX label above it.
-  s.text("the column space of X — every Xw lives here", [4.0, -1.0, 0], {
-    dx: -4,
-    dy: 24,
-    align: "right",
+  /* Prose stays on the canvas in the UI face; every symbol is a TeX label above it.
+     Anchored to the scene's centring point rather than to a corner of the plane:
+     the corners swing off the canvas once the reader turns the scene, and a caption
+     that slides out of frame is worse than one that does not track its subject. */
+  s.text("the column space of X — every Xw lives here", [1.45, 1.1, 0], {
+    dx: 0,
+    dy: 116,
+    align: "center",
     size: 12,
     color: C.acc
   });
@@ -126,13 +135,14 @@ export default function LsProjection() {
   const C = useClassColors();
   return /*#__PURE__*/React.createElement(Figure, {
     title: "Least squares in three dimensions: the two columns of X span a plane, y stands off it, and the fitted prediction is the point of the plane directly below y, with the residual meeting the plane at a right angle.",
-    caption: "The model can only produce points **in the plane** \u2014 that is what `\u0177 = Xw` means. Least squares picks the one whose residual is orthogonal to every column, which is the normal equations `X\u1D40(y \u2212 \u0177) = 0` read as a picture."
+    caption: "**Drag to turn the scene.** The model can only produce points **in the plane** \u2014 that is what `\u0177 = Xw` means. Least squares picks the one whose residual is orthogonal to every column, which is the normal equations `X\u1D40(y \u2212 \u0177) = 0` read as a picture. Turn until you are looking edge-on along the plane: `\u0177` stays in it from every angle, and the right angle at its foot holds."
   }, /*#__PURE__*/React.createElement(Canvas3D, {
     height: 310,
     sway: {
       amp: 0.30,
       seconds: 14
     },
+    interactive: true,
     labels: LABELS(C),
     initialView: {
       yaw: -0.72,

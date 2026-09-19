@@ -82,7 +82,7 @@ function classification(p, C) {
     color: C.fg,
     size: 11.5
   });
-  p.labelAt("flat: zero gradient", 2.92, 0.06, {
+  p.labelAt("flat: zero gradient", 2.92, 0.72, {
     color: C.muted,
     size: 11,
     align: "right"
@@ -143,8 +143,7 @@ export default function LossShapes() {
       size: 12,
       color: C.acc
     }, {
-      at: [1.95, 0.62],
-      anchor: "end",
+      at: [-1.95, 0.2],
       tex: "|h(x) - f(x)|",
       size: 11.5,
       color: C.muted

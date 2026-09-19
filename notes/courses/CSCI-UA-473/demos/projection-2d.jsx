@@ -111,7 +111,8 @@ export default function App() {
       <canvas ref={ref} onPointerDown={down} onPointerMove={move}
         onPointerUp={() => setDrag(null)} onPointerLeave={() => setDrag(null)}
         style={{ width: "100%", maxWidth: W, aspectRatio: "1 / 1", touchAction: "none",
-          cursor: drag ? "grabbing" : "grab", border: `1px solid ${C.border}`, borderRadius: "8px" }}
+          alignSelf: "center", cursor: drag ? "grabbing" : "grab",
+          border: `1px solid ${C.border}`, borderRadius: "8px" }}
         aria-label={`x is [${x[0].toFixed(1)}, ${x[1].toFixed(1)}], a is [${a[0].toFixed(1)}, ${a[1].toFixed(1)}], projection coefficient ${k.toFixed(3)}`} />
       <p style={{ ...readoutStyle(C), margin: 0, lineHeight: 1.7 }}>
         aᵀx / aᵀa = {k.toFixed(3)}<br />
@@ -119,7 +120,7 @@ export default function App() {
         aᵀ(x − proj) = {Math.abs(dotRes) < 5e-4 ? "0" : dotRes.toFixed(6)}
       </p>
       <p style={{ ...labelStyle(C), margin: 0, lineHeight: 1.5 }}>
-        Drag either arrow head. The dashed line is the subspace spanned by a, and the red
+        Drag either arrow head. The dashed line is the subspace spanned by a, and the orange dashed
         segment is the residual x − proj. However you move the two vectors, the last
         readout stays zero: the residual is orthogonal to a, and that single fact is what
         defines the projection. L5 uses it in exactly this form, with the column space of

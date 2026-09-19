@@ -60,7 +60,12 @@ So $\|x\|_1 = \sum |x_i|$ is the sum of absolute values, $\|x\|_2 = \sqrt{\sum |
 and so on. The $L_1$ / $L_2$ distinction returns as the two standard regularizers, so the
 shape of each is worth having in your head rather than looked up.
 
-The unit balls are worth looking at rather than deriving, because it is their *shape* that later arguments use. Sweep p and watch the corners appear.
+The unit balls are worth looking at rather than deriving, because it is their *shape* that
+later arguments use. Sweep $p$ and watch the corners appear, then take it to the far end:
+$p \to \infty$ gives $\|x\|_\infty = \max_i |x_i|$, the sup norm, whose ball is the square.
+(The control is linear in $1/p$, which is the only way a slider reaches $\infty$ at all.)
+The square has corners too, and it produces no sparsity - so "corners" is not the whole
+story, and the $L_1$ argument in L5 turns on *where* the corners are, namely on the axes.
 
 ```artifact src=demos/norm-balls.jsx
 ```

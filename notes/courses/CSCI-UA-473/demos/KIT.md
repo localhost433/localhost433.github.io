@@ -77,7 +77,12 @@ Grep for `(?<!\\)\\[a-zA-Z]` inside a `{...}` context to find the broken ones.
 `symRuns` parses `E_{in}`, `x_i`, `2e^{−2ε²N}` into baseline-shifted tspans, and every
 text primitive above runs it. Do **not** reach for the Unicode subscript letters: they
 are spread over three blocks and resolve from different fallback fonts, so `Eₒᵤₜ`
-renders with the `u` visibly higher than its neighbours. Set `math: true` on a `Box`
+renders with the `u` visibly higher than its neighbours. **The blackboard-bold letters
+are worse and the escape hatch is different.** `ℍ 𝕏 𝕐 𝒜` have no glyph in the UI sans
+face and fall back to something broken — `ℍ` prints as `IH`. In SVG, route them through
+`TeX`. On a **canvas** there is no `TeX` to route them through, because `Plot.label` and
+`Scene3D.text` are `fillText` calls: write a plain `H` there and keep the notation for the
+prose around the figure, where MathJax handles it. Set `math: true` on a `Box`
 line for `𝕏 𝕐 ℍ 𝒜`, which have the same problem.
 
 ## TeX
@@ -115,6 +120,11 @@ slides build the components diagram one box per click.
 
 - `Plot` — the 2D drawing surface. `grid`, `axes`, `curve`, `polyline`, `dot`,
   `band`, `hband`, `vline`, `label`, `labelAt`. `HistogramPlot` adds `bins`.
+  `grid({ edges: false })` drops the first and last line of each family: without it
+  a canvas narrower than the card it sits in closes into a faint rectangle, and that
+  rectangle reads as a second background colour rather than as the edge of a plot.
+  Pair it with `alignSelf: "center"` on the canvas, or the panel sits off to the left
+  of a wide card, which is the other half of the same complaint.
 - `PlotFigure({ width, height, draw, plotClass, plotOpts, ariaLabel })` — a still
   plot: the canvas, dpr and theme wiring around a `draw(plot)`.
 - `Scene3D` — the camera, shared by `bias-absorption-3d` and `ls-projection`. A point
@@ -124,7 +134,12 @@ slides build the components diagram one box per click.
 - `Canvas3D({ height, draw, spin, sway, interactive, view, onView, initialView,
   sceneOpts, ariaLabel })` — the React side. `sway: { amp, seconds }` is a small
   oscillation about the pose (parallax without losing the canonical view); `spin` is
-  a turntable; `view`/`onView` make the camera controlled.
+  a turntable; `view`/`onView` make the camera controlled. `sway` and `interactive`
+  compose: the sway holds still for the duration of a drag and resumes about whatever
+  pose the reader lets go at, so the pose being steered is the pose on screen.
+  A scene-anchored caption needs care once a figure is draggable — anchor it to the
+  scene's `center` point, not to a corner of the geometry, or it swings off canvas
+  the first time someone turns the view.
 
 ## Figures in the notes
 
@@ -133,18 +148,26 @@ slides build the components diagram one box per click.
 | `matvec-column-view` | 02 | L2 slides 12, 14 |
 | `joint-marginal-grid` | 02 | L2 slides 24-25 |
 | `components-diagram` | 03 | L3 slides 7-13, animated in the deck's build order |
+| `hypothesis-space-two-views` | 03 | no slide; the same ℍ as a family of boundaries and as a region of points |
 | `paradigms-tree` | 03 | L3 slides 55-67 |
 | `bin-to-learning-map` | 04 | L4 slides 16-20 |
 | `loss-shapes` | 04 | L4 slide 33 |
 | `error-cost-matrices` | 04 | L4 slide 34 |
-| `design-matrix-anatomy` | 05 | L5 slides 14-20 |
+| `design-matrix-anatomy` | 05 | L5 slides 8-14 |
 | `ls-projection` | 05 | L5 slide 15 (ESL 3.2), in 3D |
+| `regularization-path` | 05 | no slide; coefficient paths under ridge and lasso as λ grows, interactive |
+| `bias-variance` | 05 | preview of the 09/22 lecture; forty fits, their average, bias² and variance against M, interactive |
 | `erm-objective-anatomy` | 00 | no slide; the supplement's own objective |
 
 Interactive demos (`perceptron-2d`, `hoeffding-bin`, `union-bound-bins`,
-`complexity-ucurve`, `poly-overfit`, `ridge-vs-lasso`, `norm-balls`,
-`projection-2d`, `nfl-boolean-cube`, `bias-absorption-3d`, `practice-03`) keep their
-own state and controls and are fenced without `static`.
+`complexity-tradeoff`, `complexity-ucurve`, `ridge-vs-lasso`, `regularization-path`,
+`bias-variance`, `norm-balls`, `projection-2d`, `nfl-boolean-cube`, `bias-absorption-3d`,
+`practice-03`) keep their own state and controls and are fenced without `static`.
+`poly-overfit` was folded into `complexity-ucurve`'s right-hand panel and deleted.
+
+Captions name colours by what is on screen: the `neg` class is **orange** in both
+themes, not red. The bin-to-learning figure keeps the lecture's word "red" for the
+marbles, since that is the vocabulary the bound is stated in.
 
 ## Tests
 

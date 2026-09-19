@@ -204,6 +204,40 @@ $$
 \le 2M e^{-2\epsilon^2 N}\;}
 $$
 
+The slide states the factor of $M$ without deriving it. It is four lines, and they are
+worth having because every line is a place the argument could have been tighter and was
+not - which is the same reason VC dimension exists.
+
+> Write $B_m$ for the event that hypothesis $h_m$ is *bad on this sample*:
+>
+> $$
+> B_m \;=\; \big\{\, \lvert E_{\text{in}}(h_m) - E_{\text{out}}(h_m) \rvert > \epsilon \,\big\}.
+> $$
+>
+> The algorithm's output $g$ is one of the $h_m$, but *which* one depends on $D$, so $g$ is
+> not fixed in advance and Hoeffding does not apply to it directly. What is true is that if
+> $g$ is bad, then some $h_m$ is bad:
+>
+> $$
+> \begin{aligned}
+> \mathbb P\big[\,\lvert E_{\text{in}}(g) - E_{\text{out}}(g) \rvert > \epsilon \,\big]
+>   &\le \mathbb P\!\left[\, \bigcup_{m=1}^{M} B_m \right]
+>      && \text{the bad-}g\text{ event is contained in the union} \\[2pt]
+>   &\le \sum_{m=1}^{M} \mathbb P[B_m]
+>      && \text{union bound: no independence assumed} \\[2pt]
+>   &\le \sum_{m=1}^{M} 2 e^{-2\epsilon^2 N}
+>      && \text{Hoeffding on each } h_m,\ \text{which } \textit{is} \text{ fixed} \\[2pt]
+>   &= 2M e^{-2\epsilon^2 N}.
+> \end{aligned}
+> $$
+>
+> Two places this is loose, and both are the point. The union bound assumes nothing about
+> how the $B_m$ overlap, and in a real $\mathbb H$ they overlap enormously - two nearly
+> identical hypotheses are bad on nearly the same samples, so the sum double-counts almost
+> everything. And the containment in the first line is generous: it charges you for every
+> hypothesis that *could* have been chosen, not the one that was. VC dimension is the repair
+> for the first; nothing in this course repairs the second.
+
 The slide's annotations:
 
 - **The bound gets loose by $M$ times.**
@@ -271,7 +305,40 @@ Do not collapse those two complexities into one. $M$ is a property of the *hypot
 you chose*; the complexity of $f$ is a property of the *world*, which you do not control
 and cannot observe. The tradeoff curve is drawn over the first.
 
+The slide's own picture, with the second complexity put on a slider - because the way to
+keep the two apart is to move one and watch the other stay still:
+
+```artifact src=demos/complexity-tradeoff.jsx
+```
+
+Take the slider to the right and read the three curves in order. In-sample error rises at
+every complexity of $\mathbb H$: a harder target is harder to fit, which is question 2
+getting worse. The model-complexity curve does not move at all, because it comes from
+$2Me^{-2\epsilon^2 N}$, and that expression contains $M$ and $N$ and nothing about $f$ -
+question 1 has not noticed that the world changed. Their sum therefore bottoms out further
+right, which is the conclusion the slide states in words: **a more complex $f$ forces a more
+complex $\mathbb H$.**
+
+Two things worth taking from the picture that the sentence does not carry:
+
+- The optimum also moves **up**. The extra capacity does not recover what the harder target
+  cost you - it only stops you paying a second time for being underpowered. There is a floor
+  here that no choice of $\mathbb H$ gets under, and the next lecture's bias-variance
+  decomposition is the thing that names it.
+- The move is forced, not chosen. You cannot observe the complexity of $f$, so you cannot
+  read $d^\star$ off this picture in practice. What you can do is the thing slide 31 is
+  about: hold out data and find the minimum empirically.
+
+The same shape again, but measured rather than asserted - real fits to real points, with
+real errors on both axes. Read it against the schematic above: the U is in the same place
+for the same reason, and everything here is a number you could have computed.
+
 Both questions at once: the green curve is question two, the shaded gap is question one.
+The panel beside it is the polynomial the slider is talking about, fitted to the same ten
+points, so that a point on the curve and the curve it summarises move together. Walk $M$
+from 0 to 9 and watch the two panels disagree - the left one keeps improving on the
+measure you can compute, the right one stops being a description of anything around
+$M = 5$.
 
 ```artifact src=demos/complexity-ucurve.jsx
 ```
@@ -318,10 +385,15 @@ answered perfectly and question 1 fails completely. Zero training error is not e
 learning; it is evidence about $E_{\text{in}}$ alone, and the deck picked the case where
 that distinction costs you everything.
 
-The deck's panel, made continuous in $M$. Push it to 9 and read the two error numbers against each other.
+The deck's four panels are the right-hand side of the U-curve figure above, made
+continuous in $M$: push its slider to 9 and read the two error numbers against each other.
 
-```artifact src=demos/poly-overfit.jsx
-```
+That figure also carries a third curve the deck's plot does not draw: the error on ten
+held-out **validation** points. It is the only one of the three you could compute without
+knowing the target, and the button lets it pick $M$. Then compare the validation error at
+that degree with the error on a fresh test sample. The validation number is usually the
+smaller, because you chose the degree that made it small - which is the next section's
+reason for keeping three splits rather than two.
 
 ## How to accomplish this in practice
 

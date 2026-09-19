@@ -203,6 +203,7 @@ export default function App() {
       maxWidth: W,
       aspectRatio: "1 / 1",
       touchAction: "none",
+      alignSelf: "center",
       cursor: drag ? "grabbing" : "grab",
       border: `1px solid ${C.border}`,
       borderRadius: "8px"
@@ -220,5 +221,5 @@ export default function App() {
       margin: 0,
       lineHeight: 1.5
     }
-  }, "Drag either arrow head. The dashed line is the subspace spanned by a, and the red segment is the residual x \u2212 proj. However you move the two vectors, the last readout stays zero: the residual is orthogonal to a, and that single fact is what defines the projection. L5 uses it in exactly this form, with the column space of X in place of the line through a, which is why the normal equations read X\u1D40(y \u2212 \u0177) = 0."));
+  }, "Drag either arrow head. The dashed line is the subspace spanned by a, and the orange dashed segment is the residual x \u2212 proj. However you move the two vectors, the last readout stays zero: the residual is orthogonal to a, and that single fact is what defines the projection. L5 uses it in exactly this form, with the column space of X in place of the line through a, which is why the normal equations read X\u1D40(y \u2212 \u0177) = 0."));
 }

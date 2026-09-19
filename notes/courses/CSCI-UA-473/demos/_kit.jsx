@@ -145,15 +145,20 @@ export class Plot {
   // ---- chrome ----
   /* Grid is scaffolding and axes are information, so they never share a weight.
      Getting this wrong is what made the earlier figures read as graph paper. */
-  grid({ xTicks = 0, yTicks = 4 } = {}) {
+  grid({ xTicks = 0, yTicks = 4, edges = true } = {}) {
     const g = this.g;
+    /* `edges: false` drops the first and last line of each family. A panel whose
+       canvas is narrower than the card it sits in otherwise closes into a faint
+       rectangle, and that rectangle reads as a second background colour rather
+       than as the edge of a plot. */
+    const first = edges ? 0 : 1;
     g.strokeStyle = this.C.border; g.lineWidth = 1; g.globalAlpha = 0.5;
     g.beginPath();
-    for (let k = 0; k <= yTicks; k++) {
+    for (let k = first; k <= (edges ? yTicks : yTicks - 1); k++) {
       const yy = this.top + (k / yTicks) * (this.bottom - this.top);
       g.moveTo(this.left, yy); g.lineTo(this.right, yy);
     }
-    for (let k = 0; xTicks && k <= xTicks; k++) {
+    for (let k = first; xTicks && k <= (edges ? xTicks : xTicks - 1); k++) {
       const xx = this.left + (k / xTicks) * (this.right - this.left);
       g.moveTo(xx, this.top); g.lineTo(xx, this.bottom);
     }
@@ -876,7 +881,10 @@ export function Canvas3D({
     let raf = 0, t0 = 0, last = 0;
     const frame = (t) => {
       if (!t0) t0 = t;
-      if (sway) spun.current = sway.amp * Math.sin((2 * Math.PI * (t - t0)) / (sway.seconds * 1000));
+      // A scene can be both swayed and draggable. While a drag is in progress the
+      // sway holds still, so the pose the reader is steering is the pose they see;
+      // it resumes about whatever pose they let go at.
+      if (sway) { if (!drag.current) spun.current = sway.amp * Math.sin((2 * Math.PI * (t - t0)) / (sway.seconds * 1000)); }
       else if (last) spun.current += spin * (t - last) / 1000;
       if (last) render();
       last = t;

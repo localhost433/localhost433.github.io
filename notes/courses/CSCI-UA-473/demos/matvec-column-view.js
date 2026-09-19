@@ -10,7 +10,11 @@ import { useClassColors, Figure, FigureSvg, TableGrid, Bracket, Lines, TeX, useR
    stops being notation: the answer column is literally the first column scaled by
    the desktop price plus the second scaled by the laptop price.
 
-   Revealed in that order, because the whole figure is an equality being derived. */
+   Revealed in that order, because the whole figure is an equality being derived:
+   each column is picked out, scaled by its own price, and only then added, so the
+   "linear combination" is something you watch happen rather than a caption under a
+   finished equation. One beat per operand — splitting the two scaled columns apart
+   is the difference between an animation and a slide that fades in. */
 
 const A = [[2, 4], [1, 5], [3, 5], [2, 7]];
 const X = [1000, 3000];
@@ -19,8 +23,8 @@ const CH = 28;
 export default function MatvecColumnView() {
   const C = useClassColors();
   const box = React.useRef(null);
-  const step = useReveal(box, 4, {
-    ms: 1100
+  const step = useReveal(box, 6, {
+    ms: 950
   });
   useTypeset([C, step]);
   const cell = (t, tone) => ({
@@ -155,7 +159,7 @@ export default function MatvecColumnView() {
     tex: "a_2",
     step: step,
     at: 2
-  }), op("1000 ·", 128, 294, 1, 14), grid(164, 232, col(0), 46, 1), op("+", 228, 294, 2, 15), op("3000 ·", 272, 294, 2, 14), grid(308, 232, col(1), 46, 2), op("=", 374, 294, 3, 15), grid(392, 232, scaled(0), 66, 3), op("+", 478, 294, 3, 15), grid(496, 232, scaled(1), 74, 3), op("=", 590, 294, 3, 15), grid(608, 232, Y.map(v => [cell(v)]), 76, 3), /*#__PURE__*/React.createElement(TeX, {
+  }), op("1000 ·", 128, 294, 1, 14), grid(164, 232, col(0), 46, 1), op("+", 228, 294, 2, 15), op("3000 ·", 272, 294, 2, 14), grid(308, 232, col(1), 46, 2), op("=", 374, 294, 3, 15), grid(392, 232, scaled(0), 66, 3), op("+", 478, 294, 4, 15), grid(496, 232, scaled(1), 74, 4), op("=", 590, 294, 5, 15), grid(608, 232, Y.map(v => [cell(v)]), 76, 5), /*#__PURE__*/React.createElement(TeX, {
     x: 370,
     y: 362,
     w: 420,
@@ -163,7 +167,7 @@ export default function MatvecColumnView() {
     size: 14,
     fill: C.muted,
     step: step,
-    at: 3,
+    at: 5,
     tex: "\\text{in general:}\\quad y \\;=\\; \\sum_i x_i\\, a_i"
   }))));
 }

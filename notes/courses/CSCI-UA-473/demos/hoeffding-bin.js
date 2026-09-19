@@ -17,7 +17,7 @@ class BinPlot extends HistogramPlot {
       width: W,
       height: H,
       pad: 30,
-      padTop: 14,
+      padTop: 26,
       padRight: 12,
       xDomain: [0, 1],
       yDomain: [0, 1],
@@ -47,7 +47,8 @@ class BinPlot extends HistogramPlot {
       color: C.fg,
       width: 2
     });
-    this.label("μ", this.x(mu), this.top + 2, {
+    // the label sits in the top pad, clear of the tallest bar
+    this.label("μ", this.x(mu), this.top - 7, {
       color: C.fg,
       align: "center"
     });
@@ -167,7 +168,8 @@ export default function App() {
     style: {
       width: "100%",
       maxWidth: W,
-      aspectRatio: `${W} / ${H}`
+      aspectRatio: `${W} / ${H}`,
+      alignSelf: "center"
     },
     "aria-label": `Histogram of nu over ${TRIALS} samples; ${(miss * 100).toFixed(1)} percent missed by more than epsilon, against a bound of ${(bound * 100).toFixed(1)} percent`
   }), /*#__PURE__*/React.createElement("p", {
@@ -181,5 +183,5 @@ export default function App() {
       margin: 0,
       lineHeight: 1.5
     }
-  }, "Each bar counts samples landing at that \u03BD; shaded bars are within \u03B5 of \u03BC, red bars missed. Two things to try. Drag \u03BC: the histogram slides along but the bound does not change at all, because the bound never mentions \u03BC. Then press the two presets in turn: halving \u03B5 while quadrupling N leaves the bound where it was, which is the \u03B5\xB2N exponent showing up as a price."));
+  }, "Each bar counts samples landing at that \u03BD; shaded bars are within \u03B5 of \u03BC, orange bars missed. Two things to try. Drag \u03BC: the histogram slides along but the bound does not change at all, because the bound never mentions \u03BC. Then press the two presets in turn: halving \u03B5 while quadrupling N leaves the bound where it was, which is the \u03B5\xB2N exponent showing up as a price."));
 }

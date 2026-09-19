@@ -27,24 +27,44 @@ export function perceptronStep(pts, w, pick) {
   };
 }
 
-// kind is "sep" | "non" | "empty". `rand` is a () => [0,1) generator.
-export function generate(kind, rand) {
-  if (kind === "empty") return [];
-  let pts = [];
+// Points labelled by a hidden separator `ws`, kept clear of the boundary so the
+// sample is separable with a margin. `n` points; the separator is returned so a
+// second draw (a test set) can be labelled by the same rule.
+function labelledSample(ws, n, rand) {
+  const pts = [];
+  while (pts.length < n) {
+    const p = { a: (rand() * 2 - 1) * 4.5, b: (rand() * 2 - 1) * 4.5 };
+    const s = dot(ws, p);
+    if (Math.abs(s) < 0.12) continue;
+    p.y = s > 0 ? 1 : -1;
+    pts.push(p);
+  }
+  return pts;
+}
+
+function separableSample(rand) {
   for (;;) {
-    pts = [];
     const th = rand() * 2 * Math.PI;
     const ws = [(rand() - 0.5) * 3, Math.cos(th), Math.sin(th)];
-    while (pts.length < 20) {
-      const p = { a: (rand() * 2 - 1) * 4.5, b: (rand() * 2 - 1) * 4.5 };
-      const s = dot(ws, p);
-      if (Math.abs(s) < 0.12) continue;
-      p.y = s > 0 ? 1 : -1;
-      pts.push(p);
-    }
+    const pts = labelledSample(ws, 20, rand);
     const np = pts.filter((p) => p.y > 0).length;
-    if (np >= 3 && np <= 17) break;
+    if (np >= 3 && np <= 17) return { pts, ws };
   }
+}
+
+// kind is "sep" | "non" | "empty". `rand` is a () => [0,1) generator.
+export function generate(kind, rand) {
+  return generateSplit(kind, rand, 0).pts;
+}
+
+/* The same draw, plus `nTest` further points labelled by the same hidden separator.
+   PLA converges to zero training error on any separable sample, whatever the
+   initial w; the test set is what tells two such runs apart, and it has to come from
+   the same rule the training labels came from or the comparison means nothing. */
+export function generateSplit(kind, rand, nTest = 40) {
+  if (kind === "empty") return { pts: [], test: [] };
+  const { pts, ws } = separableSample(rand);
+  const test = nTest > 0 ? labelledSample(ws, nTest, rand) : [];
   if (kind === "non") {
     // Plant the midpoint of the two furthest same-class points, labelled the
     // other way: no line can separate it, so the run provably never converges.
@@ -57,8 +77,17 @@ export function generate(kind, rand) {
       }
     pts.push({ a: (best[0].a + best[1].a) / 2, b: (best[0].b + best[1].b) / 2, y: -c, planted: true });
   }
-  return pts;
+  return { pts, test };
 }
+
+// Multiply every input by k. Labels stay; the separator's orientation stays; only
+// the scale of the geometry changes, which is what the "double the inputs" question
+// is about.
+export const scalePoints = (pts, k) => pts.map((p) => ({ ...p, a: p.a * k, b: p.b * k }));
+
+// Fraction of `pts` on the wrong side of w, under the same <= 0 convention as
+// `misclassified`. Used for the held-out error readout.
+export const errorRate = (pts, w) => (pts.length ? misclassified(pts, w).length / pts.length : 0);
 
 /* ---- No Free Lunch on the Boolean cube ---- */
 
@@ -328,3 +357,147 @@ export function outOfSample(w, grid = 200) {
    clean curve rather than a real effect. */
 export const eoutNoisy = (w, sigma, grid = 200) =>
   Math.sqrt(Math.pow(outOfSample(w, grid), 2) + sigma * sigma);
+
+/* ---- Random-x sine samples, and validation (notes 04, 06) ---- */
+
+// Same generator as `sineSample`, but with x drawn uniformly rather than on a grid.
+// A validation or test set has to be a fresh draw from the same P(x), and a second
+// copy of the same grid is not a draw at all.
+export function sineSampleRandom(N, sigma, rand) {
+  const xs = Array.from({ length: N }, () => rand());
+  return { xs, ys: xs.map((x) => TARGET(x) + sigma * gauss(rand)) };
+}
+
+// Index of the smallest entry: the degree (or lambda) a validation curve picks.
+export const argmin = (arr) => arr.reduce((b, v, i) => (v < arr[b] ? i : b), 0);
+
+/* ---- Bias and variance (note 06 preview) ----
+   K datasets of N points each, all from the same target and noise. Fit degree M to
+   every one. gbar is the average fit; bias^2 measures how far gbar is from the
+   target, variance how far the individual fits scatter around gbar. Both are
+   averaged over a grid of x, against the noise-free target, so they are the
+   quantities in the decomposition and not a noisy estimate of them. */
+export function biasVariance(M, { K = 40, N = 10, sigma = 0.2, grid = 100, lambda = 0 } = {}, rand) {
+  const fits = [];
+  for (let k = 0; k < K; k++) {
+    const { xs, ys } = sineSample(N, sigma, rand);
+    fits.push(polyFit(xs, ys, M, lambda));
+  }
+  const gx = Array.from({ length: grid + 1 }, (_, i) => i / grid);
+  const preds = fits.map((w) => gx.map((x) => polyEval(w, x)));
+  const gbar = gx.map((_, i) => preds.reduce((s, p) => s + p[i], 0) / K);
+  let bias2 = 0, variance = 0;
+  gx.forEach((x, i) => {
+    bias2 += Math.pow(gbar[i] - TARGET(x), 2);
+    variance += preds.reduce((s, p) => s + Math.pow(p[i] - gbar[i], 2), 0) / K;
+  });
+  return { fits, gx, gbar, bias2: bias2 / gx.length, variance: variance / gx.length };
+}
+
+/* ---- Dense linear algebra for the regularization path (note 05) ---- */
+
+// Solve A x = b by Gaussian elimination with partial pivoting. Inputs are copied.
+// A singular pivot leaves that coordinate at 0 rather than throwing: the callers
+// draw a picture, and a picture with one missing coefficient is more useful than
+// no picture.
+export function solve(A0, b0) {
+  const n = b0.length;
+  const A = A0.map((r) => r.slice()), b = b0.slice();
+  for (let col = 0; col < n; col++) {
+    let piv = col;
+    for (let r = col + 1; r < n; r++) if (Math.abs(A[r][col]) > Math.abs(A[piv][col])) piv = r;
+    if (Math.abs(A[piv][col]) < 1e-12) continue;
+    [A[col], A[piv]] = [A[piv], A[col]];
+    [b[col], b[piv]] = [b[piv], b[col]];
+    for (let r = 0; r < n; r++) {
+      if (r === col) continue;
+      const f = A[r][col] / A[col][col];
+      for (let c = col; c < n; c++) A[r][c] -= f * A[col][c];
+      b[r] -= f * b[col];
+    }
+  }
+  return A.map((row, r) => (Math.abs(row[r]) < 1e-12 ? 0 : b[r] / row[r]));
+}
+
+/* A regression problem for the coefficient-path figure. N rows, d columns, the first
+   two columns correlated (rho) so that ridge and lasso disagree about them: ridge
+   splits the shared signal between the pair, lasso hands it to one and zeroes the
+   other. Columns are standardized and y centred, so there is no intercept to
+   penalize and the picture is about the d slopes only. */
+export function regressionSample({ N = 60, trueW = [4, 0, -3, 0, 2, 0], sigma = 1.5, rho = 0.9 } = {}, rand) {
+  const d = trueW.length;
+  const X = [];
+  for (let i = 0; i < N; i++) {
+    const row = Array.from({ length: d }, () => gauss(rand));
+    row[1] = rho * row[0] + Math.sqrt(1 - rho * rho) * row[1];
+    X.push(row);
+  }
+  // standardize columns
+  for (let j = 0; j < d; j++) {
+    const m = X.reduce((s, r) => s + r[j], 0) / N;
+    const sd = Math.sqrt(X.reduce((s, r) => s + (r[j] - m) ** 2, 0) / N) || 1;
+    X.forEach((r) => { r[j] = (r[j] - m) / sd; });
+  }
+  let y = X.map((r) => r.reduce((s, v, j) => s + v * trueW[j], 0) + sigma * gauss(rand));
+  const ym = y.reduce((s, v) => s + v, 0) / N;
+  y = y.map((v) => v - ym);
+  return { X, y, trueW };
+}
+
+const gram = (X) => {
+  const d = X[0].length;
+  const G = Array.from({ length: d }, () => new Array(d).fill(0));
+  for (const r of X) for (let a = 0; a < d; a++) for (let b = 0; b < d; b++) G[a][b] += r[a] * r[b];
+  return G;
+};
+const xty = (X, y) => X[0].map((_, j) => X.reduce((s, r, i) => s + r[j] * y[i], 0));
+
+// Ridge in closed form: (X'X + lambda I)^-1 X'y, on the bare-RSS convention of the
+// lecture. lambda = 0 is ordinary least squares.
+export function ridgeSolve(X, y, lambda) {
+  const G = gram(X);
+  for (let j = 0; j < G.length; j++) G[j][j] += lambda;
+  return solve(G, xty(X, y));
+}
+
+// Lasso has no closed form; this is coordinate descent on RSS + lambda * ||w||_1.
+// For coordinate j the objective is a parabola plus |w_j|, and its minimizer is the
+// soft threshold below - the operation that produces exact zeros, which is the whole
+// reason the lasso is taught.
+export function lassoSolve(X, y, lambda, { iters = 300, w0 = null } = {}) {
+  const N = X.length, d = X[0].length;
+  const w = w0 ? w0.slice() : new Array(d).fill(0);
+  const norm2 = X[0].map((_, j) => X.reduce((s, r) => s + r[j] * r[j], 0));
+  const resid = y.map((v, i) => v - X[i].reduce((s, x, j) => s + x * w[j], 0));
+  for (let it = 0; it < iters; it++) {
+    let moved = 0;
+    for (let j = 0; j < d; j++) {
+      let rho = 0;
+      for (let i = 0; i < N; i++) rho += X[i][j] * (resid[i] + X[i][j] * w[j]);
+      const wj = Math.sign(rho) * Math.max(0, Math.abs(rho) - lambda / 2) / norm2[j];
+      if (wj !== w[j]) {
+        for (let i = 0; i < N; i++) resid[i] += X[i][j] * (w[j] - wj);
+        moved = Math.max(moved, Math.abs(wj - w[j]));
+        w[j] = wj;
+      }
+    }
+    if (moved < 1e-9) break;
+  }
+  return w;
+}
+
+// Coefficient vectors along a grid of lambdas, warm-started for the lasso so the path
+// is smooth. `kind` is "ridge" | "lasso".
+export function regPath(X, y, lambdas, kind) {
+  const out = [];
+  let prev = null;
+  for (const lam of lambdas) {
+    prev = kind === "ridge" ? ridgeSolve(X, y, lam) : lassoSolve(X, y, lam, { w0: prev });
+    out.push(prev);
+  }
+  return out;
+}
+
+// Log-spaced lambdas from 10^lo to 10^hi.
+export const logSpace = (lo, hi, n) =>
+  Array.from({ length: n }, (_, i) => Math.pow(10, lo + ((hi - lo) * i) / (n - 1)));
