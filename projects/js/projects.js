@@ -122,10 +122,24 @@ function addProjectLinks(info, project) {
   const source = project.source || (project.repo ? `https://github.com/${project.repo}` : null);
   if (source && source !== project.link) links.push({ href: source, label: "Source" });
   if (project.demo && project.demo !== project.link) links.push({ href: project.demo, label: "Live demo" });
-  if (!links.length) return;
+  if (!links.length && !project.private) return;
 
   const linkRow = document.createElement("div");
   linkRow.className = "project-links";
+  if (project.private) {
+    // The repository is private; the language data for these cards is embedded
+    // in metadata.json instead of fetched from the GitHub API.
+    const note = document.createElement("span");
+    note.className = "project-private-note";
+    note.textContent = "Private repository, available on request";
+    linkRow.appendChild(note);
+    if (links.length) {
+      const separator = document.createElement("span");
+      separator.textContent = " · ";
+      separator.setAttribute("aria-hidden", "true");
+      linkRow.appendChild(separator);
+    }
+  }
   links.forEach(({ href, label }, index) => {
     if (index > 0) {
       const separator = document.createElement("span");

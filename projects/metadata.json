@@ -1,13 +1,27 @@
 [
     {
         "title": "Jump Trading Probability Cup",
-        "link": "https://github.com/localhost433/probability-cup",
-        "linkLabel": "Source",
-        "repo": "localhost433/probability-cup",
         "period": "Jun–Jul 2026",
         "category": "Forecasting & calibration",
-        "tech": "Python, typed pipelines, probability calibration, walk-forward testing",
-        "description": "Finalist in the 2026 Jump Trading Probability Cup: 131st of 4,013 entrants (top 3.3%). Built a typed forecasting stack that classifies free-text markets, prices coherent scoreline and prop distributions, and gates model changes with walk-forward tests."
+        "tech": "Python (stdlib only), pytest, cron, probability calibration, walk-forward A/B gates",
+        "description": "Finalist in the 2026 Jump Trading Probability Cup, 131st of 4,013 entrants and 43rd among bots. Every market is priced from one joint scoreline grid (bivariate Poisson with a negative-binomial layer), so the goal, total and prop quotes cannot disagree with each other. A small classifier maps free-text questions onto 62 market types, and a reliability map is refit on settled markets. There is more test code than source: 1,548 tests plus a golden snapshot of 3,440 posted probabilities. It ran under cron for the 27 days of the tournament.",
+        "private": true,
+        "languages": {
+            "Python": 3079677,
+            "JavaScript": 74134,
+            "Shell": 24510,
+            "HTML": 4352
+        }
+    },
+    {
+        "title": "NYU Course Planner",
+        "link": "https://github.com/swe-students-spring2026/5-final-final_project",
+        "linkLabel": "Source",
+        "repo": "swe-students-spring2026/5-final-final_project",
+        "period": "Mar–May 2026",
+        "category": "Team full-stack (NYU Software Engineering)",
+        "tech": "Flask, MongoDB, Docker Compose, GitHub Actions, DigitalOcean, Gemini",
+        "description": "Course project for NYU's software engineering class, team of five. Course search, a schedule builder and a graduation tracker on Flask and MongoDB, run as four Docker Compose services with a CI pipeline for each. My parts were the degree-requirement evaluator (prerequisites, electives, waivers, honors, minors) and the rate limiter and token guard in front of the AI chat route."
     },
     {
         "title": "LeetHub: Revived & Enhanced",
@@ -17,7 +31,7 @@
         "period": "2026–present",
         "category": "Developer tools",
         "tech": "JavaScript, Chrome Extension API (MV3), GitHub API",
-        "description": "Revived and refactored an unmaintained open-source extension for LeetCode-to-GitHub syncing. Fixed authentication bugs, migrated to Manifest V3, and added repository-linking, backfill, and workflow features."
+        "description": "A LeetCode-to-GitHub sync extension that had gone unmaintained. Moved it to Manifest V3, which broke the old OAuth flow, so it now uses a personal access token that never leaves the background worker. Failed uploads go to a retry queue. A first sync reads the repo tree so nothing gets committed twice."
     },
     {
         "title": "Vibe Semantic Search",
@@ -26,28 +40,40 @@
         "repo": "localhost433/Vibe-Search-Engine",
         "period": "2025",
         "category": "Search & retrieval",
-        "tech": "Python, FastAPI, React, FAISS, Sentence Transformers, Docker",
-        "description": "Winner of the 2025 Corner-DSC-BAC Datathon. Built a semantic search engine in 24 hours with FAISS indexing and Sentence Transformer embeddings, served through FastAPI and a responsive frontend."
+        "tech": "Python, FastAPI, FAISS, Sentence Transformers, Render",
+        "description": "Won the 2025 Corner-DSC-BAC Datathon with two teammates. Semantic search over places and reviews: Sentence Transformer embeddings in two FAISS indices, FastAPI in front, a plain JavaScript page on top. Deployed on Render, which rebuilds the indices at deploy time."
     },
     {
         "title": "Pennsylvania Toponym Atlas",
         "link": "https://localhost433.github.io/pa-toponyms/",
         "linkLabel": "Live atlas",
-        "repo": "localhost433/pa-toponyms",
         "period": "Oct 2025–present",
         "category": "Interactive research",
         "tech": "Python, JavaScript, Leaflet, Census ACS, GeoJSON",
-        "description": "Built a source-linked interactive atlas from a 2,500-municipality gazetteer, with 68 reviewed map records and evidence beside each claim. Added terrain, coal, urban-area, and demographic context layers while keeping uncertainty visible."
+        "description": "An interactive atlas of Pennsylvania place names. Its gazetteer has 2,572 municipalities; 68 of them are hand-checked against sources, with the evidence shown next to each claim instead of buried in a spreadsheet. Context layers (terrain, coal fields, urban areas, census demographics) come from six government APIs, and the build refuses to run if the tract join does not line up.",
+        "private": true,
+        "languages": {
+            "Python": 58288,
+            "CSS": 28956,
+            "JavaScript": 20597,
+            "HTML": 12930
+        }
     },
     {
         "title": "NYC Mayoral Forecast",
         "link": "https://localhost433.github.io/nyc-mayor-prediction/showcase/",
         "linkLabel": "Live showcase",
-        "repo": "localhost433/nyc-mayor-prediction",
         "period": "2025–2026",
         "category": "Applied modeling",
-        "tech": "Python, scikit-learn, census data, geospatial analysis, JavaScript",
-        "description": "Built an out-of-sample forecast of the 2025 NYC Democratic mayoral primary across 4,036 election districts. Trained on earlier election transitions, compared predictions with certified results, and documented baseline performance and limits."
+        "tech": "Python, NumPy, pandas, scikit-learn, census data, Leaflet",
+        "description": "A forecast of the 2025 NYC Democratic mayoral primary for each of the city's 3,972 election districts, made from what was knowable before the vote and then graded against the real result. Correlation 0.61 with the actual progressive share, against 0.42 for simply reusing 2021. Where the model breaks down (leave-one-borough-out cross-validation) is reported rather than hidden. Its ranked-choice simulator takes the first-choice estimate as an input, so it also works for races with no polling.",
+        "private": true,
+        "languages": {
+            "Python": 149260,
+            "JavaScript": 21850,
+            "HTML": 17675,
+            "CSS": 9038
+        }
     },
     {
         "title": "iCloud MCP Server",
@@ -56,27 +82,33 @@
         "repo": "localhost433/icloud-mcp",
         "period": "2025",
         "category": "Systems & integrations",
-        "tech": "Python, FastAPI, Docker, CalDAV, MCP",
-        "description": "Built an HTTP Model Context Protocol server that exposes iCloud Calendar through CalDAV, including typed read/write tools, recurring events, and a read-only research profile. Documented the private deployment and credential boundaries."
+        "tech": "Python, fastmcp, CalDAV, Docker, MCP",
+        "description": "A Model Context Protocol server for iCloud Calendar over CalDAV. Two modes: a read-only search/fetch pair for ChatGPT's Deep Research, or six read/write tools. Recurring events are built as RFC 5545 rules. Scans are bounded, and the server refuses to start without credentials."
     },
     {
         "title": "Exonym Usage in the New York Times",
-        "link": "https://github.com/localhost433/Peking-NYT",
-        "linkLabel": "Source",
-        "repo": "localhost433/Peking-NYT",
         "period": "Dec 2025",
         "category": "Corpus & visualization",
-        "tech": "Python, web scraping, corpus analysis, time-series visualization",
-        "description": "Scraped and de-duplicated 15,000+ New York Times search records from 1900–2025 to trace Peking, Peiping, and Beijing usage, with Kiev/Kyiv as a control. Plotted monthly shares around official renamings and the 1979 NYT style notice."
+        "tech": "Python, Selenium, pandas, matplotlib",
+        "description": "Small corpus study for a linguistics class. 15,577 New York Times search results from 1900 to 2025, tracing when the paper moved from Peking to Peiping to Beijing, with Kiev/Kyiv as a control. Scraping can be interrupted and resumed; de-duplication keeps the cleanest OCR copy of each headline.",
+        "private": true,
+        "languages": {
+            "Python": 37023
+        }
     },
     {
         "title": "Prime Factorization Game",
         "link": "https://localhost433.github.io/Prime-Factorization-Game/",
         "linkLabel": "Play",
-        "repo": "localhost433/Prime-Factorization-Game",
         "period": "2024–present",
         "category": "Interactive web",
         "tech": "JavaScript, CSS, Supabase",
-        "description": "Built a timed factorization game with dynamic difficulty, real-time validation, streaks, and a persistent global leaderboard."
+        "description": "A timed prime factorization game, mostly built to learn Supabase. Five difficulty bands with separate streaks and a global leaderboard. Best scores are reconciled on the server, so a slow round cannot overwrite a record.",
+        "private": true,
+        "languages": {
+            "JavaScript": 19050,
+            "CSS": 6609,
+            "HTML": 5307
+        }
     }
 ]

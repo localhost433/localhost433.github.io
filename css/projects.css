@@ -115,6 +115,14 @@
   font-size: 0.85rem;
 }
 
+.project-private-note {
+  color: #777777;
+}
+
+.dark-mode .project-private-note {
+  color: #aaaaaa;
+}
+
 .project-description {
   font-size: 0.9rem;
   color: #555555;
