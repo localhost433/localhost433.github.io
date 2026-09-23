@@ -19,7 +19,7 @@ where $n$ is usually interpreted as discrete time.
 
 ### Markov property
 
-We say a process $(X\_n)\_{n\ge 0}$ with values in $\mathcal{S}$ has the **Markov property** if for every $n\ge 0$ and all states
+We say a process $(X_n)_{n\ge 0}$ with values in $\mathcal{S}$ has the **Markov property** if for every $n\ge 0$ and all states
 $$
 i_0, i_1, \dots, i_{n-1}, i, j \in \mathcal{S},
 $$
@@ -111,10 +111,10 @@ We can compute $v^{(n+1)}$ from $v^{(n)}$ using the transition matrix $P$.
 
 For each state $j$,
 $$
-\mathbb{P}(X\_{n+1} = j)
-= \sum\_{i=1}^m \mathbb{P}(X\_{n+1}=j, X\_n = i)
-= \sum\_{i=1}^m \mathbb{P}(X\_{n+1}=j \mid X\_n=i)  \mathbb{P}(X\_n=i)
-= \sum\_{i=1}^m v^{(n)}\_i p\_{ij}.
+\mathbb{P}(X_{n+1} = j)
+= \sum_{i=1}^m \mathbb{P}(X_{n+1}=j, X_n = i)
+= \sum_{i=1}^m \mathbb{P}(X_{n+1}=j \mid X_n=i)  \mathbb{P}(X_n=i)
+= \sum_{i=1}^m v^{(n)}_i p_{ij}.
 $$
 
 In matrix form,

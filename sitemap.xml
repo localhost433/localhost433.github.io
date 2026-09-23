@@ -5,19 +5,14 @@
   <url><loc>https://localhost433.github.io/notes.html</loc></url>
   <url><loc>https://localhost433.github.io/blog.html</loc></url>
   <url><loc>https://localhost433.github.io/post.html?id=001-first</loc></url>
-  <url><loc>https://localhost433.github.io/post.html?id=002-random</loc></url>
   <url><loc>https://localhost433.github.io/post.html?id=003-seminar-opensource</loc></url>
   <url><loc>https://localhost433.github.io/post.html?id=005-googology</loc></url>
   <url><loc>https://localhost433.github.io/post.html?id=006-datathon-render-deploy</loc></url>
-  <url><loc>https://localhost433.github.io/post.html?id=007-language-acquisition</loc></url>
-  <url><loc>https://localhost433.github.io/post.html?id=008-chinese-program-lang</loc></url>
   <url><loc>https://localhost433.github.io/post.html?id=011-MoE1</loc></url>
   <url><loc>https://localhost433.github.io/post.html?id=012-MoE2</loc></url>
   <url><loc>https://localhost433.github.io/post.html?id=014-server</loc></url>
-  <url><loc>https://localhost433.github.io/post.html?id=017-RNN-IIR</loc></url>
   <url><loc>https://localhost433.github.io/post.html?id=020-seminar-anubis</loc></url>
   <url><loc>https://localhost433.github.io/post.html?id=021-smalls</loc></url>
-  <url><loc>https://localhost433.github.io/post.html?id=022-Suranyi</loc></url>
   <url><loc>https://localhost433.github.io/post.html?id=023-wechat-bot</loc></url>
   <url><loc>https://localhost433.github.io/course.html?id=LING-UA-1</loc></url>
   <url><loc>https://localhost433.github.io/note.html?course=LING-UA-1&amp;note=01-intro</loc></url>
@@ -153,9 +148,13 @@
   <url><loc>https://localhost433.github.io/note.html?course=CSCI-UA-473&amp;note=01-intro-ml</loc></url>
   <url><loc>https://localhost433.github.io/note.html?course=CSCI-UA-473&amp;note=02-math-primer</loc></url>
   <url><loc>https://localhost433.github.io/note.html?course=CSCI-UA-473&amp;note=03-components-of-learning</loc></url>
+  <url><loc>https://localhost433.github.io/note.html?course=CSCI-UA-473&amp;note=04-feasibility-of-learning</loc></url>
+  <url><loc>https://localhost433.github.io/note.html?course=CSCI-UA-473&amp;note=05-linear-regression</loc></url>
+  <url><loc>https://localhost433.github.io/note.html?course=CSCI-UA-473&amp;note=06-overfitting-validation</loc></url>
   <url><loc>https://localhost433.github.io/note.html?course=CSCI-UA-473&amp;note=00</loc></url>
   <url><loc>https://localhost433.github.io/course.html?id=CSCI-UA-480-parallel</loc></url>
   <url><loc>https://localhost433.github.io/note.html?course=CSCI-UA-480-parallel&amp;note=01-why-parallel</loc></url>
   <url><loc>https://localhost433.github.io/note.html?course=CSCI-UA-480-parallel&amp;note=02-hardware-basics</loc></url>
   <url><loc>https://localhost433.github.io/note.html?course=CSCI-UA-480-parallel&amp;note=03-hardware-advanced</loc></url>
+  <url><loc>https://localhost433.github.io/note.html?course=CSCI-UA-480-parallel&amp;note=04-software-basics</loc></url>
 </urlset>

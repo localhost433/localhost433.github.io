@@ -25,6 +25,11 @@
         "title": "5 - Linear Models for Regression",
         "date": "2026-09-17"
     },
+    {
+        "slug": "06-overfitting-validation",
+        "title": "6 - Overfitting, Validation & Bias-Variance",
+        "date": "2026-09-22"
+    },
     { "group": "Supplements" },
     {
         "slug": "00",

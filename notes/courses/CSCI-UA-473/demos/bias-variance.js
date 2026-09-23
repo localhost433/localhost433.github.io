@@ -3,7 +3,7 @@ import React from "react";
 import { useClassColors, buttonStyle, readoutStyle, labelStyle, Plot } from "@course";
 import { rng, biasVariance, polyEval, TARGET } from "@course/logic";
 
-/* The bias-variance decomposition, drawn (note 05; the lecture of 09/22 names it).
+/* The bias-variance decomposition, drawn (note 06, L6 slides 25-28).
 
    The U-curve figures show E_out turning around as M grows and call the left side
    underfitting and the right side overfitting. Those are outcomes; this figure is the
@@ -12,7 +12,11 @@ import { rng, biasVariance, polyEval, TARGET } from "@course/logic";
    from the target is bias; how far the forty fits scatter around gbar is variance.
    A low degree cannot bend to the target, so gbar is wrong and the fits agree with
    each other (bias). A high degree bends to every noisy sample, so gbar is fine and
-   the fits disagree wildly (variance). E_out is their sum plus the noise floor. */
+   the fits disagree wildly (variance). E_out is their sum plus the noise floor.
+
+   The ten x positions are fixed and only the noise is redrawn, so the variance here
+   is noise-driven. Redrawing x as well (the deck's E_D) sends the M >= 7 variances
+   past 10^3, which forty samples cannot average into a readable curve. */
 
 const W = 420,
   H = 260,
@@ -268,5 +272,5 @@ export default function App() {
       margin: 0,
       lineHeight: 1.5
     }
-  }, "Left: ", K, " samples of ", N, " noisy points each from the dashed target, a degree-M polynomial fitted to every one (faint), and their average \u1E21 (bold). Right: the same experiment at every degree. Bias\xB2 is the squared distance from \u1E21 to the target, averaged over x - what the hypothesis set cannot express however much data it sees. Variance is the squared scatter of the individual fits around \u1E21 - how much the answer depends on which sample you happened to draw. Walk M up: at 1 the fits agree and are all wrong together; at 9 their average is nearly right and no single one of them is. E_out is the sum of the two plus the noise floor \u03C3\xB2, and its minimum is where the falling and rising curves cross over, not where either one is small. (The variance axis is clipped at 0.6; at M = 9 the true value is larger.)"));
+  }, "Left: ", K, " samples of ", N, " noisy points each from the dashed target, a degree-M polynomial fitted to every one (faint), and their average \u1E21 (bold). Right: the same experiment at every degree. Bias\xB2 is the squared distance from \u1E21 to the target, averaged over x - what the hypothesis set cannot express however much data it sees. Variance is the squared scatter of the individual fits around \u1E21 - how much the answer depends on which sample you happened to draw. Walk M up: at 1 the fits agree and are all wrong together; at 9 their average is nearly right and no single one of them is. E_out is the sum of the two plus the noise floor \u03C3\xB2, and its minimum is where the two slopes cancel, which is not in general where the curves cross. (The variance axis is clipped at 0.6; at M = 9 the true value is larger.)"));
 }

@@ -471,3 +471,54 @@ test("logSpace is log-spaced with the given endpoints", () => {
   const l = L.logSpace(-1, 2, 4);
   assert.deepStrictEqual(l.map((v) => +v.toFixed(9)), [0.1, 1, 10, 100]);
 });
+
+/* ---- note 06 ---- */
+
+test("legendreTarget is normalized: E_x[f^2] = 1 at every complexity", () => {
+  for (const Q of [2, 10, 50]) {
+    for (const seed of [1, 2, 3]) {
+      const f = L.legendreTarget(Q, L.rng(seed));
+      const m = L.GRID_PM1.reduce((s, x) => s + f(x) * f(x), 0) / L.GRID_PM1.length;
+      assert.ok(Math.abs(m - 1) < 0.02, `Q=${Q} seed=${seed}: ${m}`);
+    }
+  }
+});
+
+test("overfitting moves the way slide 5's table says", () => {
+  const S = (o) => L.overfitSummary({ trials: 200, ...o }, L.rng(7));
+  // more data: less overfitting
+  assert.ok(S({ N: 15, sigma: 0.5, Q: 10 }).worse > S({ N: 80, sigma: 0.5, Q: 10 }).worse + 0.5);
+  // more noise: more overfitting
+  assert.ok(S({ N: 30, sigma: 1, Q: 10 }).worse > S({ N: 30, sigma: 0, Q: 10 }).worse + 0.5);
+  // a target beyond degree 10, with no noise at all, still makes degree 10 lose
+  assert.strictEqual(S({ N: 30, sigma: 0, Q: 10 }).worse, 0);
+  assert.ok(S({ N: 30, sigma: 0, Q: 50 }).worse > 0.5);
+});
+
+test("eoutSineExact agrees with the grid integral", () => {
+  const w = L.polyFit([0, 0.2, 0.4, 0.6, 0.8, 1], [0, 1, 0.3, -0.4, -1, 0.1], 3);
+  assert.ok(Math.abs(L.eoutSineExact(w) - L.outOfSample(w, 4000) ** 2) < 1e-4);
+  assert.ok(Math.abs(L.eoutSineExact([0], 0.3) - (0.5 + 0.09)) < 1e-6);
+});
+
+test("validation: unbiased for g-, noisy at small K, and g- degrades at large K", () => {
+  const { rows, eoutFull } = L.validationCurve({ Ks: [1, 8, 12, 28], trials: 600 }, L.rng(3));
+  const [k1, k8, k12, k28] = rows;
+  assert.ok(Math.abs(k8.meanVal - k8.meanOut) < 0.01);
+  assert.ok(k1.sdVal > 2 * k12.sdVal);
+  assert.ok(k28.meanOut > 1.5 * k8.meanOut);
+  assert.ok(eoutFull <= k8.meanOut + 1e-9);
+});
+
+test("the H0 / H1 example reproduces slide 34, and H1 wins from N = 4", () => {
+  const e2 = L.linesExperiment(2, {}, L.rng(1));
+  assert.ok(Math.abs(e2.h0.bias - 0.5) < 0.005 && Math.abs(e2.h0.variance - 0.25) < 0.01);
+  // quadrature gives 0.207 and 1.676; the slide's 1.69 is a simulation estimate
+  assert.ok(Math.abs(e2.h1.bias - 0.207) < 0.005 && Math.abs(e2.h1.variance - 1.676) < 0.02);
+  // a chord's slope is f' somewhere between its ends, so never steeper than pi
+  assert.ok(e2.h1.fits.every(([a]) => Math.abs(a) <= Math.PI + 1e-9));
+  const t = (e, k) => e[k].bias + e[k].variance;
+  const e3 = L.linesExperiment(3, {}, L.rng(1)), e4 = L.linesExperiment(4, {}, L.rng(1));
+  assert.ok(t(e3, "h0") < t(e3, "h1"));
+  assert.ok(t(e4, "h1") < t(e4, "h0"));
+});

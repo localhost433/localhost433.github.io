@@ -277,7 +277,7 @@ Computable
 - "Can verify $\Rightarrow$ can solve."
 - Modern cryptography would break down.
 
-The P vs. NP problem is one of the Millennium Prize Problems ($1 million prize for a solution).
+The P vs. NP problem is one of the Millennium Prize Problems (\$1 million prize for a solution).
 
 ---
 

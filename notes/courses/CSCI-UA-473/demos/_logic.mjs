@@ -371,7 +371,7 @@ export function sineSampleRandom(N, sigma, rand) {
 // Index of the smallest entry: the degree (or lambda) a validation curve picks.
 export const argmin = (arr) => arr.reduce((b, v, i) => (v < arr[b] ? i : b), 0);
 
-/* ---- Bias and variance (note 06 preview) ----
+/* ---- Bias and variance (note 06) ----
    K datasets of N points each, all from the same target and noise. Fit degree M to
    every one. gbar is the average fit; bias^2 measures how far gbar is from the
    target, variance how far the individual fits scatter around gbar. Both are
@@ -501,3 +501,220 @@ export function regPath(X, y, lambdas, kind) {
 // Log-spaced lambdas from 10^lo to 10^hi.
 export const logSpace = (lo, hi, n) =>
   Array.from({ length: n }, (_, i) => Math.pow(10, lo + ((hi - lo) * i) / (n - 1)));
+
+/* ---- Overfitting, validation, bias-variance (note 06) ---- */
+
+const mean = (a) => a.reduce((s, v) => s + v, 0) / a.length;
+const median = (a) => {
+  const s = [...a].sort((p, q) => p - q), m = s.length >> 1;
+  return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+};
+
+// Midpoints of 400 equal cells on [-1, 1]. Every E_out on that interval is a mean over
+// this grid. Midpoints rather than a grid that includes the endpoints: P_50 has its
+// largest values at x = +-1, and counting those at full weight overstated E_x[f^2] by 7%.
+export const GRID_PM1 = Array.from({ length: 400 }, (_, i) => -1 + (2 * i + 1) / 400);
+
+// P_0 .. P_Q at x, by Bonnet's recurrence.
+export function legendreAll(Q, x) {
+  const p = [1, x];
+  for (let q = 2; q <= Q; q++) p.push(((2 * q - 1) * x * p[q - 1] - (q - 1) * p[q - 2]) / q);
+  return p.slice(0, Q + 1);
+}
+
+/* The slide 6 targets, built the way LFD builds them: a Legendre series of degree Q
+   with Gaussian coefficients, rescaled so E_x[f^2] = 1 for x uniform on [-1, 1]. The
+   scaling uses E[P_q^2] = 1/(2q+1), so it is exact rather than estimated, and targets
+   of every complexity have the same size - otherwise "more complex" would also mean
+   "bigger", and the slider would be measuring two things. */
+export function legendreTarget(Q, rand) {
+  const a = Array.from({ length: Q + 1 }, () => gauss(rand));
+  const z = Math.sqrt(a.reduce((s, v, q) => s + (v * v) / (2 * q + 1), 0));
+  return (x) => legendreAll(Q, x).reduce((s, p, q) => s + a[q] * p, 0) / z;
+}
+
+// One draw of slide 6: a target of complexity Q, N noisy points, and the degree-2 and
+// degree-10 least-squares fits. E_out is squared error against the distribution, so it
+// includes the noise floor sigma^2, as E_in does.
+export function overfitTrial({ N = 15, sigma = 0.5, Q = 10 } = {}, rand) {
+  const f = legendreTarget(Q, rand);
+  const xs = Array.from({ length: N }, () => 2 * rand() - 1);
+  const ys = xs.map((x) => f(x) + sigma * gauss(rand));
+  const fGrid = GRID_PM1.map(f);
+  const out = { f, xs, ys, w: {}, ein: {}, eout: {} };
+  for (const M of [2, 10]) {
+    const w = polyFit(xs, ys, M);
+    out.w[M] = w;
+    out.ein[M] = mean(xs.map((x, i) => (polyEval(w, x) - ys[i]) ** 2));
+    out.eout[M] = mean(GRID_PM1.map((x, i) => (polyEval(w, x) - fGrid[i]) ** 2)) + sigma * sigma;
+  }
+  return out;
+}
+
+/* Many draws, new target and new data each time. Two summaries, because the excess
+   E_out of the degree-10 fit is heavy-tailed at small N (one draw in the hundreds
+   drags a mean anywhere): how often degree 10 loses, and the median amount by which
+   it loses. Both are LFD's "overfit measure" E_out(g10) - E_out(g2), read robustly. */
+export function overfitSummary({ N = 15, sigma = 0.5, Q = 10, trials = 300 } = {}, rand) {
+  const excess = [];
+  for (let t = 0; t < trials; t++) {
+    const o = overfitTrial({ N, sigma, Q }, rand);
+    excess.push(o.eout[10] - o.eout[2]);
+  }
+  return { worse: excess.filter((d) => d > 1e-9).length / trials, median: median(excess) };
+}
+
+/* Slide 14. For every validation size K, many datasets of N points from the noisy
+   sine: train degree M on the first N - K, validate on the last K. The x's are i.i.d.,
+   so which points land in which part is already random. Returns the mean and spread
+   of E_val(g-) across datasets, the mean of E_out(g-) (the curve E_val is unbiased
+   for - the two should overlap), and E_out(g) for the fold-back hypothesis trained on
+   all N, which does not depend on K. Squared error throughout. */
+// m_j = integral over [0, 1] of x^j TARGET(x), by Simpson's rule on 4000 cells, once.
+const SINE_MOMENTS = (() => {
+  const n = 4000, out = [];
+  for (let j = 0; j <= 12; j++) {
+    let s = 0;
+    for (let i = 0; i <= n; i++) {
+      const x = i / n, c = i === 0 || i === n ? 1 : i % 2 ? 4 : 2;
+      s += c * Math.pow(x, j) * TARGET(x);
+    }
+    out.push(s / (3 * n));
+  }
+  return out;
+})();
+
+/* E_out of a polynomial against the noisy sine, in closed form: with x uniform on
+   [0, 1], integral (g - f)^2 = sum_jk w_j w_k / (j+k+1) - 2 sum_j w_j m_j + 1/2.
+   Exact where `outOfSample` samples a grid, and O(M^2) instead of 200 evaluations,
+   which is what lets the validation figure redo 30,000 fits on a slider move. */
+export function eoutSineExact(w, sigma = 0) {
+  let gg = 0, gf = 0;
+  for (let j = 0; j < w.length; j++) {
+    gf += w[j] * SINE_MOMENTS[j];
+    for (let k = 0; k < w.length; k++) gg += (w[j] * w[k]) / (j + k + 1);
+  }
+  return Math.max(0, gg - 2 * gf + 0.5) + sigma * sigma;
+}
+
+export function validationCurve({ N = 40, M = 3, sigma = 0.3, Ks, trials = 1000 } = {}, rand) {
+  const data = Array.from({ length: trials }, () => sineSampleRandom(N, sigma, rand));
+  const eoutOf = (w) => eoutSineExact(w, sigma);
+  const full = mean(data.map((d) => eoutOf(polyFit(d.xs, d.ys, M))));
+  /* Prefix sums of the normal equations: the fit on the first n points needs
+     sum_{i<n} v_i v_i^T and sum_{i<n} v_i y_i, and every K reuses the same prefixes,
+     so each fit is one small in-place solve instead of a rebuild. */
+  const d1 = M + 1, stride = d1 * (d1 + 1);
+  const prefix = data.map(({ xs, ys }) => {
+    const P = new Float64Array((N + 1) * stride);
+    for (let i = 0; i < N; i++) {
+      const o = i * stride, o2 = o + stride;
+      let p = 1;
+      const v = new Float64Array(d1);
+      for (let r = 0; r < d1; r++) { v[r] = p; p *= xs[i]; }
+      for (let r = 0; r < d1; r++) {
+        for (let c = 0; c < d1; c++) P[o2 + r * (d1 + 1) + c] = P[o + r * (d1 + 1) + c] + v[r] * v[c];
+        P[o2 + r * (d1 + 1) + d1] = P[o + r * (d1 + 1) + d1] + v[r] * ys[i];
+      }
+    }
+    return P;
+  });
+  const aug = new Float64Array(stride);
+  const fitFirst = (k, n) => {
+    aug.set(prefix[k].subarray(n * stride, (n + 1) * stride));
+    const w = new Array(d1).fill(0), row = d1 + 1;
+    for (let col = 0; col < d1; col++) {
+      let piv = col;
+      for (let r = col + 1; r < d1; r++) if (Math.abs(aug[r * row + col]) > Math.abs(aug[piv * row + col])) piv = r;
+      if (Math.abs(aug[piv * row + col]) < 1e-12) continue;
+      if (piv !== col) for (let c = 0; c < row; c++) { const t = aug[col * row + c]; aug[col * row + c] = aug[piv * row + c]; aug[piv * row + c] = t; }
+      for (let r = 0; r < d1; r++) {
+        if (r === col) continue;
+        const f = aug[r * row + col] / aug[col * row + col];
+        for (let c = col; c < row; c++) aug[r * row + c] -= f * aug[col * row + c];
+      }
+    }
+    for (let r = 0; r < d1; r++) { const a = aug[r * row + r]; w[r] = Math.abs(a) < 1e-12 ? 0 : aug[r * row + d1] / a; }
+    return w;
+  };
+  const rows = Ks.map((K) => {
+    const ev = [], eo = [];
+    for (let k = 0; k < trials; k++) {
+      const d = data[k], n = N - K;
+      const w = fitFirst(k, n);
+      let s = 0;
+      for (let i = n; i < N; i++) {
+        let g = 0;
+        for (let j = M; j >= 0; j--) g = g * d.xs[i] + w[j];
+        s += (g - d.ys[i]) * (g - d.ys[i]);
+      }
+      ev.push(s / K);
+      eo.push(eoutOf(w));
+    }
+    const m = mean(ev), sorted = [...ev].sort((p, q) => p - q);
+    const at = (f) => sorted[Math.round(f * (sorted.length - 1))];
+    // the middle 68% as well as the sd: one wild g- among a thousand moves the sd a lot
+    // and the percentiles not at all, and the figure draws the percentiles
+    return { K, meanVal: m, sdVal: Math.sqrt(mean(ev.map((v) => (v - m) ** 2))),
+      lo: at(0.16), hi: at(0.84), meanOut: mean(eo) };
+  });
+  return { rows, eoutFull: full, first: data[0] };
+}
+
+/* Slides 29-34: f(x) = sin(pi x) on [-1, 1], no noise, N points drawn uniformly.
+   H0 fits the constant mean(y); H1 fits the least-squares line (for N = 2, the line
+   through both points). Bias and variance are exact functions of the fits, averaged
+   over a grid of x and over T datasets; `keep` fits are returned for drawing.
+
+   H1's variance is large but not heavy-tailed. The slope of a line through two points
+   on the curve is f'(xi) for some xi between them, so it never exceeds pi in size;
+   what makes the variance 1.69 is a slope of up to pi carried across an interval of
+   width 2. */
+export const SINPI = (x) => Math.sin(Math.PI * x);
+
+export function linesExperiment(N, { T = Math.round(600000 / N), grid = 100, keep = 60 } = {}, rand) {
+  /* Every fit is a line a x + b, so the grid average has a closed form: for x uniform
+     on [-1, 1], E_x[x] = 0 and E_x[x^2] = 1/3, which gives
+       variance = Var(a) / 3 + Var(b)
+       bias     = E[a]^2 / 3 + E[b]^2 - 2 E[a] E_x[x sin(pi x)] + E_x[sin^2(pi x)]
+                = E[a]^2 / 3 + E[b]^2 - 2 E[a] / pi + 1/2.
+     So a dataset costs five running sums instead of a pass over a grid, and T can be
+     large enough that the answer is not Monte Carlo noise: at 20,000 datasets H1's
+     variance at N = 2 wandered between 1.64 and 1.69 with the seed. The default keeps
+     N * T fixed, since the variance being estimated shrinks like 1/N. For reference,
+     quadrature over the two x's gives H1 at N = 2 bias 0.207 and variance 1.676; the
+     slide's 1.69 is LFD's own simulation, a little high. */
+  const gx = Array.from({ length: grid }, (_, i) => -1 + (2 * i + 1) / grid);
+  const S = { h0: [0, 0, 0, 0, 0], h1: [0, 0, 0, 0, 0] };   // sums of a, b, a^2, b^2, ab
+  const fits = { h0: [], h1: [] };
+  const xs = new Float64Array(N);
+  for (let t = 0; t < T; t++) {
+    let xm = 0, ym = 0;
+    for (let i = 0; i < N; i++) { xs[i] = 2 * rand() - 1; xm += xs[i]; }
+    xm /= N;
+    let sxy = 0, sxx = 0, ys = 0;
+    for (let i = 0; i < N; i++) { const y = SINPI(xs[i]); ys += y; }
+    ym = ys / N;
+    for (let i = 0; i < N; i++) { const dx = xs[i] - xm; sxy += dx * (SINPI(xs[i]) - ym); sxx += dx * dx; }
+    const a = sxx > 0 ? sxy / sxx : 0;
+    const lines = { h0: [0, ym], h1: [a, ym - a * xm] };
+    for (const k of ["h0", "h1"]) {
+      const [sl, ic] = lines[k], A = S[k];
+      A[0] += sl; A[1] += ic; A[2] += sl * sl; A[3] += ic * ic; A[4] += sl * ic;
+      if (t < keep) fits[k].push(lines[k]);
+    }
+  }
+  const out = { gx };
+  for (const k of ["h0", "h1"]) {
+    const [sa, sb, saa, sbb, sab] = S[k].map((v) => v / T);
+    const va = Math.max(0, saa - sa * sa), vb = Math.max(0, sbb - sb * sb), cab = sab - sa * sb;
+    out[k] = {
+      fits: fits[k], meanLine: [sa, sb],
+      gbar: gx.map((x) => sa * x + sb),
+      sd: gx.map((x) => Math.sqrt(Math.max(0, va * x * x + 2 * cab * x + vb))),
+      bias: (sa * sa) / 3 + sb * sb - (2 * sa) / Math.PI + 0.5,
+      variance: va / 3 + vb,
+    };
+  }
+  return out;
+}

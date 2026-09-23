@@ -25,7 +25,7 @@ Before we observe any data, we must encode our subjective beliefs, intuitions, o
 
 ### 2.2 The Likelihood
 
-When data $X = (X\_1, \dots, X\_n)$ is observed, the data generation process $f\_\theta(x\_1, \dots, x\_n)$ is viewed as the **conditional distribution** of the data given a specific value of the parameter, denoted $f(X | \theta)$.
+When data $X = (X_1, \dots, X_n)$ is observed, the data generation process $f_\theta(x_1, \dots, x_n)$ is viewed as the **conditional distribution** of the data given a specific value of the parameter, denoted $f(X | \theta)$.
 This is the same likelihood function used in MLE.
 
 ### 2.3 The Posterior Distribution (Bayes' Rule)
@@ -63,8 +63,8 @@ Suppose we want to estimate the unknown bias $\theta \in [0, 1]$ of a coin.
 - **Posterior:** We multiply the prior by the likelihood:
     $$
         \begin{align*}
-            \pi(\theta | X) &\propto \pi(\theta) f(X | \theta) \\\\
-            &\propto (1) \cdot \left( \theta^X (1-\theta)^{n-X} \right) \\\\
+            \pi(\theta | X) &\propto \pi(\theta) f(X | \theta) \\
+            &\propto (1) \cdot \left( \theta^X (1-\theta)^{n-X} \right) \\
             &\propto \theta^{(X+1)-1} (1-\theta)^{(n-X+1)-1}
         \end{align*}
     $$
@@ -79,7 +79,7 @@ From this comprehensive posterior distribution, we can readily derive specific p
 **Claim**: Under a squared error loss function, the optimal Bayesian point estimator is simply the posterior mean:
 
 $$
-    \hat{\theta}\_\text{Bayes} = \E[\theta | X] = \E[\text{Beta}(X+1, n-X+1)] = \frac{X+1}{n+2}
+    \hat{\theta}_\text{Bayes} = \E[\theta | X] = \E[\text{Beta}(X+1, n-X+1)] = \frac{X+1}{n+2}
 $$
 
 > **Proof of the Claim:**  
@@ -91,28 +91,28 @@ $$
 > Expand the square and distribute the expectation. With respect to the posterior distribution, $\theta$ is the random variable, and $c$ is a fixed number:
 > $$
 >     \begin{align*}
->         \text{Risk}(c) &= \E[\theta^2 - 2c\theta + c^2 \mid X] \\\\
+>         \text{Risk}(c) &= \E[\theta^2 - 2c\theta + c^2 \mid X] \\
 >         &= \E[\theta^2 \mid X] - 2c\E[\theta \mid X] + c^2
 >     \end{align*}
 > $$
 > Take the derivative with respect to $c$ and set it to $0$:
 > $$
 >     \begin{align*}
->         \frac{d}{dc} \text{Risk}(c) &= \frac{d}{dc} \left( \E[\theta^2 \mid X] - 2c\E[\theta \mid X] + c^2 \right) \\\\
+>         \frac{d}{dc} \text{Risk}(c) &= \frac{d}{dc} \left( \E[\theta^2 \mid X] - 2c\E[\theta \mid X] + c^2 \right) \\
 >         &= 0 - 2\E[\theta \mid X] + 2c
 >     \end{align*}
 > $$
 > Solve for $c$:
 > $$
 >     \begin{align*}
->         0 &= -2\E[\theta \mid X] + 2c \\\\
->         2c &= 2\E[\theta \mid X] \\\\
+>         0 &= -2\E[\theta \mid X] + 2c \\
+>         2c &= 2\E[\theta \mid X] \\
 >         c &= \E[\theta \mid X]
 >     \end{align*}
 > $$
-> This gives the optimal point estimator $\hat{\theta}\_{\text{Bayes}} = \E[\theta \mid X]$ which is the posterior mean to minimize squared error.
+> This gives the optimal point estimator $\hat{\theta}_{\text{Bayes}} = \E[\theta \mid X]$ which is the posterior mean to minimize squared error.
 
-Notice how this slightly differs from the MLE ($\hat{\theta}\_\text{MLE} = \frac{X}{n}$). The Bayesian estimator practically acts as if we saw "one imaginary head and one imaginary tail" prior to conducting any actual coin flipping. This built-in "pseudo-data" regularizes the estimate and inherently prevents extreme conclusions (such as claiming a coin is 100% heads simply because we flipped it once and got heads, $n=1, X=1$).
+Notice how this slightly differs from the MLE ($\hat{\theta}_\text{MLE} = \frac{X}{n}$). The Bayesian estimator practically acts as if we saw "one imaginary head and one imaginary tail" prior to conducting any actual coin flipping. This built-in "pseudo-data" regularizes the estimate and inherently prevents extreme conclusions (such as claiming a coin is 100% heads simply because we flipped it once and got heads, $n=1, X=1$).
 
 ---
 
@@ -122,9 +122,9 @@ What practically happens when we collect a massive amount of data ($n \to \infty
 
 As the total sample size grows immensely, the Likelihood function becomes incredibly sharp around the true parameter and completely overwhelms the subjective Prior distribution (provided the prior isn't strictly zero anywhere in the parameter space).
 
-By utilizing a Taylor expansion of the log-posterior directly around the MLE peak $\hat{\theta}\_\text{MLE}$, we can mathematically demonstrate:
+By utilizing a Taylor expansion of the log-posterior directly around the MLE peak $\hat{\theta}_\text{MLE}$, we can mathematically demonstrate:
 $$
-    \pi(\theta | X) \approx \exp\left( \ln \pi(\hat{\theta}\_\text{MLE}) - \frac{n I(\hat{\theta}\_\text{MLE})}{2} (\theta - \hat{\theta}\_\text{MLE})^2 \right)
+    \pi(\theta | X) \approx \exp\left( \ln \pi(\hat{\theta}_\text{MLE}) - \frac{n I(\hat{\theta}_\text{MLE})}{2} (\theta - \hat{\theta}_\text{MLE})^2 \right)
 $$
 
 > **Proof: Laplace Approximation of the Posterior**
@@ -137,27 +137,27 @@ $$
 > $$
 >     \ln \pi(\theta | X) = \ln \pi(\theta) + l_n(\theta) + C
 > $$
-> For a large sample size $n$, the probability mass is heavily concentrated at $\hat{\theta}\_\text{MLE}$. We perform a second-order Taylor expansion of the log-likelihood $l_n(\theta)$ centered at this peak:
+> For a large sample size $n$, the probability mass is heavily concentrated at $\hat{\theta}_\text{MLE}$. We perform a second-order Taylor expansion of the log-likelihood $l_n(\theta)$ centered at this peak:
 > $$
->     l_n(\theta) \approx l_n(\hat{\theta}\_\text{MLE}) + (\theta - \hat{\theta}\_\text{MLE}) \dot{l}\_n(\hat{\theta}\_\text{MLE}) + \frac{1}{2}(\theta - \hat{\theta}\_\text{MLE})^2 \dot{l}\_n'(\hat{\theta}\_\text{MLE})
+>     l_n(\theta) \approx l_n(\hat{\theta}_\text{MLE}) + (\theta - \hat{\theta}_\text{MLE}) \dot{l}_n(\hat{\theta}_\text{MLE}) + \frac{1}{2}(\theta - \hat{\theta}_\text{MLE})^2 \dot{l}_n'(\hat{\theta}_\text{MLE})
 > $$
-> Since $\hat{\theta}\_\text{MLE}$ is the maximum, $\dot{l}\_n(\hat{\theta}\_\text{MLE}) = 0$.  Furthermore, the negative second derivative of the log-likelihood approximates the total Fisher Information: $\ddot{l}\_n(\hat{\theta}\_\text{MLE}) \approx -n I(\hat{\theta}\_\text{MLE})$.
+> Since $\hat{\theta}_\text{MLE}$ is the maximum, $\dot{l}_n(\hat{\theta}_\text{MLE}) = 0$.  Furthermore, the negative second derivative of the log-likelihood approximates the total Fisher Information: $\ddot{l}_n(\hat{\theta}_\text{MLE}) \approx -n I(\hat{\theta}_\text{MLE})$.
 > Substitute:
 > $$
->     l_n(\theta) \approx l_n(\hat{\theta}\_\text{MLE}) - \frac{n I(\hat{\theta}\_\text{MLE})}{2}(\theta - \hat{\theta}\_\text{MLE})^2
+>     l_n(\theta) \approx l_n(\hat{\theta}_\text{MLE}) - \frac{n I(\hat{\theta}_\text{MLE})}{2}(\theta - \hat{\theta}_\text{MLE})^2
 > $$
-> Plugging this back into the unnormalized log-posterior, assuming the prior evaluates roughly to a constant $\ln \pi(\hat{\theta}\_\text{MLE})$ near the peak:
+> Plugging this back into the unnormalized log-posterior, assuming the prior evaluates roughly to a constant $\ln \pi(\hat{\theta}_\text{MLE})$ near the peak:
 > $$
->     \ln \pi(\theta | X) \approx \ln \pi(\hat{\theta}\_\text{MLE}) + l_n(\hat{\theta}\_\text{MLE}) - \frac{n I(\hat{\theta}\_\text{MLE})}{2}(\theta - \hat{\theta}\_\text{MLE})^2
+>     \ln \pi(\theta | X) \approx \ln \pi(\hat{\theta}_\text{MLE}) + l_n(\hat{\theta}_\text{MLE}) - \frac{n I(\hat{\theta}_\text{MLE})}{2}(\theta - \hat{\theta}_\text{MLE})^2
 > $$
-> Finally, exponentiating both sides and absorbing the constant likelihood term $l_n(\hat{\theta}\_\text{MLE})$ into the proportionality constant gives the approximated posterior:
+> Finally, exponentiating both sides and absorbing the constant likelihood term $l_n(\hat{\theta}_\text{MLE})$ into the proportionality constant gives the approximated posterior:
 > $$
->     \pi(\theta | X) \approx \text{const} \cdot \exp\left( \ln \pi(\hat{\theta}\_\text{MLE}) - \frac{n I(\hat{\theta}\_\text{MLE})}{2} (\theta - \hat{\theta}\_\text{MLE})^2 \right)
+>     \pi(\theta | X) \approx \text{const} \cdot \exp\left( \ln \pi(\hat{\theta}_\text{MLE}) - \frac{n I(\hat{\theta}_\text{MLE})}{2} (\theta - \hat{\theta}_\text{MLE})^2 \right)
 > $$
 
 This rigorous expansion implies that for a sufficiently large $n$, the posterior distribution closely approximates a Normal distribution that is centered precisely at the Maximum Likelihood Estimator:
 $$
-    \theta | X \approx \mathcal{N}\left( \hat{\theta}\_\text{MLE}, \frac{1}{n I(\hat{\theta}\_\text{MLE})} \right)
+    \theta | X \approx \mathcal{N}\left( \hat{\theta}_\text{MLE}, \frac{1}{n I(\hat{\theta}_\text{MLE})} \right)
 $$
 
 > **Proof: Arriving at the Normal Approximation**
@@ -168,20 +168,20 @@ $$
 > $$
 > Compare this structural form to the $\theta$-dependent component of our derived posterior approximation:
 > $$
->     \pi(\theta | X) \propto \exp\left( - \frac{n I(\hat{\theta}\_\text{MLE})}{2} (\theta - \hat{\theta}\_\text{MLE})^2 \right)
+>     \pi(\theta | X) \propto \exp\left( - \frac{n I(\hat{\theta}_\text{MLE})}{2} (\theta - \hat{\theta}_\text{MLE})^2 \right)
 > $$
 > Map the parameters:
 >
 > 1. The variable $x$ corresponds to parameter $\theta$.
-> 2. The mean $\mu$ corresponds to MLE $\hat{\theta}\_\text{MLE}$.
+> 2. The mean $\mu$ corresponds to MLE $\hat{\theta}_\text{MLE}$.
 > 3. The precision multiplier matches the variance term. Setting them equal gives:
 >
 > $$
->     \frac{1}{2\sigma^2} = \frac{n I(\hat{\theta}\_\text{MLE})}{2} \implies \frac{1}{\sigma^2} = n I(\hat{\theta}\_\text{MLE}) \implies \sigma^2 = \frac{1}{n I(\hat{\theta}\_\text{MLE})}
+>     \frac{1}{2\sigma^2} = \frac{n I(\hat{\theta}_\text{MLE})}{2} \implies \frac{1}{\sigma^2} = n I(\hat{\theta}_\text{MLE}) \implies \sigma^2 = \frac{1}{n I(\hat{\theta}_\text{MLE})}
 > $$
 > Therefore, the posterior distribution converges to a Normal distribution centered at the MLE with variance determined by the inverse Fisher Information:
 > $$
->     \theta | X \approx \mathcal{N}\left( \hat{\theta}\_\text{MLE}, \frac{1}{n I(\hat{\theta}\_\text{MLE})} \right)
+>     \theta | X \approx \mathcal{N}\left( \hat{\theta}_\text{MLE}, \frac{1}{n I(\hat{\theta}_\text{MLE})} \right)
 > $$
 
 Under the regularity conditions of the Bernstein-von Mises theorem, the posterior is asymptotically normal around an efficient estimator. The prior's influence then decreases as the sample grows. This agreement is asymptotic and depends on the model and regularity conditions; it is not a claim that Bayesian and frequentist methods always give the same answer.

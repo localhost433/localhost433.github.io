@@ -77,7 +77,7 @@ $$f_{U,V}(u, v) = f_{X,Y}(x, y) \cdot |J|^{-1}$$
 where $x, y$ are expressed in terms of $u, v$, and $J$ is the Jacobian of the transformation $(u,v) \to (x,y)$ (or inverse of the transformation $(x,y) \to (u,v)$).
 
 Specifically, if we compute the Jacobian of the transformation **from $(x, y)$ to $(u, v)$**:
-$$J = \det \begin{bmatrix} \frac{\partial u}{\partial x} & \frac{\partial u}{\partial y} \\\\ \frac{\partial v}{\partial x} & \frac{\partial v}{\partial y} \end{bmatrix}$$
+$$J = \det \begin{bmatrix} \frac{\partial u}{\partial x} & \frac{\partial u}{\partial y} \\ \frac{\partial v}{\partial x} & \frac{\partial v}{\partial y} \end{bmatrix}$$
 Then:
 $$f_{U,V}(u, v) = f_{X,Y}(x(u,v), y(u,v)) \cdot \frac{1}{|J(x,y)|}$$
 
@@ -87,7 +87,7 @@ Let $U = X + Y$. To use the method, we introduce a dummy variable $V = Y$.
 
 - **Transformation:** $u = x+y, v = y$.
 - **Inverse:** $x = u-v, y = v$.
-- **Jacobian:** $$J = \frac{\partial(u,v)}{\partial(x,y)} = \det \begin{bmatrix} 1 & 1 \\\\ 0 & 1 \end{bmatrix} = 1$$
+- **Jacobian:** $$J = \frac{\partial(u,v)}{\partial(x,y)} = \det \begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix} = 1$$
 - **Density of (U,V):**
     $$f_{U,V}(u, v) = f_{X,Y}(u-v, v) \cdot 1$$
 - **Marginal of U (Convolution Formula):**

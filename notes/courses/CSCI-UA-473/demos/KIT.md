@@ -156,12 +156,16 @@ slides build the components diagram one box per click.
 | `design-matrix-anatomy` | 05 | L5 slides 8-14 |
 | `ls-projection` | 05 | L5 slide 15 (ESL 3.2), in 3D |
 | `regularization-path` | 05 | no slide; coefficient paths under ridge and lasso as λ grows, interactive |
-| `bias-variance` | 05 | preview of the 09/22 lecture; forty fits, their average, bias² and variance against M, interactive |
+| `overfitting-causes` | 06 | L6 slides 5-6; degree 2 vs 10 on a Legendre target, N / noise / Q_f sliders, interactive |
+| `validation-size` | 06 | L6 slide 14 (LFD), rebuilt: E_val's mean and spread against K, one split at the current K, interactive |
+| `cv-folds` | 06 | L6 slides 15, 17-20; K-fold phases, the λ loop, the fold back, leave-one-out |
+| `bias-variance` | 06 | L6 slides 25-28; forty fits on fixed x, their average, bias² and variance against M, interactive |
+| `h0-vs-h1` | 06 | L6 slides 29-34; constants vs lines on sin(πx), with N on a slider, interactive |
 | `erm-objective-anatomy` | 00 | no slide; the supplement's own objective |
 
 Interactive demos (`perceptron-2d`, `hoeffding-bin`, `union-bound-bins`,
 `complexity-tradeoff`, `complexity-ucurve`, `ridge-vs-lasso`, `regularization-path`,
-`bias-variance`, `norm-balls`, `projection-2d`, `nfl-boolean-cube`, `bias-absorption-3d`,
+`bias-variance`, `overfitting-causes`, `validation-size`, `h0-vs-h1`, `norm-balls`, `projection-2d`, `nfl-boolean-cube`, `bias-absorption-3d`,
 `practice-03`) keep their own state and controls and are fenced without `static`.
 `poly-overfit` was folded into `complexity-ucurve`'s right-hand panel and deleted.
 

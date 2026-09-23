@@ -21,7 +21,7 @@ location: Warren Weaver Hall, NYU, New York, NY
 
 ## Anubis at scale
 - Anubis is a microservice system; each service can run multiple containers.
-- Snapshot (2023-02-07): about $\,\sim 366\,$ Cloud IDEs open ⇒ roughly $\,\sim 3000\,$ containers just for IDEs.
+- Snapshot (2023-02-07): about 366 Cloud IDEs open, and roughly 3,000 containers running.
 
 ## Kubernetes stack (how Anubis runs)
 - Orchestrated by **Kubernetes (k8s)**; extends networking (CNI) and storage (CSI) across many nodes.

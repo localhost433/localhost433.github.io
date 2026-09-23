@@ -19,7 +19,7 @@ Consider a historical study examining promotion decisions across different gende
 | **No Promotion ($i=2$)**  | 3            | 10             | 13    |
 | **Total**                 | 24           | 24             | 48    |
 
-The null hypothesis $H\_0$ asserts that there is absolutely no statistical effect of gender on promotion decisions. How do we mathematically model and evaluate this claim?
+The null hypothesis $H_0$ asserts that there is absolutely no statistical effect of gender on promotion decisions. How do we mathematically model and evaluate this claim?
 
 ---
 
@@ -27,26 +27,26 @@ The null hypothesis $H\_0$ asserts that there is absolutely no statistical effec
 
 Fisher's exact test evaluates $2 \times 2$ tables and is useful when sample sizes are small.
 
-Let the observed counts be denoted as $n\_{ij}$. We define the fixed marginal totals:
+Let the observed counts be denoted as $n_{ij}$. We define the fixed marginal totals:
 
-- Row totals: $n\_{i\cdot} = \sum\_j n\_{ij}$ (e.g., total promoted $n\_{1\cdot} = 35$)
-- Column totals: $n\_{\cdot j} = \sum\_i n\_{ij}$ (e.g., total males $n\_{\cdot 1} = 24$)
-- Grand total: $n\_{\cdot \cdot} = \sum\_{i,j} n\_{ij} = 48$
+- Row totals: $n_{i\cdot} = \sum_j n_{ij}$ (e.g., total promoted $n_{1\cdot} = 35$)
+- Column totals: $n_{\cdot j} = \sum_i n_{ij}$ (e.g., total males $n_{\cdot 1} = 24$)
+- Grand total: $n_{\cdot \cdot} = \sum_{i,j} n_{ij} = 48$
 
-**Fisher's Core Assumption:** We treat the row sums and column sums as strictly fixed parameters, rather than random variables. Consequently, the single upper-left cell count $N\_{11}$ mathematically dictates the entire contingency table.
+**Fisher's Core Assumption:** We treat the row sums and column sums as strictly fixed parameters, rather than random variables. Consequently, the single upper-left cell count $N_{11}$ mathematically dictates the entire contingency table.
 
 **The Null Distribution:**
-Under $H\_0$ (no gender bias), the observed count $N\_{11}$ is statistically equivalent to the result of drawing $n\_{\cdot 1}$ (24 males) completely at random, without replacement, from a combined population consisting of $n\_{1\cdot}$ (35 promoted) and $n\_{2\cdot}$ (13 not promoted) individuals.
+Under $H_0$ (no gender bias), the observed count $N_{11}$ is statistically equivalent to the result of drawing $n_{\cdot 1}$ (24 males) completely at random, without replacement, from a combined population consisting of $n_{1\cdot}$ (35 promoted) and $n_{2\cdot}$ (13 not promoted) individuals.
 
 This process flawlessly matches the definition of the **Hypergeometric distribution**. The precise probability of observing exactly $k$ promoted males is:
 $$
-    \prob(N\_{11} = k) = \frac{\binom{n\_{1\cdot}}{k} \binom{n\_{2\cdot}}{n\_{\cdot 1} - k}}{\binom{n\_{\cdot \cdot}}{n\_{\cdot 1}}}
+    \prob(N_{11} = k) = \frac{\binom{n_{1\cdot}}{k} \binom{n_{2\cdot}}{n_{\cdot 1} - k}}{\binom{n_{\cdot \cdot}}{n_{\cdot 1}}}
 $$
 Applying this to our specific numerical example:
 $$
-    \prob(N\_{11} = 21) = \frac{\binom{35}{21} \binom{13}{3}}{\binom{48}{24}}
+    \prob(N_{11} = 21) = \frac{\binom{35}{21} \binom{13}{3}}{\binom{48}{24}}
 $$
-To complete the hypothesis test, we calculate the p-value by strictly summing the probabilities of observing $N\_{11} = 21$ and all other possible counts that represent equal or even more extreme deviations from the expected center.
+To complete the hypothesis test, we calculate the p-value by strictly summing the probabilities of observing $N_{11} = 21$ and all other possible counts that represent equal or even more extreme deviations from the expected center.
 
 ---
 
@@ -54,36 +54,36 @@ To complete the hypothesis test, we calculate the p-value by strictly summing th
 
 While Fisher's Exact Test is powerful for $2 \times 2$ setups, we frequently encounter large datasets with multiple populations and multiple distinct categories.
 
-Suppose we sample from $I$ entirely independent populations. Within each population $i$, the observations are sorted into $J$ distinct categories. Let $n\_{ij}$ be the observed count in category $j$ for population $i$.
+Suppose we sample from $I$ entirely independent populations. Within each population $i$, the observations are sorted into $J$ distinct categories. Let $n_{ij}$ be the observed count in category $j$ for population $i$.
 The data in row $i$ strictly follows a multinomial distribution:
 $$
-    (X\_{i1}, \dots, X\_{iJ}) \sim \text{Multi}(n\_{i\cdot}, p\_i)
+    (X_{i1}, \dots, X_{iJ}) \sim \text{Multi}(n_{i\cdot}, p_i)
 $$
-where $p\_i = (p\_{i1}, \dots, p\_{iJ})$ represents the true categorical probabilities for population $i$.
+where $p_i = (p_{i1}, \dots, p_{iJ})$ represents the true categorical probabilities for population $i$.
 
 We wish to test if the populations are perfectly homogeneous (i.e., they all share the exact same probability structure):
 $$
-    H\_0: p\_1 = p\_2 = \dots = p\_I = \pi
+    H_0: p_1 = p_2 = \dots = p_I = \pi
 $$
 
-Under the homogeneity assumption, the maximum-likelihood estimate of the shared category probability $\pi\_j$ comes from the column totals:
+Under the homogeneity assumption, the maximum-likelihood estimate of the shared category probability $\pi_j$ comes from the column totals:
 $$
-    \hat{\pi}\_j = \frac{n\_{\cdot j}}{n\_{\cdot \cdot}}
+    \hat{\pi}_j = \frac{n_{\cdot j}}{n_{\cdot \cdot}}
 $$
-Consequently, the expected count for cell $(i,j)$ under $H\_0$ is:
+Consequently, the expected count for cell $(i,j)$ under $H_0$ is:
 $$
-    E\_{ij} = n\_{i\cdot} \hat{\pi}\_j = \frac{n\_{i\cdot} n\_{\cdot j}}{n\_{\cdot \cdot}}
+    E_{ij} = n_{i\cdot} \hat{\pi}_j = \frac{n_{i\cdot} n_{\cdot j}}{n_{\cdot \cdot}}
 $$
 
 Applying Pearson's large-sample approximation to the Generalized LR test generates the highly versatile **Chi-Square test statistic**:
 $$
-    \chi^2 = \sum\_{i=1}^I \sum\_{j=1}^J \frac{(n\_{ij} - E\_{ij})^2}{E\_{ij}}
+    \chi^2 = \sum_{i=1}^I \sum_{j=1}^J \frac{(n_{ij} - E_{ij})^2}{E_{ij}}
 $$
 By Wilks' Theorem, the asymptotic degrees of freedom $d$ is the difference in parameters between the full model ($I \times (J-1)$) and the constrained null model ($J-1$):
 $$
     d = I(J-1) - (J-1) = (I-1)(J-1)
 $$
-Thus, under $H\_0$, the test statistic asymptotically follows $\chi^2\_{(I-1)(J-1)}$.
+Thus, under $H_0$, the test statistic asymptotically follows $\chi^2_{(I-1)(J-1)}$.
 
 ---
 
@@ -93,33 +93,33 @@ A mathematically analogous but philosophically distinct problem arises when we r
 
 The total data follows one massive multinomial distribution over the $I \times J$ grid:
 $$
-    (X\_{11}, \dots, X\_{IJ}) \sim \text{Multi}(n, \Pi)
+    (X_{11}, \dots, X_{IJ}) \sim \text{Multi}(n, \Pi)
 $$
-where $\Pi\_{ij} = \prob(I=i, J=j)$.
+where $\Pi_{ij} = \prob(I=i, J=j)$.
 
 We formulate the null hypothesis that the two categorical features are statistically independent:
 $$
-    H\_0: \Pi\_{ij} = \prob(I=i) \prob(J=j) = \Pi\_{i\cdot} \Pi\_{\cdot j} \quad \text{for all } (i, j)
+    H_0: \Pi_{ij} = \prob(I=i) \prob(J=j) = \Pi_{i\cdot} \Pi_{\cdot j} \quad \text{for all } (i, j)
 $$
 
 ### 4.1 Equivalence of the Test Statistic
 
 The generalized likelihood-ratio test for independence yields the same statistic as the test for homogeneity.
 
-We estimate the marginal probabilities as $\hat{\Pi}\_{i\cdot} = \frac{n\_{i\cdot}}{n}$ and $\hat{\Pi}\_{\cdot j} = \frac{n\_{\cdot j}}{n}$.
-The expected count is therefore $E\_{ij} = n \hat{\Pi}\_{i\cdot} \hat{\Pi}\_{\cdot j} = \frac{n\_{i\cdot} n\_{\cdot j}}{n\_{\cdot \cdot}}$.
+We estimate the marginal probabilities as $\hat{\Pi}_{i\cdot} = \frac{n_{i\cdot}}{n}$ and $\hat{\Pi}_{\cdot j} = \frac{n_{\cdot j}}{n}$.
+The expected count is therefore $E_{ij} = n \hat{\Pi}_{i\cdot} \hat{\Pi}_{\cdot j} = \frac{n_{i\cdot} n_{\cdot j}}{n_{\cdot \cdot}}$.
 The test statistic strictly remains:
 $$
-    \sum\_{i=1}^I \sum\_{j=1}^J \frac{(n\_{ij} - E\_{ij})^2}{E\_{ij}} \sim \chi^2\_{(I-1)(J-1)} \quad \text{under } H\_0
+    \sum_{i=1}^I \sum_{j=1}^J \frac{(n_{ij} - E_{ij})^2}{E_{ij}} \sim \chi^2_{(I-1)(J-1)} \quad \text{under } H_0
 $$
 
 ### 4.2 Special Case: The $2 \times 2$ Grid
 
 For the highly common $2 \times 2$ scenario ($I=2, J=2$), the degrees of freedom is precisely $d = 1$. The vast summations in the Chi-Square formula beautifully condense into a single, highly efficient algebraic expression:
 $$
-    \chi^2 = \frac{(n\_{11} n\_{22} - n\_{12} n\_{21})^2 n\_{\cdot \cdot}}{n\_{1\cdot} n\_{2\cdot} n\_{\cdot 1} n\_{\cdot 2}}
+    \chi^2 = \frac{(n_{11} n_{22} - n_{12} n_{21})^2 n_{\cdot \cdot}}{n_{1\cdot} n_{2\cdot} n_{\cdot 1} n_{\cdot 2}}
 $$
-The numerator contains the squared cross-product difference $(n\_{11} n\_{22} - n\_{12} n\_{21})^2$, the square of the table's determinant.
+The numerator contains the squared cross-product difference $(n_{11} n_{22} - n_{12} n_{21})^2$, the square of the table's determinant.
 
 ---
 

@@ -10,7 +10,7 @@ Limit theorems explain "why science works". They describe the universal behavior
 Let $X_1, X_2, \dots$ be i.i.d. random variables with mean $\mu = \E[X]$ and variance $\sigma^2 = \Var{X}$.
 Consider the **sample mean**:
 $$
-    \overline{X}\_n = \frac{1}{n} \sum_{i=1}^n X_i
+    \overline{X}_n = \frac{1}{n} \sum_{i=1}^n X_i
 $$
 
 ---
@@ -22,23 +22,23 @@ The Law of Large Numbers states that the sample mean converges to the true popul
 ### 2.1 Theorem (Weak Law of Large Numbers)
 
 If $X_1, \dots, X_n$ are i.i.d. with finite mean $\mu$ and finite variance $\sigma^2$, then for any $\epsilon > 0$:
-$$\lim_{n \to \infty} \mathbb{P}(|\overline{X}\_n - \mu| > \epsilon) = 0$$
+$$\lim_{n \to \infty} \mathbb{P}(|\overline{X}_n - \mu| > \epsilon) = 0$$
 
-This is convergence in probability, written as $\overline{X}\_n \xrightarrow{p} \mu$.
+This is convergence in probability, written as $\overline{X}_n \xrightarrow{p} \mu$.
 
 ### 2.2 Proof (via Chebyshev's Inequality)
 
 First, we establish Chebyshev's Inequality. For any random variable $Y$ with mean $\E[Y]$ and variance $\Var{Y}$, and for any $\epsilon > 0$:
 $$\mathbb{P}(|Y - \E[Y]| \ge \epsilon) \le \frac{\Var{Y}}{\epsilon^2}$$
 
-Now apply this to $Y = \overline{X}\_n$:
+Now apply this to $Y = \overline{X}_n$:
 
-1. **Expectation of $\overline{X}\_n$:**
-    $$\E[\overline{X}\_n] = \frac{1}{n} \sum \E[X_i] = \frac{1}{n} (n\mu) = \mu$$
-2. **Variance of $\overline{X}\_n$:**
-    $$\Var{\overline{X}\_n} = \Var{\frac{1}{n} \sum X_i} = \frac{1}{n^2} \sum \Var{X_i} = \frac{1}{n^2} (n\sigma^2) = \frac{\sigma^2}{n}$$
+1. **Expectation of $\overline{X}_n$:**
+    $$\E[\overline{X}_n] = \frac{1}{n} \sum \E[X_i] = \frac{1}{n} (n\mu) = \mu$$
+2. **Variance of $\overline{X}_n$:**
+    $$\Var{\overline{X}_n} = \Var{\frac{1}{n} \sum X_i} = \frac{1}{n^2} \sum \Var{X_i} = \frac{1}{n^2} (n\sigma^2) = \frac{\sigma^2}{n}$$
 3. **Applying Chebyshev:**
-    $$\mathbb{P}(|\overline{X}\_n - \mu| \ge \epsilon) \le \frac{\sigma^2/n}{\epsilon^2} = \frac{\sigma^2}{n\epsilon^2}$$
+    $$\mathbb{P}(|\overline{X}_n - \mu| \ge \epsilon) \le \frac{\sigma^2/n}{\epsilon^2} = \frac{\sigma^2}{n\epsilon^2}$$
     As $n \to \infty$, the RHS goes to $0$.
 
 ### 2.3 Application: Monte Carlo Simulation
@@ -47,7 +47,7 @@ Goal is to estimate an integral $I = \int_0^1 f(x) dx$. Let $U$ be a continuous 
 $$
     p_U(u)=
     \begin{cases}
-        & 1 \text{ for }0 \le u \le 1\\\\
+        & 1 \text{ for }0 \le u \le 1\\
         & 0 \text{ otherwise.}
     \end{cases}
 $$
@@ -71,22 +71,22 @@ $$
 
 ## 3. Central Limit Theorem (CLT)
 
-While LLN tells us $\overline{X}\_n$ concentrates around $\mu$, the CLT tells us about the *distribution* of the fluctuations around $\mu$.
+While LLN tells us $\overline{X}_n$ concentrates around $\mu$, the CLT tells us about the *distribution* of the fluctuations around $\mu$.
 
-> "Fluctuations" as of $(\overline{X}\_n - \mu)$.
+> "Fluctuations" as of $(\overline{X}_n - \mu)$.
 
 ### 3.1 Theorem
 
 Let $X_1, \dots, X_n$ be i.i.d. with mean $\mu$ and variance $\sigma^2 < \infty$. Let $S_n = \sum X_i$.
 Then the standardized sum converges in distribution to a standard Normal random variable.
 
-$$Z_n = \frac{\sqrt{n}(\overline{X}\_n - \mu)}{\sigma} \xrightarrow{d} \mathcal{N}(0, 1)$$
+$$Z_n = \frac{\sqrt{n}(\overline{X}_n - \mu)}{\sigma} \xrightarrow{d} \mathcal{N}(0, 1)$$
 
 > Rigorously, "convergence in distribution" here means the CDF of $Z_n$ converges to the CDF of the standard normal dist. for every $z \in \R$:
 > $$\lim_{n \to \infty} \mathbb{P}(Z_n \le z) = \Phi(z) = \int_{-\infty}^z \frac{1}{\sqrt{2\pi}} e^{-x^2/2} dx$$
 
 **Interpretation:**
-For large $n$, $\overline{X}\_n \approx \sim \mathcal{N}(\mu, \frac{\sigma^2}{n})$.
+For large $n$, $\overline{X}_n \approx \sim \mathcal{N}(\mu, \frac{\sigma^2}{n})$.
 
 ### 3.2 Proof Sketch (Characteristic Functions)
 
@@ -104,9 +104,9 @@ Let $\varphi_Y(t)$ be the characteristic function of $Y_i$. Since the first two 
 $$
     \begin{align*}
         \varphi_Y(t)
-        &= \E[e^{itY}]\\\\
-        &= 1 + it\E[Y] + \frac{(it)^2}{2!}\E[Y^2] + o(t^2)\\\\
-        &= 1 + 0 - \frac{t^2}{2}(1) + o(t^2)\\\\
+        &= \E[e^{itY}]\\
+        &= 1 + it\E[Y] + \frac{(it)^2}{2!}\E[Y^2] + o(t^2)\\
+        &= 1 + 0 - \frac{t^2}{2}(1) + o(t^2)\\
         &= 1 - \frac{t^2}{2} + o(t^2)
     \end{align*}
 $$
@@ -116,10 +116,10 @@ Then:
 $$
     \begin{align*}
         \varphi_{Z_n}(t)
-        &= \varphi_{\sum Y_i / \sqrt{n}}(t)\\\\
-        &= \prod_{i=1}^n \varphi_{Y_i}\left(\frac{t}{\sqrt{n}}\right)\\\\
-        &= \left[ \varphi_Y\left(\frac{t}{\sqrt{n}}\right) \right]^n\\\\
-        &= \left( 1 - \frac{(t/\sqrt{n})^2}{2} + o\left(\left(\frac{t}{\sqrt{n}}\right)^2\right) \right)^n\\\\
+        &= \varphi_{\sum Y_i / \sqrt{n}}(t)\\
+        &= \prod_{i=1}^n \varphi_{Y_i}\left(\frac{t}{\sqrt{n}}\right)\\
+        &= \left[ \varphi_Y\left(\frac{t}{\sqrt{n}}\right) \right]^n\\
+        &= \left( 1 - \frac{(t/\sqrt{n})^2}{2} + o\left(\left(\frac{t}{\sqrt{n}}\right)^2\right) \right)^n\\
         &= \left( 1 - \frac{t^2}{2n} + o\left(\frac{t^2}{n}\right) \right)^n
     \end{align*}
 $$

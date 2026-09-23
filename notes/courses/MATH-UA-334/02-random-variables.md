@@ -20,7 +20,7 @@ $$X: \Omega \to \mathbb{R}$$
 
 2. **Indicator Variables:**
     - For any event $A \subseteq \Omega$, the **indicator random variable** $I_A$ (or $\mathbb{1}_A$) is defined as:
-        $$I_A(\omega) = \begin{cases} 1 & \text{if } \omega \in A \\\\ 0 & \text{if } \omega \notin A \end{cases}$$
+        $$I_A(\omega) = \begin{cases} 1 & \text{if } \omega \in A \\ 0 & \text{if } \omega \notin A \end{cases}$$
 
 ---
 
@@ -104,9 +104,9 @@ $$\mathbb{P}(X \in B) = \int_B f_X(x) \, dx$$
 Let $F_Y(y)$ be the CDF of $Y$.
 $$
 \begin{align*}
-F_Y(y) &= \mathbb{P}(Y \le y) \\\\
-&= \mathbb{P}(\sigma X + \mu \le y) \\\\
-&= \mathbb{P}\left(X \le \frac{y - \mu}{\sigma}\right) \\\\
+F_Y(y) &= \mathbb{P}(Y \le y) \\
+&= \mathbb{P}(\sigma X + \mu \le y) \\
+&= \mathbb{P}\left(X \le \frac{y - \mu}{\sigma}\right) \\
 &= F_X\left(\frac{y - \mu}{\sigma}\right)
 \end{align*}
 $$
@@ -114,9 +114,9 @@ $$
 By differentiating with respect to $y$, we recover the PDF:
 $$
 \begin{align*}
-f_Y(y) &= \frac{d}{dy} F_X\left(\frac{y - \mu}{\sigma}\right) \\\\
-&= f_X\left(\frac{y - \mu}{\sigma}\right) \cdot \frac{1}{\sigma} \quad (\text{by Chain Rule}) \\\\
-&= \frac{1}{\sqrt{2\pi}} \exp\left( -\frac{1}{2} \left(\frac{y-\mu}{\sigma}\right)^2 \right) \cdot \frac{1}{\sigma} \\\\
+f_Y(y) &= \frac{d}{dy} F_X\left(\frac{y - \mu}{\sigma}\right) \\
+&= f_X\left(\frac{y - \mu}{\sigma}\right) \cdot \frac{1}{\sigma} \quad (\text{by Chain Rule}) \\
+&= \frac{1}{\sqrt{2\pi}} \exp\left( -\frac{1}{2} \left(\frac{y-\mu}{\sigma}\right)^2 \right) \cdot \frac{1}{\sigma} \\
 &= \frac{1}{\sqrt{2\pi}\sigma} \exp\left( -\frac{(y-\mu)^2}{2\sigma^2} \right)
 \end{align*}
 $$

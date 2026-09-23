@@ -322,23 +322,9 @@ set of points and reporting **RMSE**. The text layer of that slide is thin, so c
 recording for which degrees were shown and where the error turns around; the shape is the
 one L4 already drew with its ten-point sine and $M = 9$.
 
-*Preview of 09/22.* The syllabus puts bias, variance and the tradeoff between them in the
-next lecture, and quiz 1 comes two days after it. The figure below uses the standard
-vocabulary; if the deck names things differently, the deck wins. The mechanism behind
-the U: draw forty samples instead of one, fit degree $M$ to every one, and look at the
-forty fits together.
-
-```artifact src=demos/bias-variance.jsx
-```
-
-**Bias** is how far the *average* fit $\bar g$ sits from the target - what the hypothesis
-set cannot express however much data it sees. **Variance** is how far the individual fits
-scatter around $\bar g$ - how much the answer depends on which sample you drew. Low $M$ is
-all bias: the fits agree with each other and are wrong together. High $M$ is all variance:
-their average is nearly right and no single one of them is. $E_{\text{out}}$ is the sum
-of the two plus the noise floor $\sigma^2$ from the noisy-targets section, and its minimum
-sits where the falling curve crosses the rising one, not where either is small. Ridge and
-lasso, above, are variance reducers: they buy a smaller scatter at the price of some bias.
+Why the error turns around, and where along the degree axis, is the next lecture's
+subject: [L6](note.html?course=CSCI-UA-473&note=06-overfitting-validation) splits it into
+bias and variance.
 
 ## Subset selection
 
@@ -562,6 +548,7 @@ than whether it felt familiar.
 
 ---
 
-> Next up: cross-validation, which the syllabus puts on 09/22 and which this deck does not
-> cover. It is the gap questions 10 and 12 above run into: nothing in this lecture says how
+> Next up: [cross-validation](note.html?course=CSCI-UA-473&note=06-overfitting-validation),
+> which the syllabus puts on 09/22 and which this deck does not cover. It is the gap
+> questions 10 and 12 above run into: nothing in this lecture says how
 > to *choose* $\lambda$, $M$, or a subset, only what each of them does once chosen.

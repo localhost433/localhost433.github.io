@@ -45,6 +45,9 @@ marked.setOptions({
   smartypants: false
 });
 marked.use({ renderer });
+/* Posts carry real TeX too — the MoE entries alone have 29 `\\` row breaks and 16
+   escaped braces inside math — so they need the same protection the notes do. */
+MarkdownMath.install(marked);
 
 fetch(`./posts/entries/${slug}.md`)
   .then(r => r.text())

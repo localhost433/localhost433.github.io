@@ -25,7 +25,7 @@ It's pretty surprising to hear that it isn't an "aloha" thing, but thinking more
 - **Society**: Fosters innovation (decentralizes/democratizes technology, as they say).
 
 ## Open Source in Public Service
-Governments and organizations are adopting open source mainly for cost-effectiveness. Also there's a UN Open Source Week (???), which takes place in June (includes a hackathon). I might look into that later; it sounds interesting.
+Governments and organizations are adopting open source mainly for cost-effectiveness. Also there's a UN Open Source Week, which takes place in June (includes a hackathon). I might look into that later; it sounds interesting.
 
 ## How Projects Evolve
 How projects start with a specific purpose but evolve into something much larger through this process:

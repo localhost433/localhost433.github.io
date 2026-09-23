@@ -15,28 +15,28 @@ In many practical statistical scenarios, we are not just interested in the prope
 
 Let our data be modeled as follows:
 $$
-    X\_1, \dots, X\_n \sim P
+    X_1, \dots, X_n \sim P
 $$
 $$
-    Y\_1, \dots, Y\_m \sim Q
+    Y_1, \dots, Y_m \sim Q
 $$
 where $P$ and $Q$ are the underlying probability distributions, and the two samples are mutually independent.
 
 The most common statistical question is to determine whether these two populations are identical. This forms our fundamental null hypothesis:
 $$
-    H\_0: P = Q
+    H_0: P = Q
 $$
 
 ### 1.1 Motivating Examples
 
 1. **Home Field Advantage in Sports:** Does a sports team truly perform better when playing at their home stadium?
-    - $X\_1, \dots, X\_n$: The outcomes or scores from home games.
-    - $Y\_1, \dots, Y\_m$: The outcomes or scores from away games.
+    - $X_1, \dots, X_n$: The outcomes or scores from home games.
+    - $Y_1, \dots, Y_m$: The outcomes or scores from away games.
     - We test if the distribution of home scores is statistically different from the away scores.
 
 2. **Treatment Effect in Medicine:** Does a new drug significantly improve patient outcomes compared to a placebo?
-    - $X\_1, \dots, X\_n$: The clinical outcomes from the control (placebo) group.
-    - $Y\_1, \dots, Y\_m$: The clinical outcomes from the treatment group.
+    - $X_1, \dots, X_n$: The clinical outcomes from the control (placebo) group.
+    - $Y_1, \dots, Y_m$: The clinical outcomes from the treatment group.
     - We test if the treatment distribution represents a distinct improvement.
 
 ---
@@ -46,36 +46,36 @@ $$
 To build a rigorous test, we often start by assuming the data follow a parametric distribution. A standard assumption is that both populations are normally distributed with the exact same unknown variance, but potentially different means.
 
 $$
-    X\_1, \dots, X\_n \sim \mathcal{N}(\mu\_X, \sigma^2)
+    X_1, \dots, X_n \sim \mathcal{N}(\mu_X, \sigma^2)
 $$
 $$
-    Y\_1, \dots, Y\_m \sim \mathcal{N}(\mu\_Y, \sigma^2)
+    Y_1, \dots, Y_m \sim \mathcal{N}(\mu_Y, \sigma^2)
 $$
-Here, $\mu\_X$, $\mu\_Y$, and $\sigma^2$ are all unknown parameters.
+Here, $\mu_X$, $\mu_Y$, and $\sigma^2$ are all unknown parameters.
 
 We explicitly test the equality of the means:
 $$
-    H\_0: \mu\_X = \mu\_Y \quad \text{vs.} \quad H\_1: \mu\_X \neq \mu\_Y
+    H_0: \mu_X = \mu_Y \quad \text{vs.} \quad H_1: \mu_X \neq \mu_Y
 $$
 
 ### 2.1 The Test Statistic and the Generalized LR Test
 
-Recall from previous lectures that the Generalized Likelihood Ratio (LR) test dictates we calculate the ratio of the maximized likelihoods under $H\_0$ and the full parameter space. By Wilks' Theorem, $-2 \log LR \sim \chi^2\_1$ asymptotically.
+Recall from previous lectures that the Generalized Likelihood Ratio (LR) test dictates we calculate the ratio of the maximized likelihoods under $H_0$ and the full parameter space. By Wilks' Theorem, $-2 \log LR \sim \chi^2_1$ asymptotically.
 
 For finite samples in the Gaussian model, evaluating the LR test algebraically leads directly to the standard **Two-Sample t-test statistic**:
 $$
-    T = \frac{\overline{X}\_n - \overline{Y}\_m}{S\_p \sqrt{\frac{1}{n} + \frac{1}{m}}}
+    T = \frac{\overline{X}_n - \overline{Y}_m}{S_p \sqrt{\frac{1}{n} + \frac{1}{m}}}
 $$
-where $\overline{X}\_n$ and $\overline{Y}\_m$ are the sample means, and $S\_p^2$ is the **pooled sample variance**, defined as:
+where $\overline{X}_n$ and $\overline{Y}_m$ are the sample means, and $S_p^2$ is the **pooled sample variance**, defined as:
 $$
-    S\_p^2 = \frac{\sum\_{i=1}^n (X\_i - \overline{X}\_n)^2 + \sum\_{j=1}^m (Y\_j - \overline{Y}\_m)^2}{n + m - 2}
+    S_p^2 = \frac{\sum_{i=1}^n (X_i - \overline{X}_n)^2 + \sum_{j=1}^m (Y_j - \overline{Y}_m)^2}{n + m - 2}
 $$
 
-Under the null hypothesis $H\_0$, the statistic $T$ exactly follows a Student's t-distribution with $n + m - 2$ degrees of freedom:
+Under the null hypothesis $H_0$, the statistic $T$ exactly follows a Student's t-distribution with $n + m - 2$ degrees of freedom:
 $$
-    T \sim t\_{n+m-2} \quad \text{under } H\_0
+    T \sim t_{n+m-2} \quad \text{under } H_0
 $$
-We reject $H\_0$ at significance level $\alpha$ if $|T| > t\_{n+m-2, \alpha/2}$.
+We reject $H_0$ at significance level $\alpha$ if $|T| > t_{n+m-2, \alpha/2}$.
 
 ---
 
@@ -85,40 +85,40 @@ A critical aspect of experimental design is ensuring the test has sufficient **p
 
 Let us simplify the problem to calculate the power. Assume the variance $\sigma^2$ is fully known, and the sample sizes are strictly equal ($n = m$). We define the true difference in means as $\Delta$:
 $$
-    H\_0: \mu\_X = \mu\_Y \quad \text{vs.} \quad H\_1: \mu\_X - \mu\_Y = \Delta
+    H_0: \mu_X = \mu_Y \quad \text{vs.} \quad H_1: \mu_X - \mu_Y = \Delta
 $$
 
 Under these simplified assumptions, the test statistic is normally distributed:
 $$
-    T = \frac{\overline{X}\_n - \overline{Y}\_n}{\sigma \sqrt{\frac{2}{n}}}
+    T = \frac{\overline{X}_n - \overline{Y}_n}{\sigma \sqrt{\frac{2}{n}}}
 $$
-Under $H\_0$, $T \sim \mathcal{N}(0, 1)$. We reject $H\_0$ if $|T| > z\_{\alpha/2}$.
+Under $H_0$, $T \sim \mathcal{N}(0, 1)$. We reject $H_0$ if $|T| > z_{\alpha/2}$.
 
-Under the alternative hypothesis $H\_1$, the true expected difference is $\E[\overline{X}\_n - \overline{Y}\_n] = \Delta$. The variance of this difference is $\Var{\overline{X}\_n - \overline{Y}\_n} = \frac{\sigma^2}{n} + \frac{\sigma^2}{n} = \frac{2\sigma^2}{n}$.
+Under the alternative hypothesis $H_1$, the true expected difference is $\E[\overline{X}_n - \overline{Y}_n] = \Delta$. The variance of this difference is $\Var{\overline{X}_n - \overline{Y}_n} = \frac{\sigma^2}{n} + \frac{\sigma^2}{n} = \frac{2\sigma^2}{n}$.
 Thus, standardizing this variable gives:
 $$
-    \frac{\overline{X}\_n - \overline{Y}\_n - \Delta}{\sigma \sqrt{\frac{2}{n}}} \sim \mathcal{N}(0, 1)
+    \frac{\overline{X}_n - \overline{Y}_n - \Delta}{\sigma \sqrt{\frac{2}{n}}} \sim \mathcal{N}(0, 1)
 $$
-Algebraically manipulating this to express the distribution of our test statistic $T$ under $H\_1$:
+Algebraically manipulating this to express the distribution of our test statistic $T$ under $H_1$:
 $$
-    T = \frac{\overline{X}\_n - \overline{Y}\_n}{\sigma \sqrt{\frac{2}{n}}} \sim \mathcal{N}\left( \sqrt{\frac{n}{2}} \frac{\Delta}{\sigma}, 1 \right)
+    T = \frac{\overline{X}_n - \overline{Y}_n}{\sigma \sqrt{\frac{2}{n}}} \sim \mathcal{N}\left( \sqrt{\frac{n}{2}} \frac{\Delta}{\sigma}, 1 \right)
 $$
 
 ### 3.1 Calculating the Power
 
-The power of the test is the probability of strictly rejecting $H\_0$ when $H\_1$ is true:
+The power of the test is the probability of strictly rejecting $H_0$ when $H_1$ is true:
 $$
     \begin{align*}
-        \text{Power} &= \prob(|T| > z\_{\alpha/2} \mid H\_1) \\\\
-        &= \prob\left( \left| \mathcal{N}\left( \sqrt{\frac{n}{2}} \frac{\Delta}{\sigma}, 1 \right) \right| > z\_{\alpha/2} \right) \\\\
-        &= \prob\left( \mathcal{N}(0, 1) + \sqrt{\frac{n}{2}} \frac{\Delta}{\sigma} > z\_{\alpha/2} \right) + \prob\left( \mathcal{N}(0, 1) + \sqrt{\frac{n}{2}} \frac{\Delta}{\sigma} < -z\_{\alpha/2} \right) \\\\
-        &= \prob\left( \mathcal{N}(0, 1) > z\_{\alpha/2} - \sqrt{\frac{n}{2}} \frac{\Delta}{\sigma} \right) + \prob\left( \mathcal{N}(0, 1) < -z\_{\alpha/2} - \sqrt{\frac{n}{2}} \frac{\Delta}{\sigma} \right) \\\\
-        &= 1 - \Phi\left( z\_{\alpha/2} - \sqrt{\frac{n}{2}} \frac{\Delta}{\sigma} \right) + \Phi\left( -z\_{\alpha/2} - \sqrt{\frac{n}{2}} \frac{\Delta}{\sigma} \right)
+        \text{Power} &= \prob(|T| > z_{\alpha/2} \mid H_1) \\
+        &= \prob\left( \left| \mathcal{N}\left( \sqrt{\frac{n}{2}} \frac{\Delta}{\sigma}, 1 \right) \right| > z_{\alpha/2} \right) \\
+        &= \prob\left( \mathcal{N}(0, 1) + \sqrt{\frac{n}{2}} \frac{\Delta}{\sigma} > z_{\alpha/2} \right) + \prob\left( \mathcal{N}(0, 1) + \sqrt{\frac{n}{2}} \frac{\Delta}{\sigma} < -z_{\alpha/2} \right) \\
+        &= \prob\left( \mathcal{N}(0, 1) > z_{\alpha/2} - \sqrt{\frac{n}{2}} \frac{\Delta}{\sigma} \right) + \prob\left( \mathcal{N}(0, 1) < -z_{\alpha/2} - \sqrt{\frac{n}{2}} \frac{\Delta}{\sigma} \right) \\
+        &= 1 - \Phi\left( z_{\alpha/2} - \sqrt{\frac{n}{2}} \frac{\Delta}{\sigma} \right) + \Phi\left( -z_{\alpha/2} - \sqrt{\frac{n}{2}} \frac{\Delta}{\sigma} \right)
     \end{align*}
 $$
 If we assume $\Delta$ is positive and reasonably large, the second term vanishes, yielding the approximation:
 $$
-    \text{Power} \approx 1 - \Phi\left( z\_{\alpha/2} - \sqrt{\frac{n}{2}} \frac{\Delta}{\sigma} \right)
+    \text{Power} \approx 1 - \Phi\left( z_{\alpha/2} - \sqrt{\frac{n}{2}} \frac{\Delta}{\sigma} \right)
 $$
 This fundamental equation allows statisticians to solve for the required sample size $n$ needed to achieve a target power (e.g., $80\%$ or $90\%$) for a specified minimal detectable effect size $\Delta / \sigma$.
 
@@ -126,15 +126,15 @@ This fundamental equation allows statisticians to solve for the required sample 
 
 ## 4. Welch's t-test for Unequal Variances
 
-What if the assumption of equal variances is violated? If $X\_i$ and $Y\_j$ have significantly different variances ($\sigma\_X^2 \neq \sigma\_Y^2$), the pooled variance $S\_p^2$ is an invalid estimator.
+What if the assumption of equal variances is violated? If $X_i$ and $Y_j$ have significantly different variances ($\sigma_X^2 \neq \sigma_Y^2$), the pooled variance $S_p^2$ is an invalid estimator.
 
 Instead, we use **Welch's t-test**, which relies on the unpooled test statistic:
 $$
-    T = \frac{\overline{X}\_n - \overline{Y}\_m}{\sqrt{\frac{S\_X^2}{n} + \frac{S\_Y^2}{m}}}
+    T = \frac{\overline{X}_n - \overline{Y}_m}{\sqrt{\frac{S_X^2}{n} + \frac{S_Y^2}{m}}}
 $$
-Under $H\_0$, this statistic does not perfectly follow a standard t-distribution. However, it can be highly accurately approximated by a t-distribution $t\_{\nu}$, where the adjusted degrees of freedom $\nu$ is calculated via the Welch-Satterthwaite equation:
+Under $H_0$, this statistic does not perfectly follow a standard t-distribution. However, it can be highly accurately approximated by a t-distribution $t_{\nu}$, where the adjusted degrees of freedom $\nu$ is calculated via the Welch-Satterthwaite equation:
 $$
-    \nu \approx \frac{\left(\frac{S\_X^2}{n} + \frac{S\_Y^2}{m}\right)^2}{\frac{(S\_X^2/n)^2}{n-1} + \frac{(S\_Y^2/m)^2}{m-1}}
+    \nu \approx \frac{\left(\frac{S_X^2}{n} + \frac{S_Y^2}{m}\right)^2}{\frac{(S_X^2/n)^2}{n-1} + \frac{(S_Y^2/m)^2}{m-1}}
 $$
 This robust modification ensures the Type I error rate remains strictly controlled at $\alpha$ even when the homoscedasticity assumption entirely collapses.
 
@@ -154,19 +154,19 @@ The Mann-Whitney U test (also famously known as the Wilcoxon Rank-Sum test) is a
 
 Suppose we observe independent samples:
 $$
-    X\_1, \dots, X\_n \sim P
+    X_1, \dots, X_n \sim P
 $$
 $$
-    Y\_1, \dots, Y\_m \sim Q
+    Y_1, \dots, Y_m \sim Q
 $$
 We wish to test the null hypothesis that the two distributions are completely identical:
 $$
-    H\_0: P = Q
+    H_0: P = Q
 $$
 
 ### 6.1 The Rank-Sum Idea
 
-If $H\_0$ is true, then the pooled sample of all observations $(X\_1, \dots, X\_n, Y\_1, \dots, Y\_m)$ consists of $n+m$ independent and identically distributed (i.i.d.) random variables. Since the two groups are statistically indistinguishable, the specific ranks occupied by the $Y$ observations within the pooled, sorted sample should look entirely like a random subset of size $m$ drawn uniformly from the integers $\{1, 2, \dots, n+m\}$.
+If $H_0$ is true, then the pooled sample of all observations $(X_1, \dots, X_n, Y_1, \dots, Y_m)$ consists of $n+m$ independent and identically distributed (i.i.d.) random variables. Since the two groups are statistically indistinguishable, the specific ranks occupied by the $Y$ observations within the pooled, sorted sample should look entirely like a random subset of size $m$ drawn uniformly from the integers $\{1, 2, \dots, n+m\}$.
 
 **Example Calculation:**
 Suppose we observe $X = (1, 3)$ and $Y = (6, 2, 7)$.
@@ -179,50 +179,50 @@ Suppose we observe $X = (1, 3)$ and $Y = (6, 2, 7)$.
    - Rank 3: $X$ (value 3)
    - Rank 4: $Y$ (value 6)
    - Rank 5: $Y$ (value 7)
-4. The test statistic $T\_Y$ is strictly defined as the sum of the relative ranks of the $Y$ group:
+4. The test statistic $T_Y$ is strictly defined as the sum of the relative ranks of the $Y$ group:
 
 $$
-    T\_Y = 2 + 4 + 5 = 11
+    T_Y = 2 + 4 + 5 = 11
 $$
 
-### 6.2 Distribution of $T\_Y$ under $H\_0$
+### 6.2 Distribution of $T_Y$ under $H_0$
 
-Under the null hypothesis, $T\_Y$ is distributed as the sum of $m$ distinct integers chosen uniformly at random without replacement from the set $\{1, 2, \dots, n+m\}$.
+Under the null hypothesis, $T_Y$ is distributed as the sum of $m$ distinct integers chosen uniformly at random without replacement from the set $\{1, 2, \dots, n+m\}$.
 
 We can rigorously calculate the expectation and variance of this specific random sum:
 
 - **Expectation:** The average rank in the pool is $\frac{n+m+1}{2}$. Since we select $m$ items, the expected sum is:
     $$
-        \E[T\_Y] = m \frac{n+m+1}{2}
+        \E[T_Y] = m \frac{n+m+1}{2}
     $$
 - **Variance:** Using the variance formulas for sampling without replacement (which introduces a finite population correction factor):
     $$
-        \Var{T\_Y} = \frac{nm(n+m+1)}{12}
+        \Var{T_Y} = \frac{nm(n+m+1)}{12}
     $$
 
 ### 6.3 The Mann-Whitney $U$ Statistic
 
 An equivalent way to formulate this test is via the Mann-Whitney $U$ statistic, which simply counts the total number of pairwise victories where a $Y$ observation strictly exceeds an $X$ observation:
 $$
-    U = \sum\_{i=1}^n \sum\_{j=1}^m 1\{Y\_j > X\_i\}
+    U = \sum_{i=1}^n \sum_{j=1}^m 1\{Y_j > X_i\}
 $$
-The mathematical relationship between $U$ and the rank-sum statistic $T\_Y$ is purely algebraic:
+The mathematical relationship between $U$ and the rank-sum statistic $T_Y$ is purely algebraic:
 $$
-    U = T\_Y - \frac{m(m+1)}{2}
+    U = T_Y - \frac{m(m+1)}{2}
 $$
-Under $H\_0$, the expected value is $\E[U] = \frac{nm}{2}$. For large samples, $U$ (and correspondingly $T\_Y$) converges to a normal distribution, allowing for standard Z-tests based on these moments.
+Under $H_0$, the expected value is $\E[U] = \frac{nm}{2}$. For large samples, $U$ (and correspondingly $T_Y$) converges to a normal distribution, allowing for standard Z-tests based on these moments.
 
 ---
 
 ## 7. Nonparametric Tests for Paired Data
 
-Often, data is collected in pairs $(X\_i, Y\_i)$ rather than independent groups. A classic example is measuring a patient's blood pressure strictly *before* ($X\_i$) and *after* ($Y\_i$) administering a specific medical treatment.
+Often, data is collected in pairs $(X_i, Y_i)$ rather than independent groups. A classic example is measuring a patient's blood pressure strictly *before* ($X_i$) and *after* ($Y_i$) administering a specific medical treatment.
 
-Because $X\_i$ and $Y\_i$ correspond to the exact same subject, they are highly dependent. We transform the problem by calculating the pairwise differences:
+Because $X_i$ and $Y_i$ correspond to the exact same subject, they are highly dependent. We transform the problem by calculating the pairwise differences:
 $$
-    D\_i = Y\_i - X\_i \quad \text{for } i = 1, \dots, n
+    D_i = Y_i - X_i \quad \text{for } i = 1, \dots, n
 $$
-The null hypothesis $H\_0$ asserts that the treatment has absolutely zero effect, meaning the distribution of the differences $D\_i$ is perfectly symmetric around $0$.
+The null hypothesis $H_0$ asserts that the treatment has absolutely zero effect, meaning the distribution of the differences $D_i$ is perfectly symmetric around $0$.
 
 ### 7.1 The Sign Test
 
@@ -230,9 +230,9 @@ The simplest approach is the **Sign Test**, which entirely ignores the actual ma
 
 We define the test statistic $S$ as the sum of the signs:
 $$
-    S = \sum\_{i=1}^n \text{sign}(D\_i)
+    S = \sum_{i=1}^n \text{sign}(D_i)
 $$
-where $\text{sign}(D\_i)$ equals $+1$ if $D\_i > 0$ and $-1$ if $D\_i < 0$. Under $H\_0$, each difference is equally likely to be positive or negative. Thus, the number of strictly positive differences is distributed as $\text{Binomial}(n, 1/2)$.
+where $\text{sign}(D_i)$ equals $+1$ if $D_i > 0$ and $-1$ if $D_i < 0$. Under $H_0$, each difference is equally likely to be positive or negative. Thus, the number of strictly positive differences is distributed as $\text{Binomial}(n, 1/2)$.
 Algebraically, $S$ can be expressed as:
 $$
     S = 2 \cdot \text{Bin}(n, 1/2) - n
@@ -245,23 +245,23 @@ To drastically improve power, we employ the **Wilcoxon Signed-Rank Test**, which
 
 **Procedure:**
 
-1. Calculate the absolute magnitudes $|D\_i|$ and strictly rank them from $1$ (smallest) to $n$ (largest).
+1. Calculate the absolute magnitudes $|D_i|$ and strictly rank them from $1$ (smallest) to $n$ (largest).
 2. Separate the positive differences from the negative differences.
-3. Calculate $W\_+$, which is the sum of the ranks corresponding strictly to the positive differences:
+3. Calculate $W_+$, which is the sum of the ranks corresponding strictly to the positive differences:
 
 $$
-    W\_+ = \sum\_{D\_i > 0} \text{rank}(|D\_i|)
+    W_+ = \sum_{D_i > 0} \text{rank}(|D_i|)
 $$
 
-**Distribution under $H\_0$:**
-Under the symmetric null hypothesis, the magnitude $|D\_i|$ and the sign of $D\_i$ are entirely independent. For the specific difference that occupies rank $k$, define an indicator variable $I\_k$ such that $I\_k = 1$ if the original difference was positive, and $0$ otherwise.
-Under $H\_0$, $I\_1, \dots, I\_n \sim \text{Bern}(1/2)$ independently. The test statistic is:
+**Distribution under $H_0$:**
+Under the symmetric null hypothesis, the magnitude $|D_i|$ and the sign of $D_i$ are entirely independent. For the specific difference that occupies rank $k$, define an indicator variable $I_k$ such that $I_k = 1$ if the original difference was positive, and $0$ otherwise.
+Under $H_0$, $I_1, \dots, I_n \sim \text{Bern}(1/2)$ independently. The test statistic is:
 $$
-    W\_+ = \sum\_{k=1}^n k I\_k
+    W_+ = \sum_{k=1}^n k I_k
 $$
 We can trivially compute the exact expectation:
 $$
-    \E[W\_+] = \sum\_{k=1}^n k \E[I\_k] = \sum\_{k=1}^n k \left(\frac{1}{2}\right) = \frac{n(n+1)}{4}
+    \E[W_+] = \sum_{k=1}^n k \E[I_k] = \sum_{k=1}^n k \left(\frac{1}{2}\right) = \frac{n(n+1)}{4}
 $$
 For $n \le 25$, statisticians use exact pre-computed lookup tables to find critical values. For strictly larger $n$, the sum of these independent (though not identical) variables converges securely to a Normal distribution via the Lindeberg-Feller Central Limit Theorem.
 

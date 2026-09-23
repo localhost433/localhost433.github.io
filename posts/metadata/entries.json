@@ -9,15 +9,6 @@
     }
     ,
     {
-        "title": "Random stuff in linear algebra",
-        "date": "2025-04-02",
-        "author": "R",
-        "location": "Bobst 6F, New York, NY",
-        "tags": ["math"],
-        "slug": "002-random"
-    }
-    ,
-    {
         "title": "Seminar - Opensource",
         "date": "2025-04-04",
         "author": "R",
@@ -42,24 +33,6 @@
         "location": "Alumni Hall, New York, NY",
         "tags": ["cs", "life"],
         "slug": "006-datathon-render-deploy"
-    }
-    ,
-    {
-        "title": "Thoughts about language acquisition",
-        "date": "2025-06-14",
-        "author": "R",
-        "location": "New York, NY",
-        "tags": ["linguistics"],
-        "slug": "007-language-acquisition"
-    }
-    ,
-    {
-        "title": "Comparing Chinese to programming languages",
-        "date": "2025-06-16",
-        "author": "R",
-        "location": "Bobst 10F, New York, NY",
-        "tags": ["cs", "linguistics"],
-        "slug": "008-chinese-program-lang"
     }
     ,
     {
@@ -90,15 +63,6 @@
     }
     ,
     {
-        "title": "RNNs as IIR Filters",
-        "date": "2025-07-23",
-        "author": "R",
-        "location": "Shenzhen, Guangdong, China",
-        "tags": ["ai"],
-        "slug": "017-RNN-IIR"
-    }
-    ,
-    {
         "title": "Anubis, Containers, & Kubernetes",
         "date": "2025-09-19",
         "author": "R",
@@ -116,14 +80,6 @@
         "slug": "021-smalls"
     }
     ,
-    {
-        "title": "Surányi-Hickerson conjecture",
-        "date": "2025-10-01",
-        "author": "R",
-        "location": "Bobst 8F, New York, NY",
-        "tags": ["math", "life", "notes"],
-        "slug": "022-Suranyi"
-    },
     {
         "title": "Trying to schedule a WeChat message",
         "date": "2025-11-25",

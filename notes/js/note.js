@@ -39,6 +39,11 @@ marked.setOptions({
 
 const headingData = [];
 
+/* Math spans are handed to MathJax verbatim; markdown must not touch them first.
+   The three rules, and why each is needed, live in js/markdown-math.js — the blog
+   renderer has the identical problem and now shares the identical repair. */
+MarkdownMath.install(marked);
+
 const artifactStore = [];
 marked.use({
   extensions: [{

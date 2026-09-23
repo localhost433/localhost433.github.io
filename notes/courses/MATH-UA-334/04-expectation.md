@@ -38,13 +38,13 @@ The expected value $\E[X]$ is the probability-weighted average of the possible v
     > Since the first term of the sum is $0$ (when $k=0$), we can start the summation from $k=1$. Let $m = n-1$ and $j = k-1$. As $k$ goes from $1$ to $n$, $j$ goes from $0$ to $m$. Note that $n-k = (m+1) - (j+1) = m-j$.
     > $$
     >     \begin{align*}
-    >         \E[X] &= \sum_{k=1}^n k \frac{n!}{k!(n-k)!} p^k (1-p)^{n-k} \\\\
-    >         &= \sum_{k=1}^n \frac{n \cdot (n-1)!}{(k-1)!(n-k)!} p \cdot p^{k-1} (1-p)^{n-k} \\\\
-    >         &= np \sum_{k=1}^n \frac{(n-1)!}{(k-1)!(n-k)!} p^{k-1} (1-p)^{n-k} \\\\
-    >         &= np \sum_{j=0}^m \frac{m!}{j!(m-j)!} p^j (1-p)^{m-j} \\\\
-    >         &= np \sum_{j=0}^m \binom{m}{j} p^j (1-p)^{m-j} \\\\
-    >         &= np(p + (1-p))^m \\\\
-    >         &= np(1) \\\\
+    >         \E[X] &= \sum_{k=1}^n k \frac{n!}{k!(n-k)!} p^k (1-p)^{n-k} \\
+    >         &= \sum_{k=1}^n \frac{n \cdot (n-1)!}{(k-1)!(n-k)!} p \cdot p^{k-1} (1-p)^{n-k} \\
+    >         &= np \sum_{k=1}^n \frac{(n-1)!}{(k-1)!(n-k)!} p^{k-1} (1-p)^{n-k} \\
+    >         &= np \sum_{j=0}^m \frac{m!}{j!(m-j)!} p^j (1-p)^{m-j} \\
+    >         &= np \sum_{j=0}^m \binom{m}{j} p^j (1-p)^{m-j} \\
+    >         &= np(p + (1-p))^m \\
+    >         &= np(1) \\
     >         &= np
     >     \end{align*}
     > $$
@@ -81,9 +81,9 @@ Expanding the square in the definition and using linearity:
 $$
     \begin{align*}
         \Var{X}
-        &= \E[X^2 - 2X \E[X] + (\E[X])^2]\\\\
-        &= \E[X^2] - \E[2X \E[X]] + \E[(\E[X])^2]\\\\
-        &= \E[X^2] - 2 \E[X] \E[X] + (\E[X])^2\\\\
+        &= \E[X^2 - 2X \E[X] + (\E[X])^2]\\
+        &= \E[X^2] - \E[2X \E[X]] + \E[(\E[X])^2]\\
+        &= \E[X^2] - 2 \E[X] \E[X] + (\E[X])^2\\
         &= \E[X^2] - (\E[X])^2
     \end{align*}
 $$

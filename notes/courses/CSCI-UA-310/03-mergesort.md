@@ -50,7 +50,7 @@ Let $T(n)$ be the time to sort $n$ numbers.
 3. **Combine**: We merge $n$ elements. Time: $\Theta(n)$.
 
 The recurrence is:
-$$T(n) = \begin{cases} \Theta(1) & \text{if } n = 1 \\\\ 2T(n/2) + \Theta(n) & \text{if } n > 1 \end{cases}$$
+$$T(n) = \begin{cases} \Theta(1) & \text{if } n = 1 \\ 2T(n/2) + \Theta(n) & \text{if } n > 1 \end{cases}$$
 
 ---
 
@@ -78,21 +78,21 @@ Substitute this into the recurrence:
 We can expand the recurrence as follows:
 $$
 \begin{align*}
-T(n) &= 2T\left(\frac{n}{2}\right) + cn \\\\
-&= 2\left[2T\left(\frac{n}{4}\right) + c\frac{n}{2}\right] + cn \\\\
-&= 4T\left(\frac{n}{4}\right) + 2cn \\\\
-&= 4\left[2T\left(\frac{n}{8}\right) + c\frac{n}{4}\right] + 2cn \\\\
-&= 8T\left(\frac{n}{8}\right) + 3cn \\\\
+T(n) &= 2T\left(\frac{n}{2}\right) + cn \\
+&= 2\left[2T\left(\frac{n}{4}\right) + c\frac{n}{2}\right] + cn \\
+&= 4T\left(\frac{n}{4}\right) + 2cn \\
+&= 4\left[2T\left(\frac{n}{8}\right) + c\frac{n}{4}\right] + 2cn \\
+&= 8T\left(\frac{n}{8}\right) + 3cn \\
 &= 2^k T\left(\frac{n}{2^k}\right) + kcn
 \end{align*}
 $$
 When $k = \log_2 n$, $T(1)$ is reached, so $T(n) = nT(1) + cn\log_2 n = O(n\log n)$.
 $$
 \begin{align*}
-T(n) &= 2T(n/2) + cn \\\\
-&\le 2 \left( d \frac{n}{2} \log \frac{n}{2} \right) + cn \\\\
-&= d n (\log n - \log 2) + cn \\\\
-&= d n \log n - dn + cn \\\\
+T(n) &= 2T(n/2) + cn \\
+&\le 2 \left( d \frac{n}{2} \log \frac{n}{2} \right) + cn \\
+&= d n (\log n - \log 2) + cn \\
+&= d n \log n - dn + cn \\
 &= d n \log n - (d - c)n
 \end{align*}
 $$

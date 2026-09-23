@@ -13,11 +13,11 @@ This note generalizes linear regression to multiple predictors. We derive the OL
 
 We now generalize our framework to allow for multiple predictor variables. Suppose we wish to predict a response variable $y$ using $p-1$ distinct explanatory variables (features). The standard linear model is written as:
 $$
-    y\_i = \beta\_0 + \beta\_1 x\_{i1} + \beta\_2 x\_{i2} + \dots + \beta\_{p-1} x\_{i,p-1} + e\_i \quad \text{for } i = 1, \dots, n
+    y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_{p-1} x_{i,p-1} + e_i \quad \text{for } i = 1, \dots, n
 $$
 
 To eliminate the massive summations, we aggressively compress this system into vector-matrix notation.
-Let $Y \in \mathbb{R}^n$ be the vector of responses, $e \in \mathbb{R}^n$ be the vector of random errors, $\beta \in \mathbb{R}^p$ be the parameter vector, and $X \in \mathbb{R}^{n \times p}$ be the **Design Matrix** (where the first column is strictly entirely ones to accommodate the intercept $\beta\_0$).
+Let $Y \in \mathbb{R}^n$ be the vector of responses, $e \in \mathbb{R}^n$ be the vector of random errors, $\beta \in \mathbb{R}^p$ be the parameter vector, and $X \in \mathbb{R}^{n \times p}$ be the **Design Matrix** (where the first column is strictly entirely ones to accommodate the intercept $\beta_0$).
 
 The model is compactly represented as:
 $$
@@ -26,7 +26,7 @@ $$
 **Standard Assumptions:**
 
 1. $\E[e] = 0$ (The zero vector).
-2. $\text{Cov}(e) = \sigma^2 I\_n$ (The errors are completely uncorrelated and share a constant variance $\sigma^2$).
+2. $\text{Cov}(e) = \sigma^2 I_n$ (The errors are completely uncorrelated and share a constant variance $\sigma^2$).
 
 ---
 
@@ -52,9 +52,9 @@ Since $Y$ is a random vector, $\hat{\beta}$ is also a random vector. We can rigo
 We substitute the true model $Y = X\beta + e$ directly into the estimator:
 $$
     \begin{align*}
-        \E[\hat{\beta}] &= \E[(X^T X)^{-1} X^T Y] \\\\
-        &= \E[(X^T X)^{-1} X^T (X\beta + e)] \\\\
-        &= \E[\beta + (X^T X)^{-1} X^T e] \\\\
+        \E[\hat{\beta}] &= \E[(X^T X)^{-1} X^T Y] \\
+        &= \E[(X^T X)^{-1} X^T (X\beta + e)] \\
+        &= \E[\beta + (X^T X)^{-1} X^T e] \\
         &= \beta + (X^T X)^{-1} X^T \E[e]
     \end{align*}
 $$
@@ -65,11 +65,11 @@ Because $\E[e] = 0$, the second term identically vanishes, yielding $\E[\hat{\be
 We apply the covariance transformation rule $\text{Cov}(AZ) = A \text{Cov}(Z) A^T$:
 $$
     \begin{align*}
-        \text{Cov}(\hat{\beta}) &= \text{Cov}(\beta + (X^T X)^{-1} X^T e) \\\\
-        &= \text{Cov}((X^T X)^{-1} X^T e) \\\\
-        &= ((X^T X)^{-1} X^T) \text{Cov}(e) ((X^T X)^{-1} X^T)^T \\\\
-        &= (X^T X)^{-1} X^T (\sigma^2 I\_n) X (X^T X)^{-1} \\\\
-        &= \sigma^2 (X^T X)^{-1} (X^T X) (X^T X)^{-1} \\\\
+        \text{Cov}(\hat{\beta}) &= \text{Cov}(\beta + (X^T X)^{-1} X^T e) \\
+        &= \text{Cov}((X^T X)^{-1} X^T e) \\
+        &= ((X^T X)^{-1} X^T) \text{Cov}(e) ((X^T X)^{-1} X^T)^T \\
+        &= (X^T X)^{-1} X^T (\sigma^2 I_n) X (X^T X)^{-1} \\
+        &= \sigma^2 (X^T X)^{-1} (X^T X) (X^T X)^{-1} \\
         &= \sigma^2 (X^T X)^{-1}
     \end{align*}
 $$
@@ -88,15 +88,15 @@ The matrix $P = X(X^T X)^{-1} X^T$ is known as the **Projection Matrix** (or Hat
 
 1. **Symmetric:** $P^T = P$
 2. **Idempotent:** $P^2 = P$ (Projecting a vector that is already projected changes nothing).
-3. **Trace:** $\text{Tr}(P) = p$. Consequently, the trace of $(I\_n - P)$ is $n - p$.
+3. **Trace:** $\text{Tr}(P) = p$. Consequently, the trace of $(I_n - P)$ is $n - p$.
 
 The vector of residuals is identically:
 $$
-    \hat{e} = Y - \hat{Y} = (I\_n - P)Y
+    \hat{e} = Y - \hat{Y} = (I_n - P)Y
 $$
-Since $(I\_n - P)X = X - X = 0$, substituting $Y = X\beta + e$ simplifies the residuals to strictly depend only on the true errors:
+Since $(I_n - P)X = X - X = 0$, substituting $Y = X\beta + e$ simplifies the residuals to strictly depend only on the true errors:
 $$
-    \hat{e} = (I\_n - P)(X\beta + e) = (I\_n - P)e
+    \hat{e} = (I_n - P)(X\beta + e) = (I_n - P)e
 $$
 
 ---
@@ -104,19 +104,19 @@ $$
 ## 5. Estimating the Residual Variance
 
 To estimate the unknown variance $\sigma^2$, we calculate the expected value of the sum of squared residuals, $||\hat{e}||^2$.
-Since $\E[\hat{e}] = (I\_n - P)\E[e] = 0$, we can heavily utilize the trace property $\E[||Z||^2] = \text{Tr}(\Sigma\_{ZZ})$:
+Since $\E[\hat{e}] = (I_n - P)\E[e] = 0$, we can heavily utilize the trace property $\E[||Z||^2] = \text{Tr}(\Sigma_{ZZ})$:
 $$
     \begin{align*}
-        \E[||\hat{e}||^2] &= \text{Tr}(\text{Cov}(\hat{e})) \\\\
-        &= \text{Tr}(\text{Cov}((I\_n - P)e)) \\\\
-        &= \text{Tr}((I\_n - P) \text{Cov}(e) (I\_n - P)^T) \\\\
-        &= \text{Tr}((I\_n - P) (\sigma^2 I\_n) (I\_n - P)) \\\\
-        &= \sigma^2 \text{Tr}((I\_n - P)^2)
+        \E[||\hat{e}||^2] &= \text{Tr}(\text{Cov}(\hat{e})) \\
+        &= \text{Tr}(\text{Cov}((I_n - P)e)) \\
+        &= \text{Tr}((I_n - P) \text{Cov}(e) (I_n - P)^T) \\
+        &= \text{Tr}((I_n - P) (\sigma^2 I_n) (I_n - P)) \\
+        &= \sigma^2 \text{Tr}((I_n - P)^2)
     \end{align*}
 $$
-Because $(I\_n - P)$ is also idempotent, $(I\_n - P)^2 = (I\_n - P)$.
+Because $(I_n - P)$ is also idempotent, $(I_n - P)^2 = (I_n - P)$.
 $$
-    \E[||\hat{e}||^2] = \sigma^2 \text{Tr}(I\_n - P) = \sigma^2 (n - p)
+    \E[||\hat{e}||^2] = \sigma^2 \text{Tr}(I_n - P) = \sigma^2 (n - p)
 $$
 Therefore, the unbiased estimator for the error variance strictly divides by $n-p$:
 $$
@@ -127,18 +127,18 @@ $$
 
 ## 6. Inference and Confidence Intervals
 
-With $S^2$ acquired, the estimated variance for any individual coefficient $\hat{\beta}\_j$ is seamlessly extracted strictly from the diagonal of the covariance matrix:
+With $S^2$ acquired, the estimated variance for any individual coefficient $\hat{\beta}_j$ is seamlessly extracted strictly from the diagonal of the covariance matrix:
 $$
-    S\_{\hat{\beta}\_j}^2 = S^2 [(X^T X)^{-1}]\_{jj}
+    S_{\hat{\beta}_j}^2 = S^2 [(X^T X)^{-1}]_{jj}
 $$
 
-If we assume the true underlying errors $e\_i$ are normally distributed, the test statistic dynamically follows a Student's t-distribution with $n-p$ degrees of freedom:
+If we assume the true underlying errors $e_i$ are normally distributed, the test statistic dynamically follows a Student's t-distribution with $n-p$ degrees of freedom:
 $$
-    \frac{\hat{\beta}\_j - \beta\_j}{S\_{\hat{\beta}\_j}} \sim t\_{n-p}
+    \frac{\hat{\beta}_j - \beta_j}{S_{\hat{\beta}_j}} \sim t_{n-p}
 $$
 Even if normality fails, the Central Limit Theorem heavily guarantees asymptotic normality as $n \to \infty$. This allows us to construct an approximate $95\%$ confidence interval for any parameter:
 $$
-    \beta\_j \in \left[ \hat{\beta}\_j - 1.96 S\_{\hat{\beta}\_j}, \quad \hat{\beta}\_j + 1.96 S\_{\hat{\beta}\_j} \right]
+    \beta_j \in \left[ \hat{\beta}_j - 1.96 S_{\hat{\beta}_j}, \quad \hat{\beta}_j + 1.96 S_{\hat{\beta}_j} \right]
 $$
 This precisely justifies the standard regression output universally seen in statistical software packages like R or Python, which report the Estimate, Standard Error, t-value, and the $P(>|t|)$ significance p-value.
 
@@ -146,7 +146,7 @@ This precisely justifies the standard regression output universally seen in stat
 
 ## 7. Heteroskedasticity in Linear Regression
 
-In the standard multiple linear regression model, we heavily relied on the strict assumption of homoscedasticity, meaning that the variance of the random error terms is perfectly constant across all observations: $\Var{e\_i} = \sigma^2$ for all $i$.
+In the standard multiple linear regression model, we heavily relied on the strict assumption of homoscedasticity, meaning that the variance of the random error terms is perfectly constant across all observations: $\Var{e_i} = \sigma^2$ for all $i$.
 
 However, in many practical datasets, the variance of the errors fluctuates depending on the specific observation. This phenomenon is formally known as **heteroskedasticity**.
 
@@ -158,21 +158,21 @@ where $Y \in \mathbb{R}^n$, $X \in \mathbb{R}^{n \times p}$, $\beta \in \mathbb{
 The fundamental assumptions become:
 
 1. $\E[e] = 0$
-2. $\Cov{e}{e} = \Omega = \text{diag}(\sigma\_1^2, \sigma\_2^2, \dots, \sigma\_n^2)$
+2. $\Cov{e}{e} = \Omega = \text{diag}(\sigma_1^2, \sigma_2^2, \dots, \sigma_n^2)$
 
-Here, the covariance matrix $\Omega$ is a diagonal matrix where each distinct diagonal entry represents the specific variance $\sigma\_i^2$ of the corresponding error term $e\_i$.
+Here, the covariance matrix $\Omega$ is a diagonal matrix where each distinct diagonal entry represents the specific variance $\sigma_i^2$ of the corresponding error term $e_i$.
 
 ### 7.1 Properties of the OLS Estimator under Heteroskedasticity
 
-If we naively apply the standard Ordinary Least Squares (OLS) estimator $\hat{\beta}\_{OLS} = (X^T X)^{-1} X^T Y$, what happens to its fundamental statistical properties?
+If we naively apply the standard Ordinary Least Squares (OLS) estimator $\hat{\beta}_{OLS} = (X^T X)^{-1} X^T Y$, what happens to its fundamental statistical properties?
 
 **Bias:**
-The OLS estimator miraculously remains perfectly unbiased. Because $\E[e] = 0$ still holds, the same derivation as before gives $\E[\hat{\beta}\_{OLS}] = \beta$.
+The OLS estimator miraculously remains perfectly unbiased. Because $\E[e] = 0$ still holds, the same derivation as before gives $\E[\hat{\beta}_{OLS}] = \beta$.
 
 **Variance:**
 The covariance matrix of the OLS estimator, however, fundamentally changes. We must explicitly incorporate the true error covariance matrix $\Omega$:
 $$
-    \Cov{\hat{\beta}\_{OLS}}{\hat{\beta}\_{OLS}} = (X^T X)^{-1} X^T \Omega X (X^T X)^{-1}
+    \Cov{\hat{\beta}_{OLS}}{\hat{\beta}_{OLS}} = (X^T X)^{-1} X^T \Omega X (X^T X)^{-1}
 $$
 This complex "sandwich" covariance structure proves that OLS is no longer the most efficient (lowest variance) estimator under heteroskedasticity.
 
@@ -182,12 +182,12 @@ To strictly optimize the estimation process, we employ **Weighted Least Squares 
 
 The WLS objective function explicitly minimizes the weighted sum of squared residuals:
 $$
-    Q\_{WLS}(\beta) = (Y - X\beta)^T \Omega^{-1} (Y - X\beta) = \sum\_{i=1}^n \frac{(y\_i - x\_i^T \beta)^2}{\sigma\_i^2}
+    Q_{WLS}(\beta) = (Y - X\beta)^T \Omega^{-1} (Y - X\beta) = \sum_{i=1}^n \frac{(y_i - x_i^T \beta)^2}{\sigma_i^2}
 $$
 
 By taking the derivative with respect to $\beta$ and perfectly setting it to zero, we derive the WLS estimator:
 $$
-    \hat{\beta}\_{WLS} = (X^T \Omega^{-1} X)^{-1} X^T \Omega^{-1} Y
+    \hat{\beta}_{WLS} = (X^T \Omega^{-1} X)^{-1} X^T \Omega^{-1} Y
 $$
 
 This estimator represents the absolute best linear unbiased estimator (BLUE) under heteroskedastic conditions, effectively restoring the optimality guarantees of the Gauss-Markov theorem.
@@ -200,37 +200,37 @@ A catastrophic breakdown in the standard OLS framework occurs when the number of
 
 To resolve this, we introduce **regularization**, which intentionally injects a controlled amount of bias into the estimator to drastically reduce its variance and restore mathematical stability.
 
-### 8.1 Ridge Regression ($L\_2$ Regularization)
+### 8.1 Ridge Regression ($L_2$ Regularization)
 
-Ridge regression mathematically adds an $L\_2$ penalty (the squared Euclidean norm of the parameter vector) to the standard least squares objective function:
+Ridge regression mathematically adds an $L_2$ penalty (the squared Euclidean norm of the parameter vector) to the standard least squares objective function:
 $$
-    \hat{\beta}\_{ridge} = \arg\min\_{\beta} \left( ||Y - X\beta||^2 + \lambda ||\beta||\_2^2 \right)
+    \hat{\beta}_{ridge} = \arg\min_{\beta} \left( ||Y - X\beta||^2 + \lambda ||\beta||_2^2 \right)
 $$
 where $\lambda > 0$ is a strictly positive tuning parameter that directly controls the regularization strength.
 
 Taking the derivative and setting it to zero yields a beautiful closed-form solution:
 $$
-    \hat{\beta}\_{ridge} = (X^T X + \lambda I\_p)^{-1} X^T Y
+    \hat{\beta}_{ridge} = (X^T X + \lambda I_p)^{-1} X^T Y
 $$
 Because we mathematically add a strictly positive constant $\lambda$ to the diagonal of $X^T X$, the resulting matrix is strictly positive definite and universally invertible, completely solving the $p > n$ catastrophe.
 
-### 8.2 LASSO Regression ($L\_1$ Regularization)
+### 8.2 LASSO Regression ($L_1$ Regularization)
 
-The LASSO (Least Absolute Shrinkage and Selection Operator) method introduces an $L\_1$ penalty instead:
+The LASSO (Least Absolute Shrinkage and Selection Operator) method introduces an $L_1$ penalty instead:
 $$
-    \hat{\beta}\_{LASSO} = \arg\min\_{\beta} \left( ||Y - X\beta||^2 + \lambda \sum\_{j=0}^{p-1} |\beta\_j| \right)
+    \hat{\beta}_{LASSO} = \arg\min_{\beta} \left( ||Y - X\beta||^2 + \lambda \sum_{j=0}^{p-1} |\beta_j| \right)
 $$
 
 **Key Properties of LASSO:**
 
 1. **No Closed Form:** Unlike Ridge, LASSO has absolutely no explicit closed-form algebraic solution due to the non-differentiability of the absolute value function at zero. It must be solved using advanced convex optimization algorithms.
-2. **Sparsity:** The geometric nature of the $L\_1$ penalty actively forces many of the estimated coefficients $\hat{\beta}\_j$ to become exactly zero. This effectively performs automatic feature selection, which is profoundly useful when dealing with thousands of weak or irrelevant features.
+2. **Sparsity:** The geometric nature of the $L_1$ penalty actively forces many of the estimated coefficients $\hat{\beta}_j$ to become exactly zero. This effectively performs automatic feature selection, which is profoundly useful when dealing with thousands of weak or irrelevant features.
 
 ---
 
 ## 9. Cross-Validation
 
-How do we scientifically select the optimal hyperparameter $\lambda$ for Ridge or LASSO, or generally choose the absolute best model from a diverse collection of candidates $M\_1, \dots, M\_K$?
+How do we scientifically select the optimal hyperparameter $\lambda$ for Ridge or LASSO, or generally choose the absolute best model from a diverse collection of candidates $M_1, \dots, M_K$?
 
 We heavily rely on **Cross-Validation**, a highly rigorous resampling technique designed to estimate the true out-of-sample prediction error.
 

@@ -35,9 +35,9 @@ Let $X_1, X_2, \dots, X_n$ be a random sample drawn from a population distributi
 > The sample becomes fixed numbers $x_1, \dots, x_n$. After substitution, the result is a single number called an **estimate**.
 
 - **Sample Mean:**
-    $$\overline{X}\_n = \frac{1}{n} \sum_{i=1}^n X_i$$
+    $$\overline{X}_n = \frac{1}{n} \sum_{i=1}^n X_i$$
 - **Sample Variance:**
-    $$S_n^2 = \frac{1}{n-1} \sum_{i=1}^n (X_i - \overline{X}\_n)^2$$
+    $$S_n^2 = \frac{1}{n-1} \sum_{i=1}^n (X_i - \overline{X}_n)^2$$
 
 ### 2.2 Unbiasedness
 
@@ -47,10 +47,10 @@ An estimator $\hat{\theta}$ is unbiased for a true parameter $\theta$ if its exp
 
 $$
     \begin{align*}
-        \E[\overline{X}\_n] &= \E\left[ \frac{1}{n} \sum_{i=1}^n X_i \right] \\\\
-        &= \frac{1}{n} \sum_{i=1}^n \E[X_i] \\\\
-        &= \frac{1}{n} \sum_{i=1}^n \mu \\\\
-        &= \frac{1}{n} (n\mu) \\\\
+        \E[\overline{X}_n] &= \E\left[ \frac{1}{n} \sum_{i=1}^n X_i \right] \\
+        &= \frac{1}{n} \sum_{i=1}^n \E[X_i] \\
+        &= \frac{1}{n} \sum_{i=1}^n \mu \\
+        &= \frac{1}{n} (n\mu) \\
         &= \mu
     \end{align*}
 $$
@@ -59,22 +59,22 @@ $$
 
 $$
     \begin{align*}
-        \sum_{i=1}^n (X_i - \overline{X}\_n)^2 &= \sum_{i=1}^n \left( (X_i - \mu) - (\overline{X}\_n - \mu) \right)^2 \\\\
-        &= \sum_{i=1}^n \left( (X_i - \mu)^2 - 2(X_i - \mu)(\overline{X}\_n - \mu) + (\overline{X}\_n - \mu)^2 \right) \\\\
-        &= \sum_{i=1}^n (X_i - \mu)^2 - 2(\overline{X}\_n - \mu)\sum_{i=1}^n (X_i - \mu) + n(\overline{X}\_n - \mu)^2\\\\
-        &= \sum_{i=1}^n (X_i - \mu)^2 - 2n(\overline{X}\_n - \mu)^2 + n(\overline{X}\_n - \mu)^2 \\\\
-        &= \sum_{i=1}^n (X_i - \mu)^2 - n(\overline{X}\_n - \mu)^2
+        \sum_{i=1}^n (X_i - \overline{X}_n)^2 &= \sum_{i=1}^n \left( (X_i - \mu) - (\overline{X}_n - \mu) \right)^2 \\
+        &= \sum_{i=1}^n \left( (X_i - \mu)^2 - 2(X_i - \mu)(\overline{X}_n - \mu) + (\overline{X}_n - \mu)^2 \right) \\
+        &= \sum_{i=1}^n (X_i - \mu)^2 - 2(\overline{X}_n - \mu)\sum_{i=1}^n (X_i - \mu) + n(\overline{X}_n - \mu)^2\\
+        &= \sum_{i=1}^n (X_i - \mu)^2 - 2n(\overline{X}_n - \mu)^2 + n(\overline{X}_n - \mu)^2 \\
+        &= \sum_{i=1}^n (X_i - \mu)^2 - n(\overline{X}_n - \mu)^2
     \end{align*}
 $$
 
-Take the expectation of both sides. By definition, $\E[(X_i - \mu)^2] = \Var{X_i} = \sigma^2$, and the variance of $\overline{X}\_n$ is $\E[(\overline{X}\_n - \mu)^2] = \Var{\overline{X}\_n} = \frac{\sigma^2}{n}$.
+Take the expectation of both sides. By definition, $\E[(X_i - \mu)^2] = \Var{X_i} = \sigma^2$, and the variance of $\overline{X}_n$ is $\E[(\overline{X}_n - \mu)^2] = \Var{\overline{X}_n} = \frac{\sigma^2}{n}$.
 
 $$
     \begin{align*}
-        \E\left[ \sum_{i=1}^n (X_i - \overline{X}\_n)^2 \right] &= \E\left[ \sum_{i=1}^n (X_i - \mu)^2 \right] - \E\left[ n(\overline{X}\_n - \mu)^2 \right] \\\\
-        &= \sum_{i=1}^n \E[(X_i - \mu)^2] - n\E[(\overline{X}\_n - \mu)^2] \\\\
-        &= \sum_{i=1}^n \sigma^2 - n\left(\frac{\sigma^2}{n}\right) \\\\
-        &= n\sigma^2 - \sigma^2 \\\\
+        \E\left[ \sum_{i=1}^n (X_i - \overline{X}_n)^2 \right] &= \E\left[ \sum_{i=1}^n (X_i - \mu)^2 \right] - \E\left[ n(\overline{X}_n - \mu)^2 \right] \\
+        &= \sum_{i=1}^n \E[(X_i - \mu)^2] - n\E[(\overline{X}_n - \mu)^2] \\
+        &= \sum_{i=1}^n \sigma^2 - n\left(\frac{\sigma^2}{n}\right) \\
+        &= n\sigma^2 - \sigma^2 \\
         &= (n - 1)\sigma^2
     \end{align*}
 $$
@@ -82,7 +82,7 @@ $$
 Multiply both sides by $\frac{1}{n-1}$ to see the expectation of estimator $S_n^2$:
 
 $$
-    \E[S_n^2] = \E\left[ \frac{1}{n-1} \sum_{i=1}^n (X_i - \overline{X}\_n)^2 \right] = \frac{1}{n-1} (n-1)\sigma^2 = \sigma^2
+    \E[S_n^2] = \E\left[ \frac{1}{n-1} \sum_{i=1}^n (X_i - \overline{X}_n)^2 \right] = \frac{1}{n-1} (n-1)\sigma^2 = \sigma^2
 $$
 
 > Dividing by $n-1$ makes $S_n^2$ an unbiased estimator of $\sigma^2$. If divided by $n$, expectation would have been $\frac{n-1}{n}\sigma^2$, which is biased (as an underestimation).
@@ -102,8 +102,8 @@ Defined **Bias** as: $\text{Bias}(\hat{\theta}) = \E[\hat{\theta}] - \theta$.
 
 $$
     \begin{align*}
-        \text{MSE}(\hat{\theta}) &= \E[(\hat{\theta} - \theta)^2] \\\\
-        &= \E[\left( (\hat{\theta} - \E[\hat{\theta}]) + (\E[\hat{\theta}] - \theta) \right)^2] \quad \text{(Add and subtract } \E[\hat{\theta}]\text{)} \\\\
+        \text{MSE}(\hat{\theta}) &= \E[(\hat{\theta} - \theta)^2] \\
+        &= \E[\left( (\hat{\theta} - \E[\hat{\theta}]) + (\E[\hat{\theta}] - \theta) \right)^2] \quad \text{(Add and subtract } \E[\hat{\theta}]\text{)} \\
         &= \E[(\hat{\theta} - \E[\hat{\theta}])^2] + 2\E[(\hat{\theta} - \E[\hat{\theta}])(\E[\hat{\theta}] - \theta)] + \E[(\E[\hat{\theta}] - \theta)^2]
     \end{align*}
 $$
@@ -147,20 +147,20 @@ $$
     \frac{(n-1)S_n^2}{\sigma^2} \sim \chi^2_{n-1}
 $$
 
-> $S_n^2$ is a sum of squared normal variables $(X_i - \overline{X}\_n)^2$, so it follows a Chi-squared shape.
+> $S_n^2$ is a sum of squared normal variables $(X_i - \overline{X}_n)^2$, so it follows a Chi-squared shape.
 > Division by $\sigma^2$ is for standarization.
 > > **Degrees of freedom ($n-1$):**  
 > > If we used the known true mean $\mu$, terms $\frac{X_i - \mu}{\sigma}$ would be exactly $n$ independent standard normal variables, yielding $\chi^2_n$.  
-> > However, because center is estimated $\overline{X}\_n$, the constraint $\sum (X_i - \overline{X}\_n) = 0$ makes the final residual predictable. One "independent piece of information" is lost, resulting in $n-1$ degrees of freedom.
+> > However, because center is estimated $\overline{X}_n$, the constraint $\sum (X_i - \overline{X}_n) = 0$ makes the final residual predictable. One "independent piece of information" is lost, resulting in $n-1$ degrees of freedom.
 
-Furthermore, $\overline{X}\_n$ and $S_n^2$ are independent.
+Furthermore, $\overline{X}_n$ and $S_n^2$ are independent.
 
-> This is **unique to normal distribution**. The normal distribution's shape (determined by $\sigma^2$) is independent of its location ($\mu$ determines the center). And the sample mean $\overline{X}\_n$ is uncorrelated with every residual, $(X_i - \overline{X}\_n)$, since each of these are determined by $X_i$.
+> This is **unique to normal distribution**. The normal distribution's shape (determined by $\sigma^2$) is independent of its location ($\mu$ determines the center). And the sample mean $\overline{X}_n$ is uncorrelated with every residual, $(X_i - \overline{X}_n)$, since each of these are determined by $X_i$.
 
 ### 3.2 Student's t-Distribution
 
 When evaluating how far our sample mean is from the true mean, we look at the standardized statistic:
-$$Z = \frac{\overline{X}\_n - \mu}{\sigma/\sqrt{n}} \sim \mathcal{N}(0, 1)$$
+$$Z = \frac{\overline{X}_n - \mu}{\sigma/\sqrt{n}} \sim \mathcal{N}(0, 1)$$
 However, $\sigma$ is usually unknown. We must replace it with $S_n$, which introduces extra variability.
 
 **Definition (t-distribution):**
@@ -172,22 +172,22 @@ $$
 
 Using known distributions:
 
-- Let our standard normal be $Z = \frac{\overline{X}\_n - \mu}{\sigma/\sqrt{n}}$.
+- Let our standard normal be $Z = \frac{\overline{X}_n - \mu}{\sigma/\sqrt{n}}$.
 - Let our Chi-Square variable be $V = \frac{(n-1)S_n^2}{\sigma^2}$ with $k = n-1$ degrees of freedom.
 
 Substitute:
 $$
     \begin{align*}
-        T &= \frac{\frac{\overline{X}\_n - \mu}{\sigma/\sqrt{n}}}{\sqrt{\frac{\frac{(n-1)S_n^2}{\sigma^2}}{n-1}}} \\\\
-        &= \frac{\frac{\overline{X}\_n - \mu}{\sigma/\sqrt{n}}}{\sqrt{\frac{S_n^2}{\sigma^2}}} \\\\
-        &= \frac{\overline{X}\_n - \mu}{\sigma/\sqrt{n}} \cdot \frac{\sigma}{S_n} \\\\
-        &= \frac{\overline{X}\_n - \mu}{S_n/\sqrt{n}}
+        T &= \frac{\frac{\overline{X}_n - \mu}{\sigma/\sqrt{n}}}{\sqrt{\frac{\frac{(n-1)S_n^2}{\sigma^2}}{n-1}}} \\
+        &= \frac{\frac{\overline{X}_n - \mu}{\sigma/\sqrt{n}}}{\sqrt{\frac{S_n^2}{\sigma^2}}} \\
+        &= \frac{\overline{X}_n - \mu}{\sigma/\sqrt{n}} \cdot \frac{\sigma}{S_n} \\
+        &= \frac{\overline{X}_n - \mu}{S_n/\sqrt{n}}
     \end{align*}
 $$
 
 Thus, replacing $\sigma$ with $S_n$ transforms standard normal $Z$ into a Student's t-distribution with $n-1$ degrees of freedom:
 $$
-    T = \frac{\overline{X}\_n - \mu}{S_n / \sqrt{n}} \sim t_{n-1}
+    T = \frac{\overline{X}_n - \mu}{S_n / \sqrt{n}} \sim t_{n-1}
 $$
 
 ---
@@ -204,19 +204,19 @@ Since $T \sim t_{n-1}$ represents uncertainty when $\sigma$ is unknown, we can f
 $$
     \begin{align*}
         1-\alpha
-        &= \mathbb{P}(|T| \le t_{\alpha/2})\\\\
-        &= \mathbb{P}\left(-t_{\alpha/2} \le \frac{\overline{X}\_n - \mu}{S_n/\sqrt{n}} \le t_{\alpha/2}\right)\\\\
-        &= \mathbb{P}\left(-t_{\alpha/2} \frac{S_n}{\sqrt{n}} \le \overline{X}\_n - \mu \le t_{\alpha/2} \frac{S_n}{\sqrt{n}}\right)\\\\
-        &= \mathbb{P}\left(-\overline{X}\_n - t_{\alpha/2} \frac{S_n}{\sqrt{n}} \le -\mu \le -\overline{X}\_n + t_{\alpha/2} \frac{S_n}{\sqrt{n}}\right)\\\\
-        &= \mathbb{P}\left(\overline{X}\_n + t_{\alpha/2} \frac{S_n}{\sqrt{n}} \ge \mu \ge \overline{X}\_n - t_{\alpha/2} \frac{S_n}{\sqrt{n}}\right)\\\\
-        &= \mathbb{P}\left(\overline{X}\_n - t_{\alpha/2} \frac{S_n}{\sqrt{n}} \le \mu \le \overline{X}\_n + t_{\alpha/2} \frac{S_n}{\sqrt{n}}\right)\\\\
+        &= \mathbb{P}(|T| \le t_{\alpha/2})\\
+        &= \mathbb{P}\left(-t_{\alpha/2} \le \frac{\overline{X}_n - \mu}{S_n/\sqrt{n}} \le t_{\alpha/2}\right)\\
+        &= \mathbb{P}\left(-t_{\alpha/2} \frac{S_n}{\sqrt{n}} \le \overline{X}_n - \mu \le t_{\alpha/2} \frac{S_n}{\sqrt{n}}\right)\\
+        &= \mathbb{P}\left(-\overline{X}_n - t_{\alpha/2} \frac{S_n}{\sqrt{n}} \le -\mu \le -\overline{X}_n + t_{\alpha/2} \frac{S_n}{\sqrt{n}}\right)\\
+        &= \mathbb{P}\left(\overline{X}_n + t_{\alpha/2} \frac{S_n}{\sqrt{n}} \ge \mu \ge \overline{X}_n - t_{\alpha/2} \frac{S_n}{\sqrt{n}}\right)\\
+        &= \mathbb{P}\left(\overline{X}_n - t_{\alpha/2} \frac{S_n}{\sqrt{n}} \le \mu \le \overline{X}_n + t_{\alpha/2} \frac{S_n}{\sqrt{n}}\right)\\
     \end{align*}
 $$
 
 This yields the interval for the true mean $\mu$:
 $$
-    \left[ \overline{X}\_n - t_{\alpha/2} \frac{S_n}{\sqrt{n}},
-    \quad \overline{X}\_n + t_{\alpha/2} \frac{S_n}{\sqrt{n}} \right]
+    \left[ \overline{X}_n - t_{\alpha/2} \frac{S_n}{\sqrt{n}},
+    \quad \overline{X}_n + t_{\alpha/2} \frac{S_n}{\sqrt{n}} \right]
 $$
 
 ### 4.2 Asymptotics

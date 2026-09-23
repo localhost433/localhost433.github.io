@@ -14,8 +14,8 @@ $$\Cov{X}{Y} = \E[(X - \E[X])(Y - \E[Y])]$$
 Using linearity of expectation, we can derive the computational formula:
 $$
     \begin{align*}
-        \Cov{X}{Y} &= \E[XY - X\E[Y] - Y\E[X] + \E[X]\E[Y]] \\\\
-        &= \E[XY] - \E[X]\E[Y] - \E[Y]\E[X] + \E[X]\E[Y] \\\\
+        \Cov{X}{Y} &= \E[XY - X\E[Y] - Y\E[X] + \E[X]\E[Y]] \\
+        &= \E[XY] - \E[X]\E[Y] - \E[Y]\E[X] + \E[X]\E[Y] \\
         &= \E[XY] - \E[X]\E[Y]
     \end{align*}
 $$
@@ -24,9 +24,9 @@ $$
 
 $$
     \begin{align*}
-        \Var{X + Y} &= \E[((X+Y) - \E[X+Y])^2] \\\\
-        &= \E[((X-\E[X]) + (Y-\E[Y]))^2] \\\\
-        &= \E[(X-\E[X])^2] + \E[(Y-\E[Y])^2] + 2\E[(X-\E[X])(Y-\E[Y])] \\\\
+        \Var{X + Y} &= \E[((X+Y) - \E[X+Y])^2] \\
+        &= \E[((X-\E[X]) + (Y-\E[Y]))^2] \\
+        &= \E[(X-\E[X])^2] + \E[(Y-\E[Y])^2] + 2\E[(X-\E[X])(Y-\E[Y])] \\
         &= \Var{X} + \Var{Y} + 2\Cov{X}{Y}
     \end{align*}
 $$
@@ -74,10 +74,10 @@ $$\E[\E[Y \mid X]] = \E[Y]$$
 **Proof (Discrete Case):**
 $$
     \begin{align*}
-        \E[\E[Y|X]] &= \sum_x \E[Y \mid X=x] p_X(x) \\\\
-        &= \sum_x \left( \sum_y y \frac{p_{X,Y}(x,y)}{p_X(x)} \right) p_X(x) \\\\
-        &= \sum_x \sum_y y p_{X,Y}(x,y) \\\\
-        &= \sum_y y \sum_x p_{X,Y}(x,y) \\\\
+        \E[\E[Y|X]] &= \sum_x \E[Y \mid X=x] p_X(x) \\
+        &= \sum_x \left( \sum_y y \frac{p_{X,Y}(x,y)}{p_X(x)} \right) p_X(x) \\
+        &= \sum_x \sum_y y p_{X,Y}(x,y) \\
+        &= \sum_y y \sum_x p_{X,Y}(x,y) \\
         &= \sum_y y p_Y(y) = \E[Y]
     \end{align*}
 $$
@@ -86,8 +86,8 @@ $$
 Let $S = \sum_{i=1}^N X_i$, where $N$ is a random variable independent of i.i.d. $X_i$.
 $$
     \begin{align*}
-        \E[S] &= \E[\E[S \mid N]] \\\\
-        &= \E[N \cdot \E[X]] \\\\
+        \E[S] &= \E[\E[S \mid N]] \\
+        &= \E[N \cdot \E[X]] \\
         &= \E[N]\E[X]
     \end{align*}
 $$

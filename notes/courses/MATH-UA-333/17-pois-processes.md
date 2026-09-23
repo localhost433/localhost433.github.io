@@ -154,7 +154,7 @@ and the right-hand side depends only on the increment $k_{n+1}-k_n$ over length 
 
 ### Additivity (superposition)
 
-If $\{N_1(t)\}\_{t\ge 0}$ and $\{N_2(t)\}\_{t\ge 0}$ are independent Poisson processes with rates $\lambda_1$ and $\lambda_2$, then
+If $\{N_1(t)\}_{t\ge 0}$ and $\{N_2(t)\}_{t\ge 0}$ are independent Poisson processes with rates $\lambda_1$ and $\lambda_2$, then
 $$
 N(t):=N_1(t)+N_2(t)
 $$
