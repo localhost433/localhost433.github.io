@@ -1,11 +1,12 @@
 ---
 title: "3 - Parallel Hardware: Advanced"
-date: "2026-09-10"
+date: "2026-09-15"
 ---
 
 *Reading: Pacheco & Malensek §2.3. The schedule note for this lecture: "You can neglect the
 discussion about bisection width in section 2.3." Some slides are adapted from the Barlas
-and Pacheco books.*
+and Pacheco books. Where the reading goes past the slides, the paragraph names its
+section.*
 
 ## Where L2 left off
 
@@ -67,6 +68,17 @@ three-quarters full.
 classic design they must also operate synchronously. Efficient for large data-parallel
 problems, but not for more complex kinds of parallelism.
 
+*§2.3.2's example of "or sit idle":*
+
+```c
+for (i = 0; i < n; i++)
+    if (y[i] > 0.0) x[i] += y[i];
+```
+
+Every datapath loads its `y[i]` and tests it; the ones holding a non-positive value then sit
+idle while the others add. A classical SIMD datapath also has no instruction storage, so it
+cannot hold an instruction back to run it later.
+
 ### Vector processors
 
 Instructions whose operands are vectors rather than scalars. Requires **vector registers**
@@ -85,6 +97,19 @@ Instructions whose operands are vectors rather than scalars. Requires **vector r
 The last two pros are the memory wall showing up again: the vector win is as much about
 bandwidth utilization as about arithmetic throughput.
 
+*§2.3.2 adds* three memory features that make that bandwidth possible: **interleaved
+memory** (multiple banks accessed more or less independently, so successive elements come
+from different banks and none waits for a bank to recover), **strided access** (every
+fourth element, say) and hardware **scatter/gather** (elements at irregular positions).
+Vector lengths run from 4 to 256 64-bit elements, and systems scale by adding vector
+processors, not by lengthening vectors.
+
+**GPUs** (*§2.3.2*) use SIMD within each core, with many datapaths per core, and lean
+heavily on hardware multithreading to hide memory stalls: some keep the state of more than a
+hundred suspended threads per executing thread. So they need a lot of threads and a lot of
+data to be busy, and do relatively poorly on small problems. They are not pure SIMD: a core
+can run more than one instruction stream, so a GPU is neither purely SIMD nor purely MIMD.
+
 ## MIMD
 
 Multiple simultaneous instruction streams operating on multiple data streams, typically a
@@ -92,7 +117,9 @@ collection of fully independent processors or cores. Examples: multicore process
 multiprocessor systems.
 
 Flynn classifies by instruction and data streams. MIMD then subdivides by **how memory is
-used**:
+used**. (*§2.3.3:* MIMD systems are usually **asynchronous**: there may be no global clock,
+and without imposed synchronization two cores running the same code are at different
+statements at any given instant.)
 
 **Shared memory.** Autonomous processors/cores connected to a memory system via an
 interconnection network. Each can access every memory location, and they usually
@@ -102,9 +129,20 @@ communicate **implicitly**, by accessing shared data.
 > `addr2`, do they see the same delay? Hint: **banks.** Worth answering from the recording -
 > it is the seed of NUMA at the end of the deck.
 
+*§2.3.3 gives the two names.* If the interconnect connects every processor directly to all
+of main memory, every location takes the same time to reach: **UMA**, uniform memory access.
+If each processor is directly attached to its own block of memory and reaches the others'
+blocks through special hardware on the chips, local memory is faster than remote memory:
+**NUMA**. UMA is easier to program, since access time does not depend on where the data
+lives; NUMA offers faster local access and can support more memory in total.
+
 **Distributed memory.** A cluster of nodes connected by an interconnection network, where a
 node nowadays is typically multicore processors plus accelerators. Either all nodes are the
 same - **SMP**, symmetric multi-processing - or one node is more important than the others.
+
+*§2.3.3:* since a cluster's nodes are themselves shared-memory machines, clusters are
+sometimes called **hybrid** systems. A **grid** joins geographically distributed computers
+into one distributed-memory system, usually heterogeneous.
 
 ## Interconnection networks
 
@@ -126,6 +164,22 @@ communication is very expensive. Two categories.
   each other. Examples: ring, toroidal mesh.
 - **Indirect** - switches may not be directly connected to a node. Example: crossbar.
 
+*§2.3.4 goes further than the slides.* Bisection width is left out here, as the schedule
+allows; everything else:
+
+| Network | Kind | Cost in the reading | What it buys |
+|---|---|---|---|
+| Ring | direct | $p$ switch-to-switch links; switches with 3 links | several simultaneous messages, unlike a bus, but easy to make processors wait on each other |
+| Toroidal mesh (2D) | direct | $2p$ links; switches with 5 links | more simultaneous communication patterns than a ring |
+| Fully connected | direct | $p^2/2 - p/2$ links; every switch connects to all others | the theoretical best, impractical beyond a few nodes; a yardstick |
+| Hypercube, dimension $d$ | direct | $p = 2^d$ nodes; each switch has $1 + \log_2 p$ wires | more connectivity than a mesh, at a higher price |
+| Crossbar (distributed memory) | indirect | $p^2$ switches | all processors can send at once, unless two target the same processor |
+| Omega network | indirect | $\tfrac{1}{2}p\log_2 p$ two-by-two crossbars, $2p\log_2 p$ switches | cheaper than a crossbar, but some pairs block: if 0 sends to 6, 1 cannot send to 7 |
+
+Link counts leave out the processor-to-switch links, which may run at a different speed.
+A hypercube is built inductively: two $(d-1)$-dimensional hypercubes with corresponding
+switches joined.
+
 ### Latency and bandwidth
 
 - **Latency** - the time between the source beginning to transmit and the destination
@@ -145,6 +199,10 @@ have different sensitivities: latency is paid once per message regardless of siz
 small messages are dominated by $l$ and a few large ones by $n/b$. That asymmetry is why
 message aggregation is a standard optimization in MPI.
 
+*§2.3.4's warning:* the terms are not used consistently. "Latency" sometimes means the whole
+transmission time, and sometimes the fixed overhead of assembling a message (data plus
+destination, size and error-correction information) and taking it apart at the other end.
+
 ## Cache coherence
 
 Between the cores and the memory modules sit one or more levels of cache, and that
@@ -156,13 +214,33 @@ The problem, from slide 34: `x = 2` is shared, `y0` is privately owned by core 0
 indeterminate. "Such a situation is a big mess and must not happen as it leads to buggy
 code."
 
+Why `z1` is indeterminate (*§2.3.5*): at time 0 core 1 cached `x = 2`. Core 0's write at
+time 1 changes core 0's cached copy and, with write-through, main memory too, but nothing
+changes core 1's copy. Unless that copy happens to be evicted and reloaded, core 1 computes
+$4 \times 2 = 8$ instead of $4 \times 7 = 28$, **whichever write policy the caches use.**
+The figure steps through the three times with no protocol, with snooping, and with a
+directory, on four cores so that a broadcast and a targeted message look different.
+
+```artifact src=demos/coherence-walkthrough.jsx
+```
+
 **Snooping.** The cores share a bus or other broadcasting interconnect, so any signal on it
 is visible to all. When a core updates its cached copy of `x` it broadcasts that fact; a
 core snooping the bus sees the update and marks its own copy invalid.
 
+*§2.3.5 sharpens this:* the broadcast says the **cache line** containing `x` was updated,
+not `x` itself. The interconnect need not be a bus, only something that can broadcast.
+Snooping works with write-through and write-back caches; with write-back an extra message
+is needed, since the update does not go to memory. And since it needs a broadcast on every
+update, it is not scalable: on a large network broadcasts are slow.
+
 **Directory-based.** A hardware structure - the directory - stores the status of each cache
 line. On an update the directory is consulted, and the cache controllers of exactly those
 cores holding that line are invalidated.
+
+*§2.3.5:* the directory is typically distributed, each core/memory pair keeping the entries
+for the lines in its own memory. It takes substantial extra storage, but an update only has
+to contact the cores that hold the variable.
 
 | Axis | Options |
 |---|---|
@@ -173,6 +251,15 @@ cores holding that line are invalidated.
 **Directory-based is far more scalable than snoopy and hence more widely used.** The reason
 is in the two mechanisms: snooping requires a broadcast every core must observe, which is
 $O(p)$ traffic per update, while a directory notifies only the sharers.
+
+## Why not make everything shared memory?
+
+*§2.3.6.* Most programmers find shared data structures easier than explicit messages, so
+why are most large MIMD systems distributed-memory? The main hardware reason is **the cost
+of scaling the interconnect.** Buses suit only a few processors, since conflicts rise sharply
+as processors are added, and large crossbars are very expensive. Distributed-memory
+interconnects such as the hypercube and toroidal mesh are relatively cheap, and systems with
+thousands of processors have been built on them.
 
 ## A machine at the top
 

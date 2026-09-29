@@ -83,6 +83,8 @@ The deck starts by crossing something out. A `Shape` hierarchy exists, it works,
 
 That is [note 16](note.html?course=CSCI-UA-470&note=16-solid)'s Open–Closed violation, and the fix is the same move as always — put the varying thing in its own hierarchy — with one twist that makes Visitor the hardest pattern in the course. The operation now lives in a `Visitor` class, so `Rotator` holds *everything* about rotating in one place. But a visitor has to know **which** shape it received in order to do anything, and that is where the twist is.
 
+> **Beyond the slide —** the deck writes the visitor's method as one `visit(Shape)`, and the figure above follows it. Taken literally in Java that single overload could never tell a `Circle` from a `Triangle`, and `accept` would buy nothing. The working version has **one overload per element class**, `visit(Circle)`, `visit(Rectangle)` and `visit(Triangle)`, and that is the version the stepper below runs.
+
 ### The one line that makes it work
 
 Every element class carries the same one-line method:

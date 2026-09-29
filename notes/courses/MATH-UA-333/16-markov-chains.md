@@ -15,8 +15,6 @@ where $n$ is usually interpreted as discrete time.
 - $\mathcal{S}$ may be finite (e.g. $\{1,\dots,m\}$) or infinite (e.g. $\mathbb{N}$).
 - Think of $X_n$ as “the state of the system at time $n$”.
 
-> For a similar reason, here I have used parentheses instead of set brackets which are parsed incorrectly on the web.
-
 ### Markov property
 
 We say a process $(X_n)_{n\ge 0}$ with values in $\mathcal{S}$ has the **Markov property** if for every $n\ge 0$ and all states

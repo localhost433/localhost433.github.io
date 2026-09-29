@@ -170,11 +170,11 @@ We utilize the exponential function to guarantee positivity, and we forcefully n
 
 We select class $0$ as our mathematical baseline reference class. For every other class $j \in \{1, \dots, K-1\}$, we define an entirely distinct parameter vector $\beta_j$. The exact probability of observing class $j$ given the input $x$ is defined as:
 $$
-    p_j(x) = \prob{Y = j | x} = \frac{e^{x^T \beta_j}}{1 + \sum_{l=1}^{K-1} e^{x^T \beta_l}} \quad \text{for } j = 1, \dots, K-1
+    p_j(x) = \prob(Y = j \mid x) = \frac{e^{x^T \beta_j}}{1 + \sum_{l=1}^{K-1} e^{x^T \beta_l}} \quad \text{for } j = 1, \dots, K-1
 $$
 Because the total sum of all probabilities must equal $1$, the probability of the baseline class $0$ is mechanically determined by subtraction:
 $$
-    p_0(x) = \prob{Y = 0 | x} = \frac{1}{1 + \sum_{l=1}^{K-1} e^{x^T \beta_l}}
+    p_0(x) = \prob(Y = 0 \mid x) = \frac{1}{1 + \sum_{l=1}^{K-1} e^{x^T \beta_l}}
 $$
 *(Note: Mathematically, this perfectly implies that the parameter vector for the baseline class is intrinsically anchored as the zero vector, $\beta_0 = 0$.)*
 

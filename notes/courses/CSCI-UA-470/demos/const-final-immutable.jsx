@@ -4,7 +4,7 @@ import { DiagramSvg, CompareCaption } from "@course";
 /* L10 - C++ const vs Java final vs true immutability.
    The axis is WHAT gets frozen, shown as a padlock on a shared
    name -> reference -> object chain. C++ const is fine-grained: a lock can
-   sit on the pointer, the handle, or the value -- you choose. Java final is
+   sit on the pointer, the handle, or the value — you choose. Java final is
    coarse: the lock sits on the BINDING (the link), so the object reached
    through it stays mutable. Immutability locks the OBJECT itself. The classic
    trap - `final Circle c` - is a lock on the link, not on the Circle.
@@ -135,11 +135,11 @@ export default function ConstFinalImmutable() {
 
       <CompareCaption
         cols={[
-          { tag: "C++ const", kind: "cpp", children: <>Fine-grained: you choose <em>what</em> is constant -- the value, the pointee viewed through a handle (<code className="ui-ic">const T*</code>), the pointer itself (<code className="ui-ic">T* const</code>), or <code className="ui-ic">*this</code> in a <code className="ui-ic">const</code> member.</> },
-          { tag: "Java final", kind: "java", children: <>Coarse: the lock sits on a <strong>name or edge</strong> -- a binding (<code className="ui-ic">final T x</code>), an override (<code className="ui-ic">final m()</code>), a subclass (<code className="ui-ic">final class</code>). It <strong>never</strong> freezes the object reached through a reference.</> },
+          { tag: "C++ const", kind: "cpp", children: <>Fine-grained: you choose <em>what</em> is constant — the value, the pointee viewed through a handle (<code className="ui-ic">const T*</code>), the pointer itself (<code className="ui-ic">T* const</code>), or <code className="ui-ic">*this</code> in a <code className="ui-ic">const</code> member.</> },
+          { tag: "Java final", kind: "java", children: <>Coarse: the lock sits on a <strong>name or edge</strong> — a binding (<code className="ui-ic">final T x</code>), an override (<code className="ui-ic">final m()</code>), a subclass (<code className="ui-ic">final class</code>). It <strong>never</strong> freezes the object reached through a reference.</> },
           { tag: "immutable", kind: "asm", children: <>A <strong>design property</strong>, not a keyword: all-final fields + no setters + defensive copies freeze the <strong>whole observable state</strong> (e.g. <code className="ui-ic">String</code>).</> },
         ]}
-        punch="const/final lock a binding or a handle; immutability locks the object itself. A final reference to a mutable object is not immutable -- final Circle c still allows c.radius = 10."
+        punch="const/final lock a binding or a handle; immutability locks the object itself. A final reference to a mutable object is not immutable — final Circle c still allows c.radius = 10."
       />
     </div>
   );

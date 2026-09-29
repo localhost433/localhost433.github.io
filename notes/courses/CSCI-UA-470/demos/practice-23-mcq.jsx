@@ -23,14 +23,14 @@ export default mcq({
       why: "Use cases come out of **Analysis**; class and sequence diagrams, the five principles, and the twenty patterns are all outputs of **Design**. That is why the course drew for six lectures before the capstone wrote a line: the model is the deliverable of the phase, not a sketch on the way to one.",
     },
     {
-      stem: "The board's role chain runs analyst → designer → programmer → tester. What actually crosses each handoff?",
+      stem: "The board's role chain runs analyst → designer → programmer → tester. What actually crosses the first two handoffs, before any code exists?",
       choices: [
         { text: "A document in a notation both sides can read", correct: true },
         { text: "A verbal briefing, minuted for the record later" },
         { text: "A working build of the previous stage" },
         { text: "A test suite the next stage must satisfy" },
       ],
-      why: "Use cases from the analyst, a UML model from the designer, a build from the programmer. This is UML's entire justification and the reason notation rules are worth memorising: a diagram only the author can read has failed at its one job. The board labels analyst and designer *architects* for the same reason — both produce descriptions rather than running code.",
+      why: "Use cases from the analyst, a UML model from the designer; only the last handoff, programmer to tester, carries a build. This is UML's entire justification and the reason notation rules are worth memorising: a diagram only the author can read has failed at its one job. The board labels analyst and designer *architects* for the same reason — both produce descriptions rather than running code.",
     },
     {
       stem: "The deck's headline claim is that SOLID and patterns \"describe the physics of software complexity — not the author of the code.\" What is the argument?",

@@ -92,9 +92,9 @@ export default function App() {
         <button type="button" style={buttonStyle(C)} onClick={() => setSeed((s) => s + 1)}>New datasets</button>
       </div>
       <div style={{ display: "flex", flexWrap: "wrap", gap: "12px", alignItems: "flex-start", justifyContent: "center" }}>
-        <canvas ref={r0} style={{ flex: `1 1 ${W}px`, maxWidth: W, aspectRatio: `${W} / ${H}` }}
+        <canvas ref={r0} style={{ flex: `1 1 ${W}px`, minWidth: 0, maxWidth: W, aspectRatio: `${W} / ${H}` }}
           aria-label={`Constant fits at N = ${N}: bias ${fmt(exp.h0.bias)}, variance ${fmt(exp.h0.variance)}`} />
-        <canvas ref={r1} style={{ flex: `1 1 ${W}px`, maxWidth: W, aspectRatio: `${W} / ${H}` }}
+        <canvas ref={r1} style={{ flex: `1 1 ${W}px`, minWidth: 0, maxWidth: W, aspectRatio: `${W} / ${H}` }}
           aria-label={`Line fits at N = ${N}: bias ${fmt(exp.h1.bias)}, variance ${fmt(exp.h1.variance)}`} />
       </div>
       <p style={{ ...readoutStyle(C), margin: 0 }}>

@@ -10,7 +10,7 @@ export default mcq({
   questions: [{
     stem: "What does the compiler do the first time you call `max<T>` with `int`, then with `double`?",
     choices: [{
-      text: "**Stamps out** separate concrete functions at compile time",
+      text: "Stamps out separate concrete functions at compile time",
       correct: true
     }, {
       text: "Compiles one generic function that inspects the type at runtime"

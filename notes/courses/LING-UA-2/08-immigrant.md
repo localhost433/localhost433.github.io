@@ -109,7 +109,7 @@ Topics:
 
 #### Pressures to conform
 
-- Qualitative work in Canadian cities (e.g. London, Ontario) identifies "forces of conformity":
+- Qualitative work in Canadian cities (e.g. London, Ontario) identifies “forces of conformity”:
   1. **Employment pressure** – belief that an “easier” or more Anglo-sounding name helps with hiring.
   2. **School & peer pressure** – desire not to stand out or be teased.
   3. **Avoiding constant explanations** – fatigue from spelling, correcting pronunciation, etc.

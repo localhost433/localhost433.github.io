@@ -55,7 +55,7 @@ const steps = [
     cells: [V("car1", true), CAR(true), BIKE(), REPO([CAR_ENTRY, BIKE_ENTRY])],
     caption: {
       java: "Back to `car·red` — **hit** again. Four requests have now been served by two objects.",
-      intuition: "Scale that loop to a thousand frames and the count on the left keeps climbing while the count on the right does not. That gap is the pattern.",
+      intuition: "Scale that loop to a thousand frames and the number of requests keeps climbing while the heap stays at two objects. That gap is the pattern.",
     },
   },
 ];

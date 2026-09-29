@@ -171,13 +171,13 @@ What does the hearer assume the speaker is doing:
 #### Implicature vs. Entailment vs. Presupposition
 - Implicature is possible to cancel, not the other two.
 
-Does B have to be true regardless of the condition of A?
-True: Presupposition
-Does B have to be true if A is true?
-True: Entailment
-False: Implicature.
+- Does B have to be true regardless of the condition of A?
+  - True: Presupposition
+- Does B have to be true if A is true?
+  - True: Entailment
+  - False: Implicature
 
-A java style psuedocode of this process:
+A Java-style pseudocode of this process:
 ```java
 /*********************************************************************
  * ASSUMPTIONS
@@ -219,7 +219,7 @@ class SemanticAnalyzer {
    }
 }
 ```
-(Now I feel like psuedocode is a good way to understand sth, however sometimes it's really hard to implement, for example, I wanted to writeout the helper isTrueRegardless as isTrue, but on second thought the meaning become fuzzy, and I need to define the params precisely.)
+(Now I feel like pseudocode is a good way to understand sth, however sometimes it's really hard to implement, for example, I wanted to writeout the helper isTrueRegardless as isTrue, but on second thought the meaning become fuzzy, and I need to define the params precisely.)
 
 Or a summary:
 - Entailment: B necessarily follows from A

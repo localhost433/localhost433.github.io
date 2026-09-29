@@ -48,7 +48,7 @@ export default mcq({
         { text: "Only Mediator can have more than three participants" },
         { text: "Observer's participants must be of the same class" },
       ],
-      why: "Read the **direction**. Mediator collapses a many-to-many mesh: colleagues would otherwise talk to each other, so the hub relays — and skips the sender, because it was the one talking. Observer is one-to-many: a subject announces and the listeners, who opted in with `subscribe`, hear it. That opt-in is the other visible difference.",
+      why: "Read the **direction**. Mediator collapses a many-to-many mesh: colleagues would otherwise talk to each other, so the hub relays — and skips the sender, because it was the one talking. Observer is one-to-many: a subject announces and the listeners hear it. Both keep a registration list, so the list itself does not tell them apart; what an observer adds is that it subscribes (and unsubscribes) **itself**.",
     },
     {
       stem: "Which is the odd one out among the six patterns in this note, and why?",

@@ -480,21 +480,10 @@ imported from outside, made by the ML designer. Which closes the loop with L1's 
 
 ## Practice
 
-On paper, cold, before quiz 1:
+Questions on the counterexample, Hoeffding in both forms, the two primary questions, validation, and the loss versus the cost matrices.
 
-1. Write the Boolean counterexample from memory with the correct counts (256 / 8), and
-   state in one sentence what it does *not* prove.
-2. Write Hoeffding in both forms - bin and learning - and label which symbol is random and
-   which is fixed.
-3. Given $\epsilon = 0.1$ and $N = 1000$, compute $2e^{-2\epsilon^2 N}$; then find the $N$
-   needed to get the same bound at $\epsilon = 0.05$. Confirm it is $4\times$.
-4. Explain in two sentences why the single-hypothesis bound does not apply to the output of
-   PLA.
-5. State which of the two primary questions each of the following addresses: adding more
-   training data; switching from degree 3 to degree 9; adding a regularizer; choosing a
-   different loss function.
-6. Redraw the supermarket and bank cost matrices and say, for each, which direction the
-   decision threshold should move relative to the symmetric-cost case.
+```artifact src=demos/practice-04.jsx math
+```
 
 ---
 

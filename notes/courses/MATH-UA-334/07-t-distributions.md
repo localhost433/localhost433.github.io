@@ -7,7 +7,7 @@ date: 2026-02-11
 
 We now shift from Probability (**deducing behavior from known models**) to Statistics (**inferring models from observed data**).
 
-> Discriptive Statistics vs. Inferential Statistics
+> Descriptive Statistics vs. Inferential Statistics
 
 ### Setup
 
@@ -133,7 +133,7 @@ If the data $X_i \sim \mathcal{N}(\mu, \sigma^2)$, we have specific distribution
 
 ### 3.1 Chi-Square Distribution
 
-Let $Z_1, \dots, Z_k \sim \mathcal{N}(0, 1)$ be i.i.d.. The sum of their squares $V$ follows a **Chi-Square distribution with $k$ degrees of freedom**:
+Let $Z_1, \dots, Z_k \sim \mathcal{N}(0, 1)$ be i.i.d. The sum of their squares $V$ follows a **Chi-Square distribution with $k$ degrees of freedom**:
 $$
     V = \sum_{i=1}^k Z_i^2 \sim \chi^2_k
 $$

@@ -31,9 +31,9 @@ export default mcq({
       stem: "In a class box's attribute compartment, what does an **underlined** member mean?",
       choices: [
         { text: "It is `static` — one per class, not per object", correct: true },
-        { text: "It is abstract" },
-        { text: "It is deprecated" },
-        { text: "It is `final` / read-only" },
+        { text: "It is abstract — subclasses must supply it" },
+        { text: "It is deprecated — kept only for old callers" },
+        { text: "It is `final` / read-only — set once, never changed" },
       ],
       why: "Underlining marks a **static** member (attribute or operation) — the class-level slot the course met as `static` in C++/Java. *Italics* mark abstract; UML has no underline for deprecated or final. Full attribute syntax: `visibility name : type [count] = default` — multiplicity and a default value can ride along, and a `/` in the visibility position marks a **derived** attribute (computed, not stored).",
     },

@@ -31,6 +31,8 @@ Start here because it is the odd one out. Every other pattern in this note varie
 
 The protected thing is the *order*. `run()` lives in the parent and is never overridden, so a subclass can fill a hole but cannot reorder, skip, or add a step — which is exactly what you want when the sequence is the part that must not vary.
 
+> **Beyond the slide —** the deck draws the steps as private (`- step_n()`) and gives each approach one override. Taken literally in Java neither part compiles: a subclass cannot override a private method, and an approach that leaves `step_1` and `step_4` abstract is itself abstract, so `new Approach-2()` is rejected. The working version makes the steps **protected** (`# step_n()`), and gives `Sorter` default bodies for the steps an approach may skip, with only the steps every subclass must supply left abstract.
+
 ## 2–4 · Strategy, State, and Command
 
 L20 draws these three with an identical class diagram: a context holding a field of an abstract type, three concrete subclasses, and one delegating call — named `run()` in all three. Rather than repeat the same figure three times, here it is once, with a knob for the cast:

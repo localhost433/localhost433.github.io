@@ -248,7 +248,6 @@ export default function PkSequences() {
     participants: f.participants,
     messages: f.messages,
     activations: f.activations,
-    caption: f.caption,
-    maxWidth: 720
+    caption: f.caption
   }));
 }

@@ -18,7 +18,7 @@ The study of the structures and patterns of speech sounds, at a more abstract le
 Basic unit of speech sound, concrete, what we hear. (Correspond to individual IPA symbols)
 
 - IPA is a list of universal phones, but no language would use every phone.
-- Two languages may use the same tone, but used differently.
+- Two languages may use the same phone, but use it differently.
   - Difference between the **underlying sound** and how it is **phonetically realized**.
 
 ---
@@ -150,7 +150,7 @@ class PhonologicalAnalyzer {
     }
 }
 ```
-A java style psuedocode for the process (this is added at Jun 14, after I felt this piece of note was not too good and I didn't do this process well on the exam).
+A Java-style pseudocode for the process (this is added at Jun 14, after I felt this piece of note was not too good and I didn't do this process well on the exam).
 
 ---
 
@@ -164,7 +164,7 @@ A java style psuedocode for the process (this is added at Jun 14, after I felt t
 
 ##### Flapping rule
 ```text
-/t/ -> [r] | 'V_V
+/t/ -> [ɾ] | 'V_V
 /t/ -> [t] | *elsewhere
 ```
 
@@ -172,7 +172,7 @@ A java style psuedocode for the process (this is added at Jun 14, after I felt t
 
 ##### Aspiration
 ```text
-/t/ -> [t^h] | _.'
+/t/ -> [tʰ] | _.'
 /t/ -> [t] | elsewhere*
 ```
 
@@ -201,7 +201,7 @@ To determine the minimal distinguishing feature between two sounds.
 
 ---
 
-### Phonological Rules
+### Phonological Processes
 
 Humans have the tendency to increase the place of articulation.
 

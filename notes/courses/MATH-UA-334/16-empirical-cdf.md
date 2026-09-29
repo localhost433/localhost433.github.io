@@ -71,9 +71,9 @@ $$
 $$
 
 **Theorem 16.1 (Glivenko-Cantelli Theorem):**
-As the sample size $n \to \infty$, the Kolmogorov-Smirnov distance almost surely converges to $0$ in probability:
+As the sample size $n \to \infty$, the Kolmogorov-Smirnov distance converges to $0$ almost surely:
 $$
-    d_{KS}(F_n, F) \xrightarrow{p} 0
+    d_{KS}(F_n, F) \xrightarrow{\text{a.s.}} 0
 $$
 
 **Proof Sketch:**

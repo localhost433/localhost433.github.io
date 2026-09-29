@@ -7,7 +7,7 @@ date: 2026-03-02
 
 Up until now, our statistical methods (Method of Moments, Maximum Likelihood Estimation) have relied entirely on the **Frequentist** interpretation of statistics.
 
-- **Frequentist Setting:** The true parameter $\theta$ is an unknown, but strictly fixed, constant. It is not a random variable. Probabilities are strictly interpreted as long-run frequencies of repeated experiments. Consequently, we cannot make probabilistic statements about $\theta$ itself (e.g., saying there is a $95%$ probability that $\theta$ is greater than $0$ is technically invalid in Frequentist statistics).
+- **Frequentist Setting:** The true parameter $\theta$ is an unknown, but strictly fixed, constant. It is not a random variable. Probabilities are strictly interpreted as long-run frequencies of repeated experiments. Consequently, we cannot make probabilistic statements about $\theta$ itself (e.g., saying there is a $95\%$ probability that $\theta$ is greater than $0$ is technically invalid in Frequentist statistics).
 - **Bayesian Setting:** The parameter $\theta$ is mathematically treated as a **random variable** itself. We start with prior subjective beliefs about the distribution of $\theta$, and we update these beliefs as we observe more data. Probabilities reflect our *degree of belief* or uncertainty regarding the parameter.
 
 ---

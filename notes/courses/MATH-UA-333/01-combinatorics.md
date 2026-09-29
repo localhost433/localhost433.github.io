@@ -32,7 +32,7 @@ $$
 (a+b)^n=\sum_{k=0}^{n} {n\choose k} a^{n-k} b^{k}.
 $$
 
-Useful identities include ${n \choose k}={n \choose n-k}$ and the recursive sum $\sum_{i=0}^{k-1} {n-i\choose k-i-1}={n\choose k}$.
+Useful identities include ${n \choose k}={n \choose n-k}$ and the hockey-stick sum $\sum_{i=0}^{n-k} {n-1-i\choose k-1}={n\choose k}$ (for $1\le k\le n$).
 
 ## Multinomial coefficients
 
@@ -45,7 +45,7 @@ For instance, arranging 30 students into ten presentation groups of three has ${
 
 ## Multiset permutations
 
-If a word has repeated letters, e.g.\ P,E,P,P,E,R, the number of distinct rearrangements is $\tfrac{6!}{3! 2!}$; count all $6!$ permutations and divide by the $3!$ ways to reorder the three P’s and $2!$ ways to reorder the two E’s.
+If a word has repeated letters, e.g. P,E,P,P,E,R, the number of distinct rearrangements is $\tfrac{6!}{3! 2!}$; count all $6!$ permutations and divide by the $3!$ ways to reorder the three P’s and $2!$ ways to reorder the two E’s.
 
 ## Stars and bars: integer partitions
 

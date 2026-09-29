@@ -99,19 +99,30 @@ fetch(`/notes/courses/${course}/${noteSlug}.md`)
             window.pendingPageMeta = pageMeta;
         }
 
+        // Footnotes: `[^label]: text` definitions and `[^label]` references. Labels
+        // may be words (`[^stringsize]`); they are numbered in definition order. Only
+        // DEFINED labels are replaced, so regex-like `[^...]` inside code is left alone,
+        // and a plain link reference definition (`[foo]: url`, no caret) is not taken.
         const footnotes = [];
+        const fnIndex = new Map();
+        const fnId = (label) => label.replace(/[^\w-]/g, "_");
 
         const bodyWithoutDefs = body.replace(
-            /^\s*\[([^\]]+)\]:\s*(.+)$/gm,
-            (_, num, text) => {
-                footnotes.push({ num, text: text.trim() });
+            /^[ \t]*\[\^([^\]\s]+)\]:[ \t]*(.+)$/gm,
+            (_, label, text) => {
+                if (!fnIndex.has(label)) {
+                    footnotes.push({ label, num: footnotes.length + 1, text: text.trim() });
+                    fnIndex.set(label, footnotes.length);
+                }
                 return '';
             }
         )
 
         const bodyWithRefs = bodyWithoutDefs.replace(
-            /\[\^(d+)\]/g,
-            (_, num) => `<sup id="fnref${num}"><a href="#fn${num}">${num}</a></sup>`
+            /\[\^([^\]\s]+)\]/g,
+            (m, label) => fnIndex.has(label)
+                ? `<sup id="fnref-${fnId(label)}"><a href="#fn-${fnId(label)}">${fnIndex.get(label)}</a></sup>`
+                : m
         );
 
         const back = document.querySelectorAll("#back-to-course, .back-link, .top-back-link");
@@ -208,11 +219,11 @@ fetch(`/notes/courses/${course}/${noteSlug}.md`)
             fnSec.appendChild(hr);
 
             const ol = document.createElement("ol");
-            footnotes.forEach(({ num, text }) => {
+            footnotes.forEach(({ label, text }) => {
                 const li = document.createElement("li");
-                li.id = `fn${num}`;
+                li.id = `fn-${fnId(label)}`;
                 const fnHtml = sanitize(marked.parseInline(text));
-                li.innerHTML = fnHtml;
+                li.innerHTML = fnHtml + ` <a href="#fnref-${fnId(label)}" class="footnote-back" aria-label="Back to text">↩</a>`;
                 ol.appendChild(li);
             });
             fnSec.appendChild(ol);

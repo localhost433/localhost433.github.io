@@ -63,8 +63,10 @@ for (const sig of JVM_KIT) {
 }
 
 test("MemoryModel accepts a custom segment set + active glow", () => {
-  assert.ok(src.includes("const baseSegs = segments || SEGMENTS"),
+  assert.ok(src.includes('const baseSegs = segments || (lang === "java" ? JAVA_SEGMENTS : SEGMENTS)'),
     "MemoryModel must derive segs from an optional `segments` override");
+  assert.ok(src.includes('hint: "new · garbage-collected"'),
+    "Java scenes must not label the heap with C++'s new/delete");
   assert.ok(src.includes("mm-seg--active"),
     "MemoryModel must emit the active-region class");
   assert.ok(src.includes("!segments && segs.some"),

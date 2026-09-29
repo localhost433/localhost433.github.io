@@ -9,6 +9,9 @@ import { seededShuffle, gradeOrder, hashSeed } from "@course/seq-order";
 export { DiagramSvg, diagramPalette, KnobBar, CompareCaption, CodeBlock, Mcq, McqFigure, mcq, renderCaption } from "@kit";
 import { DiagramSvg, diagramPalette, KnobBar, CompareCaption, CodeBlock, Mcq, McqFigure, mcq, renderCaption, tokenize, registerLang, highlightCode, highlight } from "@kit";
 
+// Builder `why` strings are authored in the same inline markdown as captions.
+const whyText = w => typeof w === "string" ? renderCaption(w) : w;
+
 /* ============================================================
    Shared textbook memory model for CSCI-UA-470.
    - MemoryModel: the canonical 4-segment diagram (Stack / Heap /
@@ -431,6 +434,11 @@ const SEGMENTS = [{
   label: "Code",
   hint: "machine instructions · read-only"
 }];
+// Java has no delete: its heap is reclaimed by the garbage collector.
+const JAVA_SEGMENTS = SEGMENTS.map(s => s.key === "heap" ? {
+  ...s,
+  hint: "new · garbage-collected"
+} : s);
 function Cell({
   cell,
   attachRef,
@@ -503,7 +511,8 @@ export function MemoryModel({
   regions = null,
   legend = null,
   segments = null,
-  active = null
+  active = null,
+  lang = "cpp"
 }) {
   const wrapRef = React.useRef(null);
   const refs = React.useRef({});
@@ -723,7 +732,7 @@ export function MemoryModel({
   const showLegend = legend === false ? false : hasPtr || hasRef || hasReclaimed || hasDangling || hasDestroyed || subOrigins.length > 0;
   // `regions` narrows the view to a subset of segments (e.g. stack-only side-by-side
   // figures); the stack/heap gap band only makes sense when the heap is also shown.
-  const baseSegs = segments || SEGMENTS;
+  const baseSegs = segments || (lang === "java" ? JAVA_SEGMENTS : SEGMENTS);
   const segs = regions ? baseSegs.filter(s => regions.includes(s.key)) : baseSegs;
   // the C++ stack/heap gap band ("grow toward each other") is meaningless for a
   // custom JVM segment set, so only show it for the default memory model.
@@ -1413,7 +1422,8 @@ export function MemoryScene({
     cells: prevStep.cells,
     segments: segments,
     active: prevStep.active,
-    axis: axis
+    axis: axis,
+    lang: lang
   })) : null, /*#__PURE__*/React.createElement(PredictGate, {
     predict: pred,
     onAnswer: answer
@@ -1421,7 +1431,8 @@ export function MemoryScene({
     cells: step.cells,
     segments: segments,
     active: step.active,
-    axis: axis
+    axis: axis,
+    lang: lang
   })), /*#__PURE__*/React.createElement(Section, {
     title: "Code",
     open: open.code,
@@ -1521,7 +1532,8 @@ function DualColumn({
   }, /*#__PURE__*/React.createElement("div", {
     className: "mm-dual__head"
   }, side.label), step.layout ? /*#__PURE__*/React.createElement(ObjectLayout, step.layout) : /*#__PURE__*/React.createElement(MemoryModel, {
-    cells: step.cells
+    cells: step.cells,
+    lang: side.lang || "cpp"
   }), step.asm || side.asm ? /*#__PURE__*/React.createElement(CodeAsmPane, {
     code: step.code || side.code,
     lang: side.lang || "cpp",
@@ -2690,7 +2702,8 @@ export function UmlLink({
   labelDy = -5,
   labelDx = 0,
   orth,
-  elbow = "hvh"
+  elbow = "hvh",
+  midY
 }) {
   const k = UML_LINK[kind] || UML_LINK.assoc;
   const lab = label !== undefined ? label : k.label;
@@ -2707,7 +2720,8 @@ export function UmlLink({
   if (orth && !axis) {
     let d;
     if (elbow === "vhv") {
-      const my = (from.y + to.y) / 2;
+      // midY lets sibling links turn at different heights instead of sharing one bus
+      const my = midY != null ? midY : (from.y + to.y) / 2;
       d = `M ${from.x} ${from.y} V ${my} H ${to.x} V ${to.y}`;
       lx = (from.x + to.x) / 2;
       ly = my;
@@ -3841,6 +3855,15 @@ function SeqObjectBox({
     }
   }, label));
 }
+
+// A halo in the panel colour behind message labels, so a lifeline or activation
+// bar passing behind a label is knocked out instead of striking through it.
+const SEQ_LABEL_HALO = {
+  paintOrder: "stroke",
+  stroke: "var(--mm-panel-bg)",
+  strokeWidth: 3.5,
+  strokeLinejoin: "round"
+};
 export function SequenceDiagram({
   participants = [],
   messages = [],
@@ -4000,7 +4023,6 @@ export function SequenceDiagram({
       y1 = msgY(f.to) + 16;
     const fx = minX - 30,
       fw = maxX - minX + 60;
-    const tabW = 34 + (f.kind === "loop" ? 4 : 0);
     return /*#__PURE__*/React.createElement("g", {
       key: "fr" + i
     }, /*#__PURE__*/React.createElement("rect", {
@@ -4014,22 +4036,7 @@ export function SequenceDiagram({
         stroke: "var(--mm-muted)",
         strokeWidth: 1.3
       }
-    }), /*#__PURE__*/React.createElement("path", {
-      d: `M ${fx} ${y0} h ${tabW} l 0 12 l -8 8 h ${-(tabW - 8)} Z`,
-      style: {
-        fill: "var(--mm-panel-bg)",
-        stroke: "var(--mm-muted)",
-        strokeWidth: 1.3
-      }
-    }), /*#__PURE__*/React.createElement("text", {
-      x: fx + 6,
-      y: y0 + 14,
-      style: {
-        fill: "var(--mm-muted)",
-        fontSize: 10.5,
-        fontWeight: 700
-      }
-    }, f.kind), (f.dividers || []).map((d, k) => /*#__PURE__*/React.createElement("line", {
+    }), (f.dividers || []).map((d, k) => /*#__PURE__*/React.createElement("line", {
       key: "dv" + k,
       x1: fx,
       y1: msgY(d.at) - SEQ.BAND - 2,
@@ -4059,6 +4066,28 @@ export function SequenceDiagram({
         strokeWidth: 1.2
       }
     });
+  }), fragments.map((f, i) => {
+    const y0 = msgY(f.from) - SEQ.BAND - 6;
+    const fx = minX - 30;
+    const tabW = 34 + (f.kind === "loop" ? 4 : 0);
+    return /*#__PURE__*/React.createElement("g", {
+      key: "ft" + i
+    }, /*#__PURE__*/React.createElement("path", {
+      d: `M ${fx} ${y0} h ${tabW} l 0 12 l -8 8 h ${-(tabW - 8)} Z`,
+      style: {
+        fill: "var(--mm-panel-bg)",
+        stroke: "var(--mm-muted)",
+        strokeWidth: 1.3
+      }
+    }), /*#__PURE__*/React.createElement("text", {
+      x: fx + 6,
+      y: y0 + 14,
+      style: {
+        fill: "var(--mm-muted)",
+        fontSize: 10.5,
+        fontWeight: 700
+      }
+    }, f.kind));
   }), messages.map((m, i) => {
     const y = msgY(i),
       A = byId[m.from],
@@ -4078,6 +4107,7 @@ export function SequenceDiagram({
         y: y,
         dominantBaseline: "central",
         style: {
+          ...SEQ_LABEL_HALO,
           fill: "var(--mm-cell-fg)",
           fontSize: 11,
           fontFamily: 'ui-monospace, Menlo, monospace'
@@ -4104,6 +4134,7 @@ export function SequenceDiagram({
       y: y - 6,
       textAnchor: "middle",
       style: {
+        ...SEQ_LABEL_HALO,
         fill: "var(--mm-cell-fg)",
         fontSize: 11,
         fontFamily: 'ui-monospace, Menlo, monospace'
@@ -4319,7 +4350,7 @@ export function SequenceOrderBuilder({
       className: "bex-status"
     }, "drop message ", i + 1)), checked && id && !grades[i].ok && byId[id].why ? /*#__PURE__*/React.createElement("div", {
       className: "bex-why"
-    }, byId[id].why) : null);
+    }, whyText(byId[id].why)) : null);
   }))), shownMessages.length ? /*#__PURE__*/React.createElement(SequenceDiagram, {
     participants: participants,
     messages: shownMessages,
@@ -4581,7 +4612,7 @@ export function ClassBoxBuilder({
     const s = slots.find(x => x.id === slotId);
     return checked && s && fills[slotId] && !slotOk(s) && s.why ? /*#__PURE__*/React.createElement("div", {
       className: "bex-why"
-    }, s.why) : null;
+    }, whyText(s.why)) : null;
   };
   return /*#__PURE__*/React.createElement("div", {
     className: "bex bex-cbx-ex"
@@ -4701,7 +4732,7 @@ export function ClassBoxBuilder({
     className: "bex-rel__glyph"
   }, r.glyph), " ", r.name))), checked && !relOk && relationship.why ? /*#__PURE__*/React.createElement("div", {
     className: "bex-why"
-  }, relationship.why) : null) : null), /*#__PURE__*/React.createElement("div", {
+  }, whyText(relationship.why)) : null) : null), /*#__PURE__*/React.createElement("div", {
     className: "bex-cbx-preview"
   }, /*#__PURE__*/React.createElement("div", {
     className: "bex-zone-label"
@@ -4745,7 +4776,7 @@ export function ClassBoxBuilder({
     sections: childSections,
     neutral: true,
     abstract: abstract
-  })), hasRel ? /*#__PURE__*/React.createElement("div", {
+  })), hasRel && !rel ? /*#__PURE__*/React.createElement("div", {
     className: "bex-cbx-preview__hint"
   }, "pick a line to join ", /*#__PURE__*/React.createElement("code", null, className), " to ", /*#__PURE__*/React.createElement("code", null, relationship.to)) : null)), /*#__PURE__*/React.createElement(BuilderControls, {
     status: status,
@@ -4955,8 +4986,11 @@ const setEqual = (a, b) => a.size === b.size && [...a].every(x => b.has(x));
    preserving input order for unrelated cases. Each connected component is walked
    from a MINIMUM-degree node (a leaf when one exists), so a hub — e.g. a
    generalization parent with two children — lands in the MIDDLE of its neighbours
-   and every inter-case relation draws across one gap, never through another oval. */
-function clusterByRelations(ids, relations) {
+   and every inter-case relation draws across one gap, never through another oval.
+   `actorsOf` (optional, id -> array of actor ids) breaks the remaining tie: a new
+   cluster starts from a leaf that shares an actor with the oval just placed, so one
+   actor's cases stay adjacent instead of landing at opposite ends of two clusters. */
+function clusterByRelations(ids, relations, actorsOf = null) {
   const present = new Set(ids);
   const adj = new Map(ids.map(id => [id, []]));
   relations.forEach(r => {
@@ -4989,8 +5023,11 @@ function clusterByRelations(ids, relations) {
   ids.forEach(id => {
     if (seen.has(id)) return;
     const comp = component(id);
-    // seed the walk at the lowest-degree node (leaf first), ties → earliest input
-    const start = comp.slice().sort((a, b) => deg(a) - deg(b) || pos[a] - pos[b])[0];
+    // seed the walk at the lowest-degree node (leaf first), ties → shares an actor
+    // with the previous oval, then earliest input
+    const prev = out.length ? out[out.length - 1] : null;
+    const shares = x => actorsOf && prev && (actorsOf[x] || []).some(a => (actorsOf[prev] || []).includes(a)) ? 0 : 1;
+    const start = comp.slice().sort((a, b) => deg(a) - deg(b) || shares(a) - shares(b) || pos[a] - pos[b])[0];
     const stack = [start];
     while (stack.length) {
       const x = stack.shift();
@@ -5013,6 +5050,16 @@ export function UseCaseBuilder({
   source
 }) {
   const byId = React.useMemo(() => Object.fromEntries(elements.map(e => [e.id, e])), [elements]);
+  const actorsOfCase = React.useMemo(() => {
+    const m = {};
+    associations.forEach(({
+      actor,
+      cases
+    }) => cases.forEach(c => {
+      (m[c] = m[c] || []).push(actor);
+    }));
+    return m;
+  }, [associations]);
   const shuffled = React.useMemo(() => seededShuffle(elements.map(e => e.id), hashSeed(system + elements.map(e => e.id).join(","))), [elements, system]);
 
   // Optional Identify stage: the requirements sentence as clickable spans. Each
@@ -5160,7 +5207,7 @@ export function UseCaseBuilder({
   // spans one gap (short arrow, label in the clear) instead of crossing unrelated
   // ovals. Cluster by the authored relations (stable) and keep placement order
   // within each cluster; unrelated cases keep their placement order.
-  const orderedSystem = React.useMemo(() => clusterByRelations(inSystem, relations), [inSystem.join(","), relations]);
+  const orderedSystem = React.useMemo(() => clusterByRelations(inSystem, relations, actorsOfCase), [inSystem.join(","), relations, actorsOfCase]);
   const previewCases = orderedSystem.map(id => ({
     id,
     label: byId[id].label

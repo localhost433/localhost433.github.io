@@ -7,7 +7,7 @@ date: 2025-06-17
 
 ---
 
-### What is Newrolinguistics?
+### What is Neurolinguistics?
 
 ---
 
@@ -184,7 +184,7 @@ Bemis & Pylkkänen (2011)
 
 Approach:
 - 2 words vs. 1 word
-  - Consonant string vs. psuedoword?
+  - Consonant string vs. pseudoword?
 - Task (picture matching)
 - Composition vs. List
   - To account for the visual presence of two words

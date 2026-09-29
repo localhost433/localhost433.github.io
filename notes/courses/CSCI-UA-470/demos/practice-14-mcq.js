@@ -10,7 +10,7 @@ export default mcq({
   questions: [{
     stem: "What is in the middle compartment of a box on an **object** diagram, as opposed to a class diagram?",
     choices: [{
-      text: "Attribute **values** (not declarations)",
+      text: "Attribute values (not declarations)",
       correct: true
     }, {
       text: "Attribute declarations"
@@ -23,12 +23,12 @@ export default mcq({
   }, {
     stem: "A `Window` owns its `TitleBar`: destroy the window and the title bar goes with it. Which relationship, and which notation?",
     choices: [{
-      text: "Composition — **filled** diamond at `Window` end",
+      text: "Composition — filled diamond at `Window` end",
       correct: true
     }, {
-      text: "Aggregation — **hollow** diamond at `Window` end"
+      text: "Aggregation — hollow diamond at `Window` end"
     }, {
-      text: "Composition — **filled** diamond at `TitleBar` end"
+      text: "Composition — filled diamond at `TitleBar` end"
     }, {
       text: "Association — a plain line"
     }],

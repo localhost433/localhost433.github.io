@@ -522,3 +522,99 @@ test("the H0 / H1 example reproduces slide 34, and H1 wins from N = 4", () => {
   assert.ok(t(e3, "h0") < t(e3, "h1"));
   assert.ok(t(e4, "h1") < t(e4, "h0"));
 });
+
+// ---- note 07 ----
+
+test("sigmoid(-s) = 1 - sigmoid(s), the identity behind P(y|x) = sigma(y w.x)", () => {
+  for (const s of [-30, -2.5, -0.1, 0, 0.7, 4, 30]) {
+    assert.ok(Math.abs(L.sigmoid(-s) - (1 - L.sigmoid(s))) < 1e-12);
+  }
+});
+
+test("logLoss is -log sigma(m), stable for large negative margins", () => {
+  for (const m of [-5, -1, 0, 0.5, 3]) {
+    assert.ok(Math.abs(L.logLoss(m) + Math.log(L.sigmoid(m))) < 1e-12);
+  }
+  assert.ok(Math.abs(L.logLoss(-800) - 800) < 1e-9);
+});
+
+test("binary cross-entropy with t = (1+y)/2 equals log(1 + e^{-y s})", () => {
+  for (const s of [-2, 0.3, 1.7]) for (const y of [-1, 1]) {
+    const t = (1 + y) / 2, p = L.sigmoid(s);
+    const bce = -(t * Math.log(p) + (1 - t) * Math.log(1 - p));
+    assert.ok(Math.abs(bce - L.logLoss(y * s)) < 1e-12);
+  }
+});
+
+test("logisticGrad matches a central finite difference of logisticEin", () => {
+  const pts = L.logisticSample(30, [0.5, 1.5], L.rng(7));
+  const w = [0.3, -0.8], h = 1e-6, g = L.logisticGrad(w, pts);
+  const d0 = (L.logisticEin([w[0] + h, w[1]], pts) - L.logisticEin([w[0] - h, w[1]], pts)) / (2 * h);
+  const d1 = (L.logisticEin([w[0], w[1] + h], pts) - L.logisticEin([w[0], w[1] - h], pts)) / (2 * h);
+  assert.ok(Math.abs(g[0] - d0) < 1e-7 && Math.abs(g[1] - d1) < 1e-7);
+});
+
+test("the average single-example gradient is the batch gradient (SGD is unbiased)", () => {
+  const pts = L.logisticSample(25, [-0.4, 2], L.rng(3));
+  const w = [0.1, 0.9], full = L.logisticGrad(w, pts);
+  const avg = pts.map((_, i) => L.logisticGrad(w, pts, [i]))
+    .reduce((s, g) => [s[0] + g[0] / pts.length, s[1] + g[1] / pts.length], [0, 0]);
+  assert.ok(Math.abs(avg[0] - full[0]) < 1e-12 && Math.abs(avg[1] - full[1]) < 1e-12);
+});
+
+test("Newton's minimizer has zero gradient, and batch descent approaches it", () => {
+  const pts = L.logisticSample(40, [0.5, 1.5], L.rng(2));
+  assert.strictEqual(L.separable1D(pts), false);
+  const ws = L.logisticNewton(pts), g = L.logisticGrad(ws, pts);
+  assert.ok(Math.hypot(g[0], g[1]) < 1e-10);
+  const r = L.descend(pts, { method: "batch", eta: 2, epochs: 200 }, L.rng(1));
+  assert.ok(Math.hypot(r.w[0] - ws[0], r.w[1] - ws[1]) < 1e-3);
+});
+
+test("separable data have no minimizer: E_in keeps falling as w is scaled up", () => {
+  const pts = [{ x: -1, y: -1 }, { x: -0.5, y: -1 }, { x: 0.4, y: 1 }, { x: 1.2, y: 1 }];
+  assert.strictEqual(L.separable1D(pts), true);
+  const e = [1, 10, 100].map((c) => L.logisticEin([0, c], pts));
+  assert.ok(e[0] > e[1] && e[1] > e[2] && e[2] > 0);
+});
+
+test("confusion metrics: F1 is the harmonic mean of precision and recall", () => {
+  const m = L.classMetrics({ TP: 30, FP: 10, FN: 20, TN: 40 });
+  assert.ok(Math.abs(m.f1 - 2 / (1 / m.precision + 1 / m.recall)) < 1e-12);
+  assert.strictEqual(L.classMetrics({ TP: 5, FP: 0, FN: 0, TN: 5 }).mcc, 1);
+});
+
+test("the slide 30 trap: all-negative at 0.1% prevalence is 99.9% accurate, recall 0", () => {
+  const m = L.classMetrics(L.confusionCounts({ prev: 0.001, tpr: 0, fpr: 0, total: 100000 }));
+  assert.ok(Math.abs(m.accuracy - 0.999) < 1e-12);
+  assert.strictEqual(m.recall, 0);
+  assert.ok(Number.isNaN(m.precision) && Number.isNaN(m.mcc));
+});
+
+test("slide 35's COVID example is precision: 0.9 sensitivity, 0.9 specificity, 1% prevalence", () => {
+  const m = L.classMetrics(L.confusionCounts({ prev: 0.01, tpr: 0.9, fpr: 0.1 }));
+  assert.ok(Math.abs(m.precision - 1 / 12) < 1e-12);
+});
+
+test("binormalAuc matches the pair-counting AUC of sampled scores", () => {
+  const r = L.rng(5), d = 1.5;
+  const pos = Array.from({ length: 1500 }, () => d / 2 + L.gauss(r));
+  const neg = Array.from({ length: 1500 }, () => -d / 2 + L.gauss(r));
+  assert.ok(Math.abs(L.aucFromScores(pos, neg) - L.binormalAuc(d)) < 0.02);
+  assert.ok(Math.abs(L.binormalAuc(0) - 0.5) < 1e-7);
+});
+
+test("biasVariance: E_out is bias^2 + variance + sigma^2, and E_in hits 0 when M = N - 1", () => {
+  const r9 = L.biasVariance(9, { K: 20, N: 10, sigma: 0.2 }, L.rng(4));
+  assert.ok(Math.abs(r9.eout - (r9.bias2 + r9.variance + 0.04)) < 1e-12);
+  assert.ok(r9.ein < 1e-6);
+  const r0 = L.biasVariance(0, { K: 20, N: 10, sigma: 0.2 }, L.rng(4));
+  assert.strictEqual(L.regimeOf(r0, 0.06), "bias");
+});
+
+test("biasVariance: the generalization gap E_out - E_in is positive for M >= 1", () => {
+  for (let M = 1; M <= 9; M++) {
+    const r = L.biasVariance(M, { K: 200, N: 10, sigma: 0.2 }, L.rng(17 + M));
+    assert.ok(r.eout > r.ein, `M = ${M}: E_out ${r.eout} <= E_in ${r.ein}`);
+  }
+});

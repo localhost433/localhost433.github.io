@@ -41,6 +41,10 @@ const JMP = {
 };
 const GROW = 200;
 const goodX = [560, 702, 844];
+const TY = FAT.y + diagramCardHeight(movable.sections);
+// [from x, to x, turn y]: Vehicle→Movable, Person→Movable, Bird→Movable,
+// Person→Jump-able, Bird→Jump-able. Vertical ones need no turn.
+const GOOD_EDGES = [[goodX[0] + CW / 2, goodX[0] + CW / 2, null], [goodX[1] + CW / 2 - 12, MOV.x + IW / 2, 150], [goodX[2] + CW / 2 - 12, MOV.x + IW / 2 + 22, 125], [goodX[1] + CW / 2 + 12, JMP.x + IW / 2 - 22, 170], [goodX[2] + CW / 2 + 12, goodX[2] + CW / 2 + 12, null]];
 export default function SolidIsp() {
   const badKids = [{
     spec: veh,
@@ -92,6 +96,7 @@ export default function SolidIsp() {
     key: i,
     orth: true,
     elbow: "vhv",
+    midY: [140, 160, 125][i],
     from: {
       x: k.x + CW / 2,
       y: BROW
@@ -140,20 +145,21 @@ export default function SolidIsp() {
       fontSize: 24,
       fontWeight: 800
     }
-  }, "\u21D2"), goodKids.map((k, i) => k.to.map((t, j) => /*#__PURE__*/React.createElement(UmlLink, {
-    key: i + "-" + j,
+  }, "\u21D2"), GOOD_EDGES.map(([fx, tx, my], i) => /*#__PURE__*/React.createElement(UmlLink, {
+    key: i,
     orth: true,
     elbow: "vhv",
+    midY: my,
     from: {
-      x: k.x + CW / 2,
+      x: fx,
       y: GROW
     },
     to: {
-      x: t.x + IW / 2 + (i - 1) * 22,
-      y: FAT.y + diagramCardHeight(movable.sections)
+      x: tx,
+      y: TY
     },
     kind: "realize"
-  }))), /*#__PURE__*/React.createElement(DiagramCard, {
+  })), /*#__PURE__*/React.createElement(DiagramCard, {
     x: MOV.x,
     y: MOV.y,
     w: IW,

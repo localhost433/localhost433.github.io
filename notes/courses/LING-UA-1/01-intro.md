@@ -74,15 +74,15 @@ Association of meaning with the words
 ---
 
 ### Key features of language
-1. Arbitrariness
+1. Arbitrariness\
    No inherent connection between the word and the object, just **convention**.
-2. Displacement
+2. Displacement\
    Use language to communicate about things that are unrelated to (or distant from) the here and now.
-3. Discreteness
+3. Discreteness\
    Made up of discrete units: sounds, words, phrases, etc.
-4. Hierarchical
+4. Hierarchical\
    Discrete units combine to form larger units, and larger units combine to form even larger units.
-5. Creativity
+5. Creativity\
    Use language to form an infinite set of well-formed, grammatical sentences.
 6. Rule-Governedness
    - Follow a set of conventional rules (grammar).

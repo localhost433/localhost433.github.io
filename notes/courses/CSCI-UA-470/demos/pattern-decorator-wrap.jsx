@@ -40,6 +40,8 @@ const CA = (hl) => catering("+catering", { amount: "40" }, { id: "ca", hl });
 const MU = (hl) => music("+music", { length: "3" }, { id: "mu", hl });
 const B1 = (target, hl) => stack("b1", "Booking", "ref", { id: "b1", to: target, hl });
 
+// Heap order from step 4 on is base, flowers, music, catering: in creation order the
+// b1 arrow and Catering.b both ended on the seam between +flowers and +music.
 const steps = [
   {
     line: 1,
@@ -67,7 +69,7 @@ const steps = [
   },
   {
     line: 4,
-    cells: [B1("mu", true), BK(), FL(), CA(), MU(true)],
+    cells: [B1("mu", true), BK(), FL(), MU(true), CA()],
     caption: {
       java: "Three decorators over one booking — assembled from three classes, not from a `FlowerCateringMusicBooking` class that somebody had to write.",
       intuition: "Four objects on the heap, one name on the stack, pointing at the **outermost** one.",
@@ -75,7 +77,7 @@ const steps = [
   },
   {
     line: 6,
-    cells: [B1("mu", true), BK(true), FL(true), CA(true), MU(true)],
+    cells: [B1("mu", true), BK(true), FL(true), MU(true), CA(true)],
     caption: {
       java: "`b1.cost()` runs `Music.cost()`, which adds its own and calls `b.cost()` — `Catering`, then `Flower`, then the base `Booking`, and the sums come back up the same chain.",
       intuition: "Follow the arrows: the call goes **outside-in**, the answer comes **inside-out**. Reordering lines 2–4 reorders the walk without changing a class.",

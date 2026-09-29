@@ -178,9 +178,8 @@ The full proof is subtle. One version (as outlined in the slides) assumes an add
 
 Let $S_n = X_1 + \cdots + X_n$. For fixed $k>0$ define events
 $$
-A_n = ( \left|\frac{S_n}{n} - \mu\right| \ge \frac{1}{k} ).
+A_n = \left\{ \left|\frac{S_n}{n} - \mu\right| \ge \frac{1}{k} \right\}.
 $$
-> Note: the set brackets can't be parsed on web correctly (probably because similar to tex grammar) so I replaced it with parentheses.
 
 If we can show
 $$

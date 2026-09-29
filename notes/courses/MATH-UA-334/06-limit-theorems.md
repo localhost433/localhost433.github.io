@@ -56,7 +56,7 @@ $$
 \E[f(U)] = \int_{-\infty}^{\infty} f(u) p_U(u) du = \int_0^1 f(u) \cdot 1 du = \int_0^1 f(x) dx = I
 $$
 
-1. Generate $U_1, \dots, U_n \sim \text{Unif}[0, 1]$ i.i.d..
+1. Generate $U_1, \dots, U_n \sim \text{Unif}[0, 1]$ i.i.d.
 2. Compute $Y_i = f(U_i)$, they are also i.i.d. with the same mean $\mu = I$.
 3. By LLN:
    $$
@@ -86,7 +86,7 @@ $$Z_n = \frac{\sqrt{n}(\overline{X}_n - \mu)}{\sigma} \xrightarrow{d} \mathcal{N
 > $$\lim_{n \to \infty} \mathbb{P}(Z_n \le z) = \Phi(z) = \int_{-\infty}^z \frac{1}{\sqrt{2\pi}} e^{-x^2/2} dx$$
 
 **Interpretation:**
-For large $n$, $\overline{X}_n \approx \sim \mathcal{N}(\mu, \frac{\sigma^2}{n})$.
+For large $n$, $\overline{X}_n \overset{\text{approx}}{\sim} \mathcal{N}(\mu, \frac{\sigma^2}{n})$.
 
 ### 3.2 Proof Sketch (Characteristic Functions)
 
@@ -135,7 +135,7 @@ The function $e^{-t^2/2}$ is the characteristic function of $\mathcal{N}(0,1)$. 
 Let $X_i \sim \text{Unif}[0, 1]$. We want $\mathbb{P}(\sum_{i=1}^{20} X_i \le 10)$.
 
 - $\mu = 1/2$, $\sigma^2 = 1/12$.
-- $S_{20} \approx \sim \mathcal{N}(20 \cdot 0.5, 20 \cdot \frac{1}{12}) = \sim \mathcal{N}(10, \frac{5}{3})$.
+- $S_{20} \overset{\text{approx}}{\sim} \mathcal{N}(20 \cdot 0.5, 20 \cdot \frac{1}{12}) = \mathcal{N}(10, \frac{5}{3})$.
 - Standardize and compute using the Standard Normal table.
 
 ---

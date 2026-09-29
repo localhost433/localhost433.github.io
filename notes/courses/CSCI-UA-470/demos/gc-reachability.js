@@ -318,11 +318,11 @@ export default function GcReachability() {
     cols: [{
       tag: "reachable",
       kind: "java",
-      children: /*#__PURE__*/React.createElement(React.Fragment, null, "An object is ", /*#__PURE__*/React.createElement("strong", null, "live"), " while a chain of references reaches it from a ", /*#__PURE__*/React.createElement("strong", null, "GC root"), " -- a live stack frame's locals or a static field. A, B and C qualify.")
+      children: /*#__PURE__*/React.createElement(React.Fragment, null, "An object is ", /*#__PURE__*/React.createElement("strong", null, "live"), " while a chain of references reaches it from a ", /*#__PURE__*/React.createElement("strong", null, "GC root"), " \u2014 a live stack frame's locals or a static field. A, B and C qualify.")
     }, {
       tag: "garbage",
       kind: "asm",
-      children: /*#__PURE__*/React.createElement(React.Fragment, null, "D, E and F are ", /*#__PURE__*/React.createElement("strong", null, "unreachable"), " from every root, so the collector reclaims them -- even though D and E point at each other. ", /*#__PURE__*/React.createElement("strong", null, "Reachability"), ", not reference counting, is the rule.")
+      children: /*#__PURE__*/React.createElement(React.Fragment, null, "D, E and F are ", /*#__PURE__*/React.createElement("strong", null, "unreachable"), " from every root, so the collector reclaims them \u2014 even though D and E point at each other. ", /*#__PURE__*/React.createElement("strong", null, "Reachability"), ", not reference counting, is the rule.")
     }, {
       tag: "vs C++",
       kind: "cpp",

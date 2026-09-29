@@ -72,7 +72,7 @@ The exam-usable difference is a count. **One** product hierarchy behind the door
 
 ## Practice
 
-Three patterns is too few for a naming quiz, so the drill is telling the neighbours apart. Two pairs are built to collide: one product hierarchy versus several related families, and a genuine Singleton versus a static utility class that merely looks like one. Labels are reused, so counting matters more than elimination. Check is one-shot — commit before you grade.
+Three patterns is too few for a naming quiz, so the drill is telling the neighbours apart. Two pairs are built to collide: one product hierarchy versus several related families, and two Singletons built by different means (a private constructor, and a one-constant enum), whose explanation also covers the static utility class that only looks like one. Labels are reused, so counting matters more than elimination. Check is one-shot — commit before you grade.
 
 ```artifact src=demos/practice-19-creational-match.jsx
 ```

@@ -21,6 +21,9 @@ import {
    side is whatever you already had, one class or ten. */
 
 const PAD = 14, CARD_W = 132, GAP = 12, MID = 84, FORK = 32;
+// The pattern half holds two trees side by side, so it is laid out tighter than the
+// rejected half; at the full sizes it rendered at about 0.7 scale and 8px text.
+const GOOD_W = 118, GOOD_GAP = 8, GOOD_MID = 52;
 
 const leaf = (title, attrs, ops) => ({
   title,
@@ -126,17 +129,17 @@ function badHalf(c) {
 // The pattern: visitor hierarchy on the left, element side on the right, joined by the
 // two dashed dependencies. Parent cards are centred on a shared axis so both read flat.
 function goodHalf(c) {
-  const A = treeLayout({ cx: 0, topY: PAD, cardW: CARD_W, gap: GAP, forkGap: FORK,
+  const A = treeLayout({ cx: 0, topY: PAD, cardW: GOOD_W, gap: GOOD_GAP, forkGap: FORK,
     parent: c.visitorParent, children: c.visitors });
   const aH = A.parent.h;
 
   const hasTree = c.elements.length > 0;
   const B = hasTree
-    ? treeLayout({ cx: 0, topY: PAD, cardW: CARD_W, gap: GAP, forkGap: FORK,
+    ? treeLayout({ cx: 0, topY: PAD, cardW: GOOD_W, gap: GOOD_GAP, forkGap: FORK,
         parent: c.elementParent, children: c.elements })
     : null;
   const bH = hasTree ? B.parent.h : diagramCardHeight(c.elementParent.sections, { title: true });
-  const bW = hasTree ? CARD_W : CARD_W + 30;
+  const bW = hasTree ? GOOD_W : GOOD_W + 30;
 
   // align the two parent cards on one horizontal axis
   const axis = PAD + Math.max(aH, bH) / 2;
@@ -145,12 +148,12 @@ function goodHalf(c) {
 
   const aShift = PAD - A.left;
   const aRight = A.right + aShift;
-  const bLeft = aRight + MID;
+  const bLeft = aRight + GOOD_MID;
   const bShift = hasTree ? bLeft - B.left : 0;
   const bX = hasTree ? null : bLeft;
 
-  const aParentRight = A.parent.cx + aShift + CARD_W / 2;
-  const bParentLeft = hasTree ? B.parent.cx + bShift - CARD_W / 2 : bX;
+  const aParentRight = A.parent.cx + aShift + GOOD_W / 2;
+  const bParentLeft = hasTree ? B.parent.cx + bShift - GOOD_W / 2 : bX;
   const bParentCx = hasTree ? B.parent.cx + bShift : bX + bW / 2;
 
   const ACCEPT = ["visitor.visit(this);"];

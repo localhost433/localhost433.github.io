@@ -40,7 +40,7 @@ The central idea:
 
 - Study of **US Congress members’** pronunciations of *Iraq*.
 - Main findings:
-  - The **short-vowel “I-rack”** variant (/Vɹæk/) was **most common overall**.
+  - The **short-vowel “I-rack”** variant (/Vɹæk/, V = a short vowel) was **most common overall**.
   - However, **Republicans** were **more likely** than Democrats to use this variant.
   - Other demographic factors did **not** significantly predict variant choice in the model.
 

@@ -31,7 +31,7 @@ export default mcq({
       why: "Now `Address` appears **only inside a method** — as a parameter. When `mail()` returns, the relationship is over: that is **dependency**, the dashed open arrow. The other method-local form is `Address a = new Address();` inside the body. *Where the reference lives* is the whole question: field → association, method → dependency.",
     },
     {
-      stem: "What does this pair translate to in a class diagram?",
+      stem: "What does this code translate to in a class diagram?",
       figure: { code: "class Manager {\n    List<Worker> workers;\n}", lang: "java" },
       choices: [
         { text: "Aggregation — hollow diamond at the `Manager` end", correct: true },

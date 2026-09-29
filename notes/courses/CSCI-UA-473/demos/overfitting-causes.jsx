@@ -94,7 +94,7 @@ export default function App() {
         <button type="button" style={buttonStyle(C)} onClick={() => setSeed((s) => s + 1)}>New draw</button>
       </div>
       <div style={{ display: "flex", flexWrap: "wrap", gap: "16px", alignItems: "center", justifyContent: "center" }}>
-        <canvas ref={ref} style={{ flex: `1 1 ${W}px`, maxWidth: W, aspectRatio: `${W} / ${H}` }}
+        <canvas ref={ref} style={{ flex: `1 1 ${W}px`, minWidth: 0, maxWidth: W, aspectRatio: `${W} / ${H}` }}
           aria-label={`One draw: the degree 2 fit has out-of-sample error ${fmt(trial.eout[2])} and the degree 10 fit ${fmt(trial.eout[10])}`} />
         <div style={{ flex: "0 1 220px", display: "flex", flexDirection: "column", gap: "10px" }}>
           <table style={{ ...readoutStyle(C), borderCollapse: "collapse", margin: 0 }}>

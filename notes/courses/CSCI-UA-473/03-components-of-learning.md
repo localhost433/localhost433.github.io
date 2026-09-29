@@ -247,7 +247,10 @@ Three experiments the controls are there for, each one a quiz question in disgui
   curve does not trend anywhere; an infinite run is the *only* symptom PLA gives you of
   non-separability.
 
-The final hypothesis $h$ at convergence is the $g$ that best approximates $f$. Slide 43
+The deck calls the final hypothesis $h$ at convergence "the $g$ that best approximates
+$f$". Read that as "the $g$ this run returns": PLA stops at the *first* separator it
+reaches, and nothing in it compares separators, so "best" here means only "consistent
+with every training point" (the gap max-margin methods close; see below). Slide 43
 states the guarantee: **so long as the data is linearly separable, the algorithm will find
 a separating hyperplane.**
 
@@ -392,7 +395,7 @@ of these are answered in this course:
 
 ## Practice
 
-Six questions on the figures above and on the two gaps the note flags as quiz-shaped.
+Questions on the figures above, the two gaps the note flags as quiz-shaped, and the model and learning types.
 
 ```artifact src=demos/practice-03.jsx math
 ```
@@ -406,9 +409,13 @@ Then two things to try in the figures themselves, each under a minute:
 - **Cube, target "None".** Clear the seeded sample and label corners yourself, one at a
   time, under **All 256 functions**. Watch "consistent with D" halve on every label while
   "unseen vertices decided" stays at zero - the sample is doing real work on $\mathbb H$
-  and none at all on generalization. Switch to **Linear threshold (104)** without touching
-  a label and the votes move off $0.50$ immediately. The bias is doing the work; nothing
-  about the data changed.
+  and none at all on generalization. Now switch to **Linear threshold (104)** with the
+  same labels, and the votes at the unseen corners move off $0.50$. (With *no* labels
+  they stay at $0.50$ even here: flipping every sign of a threshold function gives another
+  threshold function, so the 104 split 52/52 at every corner.) One label under all 256
+  functions leaves every other corner at $0.50$; the same label under the 104 moves its
+  three neighbours to $0.63$. The data did not change. What changed is $\mathbb H$, and
+  it takes the restricted $\mathbb H$ and the labels together to move a vote.
 
 ---
 

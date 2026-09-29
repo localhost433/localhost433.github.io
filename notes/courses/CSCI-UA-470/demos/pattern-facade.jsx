@@ -18,7 +18,7 @@ const SUB = [
   { title: "Food", sections: [{ rows: ["- name : String"] }, { rows: [] }] },
 ];
 const FACADE = { title: "Order", sections: [
-  { rows: ["- w : waiter", "- k : kitchen"] },
+  { rows: [] },
   { rows: ["+ prepare()"] },
 ]};
 
@@ -46,7 +46,7 @@ w1.deliver(f);`,
   },
   good: {
     width: W, height: H, viewBox: `0 0 ${W} ${H}`, maxWidth: 700,
-    ariaLabel: "Three subsystem classes — waiter with takeOrder and deliver, kitchen with prepareFood, and Food — sit in a row. Below them a facade class Order holds a waiter and a kitchen, offers prepare(), and depends on waiter and kitchen with dashed arrows. The subsystem classes are unchanged.",
+    ariaLabel: "Three subsystem classes — waiter with takeOrder and deliver, kitchen with prepareFood, and Food — sit in a row. Below them a facade class Order offers prepare(), whose body creates and drives the three, and depends on waiter, kitchen and Food with dashed arrows. The subsystem classes are unchanged.",
     node: (
       <g>
         <text x={PAD + rowW / 2} y={PAD + 6} textAnchor="middle"
@@ -57,7 +57,7 @@ w1.deliver(f);`,
           <DiagramCard key={s.title} x={PAD + i * (CARD_W + GAP)} y={PAD + 16} w={CARD_W}
             title={s.title} sections={s.sections} neutral />
         ))}
-        {[0, 1].map((i) => {
+        {[0, 1, 2].map((i) => {
           const cx = PAD + i * (CARD_W + GAP) + CARD_W / 2;
           return <UmlLink key={i} kind="depend" orth elbow="vhv"
             from={{ x: facX + CARD_W / 2, y: facY }} to={{ x: cx, y: PAD + 16 + subH }} />;

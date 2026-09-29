@@ -4,7 +4,8 @@ date: "2026-09-17"
 ---
 
 *Reading: Pacheco & Malensek §2.4-2.4.4. The histogram example at the end of the deck is
-that book's §2.7.1 worked through slide by slide.*
+that book's §2.7.1 worked through slide by slide. Where the reading goes past the slides,
+the paragraph names its section.*
 
 ## The burden moves
 
@@ -46,6 +47,18 @@ Every iteration is independent, nothing is shared, no order matters. Note what m
 easy - not that it is short, but that **no two iterations touch the same location**. The
 rest of the lecture is about what happens when that stops being true.
 
+*§2.4.2 names the pieces.* Giving each process/thread roughly the same amount of work is
+**load balancing**; a program that parallelizes by simply dividing the work is
+**embarrassingly parallel** (the book objects to the name: a parallel solution to anything
+is a cause for rejoicing). The other two jobs are intertwined: distributed-memory programs
+often synchronize implicitly by communicating, and shared-memory programs often communicate
+by synchronizing.
+
+*§2.4.1* also names the style almost every program in the course uses: **SPMD**, single
+program, multiple data. One executable acts like several programs by branching on its rank
+(`if (I'm thread/process 0) do this; else do that;`), which covers both data parallelism
+(each rank takes part of an array) and task parallelism (each rank takes a different task).
+
 ## Shared memory: managing threads
 
 Two strategies, and the tradeoff is resources against latency:
@@ -58,6 +71,12 @@ Two strategies, and the tradeoff is resources against latency:
 "Waste of system resources" is the pool sitting idle while holding its stacks and
 scheduler slots. On a shared machine that is a real cost; on a node you own for the
 duration, static wins nearly always.
+
+*§2.4.3 adds* two points. In shared memory, variables are **shared** (any thread can read or
+write them) or **private** (normally one thread), and communication goes through shared
+variables, so it is implicit. And the book prefers static threads partly because the
+paradigm is close to how distributed-memory programs are written, so one mindset carries
+over to the other.
 
 ## Nondeterminism
 
@@ -90,6 +109,22 @@ Unlock(&add_my_val_lock);
 `x += my_val` is the critical section because it is *three* operations - load `x`, add,
 store `x` - and a second thread can load between the first thread's load and store. Both
 then write back a value computed from the same starting point, and one update vanishes.
+
+*§2.4.3 works it with numbers:* `x` starts at 0, thread 0 computes 7 and thread 1 computes
+19, and in the book's schedule both load 0, so the final store leaves `x = 19` instead of
+26. Step it yourself below: "The book's order" replays that schedule, and the count at the
+bottom comes from trying every interleaving.
+
+```artifact src=demos/race-stepper.jsx
+```
+
+The book's vocabulary for the fix: an update is **atomic** if, once a thread finishes it, it
+looks as if no other thread modified the location in between. A **mutex** (lock) has
+hardware support; while one thread owns it, others calling `Lock` wait. The lock imposes no
+order - either thread may go first - and it **serializes** the critical section, so keep
+critical sections few and short. Alternatives: busy-waiting (below), **semaphores** (similar
+to mutexes, easier for some kinds of synchronization) and **monitors** (objects whose
+methods only one thread can run at a time).
 
 ## The question the deck poses and does not answer
 
@@ -145,6 +180,16 @@ The slide leaves it as an exercise. Four things, roughly in order of how badly t
    wait is a few hundred cycles and a core is free; wasteful otherwise, which is why locks
    that block exist.
 
+## Thread safety
+
+*§2.4.3, not on the slides.* Most serial functions are safe to call from threads, with a
+notable C exception: functions with `static` local variables. Ordinary locals live on each
+thread's own stack and are private, but a `static` local persists across calls and is
+effectively **shared** by every thread that calls the function. `strtok` keeps the string
+being split in a `static char*`, so if thread 1 starts splitting its string while thread 0
+is partway through, thread 0's string is lost and it may get thread 1's substrings. Such a
+function is **not thread safe**, and the usual cause is threads reaching shared data.
+
 ## Distributed memory: message passing
 
 No shared address space, so communication becomes explicit:
@@ -171,6 +216,32 @@ cannot have, because nothing is shared to race over.
 Read it together with L3's `l + n/b`: a message costs latency once plus size over
 bandwidth, which is why "reduce communication" in job 3 means *fewer* messages at least as
 much as *smaller* ones.
+
+*§2.4.4 fills in the rest:*
+
+- The example is SPMD, and `message` names a different block of memory in each process.
+- Distributed-memory APIs run on shared-memory hardware too; the programs start
+  **processes**, because the nodes may run separate operating systems.
+- `Send` may **block** until the matching `Receive` starts, or copy the message into its own
+  storage and return. `Receive` usually blocks until the message arrives.
+- APIs add **collectives**: a **broadcast** (one process sends the same data to all) and a
+  **reduction** (results combined into one, for example summed). The standard API is
+  **MPI**.
+- Message passing is called "the assembly language of parallel programming": parallelizing
+  usually means rewriting most of the program, data structures must be replicated or
+  distributed explicitly, and the rewrite cannot be done piece by piece.
+
+Two alternatives the book describes:
+
+- **One-sided communication** (remote memory access): one process updates another's memory
+  or reads from it, with no matching call. That saves synchronizing two processes and one
+  function call, but the writer must know when it is safe to write and the reader when the
+  value has arrived, which brings back synchronization or a flag to poll, and bugs are hard
+  to trace.
+- **PGAS** (partitioned global address space) languages give shared-memory syntax on
+  distributed hardware, but let the programmer control where each part of a shared array
+  lives, because a remote access can cost hundreds or thousands of times a local one.
+  Private variables live in the local memory of the core running the process.
 
 ## Foster's methodology (PCAM)
 
@@ -241,13 +312,18 @@ Inputs: `data_count`, the `data` array, `min_meas`, `max_meas`, `bin_count`. Out
 `data_count = 20`, `min_meas = 0.3`, `max_meas = 4.9`, `bin_count = 5`, the bins come out
 `bin_maxes = [0.9, 1.7, 2.9, 3.9, 4.9]` and `bin_counts = [6, 3, 2, 3, 6]`.
 
+**A boundary detail the deck and the book settle differently.** Six of the twenty values
+(0.9, 1.7, 2.9, 3.9 and both 4.9s) sit exactly on a bin edge, so `Find_bin` has to decide
+which side an edge belongs to. The deck's counts come out only if each bin *includes* its
+upper bound (0.9 goes in bin 0). The book (§2.7.1) uses the opposite rule,
+`bin_maxes[b-1] <= x < bin_maxes[b]`, and on this data that gives `[5, 3, 2, 3, 5]` with
+the two 4.9s in no bin at all, since they equal `max_meas`. Neither is wrong, but the rule
+has to be stated, and the last bin has to include `max_meas` either way.
+
 **First partition (slide 31).** One `Find_bin` task per element, one increment task per
 bin, and an arrow from each element to the bin it lands in:
 
-```
-Find_bin          ... [data[i-1]]  [data[i]]  [data[i+1]] ...
-                          \           /            |
-Increment         ... [bin_counts[b-1]++]  [bin_counts[b]++] ...
+```artifact src=demos/histogram-first-partition.jsx static
 ```
 
 The partition is fine and the communication is the problem: **many `Find_bin` tasks
@@ -255,15 +331,14 @@ converge on one increment task**, so every shared bin is a critical section. The
 communication checklist flags it directly - each task does not communicate with a small
 number of neighbors, and the increments cannot proceed concurrently.
 
+*§2.7.1 on when this partition is the right one:* on a GPU, whose thousands of threads
+could not each afford a private copy of the counts, the book keeps it and makes each
+increment an **atomic** operation, which GPUs implement fast.
+
 **Alternative partition (slide 32).** Give each thread a **local** count array, and add a
 second layer:
 
-```
-Find_bin      ... [data[i-1]] [data[i]] [data[i+1]] [data[i+2]] ...
-                       \  /                  |          |
-              ... [loc_bin_cts[b-1]++] [loc_bin_cts[b]++] ...
-                              \    /
-              ... [bin_counts[b-1] +=]  [bin_counts[b] +=] ...
+```artifact src=demos/histogram-local-arrays.jsx static
 ```
 
 Now the contended increment is gone: each thread increments only its own array, and the
@@ -276,6 +351,13 @@ threads: 1 into 0, 3 into 2, 5 into 4, 7 into 6; then 2 into 0 and 6 into 4; the
 Three rounds rather than seven sequential additions - $\lceil \log_2 p \rceil$ rounds for
 $p$ threads, and the halving is why the final reduction does not become the new bottleneck.
 
+```artifact src=demos/local-array-tree.jsx math
+```
+
+*§2.7.1* treats the tree as one of three options for this last step: with few threads and
+few bins, one thread does all the additions; with many more bins than threads, the bins are
+divided among the threads the way the data was; the tree is for many threads.
+
 ## Conclusions
 
 The deck closes on the four stages - partition, determine communication, aggregate if
@@ -287,22 +369,3 @@ needed, map - and one piece of advice:
 The histogram is the argument for it in miniature. Both partitions are correct. The first
 one serializes on the bins and the second one does not, and the difference was found by
 running the checklist, not by writing code.
-
-## Practice
-
-On paper, before the next lecture:
-
-1. State, in one sentence each, what cache coherence guarantees and what it does not, and
-   name the third mechanism that handles ordering across different locations.
-2. List all four defects in the busy-waiting code from memory. For each, say whether more
-   threads makes it worse, and whether a `volatile` qualifier fixes it.
-3. Take the vector-add loop from slide 3 and change `x[i] += y[i]` to
-   `x[i] += x[i-1]`. Which of the three jobs does that break, and at which PCAM stage would
-   the checklist have caught it?
-4. Run PCAM on counting word frequencies in a large text file. Give two different
-   partitions, then use the communication checklist to say which one you would keep.
-5. For the histogram with $p$ threads and $b$ bins, write the extra storage the local-array
-   version costs and the number of global updates it performs. At what ratio of
-   `data_count` to $p \times b$ does the replication stop paying for itself?
-6. Redraw the slide-33 reduction tree for 6 threads (not a power of two) and say how many
-   rounds it takes.

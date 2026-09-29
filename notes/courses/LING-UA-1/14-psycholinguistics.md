@@ -18,7 +18,7 @@ Psycholinguistics is concerned with all the linguistic levels, but areas like th
 
 ---
 
-#### Data in psucholinguistics
+#### Data in psycholinguistics
 - Rely on **behavioral data**, typically in controlled experiments.
 - There is a comprehension-production asymmetry as comprehension is easier to study in general.
 

@@ -72,8 +72,12 @@ export default patternFigure({
     String title, name, content;
     Deque<Edit> history;                 // the document keeps its own past
 
-    void setTitle(String t)   { history.push(new Edit("title", title));   title = t; }
-    void setContent(String c) { history.push(new Edit("content", content)); content = c; }
+    void setTitle(String t) {
+        history.push(new Edit("title", title));     title = t;
+    }
+    void setContent(String c) {
+        history.push(new Edit("content", content)); content = c;
+    }
 
     void undo() {
         Edit e = history.pop();

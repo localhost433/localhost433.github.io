@@ -135,6 +135,11 @@ and so on - then repeat with only the even-numbered cores, and again.
 | 8 | 7 + 7 | 3 + 3 |
 | 1000 | 999 + 999 | 10 + 10 |
 
+The deck's own numbers, both ways (switch between them and watch the height):
+
+```artifact src=demos/global-sum-tree.jsx math
+```
+
 Better than a factor of 2 at eight cores, almost a factor of 100 at a thousand. The reason
 is the shape: the master's work is $O(p)$ in the naive version and $O(\log_2 p)$ in the
 tree, so the gap widens without bound. Note that the *total* number of additions is
@@ -147,22 +152,3 @@ running time.
 - **Two ways of thinking:** task-parallelism and data-parallelism.
 - **Constraints that bound what you get:** communication, memory access, load balancing,
   synchronization.
-
-## What to retain from L1
-
-| Topic | Key point |
-|---|---|
-| The break | Dennard scaling stopped ~2002, not Moore's law; transistors kept coming, free speed did not |
-| Dennard scaling | smaller transistors → less delay, higher frequency, lower voltage → lower power |
-| Growth rates | 50%/yr until ~2002, ~20%/yr after |
-| Power identity | $P = CV^2F$, $\text{Perf} = \text{Cores} \times F$, with $V \propto F$ |
-| The multicore result | two cores at half clock = same performance, one quarter the power |
-| Why it works | perf is linear in $F$, power is cubic in $F$ |
-| Case for multicore | parallelism (instruction/task/data), power, latency hiding, simpler cores → yield → cost |
-| Vocabulary | core = CPU; chip in a socket; homogeneous vs. heterogeneous multicore |
-| Three failed escapes | better language, better hardware, auto-parallelizing compilers - the last gets worse with more cores |
-| Global sum | master does $O(p)$ work naively, $O(\log p)$ in a tree; 999 vs. 10 at 1000 cores |
-| What the tree changes | the critical path, not the total operation count |
-| Strategy | partitioning; task- vs. data-parallelism |
-| The four constraints | communication, memory access, load balancing, synchronization |
-| Slogan | the free lunch is over for software programmers |

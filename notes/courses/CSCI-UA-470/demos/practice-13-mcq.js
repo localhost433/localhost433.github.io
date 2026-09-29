@@ -10,7 +10,7 @@ export default mcq({
   questions: [{
     stem: "A message is drawn as a **solid line with a filled (solid) arrowhead**. What does that encode?",
     choices: [{
-      text: "A **synchronous** call — the caller blocks",
+      text: "A synchronous call — the caller blocks",
       correct: true
     }, {
       text: "An asynchronous call — the caller moves on"
@@ -23,7 +23,7 @@ export default mcq({
   }, {
     stem: "What does the thin **activation bar** on a lifeline represent?",
     choices: [{
-      text: "The object's method is **on the stack** — executing or waiting",
+      text: "The object's method is on the stack — executing or waiting",
       correct: true
     }, {
       text: "The object exists throughout the diagram's timeline"
@@ -36,7 +36,7 @@ export default mcq({
   }, {
     stem: "How is a **return** of control drawn, as opposed to the call that triggered it?",
     choices: [{
-      text: "**Dashed** line with **open** arrowhead",
+      text: "Dashed line with open arrowhead",
       correct: true
     }, {
       text: "Solid line with filled arrowhead"
@@ -49,7 +49,7 @@ export default mcq({
   }, {
     stem: "The receptionist checks the drink's quality by calling **its own** `checkQuality()` method. How does that appear on the diagram?",
     choices: [{
-      text: "A **self-call**: a small loop nesting a new activation bar",
+      text: "A self-call: a small loop nesting a new activation bar",
       correct: true
     }, {
       text: "A message arrow to the next participant on the right"
@@ -75,7 +75,7 @@ export default mcq({
   }, {
     stem: "A participant box at the top of the diagram reads **`Mike : Cashier`** with the text underlined. What is it?",
     choices: [{
-      text: "A specific **object** — instance of class `Cashier`",
+      text: "A specific object — instance of class `Cashier`",
       correct: true
     }, {
       text: "The class `Cashier` itself, as on a class diagram"

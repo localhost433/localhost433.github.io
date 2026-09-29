@@ -53,7 +53,7 @@ Rounded back vowels include [u ʊ oʊ ɔ].
 - **Diphthongs**: vowel quality moves during the syllable → [eɪ], [oʊ], [aɪ] (*bite*), [aʊ] (*bout*), [ɔɪ] (*boy*)
 - **Monophthongs**: relatively stationary tongue configuration.
 #### Lax vowels and word-final position
-The **lax** set [ɪ ɛ æ ʊ] (and [æ], [ɛ]) have distributional constraints in American English-for instance, they generally do **not** appear word-finally without a following consonant.
+The **lax** set [ɪ ɛ æ ʊ] has distributional constraints in American English—for instance, they generally do **not** appear word-finally without a following consonant.
 
 > **Quick practice:** Transcribe and label the vowels in your first name.
 
@@ -71,7 +71,7 @@ A **syllable** minimally contains a vowel; many English syllable shapes combine 
 
 #### Syllable-building heuristics (English)
 1. **Nucleus Rule:** create a syllable for every vowel/diphthong.
-2. **Onset Rule:** maximize onset consonants-but only sequences that can begin a word may be onsets (*e.g.*, [ŋ], /ktr/ cannot start English words).
+2. **Onset Rule:** maximize onset consonants—but only sequences that can begin a word may be onsets (*e.g.*, [ŋ], /ktr/ cannot start English words).
 3. **Coda Rule:** leftover consonants fill the coda.  
 Try parsing **conflict** and **manuscript** using these rules.
 

@@ -82,7 +82,7 @@ Overt prestige
 
 ##### How is the "Standard" Established
 - A standard variety is determined by social, economic, historical etc. factors, not because any linguistic features
-- A given linguistic feature is never inherently “standard” / “non-standard
+- A given linguistic feature is never inherently “standard” / “non-standard”
 - Social context dynamically assigns perceptions of “standardness” or “non-standardness” to certain features
 - Sometimes norms are implemented by some governing body, such as la Real Academia Española (RAE), l'Académie Française, but not always.
 
@@ -168,7 +168,7 @@ Overt prestige
   - a-prefixing
     - Variable: a-prefixing
     - Variants: *a*- or null
-    - Envelope of variation: Before -ing verbs with initial stres
+    - Envelope of variation: Before -ing verbs with initial stress
 
 ---
 
@@ -326,11 +326,11 @@ Two dimensions of variation in langugage:
 ---
 
 #### Register
-e.g., legalese
-e.g., sports announcer play-by-play commentar
-    <cyan>Bases loaded</cyan>, <purple>swing and a miss</purple>. <red>One and one</red>.
-e.g., meeting royalty
-    Address Queen as <purple>Your Majesty</purple>, other royals as <red>Your Royal Highness</red>
+- e.g., legalese
+- e.g., sports announcer play-by-play commentary\
+  <cyan>Bases loaded</cyan>, <purple>swing and a miss</purple>. <red>One and one</red>.
+- e.g., meeting royalty\
+  Address Queen as <purple>Your Majesty</purple>, other royals as <red>Your Royal Highness</red>
 
 ---
 
@@ -464,10 +464,10 @@ Bias against different languages
 #### Language and Government
 
 1. Language in the Courtroom
-Language equity
-Language in
+   - Language equity
+   - Language in
 
-2. Language and Immigration
-shibboleth, 'archaic' but here, the word used that align with certain groups
+2. Language and Immigration\
+   shibboleth, 'archaic' but here, the word used that align with certain groups
 
 Discursive Frames, Narrative Expectations

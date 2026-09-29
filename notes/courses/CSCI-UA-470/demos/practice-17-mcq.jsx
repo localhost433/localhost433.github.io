@@ -31,7 +31,7 @@ export default mcq({
     {
       stem: "\"Java has no static variables\" — why is that imprecise?",
       choices: [
-        { text: "Java has static **fields**; lacks C++ **local statics**", correct: true },
+        { text: "Java has static fields; lacks C++ local statics", correct: true },
         { text: "It is fully correct — Java has no `static`" },
         { text: "Java has local statics but no static fields" },
         { text: "Java `static` applies only to methods" },

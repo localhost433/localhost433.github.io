@@ -13,6 +13,7 @@
     { "src": "projects/js/**/*.js",       "use": "@vercel/static"  },
     
     { "src": "assets/images/**/*",        "use": "@vercel/static"  },
+    { "src": "assets/fonts/**/*",         "use": "@vercel/static"  },
     { "src": "posts/entries/**/*.md",     "use": "@vercel/static"  },
     { "src": "notes/courses/**/*",        "use": "@vercel/static"  },
 
@@ -32,7 +33,7 @@
   
   "headers": [
     {
-      "source": "/(.*)",
+      "source": "/((?!notes/artifact-host\\.html).*)",
       "headers": [
         {
           "key": "Content-Security-Policy",
@@ -43,6 +44,19 @@
         { "key": "X-Content-Type-Options", "value": "nosniff" },
         { "key": "X-Frame-Options", "value": "DENY" },
         { "key": "X-Robots-Tag", "value": "noai,noimageai" }
+      ]
+    },
+    {
+      "source": "/notes/artifact-host.html",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' blob: https://cdn.jsdelivr.net https://esm.sh; style-src 'unsafe-inline' https://cdn.jsdelivr.net https://esm.sh; img-src * data: blob:; font-src https: data:; connect-src https://esm.sh https://cdn.jsdelivr.net; base-uri 'none'; object-src 'none'; frame-ancestors 'self'"
+        },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(), payment=()" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Robots-Tag", "value": "noindex, noai, noimageai" }
       ]
     }
   ]

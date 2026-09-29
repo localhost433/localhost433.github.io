@@ -9,7 +9,9 @@ import { patternFigure, treeLayout, ClassTree, UmlLink } from "@course";
 
    The `- os : OS` field is the bridge. Everything else is two ordinary hierarchies. */
 
-const PAD = 14, CARD_W = 138, GAP = 16, MID = 76;
+// Tight on purpose: two trees side by side, and at 138/16/76 the figure rendered
+// at about 0.7 scale with 7px class text in a normal-width column.
+const PAD = 14, CARD_W = 122, GAP = 8, MID = 56;
 
 const leaf = (title, rows = []) => ({ title, sections: rows.length ? [{ rows }] : [] });
 const osOps = ["+ startup()", "+ shutdown()", "+ manageMemory()"];

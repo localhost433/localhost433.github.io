@@ -40,7 +40,7 @@ const SUB = [{
 const FACADE = {
   title: "Order",
   sections: [{
-    rows: ["- w : waiter", "- k : kitchen"]
+    rows: []
   }, {
     rows: ["+ prepare()"]
   }]
@@ -75,7 +75,7 @@ w1.deliver(f);`,
     height: H,
     viewBox: `0 0 ${W} ${H}`,
     maxWidth: 700,
-    ariaLabel: "Three subsystem classes — waiter with takeOrder and deliver, kitchen with prepareFood, and Food — sit in a row. Below them a facade class Order holds a waiter and a kitchen, offers prepare(), and depends on waiter and kitchen with dashed arrows. The subsystem classes are unchanged.",
+    ariaLabel: "Three subsystem classes — waiter with takeOrder and deliver, kitchen with prepareFood, and Food — sit in a row. Below them a facade class Order offers prepare(), whose body creates and drives the three, and depends on waiter, kitchen and Food with dashed arrows. The subsystem classes are unchanged.",
     node: /*#__PURE__*/React.createElement("g", null, /*#__PURE__*/React.createElement("text", {
       x: PAD + rowW / 2,
       y: PAD + 6,
@@ -94,7 +94,7 @@ w1.deliver(f);`,
       title: s.title,
       sections: s.sections,
       neutral: true
-    })), [0, 1].map(i => {
+    })), [0, 1, 2].map(i => {
       const cx = PAD + i * (CARD_W + GAP) + CARD_W / 2;
       return /*#__PURE__*/React.createElement(UmlLink, {
         key: i,

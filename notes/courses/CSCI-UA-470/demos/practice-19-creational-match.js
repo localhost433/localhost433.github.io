@@ -4,8 +4,8 @@ import { matchBuild } from "@course";
 /* note 19 practice; pick the creational pattern. Only three labels, so the drill
    cannot be "recognise the name"; it has to be "tell the neighbours apart". The
    pairs built to confuse: #2 vs #5 (one hierarchy vs several related families) and
-   #4 vs #1 (a class with a static accessor is not automatically a Singleton — the
-   question is whether a SECOND instance is possible). Labels are reused, not
+   #4 vs #1 (two Singletons by different routes, a private constructor and a
+   one-constant enum; the test for both is whether a SECOND instance is possible). Labels are reused, not
    consumed. One-shot: Check locks the board, Reset to retry. */
 
 export default matchBuild({
@@ -36,9 +36,9 @@ export default matchBuild({
     answer: "abstract",
     why: "Several **related** product hierarchies (Button, Menu, Scrollbar) produced as a matched set, with one door per family. Picking `MacWidgets` commits you to a whole consistent family — which is exactly what \"a family of related objects\" means."
   }, {
-    text: "`MathUtils` has a private constructor and only `static` methods — `sqrt`, `abs`, `round`. There is no instance field and nothing ever calls `new MathUtils()`.",
+    text: "`enum Registry { INSTANCE; … }` — every part of the program reaches the one registry through `Registry.INSTANCE`, and nothing can construct a second.",
     answer: "singleton",
-    why: "The closest of the three, and it is the trap: this is a *static utility class*, not really the pattern — there is **no instance at all**, so there is nothing for the pattern to guarantee one of. Of the three labels offered it is the Singleton family (private constructor, class-level access), but the exam-usable distinction is that a Singleton **hands you an object**; a utility class never does."
+    why: "An enum with one constant is Java's shortest Singleton: the language itself refuses to create a second constant, so the one-instance guarantee comes from the compiler instead of a private constructor. Compare the trap it is often confused with, a *static utility class* like `Math` (private constructor, only `static` methods): that has **no instance at all**, so there is nothing for the pattern to guarantee one of. A Singleton **hands you an object**; a utility class never does."
   }, {
     text: "A game has `MedievalFactory` and `SciFiFactory`. Each returns a `Weapon`, an `Enemy`, and a `Vehicle` from its own theme, so a sword never turns up beside a laser rifle.",
     answer: "abstract",

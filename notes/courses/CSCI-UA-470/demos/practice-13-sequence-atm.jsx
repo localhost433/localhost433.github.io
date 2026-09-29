@@ -27,7 +27,7 @@ export default sequenceOrder({
       why: "The account is debited before any money is released — the bank records it first." },
     { id: "balance", from: "bank", to: "atm", label: "newBalance", kind: "return",
       why: "The bank confirms the debit before the cash comes out." },
-    { id: "dispense", from: "atm", to: "cust", label: "dispense(cash)", kind: "return",
+    { id: "dispense", from: "atm", to: "cust", label: "cash", kind: "return",
       why: "Cash is handed over last, only after the account has actually been charged." },
   ],
   activations: [

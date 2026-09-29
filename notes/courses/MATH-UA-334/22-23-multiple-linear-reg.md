@@ -32,7 +32,7 @@ $$
 
 ## 2. Ordinary Least Squares (OLS) Estimator
 
-We seek the parameter vector $\hat{\beta}$ that strictly minimizes the sum of squared residuals $||Y - X\beta||^2$. By applying vector calculus, we differentiate the objective function with respect to the vector $\beta$ and set it to zero, leading to the famous Normal Equations:
+We seek the parameter vector $\hat{\beta}$ that strictly minimizes the sum of squared residuals $\lVert Y - X\beta \rVert^2$. By applying vector calculus, we differentiate the objective function with respect to the vector $\beta$ and set it to zero, leading to the famous Normal Equations:
 $$
     (X^T X) \hat{\beta} = X^T Y
 $$
@@ -103,11 +103,11 @@ $$
 
 ## 5. Estimating the Residual Variance
 
-To estimate the unknown variance $\sigma^2$, we calculate the expected value of the sum of squared residuals, $||\hat{e}||^2$.
-Since $\E[\hat{e}] = (I_n - P)\E[e] = 0$, we can heavily utilize the trace property $\E[||Z||^2] = \text{Tr}(\Sigma_{ZZ})$:
+To estimate the unknown variance $\sigma^2$, we calculate the expected value of the sum of squared residuals, $\lVert \hat{e} \rVert^2$.
+Since $\E[\hat{e}] = (I_n - P)\E[e] = 0$, we can heavily utilize the trace property $\E[\lVert Z \rVert^2] = \text{Tr}(\Sigma_{ZZ})$:
 $$
     \begin{align*}
-        \E[||\hat{e}||^2] &= \text{Tr}(\text{Cov}(\hat{e})) \\
+        \E[\lVert \hat{e} \rVert^2] &= \text{Tr}(\text{Cov}(\hat{e})) \\
         &= \text{Tr}(\text{Cov}((I_n - P)e)) \\
         &= \text{Tr}((I_n - P) \text{Cov}(e) (I_n - P)^T) \\
         &= \text{Tr}((I_n - P) (\sigma^2 I_n) (I_n - P)) \\
@@ -116,11 +116,11 @@ $$
 $$
 Because $(I_n - P)$ is also idempotent, $(I_n - P)^2 = (I_n - P)$.
 $$
-    \E[||\hat{e}||^2] = \sigma^2 \text{Tr}(I_n - P) = \sigma^2 (n - p)
+    \E[\lVert \hat{e} \rVert^2] = \sigma^2 \text{Tr}(I_n - P) = \sigma^2 (n - p)
 $$
 Therefore, the unbiased estimator for the error variance strictly divides by $n-p$:
 $$
-    S^2 = \frac{1}{n-p} ||\hat{e}||^2
+    S^2 = \frac{1}{n-p} \lVert \hat{e} \rVert^2
 $$
 
 ---
@@ -164,15 +164,15 @@ Here, the covariance matrix $\Omega$ is a diagonal matrix where each distinct di
 
 ### 7.1 Properties of the OLS Estimator under Heteroskedasticity
 
-If we naively apply the standard Ordinary Least Squares (OLS) estimator $\hat{\beta}_{OLS} = (X^T X)^{-1} X^T Y$, what happens to its fundamental statistical properties?
+If we naively apply the standard Ordinary Least Squares (OLS) estimator $\hat{\beta}_{\text{OLS}} = (X^T X)^{-1} X^T Y$, what happens to its fundamental statistical properties?
 
 **Bias:**
-The OLS estimator miraculously remains perfectly unbiased. Because $\E[e] = 0$ still holds, the same derivation as before gives $\E[\hat{\beta}_{OLS}] = \beta$.
+The OLS estimator miraculously remains perfectly unbiased. Because $\E[e] = 0$ still holds, the same derivation as before gives $\E[\hat{\beta}_{\text{OLS}}] = \beta$.
 
 **Variance:**
 The covariance matrix of the OLS estimator, however, fundamentally changes. We must explicitly incorporate the true error covariance matrix $\Omega$:
 $$
-    \Cov{\hat{\beta}_{OLS}}{\hat{\beta}_{OLS}} = (X^T X)^{-1} X^T \Omega X (X^T X)^{-1}
+    \Cov{\hat{\beta}_{\text{OLS}}}{\hat{\beta}_{\text{OLS}}} = (X^T X)^{-1} X^T \Omega X (X^T X)^{-1}
 $$
 This complex "sandwich" covariance structure proves that OLS is no longer the most efficient (lowest variance) estimator under heteroskedasticity.
 
@@ -182,12 +182,12 @@ To strictly optimize the estimation process, we employ **Weighted Least Squares 
 
 The WLS objective function explicitly minimizes the weighted sum of squared residuals:
 $$
-    Q_{WLS}(\beta) = (Y - X\beta)^T \Omega^{-1} (Y - X\beta) = \sum_{i=1}^n \frac{(y_i - x_i^T \beta)^2}{\sigma_i^2}
+    Q_{\text{WLS}}(\beta) = (Y - X\beta)^T \Omega^{-1} (Y - X\beta) = \sum_{i=1}^n \frac{(y_i - x_i^T \beta)^2}{\sigma_i^2}
 $$
 
 By taking the derivative with respect to $\beta$ and perfectly setting it to zero, we derive the WLS estimator:
 $$
-    \hat{\beta}_{WLS} = (X^T \Omega^{-1} X)^{-1} X^T \Omega^{-1} Y
+    \hat{\beta}_{\text{WLS}} = (X^T \Omega^{-1} X)^{-1} X^T \Omega^{-1} Y
 $$
 
 This estimator represents the absolute best linear unbiased estimator (BLUE) under heteroskedastic conditions, effectively restoring the optimality guarantees of the Gauss-Markov theorem.
@@ -204,13 +204,13 @@ To resolve this, we introduce **regularization**, which intentionally injects a 
 
 Ridge regression mathematically adds an $L_2$ penalty (the squared Euclidean norm of the parameter vector) to the standard least squares objective function:
 $$
-    \hat{\beta}_{ridge} = \arg\min_{\beta} \left( ||Y - X\beta||^2 + \lambda ||\beta||_2^2 \right)
+    \hat{\beta}_{\text{ridge}} = \arg\min_{\beta} \left( \lVert Y - X\beta \rVert^2 + \lambda \lVert \beta \rVert_2^2 \right)
 $$
 where $\lambda > 0$ is a strictly positive tuning parameter that directly controls the regularization strength.
 
 Taking the derivative and setting it to zero yields a beautiful closed-form solution:
 $$
-    \hat{\beta}_{ridge} = (X^T X + \lambda I_p)^{-1} X^T Y
+    \hat{\beta}_{\text{ridge}} = (X^T X + \lambda I_p)^{-1} X^T Y
 $$
 Because we mathematically add a strictly positive constant $\lambda$ to the diagonal of $X^T X$, the resulting matrix is strictly positive definite and universally invertible, completely solving the $p > n$ catastrophe.
 
@@ -218,7 +218,7 @@ Because we mathematically add a strictly positive constant $\lambda$ to the diag
 
 The LASSO (Least Absolute Shrinkage and Selection Operator) method introduces an $L_1$ penalty instead:
 $$
-    \hat{\beta}_{LASSO} = \arg\min_{\beta} \left( ||Y - X\beta||^2 + \lambda \sum_{j=0}^{p-1} |\beta_j| \right)
+    \hat{\beta}_{\text{LASSO}} = \arg\min_{\beta} \left( \lVert Y - X\beta \rVert^2 + \lambda \sum_{j=0}^{p-1} |\beta_j| \right)
 $$
 
 **Key Properties of LASSO:**

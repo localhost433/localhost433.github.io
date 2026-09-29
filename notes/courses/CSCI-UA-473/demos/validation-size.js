@@ -268,6 +268,7 @@ export default function App() {
     ref: ref,
     style: {
       flex: `1 1 ${W}px`,
+      minWidth: 0,
       maxWidth: W,
       aspectRatio: `${W} / ${H}`
     },
@@ -276,6 +277,7 @@ export default function App() {
     ref: sref,
     style: {
       flex: `1 1 ${FW}px`,
+      minWidth: 0,
       maxWidth: FW,
       aspectRatio: `${FW} / ${H}`
     },

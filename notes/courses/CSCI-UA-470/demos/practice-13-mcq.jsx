@@ -10,7 +10,7 @@ export default mcq({
     {
       stem: "A message is drawn as a **solid line with a filled (solid) arrowhead**. What does that encode?",
       choices: [
-        { text: "A **synchronous** call — the caller blocks", correct: true },
+        { text: "A synchronous call — the caller blocks", correct: true },
         { text: "An asynchronous call — the caller moves on" },
         { text: "A return of control to the caller" },
         { text: "The creation of a new object" },
@@ -20,7 +20,7 @@ export default mcq({
     {
       stem: "What does the thin **activation bar** on a lifeline represent?",
       choices: [
-        { text: "The object's method is **on the stack** — executing or waiting", correct: true },
+        { text: "The object's method is on the stack — executing or waiting", correct: true },
         { text: "The object exists throughout the diagram's timeline" },
         { text: "The object is being created at this moment" },
         { text: "A combined fragment is executing" },
@@ -30,7 +30,7 @@ export default mcq({
     {
       stem: "How is a **return** of control drawn, as opposed to the call that triggered it?",
       choices: [
-        { text: "**Dashed** line with **open** arrowhead", correct: true },
+        { text: "Dashed line with open arrowhead", correct: true },
         { text: "Solid line with filled arrowhead" },
         { text: "Solid line with open arrowhead" },
         { text: "An X at the lifeline's end" },
@@ -40,7 +40,7 @@ export default mcq({
     {
       stem: "The receptionist checks the drink's quality by calling **its own** `checkQuality()` method. How does that appear on the diagram?",
       choices: [
-        { text: "A **self-call**: a small loop nesting a new activation bar", correct: true },
+        { text: "A self-call: a small loop nesting a new activation bar", correct: true },
         { text: "A message arrow to the next participant on the right" },
         { text: "A dashed return arrow from the object to itself" },
         { text: "An X marking on the object's lifeline" },
@@ -60,7 +60,7 @@ export default mcq({
     {
       stem: "A participant box at the top of the diagram reads **`Mike : Cashier`** with the text underlined. What is it?",
       choices: [
-        { text: "A specific **object** — instance of class `Cashier`", correct: true },
+        { text: "A specific object — instance of class `Cashier`", correct: true },
         { text: "The class `Cashier` itself, as on a class diagram" },
         { text: "A use case named `Mike`" },
         { text: "A message from `Mike` to `Cashier`" },

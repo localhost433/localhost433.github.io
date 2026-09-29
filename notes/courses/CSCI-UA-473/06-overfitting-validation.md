@@ -437,12 +437,26 @@ falls monotonically. Test error falls, then rises. The left end is labeled **hig
 variance** and the right end **low bias, high variance**. It is the same U as L4's slide
 27, now with its two sides named.
 
-The mechanism, run forty times: forty datasets from the same noisy sine, a degree-$M$ fit
-to each, and their average $\bar g$ in bold. The right panel repeats the experiment at
-every degree.
+Slide 28's picture, measured, with the mechanism beside it. The left panel is forty
+datasets from the same noisy sine, a degree-$M$ fit to each, and their average $\bar g$ in
+bold. One of the forty is drawn solid, with its own ten points, so $E_{\text{in}}$ is
+something you can see. The right panel repeats the experiment at every degree and plots
+training error $E_{\text{in}}$ and test error
+$E_{\text{out}} = \textbf{bias} + \textbf{var} + \sigma^2$, with the two terms dashed
+underneath. The shading marks where each failure dominates.
 
 ```artifact src=demos/bias-variance.jsx
 ```
+
+The two failures can have similar test error and still call for opposite fixes, so the
+figure's table is worth learning as a diagnostic. **High bias:** $E_{\text{in}}$ is high
+and close to $E_{\text{out}}$; the fits agree with each other and are wrong together.
+More data does not help, but a bigger $\mathbb H$ (or less regularization) does.
+**High variance:** $E_{\text{in}}$ is low, often below the noise floor $\sigma^2$, which
+means the fit is reproducing noise, and the gap to $E_{\text{out}}$ is large; the fits
+disagree with each other. More data, regularization, or a smaller $\mathbb H$ help. In
+the figure, $M = 1$ and $M = 7$ have test errors of about 0.25 and 0.19, and they fail in
+these two opposite ways.
 
 One difference from the deck's $\mathbb E_D$: this demo keeps the ten $x$ positions fixed
 and redraws only the noise, so its variance is entirely noise-driven. Redrawing the $x$'s
@@ -570,66 +584,10 @@ What the deck changed:
 
 ## Practice
 
-On paper, cold. Each has a check.
+Questions on overfitting, ridge, validation and cross-validation, telling high bias from high variance, and the $\sin(\pi x)$ example.
 
-**Overfitting and regularization.**
-
-1. Five noisy points from a quadratic, fitted with a quartic. State $E_{\text{in}}$ without
-   computing anything, and say why the noise level does not affect it. *Check:* five
-   coefficients, five points: the design matrix is square, the fit interpolates, and
-   $E_{\text{in}} = 0$ for any noise.
-2. From the slide 6 table, compute $E_{\text{out}} - E_{\text{in}}$ for all four fits.
-   Explain why the noiseless experiment still produces the worst gap. *Check:* the gaps
-   are 0.077, 8.97, 0.091 and about 7680; the part of the 50th-order target that
-   $\mathbb H_{10}$ cannot represent plays the role of noise.
-3. Show that the two lines of the slide 7 ridge objective are equal only if $E_{\text{in}}$
-   is the bare RSS, and rewrite the first line for LFD's $E_{\text{in}} = \frac1N \operatorname{RSS}$.
-   Then show that the minimizer is L5's $(X^{\mathsf T}X + \lambda I)^{-1}X^{\mathsf T}y$ with the *same*
-   $\lambda$. *Check:* multiply the objective by $N$; a positive constant does not move the
-   minimizer.
-
-**Validation.**
-
-4. Prove $\mathbb E[E_{\text{val}}(g^-)] = E_{\text{out}}(g^-)$. Point to the step that
-   fails if $g^-$ was trained on some of the validation points. *Check:* it is the step
-   $\mathbb E[e(g^-(x_n), y_n)] = E_{\text{out}}(g^-)$, which needs $(x_n, y_n)$ independent
-   of $g^-$.
-5. With 0-1 error and $E_{\text{out}}(g^-) = 0.1$, find $\sigma^2(g^-)$ and the standard
-   deviation of $E_{\text{val}}$ at $K = 100$ and at $K = 400$. *Check:* a Bernoulli error
-   has $\sigma^2 = 0.1 \times 0.9 = 0.09$; the standard deviations are $0.03$ and $0.015$.
-6. $N = 100$. Apply the rule of thumb, then explain why $K = 80$ would give a *more*
-   precise estimate of a *worse* hypothesis. *Check:* $K = 20$; at $K = 80$, $g^-$ is
-   trained on 20 points.
-7. After fold-back, which hypothesis do you ship, which error do you report, and is the
-   report biased up or down for what you shipped? *Check:* ship $g$, report
-   $E_{\text{val}}(g^-)$, which is pessimistic for $g$ on the learning-curve assumption.
-8. You pick the best of $M = 10$ values of $\lambda$ by one validation set. Why is the
-   winner's $E_{\text{val}}$ optimistic, and which L4 argument is this? *Check:* it is the
-   minimum of ten noisy estimates, which is the $M$-bins argument; the bound picks up
-   $\sqrt{\ln M / K}$.
-9. $N = 1000$, one training costs one second. Compare the cost of leave-one-out with
-   10-fold. Then say what $K$ means in each of the three places the deck uses it.
-   *Check:* 1000 versus 10 trainings; $K$ is validation size, fold count, and number of
-   simulated datasets.
-
-**Bias and variance.**
-
-10. Derive $\mathbb E_D[E_{\text{out}}(g^{(D)})] = \textbf{bias} + \textbf{var}$ from the
-    definition, naming the identity used at each step. Then redo it with
-    $y = f(x) + \varepsilon$ and find where $\sigma^2$ enters. *Check:* the cross term
-    $-2\ \mathbb E[(g - f)\varepsilon]$ vanishes because $\varepsilon$ has mean zero and is
-    independent of $g^{(D)}$.
-11. For $\mathbb H_0$ on $\sin(\pi x)$ with $N$ points, show bias $= \tfrac12$ and
-    var $= \tfrac{1}{2N}$ exactly. *Check:* $\mathbb E[\sin(\pi x)] = 0$ and
-    $\mathbb E[\sin^2(\pi x)] = \tfrac12$ for uniform $x$ on $[-1, 1]$.
-12. Compute the best line in $\mathbb H_1$ against $\sin(\pi x)$ and its error. Then
-    explain why it differs from $\mathbb H_1$'s bias at $N = 2$. *Check:* $a = 3/\pi$,
-    error $\tfrac12 - 3/\pi^2 \approx 0.196$; $\bar g$ is an average of learned lines, not
-    the least-squares line.
-13. With $\operatorname{bias}(M) = 1/M^2$ and $\operatorname{var}(M) = M/8$, find where the
-    curves cross and where their sum is smallest. *Check:* they cross at $M = 2$; the
-    minimum is at $M = 16^{1/3} \approx 2.52$, which is why "pick the crossing" is the
-    wrong rule.
+```artifact src=demos/practice-06.jsx math
+```
 
 ---
 

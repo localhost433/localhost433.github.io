@@ -10,6 +10,9 @@ import { DiagramSvg, diagramPalette, KnobBar, CompareCaption, CodeBlock,
          Mcq, McqFigure, mcq, renderCaption,
          tokenize, registerLang, highlightCode, highlight } from "@kit";
 
+// Builder `why` strings are authored in the same inline markdown as captions.
+const whyText = (w) => (typeof w === "string" ? renderCaption(w) : w);
+
 /* ============================================================
    Shared textbook memory model for CSCI-UA-470.
    - MemoryModel: the canonical 4-segment diagram (Stack / Heap /
@@ -311,6 +314,8 @@ const SEGMENTS = [
   { key: "global", label: "Global / Static", hint: "globals, statics, literals" },
   { key: "code",   label: "Code",            hint: "machine instructions · read-only" },
 ];
+// Java has no delete: its heap is reclaimed by the garbage collector.
+const JAVA_SEGMENTS = SEGMENTS.map((s) => (s.key === "heap" ? { ...s, hint: "new · garbage-collected" } : s));
 
 function Cell({ cell, attachRef, regRef, onEnter, onLeave }) {
   const isPtr = cell.pointsTo != null || cell.kind === "ptr" || cell.kind === "ref";
@@ -359,7 +364,7 @@ function Cell({ cell, attachRef, regRef, onEnter, onLeave }) {
   );
 }
 
-export function MemoryModel({ cells = [], axis = true, regions = null, legend = null, segments = null, active = null }) {
+export function MemoryModel({ cells = [], axis = true, regions = null, legend = null, segments = null, active = null, lang = "cpp" }) {
   const wrapRef = React.useRef(null);
   const refs = React.useRef({});
   const [lines, setLines] = React.useState([]);
@@ -533,7 +538,7 @@ export function MemoryModel({ cells = [], axis = true, regions = null, legend = 
     : (hasPtr || hasRef || hasReclaimed || hasDangling || hasDestroyed || subOrigins.length > 0);
   // `regions` narrows the view to a subset of segments (e.g. stack-only side-by-side
   // figures); the stack/heap gap band only makes sense when the heap is also shown.
-  const baseSegs = segments || SEGMENTS;
+  const baseSegs = segments || (lang === "java" ? JAVA_SEGMENTS : SEGMENTS);
   const segs = regions ? baseSegs.filter((s) => regions.includes(s.key)) : baseSegs;
   // the C++ stack/heap gap band ("grow toward each other") is meaningless for a
   // custom JVM segment set, so only show it for the default memory model.
@@ -993,12 +998,12 @@ export function MemoryScene({ title, code, steps, lang = "cpp", asm, asmMap, asm
             {prevStep ? (
               <div className="mm-predict-ctx">
                 <span className="mm-predict-ctx__tag">state now — predict what changes</span>
-                {prevStep.layout ? <ObjectLayout {...prevStep.layout} /> : <MemoryModel cells={prevStep.cells} segments={segments} active={prevStep.active} axis={axis} />}
+                {prevStep.layout ? <ObjectLayout {...prevStep.layout} /> : <MemoryModel cells={prevStep.cells} segments={segments} active={prevStep.active} axis={axis} lang={lang} />}
               </div>
             ) : null}
             <PredictGate predict={pred} onAnswer={answer} />
           </div>
-        ) : step.layout ? <ObjectLayout {...step.layout} /> : <MemoryModel cells={step.cells} segments={segments} active={step.active} axis={axis} />}
+        ) : step.layout ? <ObjectLayout {...step.layout} /> : <MemoryModel cells={step.cells} segments={segments} active={step.active} axis={axis} lang={lang} />}
       </Section>
 
       <Section title="Code" open={open.code} onToggle={() => toggle("code")}>
@@ -1079,7 +1084,7 @@ function DualColumn({ side, step }) {
   return (
     <div className="mm-dual__col">
       <div className="mm-dual__head">{side.label}</div>
-      {step.layout ? <ObjectLayout {...step.layout} /> : <MemoryModel cells={step.cells} />}
+      {step.layout ? <ObjectLayout {...step.layout} /> : <MemoryModel cells={step.cells} lang={side.lang || "cpp"} />}
       {(step.asm || side.asm) ? (
         <CodeAsmPane
           code={step.code || side.code}
@@ -1692,7 +1697,7 @@ const UML_LINK = {
 // `orth` routes an ELBOW (only horizontal + vertical segments) when the endpoints
 // aren't already axis-aligned, so every arrow reads as H or V, never diagonal.
 // `elbow`: "hvh" exits horizontally (default), "vhv" exits vertically.
-export function UmlLink({ from, to, kind = "assoc", label, labelDy = -5, labelDx = 0, orth, elbow = "hvh" }) {
+export function UmlLink({ from, to, kind = "assoc", label, labelDy = -5, labelDx = 0, orth, elbow = "hvh", midY }) {
   const k = UML_LINK[kind] || UML_LINK.assoc;
   const lab = label !== undefined ? label : k.label;
   const axis = Math.abs(from.y - to.y) < 1 || Math.abs(from.x - to.x) < 1;
@@ -1704,7 +1709,8 @@ export function UmlLink({ from, to, kind = "assoc", label, labelDy = -5, labelDx
   if (orth && !axis) {
     let d;
     if (elbow === "vhv") {
-      const my = (from.y + to.y) / 2;
+      // midY lets sibling links turn at different heights instead of sharing one bus
+      const my = midY != null ? midY : (from.y + to.y) / 2;
       d = `M ${from.x} ${from.y} V ${my} H ${to.x} V ${to.y}`;
       lx = (from.x + to.x) / 2; ly = my;
     } else {
@@ -2270,6 +2276,10 @@ function SeqObjectBox({ label, cx, top }) {
   );
 }
 
+// A halo in the panel colour behind message labels, so a lifeline or activation
+// bar passing behind a label is knocked out instead of striking through it.
+const SEQ_LABEL_HALO = { paintOrder: "stroke", stroke: "var(--mm-panel-bg)", strokeWidth: 3.5, strokeLinejoin: "round" };
+
 export function SequenceDiagram({ participants = [], messages = [], activations = [],
   fragments = [], annotations = [], caption, maxWidth }) {
   const ps = participants.map((p) => ({ ...p, kind: p.kind || "object" }));
@@ -2388,14 +2398,10 @@ export function SequenceDiagram({ participants = [], messages = [], activations 
       {fragments.map((f, i) => {
         const y0 = msgY(f.from) - SEQ.BAND - 6, y1 = msgY(f.to) + 16;
         const fx = minX - 30, fw = (maxX - minX) + 60;
-        const tabW = 34 + (f.kind === "loop" ? 4 : 0);
         return (
           <g key={"fr" + i}>
             <rect x={fx} y={y0} width={fw} height={y1 - y0} rx={3}
               style={{ fill: "none", stroke: "var(--mm-muted)", strokeWidth: 1.3 }} />
-            <path d={`M ${fx} ${y0} h ${tabW} l 0 12 l -8 8 h ${-(tabW - 8)} Z`}
-              style={{ fill: "var(--mm-panel-bg)", stroke: "var(--mm-muted)", strokeWidth: 1.3 }} />
-            <text x={fx + 6} y={y0 + 14} style={{ fill: "var(--mm-muted)", fontSize: 10.5, fontWeight: 700 }}>{f.kind}</text>
             {(f.dividers || []).map((d, k) => (
               <line key={"dv" + k} x1={fx} y1={msgY(d.at) - SEQ.BAND - 2} x2={fx + fw} y2={msgY(d.at) - SEQ.BAND - 2}
                 style={{ stroke: "var(--mm-muted)", strokeWidth: 1, strokeDasharray: "5 4" }} />
@@ -2417,6 +2423,21 @@ export function SequenceDiagram({ participants = [], messages = [], activations 
         );
       })}
 
+      {/* fragment tabs go over the activation bars: drawn with the frame, the first
+          lifeline's bar covered the "alt" / "opt" name */}
+      {fragments.map((f, i) => {
+        const y0 = msgY(f.from) - SEQ.BAND - 6;
+        const fx = minX - 30;
+        const tabW = 34 + (f.kind === "loop" ? 4 : 0);
+        return (
+          <g key={"ft" + i}>
+            <path d={`M ${fx} ${y0} h ${tabW} l 0 12 l -8 8 h ${-(tabW - 8)} Z`}
+              style={{ fill: "var(--mm-panel-bg)", stroke: "var(--mm-muted)", strokeWidth: 1.3 }} />
+            <text x={fx + 6} y={y0 + 14} style={{ fill: "var(--mm-muted)", fontSize: 10.5, fontWeight: 700 }}>{f.kind}</text>
+          </g>
+        );
+      })}
+
       {/* messages */}
       {messages.map((m, i) => {
         const y = msgY(i), A = byId[m.from], B = byId[m.to];
@@ -2428,7 +2449,7 @@ export function SequenceDiagram({ participants = [], messages = [], activations 
                 style={lineFor(m.kind || "sync")} />
               {m.label ? (
                 <text x={sx + w + 7} y={y} dominantBaseline="central"
-                  style={{ fill: "var(--mm-cell-fg)", fontSize: 11, fontFamily: 'ui-monospace, Menlo, monospace' }}>{m.label}</text>
+                  style={{ ...SEQ_LABEL_HALO, fill: "var(--mm-cell-fg)", fontSize: 11, fontFamily: 'ui-monospace, Menlo, monospace' }}>{m.label}</text>
               ) : null}
             </g>
           );
@@ -2445,7 +2466,7 @@ export function SequenceDiagram({ participants = [], messages = [], activations 
             <line x1={sx} y1={y} x2={tx} y2={y} markerEnd={headFor(kind)} style={lineFor(kind)} />
             {m.label ? (
               <text x={(sx + tx) / 2} y={y - 6} textAnchor="middle"
-                style={{ fill: "var(--mm-cell-fg)", fontSize: 11, fontFamily: 'ui-monospace, Menlo, monospace' }}>{m.label}</text>
+                style={{ ...SEQ_LABEL_HALO, fill: "var(--mm-cell-fg)", fontSize: 11, fontFamily: 'ui-monospace, Menlo, monospace' }}>{m.label}</text>
             ) : null}
           </g>
         );
@@ -2588,7 +2609,7 @@ export function SequenceOrderBuilder({ prompt, participants = [], messages = [],
                   ) : <span className="bex-status">drop message {i + 1}</span>}
                 </div>
                 {checked && id && !grades[i].ok && byId[id].why
-                  ? <div className="bex-why">{byId[id].why}</div> : null}
+                  ? <div className="bex-why">{whyText(byId[id].why)}</div> : null}
               </li>
             );
           })}
@@ -2743,7 +2764,7 @@ export function ClassBoxBuilder({ prompt, className = "", abstract = false,
   const whyFor = (slotId) => {
     const s = slots.find((x) => x.id === slotId);
     return checked && s && fills[slotId] && !slotOk(s) && s.why
-      ? <div className="bex-why">{s.why}</div> : null;
+      ? <div className="bex-why">{whyText(s.why)}</div> : null;
   };
 
   return (
@@ -2813,7 +2834,7 @@ export function ClassBoxBuilder({ prompt, className = "", abstract = false,
                   </Chip>
                 ))}
               </div>
-              {checked && !relOk && relationship.why ? <div className="bex-why">{relationship.why}</div> : null}
+              {checked && !relOk && relationship.why ? <div className="bex-why">{whyText(relationship.why)}</div> : null}
             </div>
           ) : null}
         </div>
@@ -2834,7 +2855,7 @@ export function ClassBoxBuilder({ prompt, className = "", abstract = false,
             <DiagramCard x={px} y={hasRel ? childTop : parentTop} w={W} title={className}
               sections={childSections} neutral abstract={abstract} />
           </DiagramSvg>
-          {hasRel ? (
+          {hasRel && !rel ? (
             <div className="bex-cbx-preview__hint">pick a line to join <code>{className}</code> to <code>{relationship.to}</code></div>
           ) : null}
         </div>
@@ -2957,8 +2978,11 @@ const setEqual = (a, b) => a.size === b.size && [...a].every((x) => b.has(x));
    preserving input order for unrelated cases. Each connected component is walked
    from a MINIMUM-degree node (a leaf when one exists), so a hub — e.g. a
    generalization parent with two children — lands in the MIDDLE of its neighbours
-   and every inter-case relation draws across one gap, never through another oval. */
-function clusterByRelations(ids, relations) {
+   and every inter-case relation draws across one gap, never through another oval.
+   `actorsOf` (optional, id -> array of actor ids) breaks the remaining tie: a new
+   cluster starts from a leaf that shares an actor with the oval just placed, so one
+   actor's cases stay adjacent instead of landing at opposite ends of two clusters. */
+function clusterByRelations(ids, relations, actorsOf = null) {
   const present = new Set(ids);
   const adj = new Map(ids.map((id) => [id, []]));
   relations.forEach((r) => {
@@ -2982,8 +3006,11 @@ function clusterByRelations(ids, relations) {
   ids.forEach((id) => {
     if (seen.has(id)) return;
     const comp = component(id);
-    // seed the walk at the lowest-degree node (leaf first), ties → earliest input
-    const start = comp.slice().sort((a, b) => deg(a) - deg(b) || pos[a] - pos[b])[0];
+    // seed the walk at the lowest-degree node (leaf first), ties → shares an actor
+    // with the previous oval, then earliest input
+    const prev = out.length ? out[out.length - 1] : null;
+    const shares = (x) => (actorsOf && prev && (actorsOf[x] || []).some((a) => (actorsOf[prev] || []).includes(a)) ? 0 : 1);
+    const start = comp.slice().sort((a, b) => deg(a) - deg(b) || shares(a) - shares(b) || pos[a] - pos[b])[0];
     const stack = [start];
     while (stack.length) {
       const x = stack.shift();
@@ -3000,6 +3027,11 @@ function clusterByRelations(ids, relations) {
 export function UseCaseBuilder({ prompt, system = "System", elements = [],
   associations = [], relations = [], whyZone = {}, source }) {
   const byId = React.useMemo(() => Object.fromEntries(elements.map((e) => [e.id, e])), [elements]);
+  const actorsOfCase = React.useMemo(() => {
+    const m = {};
+    associations.forEach(({ actor, cases }) => cases.forEach((c) => { (m[c] = m[c] || []).push(actor); }));
+    return m;
+  }, [associations]);
   const shuffled = React.useMemo(
     () => seededShuffle(elements.map((e) => e.id), hashSeed(system + elements.map((e) => e.id).join(","))),
     [elements, system]);
@@ -3089,8 +3121,8 @@ export function UseCaseBuilder({ prompt, system = "System", elements = [],
   // ovals. Cluster by the authored relations (stable) and keep placement order
   // within each cluster; unrelated cases keep their placement order.
   const orderedSystem = React.useMemo(
-    () => clusterByRelations(inSystem, relations),
-    [inSystem.join(","), relations]);
+    () => clusterByRelations(inSystem, relations, actorsOfCase),
+    [inSystem.join(","), relations, actorsOfCase]);
   const previewCases = orderedSystem.map((id) => ({ id, label: byId[id].label }));
   const sysSet = new Set(inSystem), actSet = new Set(inActors);
   const previewAssoc = React.useMemo(() => {

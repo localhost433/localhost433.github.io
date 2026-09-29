@@ -244,16 +244,16 @@ export default function InterpJitTiers() {
     cols: [{
       tag: "start: interpret",
       kind: "java",
-      children: /*#__PURE__*/React.createElement(React.Fragment, null, "Every method begins ", /*#__PURE__*/React.createElement("strong", null, "interpreted"), " -- no compile pause, so startup is fast, but each call re-decodes the bytecode, so the per-call cost stays high.")
+      children: /*#__PURE__*/React.createElement(React.Fragment, null, "Every method begins ", /*#__PURE__*/React.createElement("strong", null, "interpreted"), " \u2014 no compile pause, so startup is fast, but each call re-decodes the bytecode, so the per-call cost stays high.")
     }, {
       tag: "hot: compile",
       kind: "asm",
-      children: /*#__PURE__*/React.createElement(React.Fragment, null, "The JVM counts invocations; past a threshold the ", /*#__PURE__*/React.createElement("strong", null, "JIT"), " compiles the method to ", /*#__PURE__*/React.createElement("strong", null, "native code"), " once -- a one-time cost -- and every later call runs that code far more cheaply.")
+      children: /*#__PURE__*/React.createElement(React.Fragment, null, "The JVM counts invocations; past a threshold the ", /*#__PURE__*/React.createElement("strong", null, "JIT"), " compiles the method to ", /*#__PURE__*/React.createElement("strong", null, "native code"), " once \u2014 a one-time cost \u2014 and every later call runs that code far more cheaply.")
     }, {
       tag: "both, together",
       kind: "cpp",
-      children: /*#__PURE__*/React.createElement(React.Fragment, null, "Interpreter and JIT are ", /*#__PURE__*/React.createElement("strong", null, "both"), " in the execution engine. This is why \"Java is interpreted\" is only half true -- hot code ends up as native machine code, like C++.")
+      children: /*#__PURE__*/React.createElement(React.Fragment, null, "Interpreter and JIT are ", /*#__PURE__*/React.createElement("strong", null, "both"), " in the execution engine. This is why \"Java is interpreted\" is only half true \u2014 hot code ends up as native machine code, like C++.")
     }],
-    punch: /*#__PURE__*/React.createElement(React.Fragment, null, "Interpretation is the default for fast startup; JIT compilation is the optimization for hot code -- the JVM uses both over a method's lifetime. ", /*#__PURE__*/React.createElement("em", null, "Tiered compilation"), " goes further: a quick first compile (C1) may be replaced by a more optimized one (C2), and a wrong assumption can deoptimize back to the interpreter.")
+    punch: /*#__PURE__*/React.createElement(React.Fragment, null, "Interpretation is the default for fast startup; JIT compilation is the optimization for hot code \u2014 the JVM uses both over a method's lifetime. ", /*#__PURE__*/React.createElement("em", null, "Tiered compilation"), " goes further: a quick first compile (C1) may be replaced by a more optimized one (C2), and a wrong assumption can deoptimize back to the interpreter.")
   }));
 }

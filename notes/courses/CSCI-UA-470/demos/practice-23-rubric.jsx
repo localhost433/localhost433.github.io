@@ -48,7 +48,7 @@ export default matchBuild({
       why: "*Does it depend on abstractions I control, not concrete details?* A high-level policy naming a low-level detail — and the practical tell is that you cannot test `ReportBuilder` without a live database. Specify a `ReportStore` interface and inject it, and the same model produces something you can mock, swap, or regenerate behind a fixed contract.",
     },
     {
-      code: "// prompt: \"retry the request up to three times\"\nRunnable retry = new Runnable() {\n    int n = 0;\n    public void run() {\n        try { call(); }\n        catch (E e) { if (++n < 3) run(); else throw e; }\n    }\n};   // 40 lines. It works.",
+      code: "// prompt: \"retry the request up to three times\"\nRunnable retry = new Runnable() {\n    int n = 0;\n    public void run() {\n        try { call(); }\n        catch (RuntimeException e) { if (++n < 3) run(); else throw e; }\n    }\n};   // 40 lines. It works.",
       answer: "P",
       why: "The rubric's last line, and the only one that is about the **reader** rather than the code: *is the intent obvious — a named pattern, not a clever tangle?* Nothing here is technically wrong, which is the trap. Generation is nearly free and review is not, so the scarce resource is attention — and code whose shape you can name in one word costs a reviewer seconds instead of minutes.",
     },

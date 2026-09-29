@@ -23,7 +23,7 @@ Start from the outside, the [note 12](note.html?course=CSCI-UA-470&note=12-uml-u
 ```artifact src=demos/pk-use-case.jsx static
 ```
 
-`Delete password` **«extends»** `View passwords`: deleting is *optional* behavior reachable only once you are looking at the list. The extend arrow is **dashed and points from the extension toward the base** — the extension knows the base it plugs into, never the reverse. This is the same extend edge from [note 12](note.html?course=CSCI-UA-470&note=12-uml-use-case-diagrams), here earning its place because delete is a conditional add-on to viewing, not a standalone goal.
+`Delete password` **«extend»** `View passwords`: deleting is *optional* behavior reachable only once you are looking at the list. The extend arrow is **dashed and points from the extension toward the base** — the extension knows the base it plugs into, never the reverse. This is the same extend edge from [note 12](note.html?course=CSCI-UA-470&note=12-uml-use-case-diagrams), here earning its place because delete is a conditional add-on to viewing, not a standalone goal.
 
 Forward link: each of these three ovals is a *conversation* waiting to be written out. That is the next artifact's job.
 
@@ -168,7 +168,7 @@ Two traps worth rehearsing. First, the *same* type `FileManager` would be an **a
 
 - L17 is the **integration** of notes 12–16: one small app modeled end to end, use case → sequence → class → code, and read back the other way.
 - The organizing idea is **bidirectional traceability** — every diagram element has a code home and every code shape names a diagram edge.
-- The use case's `Delete «extends» View` is a *conditional* add-on; the dashed extend arrow points from extension to base.
+- The use case's `Delete «extend» View` is a *conditional* add-on; the dashed extend arrow points from extension to base.
 - The sequence diagrams **discover the classes** (top-row participants) *and* decide their edges (a reference kept in a list → aggregation; a `new` inside a method → dependency).
 - In the class diagram the **hollow diamond** to `Password` becomes `JList` + `DefaultListModel`; the **dashed dependency** to `FileManager` becomes three method-local `new FileManager(...)`.
 - Stereotypes: **`MainGUI` = boundary + control**, **`Password` = entity**, **`FileManager` = boundary** (the file/DB wall). `Serializable` is what lets the entity cross that wall.

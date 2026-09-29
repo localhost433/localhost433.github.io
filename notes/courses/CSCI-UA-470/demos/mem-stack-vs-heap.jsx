@@ -56,7 +56,7 @@ function Panel({ lang, tag, title, sub, code, cells, flex }) {
         <span style={{ fontWeight: 600, color: "var(--mm-muted)", marginLeft: ".45rem" }}>{sub}</span>
       </div>
       <CodeBlock code={code} lang={lang} />
-      <div style={{ marginTop: ".5rem" }}><MemoryModel cells={cells} axis={false} /></div>
+      <div style={{ marginTop: ".5rem" }}><MemoryModel cells={cells} axis={false} lang={lang} /></div>
     </div>
   );
 }

@@ -1,17 +1,17 @@
 import { matchBuild } from "@course";
 
-/* notes 19–22 closer, the whole catalog on one board. Twenty labels, twelve
+/* notes 19–22 closer, the whole catalog on one board. Twenty labels, thirteen
    scenarios, no guarantee any label is used, so elimination is worthless and the
    only route is recognition. That is what a final actually asks.
 
    Item choice spans all three categories and puts one pair from each collision the
    four notes flag: Factory vs Abstract Factory, Proxy vs Decorator, State vs
-   Strategy, and Memento vs Command (#11 vs #12, adjacent on purpose — both keep an
+   Strategy, and Memento vs Command (#12 vs #13, adjacent on purpose — both keep an
    undo stack, and only what is IN the stack separates them).
    Every scenario is real code someone has written, not a lecture cast. */
 
 export default matchBuild({
-  prompt: "Twelve designs from across all four pattern lectures. Stamp the pattern each one is. Labels may be used once, more than once, or not at all — so recognise rather than eliminate.",
+  prompt: "Thirteen designs from across all four pattern lectures. Stamp the pattern each one is. Labels may be used once, more than once, or not at all — so recognise rather than eliminate.",
   paletteLabel: "Patterns",
   slotLabel: "is a",
   slotPlaceholder: "pattern",
@@ -44,7 +44,7 @@ export default matchBuild({
       why: "Private constructor plus a static accessor returning one stored object — the JDK's own Singleton. The exam-usable test is not the static method but whether a **second** instance is possible; here it is not.",
     },
     {
-      text: "`new BufferedReader(new InputStreamReader(System.in))` — each class is a `Reader`, each holds the one inside it, and reading from the outermost pulls through all of them.",
+      text: "`new DataInputStream(new BufferedInputStream(new FileInputStream(f)))` — each class is an `InputStream`, the outer two each hold the stream inside them, and reading from the outermost pulls through all of them.",
       answer: "decorator",
       why: "Wrappers that **stack**, each still being the type it wraps. The constructor argument is the giveaway: a class taking its own abstraction as a parameter is wrapping, not inheriting.",
     },

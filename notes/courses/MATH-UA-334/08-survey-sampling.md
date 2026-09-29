@@ -148,7 +148,7 @@ Because the random variables $X_1, \dots, X_n$ are dependent in the without-repl
 
 Under these conditions, the standardized sample mean converges in distribution to a standard Normal:
 $$
-    \frac{\overline{X}_n - \mu}{\sqrt{\Var{\overline{X}_n}}} \xrightarrow{d} \sim \mathcal{N}(0, 1)
+    \frac{\overline{X}_n - \mu}{\sqrt{\Var{\overline{X}_n}}} \xrightarrow{d} \mathcal{N}(0, 1)
 $$
 
 To construct a confidence interval, we estimate $\sigma^2$ using $S_n^2$. The $(1-\alpha)$ confidence interval for $\mu$ is:

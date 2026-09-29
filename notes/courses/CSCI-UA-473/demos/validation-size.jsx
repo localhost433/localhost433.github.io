@@ -116,9 +116,9 @@ export default function App() {
         <button type="button" style={buttonStyle(C)} onClick={() => setSeed((s) => s + 1)}>New datasets</button>
       </div>
       <div style={{ display: "flex", flexWrap: "wrap", gap: "12px", alignItems: "flex-start", justifyContent: "center" }}>
-        <canvas ref={ref} style={{ flex: `1 1 ${W}px`, maxWidth: W, aspectRatio: `${W} / ${H}` }}
+        <canvas ref={ref} style={{ flex: `1 1 ${W}px`, minWidth: 0, maxWidth: W, aspectRatio: `${W} / ${H}` }}
           aria-label={`At K = ${K}, the validation error averages ${row.meanVal.toFixed(3)} with standard deviation ${row.sdVal.toFixed(3)} across datasets`} />
-        <canvas ref={sref} style={{ flex: `1 1 ${FW}px`, maxWidth: FW, aspectRatio: `${FW} / ${H}` }}
+        <canvas ref={sref} style={{ flex: `1 1 ${FW}px`, minWidth: 0, maxWidth: FW, aspectRatio: `${FW} / ${H}` }}
           aria-label={`One dataset of ${N} points split into ${n} training and ${K} validation points, with the degree ${M} fit to the training part`} />
       </div>
       <p style={{ ...readoutStyle(C), margin: 0 }}>

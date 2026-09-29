@@ -25,7 +25,7 @@ const slots = m => [{
   type: "string",
   size: 32,
   origin: "person",
-  value: '"?"',
+  value: '""',
   hl: m === "teacher" || m === "amb"
 }, {
   name: "age",
@@ -38,7 +38,7 @@ const slots = m => [{
   type: "string",
   size: 32,
   origin: "person",
-  value: '"?"',
+  value: '""',
   hl: m === "student" || m === "amb"
 }, {
   name: "age",

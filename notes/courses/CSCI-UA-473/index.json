@@ -30,6 +30,11 @@
         "title": "6 - Overfitting, Validation & Bias-Variance",
         "date": "2026-09-22"
     },
+    {
+        "slug": "07-linear-classification",
+        "title": "7 - Linear Models for Classification: Logistic Regression",
+        "date": "2026-09-29"
+    },
     { "group": "Supplements" },
     {
         "slug": "00",

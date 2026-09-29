@@ -60,11 +60,11 @@ export default mcq({
       text: "No — first base shares `&t`; later base pointer is adjusted",
       correct: true
     }, {
-      text: "Yes — every base pointer equals `&t`"
+      text: "Yes — every base pointer equals `&t`, whatever the order"
     }, {
-      text: "No — neither base pointer equals `&t`"
+      text: "No — neither base pointer equals `&t`; both are offset"
     }, {
-      text: "Yes, but only if the bases are equal size"
+      text: "Yes, but only if the two bases are the same size"
     }],
     why: "The bases are laid out one after another, so only the **first** (`Student`) starts at the object's address. `Teacher`'s subobject sits further in, so `(Teacher*)&t` is **adjusted** by that offset — it is *not* `&t`. This pointer fix-up is a real cost of multiple inheritance."
   }, {

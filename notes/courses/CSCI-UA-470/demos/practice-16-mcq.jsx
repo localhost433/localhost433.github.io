@@ -21,7 +21,7 @@ export default mcq({
     {
       stem: "Per the lecture's warning: does SRP mean every class should perform a single, *simple* task?",
       choices: [
-        { text: "No — one **responsibility** (one reason to change); class can be rich", correct: true },
+        { text: "No — one responsibility (one reason to change); class can be rich", correct: true },
         { text: "Yes — classes should be minimal; ideally one method" },
         { text: "Yes — any class with multiple public methods violates SRP" },
         { text: "No — SRP only applies to interfaces" },
@@ -32,9 +32,9 @@ export default mcq({
       stem: "`getArea()` contains `if (type == \"circle\") … else if (type == \"rectangle\") …`. Adding `Cylinder` means editing this method. The OCP fix is…",
       choices: [
         { text: "Make `Shape` abstract with abstract `getArea()` in each subclass", correct: true },
-        { text: "Add the `cylinder` branch and document it" },
-        { text: "Replace strings with an `enum` for type-safety" },
-        { text: "Mark `getArea()` as `final`" },
+        { text: "Add the `cylinder` branch to the if-chain and document it" },
+        { text: "Replace the type strings with an `enum` for type-safety" },
+        { text: "Mark `getArea()` as `final` so no subclass can change it" },
       ],
       why: "**Open for extension, closed for modification**: the if-chain is a hand-rolled dispatch table that must be *reopened* for every new case. Moving each formula into its subclass lets overriding do the dispatch — `Cylinder` arrives as a new class and no existing file changes. An enum-switch is tidier but still a switch you must edit.",
     },

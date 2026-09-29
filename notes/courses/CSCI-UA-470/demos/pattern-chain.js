@@ -87,6 +87,7 @@ s.nextHandler = d;  d.nextHandler = c;  c.nextHandler = A;
 s.handle(a);           // same classes, new order, nothing recompiled
 
 c.nextHandler = d;  d.nextHandler = A;  A.nextHandler = s;
+s.nextHandler = null;  // still pointing at d from above: that would be a loop
 c.handle(a);           // starts mid-ladder; the secretary is last resort`,
     note: "Not one class changed between the three blocks — only `nextHandler` assignments. The chain is **data**, so it can come from a config file, differ per request type, or be rebuilt while the program runs."
   },

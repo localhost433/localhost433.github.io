@@ -36,7 +36,7 @@ const COLS = [{
   slots: [0, 0, 0, 0],
   ratio: "abstract by default",
   canNew: false,
-  newNote: "default / static fill corners"
+  newNote: "default / static / private bodies"
 }];
 const PANEL = {
   w: 250,
@@ -260,11 +260,11 @@ function Panel({
       fill: "var(--mm-muted)",
       fontSize: 8.8
     }
-  }, col.newNote.length > 22 ? col.newNote.split(" / ").map((t, k) => /*#__PURE__*/React.createElement("tspan", {
+  }, col.newNote.length > 22 ? (p => [p[0] + " /", p.slice(1).join(" / ")])(col.newNote.split(" / ")).map((t, k) => /*#__PURE__*/React.createElement("tspan", {
     key: k,
     x: x + 124,
     dy: k === 0 ? 0 : 11
-  }, t, k === 0 ? " /" : "")) : col.newNote));
+  }, t)) : col.newNote));
 }
 export default function ConcreteAbstractInterface() {
   return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
@@ -325,7 +325,7 @@ export default function ConcreteAbstractInterface() {
       fill: "var(--mm-muted)",
       fontSize: 10.4
     }
-  }, "A reference of any of the three is legal; only `new T()` needs every slot filled.")), /*#__PURE__*/React.createElement(CompareCaption, {
+  }, "A reference of any of the three is legal; only new T() needs every slot filled.")), /*#__PURE__*/React.createElement(CompareCaption, {
     cols: [{
       tag: "concrete",
       kind: "cpp",
@@ -347,7 +347,7 @@ export default function ConcreteAbstractInterface() {
     }, {
       tag: "interface",
       kind: "asm",
-      children: /*#__PURE__*/React.createElement(React.Fragment, null, "Abstract by default; a class can implement ", /*#__PURE__*/React.createElement("strong", null, "many"), " -- Java's controlled substitute for multiple inheritance. Modern Java adds ", /*#__PURE__*/React.createElement("code", {
+      children: /*#__PURE__*/React.createElement(React.Fragment, null, "Abstract by default; a class can implement ", /*#__PURE__*/React.createElement("strong", null, "many"), ", Java's controlled substitute for multiple inheritance. Modern Java adds ", /*#__PURE__*/React.createElement("code", {
         className: "ui-ic"
       }, "default"), "/", /*#__PURE__*/React.createElement("code", {
         className: "ui-ic"

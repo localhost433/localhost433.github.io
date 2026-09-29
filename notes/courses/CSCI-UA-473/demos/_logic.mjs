@@ -376,22 +376,53 @@ export const argmin = (arr) => arr.reduce((b, v, i) => (v < arr[b] ? i : b), 0);
    every one. gbar is the average fit; bias^2 measures how far gbar is from the
    target, variance how far the individual fits scatter around gbar. Both are
    averaged over a grid of x, against the noise-free target, so they are the
-   quantities in the decomposition and not a noisy estimate of them. */
+   quantities in the decomposition and not a noisy estimate of them.
+
+   Two details that the E_in / E_out curves depend on:
+   - The design is the midpoint grid x_i = (i + 1/2) / N, not sineSample's
+     endpoint grid. E_out averages over [0, 1], and the midpoint grid averages a
+     sine the same way (the endpoint grid, which puts two of ten points on zeros
+     of the sine, does not), so E_in and E_out measure the same thing and the gap
+     E_out - E_in comes out positive, as the theory says it should in expectation.
+     With the endpoint grid it was negative at M = 1.
+   - The fit is done in u = 2x - 1, on [-1, 1]. The degree-9 Vandermonde on [0, 1]
+     is ill-conditioned enough that the interpolating fit missed its own points
+     (E_in 0.004 instead of 0). `bvEval` evaluates a fit at x. */
+export const bvEval = (w, x) => polyEval(w, 2 * x - 1);
+
 export function biasVariance(M, { K = 40, N = 10, sigma = 0.2, grid = 100, lambda = 0 } = {}, rand) {
-  const fits = [];
+  const xs = Array.from({ length: N }, (_, i) => (i + 0.5) / N);
+  const us = xs.map((x) => 2 * x - 1);
+  const fits = [], samples = [];
+  let ein = 0;   // mean training MSE, each fit on its own noisy sample
   for (let k = 0; k < K; k++) {
-    const { xs, ys } = sineSample(N, sigma, rand);
-    fits.push(polyFit(xs, ys, M, lambda));
+    const ys = xs.map((x) => TARGET(x) + sigma * gauss(rand));
+    const w = polyFit(us, ys, M, lambda);
+    fits.push(w); samples.push({ xs, ys });
+    ein += xs.reduce((s, x, i) => s + Math.pow(bvEval(w, x) - ys[i], 2), 0) / N;
   }
   const gx = Array.from({ length: grid + 1 }, (_, i) => i / grid);
-  const preds = fits.map((w) => gx.map((x) => polyEval(w, x)));
+  const preds = fits.map((w) => gx.map((x) => bvEval(w, x)));
   const gbar = gx.map((_, i) => preds.reduce((s, p) => s + p[i], 0) / K);
   let bias2 = 0, variance = 0;
   gx.forEach((x, i) => {
     bias2 += Math.pow(gbar[i] - TARGET(x), 2);
     variance += preds.reduce((s, p) => s + Math.pow(p[i] - gbar[i], 2), 0) / K;
   });
-  return { fits, gx, gbar, bias2: bias2 / gx.length, variance: variance / gx.length };
+  // E_out against noisy labels: bias^2 + variance + sigma^2, exactly, because
+  // bias^2 + variance is the fits' mean squared distance from the target.
+  bias2 /= gx.length; variance /= gx.length;
+  return { fits, samples, gx, gbar, bias2, variance, ein: ein / K, eout: bias2 + variance + sigma * sigma };
+}
+
+/* Which side of the U a degree is on, from the decomposition rather than from the
+   position of the minimum: the bottom of the U is flat enough that its argmin moves
+   with the seed. Bias-dominated degrees are "bias"; degrees whose E_out has climbed
+   more than `slack` above the best and whose excess is mostly variance are
+   "variance"; the rest are the flat bottom. */
+export function regimeOf(r, best, slack = 1.5) {
+  if (r.bias2 > r.variance) return "bias";
+  return r.eout > slack * best ? "variance" : "balanced";
 }
 
 /* ---- Dense linear algebra for the regularization path (note 05) ---- */
@@ -717,4 +748,154 @@ export function linesExperiment(N, { T = Math.round(600000 / N), grid = 100, kee
     };
   }
   return out;
+}
+
+/* ---- Logistic regression and gradient descent (note 07) ----
+   One input plus the bias, so w = [w0, w1] and E_in is a surface over a plane the
+   figure can draw as contours. The labels are drawn from a logistic target, which
+   is the deck's noisy-target story (slide 6) made literal: y = +1 with probability
+   sigma(wTrue . x). */
+
+export const sigmoid = (s) => (s >= 0 ? 1 / (1 + Math.exp(-s)) : Math.exp(s) / (1 + Math.exp(s)));
+
+// log(1 + e^{-m}) for a margin m = y w.x, without overflowing e^{-m} when m << 0.
+export const logLoss = (m) => (m > 0 ? Math.log1p(Math.exp(-m)) : -m + Math.log1p(Math.exp(m)));
+
+export function logisticSample(N, wTrue, rand, span = 2) {
+  const pts = [];
+  for (let i = 0; i < N; i++) {
+    const x = span * (2 * rand() - 1);
+    pts.push({ x, y: rand() < sigmoid(wTrue[0] + wTrue[1] * x) ? 1 : -1 });
+  }
+  return pts;
+}
+
+export const logisticEin = (w, pts) =>
+  pts.reduce((s, p) => s + logLoss(p.y * (w[0] + w[1] * p.x)), 0) / pts.length;
+
+/* Slide 16's gradient, -(1/|B|) sum y x / (1 + e^{y w.x}), written with
+   1 / (1 + e^{t}) = sigma(-t). `idx` picks the examples: all of them for batch
+   descent, one for SGD, M for a mini-batch. */
+export function logisticGrad(w, pts, idx = null) {
+  const I = idx || pts.map((_, i) => i);
+  let g0 = 0, g1 = 0;
+  for (const i of I) {
+    const p = pts[i];
+    const k = -p.y * sigmoid(-p.y * (w[0] + w[1] * p.x));
+    g0 += k; g1 += k * p.x;
+  }
+  return [g0 / I.length, g1 / I.length];
+}
+
+/* With one input, the data are separable exactly when some threshold on x puts
+   every +1 on one side. Then E_in has no minimizer: scaling a separating w up
+   drives every margin to +infinity and E_in to 0 without reaching it. */
+export function separable1D(pts) {
+  const s = [...pts].sort((a, b) => a.x - b.x);
+  const flips = s.reduce((n, p, i) => n + (i && p.y !== s[i - 1].y ? 1 : 0), 0);
+  return flips <= 1;
+}
+
+// Newton's method, for the reference minimizer the descent paths are chasing.
+export function logisticNewton(pts, iters = 60) {
+  let w = [0, 0];
+  for (let t = 0; t < iters; t++) {
+    const g = logisticGrad(w, pts);
+    let a = 0, b = 0, c = 0;
+    for (const p of pts) {
+      const s = sigmoid(w[0] + w[1] * p.x), v = s * (1 - s);
+      a += v; b += v * p.x; c += v * p.x * p.x;
+    }
+    a /= pts.length; b /= pts.length; c /= pts.length;
+    const det = a * c - b * b;
+    if (!(det > 1e-12)) break;
+    w = [w[0] - (c * g[0] - b * g[1]) / det, w[1] - (-b * g[0] + a * g[1]) / det];
+  }
+  return w;
+}
+
+/* Slides 17-19. Every variant takes w <- w - eta g; they differ only in how many
+   examples g is averaged over (N, 1 or M) and so in how many updates one pass over
+   the data buys. `trace` is indexed by epochs (gradient evaluations / N), the fair
+   x-axis: per update, batch descent does N times the work of SGD. SGD picks its
+   example uniformly with replacement, as slide 18 says; a mini-batch is M distinct
+   examples. */
+export function descend(pts, { method = "batch", eta = 1, epochs = 20, batch = 8, w0 = [0, 0] } = {}, rand) {
+  const N = pts.length;
+  const size = method === "batch" ? N : method === "sgd" ? 1 : Math.min(batch, N);
+  const perEpoch = Math.max(1, Math.round(N / size));
+  let w = w0.slice(), evals = 0;
+  const path = [w.slice()], trace = [[0, logisticEin(w, pts)]];
+  const all = pts.map((_, i) => i);
+  for (let e = 0; e < epochs; e++) {
+    for (let s = 0; s < perEpoch; s++) {
+      let idx = null;
+      if (method === "sgd") idx = [Math.floor(rand() * N)];
+      else if (method !== "batch") {
+        const a = all.slice();
+        for (let i = 0; i < size; i++) {
+          const j = i + Math.floor(rand() * (N - i));
+          [a[i], a[j]] = [a[j], a[i]];
+        }
+        idx = a.slice(0, size);
+      }
+      const g = logisticGrad(w, pts, idx);
+      w = [w[0] - eta * g[0], w[1] - eta * g[1]];
+      evals += size;
+      path.push(w.slice());
+      trace.push([evals / N, logisticEin(w, pts)]);
+      if (!Number.isFinite(w[0] + w[1])) return { path, trace, w, diverged: true };
+    }
+  }
+  return { path, trace, w, diverged: false };
+}
+
+/* ---- Thresholds, the confusion matrix and ROC (note 07, slides 24-33) ----
+   The scores s = w.x of the two classes are modelled as unit-variance normals at
+   -d/2 (negatives) and +d/2 (positives), the textbook "binormal" ROC. The model
+   outputs sigma(s), so a threshold theta on the probability is the threshold
+   t = log(theta / (1 - theta)) on the score. */
+
+// Abramowitz and Stegun 7.1.26: |error| < 1.5e-7, plenty for a figure.
+export function normCdf(z) {
+  const t = 1 / (1 + 0.3275911 * Math.abs(z) / Math.SQRT2);
+  const y = 1 - (((((1.061405429 * t - 1.453152027) * t) + 1.421413741) * t - 0.284496736) * t + 0.254829592) * t
+    * Math.exp(-(z * z) / 2);
+  return z >= 0 ? (1 + y) / 2 : (1 - y) / 2;
+}
+
+export const logit = (p) => Math.log(p / (1 - p));
+
+export const binormalRates = (d, t) => ({ tpr: 1 - normCdf(t - d / 2), fpr: 1 - normCdf(t + d / 2) });
+
+// P(score of a random positive > score of a random negative): the difference of
+// the two is N(d, 2), so the probability is Phi(d / sqrt 2).
+export const binormalAuc = (d) => normCdf(d / Math.SQRT2);
+
+// Each rate lives inside one column of the confusion matrix, so prevalence only
+// rescales the columns. That is slide 31's "independent of the class distribution".
+export const confusionCounts = ({ prev, tpr, fpr, total = 10000 }) => ({
+  TP: total * prev * tpr, FN: total * prev * (1 - tpr),
+  FP: total * (1 - prev) * fpr, TN: total * (1 - prev) * (1 - fpr),
+});
+
+// NaN marks a 0/0 (precision with no positive predictions, MCC with an empty
+// row or column), which the figure prints as "undefined" rather than as a number.
+export function classMetrics({ TP, FP, FN, TN }) {
+  const div = (a, b) => (b > 0 ? a / b : NaN);
+  const precision = div(TP, TP + FP), recall = div(TP, TP + FN);
+  const den = Math.sqrt((TP + FP) * (TP + FN) * (TN + FP) * (TN + FN));
+  return {
+    accuracy: div(TP + TN, TP + TN + FP + FN),
+    precision, recall, specificity: div(TN, TN + FP),
+    f1: div(2 * TP, 2 * TP + FP + FN),
+    mcc: div(TP * TN - FP * FN, den),
+  };
+}
+
+// Empirical AUC by counting pairs, ties as one half. Used to test binormalAuc.
+export function aucFromScores(pos, neg) {
+  let s = 0;
+  for (const a of pos) for (const b of neg) s += a > b ? 1 : a === b ? 0.5 : 0;
+  return s / (pos.length * neg.length);
 }

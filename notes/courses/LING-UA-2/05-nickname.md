@@ -33,7 +33,7 @@ This single-syllable output is the **truncatum**.
 - **Monosyllables** typically don’t truncate alone: *John, George* → (no truncation-only form).
 - **Non-initial stress** often correlates with non-initial truncata:  
   Eugene [juˈdʒin] → **Gene**; Augustus [ɔˈɡʌ.stʌs] → **Gus**; Patricia [pæˈtɹɪ.ʃə] → **Trish**/**Pat**.
-- **Vowel-initial bases** may yield onset-preserving truncata: Albert → **Bert**; Andrew → **Drew**.
+- **Vowel-initial bases** may yield truncata that drop the initial vowel and start on the next consonant: Albert → **Bert**; Andrew → **Drew**.
 - Some truncata are **two syllables** when the base’s first syllable is unstressed: Rebecca → **Becca**; Alexander → **Alex**.
 - Some truncata are **shorter** than maximal: Christopher → **Chris** (*≠* [kɹɪst]); Susan → **Sue**.
 - Truncata that would end in **[ɹ]** often shift to avoid ill-formed codas: Sarah → **Sal** (*≠* *Sar*); Morrissey → **Moz** (*≠* *Mor*).
@@ -99,7 +99,7 @@ French uses **truncation** and, in many cases, **reduplication**, governed by ro
 ### English–French parallels
 - Both exhibit **assembly-line** processing, but English leans on **[i]-affixation** after a **single-syllable truncatum**, while French frequently **reduplicates** to meet **disyllabicity** and **open-syllable** preferences.
 
-**Takeaways (Oct 9)**
+**Takeaways**
 - French hypocoristics = truncation **+** constraint-satisfying **reduplication**; strategy choice (left/right edge, reversal, simplification) follows general phonological pressures.
 - Reduplication as a nickname device in Indo-European is **concentrated in hypocoristics**, even if reduplication is widespread typologically.
 

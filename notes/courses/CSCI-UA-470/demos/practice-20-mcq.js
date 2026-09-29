@@ -72,7 +72,7 @@ export default mcq({
     }, {
       text: "The children all override the same method as the parent"
     }],
-    why: "`Folder` is an `item` **and** holds `List<item>` — that self-reference is what lets folders nest and what makes `browse()` recurse. (Option two is the *UML* composition edge from note 14, the filled diamond's lifetime rule — a genuinely different idea that unfortunately shares the deck's name for this pattern.)"
+    why: "`Folder` is an `item` **and** holds `List<item>` — that self-reference is what lets folders nest and what makes `browse()` recurse. (\"The parts are destroyed the moment the whole is destroyed\" is the *UML* composition edge from note 14, the filled diamond's lifetime rule — a genuinely different idea that unfortunately shares the deck's name for this pattern.)"
   }, {
     stem: "You have three device types and four operating systems. Which fact most strongly indicates Bridge rather than Decorator?",
     choices: [{

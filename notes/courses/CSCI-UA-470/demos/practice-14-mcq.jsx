@@ -10,7 +10,7 @@ export default mcq({
     {
       stem: "What is in the middle compartment of a box on an **object** diagram, as opposed to a class diagram?",
       choices: [
-        { text: "Attribute **values** (not declarations)", correct: true },
+        { text: "Attribute values (not declarations)", correct: true },
         { text: "Attribute declarations" },
         { text: "The object's operations" },
         { text: "The object's associations" },
@@ -20,9 +20,9 @@ export default mcq({
     {
       stem: "A `Window` owns its `TitleBar`: destroy the window and the title bar goes with it. Which relationship, and which notation?",
       choices: [
-        { text: "Composition — **filled** diamond at `Window` end", correct: true },
-        { text: "Aggregation — **hollow** diamond at `Window` end" },
-        { text: "Composition — **filled** diamond at `TitleBar` end" },
+        { text: "Composition — filled diamond at `Window` end", correct: true },
+        { text: "Aggregation — hollow diamond at `Window` end" },
+        { text: "Composition — filled diamond at `TitleBar` end" },
         { text: "Association — a plain line" },
       ],
       why: "**Composition** is the tighter whole/part bond: the part **dies with the whole**. It draws a **filled** diamond, and the diamond always sits at the **whole** end (`Window`), never on the part. **Aggregation** — the hollow diamond — is the looser one, where the part can outlive the whole (a `Team` and its `Player`s).",

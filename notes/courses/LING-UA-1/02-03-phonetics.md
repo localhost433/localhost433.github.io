@@ -7,7 +7,7 @@ date: 2025-05-20/21
 
 ---
 
-### Ineternation Phonetic Alphabet (IPA)
+### International Phonetic Alphabet (IPA)
 Write IPA in [square brackets] for phonetic transcription.
 
 | Manner \ Place      | Bilabial    | Labiodental | Dental      | Alveolar     | Postalveolar | Retroflex | Palatal | Velar       | Uvular | Pharyngeal | Glottal |

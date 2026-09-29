@@ -114,7 +114,7 @@ $$
         \hat{\sigma}^2_\text{MoM} &= \frac{1}{n} \sum_{i=1}^n (X_i - \overline{X}_n)^2
     \end{align*}
 $$
-Thus, the MoM estimators for the Normal distribution match the standard sample mean and the (biased) sample variance. That
+Thus, the MoM estimators for the Normal distribution match the standard sample mean and the (biased) sample variance. That is,
 $$
     \hat{\theta}_\text{MoM} = \left( \hat{\mu}, \hat{\sigma}^2 \right) = \left( \overline{X}_n, \frac{1}{n} \sum_{i=1}^n (X_i - \overline{X}_n)^2 \right)
 $$

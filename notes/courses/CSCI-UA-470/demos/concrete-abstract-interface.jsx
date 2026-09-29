@@ -23,7 +23,7 @@ const COLS = [
   {
     key: "interface", title: "Interface", subtitle: "pure contract", sub: "code",
     slots: [0, 0, 0, 0], ratio: "abstract by default",
-    canNew: false, newNote: "default / static fill corners",
+    canNew: false, newNote: "default / static / private bodies",
   },
 ];
 
@@ -117,7 +117,8 @@ function Panel({ col, i }) {
       <text x={x + 124} y={PANEL.top + 184} textAnchor="start" dominantBaseline="central"
         style={{ fill: "var(--mm-muted)", fontSize: 8.8 }}>
         {col.newNote.length > 22
-          ? col.newNote.split(" / ").map((t, k) => <tspan key={k} x={x + 124} dy={k === 0 ? 0 : 11}>{t}{k === 0 ? " /" : ""}</tspan>)
+          ? ((p) => [p[0] + " /", p.slice(1).join(" / ")])(col.newNote.split(" / "))
+              .map((t, k) => <tspan key={k} x={x + 124} dy={k === 0 ? 0 : 11}>{t}</tspan>)
           : col.newNote}
       </text>
     </g>
@@ -146,7 +147,7 @@ export default function ConcreteAbstractInterface() {
 
         <text x={450} y={344} textAnchor="middle"
           style={{ fill: "var(--mm-muted)", fontSize: 10.4 }}>
-          A reference of any of the three is legal; only `new T()` needs every slot filled.
+          A reference of any of the three is legal; only new T() needs every slot filled.
         </text>
       </DiagramSvg>
 
@@ -154,7 +155,7 @@ export default function ConcreteAbstractInterface() {
         cols={[
           { tag: "concrete", kind: "cpp", children: <>Every method has a body, so <code className="ui-ic">new T()</code> is allowed. In C++, an ordinary class; add <code className="ui-ic">virtual</code> only where you need runtime dispatch. Extends one class.</> },
           { tag: "abstract", kind: "java", children: <>One <code className="ui-ic">abstract</code> method is enough to block <code className="ui-ic">new</code>. The C++ analogue is a class with a pure virtual method (<code className="ui-ic">= 0</code>). Extends one class.</> },
-          { tag: "interface", kind: "asm", children: <>Abstract by default; a class can implement <strong>many</strong> -- Java's controlled substitute for multiple inheritance. Modern Java adds <code className="ui-ic">default</code>/<code className="ui-ic">static</code>/<code className="ui-ic">private</code> bodies.</> },
+          { tag: "interface", kind: "asm", children: <>Abstract by default; a class can implement <strong>many</strong>, Java's controlled substitute for multiple inheritance. Modern Java adds <code className="ui-ic">default</code>/<code className="ui-ic">static</code>/<code className="ui-ic">private</code> bodies.</> },
         ]}
         punch="The single axis is how much is left unimplemented; that one difference drives instantiability and every other rule."
       />

@@ -49,7 +49,7 @@ const steps = [
     line: [8, 19],
     cells: [A(true), B(true), COUNT(true)],
     caption: {
-      cpp: "`Circle a, b;` constructs two `Circle`s on the **stack**; each `Circle()` bumps the shared `counter`, so it reaches **2**.",
+      cpp: "`Circle a, b;` constructs two `Circle` objects on the **stack**; each `Circle()` bumps the shared `counter`, so it reaches **2**.",
       asm: "Each `call Circle::Circle` runs `add dword [Circle::counter], 1` — two constructions, so the one shared `counter` ends at **2**.",
       intuition: "`Circle::counter` is **one shared copy** outside every object — `sizeof(Circle)` ignores it, yet every instance updates the same storage.",
     },
@@ -59,7 +59,7 @@ const steps = [
     cells: [A(), B(), COUNT(), RESET(true)],
     caption: {
       cpp: "`static void resetCounter()` is only **declared** here — a static method belonging to the class, not to any instance. `main` never calls it, so the counter stays **2**.",
-      asm: "Its body `mov dword [Circle::counter], 0` lives in the **Code** segment with **no `this`** in `rdi` — but it is never `call`ed, so it never runs.",
+      asm: "Its body `mov dword [Circle::counter], 0` lives in the **Code** segment with **no `this`** in `rdi` — but no `call` ever targets it, so it never runs.",
       intuition: "A static method is a plain Code-segment function (no object, no vtable). Declaring `resetCounter` does **not** reset anything; nothing here invokes it.",
     },
   },

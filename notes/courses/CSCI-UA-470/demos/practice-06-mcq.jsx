@@ -57,7 +57,7 @@ export default mcq({
         { text: "`TA` forgot to declare `name`" },
         { text: "It compiles; reads the Teacher copy" },
       ],
-      why: "Plain multiple inheritance gives each branch its **own** `Person`, so a `TA` holds **two** `Person` subobjects — two `name`s, two `age`s. An unqualified `t.name` cannot say which, so it is **ambiguous**. Even upcasting `Person* p = &t;` is ambiguous. Qualifying (`t.Teacher::name`) silences the error but keeps two copies — usually a bug.",
+      why: "Plain multiple inheritance gives each branch its **own** `Person`, so a `TA` holds **two** `Person` subobjects — two `name`s. An unqualified `t.name` cannot say which, so it is **ambiguous**. Even upcasting `Person* p = &t;` is ambiguous. Qualifying (`t.Teacher::name`) silences the error but keeps two copies — usually a bug.",
     },
     {
       stem: "Which repair actually gives the `TA` a **single, shared** `Person` subobject?",

@@ -21,7 +21,7 @@ export default mcq({
     }],
     why: "The reference is **method-local**: born inside `add_to_list`, dropped when it returns. No field means no association and no diamond — the loosest edge, drawn dashed. The *same* class would earn a plain association line if a `FileManager` were stored as a field instead."
   }, {
-    stem: "In the use case diagram, which way does the «extends» arrow between Delete password and View passwords point?",
+    stem: "In the use case diagram, which way does the «extend» arrow between Delete password and View passwords point?",
     choices: [{
       text: "From Delete to View — the extension knows its base",
       correct: true
@@ -30,9 +30,9 @@ export default mcq({
     }, {
       text: "Both ways, because each use case can reach the other"
     }, {
-      text: "Neither — «extends» is drawn as a line with no arrow"
+      text: "Neither — «extend» is drawn as a line with no arrow"
     }],
-    why: "The extension points at the base it plugs into, never the reverse: `View passwords` is complete on its own and knows nothing about deleting. The arrow is **dashed** with the «extends» label riding it — same edge, same direction, as note 12's optional behaviours."
+    why: "The extension points at the base it plugs into, never the reverse: `View passwords` is complete on its own and knows nothing about deleting. The arrow is **dashed** with the «extend» label riding it — same edge, same direction, as note 12's optional behaviours."
   }, {
     stem: "`class Password implements Serializable` and `class MainGUI extends JFrame` both draw a triangle-headed edge. What tells them apart?",
     choices: [{

@@ -25,10 +25,10 @@ date: 2025-06-18
 But more complicated than that, criterias include:
 - Level of required/sufficient **proficiency** in each language?
 - Weigh proficiency equally across **skills**?
-- Prodiciency across **domains of use**? (home, work, religious etc.)
+- Proficiency across **domains of use**? (home, work, religious etc.)
 - Context of acquisition? (age, setting, reason, etc.)
 
-Maybe think "bilingual" as a broad category with bmany sub-categories.
+Maybe think "bilingual" as a broad category with many sub-categories.
 
 ---
 
@@ -59,8 +59,8 @@ Maybe think "bilingual" as a broad category with bmany sub-categories.
 ---
 
 #### Perceiving and Discriminating sounds
-Finding the word boundaries in a language you aren't familiar with is diffcult
-This is because the L2 typically differes from the L1 in its
+Finding the word boundaries in a language you aren't familiar with is difficult.
+This is because the L2 typically differs from the L1 in its
 - phonemic inventory
 - phonotactics
 
@@ -81,7 +81,7 @@ Factors contributing to the difficulty of L2 acquisition
 - Neuroplasticity
   - Critical age hypothesis (7, 12, ...)
 - Social factors
-  - Adults are generally more self-conscious about their performance than kits
+  - Adults are generally more self-conscious about their performance than kids
 
 Positive factors as well:
 - metalinguistic awareness
@@ -130,13 +130,13 @@ L1 & L2 affecting each other.
     - US (western European) bias
     - Chomsky, the ideal speaker-listener
 - However, it is just as common for children to grow up with more than one language in their environment, given one or more of the following scenarios
-  - Language spokenar home
+  - Language spoken at home
 
 ---
 
 #### Is growing up bilingual harmful for children?
-Both quantity of input and quality of input matter for acquisition
-Monolingual children will have enough input to construct a mental grammar sonner than bilingual children will
+Both quantity of input and quality of input matter for acquisition.
+Monolingual children will have enough input to construct a mental grammar sooner than bilingual children will
 
 Any delays even out relatively early
 - Bilinguals equal or exceed monolinguals in terms of terminologies
@@ -154,8 +154,9 @@ Any delays even out relatively early
 **Policy and science don't always align**
 
 Proponents for English-only policy in the US.
-Educational Language Policies around the world: Haiti
-Singaporean
+Educational Language Policies around the world:
+- Haiti
+- Singaporean
 
 ---
 

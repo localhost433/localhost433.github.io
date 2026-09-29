@@ -10,7 +10,7 @@ export default scene(l02HeapScene({
   predict: {
     ask: "`delete p;` is about to run (p points at a heap `int` holding 42). Afterward, what is true of `p` and that heap block?",
     choices: [{
-      label: "The block is freed, but `p` still holds the old address — `p` now **dangles**, and `*p` is undefined behavior",
+      label: "The block is freed, but `p` keeps the old address, so `p` now dangles",
       correct: true
     }, {
       label: "`p` is set to `nullptr` automatically and the block is zeroed"

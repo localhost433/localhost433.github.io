@@ -22,9 +22,9 @@ const title = "TA object · NON-virtual diamond — sizeof 80";
 // Always the full TA layout; `m` highlights the part a step is about:
 // "teacher"/"student"/"ta" = that branch's slots, "amb" = both person copies.
 const slots = (m) => [
-  { name: "name", type: "string", size: 32, origin: "person", value: '"?"', hl: m === "teacher" || m === "amb" },
+  { name: "name", type: "string", size: 32, origin: "person", value: '""', hl: m === "teacher" || m === "amb" },
   { name: "age",  type: "int", origin: "teacher", value: "25", hl: m === "teacher" },
-  { name: "name", type: "string", size: 32, origin: "person", value: '"?"', hl: m === "student" || m === "amb" },
+  { name: "name", type: "string", size: 32, origin: "person", value: '""', hl: m === "student" || m === "amb" },
   { name: "age",  type: "int", origin: "student", value: "20", hl: m === "student" },
   { name: "age",  type: "int", origin: "TA", value: "27", hl: m === "ta" },
 ];

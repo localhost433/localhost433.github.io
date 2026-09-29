@@ -460,7 +460,9 @@ html.dark-mode {
    like "x · r" isn't clipped to the int's narrow 4-byte width */
 .mm-cmp .mm-seg__cells { justify-content: center; }
 .mm-cmp .mm-cell { min-width: 3.9rem; }
-.mm-cmp__tag { font-size: .7rem; }
+/* .mm-cap-tag's flex basis is a width in caption rows; in this column flex it would
+   become a 4.8rem-tall empty block, so size the pill to its text instead. */
+.mm-cmp__tag { font-size: .7rem; flex: none; align-self: center; }
 .mm-cmp__note { font-size: .76rem; line-height: 1.4; color: var(--mm-muted); margin: 0; max-width: 15rem; }
 .mm-cmp__foot { max-width: 42rem; margin: .9rem auto 0; padding-top: .55rem;
   border-top: 1px solid var(--mm-panel-bd); text-align: center; }
@@ -492,9 +494,9 @@ html.dark-mode {
    No scoring/gamification — the verdict is a neutral, explanatory mark. ---- */
 .mm-knobs { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1.1rem;
   padding: .4rem .6rem; background: var(--mm-panel-bg); border: 1px solid var(--mm-panel-bd); border-radius: 7px; }
-.mm-knob { display: flex; align-items: center; gap: .45rem; }
+.mm-knob { display: flex; flex-wrap: wrap; align-items: center; gap: .45rem; min-width: 0; }
 .mm-knob__label { font-size: .68rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--mm-muted); }
-.mm-knob__opts { display: inline-flex; gap: 2px; padding: 2px; border-radius: 7px;
+.mm-knob__opts { display: inline-flex; flex-wrap: wrap; max-width: 100%; gap: 2px; padding: 2px; border-radius: 7px;
   background: var(--mm-code-bg); border: 1px solid var(--mm-panel-bd); }
 .mm-knob__opt { appearance: none; border: none; cursor: pointer; font: inherit; font-size: .76rem;
   padding: .2rem .55rem; border-radius: 5px; color: var(--mm-muted); background: transparent;

@@ -97,7 +97,6 @@ export default function PkSequences() {
         messages={f.messages}
         activations={f.activations}
         caption={f.caption}
-        maxWidth={720}
       />
     </div>
   );

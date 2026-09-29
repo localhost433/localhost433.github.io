@@ -103,6 +103,14 @@ levels that have neither. Note that education is a case where an ordering arguab
 exist; what does not exist is a defensible claim that Doctoral minus Graduate equals
 Graduate minus Undergraduate, which is what a single numeric column would assert.
 
+One trap the slide does not mention. The six columns of every row sum to 1, which is
+exactly the bias column $x_0 = 1$. With an intercept in the model, the design matrix
+therefore has linearly dependent columns and $X^{\mathsf T}X$ is singular, however large
+$N$ is. The usual fix is to drop one level and use $k - 1$ indicator columns, so that the
+dropped level is absorbed into $w_0$ and each remaining weight measures a difference from
+it. Ridge also fixes it, since $X^{\mathsf T}X + \lambda I$ is invertible (see the ridge
+section below).
+
 ## The learning system
 
 *Slide 7.* The L3 components diagram, instantiated:
@@ -479,76 +487,14 @@ is silent about the setup a lecture needs before it can state them.
 
 ## Practice
 
-On paper, cold. Each one has a check attached, so you can tell whether you got it rather
-than whether it felt familiar.
+Questions on noisy targets, encoding, shapes, the geometry of least squares, the test statistics, and the two penalties.
 
-**Shapes and setup.**
-
-1. Write out $X$, $w$ and $y$ for $N = 4$ examples and $d = 2$ features, with the bias
-   absorbed, and give the dimensions of $X^{\mathsf T}X$, $X^{\mathsf T}y$ and $\hat w$.
-   *Check:* $X^{\mathsf T}X$ is $3 \times 3$, not $4 \times 4$. If you got $N \times N$
-   you have $X$ transposed, and every formula below will come out the wrong shape.
-2. State which of these are linear models and why: $w_0 + w_1x_1 + w_2x_2^3$;
-   $w_0 + w_1 x_1^{w_2}$; $w_0 + w_1\log x_1$. *Check:* the test is linearity in $w$, and
-   exactly one of the three fails it.
-3. Write $P(x,y) = P(x)\,P(y \mid x)$, name both factors, and say where the noise in a
-   noisy target lives. Then explain why enlarging $\mathbb H$ cannot remove it.
-   *Check:* your answer should mention that $x$ does not determine $y$, so no function of
-   $x$ alone - however complicated - can reproduce $y$.
-
-**Training and its geometry.**
-
-4. Derive $\hat w = (X^{\mathsf T}X)^{-1}X^{\mathsf T}y$ from
-   $\operatorname{RSS} = (y - Xw)^{\mathsf T}(y - Xw)$, stating the shape of every object
-   as you go. *Check:* the gradient is $-2X^{\mathsf T}(y - Xw)$, and it is a
-   $(d+1)$-vector, not a scalar.
-5. State the orthogonality condition at the optimum, then argue in two sentences that it
-   is the *same statement* as "$\hat y$ is the projection of $y$ onto the column space of
-   $X$". *Check:* both are $X^{\mathsf T}(y - \hat y) = 0$; the geometric reading is that
-   the residual is orthogonal to every column, and the columns span the space.
-6. Give two distinct circumstances in which $X^{\mathsf T}X$ is not invertible, one about
-   $N$ versus $d$ and one that can happen at any $N$. Say what $\lambda I$ does to each.
-   *Check:* $N < d+1$ is the first; an exactly duplicated or collinear feature is the
-   second, and ridge repairs both because $X^{\mathsf T}X + \lambda I$ is positive
-   definite for $\lambda > 0$.
-
-**Interpretation.**
-
-7. Two features have the same fitted $\hat w_j$ but different $v_j$. Which is the more
-   important feature by Z-score, and why is that the right answer rather than an artifact
-   of the formula? *Check:* the one with smaller $v_j$; a coefficient estimated from a
-   nearly-collinear direction is large and meaningless, and $v_j$ is what detects that.
-8. $N = 50$, $d = 9$. Write $\hat\sigma^2$ with the correct denominator, then set up the
-   $F$-statistic comparing this model to a nested one using 4 of the features. State what
-   breaks if the two models are not nested. *Check:* the denominator is $50 - 9 - 1 = 40$;
-   $d_1 - d_0 = 5$; and without nesting $\operatorname{RSS}_0 - \operatorname{RSS}_1$ is
-   not guaranteed non-negative, so the ratio is not an $F$ at all.
-9. You have a categorical feature with 5 levels. Say how many columns it becomes, and what
-   goes wrong if you use one column of integers $1..5$ instead. *Check:* the integer
-   encoding asserts an ordering and equal spacing that the categories do not have.
-
-**Capacity.**
-
-10. Take four points in $\mathbb R^1$. Fit a degree-1 and a degree-3 polynomial by hand via
-    the normal equations, and confirm the degree-3 fit interpolates all four. Add
-    $\lambda\lVert w\rVert_2^2$ with $\lambda = 1$, recompute, and confirm it no longer
-    does. *Check:* at degree 3 the design matrix is square and invertible, so
-    $\operatorname{RSS} = 0$ exactly; the penalty makes zero training error no longer
-    optimal.
-11. Sketch the $L_1$ diamond and the $L_2$ circle with an elliptical RSS contour coming in
-    to touch each. Mark the touch point in both and read off which gives exact zeros -
-    from the sketch, not the formula. *Check:* the argument is that the diamond's corners
-    lie *on the axes* and a contour is overwhelmingly likely to meet a corner first; the
-    circle has no corners at all. Note that the $p = \infty$ ball also has corners and
-    gives no sparsity, which is the test of whether you have the argument or the slogan.
-12. Say which of ridge and lasso has a closed form and write it. Then state what the
-    penalty does to invertibility when $N < d$, and why best-subset selection is not simply
-    the better option. *Check:* ridge, $(X^{\mathsf T}X + \lambda I)^{-1}X^{\mathsf T}y$;
-    and best-subset runs out at $d \approx 30$-$40$ because it searches $2^d$ subsets.
+```artifact src=demos/practice-05.jsx math
+```
 
 ---
 
 > Next up: [cross-validation](note.html?course=CSCI-UA-473&note=06-overfitting-validation),
-> which the syllabus puts on 09/22 and which this deck does not cover. It is the gap
-> questions 10 and 12 above run into: nothing in this lecture says how
-> to *choose* $\lambda$, $M$, or a subset, only what each of them does once chosen.
+> which the syllabus puts on 09/22 and which this deck does not cover. It fills the gap
+> the penalty questions above run into: nothing in this lecture says how to *choose*
+> $\lambda$, $M$, or a subset, only what each of them does once chosen.

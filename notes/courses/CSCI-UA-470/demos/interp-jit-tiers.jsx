@@ -95,11 +95,11 @@ export default function InterpJitTiers() {
 
       <CompareCaption
         cols={[
-          { tag: "start: interpret", kind: "java", children: <>Every method begins <strong>interpreted</strong> -- no compile pause, so startup is fast, but each call re-decodes the bytecode, so the per-call cost stays high.</> },
-          { tag: "hot: compile", kind: "asm", children: <>The JVM counts invocations; past a threshold the <strong>JIT</strong> compiles the method to <strong>native code</strong> once -- a one-time cost -- and every later call runs that code far more cheaply.</> },
-          { tag: "both, together", kind: "cpp", children: <>Interpreter and JIT are <strong>both</strong> in the execution engine. This is why "Java is interpreted" is only half true -- hot code ends up as native machine code, like C++.</> },
+          { tag: "start: interpret", kind: "java", children: <>Every method begins <strong>interpreted</strong> — no compile pause, so startup is fast, but each call re-decodes the bytecode, so the per-call cost stays high.</> },
+          { tag: "hot: compile", kind: "asm", children: <>The JVM counts invocations; past a threshold the <strong>JIT</strong> compiles the method to <strong>native code</strong> once — a one-time cost — and every later call runs that code far more cheaply.</> },
+          { tag: "both, together", kind: "cpp", children: <>Interpreter and JIT are <strong>both</strong> in the execution engine. This is why "Java is interpreted" is only half true — hot code ends up as native machine code, like C++.</> },
         ]}
-        punch={<>Interpretation is the default for fast startup; JIT compilation is the optimization for hot code -- the JVM uses both over a method's lifetime. <em>Tiered compilation</em> goes further: a quick first compile (C1) may be replaced by a more optimized one (C2), and a wrong assumption can deoptimize back to the interpreter.</>}
+        punch={<>Interpretation is the default for fast startup; JIT compilation is the optimization for hot code — the JVM uses both over a method's lifetime. <em>Tiered compilation</em> goes further: a quick first compile (C1) may be replaced by a more optimized one (C2), and a wrong assumption can deoptimize back to the interpreter.</>}
       />
     </div>
   );

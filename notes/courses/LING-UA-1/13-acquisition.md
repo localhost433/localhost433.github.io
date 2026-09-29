@@ -46,7 +46,7 @@ date: 2025-06-12
 
 ##### Infant learning
 Before the age of 6 months, babies are able to discriminate between any two sounds, regardless of whether it's used in their target language or not.
-- Example: Infant before 6 month in a Japanese speaking environment are able to differentiate 'la' and 'ra'. (using this as example because /l/ and /r/ are allophones of /r/ in Japanese)
+- Example: Infant before 6 month in a Japanese speaking environment are able to differentiate 'la' and 'ra'. (using this as example because [l] and [ɾ] are allophones of a single phoneme in Japanese)
 - Because the infant doesn't know what language they are going to speak.
 Around the age of 6 months, they begin to lose the ability to discriminate between sounds that are not phonemic in their own language.
 

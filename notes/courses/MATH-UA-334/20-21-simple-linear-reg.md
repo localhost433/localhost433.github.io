@@ -259,7 +259,7 @@ The trace of a square matrix, denoted $\text{Tr}(A)$, is the sum of its diagonal
 If $\E[Z] = 0$, then:
 $$
     \begin{align*}
-        \E[||Z||^2] &= \E\left[ \sum_{i=1}^n Z_i^2 \right] \\
+        \E[\lVert Z \rVert^2] &= \E\left[ \sum_{i=1}^n Z_i^2 \right] \\
         &= \sum_{i=1}^n \E[Z_i^2] \\
         &= \sum_{i=1}^n \Var{Z_i} \\
         &= \sum_{i=1}^n (\Sigma_{ZZ})_{ii} \\

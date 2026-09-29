@@ -51,7 +51,7 @@ $$
 
 Replacing the harsh binning indicator with the smooth kernel yields the famous **Nadaraya-Watson** estimator:
 $$
-    \hat{f}_{NW}(x_0) = \frac{\sum_{i=1}^n K_h(x_i - x_0) y_i}{\sum_{i=1}^n K_h(x_i - x_0)}
+    \hat{f}_{\text{NW}}(x_0) = \frac{\sum_{i=1}^n K_h(x_i - x_0) y_i}{\sum_{i=1}^n K_h(x_i - x_0)}
 $$
 This estimator effectively performs a highly localized, weighted constant fit. It strictly assumes the function is entirely flat within the localized neighborhood.
 

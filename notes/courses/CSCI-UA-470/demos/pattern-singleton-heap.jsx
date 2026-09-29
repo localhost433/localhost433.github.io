@@ -53,10 +53,10 @@ const steps = [
   },
   {
     line: 3,
-    cells: [FIELD(true), OBJ(true, "1"), REF("s1", true), REF("s2", true), REF("s3", true)],
+    cells: [FIELD(true), OBJ(true, "0"), REF("s1", true), REF("s2", true), REF("s3", true)],
     caption: {
       java: "Third call, same answer — and `s1 == s2 && s2 == s3` is `true`. That is `==`, **reference** comparison, not `equals()`: they are literally the same address.",
-      intuition: "Three stack slots hold three copies of **one address**. Do `s1.count++` and `s3.count` reads `1`, because there is no other object to read.",
+      intuition: "Three stack slots hold three copies of **one address**. Were you to run `s1.count++`, `s3.count` would read `1`, because there is no other object to read.",
     },
   },
 ];

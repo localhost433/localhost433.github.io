@@ -80,7 +80,7 @@ const KNOBS = [{
 
 const CAPTION = {
   phases: "Everything this course taught sits in one band. Use cases are the output of Analysis; UML, SOLID and the pattern catalog are the output of Design. Code arrives one phase later — which is why the course spent six lectures on drawings before it wrote a line of the capstone.",
-  roles: "The chain explains the syllabus. An analyst hands the designer use cases, the designer hands the programmer a model, the programmer hands the tester a build — and each handoff is a document in a notation both sides can read. That is what UML is for, and why a diagram nobody else can read has failed at its only job.",
+  roles: "The chain explains the syllabus. An analyst hands the designer use cases and the designer hands the programmer a model, each a document in a notation both sides can read; only the last handoff, programmer to tester, is a build. That is what UML is for, and why a diagram nobody else can read has failed at its only job.",
   ai: "The deck's claim in one column: AI can draft in every band, but people still decide what should exist, set the implementation contract, and judge whether what came back is right. Note where Design sits — it is the phase AI helps with most and can settle least.",
 };
 

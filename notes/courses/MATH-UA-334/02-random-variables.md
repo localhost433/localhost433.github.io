@@ -62,11 +62,11 @@ $$p_X(x_i) = \mathbb{P}(X = x_i)$$
 1. **Bernoulli ($p$):** $X \in \{0, 1\}$. Models a single success/failure trial.
     - $p_X(1) = p$, $p_X(0) = 1-p$.
 2. **Binomial ($n, p$):** Number of successes in $n$ independent Bernoulli trials.
-    - $$p_X(k) = \binom{n}{k} p^k (1-p)^{n-k}, \quad k \in \{0, \dots, n\}$$
+    - PMF: $\displaystyle p_X(k) = \binom{n}{k} p^k (1-p)^{n-k}, \quad k \in \{0, \dots, n\}$
 3. **Geometric ($p$):** Number of failures before the first success. (Memoryless).
-    - $$p_X(k) = (1-p)^k p, \quad k \in \{0, 1, \dots\}$$
+    - PMF: $\displaystyle p_X(k) = (1-p)^k p, \quad k \in \{0, 1, \dots\}$
 4. **Poisson ($\lambda$):** Modeling rare events over a fixed interval.
-    - $$p_X(k) = e^{-\lambda} \frac{\lambda^k}{k!}, \quad k \in \{0, 1, \dots\}$$
+    - PMF: $\displaystyle p_X(k) = e^{-\lambda} \frac{\lambda^k}{k!}, \quad k \in \{0, 1, \dots\}$
 
 ---
 
@@ -86,13 +86,13 @@ $$\mathbb{P}(X \in B) = \int_B f_X(x) \, dx$$
 ### Common Continuous Distributions
 
 1. **Uniform ($a, b$):** Equal density over an interval.
-    - $$f_X(x) = \frac{1}{b-a} \quad \text{for } x \in [a, b]$$
+    - PDF: $\displaystyle f_X(x) = \frac{1}{b-a} \quad \text{for } x \in [a, b]$
 2. **Exponential ($\lambda$):** Modeling waiting times. The continuous analogue to the Geometric distribution (also memoryless).
-    - $$f_X(x) = \lambda e^{-\lambda x} \quad \text{for } x \ge 0$$
+    - PDF: $\displaystyle f_X(x) = \lambda e^{-\lambda x} \quad \text{for } x \ge 0$
     - CDF: $F_X(x) = 1 - e^{-\lambda x}$.
 3. **Normal (Gaussian) ($\mu, \sigma^2$):** The most important distribution due to the Central Limit Theorem.
     - Notation: $X \sim \mathcal{N}(\mu, \sigma^2)$.
-    - $$f_X(x) = \frac{1}{\sqrt{2\pi}\sigma} \exp\left( -\frac{(x-\mu)^2}{2\sigma^2} \right)$$
+    - PDF: $\displaystyle f_X(x) = \frac{1}{\sqrt{2\pi}\sigma} \exp\left( -\frac{(x-\mu)^2}{2\sigma^2} \right)$
     - $\mu$: mean (location parameter).
     - $\sigma$: standard deviation (scale parameter).
 

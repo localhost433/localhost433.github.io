@@ -137,9 +137,9 @@ export default function App() {
       </div>
       <div style={{ display: "flex", flexWrap: "wrap", gap: "12px", alignItems: "flex-start",
         justifyContent: "center" }}>
-        <canvas ref={ref} style={{ flex: `1 1 ${W}px`, maxWidth: W, aspectRatio: `${W} / ${H}` }}
+        <canvas ref={ref} style={{ flex: `1 1 ${W}px`, minWidth: 0, maxWidth: W, aspectRatio: `${W} / ${H}` }}
           aria-label={`Error against complexity; at degree ${M} the gap between out-of-sample and in-sample error is ${gap.toFixed(3)}; validation selects degree ${picked}`} />
-        <canvas ref={fitRef} style={{ flex: `1 1 ${FW}px`, maxWidth: FW, aspectRatio: `${FW} / ${H}` }}
+        <canvas ref={fitRef} style={{ flex: `1 1 ${FW}px`, minWidth: 0, maxWidth: FW, aspectRatio: `${FW} / ${H}` }}
           aria-label={`The degree ${M} polynomial fitted to the same ten points, with the ten validation points`} />
       </div>
       <p style={{ ...readoutStyle(C), margin: 0 }}>

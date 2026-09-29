@@ -10,7 +10,7 @@ import { mcq } from "@course";
 
 export default mcq({
   questions: [{
-    stem: "Verifying a student's ID is a step that **always** runs as part of both *Update grades* and *Generate report*. Which relationship connects each base to that shared step?",
+    stem: "Verifying a student's ID is a step that **always** runs as part of both *Update grades* and *Generate output*. Which relationship connects each base to that shared step?",
     choices: [{
       text: "`<<include>>` — the shared step always runs, so factor it out",
       correct: true
@@ -21,7 +21,7 @@ export default mcq({
     }, {
       text: "A plain association — use cases only connect to actors"
     }],
-    why: "**Include** is mandatory, factored-out common behavior: the included use case *always* runs as part of the base. Because both *Update grades* and *Generate report* must verify the ID, `Verify student ID` is pulled out once and each base `<<include>>`s it. **Extend** would be wrong — it is for *conditional* behavior on a base that is already complete on its own."
+    why: "**Include** is mandatory, factored-out common behavior: the included use case *always* runs as part of the base. Because both *Update grades* and *Generate output* must verify the ID, `Verify student ID` is pulled out once and each base `<<include>>`s it. **Extend** would be wrong — it is for *conditional* behavior on a base that is already complete on its own."
   }, {
     stem: "On a shopping site, *Write a review* runs only if the shopper chooses to, on top of a *View product details* use case that is complete without it. Which relationship, and which way does the dashed arrow point?",
     choices: [{

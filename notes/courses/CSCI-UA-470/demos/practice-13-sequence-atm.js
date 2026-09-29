@@ -67,7 +67,7 @@ export default sequenceOrder({
     id: "dispense",
     from: "atm",
     to: "cust",
-    label: "dispense(cash)",
+    label: "cash",
     kind: "return",
     why: "Cash is handed over last, only after the account has actually been charged."
   }],

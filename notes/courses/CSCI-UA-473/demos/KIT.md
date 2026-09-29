@@ -161,11 +161,14 @@ slides build the components diagram one box per click.
 | `cv-folds` | 06 | L6 slides 15, 17-20; K-fold phases, the λ loop, the fold back, leave-one-out |
 | `bias-variance` | 06 | L6 slides 25-28; forty fits on fixed x, their average, bias² and variance against M, interactive |
 | `h0-vs-h1` | 06 | L6 slides 29-34; constants vs lines on sin(πx), with N on a slider, interactive |
+| `logistic-gd` | 07 | L7 slides 12-20; batch, mini-batch and SGD paths over E_in contours, E_in against epochs, η slider, separable toggle, interactive |
+| `feature-transform` | 07 | L7 slides 21-22 (LFD); the circle in x-space and the line in z-space |
+| `roc-threshold` | 07 | L7 slides 25-35; score humps, threshold, confusion matrix, metrics, ROC and AUC, prevalence slider, interactive |
 | `erm-objective-anatomy` | 00 | no slide; the supplement's own objective |
 
 Interactive demos (`perceptron-2d`, `hoeffding-bin`, `union-bound-bins`,
 `complexity-tradeoff`, `complexity-ucurve`, `ridge-vs-lasso`, `regularization-path`,
-`bias-variance`, `overfitting-causes`, `validation-size`, `h0-vs-h1`, `norm-balls`, `projection-2d`, `nfl-boolean-cube`, `bias-absorption-3d`,
+`bias-variance`, `overfitting-causes`, `validation-size`, `h0-vs-h1`, `logistic-gd`, `roc-threshold`, `norm-balls`, `projection-2d`, `nfl-boolean-cube`, `bias-absorption-3d`,
 `practice-03`) keep their own state and controls and are fenced without `static`.
 `poly-overfit` was folded into `complexity-ucurve`'s right-hand panel and deleted.
 

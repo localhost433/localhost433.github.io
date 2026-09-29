@@ -119,7 +119,8 @@ function Panel({
     }
   }, /*#__PURE__*/React.createElement(MemoryModel, {
     cells: cells,
-    axis: false
+    axis: false,
+    lang: lang
   })));
 }
 export default function MemStackVsHeap() {

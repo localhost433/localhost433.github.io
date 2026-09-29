@@ -5,7 +5,7 @@ import { DiagramSvg, CompareCaption } from "@course";
 /* L10 - C++ const vs Java final vs true immutability.
    The axis is WHAT gets frozen, shown as a padlock on a shared
    name -> reference -> object chain. C++ const is fine-grained: a lock can
-   sit on the pointer, the handle, or the value -- you choose. Java final is
+   sit on the pointer, the handle, or the value — you choose. Java final is
    coarse: the lock sits on the BINDING (the link), so the object reached
    through it stays mutable. Immutability locks the OBJECT itself. The classic
    trap - `final Circle c` - is a lock on the link, not on the Circle.
@@ -339,7 +339,7 @@ export default function ConstFinalImmutable() {
     cols: [{
       tag: "C++ const",
       kind: "cpp",
-      children: /*#__PURE__*/React.createElement(React.Fragment, null, "Fine-grained: you choose ", /*#__PURE__*/React.createElement("em", null, "what"), " is constant -- the value, the pointee viewed through a handle (", /*#__PURE__*/React.createElement("code", {
+      children: /*#__PURE__*/React.createElement(React.Fragment, null, "Fine-grained: you choose ", /*#__PURE__*/React.createElement("em", null, "what"), " is constant \u2014 the value, the pointee viewed through a handle (", /*#__PURE__*/React.createElement("code", {
         className: "ui-ic"
       }, "const T*"), "), the pointer itself (", /*#__PURE__*/React.createElement("code", {
         className: "ui-ic"
@@ -351,7 +351,7 @@ export default function ConstFinalImmutable() {
     }, {
       tag: "Java final",
       kind: "java",
-      children: /*#__PURE__*/React.createElement(React.Fragment, null, "Coarse: the lock sits on a ", /*#__PURE__*/React.createElement("strong", null, "name or edge"), " -- a binding (", /*#__PURE__*/React.createElement("code", {
+      children: /*#__PURE__*/React.createElement(React.Fragment, null, "Coarse: the lock sits on a ", /*#__PURE__*/React.createElement("strong", null, "name or edge"), " \u2014 a binding (", /*#__PURE__*/React.createElement("code", {
         className: "ui-ic"
       }, "final T x"), "), an override (", /*#__PURE__*/React.createElement("code", {
         className: "ui-ic"
@@ -365,6 +365,6 @@ export default function ConstFinalImmutable() {
         className: "ui-ic"
       }, "String"), ").")
     }],
-    punch: "const/final lock a binding or a handle; immutability locks the object itself. A final reference to a mutable object is not immutable -- final Circle c still allows c.radius = 10."
+    punch: "const/final lock a binding or a handle; immutability locks the object itself. A final reference to a mutable object is not immutable \u2014 final Circle c still allows c.radius = 10."
   }));
 }
